@@ -1,6 +1,6 @@
 //
 //  NativeFlow.swift
-//  KMPNativeCoroutinesSwift
+//  KMPNativeCoroutinesCore
 //
 //  Created by Rick Clephas on 06/06/2021.
 //

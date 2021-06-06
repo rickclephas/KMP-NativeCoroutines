@@ -6,7 +6,7 @@
 //
 
 import Combine
-import KMPNativeCoroutinesSwift
+import KMPNativeCoroutinesCore
 
 /// Creates an `AnyPublisher` for the provided `NativeSuspend`.
 /// - Parameter nativeSuspend: The native suspend function to await.

@@ -6,7 +6,7 @@
 //
 
 import Combine
-import KMPNativeCoroutinesSwift
+import KMPNativeCoroutinesCore
 
 /// Creates an `AnyPublisher` for the provided `NativeFlow`.
 /// - Parameter nativeFlow: The native flow to collect.

@@ -7,32 +7,32 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1D2EC850266D239200B118B0 /* KMPNativeCoroutinesSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D2EC847266D239100B118B0 /* KMPNativeCoroutinesSwift.framework */; };
-		1D2EC85E266D23A200B118B0 /* NativeSuspend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2EC840266D220900B118B0 /* NativeSuspend.swift */; };
-		1D2EC85F266D23B100B118B0 /* NativeCancellable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2EC83E266D212F00B118B0 /* NativeCancellable.swift */; };
-		1D2EC860266D23B800B118B0 /* NativeCallback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2EC83C266D209600B118B0 /* NativeCallback.swift */; };
-		1D2EC861266D23BF00B118B0 /* NativeFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2EC83A266D206700B118B0 /* NativeFlow.swift */; };
-		1D2EC863266D242300B118B0 /* KMPNativeCoroutinesSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D2EC847266D239100B118B0 /* KMPNativeCoroutinesSwift.framework */; };
-		1D2EC864266D242300B118B0 /* KMPNativeCoroutinesSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1D2EC847266D239100B118B0 /* KMPNativeCoroutinesSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1D2EC86B266D290000B118B0 /* Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2EC86A266D290000B118B0 /* Publisher.swift */; };
 		1D2EC86D266D29E800B118B0 /* Future.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2EC86C266D29E800B118B0 /* Future.swift */; };
+		1D2EC87C266D3A8900B118B0 /* KMPNativeCoroutinesCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D2EC873266D3A8900B118B0 /* KMPNativeCoroutinesCore.framework */; };
+		1D2EC88A266D3AD900B118B0 /* NativeCallback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2EC83C266D209600B118B0 /* NativeCallback.swift */; };
+		1D2EC88B266D3ADD00B118B0 /* NativeCancellable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2EC83E266D212F00B118B0 /* NativeCancellable.swift */; };
+		1D2EC88C266D3ADF00B118B0 /* NativeFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2EC83A266D206700B118B0 /* NativeFlow.swift */; };
+		1D2EC88D266D3AE200B118B0 /* NativeSuspend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2EC840266D220900B118B0 /* NativeSuspend.swift */; };
+		1D2EC88E266D3B0700B118B0 /* KMPNativeCoroutinesCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D2EC873266D3A8900B118B0 /* KMPNativeCoroutinesCore.framework */; };
+		1D2EC88F266D3B0700B118B0 /* KMPNativeCoroutinesCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1D2EC873266D3A8900B118B0 /* KMPNativeCoroutinesCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1DF88370266D1D270058B6F9 /* KMPNativeCoroutinesCombine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF88367266D1D270058B6F9 /* KMPNativeCoroutinesCombine.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		1D2EC851266D239200B118B0 /* PBXContainerItemProxy */ = {
+		1D2EC87D266D3A8900B118B0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1DF8833F266D1BC10058B6F9 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 1D2EC846266D239100B118B0;
-			remoteInfo = KMPNativeCoroutinesSwift;
+			remoteGlobalIDString = 1D2EC872266D3A8900B118B0;
+			remoteInfo = KMPNativeCoroutinesCore;
 		};
-		1D2EC865266D242300B118B0 /* PBXContainerItemProxy */ = {
+		1D2EC890266D3B0700B118B0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1DF8833F266D1BC10058B6F9 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 1D2EC846266D239100B118B0;
-			remoteInfo = KMPNativeCoroutinesSwift;
+			remoteGlobalIDString = 1D2EC872266D3A8900B118B0;
+			remoteInfo = KMPNativeCoroutinesCore;
 		};
 		1DF88371266D1D270058B6F9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -44,13 +44,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		1D2EC867266D242300B118B0 /* Embed Frameworks */ = {
+		1D2EC892266D3B0700B118B0 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				1D2EC864266D242300B118B0 /* KMPNativeCoroutinesSwift.framework in Embed Frameworks */,
+				1D2EC88F266D3B0700B118B0 /* KMPNativeCoroutinesCore.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -58,31 +58,31 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1D2EC83A266D206700B118B0 /* NativeFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NativeFlow.swift; path = "kmp-nativecoroutines-swift/NativeFlow.swift"; sourceTree = "<group>"; };
-		1D2EC83C266D209600B118B0 /* NativeCallback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NativeCallback.swift; path = "kmp-nativecoroutines-swift/NativeCallback.swift"; sourceTree = "<group>"; };
-		1D2EC83E266D212F00B118B0 /* NativeCancellable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NativeCancellable.swift; path = "kmp-nativecoroutines-swift/NativeCancellable.swift"; sourceTree = "<group>"; };
-		1D2EC840266D220900B118B0 /* NativeSuspend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NativeSuspend.swift; path = "kmp-nativecoroutines-swift/NativeSuspend.swift"; sourceTree = "<group>"; };
-		1D2EC847266D239100B118B0 /* KMPNativeCoroutinesSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KMPNativeCoroutinesSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		1D2EC84F266D239200B118B0 /* KMPNativeCoroutinesSwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KMPNativeCoroutinesSwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		1D2EC86A266D290000B118B0 /* Publisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Publisher.swift; path = "kmp-nativecoroutines-combine/Publisher.swift"; sourceTree = "<group>"; };
-		1D2EC86C266D29E800B118B0 /* Future.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Future.swift; path = "kmp-nativecoroutines-combine/Future.swift"; sourceTree = "<group>"; };
+		1D2EC83A266D206700B118B0 /* NativeFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeFlow.swift; sourceTree = "<group>"; };
+		1D2EC83C266D209600B118B0 /* NativeCallback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeCallback.swift; sourceTree = "<group>"; };
+		1D2EC83E266D212F00B118B0 /* NativeCancellable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeCancellable.swift; sourceTree = "<group>"; };
+		1D2EC840266D220900B118B0 /* NativeSuspend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeSuspend.swift; sourceTree = "<group>"; };
+		1D2EC86A266D290000B118B0 /* Publisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Publisher.swift; sourceTree = "<group>"; };
+		1D2EC86C266D29E800B118B0 /* Future.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Future.swift; sourceTree = "<group>"; };
+		1D2EC873266D3A8900B118B0 /* KMPNativeCoroutinesCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KMPNativeCoroutinesCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D2EC87B266D3A8900B118B0 /* KMPNativeCoroutinesCoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KMPNativeCoroutinesCoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF88367266D1D270058B6F9 /* KMPNativeCoroutinesCombine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KMPNativeCoroutinesCombine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF8836F266D1D270058B6F9 /* KMPNativeCoroutinesCombineTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KMPNativeCoroutinesCombineTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		1D2EC844266D239100B118B0 /* Frameworks */ = {
+		1D2EC870266D3A8900B118B0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1D2EC84C266D239200B118B0 /* Frameworks */ = {
+		1D2EC878266D3A8900B118B0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1D2EC850266D239200B118B0 /* KMPNativeCoroutinesSwift.framework in Frameworks */,
+				1D2EC87C266D3A8900B118B0 /* KMPNativeCoroutinesCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,7 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1D2EC863266D242300B118B0 /* KMPNativeCoroutinesSwift.framework in Frameworks */,
+				1D2EC88E266D3B0700B118B0 /* KMPNativeCoroutinesCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,7 +112,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		1D2EC868266D287600B118B0 /* KMPNativeCoroutinesSwift */ = {
+		1D2EC874266D3A8900B118B0 /* KMPNativeCoroutinesCore */ = {
 			isa = PBXGroup;
 			children = (
 				1D2EC83C266D209600B118B0 /* NativeCallback.swift */,
@@ -120,23 +120,23 @@
 				1D2EC83A266D206700B118B0 /* NativeFlow.swift */,
 				1D2EC840266D220900B118B0 /* NativeSuspend.swift */,
 			);
-			name = KMPNativeCoroutinesSwift;
+			path = KMPNativeCoroutinesCore;
 			sourceTree = "<group>";
 		};
-		1D2EC869266D28D500B118B0 /* KMPNativeCoroutinesCombine */ = {
+		1D2EC893266D3B4300B118B0 /* KMPNativeCoroutinesCombine */ = {
 			isa = PBXGroup;
 			children = (
 				1D2EC86C266D29E800B118B0 /* Future.swift */,
 				1D2EC86A266D290000B118B0 /* Publisher.swift */,
 			);
-			name = KMPNativeCoroutinesCombine;
+			path = KMPNativeCoroutinesCombine;
 			sourceTree = "<group>";
 		};
 		1DF8833E266D1BC10058B6F9 = {
 			isa = PBXGroup;
 			children = (
-				1D2EC868266D287600B118B0 /* KMPNativeCoroutinesSwift */,
-				1D2EC869266D28D500B118B0 /* KMPNativeCoroutinesCombine */,
+				1D2EC874266D3A8900B118B0 /* KMPNativeCoroutinesCore */,
+				1D2EC893266D3B4300B118B0 /* KMPNativeCoroutinesCombine */,
 				1DF88349266D1BC10058B6F9 /* Products */,
 				1D2EC862266D242300B118B0 /* Frameworks */,
 			);
@@ -147,8 +147,8 @@
 			children = (
 				1DF88367266D1D270058B6F9 /* KMPNativeCoroutinesCombine.framework */,
 				1DF8836F266D1D270058B6F9 /* KMPNativeCoroutinesCombineTests.xctest */,
-				1D2EC847266D239100B118B0 /* KMPNativeCoroutinesSwift.framework */,
-				1D2EC84F266D239200B118B0 /* KMPNativeCoroutinesSwiftTests.xctest */,
+				1D2EC873266D3A8900B118B0 /* KMPNativeCoroutinesCore.framework */,
+				1D2EC87B266D3A8900B118B0 /* KMPNativeCoroutinesCoreTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -156,7 +156,7 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		1D2EC842266D239100B118B0 /* Headers */ = {
+		1D2EC86E266D3A8900B118B0 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -173,40 +173,40 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		1D2EC846266D239100B118B0 /* KMPNativeCoroutinesSwift */ = {
+		1D2EC872266D3A8900B118B0 /* KMPNativeCoroutinesCore */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1D2EC858266D239200B118B0 /* Build configuration list for PBXNativeTarget "KMPNativeCoroutinesSwift" */;
+			buildConfigurationList = 1D2EC884266D3A8900B118B0 /* Build configuration list for PBXNativeTarget "KMPNativeCoroutinesCore" */;
 			buildPhases = (
-				1D2EC842266D239100B118B0 /* Headers */,
-				1D2EC843266D239100B118B0 /* Sources */,
-				1D2EC844266D239100B118B0 /* Frameworks */,
-				1D2EC845266D239100B118B0 /* Resources */,
+				1D2EC86E266D3A8900B118B0 /* Headers */,
+				1D2EC86F266D3A8900B118B0 /* Sources */,
+				1D2EC870266D3A8900B118B0 /* Frameworks */,
+				1D2EC871266D3A8900B118B0 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = KMPNativeCoroutinesSwift;
-			productName = KMPNativeCoroutinesSwift;
-			productReference = 1D2EC847266D239100B118B0 /* KMPNativeCoroutinesSwift.framework */;
+			name = KMPNativeCoroutinesCore;
+			productName = KMPNativeCoroutinesCore;
+			productReference = 1D2EC873266D3A8900B118B0 /* KMPNativeCoroutinesCore.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		1D2EC84E266D239200B118B0 /* KMPNativeCoroutinesSwiftTests */ = {
+		1D2EC87A266D3A8900B118B0 /* KMPNativeCoroutinesCoreTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1D2EC85B266D239200B118B0 /* Build configuration list for PBXNativeTarget "KMPNativeCoroutinesSwiftTests" */;
+			buildConfigurationList = 1D2EC887266D3A8900B118B0 /* Build configuration list for PBXNativeTarget "KMPNativeCoroutinesCoreTests" */;
 			buildPhases = (
-				1D2EC84B266D239200B118B0 /* Sources */,
-				1D2EC84C266D239200B118B0 /* Frameworks */,
-				1D2EC84D266D239200B118B0 /* Resources */,
+				1D2EC877266D3A8900B118B0 /* Sources */,
+				1D2EC878266D3A8900B118B0 /* Frameworks */,
+				1D2EC879266D3A8900B118B0 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				1D2EC852266D239200B118B0 /* PBXTargetDependency */,
+				1D2EC87E266D3A8900B118B0 /* PBXTargetDependency */,
 			);
-			name = KMPNativeCoroutinesSwiftTests;
-			productName = KMPNativeCoroutinesSwiftTests;
-			productReference = 1D2EC84F266D239200B118B0 /* KMPNativeCoroutinesSwiftTests.xctest */;
+			name = KMPNativeCoroutinesCoreTests;
+			productName = KMPNativeCoroutinesCoreTests;
+			productReference = 1D2EC87B266D3A8900B118B0 /* KMPNativeCoroutinesCoreTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		1DF88366266D1D270058B6F9 /* KMPNativeCoroutinesCombine */ = {
@@ -217,12 +217,12 @@
 				1DF88363266D1D270058B6F9 /* Sources */,
 				1DF88364266D1D270058B6F9 /* Frameworks */,
 				1DF88365266D1D270058B6F9 /* Resources */,
-				1D2EC867266D242300B118B0 /* Embed Frameworks */,
+				1D2EC892266D3B0700B118B0 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				1D2EC866266D242300B118B0 /* PBXTargetDependency */,
+				1D2EC891266D3B0700B118B0 /* PBXTargetDependency */,
 			);
 			name = KMPNativeCoroutinesCombine;
 			productName = KMPNativeCoroutinesCombine;
@@ -256,10 +256,10 @@
 				LastSwiftUpdateCheck = 1250;
 				LastUpgradeCheck = 1250;
 				TargetAttributes = {
-					1D2EC846266D239100B118B0 = {
+					1D2EC872266D3A8900B118B0 = {
 						CreatedOnToolsVersion = 12.5;
 					};
-					1D2EC84E266D239200B118B0 = {
+					1D2EC87A266D3A8900B118B0 = {
 						CreatedOnToolsVersion = 12.5;
 					};
 					1DF88366266D1D270058B6F9 = {
@@ -286,21 +286,21 @@
 			targets = (
 				1DF88366266D1D270058B6F9 /* KMPNativeCoroutinesCombine */,
 				1DF8836E266D1D270058B6F9 /* KMPNativeCoroutinesCombineTests */,
-				1D2EC846266D239100B118B0 /* KMPNativeCoroutinesSwift */,
-				1D2EC84E266D239200B118B0 /* KMPNativeCoroutinesSwiftTests */,
+				1D2EC872266D3A8900B118B0 /* KMPNativeCoroutinesCore */,
+				1D2EC87A266D3A8900B118B0 /* KMPNativeCoroutinesCoreTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		1D2EC845266D239100B118B0 /* Resources */ = {
+		1D2EC871266D3A8900B118B0 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1D2EC84D266D239200B118B0 /* Resources */ = {
+		1D2EC879266D3A8900B118B0 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -324,18 +324,18 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		1D2EC843266D239100B118B0 /* Sources */ = {
+		1D2EC86F266D3A8900B118B0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1D2EC860266D23B800B118B0 /* NativeCallback.swift in Sources */,
-				1D2EC85E266D23A200B118B0 /* NativeSuspend.swift in Sources */,
-				1D2EC861266D23BF00B118B0 /* NativeFlow.swift in Sources */,
-				1D2EC85F266D23B100B118B0 /* NativeCancellable.swift in Sources */,
+				1D2EC88A266D3AD900B118B0 /* NativeCallback.swift in Sources */,
+				1D2EC88C266D3ADF00B118B0 /* NativeFlow.swift in Sources */,
+				1D2EC88B266D3ADD00B118B0 /* NativeCancellable.swift in Sources */,
+				1D2EC88D266D3AE200B118B0 /* NativeSuspend.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1D2EC84B266D239200B118B0 /* Sources */ = {
+		1D2EC877266D3A8900B118B0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -361,15 +361,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		1D2EC852266D239200B118B0 /* PBXTargetDependency */ = {
+		1D2EC87E266D3A8900B118B0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 1D2EC846266D239100B118B0 /* KMPNativeCoroutinesSwift */;
-			targetProxy = 1D2EC851266D239200B118B0 /* PBXContainerItemProxy */;
+			target = 1D2EC872266D3A8900B118B0 /* KMPNativeCoroutinesCore */;
+			targetProxy = 1D2EC87D266D3A8900B118B0 /* PBXContainerItemProxy */;
 		};
-		1D2EC866266D242300B118B0 /* PBXTargetDependency */ = {
+		1D2EC891266D3B0700B118B0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 1D2EC846266D239100B118B0 /* KMPNativeCoroutinesSwift */;
-			targetProxy = 1D2EC865266D242300B118B0 /* PBXContainerItemProxy */;
+			target = 1D2EC872266D3A8900B118B0 /* KMPNativeCoroutinesCore */;
+			targetProxy = 1D2EC890266D3B0700B118B0 /* PBXContainerItemProxy */;
 		};
 		1DF88372266D1D270058B6F9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -379,7 +379,7 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		1D2EC859266D239200B118B0 /* Debug */ = {
+		1D2EC885266D3A8900B118B0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -387,7 +387,6 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -395,7 +394,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.rickclephas.kmp.KMPNativeCoroutinesSwift;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rickclephas.kmp.KMPNativeCoroutinesCore;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -403,7 +402,7 @@
 			};
 			name = Debug;
 		};
-		1D2EC85A266D239200B118B0 /* Release */ = {
+		1D2EC886266D3A8900B118B0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -411,7 +410,6 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -419,7 +417,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.rickclephas.kmp.KMPNativeCoroutinesSwift;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rickclephas.kmp.KMPNativeCoroutinesCore;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -427,7 +425,7 @@
 			};
 			name = Release;
 		};
-		1D2EC85C266D239200B118B0 /* Debug */ = {
+		1D2EC888266D3A8900B118B0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -437,14 +435,14 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.rickclephas.kmp.KMPNativeCoroutinesSwiftTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rickclephas.kmp.KMPNativeCoroutinesCoreTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		1D2EC85D266D239200B118B0 /* Release */ = {
+		1D2EC889266D3A8900B118B0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -454,7 +452,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.rickclephas.kmp.KMPNativeCoroutinesSwiftTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rickclephas.kmp.KMPNativeCoroutinesCoreTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -671,20 +669,20 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1D2EC858266D239200B118B0 /* Build configuration list for PBXNativeTarget "KMPNativeCoroutinesSwift" */ = {
+		1D2EC884266D3A8900B118B0 /* Build configuration list for PBXNativeTarget "KMPNativeCoroutinesCore" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1D2EC859266D239200B118B0 /* Debug */,
-				1D2EC85A266D239200B118B0 /* Release */,
+				1D2EC885266D3A8900B118B0 /* Debug */,
+				1D2EC886266D3A8900B118B0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1D2EC85B266D239200B118B0 /* Build configuration list for PBXNativeTarget "KMPNativeCoroutinesSwiftTests" */ = {
+		1D2EC887266D3A8900B118B0 /* Build configuration list for PBXNativeTarget "KMPNativeCoroutinesCoreTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1D2EC85C266D239200B118B0 /* Debug */,
-				1D2EC85D266D239200B118B0 /* Release */,
+				1D2EC888266D3A8900B118B0 /* Debug */,
+				1D2EC889266D3A8900B118B0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
