@@ -11,7 +11,7 @@ import kotlin.native.concurrent.freeze
  * The function takes an `onResult` and `onError` callback
  * and returns a cancellable that can be used to cancel the suspend function.
  */
-internal typealias NativeSuspend<T> = (onResult: NativeCallback<T>, onError: NativeCallback<NSError>) -> NativeCancellable
+typealias NativeSuspend<T> = (onResult: NativeCallback<T>, onError: NativeCallback<NSError>) -> NativeCancellable
 
 /**
  * Creates a [NativeSuspend] for the provided suspend [block].

@@ -13,7 +13,7 @@ import kotlin.native.concurrent.freeze
  * The function takes an `onItem` and `onComplete` callback
  * and returns a cancellable that can be used to cancel the collection.
  */
-internal typealias NativeFlow<T> = (onItem: NativeCallback<T>, onComplete: NativeCallback<NSError?>) -> NativeCancellable
+typealias NativeFlow<T> = (onItem: NativeCallback<T>, onComplete: NativeCallback<NSError?>) -> NativeCancellable
 
 /**
  * Creates a [NativeFlow] for this [Flow].

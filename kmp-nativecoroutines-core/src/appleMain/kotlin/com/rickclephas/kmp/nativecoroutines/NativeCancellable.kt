@@ -6,7 +6,7 @@ import kotlin.native.concurrent.freeze
 /**
  * A function that cancels the coroutines [Job].
  */
-internal typealias NativeCancellable = () -> Unit
+typealias NativeCancellable = () -> Unit
 
 /**
  * Creates a [NativeCancellable] for this [Job].
