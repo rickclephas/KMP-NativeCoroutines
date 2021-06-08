@@ -1,0 +1,15 @@
+use_frameworks!
+
+target 'iOS App' do
+  platform :ios, '13.0'
+  pod 'shared', :path => './shared'
+  pod 'KMPNativeCoroutinesCore', :path => '../'
+  pod 'KMPNativeCoroutinesCombine', :path => '../'
+end
+
+target 'macOS App' do
+  platform :osx, '10.15'
+  pod 'shared', :path => './shared'
+  pod 'KMPNativeCoroutinesCore', :path => '../'
+  pod 'KMPNativeCoroutinesCombine', :path => '../'
+end

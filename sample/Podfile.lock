@@ -1,0 +1,27 @@
+PODS:
+  - KMPNativeCoroutinesCombine (0.1.0):
+    - KMPNativeCoroutinesCore
+  - KMPNativeCoroutinesCore (0.1.0)
+  - shared (0.1.0-SNAPSHOT)
+
+DEPENDENCIES:
+  - KMPNativeCoroutinesCombine (from `../`)
+  - KMPNativeCoroutinesCore (from `../`)
+  - shared (from `./shared`)
+
+EXTERNAL SOURCES:
+  KMPNativeCoroutinesCombine:
+    :path: "../"
+  KMPNativeCoroutinesCore:
+    :path: "../"
+  shared:
+    :path: "./shared"
+
+SPEC CHECKSUMS:
+  KMPNativeCoroutinesCombine: ba6dec802aeb8021e44c4e47152f4c2aca35a6c9
+  KMPNativeCoroutinesCore: 389e2ecbc2c7308d225d8bf6791ffc8be371a5d7
+  shared: 4f6ad6cf7ce9f21e809b9db1798a12bb0ae682b4
+
+PODFILE CHECKSUM: 26df50cd8013cfec6313085e70df530222d0668e
+
+COCOAPODS: 1.10.1
