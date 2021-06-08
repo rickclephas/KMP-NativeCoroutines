@@ -6,13 +6,14 @@ group = "com.rickclephas.kmp"
 version = "0.1.0-SNAPSHOT"
 
 kotlin {
+    jvm()
     macosX64()
     iosArm64()
     iosX64()
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0-native-mt")
+                api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0-native-mt")
             }
         }
         val commonTest by getting {
