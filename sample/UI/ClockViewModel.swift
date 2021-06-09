@@ -18,6 +18,8 @@ protocol ClockViewModel: ObservableObject {
     func startMonitoring()
     /// Stops monitoring the time.
     func stopMonitoring()
+    /// Update the `time` value to the current time.
+    func updateTime()
 }
 
 /// `ClockViewModel` implementation for the SwiftUI previews.
@@ -32,4 +34,5 @@ class ClockPreviewViewModel: ClockViewModel {
     
     func startMonitoring() { }
     func stopMonitoring() { }
+    func updateTime() { }
 }

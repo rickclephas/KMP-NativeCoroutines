@@ -28,11 +28,15 @@ class ClockCombineViewModel: ClockViewModel {
     
     func startMonitoring() {
         cancellable = createPublisher(for: clock.timeNative)
+            // Convert the seconds since EPOCH to a string in the format "HH:mm:ss"
             .map { [weak self] time -> String in
                 guard let self = self else { return "" }
-                return self.formatter.string(from: Date(timeIntervalSince1970: time.doubleValue))
+                let date = Date(timeIntervalSince1970: time.doubleValue)
+                return self.formatter.string(from: date)
             }
+            // Replace any errors with a text message :)
             .replaceError(with: "Ohno error!")
+            // Update the UI on the main thread
             .receive(on: DispatchQueue.main)
             .sink { [weak self] time in
                 guard let self = self else { return }
@@ -43,5 +47,12 @@ class ClockCombineViewModel: ClockViewModel {
     func stopMonitoring() {
         cancellable?.cancel()
         cancellable = nil
+    }
+    
+    func updateTime() {
+        // Convert the seconds since EPOCH to a string
+        // in the format "HH:mm:ss" and update the UI
+        let date = Date(timeIntervalSince1970: TimeInterval(clock.timeNativeValue))
+        time = formatter.string(from: date)
     }
 }
