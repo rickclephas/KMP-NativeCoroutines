@@ -36,7 +36,7 @@ struct ClockView<ViewModel: ClockViewModel>: View {
                 viewModel.updateTime()
             }.disabled(viewModel.isMonitoring)
             Spacer()
-        }
+        }.navigationBarTitle(inlineTitle: "Clock")
     }
 }
 

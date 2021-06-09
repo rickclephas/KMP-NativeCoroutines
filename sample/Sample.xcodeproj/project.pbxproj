@@ -22,6 +22,10 @@
 		1D71762F26700A6E00846F75 /* ClockViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D71762C26700A6E00846F75 /* ClockViewModel.swift */; };
 		1D71763026700A6E00846F75 /* ClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D71762D26700A6E00846F75 /* ClockView.swift */; };
 		1D71763126700A6E00846F75 /* ClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D71762D26700A6E00846F75 /* ClockView.swift */; };
+		1DF1A66C2671448500945FF9 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF1A66B2671448500945FF9 /* RootView.swift */; };
+		1DF1A66D2671448500945FF9 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF1A66B2671448500945FF9 /* RootView.swift */; };
+		1DF1A66F2671494800945FF9 /* NavigationBarTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF1A66E2671494800945FF9 /* NavigationBarTitle.swift */; };
+		1DF1A6702671494800945FF9 /* NavigationBarTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF1A66E2671494800945FF9 /* NavigationBarTitle.swift */; };
 		E2D6702474205AE2CC47D3FA /* Pods_iOS_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C54EBD4C92297D7F9195116 /* Pods_iOS_App.framework */; };
 		E45C268DBAB665FAC90C0C01 /* Pods_macOS_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA86A8D66453FD04AAF5353F /* Pods_macOS_App.framework */; };
 /* End PBXBuildFile section */
@@ -47,6 +51,8 @@
 		1D71762C26700A6E00846F75 /* ClockViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClockViewModel.swift; sourceTree = "<group>"; };
 		1D71762D26700A6E00846F75 /* ClockView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClockView.swift; sourceTree = "<group>"; };
 		1DEE8AB330F1D42D1AF1532C /* Pods-macOS App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-macOS App.release.xcconfig"; path = "Target Support Files/Pods-macOS App/Pods-macOS App.release.xcconfig"; sourceTree = "<group>"; };
+		1DF1A66B2671448500945FF9 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		1DF1A66E2671494800945FF9 /* NavigationBarTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarTitle.swift; sourceTree = "<group>"; };
 		4AB8345A013815C7E3CC5079 /* Pods-macOS App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-macOS App.debug.xcconfig"; path = "Target Support Files/Pods-macOS App/Pods-macOS App.debug.xcconfig"; sourceTree = "<group>"; };
 		8C54EBD4C92297D7F9195116 /* Pods_iOS_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9B8A7EE56283DF651E7F0A8 /* Pods-iOS App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS App.release.xcconfig"; path = "Target Support Files/Pods-iOS App/Pods-iOS App.release.xcconfig"; sourceTree = "<group>"; };
@@ -154,6 +160,8 @@
 			children = (
 				1D71762D26700A6E00846F75 /* ClockView.swift */,
 				1D71762C26700A6E00846F75 /* ClockViewModel.swift */,
+				1DF1A66B2671448500945FF9 /* RootView.swift */,
+				1DF1A66E2671494800945FF9 /* NavigationBarTitle.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -365,8 +373,10 @@
 			files = (
 				1D71763026700A6E00846F75 /* ClockView.swift in Sources */,
 				1D7175FF267009C500846F75 /* AppDelegate.swift in Sources */,
+				1DF1A66F2671494800945FF9 /* NavigationBarTitle.swift in Sources */,
 				1D71762A26700A6000846F75 /* ClockCombineViewModel.swift in Sources */,
 				1D71762E26700A6E00846F75 /* ClockViewModel.swift in Sources */,
+				1DF1A66C2671448500945FF9 /* RootView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -375,7 +385,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				1D717616267009E700846F75 /* AppDelegate.swift in Sources */,
+				1DF1A6702671494800945FF9 /* NavigationBarTitle.swift in Sources */,
 				1D71763126700A6E00846F75 /* ClockView.swift in Sources */,
+				1DF1A66D2671448500945FF9 /* RootView.swift in Sources */,
 				1D717618267009E700846F75 /* SceneDelegate.swift in Sources */,
 				1D71762B26700A6000846F75 /* ClockCombineViewModel.swift in Sources */,
 				1D71762F26700A6E00846F75 /* ClockViewModel.swift in Sources */,
