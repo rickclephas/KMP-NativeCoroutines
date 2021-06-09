@@ -18,8 +18,8 @@ EXTERNAL SOURCES:
     :path: "./shared"
 
 SPEC CHECKSUMS:
-  KMPNativeCoroutinesCombine: ba6dec802aeb8021e44c4e47152f4c2aca35a6c9
-  KMPNativeCoroutinesCore: 389e2ecbc2c7308d225d8bf6791ffc8be371a5d7
+  KMPNativeCoroutinesCombine: d3660dda94264185e56006b064c862c8e58e9dda
+  KMPNativeCoroutinesCore: 1d92cbe2059fe7c3951ddff0f2ef5a364a8aee61
   shared: 4f6ad6cf7ce9f21e809b9db1798a12bb0ae682b4
 
 PODFILE CHECKSUM: 26df50cd8013cfec6313085e70df530222d0668e

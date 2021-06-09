@@ -14,6 +14,9 @@ struct RootView: View {
                 NavigationLink(destination: ClockView(viewModel: ClockCombineViewModel())) {
                     Text("Clock")
                 }
+                NavigationLink(destination: RandomLettersView(viewModel: RandomLettersCombineViewModel())) {
+                    Text("Random letters")
+                }
             }
         }.navigationBarTitle(inlineTitle: "KMP-NativeCoroutines")
     }
