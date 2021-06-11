@@ -21,6 +21,7 @@ class RandomLettersCombineViewModel: RandomLettersViewModel {
     
     func loadRandomLetters(throwException: Bool) {
         isLoading = true
+        result = nil
         createFuture(for: randomLettersGenerator.getRandomLettersNative(throwException: throwException))
             // Update the UI on the main thread
             .receive(on: DispatchQueue.main)
@@ -34,6 +35,5 @@ class RandomLettersCombineViewModel: RandomLettersViewModel {
                 guard let self = self else { return }
                 self.result = .success(word)
             }.store(in: &cancellables)
-
     }
 }

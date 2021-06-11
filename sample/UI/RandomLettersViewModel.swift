@@ -7,14 +7,14 @@
 
 import Foundation
 
-/// A type of object that is used as the view model for the `RandomLettersViewRandomLettersView`.
+/// A type of object that is used as the view model for the `RandomLettersView`.
 protocol RandomLettersViewModel: ObservableObject {
     /// The result of the `loadRandomLetters` action.
     var result: Result<String, Error>? { get }
     /// Indicates if random letters are being loaded.
     var isLoading: Bool { get }
     
-    /// Loads random letters or throw an exception
+    /// Loads random letters or throws an exception
     func loadRandomLetters(throwException: Bool)
 }
 
