@@ -27,7 +27,7 @@ fun <T> Flow<T>.asNativeFlow(scope: CoroutineScope? = null): NativeFlow<T> {
     return (collect@{ onItem: NativeCallback<T>, onComplete: NativeCallback<NSError?> ->
         val job = coroutineScope.launch {
             try {
-                collect { onItem(it.freeze()) }
+                collect { onItem(it) }
                 onComplete(null)
             } catch (e: Exception) {
                 onComplete(e.asNSError())

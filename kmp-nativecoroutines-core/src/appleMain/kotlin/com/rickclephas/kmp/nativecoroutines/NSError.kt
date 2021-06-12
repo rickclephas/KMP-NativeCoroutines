@@ -14,10 +14,10 @@ import kotlin.native.concurrent.freeze
  */
 internal fun Exception.asNSError(): NSError {
     val userInfo = mutableMapOf<Any?, Any>()
-    userInfo["KotlinException"] = this
+    userInfo["KotlinException"] = this.freeze()
     val message = message
     if (message != null) {
         userInfo[NSLocalizedDescriptionKey] = message
     }
-    return NSError.errorWithDomain("KotlinException", 0, userInfo).freeze()
+    return NSError.errorWithDomain("KotlinException", 0, userInfo)
 }
