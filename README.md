@@ -18,8 +18,8 @@ val Clock.timeNative
 Create an extension function to expose the suspend function as a `NativeSuspend` to Swift:
 
 ```kotlin
-fun RandomLettersGenerator.getRandomLettersNative(throwException: Boolean) =
-    nativeSuspend { getRandomLetters(throwException) }
+fun RandomLettersGenerator.getRandomLettersNative() =
+    nativeSuspend { getRandomLetters() }
 ```
 
 ## Swift Combine
@@ -37,5 +37,5 @@ let publisher = createPublisher(for: clock.timeNative)
 Use the `createFuture(for:)` function to get an `AnyPublisher` for the `NativeSuspend`:
 
 ```swift
-let future = createFuture(for: randomLettersGenerator.getRandomLettersNative(false))
+let future = createFuture(for: randomLettersGenerator.getRandomLettersNative())
 ```
