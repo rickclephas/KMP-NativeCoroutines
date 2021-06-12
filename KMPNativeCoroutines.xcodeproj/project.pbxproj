@@ -14,6 +14,10 @@
 		1D7175BF266FF03A00846F75 /* NativeSuspend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2EC840266D220900B118B0 /* NativeSuspend.swift */; };
 		1D7175C0266FF03F00846F75 /* Future.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2EC86C266D29E800B118B0 /* Future.swift */; };
 		1D7175C1266FF04200846F75 /* Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2EC86A266D290000B118B0 /* Publisher.swift */; };
+		1DCA41A826753C640036C1A3 /* FutureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DCA41A726753C640036C1A3 /* FutureTests.swift */; };
+		1DCA41AA26753C640036C1A3 /* KMPNativeCoroutinesCombine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D71759F266FE9B700846F75 /* KMPNativeCoroutinesCombine.framework */; };
+		1DCA41B1267540790036C1A3 /* TestValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DCA41B0267540790036C1A3 /* TestValue.swift */; };
+		1DCA41B3267545600036C1A3 /* PublisherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DCA41B2267545600036C1A3 /* PublisherTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -23,6 +27,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 1D717582266FE90400846F75;
 			remoteInfo = KMPNativeCoroutinesCore;
+		};
+		1DCA41AB26753C640036C1A3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1DF8833F266D1BC10058B6F9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1D71759E266FE9B700846F75;
+			remoteInfo = KMPNativeCoroutinesCombine;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -35,6 +46,10 @@
 		1D2EC86C266D29E800B118B0 /* Future.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Future.swift; sourceTree = "<group>"; };
 		1D717583266FE90400846F75 /* KMPNativeCoroutinesCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KMPNativeCoroutinesCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D71759F266FE9B700846F75 /* KMPNativeCoroutinesCombine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KMPNativeCoroutinesCombine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1DCA41A526753C630036C1A3 /* KMPNativeCoroutinesCombineTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KMPNativeCoroutinesCombineTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1DCA41A726753C640036C1A3 /* FutureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FutureTests.swift; sourceTree = "<group>"; };
+		1DCA41B0267540790036C1A3 /* TestValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestValue.swift; sourceTree = "<group>"; };
+		1DCA41B2267545600036C1A3 /* PublisherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublisherTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +65,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				1D7175B7266FE9F800846F75 /* KMPNativeCoroutinesCore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1DCA41A226753C630036C1A3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1DCA41AA26753C640036C1A3 /* KMPNativeCoroutinesCombine.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,11 +99,22 @@
 			path = KMPNativeCoroutinesCombine;
 			sourceTree = "<group>";
 		};
+		1DCA41A626753C640036C1A3 /* KMPNativeCoroutinesCombineTests */ = {
+			isa = PBXGroup;
+			children = (
+				1DCA41A726753C640036C1A3 /* FutureTests.swift */,
+				1DCA41B0267540790036C1A3 /* TestValue.swift */,
+				1DCA41B2267545600036C1A3 /* PublisherTests.swift */,
+			);
+			path = KMPNativeCoroutinesCombineTests;
+			sourceTree = "<group>";
+		};
 		1DF8833E266D1BC10058B6F9 = {
 			isa = PBXGroup;
 			children = (
 				1D717584266FE90400846F75 /* KMPNativeCoroutinesCore */,
 				1D7175A0266FE9B700846F75 /* KMPNativeCoroutinesCombine */,
+				1DCA41A626753C640036C1A3 /* KMPNativeCoroutinesCombineTests */,
 				1DF88349266D1BC10058B6F9 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -90,6 +124,7 @@
 			children = (
 				1D717583266FE90400846F75 /* KMPNativeCoroutinesCore.framework */,
 				1D71759F266FE9B700846F75 /* KMPNativeCoroutinesCombine.framework */,
+				1DCA41A526753C630036C1A3 /* KMPNativeCoroutinesCombineTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -151,6 +186,24 @@
 			productReference = 1D71759F266FE9B700846F75 /* KMPNativeCoroutinesCombine.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		1DCA41A426753C630036C1A3 /* KMPNativeCoroutinesCombineTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1DCA41AF26753C640036C1A3 /* Build configuration list for PBXNativeTarget "KMPNativeCoroutinesCombineTests" */;
+			buildPhases = (
+				1DCA41A126753C630036C1A3 /* Sources */,
+				1DCA41A226753C630036C1A3 /* Frameworks */,
+				1DCA41A326753C630036C1A3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1DCA41AC26753C640036C1A3 /* PBXTargetDependency */,
+			);
+			name = KMPNativeCoroutinesCombineTests;
+			productName = KMPNativeCoroutinesCombineTests;
+			productReference = 1DCA41A526753C630036C1A3 /* KMPNativeCoroutinesCombineTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -164,6 +217,9 @@
 						CreatedOnToolsVersion = 12.5;
 					};
 					1D71759E266FE9B700846F75 = {
+						CreatedOnToolsVersion = 12.5;
+					};
+					1DCA41A426753C630036C1A3 = {
 						CreatedOnToolsVersion = 12.5;
 					};
 				};
@@ -183,6 +239,7 @@
 			targets = (
 				1D717582266FE90400846F75 /* KMPNativeCoroutinesCore */,
 				1D71759E266FE9B700846F75 /* KMPNativeCoroutinesCombine */,
+				1DCA41A426753C630036C1A3 /* KMPNativeCoroutinesCombineTests */,
 			);
 		};
 /* End PBXProject section */
@@ -196,6 +253,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		1D71759D266FE9B700846F75 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1DCA41A326753C630036C1A3 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -225,6 +289,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1DCA41A126753C630036C1A3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1DCA41B1267540790036C1A3 /* TestValue.swift in Sources */,
+				1DCA41A826753C640036C1A3 /* FutureTests.swift in Sources */,
+				1DCA41B3267545600036C1A3 /* PublisherTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -232,6 +306,11 @@
 			isa = PBXTargetDependency;
 			target = 1D717582266FE90400846F75 /* KMPNativeCoroutinesCore */;
 			targetProxy = 1D7175B9266FE9F800846F75 /* PBXContainerItemProxy */;
+		};
+		1DCA41AC26753C640036C1A3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1D71759E266FE9B700846F75 /* KMPNativeCoroutinesCombine */;
+			targetProxy = 1DCA41AB26753C640036C1A3 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -328,6 +407,40 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.rickclephas.kmp.KMPNativeCoroutinesCombine;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		1DCA41AD26753C640036C1A3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.3;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rickclephas.kmp.KMPNativeCoroutinesCombineTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		1DCA41AE26753C640036C1A3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.3;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rickclephas.kmp.KMPNativeCoroutinesCombineTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
@@ -473,6 +586,15 @@
 			buildConfigurations = (
 				1D7175B1266FE9B700846F75 /* Debug */,
 				1D7175B2266FE9B700846F75 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1DCA41AF26753C640036C1A3 /* Build configuration list for PBXNativeTarget "KMPNativeCoroutinesCombineTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DCA41AD26753C640036C1A3 /* Debug */,
+				1DCA41AE26753C640036C1A3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
