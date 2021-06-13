@@ -29,7 +29,7 @@ fun <T> Flow<T>.asNativeFlow(scope: CoroutineScope? = null): NativeFlow<T> {
             try {
                 collect { onItem(it) }
                 onComplete(null)
-            } catch (e: Error) {
+            } catch (e: Throwable) {
                 onComplete(e.asNSError())
             }
         }
