@@ -10,6 +10,8 @@ import KMPNativeCoroutinesCore
 import KMPNativeCoroutinesCombine
 
 class FutureTests: XCTestCase {
+    
+    private class TestValue { }
 
     func testCancellableInvoked() {
         var cancelCount = 0
@@ -48,7 +50,7 @@ class FutureTests: XCTestCase {
     }
     
     func testCompletionWithError() {
-        let error = NSError()
+        let error = NSError(domain: "Test", code: 0)
         let nativeSuspend: NativeSuspend<TestValue, NSError, Void> = { _, errorCallback in
             errorCallback(error, ())
             return { }

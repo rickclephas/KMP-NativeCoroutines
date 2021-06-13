@@ -10,6 +10,8 @@ import KMPNativeCoroutinesCore
 import KMPNativeCoroutinesCombine
 
 class PublisherTests: XCTestCase {
+    
+    private class TestValue { }
 
     func testCancellableInvoked() {
         var cancelCount = 0
@@ -51,7 +53,7 @@ class PublisherTests: XCTestCase {
     }
     
     func testCompletionWithError() {
-        let error = NSError()
+        let error = NSError(domain: "Test", code: 0)
         let nativeFlow: NativeFlow<TestValue, NSError, Void> = { _, completionCallback in
             completionCallback(error, ())
             return { }

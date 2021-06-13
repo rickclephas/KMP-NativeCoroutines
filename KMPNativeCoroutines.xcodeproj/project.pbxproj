@@ -16,7 +16,6 @@
 		1D7175C1266FF04200846F75 /* Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2EC86A266D290000B118B0 /* Publisher.swift */; };
 		1DCA41A826753C640036C1A3 /* FutureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DCA41A726753C640036C1A3 /* FutureTests.swift */; };
 		1DCA41AA26753C640036C1A3 /* KMPNativeCoroutinesCombine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D71759F266FE9B700846F75 /* KMPNativeCoroutinesCombine.framework */; };
-		1DCA41B1267540790036C1A3 /* TestValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DCA41B0267540790036C1A3 /* TestValue.swift */; };
 		1DCA41B3267545600036C1A3 /* PublisherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DCA41B2267545600036C1A3 /* PublisherTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -48,7 +47,6 @@
 		1D71759F266FE9B700846F75 /* KMPNativeCoroutinesCombine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KMPNativeCoroutinesCombine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DCA41A526753C630036C1A3 /* KMPNativeCoroutinesCombineTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KMPNativeCoroutinesCombineTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DCA41A726753C640036C1A3 /* FutureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FutureTests.swift; sourceTree = "<group>"; };
-		1DCA41B0267540790036C1A3 /* TestValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestValue.swift; sourceTree = "<group>"; };
 		1DCA41B2267545600036C1A3 /* PublisherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublisherTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -103,7 +101,6 @@
 			isa = PBXGroup;
 			children = (
 				1DCA41A726753C640036C1A3 /* FutureTests.swift */,
-				1DCA41B0267540790036C1A3 /* TestValue.swift */,
 				1DCA41B2267545600036C1A3 /* PublisherTests.swift */,
 			);
 			path = KMPNativeCoroutinesCombineTests;
@@ -293,7 +290,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1DCA41B1267540790036C1A3 /* TestValue.swift in Sources */,
 				1DCA41A826753C640036C1A3 /* FutureTests.swift in Sources */,
 				1DCA41B3267545600036C1A3 /* PublisherTests.swift in Sources */,
 			);
