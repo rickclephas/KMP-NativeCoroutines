@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,6 +14,10 @@
 		1D7175BF266FF03A00846F75 /* NativeSuspend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2EC840266D220900B118B0 /* NativeSuspend.swift */; };
 		1D7175C0266FF03F00846F75 /* Future.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2EC86C266D29E800B118B0 /* Future.swift */; };
 		1D7175C1266FF04200846F75 /* Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2EC86A266D290000B118B0 /* Publisher.swift */; };
+		1DA5DCEF267613BB002448E3 /* KMPNativeCoroutinesAsync.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DA5DCE5267613BB002448E3 /* KMPNativeCoroutinesAsync.framework */; platformFilter = ios; };
+		1DA5DCF4267613BB002448E3 /* AsyncFunctionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA5DCF3267613BB002448E3 /* AsyncFunctionTests.swift */; };
+		1DA5DCFD26761404002448E3 /* AsyncFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA5DCFC26761404002448E3 /* AsyncFunction.swift */; };
+		1DA5DCFF2676192F002448E3 /* KMPNativeCoroutinesCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D717583266FE90400846F75 /* KMPNativeCoroutinesCore.framework */; };
 		1DCA41A826753C640036C1A3 /* FutureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DCA41A726753C640036C1A3 /* FutureTests.swift */; };
 		1DCA41AA26753C640036C1A3 /* KMPNativeCoroutinesCombine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D71759F266FE9B700846F75 /* KMPNativeCoroutinesCombine.framework */; };
 		1DCA41B3267545600036C1A3 /* PublisherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DCA41B2267545600036C1A3 /* PublisherTests.swift */; };
@@ -21,6 +25,20 @@
 
 /* Begin PBXContainerItemProxy section */
 		1D7175B9266FE9F800846F75 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1DF8833F266D1BC10058B6F9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1D717582266FE90400846F75;
+			remoteInfo = KMPNativeCoroutinesCore;
+		};
+		1DA5DCF0267613BB002448E3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1DF8833F266D1BC10058B6F9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1DA5DCE4267613BB002448E3;
+			remoteInfo = KMPNativeCoroutinesAsync;
+		};
+		1DA5DD012676192F002448E3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1DF8833F266D1BC10058B6F9 /* Project object */;
 			proxyType = 1;
@@ -45,6 +63,10 @@
 		1D2EC86C266D29E800B118B0 /* Future.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Future.swift; sourceTree = "<group>"; };
 		1D717583266FE90400846F75 /* KMPNativeCoroutinesCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KMPNativeCoroutinesCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D71759F266FE9B700846F75 /* KMPNativeCoroutinesCombine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KMPNativeCoroutinesCombine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1DA5DCE5267613BB002448E3 /* KMPNativeCoroutinesAsync.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KMPNativeCoroutinesAsync.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1DA5DCEE267613BB002448E3 /* KMPNativeCoroutinesAsyncTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KMPNativeCoroutinesAsyncTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1DA5DCF3267613BB002448E3 /* AsyncFunctionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncFunctionTests.swift; sourceTree = "<group>"; };
+		1DA5DCFC26761404002448E3 /* AsyncFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncFunction.swift; sourceTree = "<group>"; };
 		1DCA41A526753C630036C1A3 /* KMPNativeCoroutinesCombineTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KMPNativeCoroutinesCombineTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DCA41A726753C640036C1A3 /* FutureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FutureTests.swift; sourceTree = "<group>"; };
 		1DCA41B2267545600036C1A3 /* PublisherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublisherTests.swift; sourceTree = "<group>"; };
@@ -63,6 +85,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				1D7175B7266FE9F800846F75 /* KMPNativeCoroutinesCore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1DA5DCE2267613BB002448E3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1DA5DCFF2676192F002448E3 /* KMPNativeCoroutinesCore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1DA5DCEB267613BB002448E3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1DA5DCEF267613BB002448E3 /* KMPNativeCoroutinesAsync.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,6 +135,29 @@
 			path = KMPNativeCoroutinesCombine;
 			sourceTree = "<group>";
 		};
+		1DA5DCE6267613BB002448E3 /* KMPNativeCoroutinesAsync */ = {
+			isa = PBXGroup;
+			children = (
+				1DA5DCFC26761404002448E3 /* AsyncFunction.swift */,
+			);
+			path = KMPNativeCoroutinesAsync;
+			sourceTree = "<group>";
+		};
+		1DA5DCF2267613BB002448E3 /* KMPNativeCoroutinesAsyncTests */ = {
+			isa = PBXGroup;
+			children = (
+				1DA5DCF3267613BB002448E3 /* AsyncFunctionTests.swift */,
+			);
+			path = KMPNativeCoroutinesAsyncTests;
+			sourceTree = "<group>";
+		};
+		1DA5DCFE2676192F002448E3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		1DCA41A626753C640036C1A3 /* KMPNativeCoroutinesCombineTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -112,7 +173,10 @@
 				1D717584266FE90400846F75 /* KMPNativeCoroutinesCore */,
 				1D7175A0266FE9B700846F75 /* KMPNativeCoroutinesCombine */,
 				1DCA41A626753C640036C1A3 /* KMPNativeCoroutinesCombineTests */,
+				1DA5DCE6267613BB002448E3 /* KMPNativeCoroutinesAsync */,
+				1DA5DCF2267613BB002448E3 /* KMPNativeCoroutinesAsyncTests */,
 				1DF88349266D1BC10058B6F9 /* Products */,
+				1DA5DCFE2676192F002448E3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -122,6 +186,8 @@
 				1D717583266FE90400846F75 /* KMPNativeCoroutinesCore.framework */,
 				1D71759F266FE9B700846F75 /* KMPNativeCoroutinesCombine.framework */,
 				1DCA41A526753C630036C1A3 /* KMPNativeCoroutinesCombineTests.xctest */,
+				1DA5DCE5267613BB002448E3 /* KMPNativeCoroutinesAsync.framework */,
+				1DA5DCEE267613BB002448E3 /* KMPNativeCoroutinesAsyncTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -137,6 +203,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		1D71759A266FE9B700846F75 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1DA5DCE0267613BB002448E3 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -183,6 +256,43 @@
 			productReference = 1D71759F266FE9B700846F75 /* KMPNativeCoroutinesCombine.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		1DA5DCE4267613BB002448E3 /* KMPNativeCoroutinesAsync */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1DA5DCFA267613BB002448E3 /* Build configuration list for PBXNativeTarget "KMPNativeCoroutinesAsync" */;
+			buildPhases = (
+				1DA5DCE0267613BB002448E3 /* Headers */,
+				1DA5DCE1267613BB002448E3 /* Sources */,
+				1DA5DCE2267613BB002448E3 /* Frameworks */,
+				1DA5DCE3267613BB002448E3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1DA5DD022676192F002448E3 /* PBXTargetDependency */,
+			);
+			name = KMPNativeCoroutinesAsync;
+			productName = KMPNativeCoroutinesAsync;
+			productReference = 1DA5DCE5267613BB002448E3 /* KMPNativeCoroutinesAsync.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		1DA5DCED267613BB002448E3 /* KMPNativeCoroutinesAsyncTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1DA5DCFB267613BB002448E3 /* Build configuration list for PBXNativeTarget "KMPNativeCoroutinesAsyncTests" */;
+			buildPhases = (
+				1DA5DCEA267613BB002448E3 /* Sources */,
+				1DA5DCEB267613BB002448E3 /* Frameworks */,
+				1DA5DCEC267613BB002448E3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1DA5DCF1267613BB002448E3 /* PBXTargetDependency */,
+			);
+			name = KMPNativeCoroutinesAsyncTests;
+			productName = KMPNativeCoroutinesAsyncTests;
+			productReference = 1DA5DCEE267613BB002448E3 /* KMPNativeCoroutinesAsyncTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		1DCA41A426753C630036C1A3 /* KMPNativeCoroutinesCombineTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1DCA41AF26753C640036C1A3 /* Build configuration list for PBXNativeTarget "KMPNativeCoroutinesCombineTests" */;
@@ -207,7 +317,7 @@
 		1DF8833F266D1BC10058B6F9 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1250;
+				LastSwiftUpdateCheck = 1300;
 				LastUpgradeCheck = 1250;
 				TargetAttributes = {
 					1D717582266FE90400846F75 = {
@@ -215,6 +325,13 @@
 					};
 					1D71759E266FE9B700846F75 = {
 						CreatedOnToolsVersion = 12.5;
+					};
+					1DA5DCE4267613BB002448E3 = {
+						CreatedOnToolsVersion = 13.0;
+						LastSwiftMigration = 1300;
+					};
+					1DA5DCED267613BB002448E3 = {
+						CreatedOnToolsVersion = 13.0;
 					};
 					1DCA41A426753C630036C1A3 = {
 						CreatedOnToolsVersion = 12.5;
@@ -237,6 +354,8 @@
 				1D717582266FE90400846F75 /* KMPNativeCoroutinesCore */,
 				1D71759E266FE9B700846F75 /* KMPNativeCoroutinesCombine */,
 				1DCA41A426753C630036C1A3 /* KMPNativeCoroutinesCombineTests */,
+				1DA5DCE4267613BB002448E3 /* KMPNativeCoroutinesAsync */,
+				1DA5DCED267613BB002448E3 /* KMPNativeCoroutinesAsyncTests */,
 			);
 		};
 /* End PBXProject section */
@@ -250,6 +369,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		1D71759D266FE9B700846F75 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1DA5DCE3267613BB002448E3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1DA5DCEC267613BB002448E3 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -286,6 +419,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1DA5DCE1267613BB002448E3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1DA5DCFD26761404002448E3 /* AsyncFunction.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1DA5DCEA267613BB002448E3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1DA5DCF4267613BB002448E3 /* AsyncFunctionTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1DCA41A126753C630036C1A3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -302,6 +451,17 @@
 			isa = PBXTargetDependency;
 			target = 1D717582266FE90400846F75 /* KMPNativeCoroutinesCore */;
 			targetProxy = 1D7175B9266FE9F800846F75 /* PBXContainerItemProxy */;
+		};
+		1DA5DCF1267613BB002448E3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			platformFilter = ios;
+			target = 1DA5DCE4267613BB002448E3 /* KMPNativeCoroutinesAsync */;
+			targetProxy = 1DA5DCF0267613BB002448E3 /* PBXContainerItemProxy */;
+		};
+		1DA5DD022676192F002448E3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1D717582266FE90400846F75 /* KMPNativeCoroutinesCore */;
+			targetProxy = 1DA5DD012676192F002448E3 /* PBXContainerItemProxy */;
 		};
 		1DCA41AC26753C640036C1A3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -403,6 +563,113 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.rickclephas.kmp.KMPNativeCoroutinesCombine;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		1DA5DCF6267613BB002448E3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rickclephas.kmp.KMPNativeCoroutinesAsync;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		1DA5DCF7267613BB002448E3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rickclephas.kmp.KMPNativeCoroutinesAsync;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		1DA5DCF8267613BB002448E3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rickclephas.kmp.KMPNativeCoroutinesAsyncTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		1DA5DCF9267613BB002448E3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rickclephas.kmp.KMPNativeCoroutinesAsyncTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
@@ -582,6 +849,24 @@
 			buildConfigurations = (
 				1D7175B1266FE9B700846F75 /* Debug */,
 				1D7175B2266FE9B700846F75 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1DA5DCFA267613BB002448E3 /* Build configuration list for PBXNativeTarget "KMPNativeCoroutinesAsync" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DA5DCF6267613BB002448E3 /* Debug */,
+				1DA5DCF7267613BB002448E3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1DA5DCFB267613BB002448E3 /* Build configuration list for PBXNativeTarget "KMPNativeCoroutinesAsyncTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DA5DCF8267613BB002448E3 /* Debug */,
+				1DA5DCF9267613BB002448E3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
