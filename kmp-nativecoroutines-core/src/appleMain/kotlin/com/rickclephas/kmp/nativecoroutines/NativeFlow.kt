@@ -29,9 +29,13 @@ fun <T> Flow<T>.asNativeFlow(scope: CoroutineScope? = null): NativeFlow<T> {
             try {
                 collect { onItem(it) }
                 onComplete(null)
-            } catch (e: Exception) {
+            } catch (e: Error) {
                 onComplete(e.asNSError())
             }
+        }
+        job.invokeOnCompletion { cause ->
+            if (cause == null) return@invokeOnCompletion
+            onComplete(cause.asNSError())
         }
         return@collect job.asNativeCancellable()
     }).freeze()

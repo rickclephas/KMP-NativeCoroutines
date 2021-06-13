@@ -25,9 +25,13 @@ fun <T> nativeSuspend(scope: CoroutineScope? = null, block: suspend () -> T): Na
         val job = coroutineScope.launch {
             try {
                 onResult(block())
-            } catch (e: Exception) {
+            } catch (e: Error) {
                 onError(e.asNSError())
             }
+        }
+        job.invokeOnCompletion { cause ->
+            if (cause == null) return@invokeOnCompletion
+            onError(cause.asNSError())
         }
         return@collect job.asNativeCancellable()
     }).freeze()
