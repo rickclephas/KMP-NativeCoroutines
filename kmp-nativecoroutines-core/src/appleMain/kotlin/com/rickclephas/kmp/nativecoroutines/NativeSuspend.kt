@@ -25,7 +25,7 @@ fun <T> nativeSuspend(scope: CoroutineScope? = null, block: suspend () -> T): Na
         val job = coroutineScope.launch {
             try {
                 onResult(block())
-            } catch (e: Error) {
+            } catch (e: Throwable) {
                 onError(e.asNSError())
             }
         }
