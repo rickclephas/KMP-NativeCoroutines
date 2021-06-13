@@ -1,15 +1,17 @@
 use_frameworks!
 
 target 'iOS App' do
-  platform :ios, '13.0'
+  platform :ios, '15.0'
   pod 'shared', :path => './shared'
   pod 'KMPNativeCoroutinesCore', :path => '../'
   pod 'KMPNativeCoroutinesCombine', :path => '../'
+  pod 'KMPNativeCoroutinesAsync', :path => '../'
 end
 
 target 'macOS App' do
-  platform :osx, '10.15'
+  platform :osx, '12.0'
   pod 'shared', :path => './shared'
   pod 'KMPNativeCoroutinesCore', :path => '../'
   pod 'KMPNativeCoroutinesCombine', :path => '../'
+  pod 'KMPNativeCoroutinesAsync', :path => '../'
 end

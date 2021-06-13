@@ -18,6 +18,11 @@ struct RootView: View {
                     Text("Random letters")
                 }
             }
+            Section(header: Text("Async/Await")) {
+                NavigationLink(destination: RandomLettersView(viewModel: RandomLettersAsyncViewModel())) {
+                    Text("Random letters")
+                }
+            }
         }.navigationBarTitle(inlineTitle: "KMP-NativeCoroutines")
     }
 }

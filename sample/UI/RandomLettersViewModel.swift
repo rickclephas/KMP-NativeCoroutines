@@ -8,6 +8,7 @@
 import Foundation
 
 /// A type of object that is used as the view model for the `RandomLettersView`.
+@MainActor
 protocol RandomLettersViewModel: ObservableObject {
     /// The result of the `loadRandomLetters` action.
     var result: Result<String, Error>? { get }
