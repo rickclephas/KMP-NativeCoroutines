@@ -9,8 +9,8 @@ import XCTest
 
 extension XCTestCase {
     
-    func randomInt() -> Int32 {
-        Int32.random(in: Int32.min...Int32.max)
+    func randomInt(min: Int32 = .min, max: Int32 = .max) -> Int32 {
+        Int32.random(in: min...max)
     }
     
     func randomString() -> String {
