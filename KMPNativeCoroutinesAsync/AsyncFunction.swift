@@ -13,24 +13,27 @@ import KMPNativeCoroutinesCore
 /// - Returns: The result from the `nativeSuspend`.
 /// - Throws: Errors thrown by the `nativeSuspend`.
 public func asyncFunction<Result, Failure: Error, Unit>(for nativeSuspend: @escaping NativeSuspend<Result, Failure, Unit>) async throws -> Result {
-    let cancellableActor = NativeCancellableActor<Unit>()
+    let asyncFunctionActor = AsyncFunctionActor<Result, Unit>()
     return try await withTaskCancellationHandler {
-        async { await cancellableActor.cancel() }
+        async { await asyncFunctionActor.cancel() }
     } operation: {
         try await withUnsafeThrowingContinuation { continuation in
-            let nativeCancellable = nativeSuspend({ output, unit in
-                continuation.resume(returning: output)
-                return unit
-            }, { error, unit in
-                continuation.resume(throwing: error)
-                return unit
-            })
-            async { await cancellableActor.setNativeCancellable(nativeCancellable) }
+            async {
+                await asyncFunctionActor.setContinuation(continuation)
+                let nativeCancellable = nativeSuspend({ output, unit in
+                    async { await asyncFunctionActor.continueWith(result: output) }
+                    return unit
+                }, { error, unit in
+                    async { await asyncFunctionActor.continueWith(error: error) }
+                    return unit
+                })
+                await asyncFunctionActor.setNativeCancellable(nativeCancellable)
+            }
         }
     }
 }
 
-internal actor NativeCancellableActor<Unit> {
+internal actor AsyncFunctionActor<Result, Unit> {
     
     private var isCancelled = false
     private var nativeCancellable: NativeCancellable<Unit>? = nil
@@ -47,5 +50,21 @@ internal actor NativeCancellableActor<Unit> {
         isCancelled = true
         _ = nativeCancellable?()
         nativeCancellable = nil
+    }
+    
+    private var continuation: UnsafeContinuation<Result, Error>? = nil
+    
+    func setContinuation(_ continuation: UnsafeContinuation<Result, Error>) {
+        self.continuation = continuation
+    }
+    
+    func continueWith(result: Result) {
+        continuation?.resume(returning: result)
+        continuation = nil
+    }
+    
+    func continueWith(error: Error) {
+        continuation?.resume(throwing: error)
+        continuation = nil
     }
 }
