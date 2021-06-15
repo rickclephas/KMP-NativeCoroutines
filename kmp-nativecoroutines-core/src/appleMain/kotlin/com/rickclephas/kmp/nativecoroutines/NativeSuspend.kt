@@ -1,5 +1,6 @@
 package com.rickclephas.kmp.nativecoroutines
 
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import platform.Foundation.NSError
@@ -25,12 +26,17 @@ fun <T> nativeSuspend(scope: CoroutineScope? = null, block: suspend () -> T): Na
         val job = coroutineScope.launch {
             try {
                 onResult(block())
+            } catch (e: CancellationException) {
+                // CancellationExceptions are handled by the invokeOnCompletion
+                // this is required since the job could be cancelled before it is started
+                throw e
             } catch (e: Throwable) {
                 onError(e.asNSError())
             }
         }
         job.invokeOnCompletion { cause ->
-            if (cause == null) return@invokeOnCompletion
+            // Only handle CancellationExceptions, all other exceptions should be handled inside the job
+            if (cause !is CancellationException) return@invokeOnCompletion
             onError(cause.asNSError())
         }
         return@collect job.asNativeCancellable()
