@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import NativeCoroutinesSampleShared
 
 struct RootView: View {
     var body: some View {
@@ -21,6 +22,9 @@ struct RootView: View {
             Section(header: Text("Async/Await")) {
                 NavigationLink(destination: RandomLettersView(viewModel: RandomLettersAsyncViewModel())) {
                     Text("Random letters")
+                }
+                NavigationLink(destination: SwiftUIAsyncTest(tests: SuspendIntegrationTests())) {
+                    Text("SwiftUI test")
                 }
             }
         }.navigationBarTitle(inlineTitle: "KMP-NativeCoroutines")
