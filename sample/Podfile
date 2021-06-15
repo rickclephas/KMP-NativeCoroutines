@@ -13,6 +13,7 @@ target 'iOS Tests' do
   pod 'shared', :path => './shared'
   pod 'KMPNativeCoroutinesCore', :path => '../'
   pod 'KMPNativeCoroutinesCombine', :path => '../'
+  pod 'KMPNativeCoroutinesAsync', :path => '../'
 end
 
 target 'macOS App' do
@@ -28,4 +29,5 @@ target 'macOS Tests' do
   pod 'shared', :path => './shared'
   pod 'KMPNativeCoroutinesCore', :path => '../'
   pod 'KMPNativeCoroutinesCombine', :path => '../'
+  pod 'KMPNativeCoroutinesAsync', :path => '../'
 end
