@@ -56,6 +56,6 @@ kotlin {
         frameworkName = "NativeCoroutinesSampleShared"
         ios.deploymentTarget = "13.0"
         osx.deploymentTarget = "10.15"
-        podfile = project.file("../../Podfile")
+        podfile = project.file("../Podfile")
     }
 }
