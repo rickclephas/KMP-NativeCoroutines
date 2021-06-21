@@ -3,9 +3,6 @@ plugins {
     kotlin("native.cocoapods")
 }
 
-group = "com.rickclephas.kmp"
-version = "0.1.0-SNAPSHOT"
-
 kotlin {
     macosX64()
     iosArm64()

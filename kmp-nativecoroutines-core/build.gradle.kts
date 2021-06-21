@@ -1,9 +1,8 @@
 plugins {
     kotlin("multiplatform")
+    `maven-publish`
+    signing
 }
-
-group = "com.rickclephas.kmp"
-version = "0.1.0-SNAPSHOT"
 
 kotlin {
     jvm()
