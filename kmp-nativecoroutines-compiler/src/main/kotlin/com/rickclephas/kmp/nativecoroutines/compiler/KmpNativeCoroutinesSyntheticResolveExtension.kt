@@ -20,7 +20,7 @@ internal class KmpNativeCoroutinesSyntheticResolveExtension(
     // Instead we'll use reflection to use the same code the compiler is using.
     // https://github.com/JetBrains/kotlin/blob/fe8f7cfcae3b33ba7ee5d06cd45e5e68f3c421a8/compiler/frontend/src/org/jetbrains/kotlin/resolve/lazy/descriptors/LazyClassMemberScope.kt#L64
     @Suppress("UNCHECKED_CAST")
-    private fun getDeclaration(memberScope: MemberScope): List<DeclarationDescriptor> =
+    private fun getDeclarations(memberScope: MemberScope): List<DeclarationDescriptor> =
         AbstractLazyMemberScope::class.java.declaredMethods
             .first { it.name == "computeDescriptorsFromDeclaredElements" }
             .apply { isAccessible = true }
@@ -28,7 +28,7 @@ internal class KmpNativeCoroutinesSyntheticResolveExtension(
                 NoLookupLocation.WHEN_GET_ALL_DESCRIPTORS) as List<DeclarationDescriptor>
 
     override fun getSyntheticFunctionNames(thisDescriptor: ClassDescriptor): List<Name> {
-        val declarations = getDeclaration(thisDescriptor.unsubstitutedMemberScope)
+        val declarations = getDeclarations(thisDescriptor.unsubstitutedMemberScope)
         val suspendFunctions = declarations.mapNotNull { it as? SimpleFunctionDescriptor }
             .filter { !it.name.isSpecial && it.isSuspend }
 
@@ -46,7 +46,7 @@ internal class KmpNativeCoroutinesSyntheticResolveExtension(
         val identifier = name.identifier
         if (!identifier.endsWith(suffix)) return
         val originalFunctionName = name.identifier.removeSuffix(suffix)
-        val declarations = getDeclaration(thisDescriptor.unsubstitutedMemberScope)
+        val declarations = getDeclarations(thisDescriptor.unsubstitutedMemberScope)
         val function = declarations.firstOrNull {
             it is SimpleFunctionDescriptor && it.isSuspend && !it.name.isSpecial &&
                     it.name.identifier == originalFunctionName
