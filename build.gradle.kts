@@ -1,5 +1,6 @@
 buildscript {
     repositories {
+        mavenLocal()
         gradlePluginPortal()
         mavenCentral()
     }
@@ -13,6 +14,7 @@ allprojects {
     version = "0.1.0"
 
     repositories {
+        mavenLocal()
         mavenCentral()
     }
 

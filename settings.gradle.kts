@@ -1,5 +1,6 @@
 pluginManagement {
     repositories {
+        mavenLocal()
         gradlePluginPortal()
         mavenCentral()
     }
@@ -8,4 +9,6 @@ pluginManagement {
 rootProject.name = "kmp-nativecoroutines"
 
 include(":kmp-nativecoroutines-core")
+include(":kmp-nativecoroutines-compiler")
+include(":kmp-nativecoroutines-gradle-plugin")
 include(":sample:shared")
