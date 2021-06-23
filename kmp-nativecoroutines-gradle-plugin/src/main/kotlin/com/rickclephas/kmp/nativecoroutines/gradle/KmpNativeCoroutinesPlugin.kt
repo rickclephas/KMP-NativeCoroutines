@@ -4,6 +4,7 @@ import org.gradle.api.Project
 import org.gradle.api.provider.Provider
 import org.jetbrains.kotlin.gradle.plugin.*
 
+@Suppress("unused")
 class KmpNativeCoroutinesPlugin: KotlinCompilerPluginSupportPlugin {
 
     override fun apply(target: Project) {
