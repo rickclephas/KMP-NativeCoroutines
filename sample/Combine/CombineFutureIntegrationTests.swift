@@ -13,8 +13,21 @@ class CombineFutureIntegrationTests: XCTestCase {
     
     func testCodegenFunction() {
         let integrationTests = SuspendIntegrationTests()
-        let result = integrationTests.returnNullNative(delay: 0)
-        XCTAssertEqual(result, "Hello KMP-NativeCoroutines codegen!", "Received incorrect result")
+        let sendValue = randomInt()
+        let future = createFuture(for: integrationTests.returnValueNative(value: sendValue, delay: 1000))
+        let valueExpectation = expectation(description: "Waiting for value")
+        let completionExpectation = expectation(description: "Waiting for completion")
+        let cancellable = future.sink { completion in
+            if case .failure(_) = completion {
+                XCTFail("Future should complete without an error")
+            }
+            completionExpectation.fulfill()
+        } receiveValue: { value in
+            XCTAssertEqual(value.int32Value, sendValue, "Received incorrect value")
+            valueExpectation.fulfill()
+        }
+        _ = cancellable // This is just to remove the unused variable warning
+        wait(for: [valueExpectation, completionExpectation], timeout: 2)
     }
     
 //    func testValueReceived() {

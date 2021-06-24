@@ -11,6 +11,8 @@ import org.jetbrains.kotlin.resolve.extensions.SyntheticResolveExtension
 import org.jetbrains.kotlin.resolve.lazy.descriptors.AbstractLazyMemberScope
 import org.jetbrains.kotlin.resolve.scopes.DescriptorKindFilter
 import org.jetbrains.kotlin.resolve.scopes.MemberScope
+import org.jetbrains.kotlin.types.KotlinTypeFactory.computeExpandedType
+import org.jetbrains.kotlin.types.typeUtil.asTypeProjection
 
 internal class KmpNativeCoroutinesSyntheticResolveExtension(
     private val suffix: String
@@ -27,12 +29,16 @@ internal class KmpNativeCoroutinesSyntheticResolveExtension(
             .invoke(memberScope, DescriptorKindFilter.ALL, MemberScope.ALL_NAME_FILTER,
                 NoLookupLocation.WHEN_GET_ALL_DESCRIPTORS) as List<DeclarationDescriptor>
 
-    override fun getSyntheticFunctionNames(thisDescriptor: ClassDescriptor): List<Name> {
-        val declarations = getDeclarations(thisDescriptor.unsubstitutedMemberScope)
-        val suspendFunctions = declarations.mapNotNull { it as? SimpleFunctionDescriptor }
-            .filter { !it.name.isSpecial && it.isSuspend }
+    private fun getDeclaredFunctions(memberScope: MemberScope): List<SimpleFunctionDescriptor> =
+        getDeclarations(memberScope).mapNotNull { it as? SimpleFunctionDescriptor }
 
-        return suspendFunctions.map { Name.identifier("${it.name.identifier}$suffix") }
+    override fun getSyntheticFunctionNames(thisDescriptor: ClassDescriptor): List<Name> {
+        val suspendFunctions = getDeclaredFunctions(thisDescriptor.unsubstitutedMemberScope).filter {
+            !it.name.isSpecial && it.isSuspend
+        }
+        return suspendFunctions.map {
+            Name.identifier("${it.name.identifier}$suffix")
+        }
     }
 
     override fun generateSyntheticMethods(
@@ -45,35 +51,48 @@ internal class KmpNativeCoroutinesSyntheticResolveExtension(
         if (result.isNotEmpty() || name.isSpecial) return
         val identifier = name.identifier
         if (!identifier.endsWith(suffix)) return
+
         val originalFunctionName = name.identifier.removeSuffix(suffix)
-        val declarations = getDeclarations(thisDescriptor.unsubstitutedMemberScope)
-        val function = declarations.firstOrNull {
-            it is SimpleFunctionDescriptor && it.isSuspend && !it.name.isSpecial &&
-                    it.name.identifier == originalFunctionName
-        } as? SimpleFunctionDescriptor ?: return
+        // TODO: Support function overloads
+        val function = getDeclaredFunctions(thisDescriptor.unsubstitutedMemberScope).firstOrNull {
+            !it.name.isSpecial && it.isSuspend && it.name.identifier == originalFunctionName
+        } ?: return
+
         result += createNativeSuspendFunctionDescriptor(thisDescriptor, function)
     }
 
     private fun createNativeSuspendFunctionDescriptor(
         thisDescriptor: ClassDescriptor,
         suspendFunctionDescriptor: SimpleFunctionDescriptor
-    ) = SimpleFunctionDescriptorImpl.create(
-        thisDescriptor,
-        Annotations.EMPTY,
-        Name.identifier("${suspendFunctionDescriptor.name.identifier}$suffix"),
-        CallableMemberDescriptor.Kind.SYNTHESIZED,
-        SourceElement.NO_SOURCE
-    ).apply {
-        initialize(
-            suspendFunctionDescriptor.extensionReceiverParameter,
-            suspendFunctionDescriptor.dispatchReceiverParameter,
-            emptyList(),
-            suspendFunctionDescriptor.valueParameters.map {
-                it.copy(this, it.name, it.index)
-            },
-            thisDescriptor.builtIns.stringType,
-            Modality.FINAL,
-            suspendFunctionDescriptor.visibility
-        )
+    ): SimpleFunctionDescriptor {
+        val returnType = suspendFunctionDescriptor.returnType
+            ?: throw IllegalStateException("Suspend function doesn't have return type")
+        val nativeSuspendDescriptor = thisDescriptor.module.findTypeAliasAcrossModuleDependencies(nativeSuspendClassId)
+            ?: throw IllegalStateException("Couldn't find NativeSuspend typealias")
+        val nativeReturnType = nativeSuspendDescriptor.computeExpandedType(listOf(returnType.asTypeProjection()))
+
+        val name = suspendFunctionDescriptor.name
+        if (name.isSpecial) throw IllegalStateException("Suspend function shouldn't have a special name")
+        val nativeName = Name.identifier("${name.identifier}$suffix")
+
+        return SimpleFunctionDescriptorImpl.create(
+            thisDescriptor,
+            Annotations.EMPTY,
+            nativeName,
+            CallableMemberDescriptor.Kind.SYNTHESIZED,
+            SourceElement.NO_SOURCE
+        ).apply {
+            initialize(
+                suspendFunctionDescriptor.extensionReceiverParameter,
+                suspendFunctionDescriptor.dispatchReceiverParameter,
+                emptyList(),
+                suspendFunctionDescriptor.valueParameters.map {
+                    it.copy(this, it.name, it.index)
+                },
+                nativeReturnType,
+                Modality.FINAL,
+                suspendFunctionDescriptor.visibility
+            )
+        }
     }
 }
