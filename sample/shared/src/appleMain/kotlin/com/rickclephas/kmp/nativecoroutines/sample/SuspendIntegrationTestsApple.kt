@@ -1,5 +1,6 @@
 package com.rickclephas.kmp.nativecoroutines.sample
 
+import com.rickclephas.kmp.nativecoroutines.asNativeFlow
 import com.rickclephas.kmp.nativecoroutines.nativeSuspend
 
 fun SuspendIntegrationTests.returnValueNative(value: Int, delay: Long) =
@@ -16,3 +17,6 @@ fun SuspendIntegrationTests.throwErrorNative(message: String, delay: Long) =
 
 fun SuspendIntegrationTests.returnFromCallbackNative(delay: Long, callback: () -> Int) =
     nativeSuspend(coroutineScope) { returnFromCallback(delay, callback) }
+
+fun SuspendIntegrationTests.getFlowNative(count: Int, delay: Long) =
+    nativeSuspend(coroutineScope) { getFlow(count, delay).asNativeFlow(coroutineScope) }

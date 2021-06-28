@@ -1,6 +1,8 @@
 package com.rickclephas.kmp.nativecoroutines.sample
 
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 
 class SuspendIntegrationTests: IntegrationTests() {
 
@@ -27,5 +29,15 @@ class SuspendIntegrationTests: IntegrationTests() {
     suspend fun returnFromCallback(delay: Long, callback: () -> Int): Int {
         delay(delay)
         return callback()
+    }
+
+    suspend fun getFlow(count: Int, delay: Long): Flow<Int> {
+        delay(delay)
+        return flow {
+            repeat(count) {
+                delay(delay)
+                emit(it)
+            }
+        }
     }
 }
