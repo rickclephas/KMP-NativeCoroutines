@@ -2,7 +2,7 @@
 
 A library to use Kotlin Coroutines from Swift code in KMP apps.
 
-> :bulb: **Swift Async/Await:** checkout the [`feature/swift-async-await`](feature/swift-async-await) branch 
+> :bulb: **Swift Async/Await:** checkout the [`feature/swift-async-await`](https://github.com/rickclephas/KMP-NativeCoroutines/tree/feature/swift-async-await) branch 
 for some Swift 5.5 async wrapper functions.
 
 ## Installation
