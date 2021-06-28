@@ -44,6 +44,8 @@
 		1DF1A6792671535200945FF9 /* RandomLettersCombineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF1A6772671535200945FF9 /* RandomLettersCombineViewModel.swift */; };
 		1DF82A77267939F70024886B /* SwiftUIAsyncTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF82A76267939F70024886B /* SwiftUIAsyncTest.swift */; };
 		1DF82A78267939F70024886B /* SwiftUIAsyncTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF82A76267939F70024886B /* SwiftUIAsyncTest.swift */; };
+		1DFC3602268A316D008393FA /* AsyncResultIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFC35FF268A3148008393FA /* AsyncResultIntegrationTests.swift */; };
+		1DFC3603268A316D008393FA /* AsyncResultIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFC35FF268A3148008393FA /* AsyncResultIntegrationTests.swift */; };
 		37CEC1BD1853BFCDEEBE4B52 /* Pods_macOS_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8CAA0A4A2F0DA48EC903C52 /* Pods_macOS_Tests.framework */; };
 		AD925FB3B122897B070DEFEB /* Pods_iOS_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 430255A8B181606267348B23 /* Pods_iOS_Tests.framework */; };
 		E2D6702474205AE2CC47D3FA /* Pods_iOS_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C54EBD4C92297D7F9195116 /* Pods_iOS_App.framework */; };
@@ -102,6 +104,7 @@
 		1DF1A67426714FBD00945FF9 /* RandomLettersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomLettersView.swift; sourceTree = "<group>"; };
 		1DF1A6772671535200945FF9 /* RandomLettersCombineViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomLettersCombineViewModel.swift; sourceTree = "<group>"; };
 		1DF82A76267939F70024886B /* SwiftUIAsyncTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIAsyncTest.swift; sourceTree = "<group>"; };
+		1DFC35FF268A3148008393FA /* AsyncResultIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncResultIntegrationTests.swift; sourceTree = "<group>"; };
 		3D1DA8D6E8034D66525F216D /* Pods-macOS Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-macOS Tests.debug.xcconfig"; path = "Target Support Files/Pods-macOS Tests/Pods-macOS Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		403C05C9BA3D6C45A44669C7 /* Pods-iOS Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS Tests.debug.xcconfig"; path = "Target Support Files/Pods-iOS Tests/Pods-iOS Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		430255A8B181606267348B23 /* Pods_iOS_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -261,6 +264,7 @@
 				1DA5DD0526764810002448E3 /* RandomLettersAsyncViewModel.swift */,
 				1D0CA84C2677F6DB0000D612 /* AsyncFunctionIntegrationTests.swift */,
 				1DF82A76267939F70024886B /* SwiftUIAsyncTest.swift */,
+				1DFC35FF268A3148008393FA /* AsyncResultIntegrationTests.swift */,
 			);
 			path = Async;
 			sourceTree = "<group>";
@@ -643,6 +647,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1DFC3602268A316D008393FA /* AsyncResultIntegrationTests.swift in Sources */,
 				1D81B1542677B7EF00EEC34D /* CombineFutureIntegrationTests.swift in Sources */,
 				1D0CA84D2677F6DB0000D612 /* AsyncFunctionIntegrationTests.swift in Sources */,
 				1D81B15A2677EDE600EEC34D /* CombinePublisherIntegrationTests.swift in Sources */,
@@ -654,6 +659,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1DFC3603268A316D008393FA /* AsyncResultIntegrationTests.swift in Sources */,
 				1D81B1552677B7EF00EEC34D /* CombineFutureIntegrationTests.swift in Sources */,
 				1D0CA84E2677F6DB0000D612 /* AsyncFunctionIntegrationTests.swift in Sources */,
 				1D81B15B2677EDE600EEC34D /* CombinePublisherIntegrationTests.swift in Sources */,

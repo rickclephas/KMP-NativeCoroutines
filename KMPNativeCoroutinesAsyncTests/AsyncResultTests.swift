@@ -1,15 +1,15 @@
 //
-//  AsyncFunctionTests.swift
+//  AsyncResultTests.swift
 //  KMPNativeCoroutinesAsyncTests
 //
-//  Created by Rick Clephas on 13/06/2021.
+//  Created by Rick Clephas on 28/06/2021.
 //
 
 import XCTest
 import KMPNativeCoroutinesCore
 import KMPNativeCoroutinesAsync
 
-class AsyncFunctionTests: XCTestCase {
+class AsyncResultTests: XCTestCase {
     
     private class TestValue { }
 
@@ -22,12 +22,16 @@ class AsyncFunctionTests: XCTestCase {
             }
         }
         let handle = async {
-            try await asyncFunction(for: nativeSuspend)
+            await asyncResult(for: nativeSuspend)
         }
         XCTAssertEqual(cancelCount, 0, "Cancellable shouldn't be invoked yet")
         handle.cancel()
-        let result = await handle.getResult()
+        let handleResult = await handle.getResult()
         XCTAssertEqual(cancelCount, 1, "Cancellable should be invoked once")
+        guard case let .success(result) = handleResult else {
+            XCTFail("Task should complete without an error")
+            return
+        }
         guard case .failure(_) = result else {
             XCTFail("Function should fail with an error")
             return
@@ -40,12 +44,12 @@ class AsyncFunctionTests: XCTestCase {
             resultCallback(value, ())
             return { }
         }
-        do {
-            let receivedValue = try await asyncFunction(for: nativeSuspend)
-            XCTAssertIdentical(receivedValue, value, "Received incorrect value")
-        } catch {
-            XCTFail("Function shouldn't throw an error")
+        let result = await asyncResult(for: nativeSuspend)
+        guard case let .success(receivedValue) = result else {
+            XCTFail("Function should return without an error")
+            return
         }
+        XCTAssertIdentical(receivedValue, value, "Received incorrect value")
     }
     
     func testCompletionWithError() async {
@@ -54,11 +58,11 @@ class AsyncFunctionTests: XCTestCase {
             errorCallback(sendError, ())
             return { }
         }
-        do {
-            _ = try await asyncFunction(for: nativeSuspend)
+        let result = await asyncResult(for: nativeSuspend)
+        guard case let .failure(error) = result else {
             XCTFail("Function should throw an error")
-        } catch {
-            XCTAssertEqual(error as NSError, sendError, "Received incorrect error")
+            return
         }
+        XCTAssertEqual(error as NSError, sendError, "Received incorrect error")
     }
 }

@@ -5,7 +5,6 @@
 //  Created by Rick Clephas on 13/06/2021.
 //
 
-import Foundation
 import KMPNativeCoroutinesCore
 
 /// Wraps the `NativeSuspend` in an async function.
