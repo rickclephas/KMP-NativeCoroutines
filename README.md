@@ -10,7 +10,7 @@ These wrapper functions can only be used in apps targeting iOS 15 and macOS 12.
 
 Add the Kotlin library to your common dependencies:
 ```kotlin
-implementation("com.rickclephas.kmp:kmp-nativecoroutines-core:0.1.0")
+implementation("com.rickclephas.kmp:kmp-nativecoroutines-core:0.2.0")
 ```
 
 and add the Swift library to your `Podfile`:

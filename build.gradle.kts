@@ -4,13 +4,13 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.10")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.20")
     }
 }
 
 allprojects {
     group = "com.rickclephas.kmp"
-    version = "0.1.0"
+    version = "0.2.0"
 
     repositories {
         mavenCentral()
