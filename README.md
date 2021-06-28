@@ -65,3 +65,9 @@ Use the `asyncFunction(for:)` function to get an async function for the `NativeS
 ```swift
 let letters = try await asyncFunction(for: randomLettersGenerator.getRandomLettersNative())
 ```
+
+or use the `asyncResult(for:)` function to get the result of the `NativeSuspend`:
+
+```swift
+let result = await asyncResult(for: randomLettersGenerator.getRandomLettersNative())
+```
