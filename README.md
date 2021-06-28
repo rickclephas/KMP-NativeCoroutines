@@ -63,7 +63,7 @@ Use the `createFuture(for:)` function to get an `AnyPublisher` for the `NativeSu
 let future = createFuture(for: randomLettersGenerator.getRandomLettersNative())
 ```
 
-### Swift Async/Await
+#### Swift Async/Await
 
 Use the `asyncFunction(for:)` function to get an async function for the `NativeSuspend`:
 

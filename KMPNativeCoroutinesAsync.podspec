@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name       = 'KMPNativeCoroutinesAsync'
-  s.version    = '0.1.0'
+  s.version    = '0.2.0'
   s.summary    = 'Swift library for Kotlin Coroutines with Swift Async/Await'
 
   s.homepage   = 'https://github.com/rickclephas/KMP-NativeCoroutines'
@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
 
   s.source = {
     :git => 'https://github.com/rickclephas/KMP-NativeCoroutines.git',
-    :tag => 'v' + s.version.to_s
+    :tag => 'v' + s.version.to_s + '-swift-async-await'
   }
 
   s.swift_versions = ['5.5']
