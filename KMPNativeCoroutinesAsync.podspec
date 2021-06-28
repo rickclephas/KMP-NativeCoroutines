@@ -12,10 +12,9 @@ Pod::Spec.new do |s|
     :tag => 'v' + s.version.to_s
   }
 
+  s.swift_versions = ['5.5']
   s.ios.deployment_target = '15.0'
   s.osx.deployment_target = '12.0'
-
-  s.swift_version = '5.5'
 
   s.dependency 'KMPNativeCoroutinesCore'
 
