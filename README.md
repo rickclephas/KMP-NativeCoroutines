@@ -5,6 +5,24 @@ A library to use Kotlin Coroutines from Swift code in KMP apps.
 > :bulb: **Swift Async/Await:** checkout the [`feature/swift-async-await`](https://github.com/rickclephas/KMP-NativeCoroutines/tree/feature/swift-async-await) branch 
 for some Swift 5.5 async wrapper functions.
 
+## Why this library?
+
+Both KMP and Kotlin Coroutines are amazing but together they have same limitations.
+
+The most important limitation is cancellation support.  
+Kotlin suspend functions are exposed to Swift as functions with a completion handler.  
+This allows you to easily use them from your Swift code, but it doesn't support cancellation.
+
+> :warning: Swift 5.5 brings async functions to Swift!  
+> For interoperability with ObjC all function with a completion handler can be called like an async function.  
+> This means starting with Swift 5.5 your Kotlin suspend functions will look like Swift async functions.  
+> But that's just syntactic sugar, so there's still no cancellation support :cry:.
+
+Besides cancellation support, ObjC doesn't support generics on protocols.  
+So all the `Flow` interfaces lose their generic value type which make them hard to use.
+
+This library solves both of these limitations :smile:.
+
 ## Installation
 
 Add the Kotlin library to your common dependencies:
