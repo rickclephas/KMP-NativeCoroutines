@@ -60,7 +60,10 @@ internal class KmpNativeCoroutinesSyntheticResolveExtension(
         var returnType = coroutinesFunctionDescriptor.returnType
             ?: throw IllegalStateException("Coroutines function doesn't have a return type")
 
-        // TODO: Convert Flow types to NativeFlow
+        // Convert Flow types to NativeFlow
+        val flowValueType = coroutinesFunctionDescriptor.getFlowValueTypeOrNull()
+        if (flowValueType != null)
+            returnType = thisDescriptor.module.getExpandedNativeFlowType(flowValueType.type)
 
         // Convert suspend function to NativeSuspend
         if (coroutinesFunctionDescriptor.isSuspend)

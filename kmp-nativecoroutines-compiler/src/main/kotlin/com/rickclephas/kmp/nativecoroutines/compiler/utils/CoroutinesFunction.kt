@@ -5,10 +5,10 @@ import org.jetbrains.kotlin.ir.declarations.IrFunction
 import org.jetbrains.kotlin.ir.declarations.IrSimpleFunction
 
 internal val SimpleFunctionDescriptor.isCoroutinesFunction: Boolean
-    get() = !name.isSpecial && isSuspend // TODO: Support functions that return a Flow
+    get() = !name.isSpecial && (isSuspend || hasFlowReturnType)
 
 internal val IrSimpleFunction.isCoroutinesFunction: Boolean
-    get() = !name.isSpecial && isSuspend // TODO: Support functions that return a Flow
+    get() = !name.isSpecial && (isSuspend || returnType.isFlowType)
 
 internal val IrFunction.isNativeCoroutinesFunction: Boolean
-    get() = !name.isSpecial && returnType.isNativeSuspend // TODO: Support functions that return a Flow
+    get() = !name.isSpecial && (returnType.isNativeSuspend || returnType.isNativeFlow)

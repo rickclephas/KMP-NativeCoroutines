@@ -12,6 +12,7 @@ import org.jetbrains.kotlin.ir.declarations.IrFunction
 import org.jetbrains.kotlin.ir.expressions.IrExpression
 import org.jetbrains.kotlin.ir.types.classifierOrFail
 import org.jetbrains.kotlin.ir.types.impl.IrSimpleTypeImpl
+import org.jetbrains.kotlin.ir.types.typeOrNull
 import org.jetbrains.kotlin.ir.util.functions
 import org.jetbrains.kotlin.ir.util.parentAsClass
 
@@ -21,6 +22,7 @@ internal class KmpNativeCoroutinesIrTransformer(
 ): IrElementTransformerVoidWithContext() {
 
     private val nativeSuspendFunction = context.referenceNativeSuspendFunction()
+    private val nativeFlowFunction = context.referenceNativeFlowFunction()
 
     override fun visitFunctionNew(declaration: IrFunction): IrStatement {
         if (!nameGenerator.isNativeName(declaration.name) ||
@@ -47,7 +49,22 @@ internal class KmpNativeCoroutinesIrTransformer(
                 }
             }
 
-            // TODO: Convert Flow types to NativeFlow
+            // Convert Flow types to NativeFlow
+            val flowValueType = returnType.getFlowValueTypeOrNull()
+            if (flowValueType != null) {
+                val valueType = flowValueType.typeOrNull
+                    ?: throw IllegalStateException("Unsupported Flow value type $flowValueType")
+                returnType = IrSimpleTypeImpl(
+                    nativeFlowFunction.owner.returnType.classifierOrFail,
+                    false,
+                    listOf(flowValueType),
+                    emptyList()
+                )
+                call = irCall(nativeFlowFunction, returnType).apply {
+                    putTypeArgument(0, valueType)
+                    extensionReceiver = call
+                }
+            }
 
             // Convert suspend functions to NativeSuspend
             if (originalFunction.isSuspend) {
