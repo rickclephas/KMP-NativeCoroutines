@@ -30,8 +30,7 @@ internal class KmpNativeCoroutinesIrTransformer(
 
         val originalName = nameGenerator.createOriginalName(declaration.name)
         val originalFunction = declaration.parentAsClass.functions.single {
-            it.isCoroutinesFunction && it.name == originalName && it.valueParameters.size == declaration.valueParameters.size
-            // TODO: Validate actual value parameters instead of the count
+            it.isCoroutinesFunction && it.name == originalName && it.valueParameters.areSameAs(declaration.valueParameters)
         }
         val originalReturnType = originalFunction.returnType as? IrSimpleTypeImpl
             ?: throw IllegalStateException("Unsupported return type ${originalFunction.returnType}")
