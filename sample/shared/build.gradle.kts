@@ -14,7 +14,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(project(":kmp-nativecoroutines-core"))
-                implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.2.1")
+                implementation(Dependencies.Kotlinx.datetime)
             }
         }
         val commonTest by getting {
