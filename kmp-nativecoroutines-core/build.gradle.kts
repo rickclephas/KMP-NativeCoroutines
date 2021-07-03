@@ -1,7 +1,6 @@
 plugins {
     kotlin("multiplatform")
-    `maven-publish`
-    signing
+    `kmp-nativecoroutines-publish`
 }
 
 kotlin {
