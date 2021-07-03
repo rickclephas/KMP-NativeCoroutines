@@ -5,9 +5,9 @@ plugins {
 }
 
 dependencies {
-    compileOnly("org.jetbrains.kotlin:kotlin-compiler:1.5.10")
-    compileOnly("com.google.auto.service:auto-service:1.0")
-    kapt("com.google.auto.service:auto-service:1.0")
+    compileOnly(Dependencies.Kotlin.compiler)
+    compileOnly(Dependencies.AutoService.annotations)
+    kapt(Dependencies.AutoService.processor)
 }
 
 tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile::class).all {

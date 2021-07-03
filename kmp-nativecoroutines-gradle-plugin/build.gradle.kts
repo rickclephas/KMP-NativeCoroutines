@@ -15,5 +15,5 @@ gradlePlugin {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin-api:1.5.10")
+    implementation(Dependencies.Kotlin.gradlePluginApi)
 }
