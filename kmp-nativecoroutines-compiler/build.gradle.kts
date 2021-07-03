@@ -1,7 +1,7 @@
 plugins {
     kotlin("jvm")
     kotlin("kapt")
-    `maven-publish`
+    `kmp-nativecoroutines-publish`
 }
 
 dependencies {

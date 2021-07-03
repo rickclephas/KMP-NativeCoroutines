@@ -2,7 +2,7 @@ plugins {
     `java-gradle-plugin`
     kotlin("jvm")
     kotlin("kapt")
-    `maven-publish`
+    `kmp-nativecoroutines-publish`
 }
 
 gradlePlugin {
