@@ -31,6 +31,16 @@ class SuspendIntegrationTests: IntegrationTests() {
         return callback()
     }
 
+    suspend fun getFlow(count: Int, delay: Long): Flow<Int> {
+        delay(delay)
+        return flow {
+            repeat(count) {
+                delay(delay)
+                emit(it)
+            }
+        }
+    }
+
     suspend fun returnFlow(value: Int, delay: Long): Flow<Int> {
         delay(delay)
         return flow {

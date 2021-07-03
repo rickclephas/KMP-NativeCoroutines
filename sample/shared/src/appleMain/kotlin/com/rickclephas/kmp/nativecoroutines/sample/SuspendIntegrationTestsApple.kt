@@ -1,5 +1,6 @@
 package com.rickclephas.kmp.nativecoroutines.sample
 
+import com.rickclephas.kmp.nativecoroutines.asNativeFlow
 import com.rickclephas.kmp.nativecoroutines.nativeSuspend
 
 // TODO: Remove extension functions completely
@@ -17,3 +18,7 @@ import com.rickclephas.kmp.nativecoroutines.nativeSuspend
 //
 //fun SuspendIntegrationTests.returnFromCallbackNative(delay: Long, callback: () -> Int) =
 //    nativeSuspend(coroutineScope) { returnFromCallback(delay, callback) }
+//    nativeSuspend(coroutineScope) { returnFromCallback(delay, callback) }
+//
+//fun SuspendIntegrationTests.getFlowNative(count: Int, delay: Long) =
+//    nativeSuspend(coroutineScope) { getFlow(count, delay).asNativeFlow(coroutineScope) }
