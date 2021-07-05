@@ -1,7 +1,15 @@
 local.properties
 
-# Created by https://www.toptal.com/developers/gitignore/api/gradle,kotlin,intellij,swift
-# Edit at https://www.toptal.com/developers/gitignore?templates=gradle,kotlin,intellij,swift
+# Created by https://www.toptal.com/developers/gitignore/api/swift,xcode,gradle,kotlin,intellij,cocoapods
+# Edit at https://www.toptal.com/developers/gitignore?templates=swift,xcode,gradle,kotlin,intellij,cocoapods
+
+### CocoaPods ###
+## CocoaPods GitIgnore Template
+
+# CocoaPods - Only use to conserve bandwidth / Save time on Pushing
+#           - Also handy if you have a large number of dependant pods
+#           - AS PER https://guides.cocoapods.org/using/using-cocoapods.html NEVER IGNORE THE LOCK FILE
+Pods/
 
 ### Intellij ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm and Rider
@@ -13,6 +21,9 @@ local.properties
 .idea/**/usage.statistics.xml
 .idea/**/dictionaries
 .idea/**/shelf
+
+# AWS User-specific
+.idea/**/aws.xml
 
 # Generated files
 .idea/**/contentModel.xml
@@ -139,6 +150,23 @@ hs_err_pid*
 ## User settings
 xcuserdata/
 
+## compatibility with Xcode 8 and earlier (ignoring not required starting Xcode 9)
+*.xcscmblueprint
+*.xccheckout
+
+## compatibility with Xcode 3 and earlier (ignoring not required starting Xcode 4)
+build/
+DerivedData/
+*.moved-aside
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+
 ## Obj-C/Swift specific
 *.hmap
 
@@ -177,9 +205,9 @@ playground.xcworkspace
 
 Carthage/Build/
 
-# Add this lines if you are using Accio dependency management (Deprecated since Xcode 12)
-# Dependencies/
-# .accio/
+# Accio dependency management
+Dependencies/
+.accio/
 
 # fastlane
 # It is recommended to not store the screenshots in the git repo.
@@ -197,6 +225,23 @@ fastlane/test_output
 # https://github.com/johnno1962/injectionforxcode
 
 iOSInjectionProject/
+
+### Xcode ###
+# Xcode
+# gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
+
+
+
+
+## Gcc Patch
+/*.gcno
+
+### Xcode Patch ###
+*.xcodeproj/*
+!*.xcodeproj/project.pbxproj
+!*.xcodeproj/xcshareddata/
+!*.xcworkspace/contents.xcworkspacedata
+**/xcshareddata/WorkspaceSettings.xcsettings
 
 ### Gradle ###
 .gradle
@@ -216,4 +261,4 @@ gradle-app.setting
 ### Gradle Patch ###
 **/build/
 
-# End of https://www.toptal.com/developers/gitignore/api/gradle,kotlin,intellij,swift
+# End of https://www.toptal.com/developers/gitignore/api/swift,xcode,gradle,kotlin,intellij,cocoapods
