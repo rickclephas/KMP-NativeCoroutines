@@ -11,8 +11,10 @@ import org.jetbrains.kotlin.resolve.BindingContext
 import org.jetbrains.kotlin.resolve.descriptorUtil.*
 import org.jetbrains.kotlin.resolve.extensions.SyntheticResolveExtension
 import org.jetbrains.kotlin.resolve.lazy.descriptors.AbstractLazyMemberScope
+import org.jetbrains.kotlin.resolve.lazy.descriptors.LazyClassMemberScope
 import org.jetbrains.kotlin.resolve.scopes.DescriptorKindFilter
 import org.jetbrains.kotlin.resolve.scopes.MemberScope
+import java.lang.Integer.min
 
 internal class KmpNativeCoroutinesSyntheticResolveExtension(
     private val nameGenerator: NameGenerator
@@ -22,18 +24,35 @@ internal class KmpNativeCoroutinesSyntheticResolveExtension(
     // Instead we'll use reflection to use the same code the compiler is using.
     // https://github.com/JetBrains/kotlin/blob/fe8f7cfcae3b33ba7ee5d06cd45e5e68f3c421a8/compiler/frontend/src/org/jetbrains/kotlin/resolve/lazy/descriptors/LazyClassMemberScope.kt#L64
     @Suppress("UNCHECKED_CAST")
-    private fun ClassDescriptor.getDeclarations(): List<DeclarationDescriptor> =
-        AbstractLazyMemberScope::class.java.declaredMethods
+    private fun ClassDescriptor.getDeclarations(): List<DeclarationDescriptor> {
+        val memberScope = unsubstitutedMemberScope
+        if (memberScope !is LazyClassMemberScope) return emptyList()
+        return AbstractLazyMemberScope::class.java.declaredMethods
             .first { it.name == "computeDescriptorsFromDeclaredElements" }
             .apply { isAccessible = true }
-            .invoke(unsubstitutedMemberScope, DescriptorKindFilter.ALL, MemberScope.ALL_NAME_FILTER,
+            .invoke(memberScope, DescriptorKindFilter.ALL, MemberScope.ALL_NAME_FILTER,
                 NoLookupLocation.WHEN_GET_ALL_DESCRIPTORS) as List<DeclarationDescriptor>
+    }
+
+    // Checking some return types will recursively call our synthetic resolve extension again.
+    // We'll use the stacktrace to check for this and prevent infinite loops.
+    private fun isRecursiveCall(): Boolean {
+        val stackTrace = Throwable().stackTrace
+        val currentElement = stackTrace.getOrNull(1) ?: return false
+        // The original call should be in the first 70 elements
+        for (i in 2 until min(70, stackTrace.size)) {
+            if (stackTrace[i].className == currentElement.className)
+                return true
+        }
+        return false
+    }
 
     private fun ClassDescriptor.getDeclaredFunctions(): List<SimpleFunctionDescriptor> =
         getDeclarations().mapNotNull { it as? SimpleFunctionDescriptor }
 
     override fun getSyntheticFunctionNames(thisDescriptor: ClassDescriptor): List<Name> =
-        thisDescriptor.getDeclaredFunctions()
+        if (isRecursiveCall()) emptyList()
+        else thisDescriptor.getDeclaredFunctions()
             .filter { it.isCoroutinesFunction }
             .map { nameGenerator.createNativeName(it.name) }
             .distinct()
