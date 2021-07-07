@@ -27,6 +27,15 @@ internal val SimpleFunctionDescriptor.hasFlowReturnType: Boolean
         }
     }
 
+internal val PropertyDescriptor.hasFlowType: Boolean
+    get() {
+        val type = type
+        val flowTypeConstructor = module.findFlowClassifier().typeConstructor
+        return type.constructor == flowTypeConstructor || type.supertypes().any {
+            it.constructor == flowTypeConstructor
+        }
+    }
+
 internal fun SimpleFunctionDescriptor.getFlowValueTypeOrNull(): TypeProjection? {
     val returnType = returnType ?: return null
     val flowTypeConstructor = module.findFlowClassifier().typeConstructor
@@ -34,6 +43,17 @@ internal fun SimpleFunctionDescriptor.getFlowValueTypeOrNull(): TypeProjection? 
         return returnType.arguments.first()
     }
     return returnType.supertypes().firstOrNull {
+        it.constructor == flowTypeConstructor
+    }?.arguments?.first()
+}
+
+internal fun PropertyDescriptor.getFlowValueTypeOrNull(): TypeProjection? {
+    val type = type
+    val flowTypeConstructor = module.findFlowClassifier().typeConstructor
+    if (type.constructor == flowTypeConstructor) {
+        return type.arguments.first()
+    }
+    return type.supertypes().firstOrNull {
         it.constructor == flowTypeConstructor
     }?.arguments?.first()
 }

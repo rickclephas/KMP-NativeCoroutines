@@ -4,6 +4,8 @@ import com.rickclephas.kmp.nativecoroutines.compiler.utils.*
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.isCoroutinesFunction
 import org.jetbrains.kotlin.descriptors.*
 import org.jetbrains.kotlin.descriptors.annotations.Annotations
+import org.jetbrains.kotlin.descriptors.impl.PropertyDescriptorImpl
+import org.jetbrains.kotlin.descriptors.impl.PropertyGetterDescriptorImpl
 import org.jetbrains.kotlin.descriptors.impl.SimpleFunctionDescriptorImpl
 import org.jetbrains.kotlin.incremental.components.NoLookupLocation
 import org.jetbrains.kotlin.name.Name
@@ -15,6 +17,7 @@ import org.jetbrains.kotlin.resolve.lazy.descriptors.LazyClassMemberScope
 import org.jetbrains.kotlin.resolve.scopes.DescriptorKindFilter
 import org.jetbrains.kotlin.resolve.scopes.MemberScope
 import java.lang.Integer.min
+import java.util.ArrayList
 
 internal class KmpNativeCoroutinesSyntheticResolveExtension(
     private val nameGenerator: NameGenerator
@@ -45,6 +48,82 @@ internal class KmpNativeCoroutinesSyntheticResolveExtension(
                 return true
         }
         return false
+    }
+
+    private fun ClassDescriptor.getDeclaredProperties(): List<PropertyDescriptor> =
+        getDeclarations().mapNotNull { it as? PropertyDescriptor }
+
+    override fun getSyntheticPropertiesNames(thisDescriptor: ClassDescriptor): List<Name> =
+        if (isRecursiveCall()) emptyList()
+        else thisDescriptor.getDeclaredProperties()
+            .filter { it.isCoroutinesProperty }
+            .map { nameGenerator.createNativeName(it.name) }
+            .distinct()
+
+    override fun generateSyntheticProperties(
+        thisDescriptor: ClassDescriptor,
+        name: Name,
+        bindingContext: BindingContext,
+        fromSupertypes: ArrayList<PropertyDescriptor>,
+        result: MutableSet<PropertyDescriptor>
+    ) {
+        if (!nameGenerator.isNativeName(name) || result.isNotEmpty()) return
+        val originalName = nameGenerator.createOriginalName(name)
+        result += thisDescriptor.getDeclaredProperties()
+            .filter { it.name == originalName && it.isCoroutinesProperty }
+            .map { createNativePropertyDescriptor(thisDescriptor, it, name) }
+    }
+
+    private fun createNativePropertyDescriptor(
+        thisDescriptor: ClassDescriptor,
+        coroutinesPropertyDescriptor: PropertyDescriptor,
+        name: Name
+    ): PropertyDescriptor {
+        var type = coroutinesPropertyDescriptor.type
+
+        // Convert Flow types to NativeFlow
+        val flowValueType = coroutinesPropertyDescriptor.getFlowValueTypeOrNull()
+        if (flowValueType != null)
+            type = thisDescriptor.module.getExpandedNativeFlowType(flowValueType.type)
+
+        return PropertyDescriptorImpl.create(
+            thisDescriptor,
+            Annotations.EMPTY,
+            Modality.FINAL,
+            coroutinesPropertyDescriptor.visibility,
+            false,
+            name,
+            CallableMemberDescriptor.Kind.SYNTHESIZED,
+            SourceElement.NO_SOURCE,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+        ).apply {
+            setType(
+                type,
+                emptyList(),
+                coroutinesPropertyDescriptor.dispatchReceiverParameter,
+                coroutinesPropertyDescriptor.extensionReceiverParameter
+            )
+            initialize(
+                PropertyGetterDescriptorImpl(
+                    this,
+                    Annotations.EMPTY,
+                    Modality.FINAL,
+                    coroutinesPropertyDescriptor.visibility,
+                    false,
+                    false,
+                    false,
+                    CallableMemberDescriptor.Kind.SYNTHESIZED,
+                    null,
+                    SourceElement.NO_SOURCE
+                ).apply { initialize(type) },
+                null
+            )
+        }
     }
 
     private fun ClassDescriptor.getDeclaredFunctions(): List<SimpleFunctionDescriptor> =

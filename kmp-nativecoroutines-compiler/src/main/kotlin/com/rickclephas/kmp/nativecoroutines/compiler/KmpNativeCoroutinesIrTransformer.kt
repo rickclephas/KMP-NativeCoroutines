@@ -9,12 +9,16 @@ import org.jetbrains.kotlin.backend.common.lower.DeclarationIrBuilder
 import org.jetbrains.kotlin.ir.IrStatement
 import org.jetbrains.kotlin.ir.builders.*
 import org.jetbrains.kotlin.ir.declarations.IrFunction
+import org.jetbrains.kotlin.ir.declarations.IrProperty
+import org.jetbrains.kotlin.ir.declarations.IrSimpleFunction
+import org.jetbrains.kotlin.ir.expressions.IrBlockBody
 import org.jetbrains.kotlin.ir.expressions.IrExpression
 import org.jetbrains.kotlin.ir.types.classifierOrFail
 import org.jetbrains.kotlin.ir.types.impl.IrSimpleTypeImpl
 import org.jetbrains.kotlin.ir.types.typeOrNull
 import org.jetbrains.kotlin.ir.util.functions
 import org.jetbrains.kotlin.ir.util.parentAsClass
+import org.jetbrains.kotlin.ir.util.properties
 
 internal class KmpNativeCoroutinesIrTransformer(
     private val context: IrPluginContext,
@@ -24,21 +28,39 @@ internal class KmpNativeCoroutinesIrTransformer(
     private val nativeSuspendFunction = context.referenceNativeSuspendFunction()
     private val nativeFlowFunction = context.referenceNativeFlowFunction()
 
+    override fun visitPropertyNew(declaration: IrProperty): IrStatement {
+        if (!nameGenerator.isNativeName(declaration.name) ||
+            !declaration.isNativeCoroutinesProperty ||
+            declaration.getter?.body != null
+        ) return super.visitPropertyNew(declaration)
+        val getter = declaration.getter ?: return super.visitPropertyNew(declaration)
+        val originalName = nameGenerator.createOriginalName(declaration.name)
+        val originalProperty = declaration.parentAsClass.properties.single {
+            it.isCoroutinesProperty && it.name == originalName
+        }
+        val originalGetter = originalProperty.getter
+            ?: throw IllegalStateException("Original property doesn't have a getter")
+        getter.body = createNativeBody(getter, originalGetter)
+        return super.visitPropertyNew(declaration)
+    }
+
     override fun visitFunctionNew(declaration: IrFunction): IrStatement {
         if (!nameGenerator.isNativeName(declaration.name) ||
             !declaration.isNativeCoroutinesFunction ||
             declaration.body != null
         ) return super.visitFunctionNew(declaration)
-
         val originalName = nameGenerator.createOriginalName(declaration.name)
         val originalFunction = declaration.parentAsClass.functions.single {
             it.isCoroutinesFunction && it.name == originalName && it.valueParameters.areSameAs(declaration.valueParameters)
         }
+        declaration.body = createNativeBody(declaration, originalFunction)
+        return super.visitFunctionNew(declaration)
+    }
+
+    private fun createNativeBody(declaration: IrFunction, originalFunction: IrSimpleFunction): IrBlockBody {
         val originalReturnType = originalFunction.returnType as? IrSimpleTypeImpl
             ?: throw IllegalStateException("Unsupported return type ${originalFunction.returnType}")
-
-        declaration.body = DeclarationIrBuilder(context, declaration.symbol).irBlockBody {
-
+        return DeclarationIrBuilder(context, declaration.symbol).irBlockBody {
             // Call original function
             var returnType = originalReturnType
             var call: IrExpression = irCall(originalFunction).apply {
@@ -48,7 +70,6 @@ internal class KmpNativeCoroutinesIrTransformer(
                     putValueArgument(index, irGet(parameter))
                 }
             }
-
             // Convert Flow types to NativeFlow
             val flowValueType = returnType.getFlowValueTypeOrNull()
             if (flowValueType != null) {
@@ -65,7 +86,6 @@ internal class KmpNativeCoroutinesIrTransformer(
                     extensionReceiver = call
                 }
             }
-
             // Convert suspend functions to NativeSuspend
             if (originalFunction.isSuspend) {
                 val lambdaType = IrSimpleTypeImpl(
@@ -88,9 +108,7 @@ internal class KmpNativeCoroutinesIrTransformer(
                     putValueArgument(1, lambda)
                 }
             }
-
             +irReturn(call)
         }
-        return super.visitFunctionNew(declaration)
     }
 }
