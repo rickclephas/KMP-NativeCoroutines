@@ -1,10 +1,9 @@
 package com.rickclephas.kmp.nativecoroutines.compiler.utils
 
 import org.jetbrains.kotlin.descriptors.*
-import org.jetbrains.kotlin.ir.types.IrSimpleType
-import org.jetbrains.kotlin.ir.types.IrType
-import org.jetbrains.kotlin.ir.types.IrTypeArgument
-import org.jetbrains.kotlin.ir.types.classFqName
+import org.jetbrains.kotlin.ir.types.*
+import org.jetbrains.kotlin.ir.util.getAllSubstitutedSupertypes
+import org.jetbrains.kotlin.ir.util.substitute
 import org.jetbrains.kotlin.ir.util.superTypes
 import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.FqName
@@ -42,17 +41,16 @@ internal fun SimpleFunctionDescriptor.getFlowValueTypeOrNull(): TypeProjection? 
 internal val IrType.isFlowType: Boolean
     get() {
         if (this !is IrSimpleType) return false
-        return classFqName == flowFqName || superTypes().any {
-            it.classFqName == flowFqName
-        }
+        return classFqName == flowFqName || superTypes().any { it.isFlowType }
     }
 
 internal fun IrType.getFlowValueTypeOrNull(): IrTypeArgument? {
     if (this !is IrSimpleType) return null
-    if (classFqName == flowFqName) {
-        return arguments.first()
-    }
-    return superTypes().firstOrNull {
-        it.classFqName == flowFqName
-    }?.let { it as? IrSimpleType }?.arguments?.first()
+    if (classFqName == flowFqName) return arguments.first()
+    val irClass = getClass() ?: return null
+    val superTypes = getAllSubstitutedSupertypes(irClass)
+    return superTypes.firstOrNull { it.classFqName == flowFqName }
+        ?.substitute(irClass.typeParameters, arguments.map { it.typeOrNull!! })
+        ?.let { it as? IrSimpleType }
+        ?.arguments?.first()
 }
