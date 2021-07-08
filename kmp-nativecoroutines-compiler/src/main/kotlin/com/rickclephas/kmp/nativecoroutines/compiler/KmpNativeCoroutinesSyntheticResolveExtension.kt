@@ -57,7 +57,7 @@ internal class KmpNativeCoroutinesSyntheticResolveExtension(
     override fun getSyntheticPropertiesNames(thisDescriptor: ClassDescriptor): List<Name> =
         if (isRecursiveCall()) emptyList()
         else thisDescriptor.getDeclaredProperties()
-            .filter { it.isCoroutinesProperty }
+            .filter { it.isCoroutinesProperty && it.effectiveVisibility().publicApi }
             .flatMap {
                 val hasStateFlowType = it.hasStateFlowType
                 val hasSharedFlowType = it.hasSharedFlowType
@@ -83,7 +83,7 @@ internal class KmpNativeCoroutinesSyntheticResolveExtension(
         if (!isNativeName && !isNativeValueName && !isNativeReplayCacheName) return
         val originalName = nameGenerator.createOriginalName(name)
         result += thisDescriptor.getDeclaredProperties()
-            .filter { it.name == originalName && it.isCoroutinesProperty }
+            .filter { it.name == originalName && it.isCoroutinesProperty && it.effectiveVisibility().publicApi }
             .map {
                 when {
                     isNativeName -> createNativePropertyDescriptor(thisDescriptor, it, name)
@@ -187,7 +187,7 @@ internal class KmpNativeCoroutinesSyntheticResolveExtension(
     override fun getSyntheticFunctionNames(thisDescriptor: ClassDescriptor): List<Name> =
         if (isRecursiveCall()) emptyList()
         else thisDescriptor.getDeclaredFunctions()
-            .filter { it.isCoroutinesFunction }
+            .filter { it.isCoroutinesFunction && it.effectiveVisibility().publicApi }
             .map { nameGenerator.createNativeName(it.name) }
             .distinct()
 
@@ -201,7 +201,7 @@ internal class KmpNativeCoroutinesSyntheticResolveExtension(
         if (!nameGenerator.isNativeName(name) || result.isNotEmpty()) return
         val originalName = nameGenerator.createOriginalName(name)
         result += thisDescriptor.getDeclaredFunctions()
-            .filter { it.name == originalName && it.isCoroutinesFunction }
+            .filter { it.name == originalName && it.isCoroutinesFunction && it.effectiveVisibility().publicApi }
             .map { createNativeFunctionDescriptor(thisDescriptor, it, name) }
     }
 
