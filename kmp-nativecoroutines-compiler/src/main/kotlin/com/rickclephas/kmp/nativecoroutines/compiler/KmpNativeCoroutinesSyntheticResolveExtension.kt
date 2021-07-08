@@ -16,6 +16,7 @@ import org.jetbrains.kotlin.resolve.lazy.descriptors.AbstractLazyMemberScope
 import org.jetbrains.kotlin.resolve.lazy.descriptors.LazyClassMemberScope
 import org.jetbrains.kotlin.resolve.scopes.DescriptorKindFilter
 import org.jetbrains.kotlin.resolve.scopes.MemberScope
+import org.jetbrains.kotlin.types.KotlinType
 import java.lang.Integer.min
 import java.util.ArrayList
 
@@ -57,7 +58,12 @@ internal class KmpNativeCoroutinesSyntheticResolveExtension(
         if (isRecursiveCall()) emptyList()
         else thisDescriptor.getDeclaredProperties()
             .filter { it.isCoroutinesProperty }
-            .map { nameGenerator.createNativeName(it.name) }
+            .flatMap {
+                listOfNotNull(
+                    nameGenerator.createNativeName(it.name),
+                    if (it.hasStateFlowType) nameGenerator.createNativeValueName(it.name) else null
+                )
+            }
             .distinct()
 
     override fun generateSyntheticProperties(
@@ -67,11 +73,20 @@ internal class KmpNativeCoroutinesSyntheticResolveExtension(
         fromSupertypes: ArrayList<PropertyDescriptor>,
         result: MutableSet<PropertyDescriptor>
     ) {
-        if (!nameGenerator.isNativeName(name) || result.isNotEmpty()) return
+        if (result.isNotEmpty()) return
+        val isNativeName = nameGenerator.isNativeName(name)
+        val isNativeValueName = nameGenerator.isNativeValueName(name)
+        if (!isNativeName && !isNativeValueName) return
         val originalName = nameGenerator.createOriginalName(name)
         result += thisDescriptor.getDeclaredProperties()
             .filter { it.name == originalName && it.isCoroutinesProperty }
-            .map { createNativePropertyDescriptor(thisDescriptor, it, name) }
+            .map {
+                when {
+                    isNativeName -> createNativePropertyDescriptor(thisDescriptor, it, name)
+                    isNativeValueName -> createNativeValuePropertyDescriptor(thisDescriptor, it, name)
+                    else -> throw IllegalStateException("Unsupported property type")
+                }
+            }
     }
 
     private fun createNativePropertyDescriptor(
@@ -79,51 +94,72 @@ internal class KmpNativeCoroutinesSyntheticResolveExtension(
         coroutinesPropertyDescriptor: PropertyDescriptor,
         name: Name
     ): PropertyDescriptor {
-        var type = coroutinesPropertyDescriptor.type
+        val valueType = coroutinesPropertyDescriptor.getFlowValueTypeOrNull()?.type
+            ?: throw IllegalStateException("Coroutines property doesn't have a value type")
+        val type = thisDescriptor.module.getExpandedNativeFlowType(valueType)
+        return createPropertyDescriptor(thisDescriptor, coroutinesPropertyDescriptor.visibility,
+            name, type, coroutinesPropertyDescriptor.dispatchReceiverParameter,
+            coroutinesPropertyDescriptor.extensionReceiverParameter
+        )
+    }
 
-        // Convert Flow types to NativeFlow
-        val flowValueType = coroutinesPropertyDescriptor.getFlowValueTypeOrNull()
-        if (flowValueType != null)
-            type = thisDescriptor.module.getExpandedNativeFlowType(flowValueType.type)
+    private fun createNativeValuePropertyDescriptor(
+        thisDescriptor: ClassDescriptor,
+        coroutinesPropertyDescriptor: PropertyDescriptor,
+        name: Name
+    ): PropertyDescriptor {
+        val valueType = coroutinesPropertyDescriptor.getStateFlowValueTypeOrNull()?.type
+            ?: throw IllegalStateException("Coroutines property doesn't have a value type")
+        return createPropertyDescriptor(thisDescriptor, coroutinesPropertyDescriptor.visibility,
+            name, valueType, coroutinesPropertyDescriptor.dispatchReceiverParameter,
+            coroutinesPropertyDescriptor.extensionReceiverParameter
+        )
+    }
 
-        return PropertyDescriptorImpl.create(
-            thisDescriptor,
-            Annotations.EMPTY,
-            Modality.FINAL,
-            coroutinesPropertyDescriptor.visibility,
-            false,
-            name,
-            CallableMemberDescriptor.Kind.SYNTHESIZED,
-            SourceElement.NO_SOURCE,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false
-        ).apply {
-            setType(
-                type,
-                emptyList(),
-                coroutinesPropertyDescriptor.dispatchReceiverParameter,
-                coroutinesPropertyDescriptor.extensionReceiverParameter
-            )
-            initialize(
-                PropertyGetterDescriptorImpl(
-                    this,
-                    Annotations.EMPTY,
-                    Modality.FINAL,
-                    coroutinesPropertyDescriptor.visibility,
-                    false,
-                    false,
-                    false,
-                    CallableMemberDescriptor.Kind.SYNTHESIZED,
-                    null,
-                    SourceElement.NO_SOURCE
-                ).apply { initialize(type) },
-                null
-            )
-        }
+    private fun createPropertyDescriptor(
+        containingDeclaration: DeclarationDescriptor,
+        visibility: DescriptorVisibility,
+        name: Name,
+        outType: KotlinType,
+        dispatchReceiverParameter: ReceiverParameterDescriptor?,
+        extensionReceiverParameter: ReceiverParameterDescriptor?
+    ): PropertyDescriptor = PropertyDescriptorImpl.create(
+        containingDeclaration,
+        Annotations.EMPTY,
+        Modality.FINAL,
+        visibility,
+        false,
+        name,
+        CallableMemberDescriptor.Kind.SYNTHESIZED,
+        SourceElement.NO_SOURCE,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+    ).apply {
+        setType(
+            outType,
+            emptyList(),
+            dispatchReceiverParameter,
+            extensionReceiverParameter
+        )
+        initialize(
+            PropertyGetterDescriptorImpl(
+                this,
+                Annotations.EMPTY,
+                Modality.FINAL,
+                visibility,
+                false,
+                false,
+                false,
+                CallableMemberDescriptor.Kind.SYNTHESIZED,
+                null,
+                SourceElement.NO_SOURCE
+            ).apply { initialize(outType) },
+            null
+        )
     }
 
     private fun ClassDescriptor.getDeclaredFunctions(): List<SimpleFunctionDescriptor> =

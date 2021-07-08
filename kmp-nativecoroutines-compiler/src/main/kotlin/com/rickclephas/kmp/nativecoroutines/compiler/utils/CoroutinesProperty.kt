@@ -8,6 +8,3 @@ internal val PropertyDescriptor.isCoroutinesProperty: Boolean
 
 internal val IrProperty.isCoroutinesProperty: Boolean
     get() = !name.isSpecial && (getter?.returnType?.isFlowType == true)
-
-internal val IrProperty.isNativeCoroutinesProperty: Boolean
-    get() = !name.isSpecial && (getter?.returnType?.isNativeFlow == true)

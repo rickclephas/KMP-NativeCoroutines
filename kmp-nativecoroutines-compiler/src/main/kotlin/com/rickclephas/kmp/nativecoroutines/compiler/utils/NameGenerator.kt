@@ -10,6 +10,14 @@ internal class NameGenerator(private val suffix: String) {
     fun isNativeName(name: Name): Boolean =
         !name.isSpecial && name.identifier.endsWith(suffix)
 
+    fun createNativeValueName(name: Name): Name =
+        Name.identifier("${name.identifier}${suffix}Value")
+
+    fun isNativeValueName(name: Name): Boolean =
+        !name.isSpecial && name.identifier.endsWith("${suffix}Value")
+
+    private val regex = Regex("${suffix}(Value)?$")
+
     fun createOriginalName(nativeName: Name): Name =
-        Name.identifier(nativeName.identifier.removeSuffix(suffix))
+        Name.identifier(nativeName.identifier.replace(regex, ""))
 }

@@ -27,12 +27,16 @@ internal class KmpNativeCoroutinesIrTransformer(
 
     private val nativeSuspendFunction = context.referenceNativeSuspendFunction()
     private val nativeFlowFunction = context.referenceNativeFlowFunction()
+    private val stateFlowValueProperty = context.referenceStateFlowValueProperty()
 
     override fun visitPropertyNew(declaration: IrProperty): IrStatement {
-        if (!nameGenerator.isNativeName(declaration.name) ||
-            !declaration.isNativeCoroutinesProperty ||
-            declaration.getter?.body != null
-        ) return super.visitPropertyNew(declaration)
+        if (declaration.getter?.body != null || declaration.setter != null)
+            return super.visitPropertyNew(declaration)
+
+        val isNativeName = nameGenerator.isNativeName(declaration.name)
+        val isNativeValueName = nameGenerator.isNativeValueName(declaration.name)
+        if (!isNativeName && !isNativeValueName) return super.visitPropertyNew(declaration)
+
         val getter = declaration.getter ?: return super.visitPropertyNew(declaration)
         val originalName = nameGenerator.createOriginalName(declaration.name)
         val originalProperty = declaration.parentAsClass.properties.single {
@@ -40,8 +44,27 @@ internal class KmpNativeCoroutinesIrTransformer(
         }
         val originalGetter = originalProperty.getter
             ?: throw IllegalStateException("Original property doesn't have a getter")
-        getter.body = createNativeBody(getter, originalGetter)
+
+        getter.body = when {
+            isNativeName -> createNativeBody(getter, originalGetter)
+            isNativeValueName -> createNativeValueBody(getter, originalGetter)
+            else -> throw IllegalStateException("Unsupported property type")
+        }
         return super.visitPropertyNew(declaration)
+    }
+
+    private fun createNativeValueBody(getter: IrFunction, originalGetter: IrSimpleFunction): IrBlockBody {
+        val originalReturnType = originalGetter.returnType as? IrSimpleTypeImpl
+            ?: throw IllegalStateException("Unsupported return type ${originalGetter.returnType}")
+        return DeclarationIrBuilder(context, getter.symbol).irBlockBody {
+            val returnType = originalReturnType.getStateFlowValueTypeOrNull()?.typeOrNull
+                ?: throw IllegalStateException("Unsupported StateFlow value type $originalReturnType")
+            val valueGetter = stateFlowValueProperty.owner.getter?.symbol
+                ?: throw IllegalStateException("Couldn't find StateFlow value getter")
+            +irReturn(irCall(valueGetter, returnType).apply {
+                dispatchReceiver = callOriginalFunction(getter, originalGetter)
+            })
+        }
     }
 
     override fun visitFunctionNew(declaration: IrFunction): IrStatement {
@@ -63,13 +86,7 @@ internal class KmpNativeCoroutinesIrTransformer(
         return DeclarationIrBuilder(context, declaration.symbol).irBlockBody {
             // Call original function
             var returnType = originalReturnType
-            var call: IrExpression = irCall(originalFunction).apply {
-                dispatchReceiver = declaration.dispatchReceiverParameter?.let { irGet(it) }
-                extensionReceiver = declaration.extensionReceiverParameter?.let { irGet(it) }
-                declaration.valueParameters.forEachIndexed { index, parameter ->
-                    putValueArgument(index, irGet(parameter))
-                }
-            }
+            var call: IrExpression = callOriginalFunction(declaration, originalFunction)
             // Convert Flow types to NativeFlow
             val flowValueType = returnType.getFlowValueTypeOrNull()
             if (flowValueType != null) {
@@ -111,4 +128,13 @@ internal class KmpNativeCoroutinesIrTransformer(
             +irReturn(call)
         }
     }
+
+    private fun IrBuilderWithScope.callOriginalFunction(function: IrFunction, originalFunction: IrFunction) =
+        irCall(originalFunction).apply {
+            dispatchReceiver = function.dispatchReceiverParameter?.let { irGet(it) }
+            extensionReceiver = function.extensionReceiverParameter?.let { irGet(it) }
+            function.valueParameters.forEachIndexed { index, parameter ->
+                putValueArgument(index, irGet(parameter))
+            }
+        }
 }

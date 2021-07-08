@@ -6,5 +6,5 @@ import com.rickclephas.kmp.nativecoroutines.asNativeFlow
 //val Clock.timeNative
 //    get() = time.asNativeFlow()
 
-val Clock.timeNativeValue
-    get() = time.value
+//val Clock.timeNativeValue
+//    get() = time.value

@@ -8,55 +8,45 @@ import org.jetbrains.kotlin.ir.util.superTypes
 import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.resolve.descriptorUtil.module
+import org.jetbrains.kotlin.types.KotlinType
+import org.jetbrains.kotlin.types.TypeConstructor
 import org.jetbrains.kotlin.types.TypeProjection
 import org.jetbrains.kotlin.types.typeUtil.supertypes
 
 private val flowFqName = FqName("kotlinx.coroutines.flow.Flow")
 private val flowClassId = ClassId.topLevel(flowFqName)
 
-internal fun ModuleDescriptor.findFlowClassifier(): ClassifierDescriptor =
+private fun ModuleDescriptor.findFlowClassifier(): ClassifierDescriptor =
     findClassifierAcrossModuleDependencies(flowClassId)
         ?: throw NoSuchElementException("Couldn't find Flow classifier")
 
-internal val SimpleFunctionDescriptor.hasFlowReturnType: Boolean
-    get() {
-        val returnType = returnType ?: return false
-        val flowTypeConstructor = module.findFlowClassifier().typeConstructor
-        return returnType.constructor == flowTypeConstructor || returnType.supertypes().any {
-            it.constructor == flowTypeConstructor
-        }
+internal fun KotlinType.isFlowType(typeConstructor: TypeConstructor): Boolean =
+    constructor == typeConstructor || supertypes().any {
+        it.constructor == typeConstructor
     }
+
+internal val SimpleFunctionDescriptor.hasFlowReturnType: Boolean
+    get() = returnType?.isFlowType(module.findFlowClassifier().typeConstructor) ?: false
 
 internal val PropertyDescriptor.hasFlowType: Boolean
-    get() {
-        val type = type
-        val flowTypeConstructor = module.findFlowClassifier().typeConstructor
-        return type.constructor == flowTypeConstructor || type.supertypes().any {
-            it.constructor == flowTypeConstructor
-        }
-    }
+    get() = type.isFlowType(module.findFlowClassifier().typeConstructor)
 
-internal fun SimpleFunctionDescriptor.getFlowValueTypeOrNull(): TypeProjection? {
-    val returnType = returnType ?: return null
-    val flowTypeConstructor = module.findFlowClassifier().typeConstructor
-    if (returnType.constructor == flowTypeConstructor) {
-        return returnType.arguments.first()
+private fun KotlinType.getFlowValueTypeOrNull(typeConstructor: TypeConstructor): TypeProjection? {
+    if (constructor == typeConstructor) {
+        return arguments.first()
     }
-    return returnType.supertypes().firstOrNull {
-        it.constructor == flowTypeConstructor
+    return supertypes().firstOrNull {
+        it.constructor == typeConstructor
     }?.arguments?.first()
 }
 
-internal fun PropertyDescriptor.getFlowValueTypeOrNull(): TypeProjection? {
-    val type = type
-    val flowTypeConstructor = module.findFlowClassifier().typeConstructor
-    if (type.constructor == flowTypeConstructor) {
-        return type.arguments.first()
-    }
-    return type.supertypes().firstOrNull {
-        it.constructor == flowTypeConstructor
-    }?.arguments?.first()
-}
+internal fun SimpleFunctionDescriptor.getFlowValueTypeOrNull(
+    typeConstructor: TypeConstructor = module.findFlowClassifier().typeConstructor
+) = returnType?.getFlowValueTypeOrNull(typeConstructor)
+
+internal fun PropertyDescriptor.getFlowValueTypeOrNull(
+    typeConstructor: TypeConstructor = module.findFlowClassifier().typeConstructor
+) = type.getFlowValueTypeOrNull(typeConstructor)
 
 internal val IrType.isFlowType: Boolean
     get() {
@@ -64,12 +54,12 @@ internal val IrType.isFlowType: Boolean
         return classFqName == flowFqName || superTypes().any { it.isFlowType }
     }
 
-internal fun IrType.getFlowValueTypeOrNull(): IrTypeArgument? {
+internal fun IrType.getFlowValueTypeOrNull(fqName: FqName = flowFqName): IrTypeArgument? {
     if (this !is IrSimpleType) return null
-    if (classFqName == flowFqName) return arguments.first()
+    if (classFqName == fqName) return arguments.first()
     val irClass = getClass() ?: return null
     val superTypes = getAllSubstitutedSupertypes(irClass)
-    return superTypes.firstOrNull { it.classFqName == flowFqName }
+    return superTypes.firstOrNull { it.classFqName == fqName }
         ?.substitute(irClass.typeParameters, arguments.map { it.typeOrNull!! })
         ?.let { it as? IrSimpleType }
         ?.arguments?.first()
