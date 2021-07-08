@@ -28,6 +28,8 @@ internal class KmpNativeCoroutinesIrTransformer(
     private val nativeSuspendFunction = context.referenceNativeSuspendFunction()
     private val nativeFlowFunction = context.referenceNativeFlowFunction()
     private val stateFlowValueProperty = context.referenceStateFlowValueProperty()
+    private val sharedFlowReplayCacheProperty = context.referenceSharedFlowReplayCacheProperty()
+    private val listClass = context.referenceListClass()
 
     override fun visitPropertyNew(declaration: IrProperty): IrStatement {
         if (declaration.getter?.body != null || declaration.setter != null)
@@ -35,7 +37,9 @@ internal class KmpNativeCoroutinesIrTransformer(
 
         val isNativeName = nameGenerator.isNativeName(declaration.name)
         val isNativeValueName = nameGenerator.isNativeValueName(declaration.name)
-        if (!isNativeName && !isNativeValueName) return super.visitPropertyNew(declaration)
+        val isNativeReplayCacheName = nameGenerator.isNativeReplayCacheName(declaration.name)
+        if (!isNativeName && !isNativeValueName && !isNativeReplayCacheName)
+            return super.visitPropertyNew(declaration)
 
         val getter = declaration.getter ?: return super.visitPropertyNew(declaration)
         val originalName = nameGenerator.createOriginalName(declaration.name)
@@ -48,6 +52,7 @@ internal class KmpNativeCoroutinesIrTransformer(
         getter.body = when {
             isNativeName -> createNativeBody(getter, originalGetter)
             isNativeValueName -> createNativeValueBody(getter, originalGetter)
+            isNativeReplayCacheName -> createNativeReplayCacheBody(getter, originalGetter)
             else -> throw IllegalStateException("Unsupported property type")
         }
         return super.visitPropertyNew(declaration)
@@ -60,6 +65,21 @@ internal class KmpNativeCoroutinesIrTransformer(
             val returnType = originalReturnType.getStateFlowValueTypeOrNull()?.typeOrNull
                 ?: throw IllegalStateException("Unsupported StateFlow value type $originalReturnType")
             val valueGetter = stateFlowValueProperty.owner.getter?.symbol
+                ?: throw IllegalStateException("Couldn't find StateFlow value getter")
+            +irReturn(irCall(valueGetter, returnType).apply {
+                dispatchReceiver = callOriginalFunction(getter, originalGetter)
+            })
+        }
+    }
+
+    private fun createNativeReplayCacheBody(getter: IrFunction, originalGetter: IrSimpleFunction): IrBlockBody {
+        val originalReturnType = originalGetter.returnType as? IrSimpleTypeImpl
+            ?: throw IllegalStateException("Unsupported return type ${originalGetter.returnType}")
+        return DeclarationIrBuilder(context, getter.symbol).irBlockBody {
+            val valueType = originalReturnType.getSharedFlowValueTypeOrNull()?.typeOrNull as? IrSimpleTypeImpl
+                ?: throw IllegalStateException("Unsupported StateFlow value type $originalReturnType")
+            val returnType = IrSimpleTypeImpl(listClass, false, listOf(valueType), emptyList())
+            val valueGetter = sharedFlowReplayCacheProperty.owner.getter?.symbol
                 ?: throw IllegalStateException("Couldn't find StateFlow value getter")
             +irReturn(irCall(valueGetter, returnType).apply {
                 dispatchReceiver = callOriginalFunction(getter, originalGetter)

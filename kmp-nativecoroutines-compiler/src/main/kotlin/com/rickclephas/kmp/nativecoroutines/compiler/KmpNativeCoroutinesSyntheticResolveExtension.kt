@@ -59,9 +59,12 @@ internal class KmpNativeCoroutinesSyntheticResolveExtension(
         else thisDescriptor.getDeclaredProperties()
             .filter { it.isCoroutinesProperty }
             .flatMap {
+                val hasStateFlowType = it.hasStateFlowType
+                val hasSharedFlowType = it.hasSharedFlowType
                 listOfNotNull(
                     nameGenerator.createNativeName(it.name),
-                    if (it.hasStateFlowType) nameGenerator.createNativeValueName(it.name) else null
+                    if (hasStateFlowType) nameGenerator.createNativeValueName(it.name) else null,
+                    if (hasSharedFlowType && !hasStateFlowType) nameGenerator.createNativeReplayCacheName(it.name) else null
                 )
             }
             .distinct()
@@ -76,7 +79,8 @@ internal class KmpNativeCoroutinesSyntheticResolveExtension(
         if (result.isNotEmpty()) return
         val isNativeName = nameGenerator.isNativeName(name)
         val isNativeValueName = nameGenerator.isNativeValueName(name)
-        if (!isNativeName && !isNativeValueName) return
+        val isNativeReplayCacheName = nameGenerator.isNativeReplayCacheName(name)
+        if (!isNativeName && !isNativeValueName && !isNativeReplayCacheName) return
         val originalName = nameGenerator.createOriginalName(name)
         result += thisDescriptor.getDeclaredProperties()
             .filter { it.name == originalName && it.isCoroutinesProperty }
@@ -84,6 +88,7 @@ internal class KmpNativeCoroutinesSyntheticResolveExtension(
                 when {
                     isNativeName -> createNativePropertyDescriptor(thisDescriptor, it, name)
                     isNativeValueName -> createNativeValuePropertyDescriptor(thisDescriptor, it, name)
+                    isNativeReplayCacheName -> createNativeReplayCachePropertyDescriptor(thisDescriptor, it, name)
                     else -> throw IllegalStateException("Unsupported property type")
                 }
             }
@@ -112,6 +117,20 @@ internal class KmpNativeCoroutinesSyntheticResolveExtension(
             ?: throw IllegalStateException("Coroutines property doesn't have a value type")
         return createPropertyDescriptor(thisDescriptor, coroutinesPropertyDescriptor.visibility,
             name, valueType, coroutinesPropertyDescriptor.dispatchReceiverParameter,
+            coroutinesPropertyDescriptor.extensionReceiverParameter
+        )
+    }
+
+    private fun createNativeReplayCachePropertyDescriptor(
+        thisDescriptor: ClassDescriptor,
+        coroutinesPropertyDescriptor: PropertyDescriptor,
+        name: Name
+    ): PropertyDescriptor {
+        val valueType = coroutinesPropertyDescriptor.getSharedFlowValueTypeOrNull()?.type
+            ?: throw IllegalStateException("Coroutines property doesn't have a value type")
+        val type = thisDescriptor.module.createListType(valueType)
+        return createPropertyDescriptor(thisDescriptor, coroutinesPropertyDescriptor.visibility,
+            name, type, coroutinesPropertyDescriptor.dispatchReceiverParameter,
             coroutinesPropertyDescriptor.extensionReceiverParameter
         )
     }

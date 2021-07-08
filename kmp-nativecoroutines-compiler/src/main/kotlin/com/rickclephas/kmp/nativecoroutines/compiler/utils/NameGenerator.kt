@@ -16,7 +16,13 @@ internal class NameGenerator(private val suffix: String) {
     fun isNativeValueName(name: Name): Boolean =
         !name.isSpecial && name.identifier.endsWith("${suffix}Value")
 
-    private val regex = Regex("${suffix}(Value)?$")
+    fun createNativeReplayCacheName(name: Name): Name =
+        Name.identifier("${name.identifier}${suffix}ReplayCache")
+
+    fun isNativeReplayCacheName(name: Name): Boolean =
+        !name.isSpecial && name.identifier.endsWith("${suffix}ReplayCache")
+
+    private val regex = Regex("${suffix}(Value|ReplayCache)?$")
 
     fun createOriginalName(nativeName: Name): Name =
         Name.identifier(nativeName.identifier.replace(regex, ""))
