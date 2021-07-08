@@ -30,6 +30,4 @@ internal fun ModuleDescriptor.getExpandedNativeSuspendType(valueType: KotlinType
 private val functionFqName = FqName("com.rickclephas.kmp.nativecoroutines.nativeSuspend")
 
 internal fun IrPluginContext.referenceNativeSuspendFunction(): IrSimpleFunctionSymbol =
-    referenceFunctions(functionFqName).single {
-        it.owner.valueParameters.size == 2 // TODO: Validate the parameters
-    }
+    referenceFunctions(functionFqName).single()

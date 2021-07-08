@@ -30,6 +30,4 @@ internal fun ModuleDescriptor.getExpandedNativeFlowType(valueType: KotlinType): 
 private val functionFqName = FqName("com.rickclephas.kmp.nativecoroutines.asNativeFlow")
 
 internal fun IrPluginContext.referenceNativeFlowFunction(): IrSimpleFunctionSymbol =
-    referenceFunctions(functionFqName).single {
-        it.owner.valueParameters.size == 1 // TODO: Validate the parameters
-    }
+    referenceFunctions(functionFqName).single()
