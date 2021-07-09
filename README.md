@@ -27,7 +27,7 @@ This library solves both of these limitations :smile:.
 
 Add the Kotlin library to your common dependencies:
 ```kotlin
-implementation("com.rickclephas.kmp:kmp-nativecoroutines-core:0.2.0")
+implementation("com.rickclephas.kmp:kmp-nativecoroutines-core:0.3.0")
 ```
 
 and add the Swift library to your `Podfile`:
