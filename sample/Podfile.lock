@@ -2,7 +2,7 @@ PODS:
   - KMPNativeCoroutinesCombine (0.2.0):
     - KMPNativeCoroutinesCore
   - KMPNativeCoroutinesCore (0.2.0)
-  - shared (0.2.0)
+  - shared (0.2.0-kotlin-1.5.10)
 
 DEPENDENCIES:
   - KMPNativeCoroutinesCombine (from `../`)
@@ -20,7 +20,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   KMPNativeCoroutinesCombine: 85a52598bfd40d44d070a2332041361d3de9e879
   KMPNativeCoroutinesCore: 1c7e0b947f0246c983a7745eba3033e9a577ba9f
-  shared: 006890794a7b59087863f41e17c3538d19bac0dd
+  shared: 1f469a499404a34ea78832bcb736654421e10dcc
 
 PODFILE CHECKSUM: 7f1e43d0c1555df8202cbe830774e6b5b3fa3e4b
 
