@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
     spec.name                     = 'shared'
-    spec.version                  = '0.2.0-kotlin-1.5.10'
+    spec.version                  = '0.3.0'
     spec.homepage                 = 'https://github.com/rickclephas/KMP-NativeCoroutines'
     spec.source                   = { :git => "Not Published", :tag => "Cocoapods/#{spec.name}/#{spec.version}" }
     spec.authors                  = ''

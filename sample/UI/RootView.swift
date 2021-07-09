@@ -18,6 +18,14 @@ struct RootView: View {
                     Text("Random letters")
                 }
             }
+            Section(header: Text("RxSwift")) {
+                NavigationLink(destination: ClockView(viewModel: ClockRxSwiftViewModel())) {
+                    Text("Clock")
+                }
+                NavigationLink(destination: RandomLettersView(viewModel: RandomLettersRxSwiftViewModel())) {
+                    Text("Random letters")
+                }
+            }
         }.navigationBarTitle(inlineTitle: "KMP-NativeCoroutines")
     }
 }
