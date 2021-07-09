@@ -22,14 +22,15 @@
 		1DCA41A826753C640036C1A3 /* FutureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DCA41A726753C640036C1A3 /* FutureTests.swift */; };
 		1DCA41AA26753C640036C1A3 /* KMPNativeCoroutinesCombine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D71759F266FE9B700846F75 /* KMPNativeCoroutinesCombine.framework */; };
 		1DCA41B3267545600036C1A3 /* PublisherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DCA41B2267545600036C1A3 /* PublisherTests.swift */; };
-		1DFC35FC268A2DE3008393FA /* AsyncResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFC35FB268A2DE3008393FA /* AsyncResult.swift */; };
-		1DFC35FE268A2FFE008393FA /* AsyncResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFC35FD268A2FFE008393FA /* AsyncResultTests.swift */; };
+		1DF053052698D5E100A16325 /* KMPNativeCoroutinesCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D717583266FE90400846F75 /* KMPNativeCoroutinesCore.framework */; };
 		1DF3F9D126936935004C21F2 /* KMPNativeCoroutinesRxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF3F9C826936935004C21F2 /* KMPNativeCoroutinesRxSwift.framework */; };
 		1DF3F9DF269369A3004C21F2 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF3F94C2693586C004C21F2 /* Observable.swift */; };
 		1DF3F9E0269369A9004C21F2 /* Single.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF3F95526935C7D004C21F2 /* Single.swift */; };
 		1DF3F9E1269369AD004C21F2 /* SingleObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF3F95726935E2A004C21F2 /* SingleObservable.swift */; };
 		1DF3F9E2269369B5004C21F2 /* ObservableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF3F94E2693590D004C21F2 /* ObservableTests.swift */; };
 		1DF3F9E3269369BA004C21F2 /* SingleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF3F959269362D0004C21F2 /* SingleTests.swift */; };
+		1DFC35FC268A2DE3008393FA /* AsyncResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFC35FB268A2DE3008393FA /* AsyncResult.swift */; };
+		1DFC35FE268A2FFE008393FA /* AsyncResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFC35FD268A2FFE008393FA /* AsyncResultTests.swift */; };
 		F894145297A8A7962D7B733F /* Pods_KMPNativeCoroutinesRxSwiftTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CE7291F55D80A8A787D5434 /* Pods_KMPNativeCoroutinesRxSwiftTests.framework */; };
 		FC386DB0642D701EAD014BFC /* Pods_KMPNativeCoroutinesRxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2A255B5783FE4B55220F3B1 /* Pods_KMPNativeCoroutinesRxSwift.framework */; };
 /* End PBXBuildFile section */
@@ -63,6 +64,13 @@
 			remoteGlobalIDString = 1D71759E266FE9B700846F75;
 			remoteInfo = KMPNativeCoroutinesCombine;
 		};
+		1DF053072698D5E100A16325 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1DF8833F266D1BC10058B6F9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1D717582266FE90400846F75;
+			remoteInfo = KMPNativeCoroutinesCore;
+		};
 		1DF3F9D226936935004C21F2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1DF8833F266D1BC10058B6F9 /* Project object */;
@@ -89,8 +97,6 @@
 		1DCA41A526753C630036C1A3 /* KMPNativeCoroutinesCombineTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KMPNativeCoroutinesCombineTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DCA41A726753C640036C1A3 /* FutureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FutureTests.swift; sourceTree = "<group>"; };
 		1DCA41B2267545600036C1A3 /* PublisherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublisherTests.swift; sourceTree = "<group>"; };
-		1DFC35FB268A2DE3008393FA /* AsyncResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncResult.swift; sourceTree = "<group>"; };
-		1DFC35FD268A2FFE008393FA /* AsyncResultTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncResultTests.swift; sourceTree = "<group>"; };
 		1DF3F94C2693586C004C21F2 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		1DF3F94E2693590D004C21F2 /* ObservableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableTests.swift; sourceTree = "<group>"; };
 		1DF3F95526935C7D004C21F2 /* Single.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Single.swift; sourceTree = "<group>"; };
@@ -98,6 +104,8 @@
 		1DF3F959269362D0004C21F2 /* SingleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleTests.swift; sourceTree = "<group>"; };
 		1DF3F9C826936935004C21F2 /* KMPNativeCoroutinesRxSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KMPNativeCoroutinesRxSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF3F9D026936935004C21F2 /* KMPNativeCoroutinesRxSwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KMPNativeCoroutinesRxSwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1DFC35FB268A2DE3008393FA /* AsyncResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncResult.swift; sourceTree = "<group>"; };
+		1DFC35FD268A2FFE008393FA /* AsyncResultTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncResultTests.swift; sourceTree = "<group>"; };
 		559692840A021744843AA7BC /* Pods-KMPNativeCoroutinesRxSwiftTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KMPNativeCoroutinesRxSwiftTests.release.xcconfig"; path = "Target Support Files/Pods-KMPNativeCoroutinesRxSwiftTests/Pods-KMPNativeCoroutinesRxSwiftTests.release.xcconfig"; sourceTree = "<group>"; };
 		7159DBB1DE3C32A519B6F448 /* Pods-KMPNativeCoroutinesRxSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KMPNativeCoroutinesRxSwift.debug.xcconfig"; path = "Target Support Files/Pods-KMPNativeCoroutinesRxSwift/Pods-KMPNativeCoroutinesRxSwift.debug.xcconfig"; sourceTree = "<group>"; };
 		8CE7291F55D80A8A787D5434 /* Pods_KMPNativeCoroutinesRxSwiftTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KMPNativeCoroutinesRxSwiftTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -150,6 +158,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1DF053052698D5E100A16325 /* KMPNativeCoroutinesCore.framework in Frameworks */,
 				FC386DB0642D701EAD014BFC /* Pods_KMPNativeCoroutinesRxSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -214,13 +223,6 @@
 			path = KMPNativeCoroutinesAsyncTests;
 			sourceTree = "<group>";
 		};
-		1DA5DCFE2676192F002448E3 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		1DCA41A626753C640036C1A3 /* KMPNativeCoroutinesCombineTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -257,8 +259,6 @@
 				1DCA41A626753C640036C1A3 /* KMPNativeCoroutinesCombineTests */,
 				1DA5DCE6267613BB002448E3 /* KMPNativeCoroutinesAsync */,
 				1DA5DCF2267613BB002448E3 /* KMPNativeCoroutinesAsyncTests */,
-				1DF88349266D1BC10058B6F9 /* Products */,
-				1DA5DCFE2676192F002448E3 /* Frameworks */,
 				1DF3F936269357FA004C21F2 /* KMPNativeCoroutinesRxSwift */,
 				1DF3F941269357FB004C21F2 /* KMPNativeCoroutinesRxSwiftTests */,
 				1DF88349266D1BC10058B6F9 /* Products */,
@@ -416,7 +416,6 @@
 			buildConfigurationList = 1DF3F9D926936935004C21F2 /* Build configuration list for PBXNativeTarget "KMPNativeCoroutinesRxSwift" */;
 			buildPhases = (
 				1D39DA6C818EDECA53D6C3A5 /* [CP] Check Pods Manifest.lock */,
-				1DF3F9C326936935004C21F2 /* Headers */,
 				1DF3F9C426936935004C21F2 /* Sources */,
 				1DF3F9C526936935004C21F2 /* Frameworks */,
 				1DF3F9C626936935004C21F2 /* Resources */,
@@ -424,6 +423,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				1DF053082698D5E100A16325 /* PBXTargetDependency */,
 			);
 			name = KMPNativeCoroutinesRxSwift;
 			productName = KMPNativeCoroutinesRxSwift;
@@ -714,6 +714,11 @@
 			isa = PBXTargetDependency;
 			target = 1D71759E266FE9B700846F75 /* KMPNativeCoroutinesCombine */;
 			targetProxy = 1DCA41AB26753C640036C1A3 /* PBXContainerItemProxy */;
+		};
+		1DF053082698D5E100A16325 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1D717582266FE90400846F75 /* KMPNativeCoroutinesCore */;
+			targetProxy = 1DF053072698D5E100A16325 /* PBXContainerItemProxy */;
 		};
 		1DF3F9D326936935004C21F2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
