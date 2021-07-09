@@ -5,6 +5,7 @@ target 'iOS App' do
   pod 'shared', :path => './shared'
   pod 'KMPNativeCoroutinesCore', :path => '../'
   pod 'KMPNativeCoroutinesCombine', :path => '../'
+  pod 'KMPNativeCoroutinesRxSwift', :path => '../'
   pod 'KMPNativeCoroutinesAsync', :path => '../'
 end
 
@@ -13,6 +14,7 @@ target 'iOS Tests' do
   pod 'shared', :path => './shared'
   pod 'KMPNativeCoroutinesCore', :path => '../'
   pod 'KMPNativeCoroutinesCombine', :path => '../'
+  pod 'KMPNativeCoroutinesRxSwift', :path => '../'
   pod 'KMPNativeCoroutinesAsync', :path => '../'
 end
 
@@ -21,6 +23,7 @@ target 'macOS App' do
   pod 'shared', :path => './shared'
   pod 'KMPNativeCoroutinesCore', :path => '../'
   pod 'KMPNativeCoroutinesCombine', :path => '../'
+  pod 'KMPNativeCoroutinesRxSwift', :path => '../'
   pod 'KMPNativeCoroutinesAsync', :path => '../'
 end
 
@@ -29,5 +32,6 @@ target 'macOS Tests' do
   pod 'shared', :path => './shared'
   pod 'KMPNativeCoroutinesCore', :path => '../'
   pod 'KMPNativeCoroutinesCombine', :path => '../'
+  pod 'KMPNativeCoroutinesRxSwift', :path => '../'
   pod 'KMPNativeCoroutinesAsync', :path => '../'
 end

@@ -19,6 +19,14 @@ struct RootView: View {
                     Text("Random letters")
                 }
             }
+            Section(header: Text("RxSwift")) {
+                NavigationLink(destination: ClockView(viewModel: ClockRxSwiftViewModel())) {
+                    Text("Clock")
+                }
+                NavigationLink(destination: RandomLettersView(viewModel: RandomLettersRxSwiftViewModel())) {
+                    Text("Random letters")
+                }
+            }
             Section(header: Text("Async/Await")) {
                 NavigationLink(destination: RandomLettersView(viewModel: RandomLettersAsyncViewModel())) {
                     Text("Random letters")

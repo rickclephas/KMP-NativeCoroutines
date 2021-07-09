@@ -1,7 +1,6 @@
 plugins {
     kotlin("multiplatform")
-    `maven-publish`
-    signing
+    `kmp-nativecoroutines-publish`
 }
 
 kotlin {
@@ -12,7 +11,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0-native-mt")
+                api(Dependencies.Kotlinx.coroutinesCore)
             }
         }
         val commonTest by getting {
