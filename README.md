@@ -7,7 +7,7 @@ for some Swift 5.5 async wrapper functions.
 
 ## Why this library?
 
-Both KMP and Kotlin Coroutines are amazing but together they have same limitations.
+Both KMP and Kotlin Coroutines are amazing but together they have some limitations.
 
 The most important limitation is cancellation support.  
 Kotlin suspend functions are exposed to Swift as functions with a completion handler.  
@@ -32,14 +32,15 @@ implementation("com.rickclephas.kmp:kmp-nativecoroutines-core:0.2.0")
 
 and add the Swift library to your `Podfile`:
 ```ruby
-pod 'KMPNativeCoroutinesCombine'
+pod 'KMPNativeCoroutinesCombine' # For Swift Combine
+pod 'KMPNativeCoroutinesRxSwift' # For RxSwift
 ```
 
 ## Usage
 
 To use Kotlin Coroutines from Swift you will need to:
 1. Add some extension properties/functions to your Kotlin native code.
-2. Use the wrapper functions in Swift to get Combine publishers.
+2. Use the wrapper functions in Swift to get Combine publishers or RxSwift observables.
 
 ### Flows
 
@@ -60,6 +61,14 @@ Use the `createPublisher(for:)` function to get an `AnyPublisher` for the `Nativ
 let publisher = createPublisher(for: clock.timeNative)
 ```
 
+#### RxSwift
+
+Use the `createObservable(for:)` function to get an `Observable` for the `NativeFlow`:
+
+```swift
+let observable = createObservable(for: clock.timeNative)
+```
+
 ### Suspend functions
 
 #### Kotlin
@@ -77,4 +86,12 @@ Use the `createFuture(for:)` function to get an `AnyPublisher` for the `NativeSu
 
 ```swift
 let future = createFuture(for: randomLettersGenerator.getRandomLettersNative())
+```
+
+#### RxSwift
+
+Use the `createSingle(for:)` function to get a `Single` for the `NativeSuspend`:
+
+```swift
+let single = createSingle(for: randomLettersGenerator.getRandomLettersNative())
 ```
