@@ -18,6 +18,14 @@
 		1DCA41A826753C640036C1A3 /* FutureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DCA41A726753C640036C1A3 /* FutureTests.swift */; };
 		1DCA41AA26753C640036C1A3 /* KMPNativeCoroutinesCombine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D71759F266FE9B700846F75 /* KMPNativeCoroutinesCombine.framework */; };
 		1DCA41B3267545600036C1A3 /* PublisherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DCA41B2267545600036C1A3 /* PublisherTests.swift */; };
+		1DF3F9D126936935004C21F2 /* KMPNativeCoroutinesRxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF3F9C826936935004C21F2 /* KMPNativeCoroutinesRxSwift.framework */; };
+		1DF3F9DF269369A3004C21F2 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF3F94C2693586C004C21F2 /* Observable.swift */; };
+		1DF3F9E0269369A9004C21F2 /* Single.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF3F95526935C7D004C21F2 /* Single.swift */; };
+		1DF3F9E1269369AD004C21F2 /* SingleObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF3F95726935E2A004C21F2 /* SingleObservable.swift */; };
+		1DF3F9E2269369B5004C21F2 /* ObservableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF3F94E2693590D004C21F2 /* ObservableTests.swift */; };
+		1DF3F9E3269369BA004C21F2 /* SingleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF3F959269362D0004C21F2 /* SingleTests.swift */; };
+		F894145297A8A7962D7B733F /* Pods_KMPNativeCoroutinesRxSwiftTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CE7291F55D80A8A787D5434 /* Pods_KMPNativeCoroutinesRxSwiftTests.framework */; };
+		FC386DB0642D701EAD014BFC /* Pods_KMPNativeCoroutinesRxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2A255B5783FE4B55220F3B1 /* Pods_KMPNativeCoroutinesRxSwift.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +43,13 @@
 			remoteGlobalIDString = 1D71759E266FE9B700846F75;
 			remoteInfo = KMPNativeCoroutinesCombine;
 		};
+		1DF3F9D226936935004C21F2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1DF8833F266D1BC10058B6F9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1DF3F9C726936935004C21F2;
+			remoteInfo = KMPNativeCoroutinesRxSwift;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +65,19 @@
 		1DCA41A526753C630036C1A3 /* KMPNativeCoroutinesCombineTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KMPNativeCoroutinesCombineTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DCA41A726753C640036C1A3 /* FutureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FutureTests.swift; sourceTree = "<group>"; };
 		1DCA41B2267545600036C1A3 /* PublisherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublisherTests.swift; sourceTree = "<group>"; };
+		1DF3F94C2693586C004C21F2 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		1DF3F94E2693590D004C21F2 /* ObservableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableTests.swift; sourceTree = "<group>"; };
+		1DF3F95526935C7D004C21F2 /* Single.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Single.swift; sourceTree = "<group>"; };
+		1DF3F95726935E2A004C21F2 /* SingleObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleObservable.swift; sourceTree = "<group>"; };
+		1DF3F959269362D0004C21F2 /* SingleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleTests.swift; sourceTree = "<group>"; };
+		1DF3F9C826936935004C21F2 /* KMPNativeCoroutinesRxSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KMPNativeCoroutinesRxSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1DF3F9D026936935004C21F2 /* KMPNativeCoroutinesRxSwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KMPNativeCoroutinesRxSwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		559692840A021744843AA7BC /* Pods-KMPNativeCoroutinesRxSwiftTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KMPNativeCoroutinesRxSwiftTests.release.xcconfig"; path = "Target Support Files/Pods-KMPNativeCoroutinesRxSwiftTests/Pods-KMPNativeCoroutinesRxSwiftTests.release.xcconfig"; sourceTree = "<group>"; };
+		7159DBB1DE3C32A519B6F448 /* Pods-KMPNativeCoroutinesRxSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KMPNativeCoroutinesRxSwift.debug.xcconfig"; path = "Target Support Files/Pods-KMPNativeCoroutinesRxSwift/Pods-KMPNativeCoroutinesRxSwift.debug.xcconfig"; sourceTree = "<group>"; };
+		8CE7291F55D80A8A787D5434 /* Pods_KMPNativeCoroutinesRxSwiftTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KMPNativeCoroutinesRxSwiftTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E2A255B5783FE4B55220F3B1 /* Pods_KMPNativeCoroutinesRxSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KMPNativeCoroutinesRxSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F6186D4AF44B57CA297D923C /* Pods-KMPNativeCoroutinesRxSwiftTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KMPNativeCoroutinesRxSwiftTests.debug.xcconfig"; path = "Target Support Files/Pods-KMPNativeCoroutinesRxSwiftTests/Pods-KMPNativeCoroutinesRxSwiftTests.debug.xcconfig"; sourceTree = "<group>"; };
+		FBCD7E0A69A878E7A85A3FB2 /* Pods-KMPNativeCoroutinesRxSwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KMPNativeCoroutinesRxSwift.release.xcconfig"; path = "Target Support Files/Pods-KMPNativeCoroutinesRxSwift/Pods-KMPNativeCoroutinesRxSwift.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,9 +104,35 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1DF3F9C526936935004C21F2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FC386DB0642D701EAD014BFC /* Pods_KMPNativeCoroutinesRxSwift.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1DF3F9CD26936935004C21F2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1DF3F9D126936935004C21F2 /* KMPNativeCoroutinesRxSwift.framework in Frameworks */,
+				F894145297A8A7962D7B733F /* Pods_KMPNativeCoroutinesRxSwiftTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		098FB8F5C05D9B59B0FD129C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E2A255B5783FE4B55220F3B1 /* Pods_KMPNativeCoroutinesRxSwift.framework */,
+				8CE7291F55D80A8A787D5434 /* Pods_KMPNativeCoroutinesRxSwiftTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		1D717584266FE90400846F75 /* KMPNativeCoroutinesCore */ = {
 			isa = PBXGroup;
 			children = (
@@ -109,13 +163,36 @@
 			path = KMPNativeCoroutinesCombineTests;
 			sourceTree = "<group>";
 		};
+		1DF3F936269357FA004C21F2 /* KMPNativeCoroutinesRxSwift */ = {
+			isa = PBXGroup;
+			children = (
+				1DF3F94C2693586C004C21F2 /* Observable.swift */,
+				1DF3F95526935C7D004C21F2 /* Single.swift */,
+				1DF3F95726935E2A004C21F2 /* SingleObservable.swift */,
+			);
+			path = KMPNativeCoroutinesRxSwift;
+			sourceTree = "<group>";
+		};
+		1DF3F941269357FB004C21F2 /* KMPNativeCoroutinesRxSwiftTests */ = {
+			isa = PBXGroup;
+			children = (
+				1DF3F94E2693590D004C21F2 /* ObservableTests.swift */,
+				1DF3F959269362D0004C21F2 /* SingleTests.swift */,
+			);
+			path = KMPNativeCoroutinesRxSwiftTests;
+			sourceTree = "<group>";
+		};
 		1DF8833E266D1BC10058B6F9 = {
 			isa = PBXGroup;
 			children = (
 				1D717584266FE90400846F75 /* KMPNativeCoroutinesCore */,
 				1D7175A0266FE9B700846F75 /* KMPNativeCoroutinesCombine */,
 				1DCA41A626753C640036C1A3 /* KMPNativeCoroutinesCombineTests */,
+				1DF3F936269357FA004C21F2 /* KMPNativeCoroutinesRxSwift */,
+				1DF3F941269357FB004C21F2 /* KMPNativeCoroutinesRxSwiftTests */,
 				1DF88349266D1BC10058B6F9 /* Products */,
+				A1B177BC5C9DC21613BD4CD4 /* Pods */,
+				098FB8F5C05D9B59B0FD129C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -125,8 +202,21 @@
 				1D717583266FE90400846F75 /* KMPNativeCoroutinesCore.framework */,
 				1D71759F266FE9B700846F75 /* KMPNativeCoroutinesCombine.framework */,
 				1DCA41A526753C630036C1A3 /* KMPNativeCoroutinesCombineTests.xctest */,
+				1DF3F9C826936935004C21F2 /* KMPNativeCoroutinesRxSwift.framework */,
+				1DF3F9D026936935004C21F2 /* KMPNativeCoroutinesRxSwiftTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		A1B177BC5C9DC21613BD4CD4 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7159DBB1DE3C32A519B6F448 /* Pods-KMPNativeCoroutinesRxSwift.debug.xcconfig */,
+				FBCD7E0A69A878E7A85A3FB2 /* Pods-KMPNativeCoroutinesRxSwift.release.xcconfig */,
+				F6186D4AF44B57CA297D923C /* Pods-KMPNativeCoroutinesRxSwiftTests.debug.xcconfig */,
+				559692840A021744843AA7BC /* Pods-KMPNativeCoroutinesRxSwiftTests.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -140,6 +230,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		1D71759A266FE9B700846F75 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1DF3F9C326936935004C21F2 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -204,6 +301,45 @@
 			productReference = 1DCA41A526753C630036C1A3 /* KMPNativeCoroutinesCombineTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		1DF3F9C726936935004C21F2 /* KMPNativeCoroutinesRxSwift */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1DF3F9D926936935004C21F2 /* Build configuration list for PBXNativeTarget "KMPNativeCoroutinesRxSwift" */;
+			buildPhases = (
+				1D39DA6C818EDECA53D6C3A5 /* [CP] Check Pods Manifest.lock */,
+				1DF3F9C326936935004C21F2 /* Headers */,
+				1DF3F9C426936935004C21F2 /* Sources */,
+				1DF3F9C526936935004C21F2 /* Frameworks */,
+				1DF3F9C626936935004C21F2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KMPNativeCoroutinesRxSwift;
+			productName = KMPNativeCoroutinesRxSwift;
+			productReference = 1DF3F9C826936935004C21F2 /* KMPNativeCoroutinesRxSwift.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		1DF3F9CF26936935004C21F2 /* KMPNativeCoroutinesRxSwiftTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1DF3F9DC26936935004C21F2 /* Build configuration list for PBXNativeTarget "KMPNativeCoroutinesRxSwiftTests" */;
+			buildPhases = (
+				A2C5BB189AE58269BB0C8C9A /* [CP] Check Pods Manifest.lock */,
+				1DF3F9CC26936935004C21F2 /* Sources */,
+				1DF3F9CD26936935004C21F2 /* Frameworks */,
+				1DF3F9CE26936935004C21F2 /* Resources */,
+				8509C62BB6CACDD17DDC2743 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1DF3F9D326936935004C21F2 /* PBXTargetDependency */,
+			);
+			name = KMPNativeCoroutinesRxSwiftTests;
+			productName = KMPNativeCoroutinesRxSwiftTests;
+			productReference = 1DF3F9D026936935004C21F2 /* KMPNativeCoroutinesRxSwiftTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -221,6 +357,12 @@
 					};
 					1DCA41A426753C630036C1A3 = {
 						CreatedOnToolsVersion = 12.5;
+					};
+					1DF3F9C726936935004C21F2 = {
+						CreatedOnToolsVersion = 12.5.1;
+					};
+					1DF3F9CF26936935004C21F2 = {
+						CreatedOnToolsVersion = 12.5.1;
 					};
 				};
 			};
@@ -240,6 +382,8 @@
 				1D717582266FE90400846F75 /* KMPNativeCoroutinesCore */,
 				1D71759E266FE9B700846F75 /* KMPNativeCoroutinesCombine */,
 				1DCA41A426753C630036C1A3 /* KMPNativeCoroutinesCombineTests */,
+				1DF3F9C726936935004C21F2 /* KMPNativeCoroutinesRxSwift */,
+				1DF3F9CF26936935004C21F2 /* KMPNativeCoroutinesRxSwiftTests */,
 			);
 		};
 /* End PBXProject section */
@@ -266,7 +410,85 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1DF3F9C626936935004C21F2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1DF3F9CE26936935004C21F2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1D39DA6C818EDECA53D6C3A5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-KMPNativeCoroutinesRxSwift-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8509C62BB6CACDD17DDC2743 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KMPNativeCoroutinesRxSwiftTests/Pods-KMPNativeCoroutinesRxSwiftTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KMPNativeCoroutinesRxSwiftTests/Pods-KMPNativeCoroutinesRxSwiftTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KMPNativeCoroutinesRxSwiftTests/Pods-KMPNativeCoroutinesRxSwiftTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A2C5BB189AE58269BB0C8C9A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-KMPNativeCoroutinesRxSwiftTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1D71757F266FE90400846F75 /* Sources */ = {
@@ -299,6 +521,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1DF3F9C426936935004C21F2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1DF3F9DF269369A3004C21F2 /* Observable.swift in Sources */,
+				1DF3F9E0269369A9004C21F2 /* Single.swift in Sources */,
+				1DF3F9E1269369AD004C21F2 /* SingleObservable.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1DF3F9CC26936935004C21F2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1DF3F9E2269369B5004C21F2 /* ObservableTests.swift in Sources */,
+				1DF3F9E3269369BA004C21F2 /* SingleTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -311,6 +552,11 @@
 			isa = PBXTargetDependency;
 			target = 1D71759E266FE9B700846F75 /* KMPNativeCoroutinesCombine */;
 			targetProxy = 1DCA41AB26753C640036C1A3 /* PBXContainerItemProxy */;
+		};
+		1DF3F9D326936935004C21F2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1DF3F9C726936935004C21F2 /* KMPNativeCoroutinesRxSwift */;
+			targetProxy = 1DF3F9D226936935004C21F2 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -440,6 +686,96 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.rickclephas.kmp.KMPNativeCoroutinesCombineTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		1DF3F9DA26936935004C21F2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7159DBB1DE3C32A519B6F448 /* Pods-KMPNativeCoroutinesRxSwift.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rickclephas.kmp.KMPNativeCoroutinesRxSwift;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		1DF3F9DB26936935004C21F2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FBCD7E0A69A878E7A85A3FB2 /* Pods-KMPNativeCoroutinesRxSwift.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rickclephas.kmp.KMPNativeCoroutinesRxSwift;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		1DF3F9DD26936935004C21F2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F6186D4AF44B57CA297D923C /* Pods-KMPNativeCoroutinesRxSwiftTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rickclephas.kmp.KMPNativeCoroutinesRxSwiftTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		1DF3F9DE26936935004C21F2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 559692840A021744843AA7BC /* Pods-KMPNativeCoroutinesRxSwiftTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rickclephas.kmp.KMPNativeCoroutinesRxSwiftTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -595,6 +931,24 @@
 			buildConfigurations = (
 				1DCA41AD26753C640036C1A3 /* Debug */,
 				1DCA41AE26753C640036C1A3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1DF3F9D926936935004C21F2 /* Build configuration list for PBXNativeTarget "KMPNativeCoroutinesRxSwift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DF3F9DA26936935004C21F2 /* Debug */,
+				1DF3F9DB26936935004C21F2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1DF3F9DC26936935004C21F2 /* Build configuration list for PBXNativeTarget "KMPNativeCoroutinesRxSwiftTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DF3F9DD26936935004C21F2 /* Debug */,
+				1DF3F9DE26936935004C21F2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
