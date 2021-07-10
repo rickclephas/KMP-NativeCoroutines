@@ -18,6 +18,7 @@ import org.jetbrains.kotlin.ir.types.impl.IrSimpleTypeImpl
 import org.jetbrains.kotlin.ir.types.typeOrNull
 import org.jetbrains.kotlin.ir.util.functions
 import org.jetbrains.kotlin.ir.util.parentAsClass
+import org.jetbrains.kotlin.ir.util.parentClassOrNull
 import org.jetbrains.kotlin.ir.util.properties
 
 internal class KmpNativeCoroutinesIrTransformer(
@@ -107,6 +108,8 @@ internal class KmpNativeCoroutinesIrTransformer(
             // Call original function
             var returnType = originalReturnType
             var call: IrExpression = callOriginalFunction(declaration, originalFunction)
+            // Call nativeCoroutineScope
+            val nativeCoroutineScope = callNativeCoroutineScope(declaration)
             // Convert Flow types to NativeFlow
             val flowValueType = returnType.getFlowValueTypeOrNull()
             if (flowValueType != null) {
@@ -120,6 +123,7 @@ internal class KmpNativeCoroutinesIrTransformer(
                 )
                 call = irCall(nativeFlowFunction, returnType).apply {
                     putTypeArgument(0, valueType)
+                    putValueArgument(0, nativeCoroutineScope)
                     extensionReceiver = call
                 }
             }
@@ -142,6 +146,7 @@ internal class KmpNativeCoroutinesIrTransformer(
                 )
                 call = irCall(nativeSuspendFunction, returnType).apply {
                     putTypeArgument(0, lambda.function.returnType)
+                    putValueArgument(0, nativeCoroutineScope)
                     putValueArgument(1, lambda)
                 }
             }
@@ -157,4 +162,17 @@ internal class KmpNativeCoroutinesIrTransformer(
                 putValueArgument(index, irGet(parameter))
             }
         }
+
+    private fun IrBuilderWithScope.callNativeCoroutineScope(function: IrFunction): IrExpression {
+        val parentClass = function.parentClassOrNull ?: return irNull()
+        val nativeCoroutineScopeProperty = parentClass.declarations
+            .mapNotNull { it as? IrProperty }
+            .firstOrNull { it.isNativeCoroutineScope } ?: return irNull()
+        val getter = nativeCoroutineScopeProperty.getter ?: return irNull()
+        if (getter.extensionReceiverParameter != null)
+            throw UnsupportedOperationException("NativeCoroutineScope property can't be an extension property")
+        return irCall(getter).apply {
+            dispatchReceiver = function.dispatchReceiverParameter?.let { irGet(it) }
+        }
+    }
 }

@@ -49,10 +49,7 @@ internal fun PropertyDescriptor.getFlowValueTypeOrNull(
 ) = type.getFlowValueTypeOrNull(typeConstructor)
 
 internal val IrType.isFlowType: Boolean
-    get() {
-        if (this !is IrSimpleType) return false
-        return classFqName == flowFqName || superTypes().any { it.isFlowType }
-    }
+    get() = classFqName == flowFqName || superTypes().any { it.isFlowType }
 
 internal fun IrType.getFlowValueTypeOrNull(fqName: FqName = flowFqName): IrTypeArgument? {
     if (this !is IrSimpleType) return null
