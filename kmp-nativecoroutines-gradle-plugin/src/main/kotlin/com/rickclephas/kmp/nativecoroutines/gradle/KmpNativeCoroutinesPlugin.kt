@@ -26,7 +26,7 @@ class KmpNativeCoroutinesPlugin: KotlinCompilerPluginSupportPlugin {
     override fun getCompilerPluginId(): String = "com.rickclephas.kmp.nativecoroutines"
 
     override fun getPluginArtifactForNative(): SubpluginArtifact =
-        SubpluginArtifact("com.rickclephas.kmp", "kmp-nativecoroutines-compiler", "0.2.0")
+        SubpluginArtifact("com.rickclephas.kmp", "kmp-nativecoroutines-compiler", "0.3.0")
 
     override fun getPluginArtifact(): SubpluginArtifact =
         throw UnsupportedOperationException("KMP-NativeCoroutines only supports Kotlin\\Native!")
