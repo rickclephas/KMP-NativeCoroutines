@@ -14,8 +14,8 @@ class KmpNativeCoroutinesPlugin: KotlinCompilerPluginSupportPlugin {
             val sourceSet = target.extensions.getByType(KotlinMultiplatformExtension::class.java)
                 .sourceSets.getByName("commonMain")
             target.configurations.getByName(sourceSet.implementationConfigurationName).dependencies.apply {
-                add(target.dependencies.create("com.rickclephas.kmp:kmp-nativecoroutines-core:0.3.0"))
-                add(target.dependencies.create("com.rickclephas.kmp:kmp-nativecoroutines-annotations:0.3.0"))
+                add(target.dependencies.create("com.rickclephas.kmp:kmp-nativecoroutines-core:$VERSION"))
+                add(target.dependencies.create("com.rickclephas.kmp:kmp-nativecoroutines-annotations:$VERSION"))
             }
         }
     }
@@ -35,7 +35,7 @@ class KmpNativeCoroutinesPlugin: KotlinCompilerPluginSupportPlugin {
     override fun getCompilerPluginId(): String = "com.rickclephas.kmp.nativecoroutines"
 
     override fun getPluginArtifactForNative(): SubpluginArtifact =
-        SubpluginArtifact("com.rickclephas.kmp", "kmp-nativecoroutines-compiler", "0.3.0")
+        SubpluginArtifact("com.rickclephas.kmp", "kmp-nativecoroutines-compiler", VERSION)
 
     override fun getPluginArtifact(): SubpluginArtifact =
         throw UnsupportedOperationException("KMP-NativeCoroutines only supports Kotlin\\Native!")
