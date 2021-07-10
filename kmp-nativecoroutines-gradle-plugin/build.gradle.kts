@@ -15,5 +15,5 @@ gradlePlugin {
 }
 
 dependencies {
-    implementation(Dependencies.Kotlin.gradlePluginApi)
+    implementation(Dependencies.Kotlin.gradlePlugin)
 }

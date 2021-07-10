@@ -14,8 +14,6 @@ kotlin {
         }
         val commonMain by getting {
             dependencies {
-                implementation(project(":kmp-nativecoroutines-core"))
-                compileOnly(project(":kmp-nativecoroutines-annotations"))
                 implementation(Dependencies.Kotlinx.datetime)
             }
         }
