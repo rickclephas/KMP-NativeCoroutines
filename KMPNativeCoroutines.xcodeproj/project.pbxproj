@@ -29,6 +29,8 @@
 		1DF3F9E1269369AD004C21F2 /* SingleObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF3F95726935E2A004C21F2 /* SingleObservable.swift */; };
 		1DF3F9E2269369B5004C21F2 /* ObservableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF3F94E2693590D004C21F2 /* ObservableTests.swift */; };
 		1DF3F9E3269369BA004C21F2 /* SingleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF3F959269362D0004C21F2 /* SingleTests.swift */; };
+		1DFB127A26A09796001BE321 /* AsyncStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFB127926A09796001BE321 /* AsyncStream.swift */; };
+		1DFB127C26A0A446001BE321 /* AsyncStreamTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFB127B26A0A446001BE321 /* AsyncStreamTests.swift */; };
 		1DFC35FC268A2DE3008393FA /* AsyncResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFC35FB268A2DE3008393FA /* AsyncResult.swift */; };
 		1DFC35FE268A2FFE008393FA /* AsyncResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFC35FD268A2FFE008393FA /* AsyncResultTests.swift */; };
 		F894145297A8A7962D7B733F /* Pods_KMPNativeCoroutinesRxSwiftTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CE7291F55D80A8A787D5434 /* Pods_KMPNativeCoroutinesRxSwiftTests.framework */; };
@@ -104,6 +106,8 @@
 		1DF3F959269362D0004C21F2 /* SingleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleTests.swift; sourceTree = "<group>"; };
 		1DF3F9C826936935004C21F2 /* KMPNativeCoroutinesRxSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KMPNativeCoroutinesRxSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF3F9D026936935004C21F2 /* KMPNativeCoroutinesRxSwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KMPNativeCoroutinesRxSwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1DFB127926A09796001BE321 /* AsyncStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncStream.swift; sourceTree = "<group>"; };
+		1DFB127B26A0A446001BE321 /* AsyncStreamTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncStreamTests.swift; sourceTree = "<group>"; };
 		1DFC35FB268A2DE3008393FA /* AsyncResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncResult.swift; sourceTree = "<group>"; };
 		1DFC35FD268A2FFE008393FA /* AsyncResultTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncResultTests.swift; sourceTree = "<group>"; };
 		559692840A021744843AA7BC /* Pods-KMPNativeCoroutinesRxSwiftTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KMPNativeCoroutinesRxSwiftTests.release.xcconfig"; path = "Target Support Files/Pods-KMPNativeCoroutinesRxSwiftTests/Pods-KMPNativeCoroutinesRxSwiftTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -210,6 +214,7 @@
 			children = (
 				1DA5DCFC26761404002448E3 /* AsyncFunction.swift */,
 				1DFC35FB268A2DE3008393FA /* AsyncResult.swift */,
+				1DFB127926A09796001BE321 /* AsyncStream.swift */,
 			);
 			path = KMPNativeCoroutinesAsync;
 			sourceTree = "<group>";
@@ -219,6 +224,7 @@
 			children = (
 				1DA5DCF3267613BB002448E3 /* AsyncFunctionTests.swift */,
 				1DFC35FD268A2FFE008393FA /* AsyncResultTests.swift */,
+				1DFB127B26A0A446001BE321 /* AsyncStreamTests.swift */,
 			);
 			path = KMPNativeCoroutinesAsyncTests;
 			sourceTree = "<group>";
@@ -651,6 +657,7 @@
 			files = (
 				1DA5DCFD26761404002448E3 /* AsyncFunction.swift in Sources */,
 				1DFC35FC268A2DE3008393FA /* AsyncResult.swift in Sources */,
+				1DFB127A26A09796001BE321 /* AsyncStream.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -659,6 +666,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1DA5DCF4267613BB002448E3 /* AsyncFunctionTests.swift in Sources */,
+				1DFB127C26A0A446001BE321 /* AsyncStreamTests.swift in Sources */,
 				1DFC35FE268A2FFE008393FA /* AsyncResultTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
