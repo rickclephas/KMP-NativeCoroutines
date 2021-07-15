@@ -18,7 +18,7 @@ class RandomLettersAsyncViewModel: RandomLettersViewModel {
     private let randomLettersGenerator = RandomLettersGenerator()
     
     func loadRandomLetters(throwException: Bool) {
-        async {
+        Task {
             isLoading = true
             result = nil
             do {

@@ -14,16 +14,16 @@ import KMPNativeCoroutinesCore
 public func asyncFunction<Result, Failure: Error, Unit>(for nativeSuspend: @escaping NativeSuspend<Result, Failure, Unit>) async throws -> Result {
     let asyncFunctionActor = AsyncFunctionActor<Result, Unit>()
     return try await withTaskCancellationHandler {
-        async { await asyncFunctionActor.cancel() }
+        Task { await asyncFunctionActor.cancel() }
     } operation: {
         try await withUnsafeThrowingContinuation { continuation in
-            async {
+            Task {
                 await asyncFunctionActor.setContinuation(continuation)
                 let nativeCancellable = nativeSuspend({ output, unit in
-                    async { await asyncFunctionActor.continueWith(result: output) }
+                    Task { await asyncFunctionActor.continueWith(result: output) }
                     return unit
                 }, { error, unit in
-                    async { await asyncFunctionActor.continueWith(error: error) }
+                    Task { await asyncFunctionActor.continueWith(error: error) }
                     return unit
                 })
                 await asyncFunctionActor.setNativeCancellable(nativeCancellable)

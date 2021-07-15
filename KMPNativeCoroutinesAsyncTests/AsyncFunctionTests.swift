@@ -18,15 +18,15 @@ class AsyncFunctionTests: XCTestCase {
         let nativeSuspend: NativeSuspend<String, Error, Void> = { _, errorCallback in
             return {
                 cancelCount += 1
-                errorCallback(Task.CancellationError(), ())
+                errorCallback(CancellationError(), ())
             }
         }
-        let handle = async {
+        let handle = Task {
             try await asyncFunction(for: nativeSuspend)
         }
         XCTAssertEqual(cancelCount, 0, "Cancellable shouldn't be invoked yet")
         handle.cancel()
-        let result = await handle.getResult()
+        let result = await handle.result
         XCTAssertEqual(cancelCount, 1, "Cancellable should be invoked once")
         guard case .failure(_) = result else {
             XCTFail("Function should fail with an error")
