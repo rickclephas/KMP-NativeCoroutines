@@ -62,7 +62,8 @@ internal class KmpNativeCoroutinesIrTransformer(
     private fun createNativeValueBody(getter: IrFunction, originalGetter: IrSimpleFunction): IrBlockBody {
         val originalReturnType = originalGetter.returnType as? IrSimpleTypeImpl
             ?: throw IllegalStateException("Unsupported return type ${originalGetter.returnType}")
-        return DeclarationIrBuilder(context, getter.symbol).irBlockBody {
+        return DeclarationIrBuilder(context, getter.symbol,
+            originalGetter.startOffset, originalGetter.endOffset).irBlockBody {
             val returnType = originalReturnType.getStateFlowValueTypeOrNull()?.typeOrNull
                 ?: throw IllegalStateException("Unsupported StateFlow value type $originalReturnType")
             val valueGetter = stateFlowValueProperty.owner.getter?.symbol
@@ -76,7 +77,8 @@ internal class KmpNativeCoroutinesIrTransformer(
     private fun createNativeReplayCacheBody(getter: IrFunction, originalGetter: IrSimpleFunction): IrBlockBody {
         val originalReturnType = originalGetter.returnType as? IrSimpleTypeImpl
             ?: throw IllegalStateException("Unsupported return type ${originalGetter.returnType}")
-        return DeclarationIrBuilder(context, getter.symbol).irBlockBody {
+        return DeclarationIrBuilder(context, getter.symbol,
+            originalGetter.startOffset, originalGetter.endOffset).irBlockBody {
             val valueType = originalReturnType.getSharedFlowValueTypeOrNull()?.typeOrNull as? IrSimpleTypeImpl
                 ?: throw IllegalStateException("Unsupported StateFlow value type $originalReturnType")
             val returnType = IrSimpleTypeImpl(listClass, false, listOf(valueType), emptyList())
@@ -104,7 +106,8 @@ internal class KmpNativeCoroutinesIrTransformer(
     private fun createNativeBody(declaration: IrFunction, originalFunction: IrSimpleFunction): IrBlockBody {
         val originalReturnType = originalFunction.returnType as? IrSimpleTypeImpl
             ?: throw IllegalStateException("Unsupported return type ${originalFunction.returnType}")
-        return DeclarationIrBuilder(context, declaration.symbol).irBlockBody {
+        return DeclarationIrBuilder(context, declaration.symbol,
+            originalFunction.startOffset, originalFunction.endOffset).irBlockBody {
             // Call original function
             var returnType = originalReturnType
             var call: IrExpression = callOriginalFunction(declaration, originalFunction)

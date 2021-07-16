@@ -19,6 +19,8 @@ internal fun IrBuilderWithScope.irLambda(
     body: IrBlockBodyBuilder.() -> Unit
 ): IrFunctionExpression {
     val lambdaFunction = context.irFactory.buildFun {
+        startOffset = this@irLambda.startOffset
+        endOffset = this@irLambda.endOffset
         name = Name.special("<anonymous>")
         visibility = DescriptorVisibilities.LOCAL
         origin = IrDeclarationOrigin.LOCAL_FUNCTION_FOR_LAMBDA
@@ -29,8 +31,8 @@ internal fun IrBuilderWithScope.irLambda(
         this.body = DeclarationIrBuilder(context, symbol).irBlockBody(body = body)
     }
     return IrFunctionExpressionImpl(
-        UNDEFINED_OFFSET,
-        UNDEFINED_OFFSET,
+        startOffset,
+        endOffset,
         lambdaType,
         lambdaFunction,
         IrStatementOrigin.LAMBDA
