@@ -52,9 +52,11 @@ Make sure to always use the same versions for all the libraries!
 
 ### Kotlin
 
-On the Kotlin side you'll just add the library to your common dependencies:
+For Kotlin just add the plugin to your `build.gradle.kts`:
 ```kotlin
-implementation("com.rickclephas.kmp:kmp-nativecoroutines-core:$version")
+plugins {
+    id("com.rickclephas.kmp.nativecoroutines") version "<version>"
+}
 ```
 
 ### Swift
@@ -69,69 +71,74 @@ pod 'KMPNativeCoroutinesAsync'    # Swift 5.5 Async/Await implementation
 
 ## Usage
 
-To use your Kotlin Coroutines code from Swift you will need to:
-1. Add some extension properties/functions to your Kotlin native code :eyes: .
-2. Use the wrapper functions in Swift to get Observables, Publishers or async functions.
-
-> :eyes: : as soon as the [codegen](https://github.com/rickclephas/KMP-NativeCoroutines/tree/feature/codegen) 
-> compiler plugin is ready you won't even need to do anything on the Kotlin side anymore!
+Using your Kotlin Coroutines code from Swift is almost as easy as calling the Kotlin code.   
+Just use the wrapper functions in Swift to get Observables, Publishers or async functions.
 
 ### Kotlin
 
-The Kotlin part of the library provides 2 functions to convert your Coroutines code into something Swift understands.  
+The plugin will automagically generate the necessary code for you! :crystal_ball:
 
-For `Flow`s there is the `asNativeFlow` function:
+Your `Flow` properties/functions get a `Native` version:
 ```kotlin
-// Somewhere in your Kotlin code you'll have a Flow property
 class Clock {
+    // Somewhere in your Kotlin code you define a Flow property
     val time: StateFlow<Long> // This can be any kind of Flow
-}
 
-// In your native Kotlin code you'll define the extension property
-val Clock.timeNative
-    get() = time.asNativeFlow()
+    // The plugin will generate this native property for you
+    val timeNative
+        get() = time.asNativeFlow()
+}
 ```
 
-and for suspend functions there is the `nativeSuspend` function:
+In case of a `StateFlow` or `SharedFlow` property you also get a `NativeValue` or `NativeReplayCache` property:
 ```kotlin
-// Somewhere in your Kotlin code you'll have a suspend function
+// For the StateFlow defined above the plugin will generate this native value property
+val timeNativeValue
+    get() = time.value
+
+// In case of a SharedFlow the plugin would generate this native replay cache property
+val timeNativeReplayCache
+    get() = time.replayCache
+```
+
+The plugin also generates `Native` versions for all your suspend functions:
+```kotlin
+
 class RandomLettersGenerator {
+    // Somewhere in your Kotlin code you define a suspend function
     suspend fun getRandomLetters(): String { 
         // Code to generate some random letters
     }
-}
 
-// In your native Kotlin code you'll define the extension function
-fun RandomLettersGenerator.getRandomLettersNative() =
-    nativeSuspend { getRandomLetters() }
+    // The plugin will generate this native function for you
+    fun getRandomLettersNative() = 
+        nativeSuspend { getRandomLetters() }
+}
 ```
 
-It's also possible to combine the two functions if you have a suspend function that returns a `Flow`:
-```kotlin
-// Somewhere in your Kotlin code you'll have a suspend function returning a Flow
-class RandomLettersGenerator {
-    suspend fun getRandomLettersFlow(): Flow<String> {
-        // Code to generate a Flow of random letters
-    }
-}
+#### Global properties and functions
 
-// In your native Kotlin code you'll define the extension function
-fun RandomLettersGenerator.getRandomLettersFlowNative() =
-    nativeSuspend { getRandomLettersFlow().asNativeFlow() }
+The plugin is currently unable to generate native versions for global properties and functions.  
+In such cases you have to manually create the native versions in your Kotlin native code.
+
+#### Custom suffix
+
+If you don't like the naming of these generated properties/functions, you can easily change the suffix.  
+For example add the following to your `build.gradle.kts` to use the suffix `Apple`:
+```kotlin
+nativeCoroutines {
+    suffix = "Apple"
+}
 ```
 
 #### Custom CoroutineScope
 
-For more control you can provide a custom `CoroutineScope` that should be used for the native extensions:
+For more control you can provide a custom `CoroutineScope` with the `NativeCoroutineScope` annotation:
 ```kotlin
-@SharedImmutable
-val customCoroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
-
-val Clock.timeNative
-    get() = time.asNativeFlow(customCoroutineScope)
-
-fun RandomLettersGenerator.getRandomLettersNative() =
-    nativeSuspend(customCoroutineScope) { getRandomLetters() }
+class Clock {
+    @NativeCoroutineScope
+    internal val coroutineScope = CoroutineScope(job + Dispatchers.Default)
+}
 ```
 
 If you don't provide a `CoroutineScope` the default scope will be used which is defined as:
