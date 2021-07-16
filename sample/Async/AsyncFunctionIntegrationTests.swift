@@ -62,7 +62,7 @@ class AsyncFunctionIntegrationTests: XCTestCase {
     
     func testCancellation() async {
         let integrationTests = SuspendIntegrationTests()
-        let handle = async {
+        let handle = Task {
             return try await asyncFunction(for: integrationTests.returnFromCallbackNative(delay: 3000) {
                 XCTFail("Callback shouldn't be invoked")
                 return KotlinInt(int: 1)
@@ -72,7 +72,7 @@ class AsyncFunctionIntegrationTests: XCTestCase {
             XCTAssertEqual(integrationTests.activeJobCount, 1, "There should be 1 active job")
             handle.cancel()
         }
-        let result = await handle.getResult()
+        let result = await handle.result
         XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
         if case let .failure(error) = result {
             let error = error as NSError
