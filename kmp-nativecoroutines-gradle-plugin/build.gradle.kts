@@ -26,6 +26,8 @@ sourceSets {
 gradlePlugin {
     plugins {
         create("kmpNativeCoroutines") {
+            displayName = "KMP-NativeCoroutines"
+            description = "Swift library for Kotlin Coroutines"
             id = "com.rickclephas.kmp.nativecoroutines"
             implementationClass = "com.rickclephas.kmp.nativecoroutines.gradle.KmpNativeCoroutinesPlugin"
         }
@@ -34,4 +36,15 @@ gradlePlugin {
 
 dependencies {
     implementation(Dependencies.Kotlin.gradlePlugin)
+}
+
+val sourcesJar by tasks.registering(Jar::class) {
+    archiveClassifier.set("sources")
+    from(sourceSets.main.get().allSource)
+}
+
+publishing {
+    publications.withType<MavenPublication> {
+        artifact(sourcesJar)
+    }
 }
