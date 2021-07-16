@@ -72,7 +72,7 @@ pod 'KMPNativeCoroutinesAsync'    # Swift 5.5 Async/Await implementation
 ## Usage
 
 Using your Kotlin Coroutines code from Swift is almost as easy as calling the Kotlin code.   
-Just use the wrapper functions in Swift to get Observables, Publishers or async functions.
+Just use the wrapper functions in Swift to get Observables, Publishers, AsyncStreams or async functions.
 
 ### Kotlin
 
@@ -245,11 +245,11 @@ Meaning every subscription will trigger the collection of the `Flow` or executio
 
 > :construction: : the Async implementation requires Xcode 13 which is currently in beta!
 
-The Async implementation provides some functions to get async Swift functions for your Kotlin suspend functions.
+The Async implementation provides some functions to get async Swift functions and `AsyncStream`s.
 
 Use the `asyncFunction(for:)` function to get an async function that can be awaited:
 ```swift
-let handle = async {
+let handle = Task {
     do {
         let letters = try await asyncFunction(for: randomLettersGenerator.getRandomLettersNative())
         print("Got random letters: \(letters)")
@@ -264,10 +264,25 @@ handle.cancel()
 
 or if you don't like these do-catches you can use the `asyncResult(for:)` function:
 ```swift
-async {
-    let result = await asyncResult(for: randomLettersGenerator.getRandomLettersNative())
-    if case let .success(letters) = result {
-        print("Got random letters: \(letters)")
+let result = await asyncResult(for: randomLettersGenerator.getRandomLettersNative())
+if case let .success(letters) = result {
+    print("Got random letters: \(letters)")
+}
+```
+
+For `Flow`s there is the `asyncStream(for:)` function to get an `AsyncStream`:
+```swift
+let handle = Task {
+    do {
+        let stream = asyncStream(for: randomLettersGenerator.getRandomLettersFlowNative())
+        for try await letters in stream {
+            print("Got random letters: \(letters)")
+        }
+    } catch {
+        print("Failed with error: \(error)")
     }
 }
+
+// To cancel the flow (collection) just cancel the async task
+handle.cancel()
 ```
