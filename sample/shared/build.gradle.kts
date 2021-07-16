@@ -1,6 +1,7 @@
 plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
+    id("com.rickclephas.kmp.nativecoroutines") version "0.4.0"
 }
 
 kotlin {
@@ -13,7 +14,6 @@ kotlin {
         }
         val commonMain by getting {
             dependencies {
-                implementation(project(":kmp-nativecoroutines-core"))
                 implementation(Dependencies.Kotlinx.datetime)
             }
         }

@@ -1,5 +1,6 @@
 buildscript {
     repositories {
+        mavenLocal()
         gradlePluginPortal()
         mavenCentral()
     }
@@ -10,9 +11,10 @@ buildscript {
 
 allprojects {
     group = "com.rickclephas.kmp"
-    version = "0.3.0-kotlin-1.5.10"
+    version = "0.4.0"
 
     repositories {
+        mavenLocal()
         mavenCentral()
     }
 }
