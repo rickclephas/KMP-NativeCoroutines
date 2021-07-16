@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1D0CA84D2677F6DB0000D612 /* AsyncFunctionIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0CA84C2677F6DB0000D612 /* AsyncFunctionIntegrationTests.swift */; };
+		1D0CA84E2677F6DB0000D612 /* AsyncFunctionIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0CA84C2677F6DB0000D612 /* AsyncFunctionIntegrationTests.swift */; };
 		1D5DAF7D2698B5EB0059D4B8 /* ClockRxSwiftViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D5DAF7C2698B5EB0059D4B8 /* ClockRxSwiftViewModel.swift */; };
 		1D5DAF7E2698B5EB0059D4B8 /* ClockRxSwiftViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D5DAF7C2698B5EB0059D4B8 /* ClockRxSwiftViewModel.swift */; };
 		1D5DAF802698C3C30059D4B8 /* RandomLettersRxSwiftViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D5DAF7F2698C3C30059D4B8 /* RandomLettersRxSwiftViewModel.swift */; };
@@ -15,8 +17,6 @@
 		1D5DAF842698C67D0059D4B8 /* RxSwiftSingleIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D5DAF822698C67D0059D4B8 /* RxSwiftSingleIntegrationTests.swift */; };
 		1D5DAF862698CA040059D4B8 /* RxSwiftObservableIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D5DAF852698CA040059D4B8 /* RxSwiftObservableIntegrationTests.swift */; };
 		1D5DAF872698CA040059D4B8 /* RxSwiftObservableIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D5DAF852698CA040059D4B8 /* RxSwiftObservableIntegrationTests.swift */; };
-		1D0CA84D2677F6DB0000D612 /* AsyncFunctionIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0CA84C2677F6DB0000D612 /* AsyncFunctionIntegrationTests.swift */; };
-		1D0CA84E2677F6DB0000D612 /* AsyncFunctionIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0CA84C2677F6DB0000D612 /* AsyncFunctionIntegrationTests.swift */; };
 		1D7175FF267009C500846F75 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7175FE267009C500846F75 /* AppDelegate.swift */; };
 		1D717603267009C600846F75 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1D717602267009C600846F75 /* Assets.xcassets */; };
 		1D717606267009C600846F75 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1D717605267009C600846F75 /* Preview Assets.xcassets */; };
@@ -32,6 +32,8 @@
 		1D71762F26700A6E00846F75 /* ClockViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D71762C26700A6E00846F75 /* ClockViewModel.swift */; };
 		1D71763026700A6E00846F75 /* ClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D71762D26700A6E00846F75 /* ClockView.swift */; };
 		1D71763126700A6E00846F75 /* ClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D71762D26700A6E00846F75 /* ClockView.swift */; };
+		1D810BC226A20FD30065C740 /* ClockAsyncViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D810BC126A20FD30065C740 /* ClockAsyncViewModel.swift */; };
+		1D810BC326A20FD30065C740 /* ClockAsyncViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D810BC126A20FD30065C740 /* ClockAsyncViewModel.swift */; };
 		1D81B1542677B7EF00EEC34D /* CombineFutureIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D81B1532677B7EF00EEC34D /* CombineFutureIntegrationTests.swift */; };
 		1D81B1552677B7EF00EEC34D /* CombineFutureIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D81B1532677B7EF00EEC34D /* CombineFutureIntegrationTests.swift */; };
 		1D81B1572677E56200EEC34D /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D81B1562677E56200EEC34D /* TestUtils.swift */; };
@@ -81,11 +83,11 @@
 		0BC692248E0A96A34E37C6AC /* Pods-iOS Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS Tests.release.xcconfig"; path = "Target Support Files/Pods-iOS Tests/Pods-iOS Tests.release.xcconfig"; sourceTree = "<group>"; };
 		1D04AEFF266E9C0700920D20 /* KMPNativeCoroutinesCombine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KMPNativeCoroutinesCombine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D04AF3C266EB02000920D20 /* KMPNativeCoroutinesCombine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KMPNativeCoroutinesCombine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D0CA84C2677F6DB0000D612 /* AsyncFunctionIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncFunctionIntegrationTests.swift; sourceTree = "<group>"; };
 		1D5DAF7C2698B5EB0059D4B8 /* ClockRxSwiftViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockRxSwiftViewModel.swift; sourceTree = "<group>"; };
 		1D5DAF7F2698C3C30059D4B8 /* RandomLettersRxSwiftViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomLettersRxSwiftViewModel.swift; sourceTree = "<group>"; };
 		1D5DAF822698C67D0059D4B8 /* RxSwiftSingleIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxSwiftSingleIntegrationTests.swift; sourceTree = "<group>"; };
 		1D5DAF852698CA040059D4B8 /* RxSwiftObservableIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxSwiftObservableIntegrationTests.swift; sourceTree = "<group>"; };
-		1D0CA84C2677F6DB0000D612 /* AsyncFunctionIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncFunctionIntegrationTests.swift; sourceTree = "<group>"; };
 		1D7175FC267009C500846F75 /* macOS App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "macOS App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D7175FE267009C500846F75 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1D717602267009C600846F75 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 		1D71762926700A6000846F75 /* ClockCombineViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClockCombineViewModel.swift; sourceTree = "<group>"; };
 		1D71762C26700A6E00846F75 /* ClockViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClockViewModel.swift; sourceTree = "<group>"; };
 		1D71762D26700A6E00846F75 /* ClockView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClockView.swift; sourceTree = "<group>"; };
+		1D810BC126A20FD30065C740 /* ClockAsyncViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockAsyncViewModel.swift; sourceTree = "<group>"; };
 		1D81B13B2677B72200EEC34D /* macOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "macOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D81B1492677B7C000EEC34D /* iOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "iOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D81B1532677B7EF00EEC34D /* CombineFutureIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineFutureIntegrationTests.swift; sourceTree = "<group>"; };
@@ -289,6 +292,7 @@
 				1D0CA84C2677F6DB0000D612 /* AsyncFunctionIntegrationTests.swift */,
 				1DF82A76267939F70024886B /* SwiftUIAsyncTest.swift */,
 				1DFC35FF268A3148008393FA /* AsyncResultIntegrationTests.swift */,
+				1D810BC126A20FD30065C740 /* ClockAsyncViewModel.swift */,
 			);
 			path = Async;
 			sourceTree = "<group>";
@@ -642,6 +646,7 @@
 				1D71762E26700A6E00846F75 /* ClockViewModel.swift in Sources */,
 				1DF1A6782671535200945FF9 /* RandomLettersCombineViewModel.swift in Sources */,
 				1DF1A67226714EEC00945FF9 /* RandomLettersViewModel.swift in Sources */,
+				1D810BC226A20FD30065C740 /* ClockAsyncViewModel.swift in Sources */,
 				1D5DAF802698C3C30059D4B8 /* RandomLettersRxSwiftViewModel.swift in Sources */,
 				1DF82A77267939F70024886B /* SwiftUIAsyncTest.swift in Sources */,
 				1DF1A66C2671448500945FF9 /* RootView.swift in Sources */,
@@ -655,6 +660,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1D5DAF7E2698B5EB0059D4B8 /* ClockRxSwiftViewModel.swift in Sources */,
+				1D810BC326A20FD30065C740 /* ClockAsyncViewModel.swift in Sources */,
 				1D5DAF812698C3C30059D4B8 /* RandomLettersRxSwiftViewModel.swift in Sources */,
 				1D717616267009E700846F75 /* AppDelegate.swift in Sources */,
 				1DF1A6702671494800945FF9 /* NavigationBarTitle.swift in Sources */,

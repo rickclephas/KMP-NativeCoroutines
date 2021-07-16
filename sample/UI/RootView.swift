@@ -28,6 +28,9 @@ struct RootView: View {
                 }
             }
             Section(header: Text("Async/Await")) {
+                NavigationLink(destination: ClockView(viewModel: ClockAsyncViewModel())) {
+                    Text("Clock")
+                }
                 NavigationLink(destination: RandomLettersView(viewModel: RandomLettersAsyncViewModel())) {
                     Text("Random letters")
                 }
