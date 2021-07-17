@@ -8,6 +8,8 @@ ext["signing.password"] = null
 ext["signing.secretKeyRingFile"] = null
 ext["ossrhUsername"] = null
 ext["ossrhPassword"] = null
+ext["gradle.publish.key"] = null
+ext["gradle.publish.secret"] = null
 val localPropsFile = project.rootProject.file("local.properties")
 if (localPropsFile.exists()) {
     localPropsFile.reader()
@@ -19,6 +21,8 @@ if (localPropsFile.exists()) {
     ext["signing.secretKeyRingFile"] = System.getenv("SIGNING_SECRET_KEY_RING_FILE")
     ext["ossrhUsername"] = System.getenv("OSSRH_USERNAME")
     ext["ossrhPassword"] = System.getenv("OSSRH_PASSWORD")
+    ext["gradle.publish.key"] = System.getenv("GRADLE_PUBLISH_KEY")
+    ext["gradle.publish.secret"] = System.getenv("GRADLE_PUBLISH_SECRET")
 }
 
 val emptyJavadocJar by tasks.registering(Jar::class) {
