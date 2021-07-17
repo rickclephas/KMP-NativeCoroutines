@@ -45,7 +45,7 @@ internal class KmpNativeCoroutinesIrTransformer(
         val getter = declaration.getter ?: return super.visitPropertyNew(declaration)
         val originalName = nameGenerator.createOriginalName(declaration.name)
         val originalProperty = declaration.parentAsClass.properties.single {
-            it.isCoroutinesProperty && it.name == originalName
+            it.name == originalName && it.isCoroutinesProperty
         }
         val originalGetter = originalProperty.getter
             ?: throw IllegalStateException("Original property doesn't have a getter")
@@ -97,7 +97,7 @@ internal class KmpNativeCoroutinesIrTransformer(
         ) return super.visitFunctionNew(declaration)
         val originalName = nameGenerator.createOriginalName(declaration.name)
         val originalFunction = declaration.parentAsClass.functions.single {
-            it.isCoroutinesFunction && it.name == originalName && it.valueParameters.areSameAs(declaration.valueParameters)
+            it.name == originalName && it.isCoroutinesFunction && it.valueParameters.areSameAs(declaration.valueParameters)
         }
         declaration.body = createNativeBody(declaration, originalFunction)
         return super.visitFunctionNew(declaration)
