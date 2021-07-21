@@ -43,8 +43,8 @@ internal class KmpNativeCoroutinesSyntheticResolveExtension(
     private fun isRecursiveCall(): Boolean {
         val stackTrace = Throwable().stackTrace
         val currentElement = stackTrace.getOrNull(1) ?: return false
-        // The original call should be in the first 70 elements
-        for (i in 2 until min(70, stackTrace.size)) {
+        // The original call should be in the first 100 elements
+        for (i in 2 until min(100, stackTrace.size)) {
             if (stackTrace[i].className == currentElement.className)
                 return true
         }
