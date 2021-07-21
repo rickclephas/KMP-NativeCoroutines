@@ -63,20 +63,6 @@ plugins {
 }
 ```
 
-#### Kotlin 1.5.10
-
-In Kotlin 1.5.10 you might get a recursion error during compilation (see [#4](https://github.com/rickclephas/KMP-NativeCoroutines/issues/4)).  
-The issue is with implicit return types. To fix this you should use explicit return types for your public API:
-```kotlin
-private val _time = MutableStateFlow(0L)
-
-// The following will generate a recursion error in Kotlin 1.5.10
-val time = _time.asStateFlow()
-
-// Specifying the return type fixes the recursion
-val time: StateFlow<Long> = _time.asStateFlow()
-```
-
 ### Swift
 
 Now for Swift you can choose from a couple of implementations.  
