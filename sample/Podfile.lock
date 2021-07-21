@@ -6,7 +6,7 @@ PODS:
     - KMPNativeCoroutinesCore
     - RxSwift
   - RxSwift (6.2.0)
-  - shared (0.4.2)
+  - shared (0.4.2-kotlin-1.5.10)
 
 DEPENDENCIES:
   - KMPNativeCoroutinesCombine (from `../`)
@@ -33,7 +33,7 @@ SPEC CHECKSUMS:
   KMPNativeCoroutinesCore: 04c0d951af2a8dc6099f8219b3662fab7939f932
   KMPNativeCoroutinesRxSwift: cdd1df5644c0483985fa10bd21f8c7bd75acadf3
   RxSwift: d356ab7bee873611322f134c5f9ef379fa183d8f
-  shared: c4b80852b1c9a937dc68fed53f8ef2265d11b354
+  shared: 46f9e1579e941ef450d7a12063b7d9f8ad7b5017
 
 PODFILE CHECKSUM: 44e2c50fc01577ab1acfd23bee507711094834b0
 
