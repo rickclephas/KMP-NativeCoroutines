@@ -1,4 +1,6 @@
 PODS:
+  - KMPNativeCoroutinesAsync (0.4.3):
+    - KMPNativeCoroutinesCore
   - KMPNativeCoroutinesCombine (0.4.3):
     - KMPNativeCoroutinesCore
   - KMPNativeCoroutinesCore (0.4.3)
@@ -32,6 +34,7 @@ EXTERNAL SOURCES:
     :path: "./shared"
 
 SPEC CHECKSUMS:
+  KMPNativeCoroutinesAsync: 9776886be67c3d07f5265152c6bc4100d9fb9282
   KMPNativeCoroutinesCombine: f75e590f94c99e8d758818c46c8088db040ae954
   KMPNativeCoroutinesCore: 1e770e4f1269f38bba3bd30f1f2c00537032cda0
   KMPNativeCoroutinesRxSwift: 8daf69dbadd74cf476c73db0d44804e33dea2cec
