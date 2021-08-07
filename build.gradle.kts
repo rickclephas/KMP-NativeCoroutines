@@ -11,7 +11,7 @@ buildscript {
 
 allprojects {
     group = "com.rickclephas.kmp"
-    version = "0.4.3"
+    version = "0.4.3-kotlin-1.5.10"
 
     repositories {
         mavenLocal()
