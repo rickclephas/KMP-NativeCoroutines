@@ -99,6 +99,11 @@ internal class KmpNativeCoroutinesIrTransformer(
         val originalFunction = declaration.parentAsClass.functions.single {
             it.name == originalName && it.isCoroutinesFunction && it.valueParameters.areSameAs(declaration.valueParameters)
         }
+        // Remove the default value stubs
+        // TODO: Support and copy default values
+        declaration.valueParameters.forEach {
+            it.defaultValue = null
+        }
         declaration.body = createNativeBody(declaration, originalFunction)
         return super.visitFunctionNew(declaration)
     }
