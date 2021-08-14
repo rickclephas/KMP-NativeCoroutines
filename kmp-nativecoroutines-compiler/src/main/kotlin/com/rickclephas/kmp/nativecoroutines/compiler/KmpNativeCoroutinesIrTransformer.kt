@@ -5,6 +5,7 @@ import com.rickclephas.kmp.nativecoroutines.compiler.utils.isNativeCoroutinesFun
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.referenceNativeSuspendFunction
 import org.jetbrains.kotlin.backend.common.IrElementTransformerVoidWithContext
 import org.jetbrains.kotlin.backend.common.extensions.IrPluginContext
+import org.jetbrains.kotlin.backend.common.ir.passTypeArgumentsFrom
 import org.jetbrains.kotlin.backend.common.lower.DeclarationIrBuilder
 import org.jetbrains.kotlin.ir.IrStatement
 import org.jetbrains.kotlin.ir.builders.*
@@ -99,11 +100,6 @@ internal class KmpNativeCoroutinesIrTransformer(
         val originalFunction = declaration.parentAsClass.functions.single {
             it.name == originalName && it.isCoroutinesFunction && it.valueParameters.areSameAs(declaration.valueParameters)
         }
-        // Remove the default value stubs
-        // TODO: Support and copy default values
-        declaration.valueParameters.forEach {
-            it.defaultValue = null
-        }
         declaration.body = createNativeBody(declaration, originalFunction)
         return super.visitFunctionNew(declaration)
     }
@@ -166,6 +162,7 @@ internal class KmpNativeCoroutinesIrTransformer(
         irCall(originalFunction).apply {
             dispatchReceiver = function.dispatchReceiverParameter?.let { irGet(it) }
             extensionReceiver = function.extensionReceiverParameter?.let { irGet(it) }
+            passTypeArgumentsFrom(function)
             function.valueParameters.forEachIndexed { index, parameter ->
                 putValueArgument(index, irGet(parameter))
             }

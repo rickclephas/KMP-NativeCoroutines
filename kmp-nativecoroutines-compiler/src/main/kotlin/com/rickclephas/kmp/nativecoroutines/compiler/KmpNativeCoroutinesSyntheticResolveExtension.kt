@@ -209,37 +209,41 @@ internal class KmpNativeCoroutinesSyntheticResolveExtension(
         thisDescriptor: ClassDescriptor,
         coroutinesFunctionDescriptor: SimpleFunctionDescriptor,
         name: Name
-    ): SimpleFunctionDescriptor {
-        var returnType = coroutinesFunctionDescriptor.returnType
-            ?: throw IllegalStateException("Coroutines function doesn't have a return type")
-
-        // Convert Flow types to NativeFlow
-        val flowValueType = coroutinesFunctionDescriptor.getFlowValueTypeOrNull()
-        if (flowValueType != null)
-            returnType = thisDescriptor.module.getExpandedNativeFlowType(flowValueType.type)
-
-        // Convert suspend function to NativeSuspend
-        if (coroutinesFunctionDescriptor.isSuspend)
-            returnType = thisDescriptor.module.getExpandedNativeSuspendType(returnType)
-
-        return SimpleFunctionDescriptorImpl.create(
+    ): SimpleFunctionDescriptor =
+        SimpleFunctionDescriptorImpl.create(
             thisDescriptor,
             Annotations.EMPTY,
             name,
             CallableMemberDescriptor.Kind.SYNTHESIZED,
             SourceElement.NO_SOURCE
         ).apply {
+            val typeParameters = coroutinesFunctionDescriptor.typeParameters.copyFor(this)
+            val extensionReceiverParameter = coroutinesFunctionDescriptor.extensionReceiverParameter
+                ?.copyFor(this, typeParameters)
+            val valueParameters = coroutinesFunctionDescriptor.valueParameters
+                .copyFor(this, typeParameters)
+
+            var returnType = coroutinesFunctionDescriptor.returnType
+                ?: throw IllegalStateException("Coroutines function doesn't have a return type")
+            returnType = returnType.replaceFunctionGenerics(coroutinesFunctionDescriptor, typeParameters)
+
+            // Convert Flow types to NativeFlow
+            val flowValueType = coroutinesFunctionDescriptor.getFlowValueTypeOrNull()
+            if (flowValueType != null)
+                returnType = thisDescriptor.module.getExpandedNativeFlowType(flowValueType.type)
+
+            // Convert suspend function to NativeSuspend
+            if (coroutinesFunctionDescriptor.isSuspend)
+                returnType = thisDescriptor.module.getExpandedNativeSuspendType(returnType)
+
             initialize(
-                coroutinesFunctionDescriptor.extensionReceiverParameter,
+                extensionReceiverParameter,
                 coroutinesFunctionDescriptor.dispatchReceiverParameter,
-                emptyList(),
-                coroutinesFunctionDescriptor.valueParameters.map {
-                    it.copy(this, it.name, it.index)
-                },
+                typeParameters,
+                valueParameters,
                 returnType,
                 Modality.FINAL,
                 coroutinesFunctionDescriptor.visibility
             )
         }
-    }
 }
