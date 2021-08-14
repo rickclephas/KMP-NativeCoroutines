@@ -36,6 +36,8 @@
 		1D81B1582677E56200EEC34D /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D81B1562677E56200EEC34D /* TestUtils.swift */; };
 		1D81B15A2677EDE600EEC34D /* CombinePublisherIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D81B1592677EDE600EEC34D /* CombinePublisherIntegrationTests.swift */; };
 		1D81B15B2677EDE600EEC34D /* CombinePublisherIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D81B1592677EDE600EEC34D /* CombinePublisherIntegrationTests.swift */; };
+		1D91395126C7F04C00A50CDC /* CompilerIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D91395026C7F04C00A50CDC /* CompilerIntegrationTests.swift */; };
+		1D91395226C7F04C00A50CDC /* CompilerIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D91395026C7F04C00A50CDC /* CompilerIntegrationTests.swift */; };
 		1DF1A66C2671448500945FF9 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF1A66B2671448500945FF9 /* RootView.swift */; };
 		1DF1A66D2671448500945FF9 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF1A66B2671448500945FF9 /* RootView.swift */; };
 		1DF1A66F2671494800945FF9 /* NavigationBarTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF1A66E2671494800945FF9 /* NavigationBarTitle.swift */; };
@@ -99,6 +101,7 @@
 		1D81B1532677B7EF00EEC34D /* CombineFutureIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineFutureIntegrationTests.swift; sourceTree = "<group>"; };
 		1D81B1562677E56200EEC34D /* TestUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUtils.swift; sourceTree = "<group>"; };
 		1D81B1592677EDE600EEC34D /* CombinePublisherIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombinePublisherIntegrationTests.swift; sourceTree = "<group>"; };
+		1D91395026C7F04C00A50CDC /* CompilerIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompilerIntegrationTests.swift; sourceTree = "<group>"; };
 		1DEE8AB330F1D42D1AF1532C /* Pods-macOS App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-macOS App.release.xcconfig"; path = "Target Support Files/Pods-macOS App/Pods-macOS App.release.xcconfig"; sourceTree = "<group>"; };
 		1DF1A66B2671448500945FF9 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		1DF1A66E2671494800945FF9 /* NavigationBarTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarTitle.swift; sourceTree = "<group>"; };
@@ -156,7 +159,7 @@
 		1D04AED6266E966900920D20 = {
 			isa = PBXGroup;
 			children = (
-				1D81B1562677E56200EEC34D /* TestUtils.swift */,
+				1D91395426C7F52900A50CDC /* IntegrationTests */,
 				1D71762826700A4400846F75 /* Combine */,
 				1D5DAF7B2698B5C60059D4B8 /* RxSwift */,
 				1D71762726700A1800846F75 /* UI */,
@@ -267,6 +270,15 @@
 				1D81B1592677EDE600EEC34D /* CombinePublisherIntegrationTests.swift */,
 			);
 			path = Combine;
+			sourceTree = "<group>";
+		};
+		1D91395426C7F52900A50CDC /* IntegrationTests */ = {
+			isa = PBXGroup;
+			children = (
+				1D91395026C7F04C00A50CDC /* CompilerIntegrationTests.swift */,
+				1D81B1562677E56200EEC34D /* TestUtils.swift */,
+			);
+			path = IntegrationTests;
 			sourceTree = "<group>";
 		};
 		BA4BEB357C3A9E0685F6DF25 /* Pods */ = {
@@ -650,6 +662,7 @@
 				1D81B1542677B7EF00EEC34D /* CombineFutureIntegrationTests.swift in Sources */,
 				1D81B15A2677EDE600EEC34D /* CombinePublisherIntegrationTests.swift in Sources */,
 				1D5DAF862698CA040059D4B8 /* RxSwiftObservableIntegrationTests.swift in Sources */,
+				1D91395126C7F04C00A50CDC /* CompilerIntegrationTests.swift in Sources */,
 				1D5DAF832698C67D0059D4B8 /* RxSwiftSingleIntegrationTests.swift in Sources */,
 				1D81B1572677E56200EEC34D /* TestUtils.swift in Sources */,
 			);
@@ -662,6 +675,7 @@
 				1D81B1552677B7EF00EEC34D /* CombineFutureIntegrationTests.swift in Sources */,
 				1D81B15B2677EDE600EEC34D /* CombinePublisherIntegrationTests.swift in Sources */,
 				1D5DAF872698CA040059D4B8 /* RxSwiftObservableIntegrationTests.swift in Sources */,
+				1D91395226C7F04C00A50CDC /* CompilerIntegrationTests.swift in Sources */,
 				1D5DAF842698C67D0059D4B8 /* RxSwiftSingleIntegrationTests.swift in Sources */,
 				1D81B1582677E56200EEC34D /* TestUtils.swift in Sources */,
 			);
