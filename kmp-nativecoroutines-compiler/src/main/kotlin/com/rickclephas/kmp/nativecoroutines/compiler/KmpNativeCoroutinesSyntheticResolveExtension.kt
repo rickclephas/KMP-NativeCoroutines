@@ -1,7 +1,6 @@
 package com.rickclephas.kmp.nativecoroutines.compiler
 
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.*
-import com.rickclephas.kmp.nativecoroutines.compiler.utils.isCoroutinesFunction
 import org.jetbrains.kotlin.descriptors.*
 import org.jetbrains.kotlin.descriptors.annotations.Annotations
 import org.jetbrains.kotlin.descriptors.impl.PropertyDescriptorImpl
@@ -57,7 +56,7 @@ internal class KmpNativeCoroutinesSyntheticResolveExtension(
     override fun getSyntheticPropertiesNames(thisDescriptor: ClassDescriptor): List<Name> =
         if (isRecursiveCall()) emptyList()
         else thisDescriptor.getDeclaredProperties()
-            .filter { it.effectiveVisibility().publicApi && it.isCoroutinesProperty }
+            .filter { it.needsNativeProperty }
             .flatMap {
                 val hasStateFlowType = it.hasStateFlowType
                 val hasSharedFlowType = it.hasSharedFlowType
@@ -83,7 +82,7 @@ internal class KmpNativeCoroutinesSyntheticResolveExtension(
         if (!isNativeName && !isNativeValueName && !isNativeReplayCacheName) return
         val originalName = nameGenerator.createOriginalName(name)
         result += thisDescriptor.getDeclaredProperties()
-            .filter { it.name == originalName && it.effectiveVisibility().publicApi && it.isCoroutinesProperty }
+            .filter { it.name == originalName && it.needsNativeProperty }
             .map {
                 when {
                     isNativeName -> createNativePropertyDescriptor(thisDescriptor, it, name)
@@ -187,7 +186,7 @@ internal class KmpNativeCoroutinesSyntheticResolveExtension(
     override fun getSyntheticFunctionNames(thisDescriptor: ClassDescriptor): List<Name> =
         if (isRecursiveCall()) emptyList()
         else thisDescriptor.getDeclaredFunctions()
-            .filter { it.effectiveVisibility().publicApi && it.isCoroutinesFunction }
+            .filter { it.needsNativeFunction }
             .map { nameGenerator.createNativeName(it.name) }
             .distinct()
 
@@ -201,7 +200,7 @@ internal class KmpNativeCoroutinesSyntheticResolveExtension(
         if (!nameGenerator.isNativeName(name) || result.isNotEmpty()) return
         val originalName = nameGenerator.createOriginalName(name)
         result += thisDescriptor.getDeclaredFunctions()
-            .filter { it.name == originalName && it.effectiveVisibility().publicApi && it.isCoroutinesFunction }
+            .filter { it.name == originalName && it.needsNativeFunction }
             .map { createNativeFunctionDescriptor(thisDescriptor, it, name) }
     }
 
@@ -209,37 +208,41 @@ internal class KmpNativeCoroutinesSyntheticResolveExtension(
         thisDescriptor: ClassDescriptor,
         coroutinesFunctionDescriptor: SimpleFunctionDescriptor,
         name: Name
-    ): SimpleFunctionDescriptor {
-        var returnType = coroutinesFunctionDescriptor.returnType
-            ?: throw IllegalStateException("Coroutines function doesn't have a return type")
-
-        // Convert Flow types to NativeFlow
-        val flowValueType = coroutinesFunctionDescriptor.getFlowValueTypeOrNull()
-        if (flowValueType != null)
-            returnType = thisDescriptor.module.getExpandedNativeFlowType(flowValueType.type)
-
-        // Convert suspend function to NativeSuspend
-        if (coroutinesFunctionDescriptor.isSuspend)
-            returnType = thisDescriptor.module.getExpandedNativeSuspendType(returnType)
-
-        return SimpleFunctionDescriptorImpl.create(
+    ): SimpleFunctionDescriptor =
+        SimpleFunctionDescriptorImpl.create(
             thisDescriptor,
             Annotations.EMPTY,
             name,
             CallableMemberDescriptor.Kind.SYNTHESIZED,
             SourceElement.NO_SOURCE
         ).apply {
+            val typeParameters = coroutinesFunctionDescriptor.typeParameters.copyFor(this)
+            val extensionReceiverParameter = coroutinesFunctionDescriptor.extensionReceiverParameter
+                ?.copyFor(this, typeParameters)
+            val valueParameters = coroutinesFunctionDescriptor.valueParameters
+                .copyFor(this, typeParameters)
+
+            var returnType = coroutinesFunctionDescriptor.returnType
+                ?: throw IllegalStateException("Coroutines function doesn't have a return type")
+            returnType = returnType.replaceFunctionGenerics(coroutinesFunctionDescriptor, typeParameters)
+
+            // Convert Flow types to NativeFlow
+            val flowValueType = coroutinesFunctionDescriptor.getFlowValueTypeOrNull()
+            if (flowValueType != null)
+                returnType = thisDescriptor.module.getExpandedNativeFlowType(flowValueType.type)
+
+            // Convert suspend function to NativeSuspend
+            if (coroutinesFunctionDescriptor.isSuspend)
+                returnType = thisDescriptor.module.getExpandedNativeSuspendType(returnType)
+
             initialize(
-                coroutinesFunctionDescriptor.extensionReceiverParameter,
+                extensionReceiverParameter,
                 coroutinesFunctionDescriptor.dispatchReceiverParameter,
-                emptyList(),
-                coroutinesFunctionDescriptor.valueParameters.map {
-                    it.copy(this, it.name, it.index)
-                },
+                typeParameters,
+                valueParameters,
                 returnType,
                 Modality.FINAL,
                 coroutinesFunctionDescriptor.visibility
             )
         }
-    }
 }

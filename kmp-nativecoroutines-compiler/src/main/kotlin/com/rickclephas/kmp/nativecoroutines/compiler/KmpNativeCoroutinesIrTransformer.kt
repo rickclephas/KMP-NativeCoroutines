@@ -5,6 +5,7 @@ import com.rickclephas.kmp.nativecoroutines.compiler.utils.isNativeCoroutinesFun
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.referenceNativeSuspendFunction
 import org.jetbrains.kotlin.backend.common.IrElementTransformerVoidWithContext
 import org.jetbrains.kotlin.backend.common.extensions.IrPluginContext
+import org.jetbrains.kotlin.backend.common.ir.passTypeArgumentsFrom
 import org.jetbrains.kotlin.backend.common.lower.DeclarationIrBuilder
 import org.jetbrains.kotlin.ir.IrStatement
 import org.jetbrains.kotlin.ir.builders.*
@@ -16,10 +17,7 @@ import org.jetbrains.kotlin.ir.expressions.IrExpression
 import org.jetbrains.kotlin.ir.types.classifierOrFail
 import org.jetbrains.kotlin.ir.types.impl.IrSimpleTypeImpl
 import org.jetbrains.kotlin.ir.types.typeOrNull
-import org.jetbrains.kotlin.ir.util.functions
-import org.jetbrains.kotlin.ir.util.parentAsClass
-import org.jetbrains.kotlin.ir.util.parentClassOrNull
-import org.jetbrains.kotlin.ir.util.properties
+import org.jetbrains.kotlin.ir.util.*
 
 internal class KmpNativeCoroutinesIrTransformer(
     private val context: IrPluginContext,
@@ -33,7 +31,7 @@ internal class KmpNativeCoroutinesIrTransformer(
     private val listClass = context.referenceListClass()
 
     override fun visitPropertyNew(declaration: IrProperty): IrStatement {
-        if (declaration.getter?.body != null || declaration.setter != null)
+        if (declaration.isFakeOverride || declaration.getter?.body != null || declaration.setter != null)
             return super.visitPropertyNew(declaration)
 
         val isNativeName = nameGenerator.isNativeName(declaration.name)
@@ -45,7 +43,7 @@ internal class KmpNativeCoroutinesIrTransformer(
         val getter = declaration.getter ?: return super.visitPropertyNew(declaration)
         val originalName = nameGenerator.createOriginalName(declaration.name)
         val originalProperty = declaration.parentAsClass.properties.single {
-            it.name == originalName && it.isCoroutinesProperty
+            it.name == originalName && it.needsNativeProperty
         }
         val originalGetter = originalProperty.getter
             ?: throw IllegalStateException("Original property doesn't have a getter")
@@ -91,18 +89,14 @@ internal class KmpNativeCoroutinesIrTransformer(
     }
 
     override fun visitFunctionNew(declaration: IrFunction): IrStatement {
-        if (!nameGenerator.isNativeName(declaration.name) ||
+        if (declaration.isFakeOverride ||
+            !nameGenerator.isNativeName(declaration.name) ||
             !declaration.isNativeCoroutinesFunction ||
             declaration.body != null
         ) return super.visitFunctionNew(declaration)
         val originalName = nameGenerator.createOriginalName(declaration.name)
         val originalFunction = declaration.parentAsClass.functions.single {
-            it.name == originalName && it.isCoroutinesFunction && it.valueParameters.areSameAs(declaration.valueParameters)
-        }
-        // Remove the default value stubs
-        // TODO: Support and copy default values
-        declaration.valueParameters.forEach {
-            it.defaultValue = null
+            it.name == originalName && it.needsNativeFunction && it.valueParameters.areSameAs(declaration.valueParameters)
         }
         declaration.body = createNativeBody(declaration, originalFunction)
         return super.visitFunctionNew(declaration)
@@ -166,6 +160,7 @@ internal class KmpNativeCoroutinesIrTransformer(
         irCall(originalFunction).apply {
             dispatchReceiver = function.dispatchReceiverParameter?.let { irGet(it) }
             extensionReceiver = function.extensionReceiverParameter?.let { irGet(it) }
+            passTypeArgumentsFrom(function)
             function.valueParameters.forEachIndexed { index, parameter ->
                 putValueArgument(index, irGet(parameter))
             }

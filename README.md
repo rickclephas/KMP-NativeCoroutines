@@ -29,10 +29,10 @@ This library solves both of these limitations :smile: .
 As of version `0.2.0` the library uses Kotlin version `1.5.20`.  
 Compatibility versions for older Kotlin versions are also available:
 
-|Version suffix|Kotlin|Coroutines|
-|---|:---:|:---:|
-|_no suffix_|1.5.20|1.5.0-native-mt|
-|-kotlin-1.5.10|1.5.10|1.5.0-native-mt|
+|Version|Version suffix|Kotlin|Coroutines|
+|---|---|:---:|:---:|
+|_latest_|_no suffix_|1.5.20|1.5.0-native-mt|
+|0.4.3|-kotlin-1.5.10|1.5.10|1.5.0-native-mt|
 
 You can choose from a couple of Swift implementations.  
 Depending on the implementation you can support as low as iOS 9 and macOS 10.9:
@@ -149,6 +149,17 @@ If you don't provide a `CoroutineScope` the default scope will be used which is 
 ```kotlin
 @SharedImmutable
 internal val defaultCoroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
+```
+
+#### Ignoring declarations
+
+Use the `NativeCoroutinesIgnore` annotation to tell the plugin to ignore a property or function:
+```kotlin
+@NativeCoroutinesIgnore
+val ignoredFlowProperty: Flow<Int>
+
+@NativeCoroutinesIgnore
+suspend fun ignoredSuspendFunction() { }
 ```
 
 ### RxSwift

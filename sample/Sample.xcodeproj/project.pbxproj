@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1D02C12326C82EE800E2FF60 /* CompilerIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D02C12126C82EE800E2FF60 /* CompilerIntegrationTests.swift */; };
+		1D02C12426C82EE800E2FF60 /* CompilerIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D02C12126C82EE800E2FF60 /* CompilerIntegrationTests.swift */; };
+		1D02C12526C82EE800E2FF60 /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D02C12226C82EE800E2FF60 /* TestUtils.swift */; };
+		1D02C12626C82EE800E2FF60 /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D02C12226C82EE800E2FF60 /* TestUtils.swift */; };
 		1D0CA84D2677F6DB0000D612 /* AsyncFunctionIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0CA84C2677F6DB0000D612 /* AsyncFunctionIntegrationTests.swift */; };
 		1D0CA84E2677F6DB0000D612 /* AsyncFunctionIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0CA84C2677F6DB0000D612 /* AsyncFunctionIntegrationTests.swift */; };
 		1D5DAF7D2698B5EB0059D4B8 /* ClockRxSwiftViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D5DAF7C2698B5EB0059D4B8 /* ClockRxSwiftViewModel.swift */; };
@@ -38,8 +42,6 @@
 		1D810BC626A214020065C740 /* AsyncStreamIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D810BC426A214020065C740 /* AsyncStreamIntegrationTests.swift */; };
 		1D81B1542677B7EF00EEC34D /* CombineFutureIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D81B1532677B7EF00EEC34D /* CombineFutureIntegrationTests.swift */; };
 		1D81B1552677B7EF00EEC34D /* CombineFutureIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D81B1532677B7EF00EEC34D /* CombineFutureIntegrationTests.swift */; };
-		1D81B1572677E56200EEC34D /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D81B1562677E56200EEC34D /* TestUtils.swift */; };
-		1D81B1582677E56200EEC34D /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D81B1562677E56200EEC34D /* TestUtils.swift */; };
 		1D81B15A2677EDE600EEC34D /* CombinePublisherIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D81B1592677EDE600EEC34D /* CombinePublisherIntegrationTests.swift */; };
 		1D81B15B2677EDE600EEC34D /* CombinePublisherIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D81B1592677EDE600EEC34D /* CombinePublisherIntegrationTests.swift */; };
 		1DA5DD0626764810002448E3 /* RandomLettersAsyncViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA5DD0526764810002448E3 /* RandomLettersAsyncViewModel.swift */; };
@@ -83,6 +85,8 @@
 
 /* Begin PBXFileReference section */
 		0BC692248E0A96A34E37C6AC /* Pods-iOS Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS Tests.release.xcconfig"; path = "Target Support Files/Pods-iOS Tests/Pods-iOS Tests.release.xcconfig"; sourceTree = "<group>"; };
+		1D02C12126C82EE800E2FF60 /* CompilerIntegrationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompilerIntegrationTests.swift; sourceTree = "<group>"; };
+		1D02C12226C82EE800E2FF60 /* TestUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUtils.swift; sourceTree = "<group>"; };
 		1D04AEFF266E9C0700920D20 /* KMPNativeCoroutinesCombine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KMPNativeCoroutinesCombine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D04AF3C266EB02000920D20 /* KMPNativeCoroutinesCombine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KMPNativeCoroutinesCombine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D0CA84C2677F6DB0000D612 /* AsyncFunctionIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncFunctionIntegrationTests.swift; sourceTree = "<group>"; };
@@ -112,7 +116,6 @@
 		1D81B13B2677B72200EEC34D /* macOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "macOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D81B1492677B7C000EEC34D /* iOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "iOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D81B1532677B7EF00EEC34D /* CombineFutureIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineFutureIntegrationTests.swift; sourceTree = "<group>"; };
-		1D81B1562677E56200EEC34D /* TestUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUtils.swift; sourceTree = "<group>"; };
 		1D81B1592677EDE600EEC34D /* CombinePublisherIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombinePublisherIntegrationTests.swift; sourceTree = "<group>"; };
 		1DA5DD0526764810002448E3 /* RandomLettersAsyncViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomLettersAsyncViewModel.swift; sourceTree = "<group>"; };
 		1DEE8AB330F1D42D1AF1532C /* Pods-macOS App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-macOS App.release.xcconfig"; path = "Target Support Files/Pods-macOS App/Pods-macOS App.release.xcconfig"; sourceTree = "<group>"; };
@@ -171,10 +174,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1D02C12026C82EE800E2FF60 /* IntegrationTests */ = {
+			isa = PBXGroup;
+			children = (
+				1D02C12126C82EE800E2FF60 /* CompilerIntegrationTests.swift */,
+				1D02C12226C82EE800E2FF60 /* TestUtils.swift */,
+			);
+			path = IntegrationTests;
+			sourceTree = "<group>";
+		};
 		1D04AED6266E966900920D20 = {
 			isa = PBXGroup;
 			children = (
-				1D81B1562677E56200EEC34D /* TestUtils.swift */,
+				1D02C12026C82EE800E2FF60 /* IntegrationTests */,
 				1DA5DD04267647F6002448E3 /* Async */,
 				1D71762826700A4400846F75 /* Combine */,
 				1D5DAF7B2698B5C60059D4B8 /* RxSwift */,
@@ -685,13 +697,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D02C12326C82EE800E2FF60 /* CompilerIntegrationTests.swift in Sources */,
 				1DFC3602268A316D008393FA /* AsyncResultIntegrationTests.swift in Sources */,
 				1D81B1542677B7EF00EEC34D /* CombineFutureIntegrationTests.swift in Sources */,
+				1D02C12526C82EE800E2FF60 /* TestUtils.swift in Sources */,
 				1D0CA84D2677F6DB0000D612 /* AsyncFunctionIntegrationTests.swift in Sources */,
 				1D81B15A2677EDE600EEC34D /* CombinePublisherIntegrationTests.swift in Sources */,
 				1D5DAF862698CA040059D4B8 /* RxSwiftObservableIntegrationTests.swift in Sources */,
 				1D5DAF832698C67D0059D4B8 /* RxSwiftSingleIntegrationTests.swift in Sources */,
-				1D81B1572677E56200EEC34D /* TestUtils.swift in Sources */,
 				1D810BC526A214020065C740 /* AsyncStreamIntegrationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -700,13 +713,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D02C12426C82EE800E2FF60 /* CompilerIntegrationTests.swift in Sources */,
 				1DFC3603268A316D008393FA /* AsyncResultIntegrationTests.swift in Sources */,
 				1D81B1552677B7EF00EEC34D /* CombineFutureIntegrationTests.swift in Sources */,
+				1D02C12626C82EE800E2FF60 /* TestUtils.swift in Sources */,
 				1D0CA84E2677F6DB0000D612 /* AsyncFunctionIntegrationTests.swift in Sources */,
 				1D81B15B2677EDE600EEC34D /* CombinePublisherIntegrationTests.swift in Sources */,
 				1D5DAF872698CA040059D4B8 /* RxSwiftObservableIntegrationTests.swift in Sources */,
 				1D5DAF842698C67D0059D4B8 /* RxSwiftSingleIntegrationTests.swift in Sources */,
-				1D81B1582677E56200EEC34D /* TestUtils.swift in Sources */,
 				1D810BC626A214020065C740 /* AsyncStreamIntegrationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -1,14 +1,12 @@
 PODS:
-  - KMPNativeCoroutinesAsync (0.4.3):
+  - KMPNativeCoroutinesCombine (0.5.0):
     - KMPNativeCoroutinesCore
-  - KMPNativeCoroutinesCombine (0.4.3):
-    - KMPNativeCoroutinesCore
-  - KMPNativeCoroutinesCore (0.4.3)
-  - KMPNativeCoroutinesRxSwift (0.4.3):
+  - KMPNativeCoroutinesCore (0.5.0)
+  - KMPNativeCoroutinesRxSwift (0.5.0):
     - KMPNativeCoroutinesCore
     - RxSwift
   - RxSwift (6.2.0)
-  - shared (0.4.3)
+  - shared (0.5.0)
 
 DEPENDENCIES:
   - KMPNativeCoroutinesAsync (from `../`)
@@ -34,12 +32,11 @@ EXTERNAL SOURCES:
     :path: "./shared"
 
 SPEC CHECKSUMS:
-  KMPNativeCoroutinesAsync: 9776886be67c3d07f5265152c6bc4100d9fb9282
-  KMPNativeCoroutinesCombine: f75e590f94c99e8d758818c46c8088db040ae954
-  KMPNativeCoroutinesCore: 1e770e4f1269f38bba3bd30f1f2c00537032cda0
-  KMPNativeCoroutinesRxSwift: 8daf69dbadd74cf476c73db0d44804e33dea2cec
+  KMPNativeCoroutinesCombine: c17e07579f12551998830bb02ee78a441839227f
+  KMPNativeCoroutinesCore: 916c68ae1d7396b0a07ece46962ecd4bc799319b
+  KMPNativeCoroutinesRxSwift: 2c5bbfa02d3514882169e281b0bc9b800a2e71a1
   RxSwift: d356ab7bee873611322f134c5f9ef379fa183d8f
-  shared: 65aa739773f60a4c084c7a22cbabb5544eba52ac
+  shared: 71021a878cffefe283d7d8212eb15603b0aeabce
 
 PODFILE CHECKSUM: f6c70d246fb82f0659448f5091b2839ba4a55a48
 
