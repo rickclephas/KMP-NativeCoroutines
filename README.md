@@ -147,6 +147,17 @@ If you don't provide a `CoroutineScope` the default scope will be used which is 
 internal val defaultCoroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
 ```
 
+#### Ignoring declarations
+
+Use the `NativeCoroutinesIgnore` annotation to tell the plugin to ignore a property or function:
+```kotlin
+@NativeCoroutinesIgnore
+val ignoredFlowProperty: Flow<Int>
+
+@NativeCoroutinesIgnore
+suspend fun ignoredSuspendFunction() { }
+```
+
 ### RxSwift
 
 The RxSwift implementation provides a couple functions to get an `Observable` or `Single` for your Coroutines code.
