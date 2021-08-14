@@ -8,10 +8,16 @@ internal val PropertyDescriptor.isCoroutinesProperty: Boolean
     get() = !name.isSpecial && hasFlowType
 
 internal val PropertyDescriptor.needsNativeProperty: Boolean
-    get() = effectiveVisibility().publicApi && overriddenDescriptors.isEmpty() && isCoroutinesProperty
+    get() = effectiveVisibility().publicApi &&
+            !hasIgnoreAnnotation &&
+            overriddenDescriptors.isEmpty() &&
+            isCoroutinesProperty
 
 internal val IrProperty.isCoroutinesProperty: Boolean
     get() = !name.isSpecial && (getter?.returnType?.isFlowType == true)
 
 internal val IrProperty.needsNativeProperty: Boolean
-    get() = visibility.isPublicAPI && overriddenSymbols.isEmpty() && isCoroutinesProperty
+    get() = visibility.isPublicAPI &&
+            !hasIgnoreAnnotation &&
+            overriddenSymbols.isEmpty() &&
+            isCoroutinesProperty

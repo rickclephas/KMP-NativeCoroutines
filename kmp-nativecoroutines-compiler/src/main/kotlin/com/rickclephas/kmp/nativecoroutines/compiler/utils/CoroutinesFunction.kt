@@ -9,13 +9,19 @@ internal val SimpleFunctionDescriptor.isCoroutinesFunction: Boolean
     get() = !name.isSpecial && (isSuspend || hasFlowReturnType)
 
 internal val SimpleFunctionDescriptor.needsNativeFunction: Boolean
-    get() = effectiveVisibility().publicApi && overriddenDescriptors.isEmpty() && isCoroutinesFunction
+    get() = effectiveVisibility().publicApi &&
+            !hasIgnoreAnnotation &&
+            overriddenDescriptors.isEmpty() &&
+            isCoroutinesFunction
 
 internal val IrSimpleFunction.isCoroutinesFunction: Boolean
     get() = !name.isSpecial && (isSuspend || returnType.isFlowType)
 
 internal val IrSimpleFunction.needsNativeFunction: Boolean
-    get() = visibility.isPublicAPI && overriddenSymbols.isEmpty() && isCoroutinesFunction
+    get() = visibility.isPublicAPI &&
+            !hasIgnoreAnnotation &&
+            overriddenSymbols.isEmpty() &&
+            isCoroutinesFunction
 
 internal val IrFunction.isNativeCoroutinesFunction: Boolean
     get() = !name.isSpecial && (returnType.isNativeSuspend || returnType.isNativeFlow)

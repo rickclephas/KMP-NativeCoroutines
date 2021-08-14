@@ -1,5 +1,7 @@
 package com.rickclephas.kmp.nativecoroutines.sample
 
+import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesIgnore
+
 class CompilerIntegrationTests<V>: IntegrationTests() {
 
     suspend fun returnGenericClassValue(value: V): V {
@@ -23,6 +25,11 @@ class CompilerIntegrationTests<V>: IntegrationTests() {
     }
 
     suspend fun <T> List<T>.returnGenericValueFromExtension(value: T): T {
+        return value
+    }
+
+    @NativeCoroutinesIgnore
+    suspend fun returnIgnoredValue(value: Int): Int {
         return value
     }
 }
