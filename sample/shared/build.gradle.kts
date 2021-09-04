@@ -5,9 +5,14 @@ plugins {
 }
 
 kotlin {
-    macosX64()
-    iosArm64()
-    iosX64()
+    val macosX64 = macosX64()
+    val iosArm64 = iosArm64()
+    val iosX64 = iosX64()
+    val watchosArm32 = watchosArm32()
+    val watchosArm64 = watchosArm64()
+    val watchosX64 = watchosX64()
+    val tvosArm64 = tvosArm64()
+    val tvosX64 = tvosX64()
     sourceSets {
         all {
             languageSettings.useExperimentalAnnotation("kotlin.RequiresOptIn")
@@ -28,23 +33,18 @@ kotlin {
         val appleTest by creating {
             dependsOn(commonTest)
         }
-        val macosX64Main by getting {
-            dependsOn(appleMain)
-        }
-        val macosX64Test by getting {
-            dependsOn(appleTest)
-        }
-        val iosArm64Main by getting {
-            dependsOn(appleMain)
-        }
-        val iosArm64Test by getting {
-            dependsOn(appleTest)
-        }
-        val iosX64Main by getting {
-            dependsOn(appleMain)
-        }
-        val iosX64Test by getting {
-            dependsOn(appleTest)
+        listOf(
+            macosX64,
+            iosArm64, iosX64,
+            watchosArm32, watchosArm64, watchosX64,
+            tvosArm64, tvosX64
+        ).forEach {
+            getByName("${it.targetName}Main") {
+                dependsOn(appleMain)
+            }
+            getByName("${it.targetName}Test") {
+                dependsOn(appleTest)
+            }
         }
     }
     cocoapods {
@@ -53,6 +53,8 @@ kotlin {
         frameworkName = "NativeCoroutinesSampleShared"
         ios.deploymentTarget = "13.0"
         osx.deploymentTarget = "10.15"
+        watchos.deploymentTarget = "6.0"
+        tvos.deploymentTarget = "13.0"
         podfile = project.file("../Podfile")
     }
 }
