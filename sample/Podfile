@@ -47,3 +47,19 @@ target 'tvOS Tests' do
   pod 'KMPNativeCoroutinesCombine', :path => '../'
   pod 'KMPNativeCoroutinesRxSwift', :path => '../'
 end
+
+target 'watchOS App WatchKit Extension' do
+  platform :watchos, '7.4'
+  pod 'shared', :path => './shared'
+  pod 'KMPNativeCoroutinesCore', :path => '../'
+  pod 'KMPNativeCoroutinesCombine', :path => '../'
+  pod 'KMPNativeCoroutinesRxSwift', :path => '../'
+end
+
+target 'watchOS Tests' do
+  platform :tvos, '7.4'
+  pod 'shared', :path => './shared'
+  pod 'KMPNativeCoroutinesCore', :path => '../'
+  pod 'KMPNativeCoroutinesCombine', :path => '../'
+  pod 'KMPNativeCoroutinesRxSwift', :path => '../'
+end
