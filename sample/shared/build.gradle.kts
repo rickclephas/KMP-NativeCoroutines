@@ -64,3 +64,9 @@ kotlin {
         podfile = project.file("../Podfile")
     }
 }
+
+afterEvaluate {
+    tasks.withType(org.jetbrains.kotlin.gradle.tasks.FatFrameworkTask::class.java).forEach {
+        it.baseName = "NativeCoroutinesSampleShared"
+    }
+}
