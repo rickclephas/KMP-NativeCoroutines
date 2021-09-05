@@ -33,7 +33,7 @@ SPEC CHECKSUMS:
   KMPNativeCoroutinesCore: 8c29a85f440a34639a2cb6776303b69d7a3f44ad
   KMPNativeCoroutinesRxSwift: 381d3f2eaf646eb03cbaee1dfe5b30e9f580f6f2
   RxSwift: d356ab7bee873611322f134c5f9ef379fa183d8f
-  shared: 8e10c052f727a9bcdfa37c6f62727c2669a19338
+  shared: 53890aa94ed63749bd08bc3f40b9bc8cf56d62d6
 
 PODFILE CHECKSUM: 8e4a99e42d80b625d3bd28a38f017c9e919f022d
 
