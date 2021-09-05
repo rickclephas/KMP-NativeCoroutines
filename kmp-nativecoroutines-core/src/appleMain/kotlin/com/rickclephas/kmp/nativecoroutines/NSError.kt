@@ -1,5 +1,6 @@
 package com.rickclephas.kmp.nativecoroutines
 
+import kotlinx.cinterop.convert
 import platform.Foundation.NSError
 import platform.Foundation.NSLocalizedDescriptionKey
 import kotlin.native.concurrent.freeze
@@ -19,5 +20,5 @@ internal fun Throwable.asNSError(): NSError {
     if (message != null) {
         userInfo[NSLocalizedDescriptionKey] = message
     }
-    return NSError.errorWithDomain("KotlinException", 0, userInfo)
+    return NSError.errorWithDomain("KotlinException", 0.convert(), userInfo)
 }

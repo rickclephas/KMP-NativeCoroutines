@@ -1,5 +1,6 @@
 package com.rickclephas.kmp.nativecoroutines
 
+import kotlinx.cinterop.convert
 import kotlin.native.concurrent.isFrozen
 import kotlin.test.*
 
@@ -19,7 +20,7 @@ class NSErrorTests {
         val exception = RandomException()
         val nsError = exception.asNSError()
         assertEquals("KotlinException", nsError.domain, "Incorrect NSError domain")
-        assertEquals(0, nsError.code, "Incorrect NSError code")
+        assertEquals(0.convert(), nsError.code, "Incorrect NSError code")
     }
 
     @Test
