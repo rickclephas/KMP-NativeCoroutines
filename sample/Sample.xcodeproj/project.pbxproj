@@ -13,6 +13,14 @@
 		1D02C12626C82EE800E2FF60 /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D02C12226C82EE800E2FF60 /* TestUtils.swift */; };
 		1D0CA84D2677F6DB0000D612 /* AsyncFunctionIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0CA84C2677F6DB0000D612 /* AsyncFunctionIntegrationTests.swift */; };
 		1D0CA84E2677F6DB0000D612 /* AsyncFunctionIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0CA84C2677F6DB0000D612 /* AsyncFunctionIntegrationTests.swift */; };
+		1D4F36B326E5001200F7C772 /* RandomLettersAsyncViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA5DD0526764810002448E3 /* RandomLettersAsyncViewModel.swift */; };
+		1D4F36B426E5001500F7C772 /* AsyncFunctionIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0CA84C2677F6DB0000D612 /* AsyncFunctionIntegrationTests.swift */; };
+		1D4F36B526E5001B00F7C772 /* SwiftUIAsyncTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF82A76267939F70024886B /* SwiftUIAsyncTest.swift */; };
+		1D4F36B626E5001E00F7C772 /* AsyncResultIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFC35FF268A3148008393FA /* AsyncResultIntegrationTests.swift */; };
+		1D4F36B726E5002000F7C772 /* ClockAsyncViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D810BC126A20FD30065C740 /* ClockAsyncViewModel.swift */; };
+		1D4F36B826E5002300F7C772 /* AsyncStreamIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D810BC426A214020065C740 /* AsyncStreamIntegrationTests.swift */; };
+		1D4F36BC26E500B800F7C772 /* CompilerIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D02C12126C82EE800E2FF60 /* CompilerIntegrationTests.swift */; };
+		1D4F36BD26E500BA00F7C772 /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D02C12226C82EE800E2FF60 /* TestUtils.swift */; };
 		1D5DAF7D2698B5EB0059D4B8 /* ClockRxSwiftViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D5DAF7C2698B5EB0059D4B8 /* ClockRxSwiftViewModel.swift */; };
 		1D5DAF7E2698B5EB0059D4B8 /* ClockRxSwiftViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D5DAF7C2698B5EB0059D4B8 /* ClockRxSwiftViewModel.swift */; };
 		1D5DAF802698C3C30059D4B8 /* RandomLettersRxSwiftViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D5DAF7F2698C3C30059D4B8 /* RandomLettersRxSwiftViewModel.swift */; };
@@ -39,8 +47,8 @@
 		1D63BF6C26E3E261003363BE /* NavigationBarTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF1A66E2671494800945FF9 /* NavigationBarTitle.swift */; };
 		1D63BF6D26E3E263003363BE /* RandomLettersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF1A67126714EEC00945FF9 /* RandomLettersViewModel.swift */; };
 		1D63BF6E26E3E266003363BE /* RandomLettersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF1A67426714FBD00945FF9 /* RandomLettersView.swift */; };
-		1D63BF6F26E3E269003363BE /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D81B1562677E56200EEC34D /* TestUtils.swift */; };
-		1D63BF7026E3E26C003363BE /* CompilerIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D91395026C7F04C00A50CDC /* CompilerIntegrationTests.swift */; };
+		1D63BF6F26E3E269003363BE /* (null) in Sources */ = {isa = PBXBuildFile; };
+		1D63BF7026E3E26C003363BE /* (null) in Sources */ = {isa = PBXBuildFile; };
 		1D63BF7726E4F006003363BE /* watchOS App WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 1D63BF7626E4F006003363BE /* watchOS App WatchKit App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		1D63BF7D26E4F006003363BE /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D63BF7B26E4F006003363BE /* Interface.storyboard */; };
 		1D63BF7F26E4F009003363BE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1D63BF7E26E4F009003363BE /* Assets.xcassets */; };
@@ -50,8 +58,8 @@
 		1D63BF9126E4F009003363BE /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D63BF9026E4F009003363BE /* ComplicationController.swift */; };
 		1D63BF9326E4F00A003363BE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1D63BF9226E4F00A003363BE /* Assets.xcassets */; };
 		1D63BF9626E4F00A003363BE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1D63BF9526E4F00A003363BE /* Preview Assets.xcassets */; };
-		1D63BFBF26E4F0C6003363BE /* CompilerIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D91395026C7F04C00A50CDC /* CompilerIntegrationTests.swift */; };
-		1D63BFC026E4F0CA003363BE /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D81B1562677E56200EEC34D /* TestUtils.swift */; };
+		1D63BFBF26E4F0C6003363BE /* (null) in Sources */ = {isa = PBXBuildFile; };
+		1D63BFC026E4F0CA003363BE /* (null) in Sources */ = {isa = PBXBuildFile; };
 		1D63BFC126E4F0CD003363BE /* ClockCombineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D71762926700A6000846F75 /* ClockCombineViewModel.swift */; };
 		1D63BFC226E4F0D1003363BE /* RandomLettersCombineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF1A6772671535200945FF9 /* RandomLettersCombineViewModel.swift */; };
 		1D63BFC326E4F0D5003363BE /* CombineFutureIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D81B1532677B7EF00EEC34D /* CombineFutureIntegrationTests.swift */; };
@@ -1270,8 +1278,8 @@
 				1D63BF6326E3E244003363BE /* CombineFutureIntegrationTests.swift in Sources */,
 				1D63BF6826E3E252003363BE /* RxSwiftObservableIntegrationTests.swift in Sources */,
 				1D63BF6726E3E24F003363BE /* RxSwiftSingleIntegrationTests.swift in Sources */,
-				1D63BF7026E3E26C003363BE /* CompilerIntegrationTests.swift in Sources */,
-				1D63BF6F26E3E269003363BE /* TestUtils.swift in Sources */,
+				1D63BF7026E3E26C003363BE /* (null) in Sources */,
+				1D63BF6F26E3E269003363BE /* (null) in Sources */,
 				1D63BF6426E3E247003363BE /* CombinePublisherIntegrationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1280,6 +1288,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D4F36B326E5001200F7C772 /* RandomLettersAsyncViewModel.swift in Sources */,
 				1D63BF9126E4F009003363BE /* ComplicationController.swift in Sources */,
 				1D63BFCC26E4F0F1003363BE /* NavigationBarTitle.swift in Sources */,
 				1D63BF8B26E4F009003363BE /* HostingController.swift in Sources */,
@@ -1288,6 +1297,8 @@
 				1D63BFC626E4F0DE003363BE /* RandomLettersRxSwiftViewModel.swift in Sources */,
 				1D63BFC126E4F0CD003363BE /* ClockCombineViewModel.swift in Sources */,
 				1D63BFC926E4F0E8003363BE /* ClockView.swift in Sources */,
+				1D4F36B526E5001B00F7C772 /* SwiftUIAsyncTest.swift in Sources */,
+				1D4F36B726E5002000F7C772 /* ClockAsyncViewModel.swift in Sources */,
 				1D63BF8F26E4F009003363BE /* ExtensionDelegate.swift in Sources */,
 				1D63BFCA26E4F0EB003363BE /* ClockViewModel.swift in Sources */,
 				1D63BFCE26E4F0FD003363BE /* RandomLettersView.swift in Sources */,
@@ -1300,12 +1311,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D4F36B626E5001E00F7C772 /* AsyncResultIntegrationTests.swift in Sources */,
+				1D4F36BC26E500B800F7C772 /* CompilerIntegrationTests.swift in Sources */,
+				1D4F36BD26E500BA00F7C772 /* TestUtils.swift in Sources */,
 				1D63BFC326E4F0D5003363BE /* CombineFutureIntegrationTests.swift in Sources */,
-				1D63BFBF26E4F0C6003363BE /* CompilerIntegrationTests.swift in Sources */,
-				1D63BFC026E4F0CA003363BE /* TestUtils.swift in Sources */,
+				1D63BFBF26E4F0C6003363BE /* (null) in Sources */,
+				1D63BFC026E4F0CA003363BE /* (null) in Sources */,
 				1D63BFC826E4F0E5003363BE /* RxSwiftObservableIntegrationTests.swift in Sources */,
 				1D63BFC426E4F0D8003363BE /* CombinePublisherIntegrationTests.swift in Sources */,
 				1D63BFC726E4F0E2003363BE /* RxSwiftSingleIntegrationTests.swift in Sources */,
+				1D4F36B426E5001500F7C772 /* AsyncFunctionIntegrationTests.swift in Sources */,
+				1D4F36B826E5002300F7C772 /* AsyncStreamIntegrationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1947,7 +1963,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 7.4;
+				WATCHOS_DEPLOYMENT_TARGET = 8.0;
 			};
 			name = Debug;
 		};
@@ -2013,7 +2029,7 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				VALIDATE_PRODUCT = YES;
-				WATCHOS_DEPLOYMENT_TARGET = 7.4;
+				WATCHOS_DEPLOYMENT_TARGET = 8.0;
 			};
 			name = Release;
 		};
@@ -2091,7 +2107,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 7.4;
+				WATCHOS_DEPLOYMENT_TARGET = 8.0;
 			};
 			name = Debug;
 		};
@@ -2162,7 +2178,7 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				VALIDATE_PRODUCT = YES;
-				WATCHOS_DEPLOYMENT_TARGET = 7.4;
+				WATCHOS_DEPLOYMENT_TARGET = 8.0;
 			};
 			name = Release;
 		};
@@ -2235,7 +2251,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 7.4;
+				WATCHOS_DEPLOYMENT_TARGET = 8.0;
 			};
 			name = Debug;
 		};
@@ -2302,7 +2318,7 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				VALIDATE_PRODUCT = YES;
-				WATCHOS_DEPLOYMENT_TARGET = 7.4;
+				WATCHOS_DEPLOYMENT_TARGET = 8.0;
 			};
 			name = Release;
 		};
