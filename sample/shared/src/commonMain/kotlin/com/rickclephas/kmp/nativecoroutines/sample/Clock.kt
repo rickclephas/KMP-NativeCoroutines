@@ -6,7 +6,6 @@ import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import kotlinx.datetime.Clock
 import kotlin.time.Duration.Companion.seconds
 import kotlin.time.ExperimentalTime
 
@@ -20,9 +19,11 @@ object Clock {
     init {
         GlobalScope.launch {
             while (true) {
-                _time.value = Clock.System.now().epochSeconds
+                _time.value = epochSeconds()
                 delay(seconds(1))
             }
         }
     }
 }
+
+expect fun epochSeconds(): Long

@@ -19,7 +19,7 @@ kotlin {
         }
         val commonMain by getting {
             dependencies {
-                implementation(Dependencies.Kotlinx.datetime)
+
             }
         }
         val commonTest by getting {
@@ -56,5 +56,11 @@ kotlin {
         watchos.deploymentTarget = "6.0"
         tvos.deploymentTarget = "13.0"
         podfile = project.file("../Podfile")
+    }
+}
+
+afterEvaluate {
+    tasks.withType(org.jetbrains.kotlin.gradle.tasks.FatFrameworkTask::class.java).forEach {
+        it.baseName = "NativeCoroutinesSampleShared"
     }
 }
