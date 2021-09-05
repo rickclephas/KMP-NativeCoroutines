@@ -15,7 +15,7 @@ kotlin {
     val tvosX64 = tvosX64()
     sourceSets {
         all {
-            languageSettings.optIn("kotlin.RequiresOptIn")
+            languageSettings.useExperimentalAnnotation("kotlin.RequiresOptIn")
         }
         val commonMain by getting {
             dependencies {
