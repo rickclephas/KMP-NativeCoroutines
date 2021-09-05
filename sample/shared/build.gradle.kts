@@ -1,7 +1,7 @@
 plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
-    id("com.rickclephas.kmp.nativecoroutines") version "0.5.0-kotlin-1.5.20"
+    id("com.rickclephas.kmp.nativecoroutines") version "0.6.0"
 }
 
 kotlin {
