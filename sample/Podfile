@@ -37,7 +37,7 @@ target 'macOS Tests' do
 end
 
 target 'tvOS App' do
-  platform :tvos, '13.0'
+  platform :tvos, '15.0'
   pod 'shared', :path => './shared'
   pod 'KMPNativeCoroutinesCore', :path => '../'
   pod 'KMPNativeCoroutinesCombine', :path => '../'
@@ -45,7 +45,7 @@ target 'tvOS App' do
 end
 
 target 'tvOS Tests' do
-  platform :tvos, '13.0'
+  platform :tvos, '15.0'
   pod 'shared', :path => './shared'
   pod 'KMPNativeCoroutinesCore', :path => '../'
   pod 'KMPNativeCoroutinesCombine', :path => '../'
@@ -53,7 +53,7 @@ target 'tvOS Tests' do
 end
 
 target 'watchOS App WatchKit Extension' do
-  platform :watchos, '7.4'
+  platform :watchos, '8.0'
   pod 'shared', :path => './shared'
   pod 'KMPNativeCoroutinesCore', :path => '../'
   pod 'KMPNativeCoroutinesCombine', :path => '../'
@@ -61,7 +61,7 @@ target 'watchOS App WatchKit Extension' do
 end
 
 target 'watchOS Tests' do
-  platform :watchos, '7.4'
+  platform :watchos, '8.0'
   pod 'shared', :path => './shared'
   pod 'KMPNativeCoroutinesCore', :path => '../'
   pod 'KMPNativeCoroutinesCombine', :path => '../'
