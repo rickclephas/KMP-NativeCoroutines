@@ -22,20 +22,17 @@ struct ClockView<ViewModel: ClockViewModel>: View {
     }
     
     var body: some View {
-        VStack{
-            Spacer()
-            Spacer()
-            Text(viewModel.time)
-                .font(.system(size: 50, weight: .bold, design: .monospaced))
-            Spacer()
-            Text("Monitor time")
-            Toggle("", isOn: isMonitoringBinding)
-                .labelsHidden()
-            Spacer()
-            Button("Update time") {
-                viewModel.updateTime()
-            }.disabled(viewModel.isMonitoring)
-            Spacer()
+        ScrollView {
+            VStack{
+                Text(viewModel.time)
+                    .font(.system(size: 30, weight: .bold, design: .monospaced))
+                Text("Monitor time")
+                Toggle("", isOn: isMonitoringBinding)
+                    .labelsHidden()
+                Button("Update time") {
+                    viewModel.updateTime()
+                }.disabled(viewModel.isMonitoring)
+            }
         }.navigationBarTitle(inlineTitle: "Clock")
     }
 }
