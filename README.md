@@ -22,22 +22,23 @@ This library solves both of these limitations :smile: .
 
 ## Compatibility
 
-As of version `0.2.0` the library uses Kotlin version `1.5.20`.  
+As of version `0.6.0` the library uses Kotlin version `1.5.30`.  
 Compatibility versions for older Kotlin versions are also available:
 
 |Version|Version suffix|Kotlin|Coroutines|
 |---|---|:---:|:---:|
-|_latest_|_no suffix_|1.5.20|1.5.0-native-mt|
+|_latest_|_no suffix_|1.5.30|1.5.2-native-mt|
+|_latest_|-kotlin-1.5.20|1.5.20|1.5.0-native-mt|
 |0.4.3|-kotlin-1.5.10|1.5.10|1.5.0-native-mt|
 
 You can choose from a couple of Swift implementations.  
-Depending on the implementation you can support as low as iOS 9 and macOS 10.9:
+Depending on the implementation you can support as low as iOS 9, macOS 10.9, tvOS 9 and watchOS 3:
 
-|Implementation|Swift|iOS|macOS|
-|---|:---:|:---:|:---:|
-|RxSwift|5.0|9.0|10.9|
-|Combine|5.0|13.0|10.15|
-|Async :construction:|5.5|15.0|12.0|
+|Implementation|Swift|iOS|macOS|tvOS|watchOS|
+|---|:---:|:---:|:---:|:---:|:---:|
+|RxSwift|5.0|9.0|10.9|9.0|3.0|
+|Combine|5.0|13.0|10.15|13.0|6.0|
+|Async :construction:|5.5|15.0|12.0|15.0|8.0|
 
 > :construction: : the Async implementation requires Xcode 13 which is currently in beta!
 
