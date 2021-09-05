@@ -21,6 +21,14 @@
 		1D4F36B826E5002300F7C772 /* AsyncStreamIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D810BC426A214020065C740 /* AsyncStreamIntegrationTests.swift */; };
 		1D4F36BC26E500B800F7C772 /* CompilerIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D02C12126C82EE800E2FF60 /* CompilerIntegrationTests.swift */; };
 		1D4F36BD26E500BA00F7C772 /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D02C12226C82EE800E2FF60 /* TestUtils.swift */; };
+		1D4F36BE26E5030400F7C772 /* CompilerIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D02C12126C82EE800E2FF60 /* CompilerIntegrationTests.swift */; };
+		1D4F36BF26E5030600F7C772 /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D02C12226C82EE800E2FF60 /* TestUtils.swift */; };
+		1D4F36C026E5030E00F7C772 /* RandomLettersAsyncViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA5DD0526764810002448E3 /* RandomLettersAsyncViewModel.swift */; };
+		1D4F36C126E5031200F7C772 /* AsyncFunctionIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0CA84C2677F6DB0000D612 /* AsyncFunctionIntegrationTests.swift */; };
+		1D4F36C226E5031500F7C772 /* SwiftUIAsyncTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF82A76267939F70024886B /* SwiftUIAsyncTest.swift */; };
+		1D4F36C326E5031D00F7C772 /* AsyncResultIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFC35FF268A3148008393FA /* AsyncResultIntegrationTests.swift */; };
+		1D4F36C426E5032100F7C772 /* ClockAsyncViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D810BC126A20FD30065C740 /* ClockAsyncViewModel.swift */; };
+		1D4F36C526E5032400F7C772 /* AsyncStreamIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D810BC426A214020065C740 /* AsyncStreamIntegrationTests.swift */; };
 		1D5DAF7D2698B5EB0059D4B8 /* ClockRxSwiftViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D5DAF7C2698B5EB0059D4B8 /* ClockRxSwiftViewModel.swift */; };
 		1D5DAF7E2698B5EB0059D4B8 /* ClockRxSwiftViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D5DAF7C2698B5EB0059D4B8 /* ClockRxSwiftViewModel.swift */; };
 		1D5DAF802698C3C30059D4B8 /* RandomLettersRxSwiftViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D5DAF7F2698C3C30059D4B8 /* RandomLettersRxSwiftViewModel.swift */; };
@@ -1259,12 +1267,15 @@
 			files = (
 				1D63BF6626E3E24D003363BE /* RandomLettersRxSwiftViewModel.swift in Sources */,
 				1D63BF3626E3E1DB003363BE /* AppDelegate.swift in Sources */,
+				1D4F36C026E5030E00F7C772 /* RandomLettersAsyncViewModel.swift in Sources */,
 				1D63BF6126E3E23E003363BE /* ClockCombineViewModel.swift in Sources */,
 				1D63BF6926E3E258003363BE /* ClockView.swift in Sources */,
 				1D63BF6B26E3E25E003363BE /* RootView.swift in Sources */,
 				1D63BF6D26E3E263003363BE /* RandomLettersViewModel.swift in Sources */,
 				1D63BF6C26E3E261003363BE /* NavigationBarTitle.swift in Sources */,
+				1D4F36C426E5032100F7C772 /* ClockAsyncViewModel.swift in Sources */,
 				1D63BF6226E3E242003363BE /* RandomLettersCombineViewModel.swift in Sources */,
+				1D4F36C226E5031500F7C772 /* SwiftUIAsyncTest.swift in Sources */,
 				1D63BF6E26E3E266003363BE /* RandomLettersView.swift in Sources */,
 				1D63BF6526E3E24A003363BE /* ClockRxSwiftViewModel.swift in Sources */,
 				1D63BF6A26E3E25B003363BE /* ClockViewModel.swift in Sources */,
@@ -1275,11 +1286,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D4F36C326E5031D00F7C772 /* AsyncResultIntegrationTests.swift in Sources */,
 				1D63BF6326E3E244003363BE /* CombineFutureIntegrationTests.swift in Sources */,
 				1D63BF6826E3E252003363BE /* RxSwiftObservableIntegrationTests.swift in Sources */,
 				1D63BF6726E3E24F003363BE /* RxSwiftSingleIntegrationTests.swift in Sources */,
+				1D4F36C526E5032400F7C772 /* AsyncStreamIntegrationTests.swift in Sources */,
+				1D4F36BF26E5030600F7C772 /* TestUtils.swift in Sources */,
 				1D63BF7026E3E26C003363BE /* (null) in Sources */,
+				1D4F36BE26E5030400F7C772 /* CompilerIntegrationTests.swift in Sources */,
 				1D63BF6F26E3E269003363BE /* (null) in Sources */,
+				1D4F36C126E5031200F7C772 /* AsyncFunctionIntegrationTests.swift in Sources */,
 				1D63BF6426E3E247003363BE /* CombinePublisherIntegrationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1555,7 +1571,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 13.0;
+				TVOS_DEPLOYMENT_TARGET = 15.0;
 			};
 			name = Debug;
 		};
@@ -1624,7 +1640,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 13.0;
+				TVOS_DEPLOYMENT_TARGET = 15.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1698,7 +1714,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 14.5;
+				TVOS_DEPLOYMENT_TARGET = 15.0;
 			};
 			name = Debug;
 		};
@@ -1764,7 +1780,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 14.5;
+				TVOS_DEPLOYMENT_TARGET = 15.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
