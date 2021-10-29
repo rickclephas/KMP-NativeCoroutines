@@ -34,8 +34,10 @@ struct RootView: View {
                 NavigationLink(destination: RandomLettersView(viewModel: RandomLettersAsyncViewModel())) {
                     Text("Random letters")
                 }
-                NavigationLink(destination: SwiftUIAsyncTest(tests: SuspendIntegrationTests())) {
-                    Text("SwiftUI test")
+                if #available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *) {
+                    NavigationLink(destination: SwiftUIAsyncTest(tests: SuspendIntegrationTests())) {
+                        Text("SwiftUI test")
+                    }
                 }
             }
         }.navigationBarTitle(inlineTitle: "KMP-NativeCoroutines")
