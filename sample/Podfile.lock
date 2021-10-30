@@ -1,40 +1,16 @@
 PODS:
-  - KMPNativeCoroutinesCombine (0.6.0):
-    - KMPNativeCoroutinesCore
-  - KMPNativeCoroutinesCore (0.6.0)
-  - KMPNativeCoroutinesRxSwift (0.6.0):
-    - KMPNativeCoroutinesCore
-    - RxSwift
-  - RxSwift (6.2.0)
   - shared (0.6.0)
 
 DEPENDENCIES:
-  - KMPNativeCoroutinesCombine (from `../`)
-  - KMPNativeCoroutinesCore (from `../`)
-  - KMPNativeCoroutinesRxSwift (from `../`)
   - shared (from `./shared`)
 
-SPEC REPOS:
-  trunk:
-    - RxSwift
-
 EXTERNAL SOURCES:
-  KMPNativeCoroutinesCombine:
-    :path: "../"
-  KMPNativeCoroutinesCore:
-    :path: "../"
-  KMPNativeCoroutinesRxSwift:
-    :path: "../"
   shared:
     :path: "./shared"
 
 SPEC CHECKSUMS:
-  KMPNativeCoroutinesCombine: af5ce48fc2f42374c8497475ed49063d7433a790
-  KMPNativeCoroutinesCore: 9e575c725afddd5396eb5be642b768ce3f073c64
-  KMPNativeCoroutinesRxSwift: fc0fbe1388aad216c44fe464e4cedf54150e3b6f
-  RxSwift: d356ab7bee873611322f134c5f9ef379fa183d8f
   shared: 4d698773929b931ff6b3c5dee4e8c3573f6a9ad4
 
-PODFILE CHECKSUM: 8e4a99e42d80b625d3bd28a38f017c9e919f022d
+PODFILE CHECKSUM: a916294a9377172039d1dca014bc023cf9f348d7
 
 COCOAPODS: 1.10.1

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -75,6 +75,30 @@
 		1D71762F26700A6E00846F75 /* ClockViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D71762C26700A6E00846F75 /* ClockViewModel.swift */; };
 		1D71763026700A6E00846F75 /* ClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D71762D26700A6E00846F75 /* ClockView.swift */; };
 		1D71763126700A6E00846F75 /* ClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D71762D26700A6E00846F75 /* ClockView.swift */; };
+		1D75A333272C85CC00CFF795 /* KMPNativeCoroutinesCombine in Frameworks */ = {isa = PBXBuildFile; productRef = 1D75A332272C85CC00CFF795 /* KMPNativeCoroutinesCombine */; };
+		1D75A335272C85CC00CFF795 /* KMPNativeCoroutinesCore in Frameworks */ = {isa = PBXBuildFile; productRef = 1D75A334272C85CC00CFF795 /* KMPNativeCoroutinesCore */; };
+		1D75A337272C85CC00CFF795 /* KMPNativeCoroutinesRxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1D75A336272C85CC00CFF795 /* KMPNativeCoroutinesRxSwift */; };
+		1D75A339272C85E300CFF795 /* KMPNativeCoroutinesCombine in Frameworks */ = {isa = PBXBuildFile; productRef = 1D75A338272C85E300CFF795 /* KMPNativeCoroutinesCombine */; };
+		1D75A33B272C85E300CFF795 /* KMPNativeCoroutinesCore in Frameworks */ = {isa = PBXBuildFile; productRef = 1D75A33A272C85E300CFF795 /* KMPNativeCoroutinesCore */; };
+		1D75A33D272C85E300CFF795 /* KMPNativeCoroutinesRxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1D75A33C272C85E300CFF795 /* KMPNativeCoroutinesRxSwift */; };
+		1D75A33F272C85EB00CFF795 /* KMPNativeCoroutinesCombine in Frameworks */ = {isa = PBXBuildFile; productRef = 1D75A33E272C85EB00CFF795 /* KMPNativeCoroutinesCombine */; };
+		1D75A341272C85EB00CFF795 /* KMPNativeCoroutinesCore in Frameworks */ = {isa = PBXBuildFile; productRef = 1D75A340272C85EB00CFF795 /* KMPNativeCoroutinesCore */; };
+		1D75A343272C85EB00CFF795 /* KMPNativeCoroutinesRxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1D75A342272C85EB00CFF795 /* KMPNativeCoroutinesRxSwift */; };
+		1D75A345272C85F600CFF795 /* KMPNativeCoroutinesCombine in Frameworks */ = {isa = PBXBuildFile; productRef = 1D75A344272C85F600CFF795 /* KMPNativeCoroutinesCombine */; };
+		1D75A347272C85F600CFF795 /* KMPNativeCoroutinesCore in Frameworks */ = {isa = PBXBuildFile; productRef = 1D75A346272C85F600CFF795 /* KMPNativeCoroutinesCore */; };
+		1D75A349272C85F600CFF795 /* KMPNativeCoroutinesRxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1D75A348272C85F600CFF795 /* KMPNativeCoroutinesRxSwift */; };
+		1D75A34B272C8B1C00CFF795 /* KMPNativeCoroutinesCombine in Frameworks */ = {isa = PBXBuildFile; productRef = 1D75A34A272C8B1C00CFF795 /* KMPNativeCoroutinesCombine */; };
+		1D75A34D272C8B1C00CFF795 /* KMPNativeCoroutinesCore in Frameworks */ = {isa = PBXBuildFile; productRef = 1D75A34C272C8B1C00CFF795 /* KMPNativeCoroutinesCore */; };
+		1D75A34F272C8B1C00CFF795 /* KMPNativeCoroutinesRxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1D75A34E272C8B1C00CFF795 /* KMPNativeCoroutinesRxSwift */; };
+		1D75A351272C8B2300CFF795 /* KMPNativeCoroutinesCombine in Frameworks */ = {isa = PBXBuildFile; productRef = 1D75A350272C8B2300CFF795 /* KMPNativeCoroutinesCombine */; };
+		1D75A353272C8B2300CFF795 /* KMPNativeCoroutinesCore in Frameworks */ = {isa = PBXBuildFile; productRef = 1D75A352272C8B2300CFF795 /* KMPNativeCoroutinesCore */; };
+		1D75A355272C8B2300CFF795 /* KMPNativeCoroutinesRxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1D75A354272C8B2300CFF795 /* KMPNativeCoroutinesRxSwift */; };
+		1D75A357272C8B2900CFF795 /* KMPNativeCoroutinesCombine in Frameworks */ = {isa = PBXBuildFile; productRef = 1D75A356272C8B2900CFF795 /* KMPNativeCoroutinesCombine */; };
+		1D75A359272C8B2900CFF795 /* KMPNativeCoroutinesCore in Frameworks */ = {isa = PBXBuildFile; productRef = 1D75A358272C8B2900CFF795 /* KMPNativeCoroutinesCore */; };
+		1D75A35B272C8B2900CFF795 /* KMPNativeCoroutinesRxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1D75A35A272C8B2900CFF795 /* KMPNativeCoroutinesRxSwift */; };
+		1D75A35D272C8B3000CFF795 /* KMPNativeCoroutinesCombine in Frameworks */ = {isa = PBXBuildFile; productRef = 1D75A35C272C8B3000CFF795 /* KMPNativeCoroutinesCombine */; };
+		1D75A35F272C8B3000CFF795 /* KMPNativeCoroutinesCore in Frameworks */ = {isa = PBXBuildFile; productRef = 1D75A35E272C8B3000CFF795 /* KMPNativeCoroutinesCore */; };
+		1D75A361272C8B3000CFF795 /* KMPNativeCoroutinesRxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1D75A360272C8B3000CFF795 /* KMPNativeCoroutinesRxSwift */; };
 		1D81B1542677B7EF00EEC34D /* CombineFutureIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D81B1532677B7EF00EEC34D /* CombineFutureIntegrationTests.swift */; };
 		1D81B1552677B7EF00EEC34D /* CombineFutureIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D81B1532677B7EF00EEC34D /* CombineFutureIntegrationTests.swift */; };
 		1D81B1572677E56200EEC34D /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D81B1562677E56200EEC34D /* TestUtils.swift */; };
@@ -218,6 +242,7 @@
 		1D71762926700A6000846F75 /* ClockCombineViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClockCombineViewModel.swift; sourceTree = "<group>"; };
 		1D71762C26700A6E00846F75 /* ClockViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClockViewModel.swift; sourceTree = "<group>"; };
 		1D71762D26700A6E00846F75 /* ClockView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClockView.swift; sourceTree = "<group>"; };
+		1D75A331272C85BA00CFF795 /* KMP-NativeCoroutines */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "KMP-NativeCoroutines"; path = ..; sourceTree = "<group>"; };
 		1D81B13B2677B72200EEC34D /* macOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "macOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D81B1492677B7C000EEC34D /* iOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "iOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D81B1532677B7EF00EEC34D /* CombineFutureIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineFutureIntegrationTests.swift; sourceTree = "<group>"; };
@@ -260,6 +285,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				C777E2D954DA358AD25CC3BF /* Pods_tvOS_App.framework in Frameworks */,
+				1D75A33F272C85EB00CFF795 /* KMPNativeCoroutinesCombine in Frameworks */,
+				1D75A341272C85EB00CFF795 /* KMPNativeCoroutinesCore in Frameworks */,
+				1D75A343272C85EB00CFF795 /* KMPNativeCoroutinesRxSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -268,6 +296,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F0A1E1603107E57275DCEB3 /* Pods_tvOS_Tests.framework in Frameworks */,
+				1D75A357272C8B2900CFF795 /* KMPNativeCoroutinesCombine in Frameworks */,
+				1D75A359272C8B2900CFF795 /* KMPNativeCoroutinesCore in Frameworks */,
+				1D75A35B272C8B2900CFF795 /* KMPNativeCoroutinesRxSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,6 +307,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				B87DF9409827D657010BA035 /* Pods_watchOS_App_WatchKit_Extension.framework in Frameworks */,
+				1D75A345272C85F600CFF795 /* KMPNativeCoroutinesCombine in Frameworks */,
+				1D75A347272C85F600CFF795 /* KMPNativeCoroutinesCore in Frameworks */,
+				1D75A349272C85F600CFF795 /* KMPNativeCoroutinesRxSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,6 +318,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				C4D6F3AC74F7B109B556CD3D /* Pods_watchOS_Tests.framework in Frameworks */,
+				1D75A35D272C8B3000CFF795 /* KMPNativeCoroutinesCombine in Frameworks */,
+				1D75A35F272C8B3000CFF795 /* KMPNativeCoroutinesCore in Frameworks */,
+				1D75A361272C8B3000CFF795 /* KMPNativeCoroutinesRxSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,6 +329,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				E45C268DBAB665FAC90C0C01 /* Pods_macOS_App.framework in Frameworks */,
+				1D75A333272C85CC00CFF795 /* KMPNativeCoroutinesCombine in Frameworks */,
+				1D75A335272C85CC00CFF795 /* KMPNativeCoroutinesCore in Frameworks */,
+				1D75A337272C85CC00CFF795 /* KMPNativeCoroutinesRxSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,6 +340,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2D6702474205AE2CC47D3FA /* Pods_iOS_App.framework in Frameworks */,
+				1D75A339272C85E300CFF795 /* KMPNativeCoroutinesCombine in Frameworks */,
+				1D75A33B272C85E300CFF795 /* KMPNativeCoroutinesCore in Frameworks */,
+				1D75A33D272C85E300CFF795 /* KMPNativeCoroutinesRxSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -308,6 +351,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				37CEC1BD1853BFCDEEBE4B52 /* Pods_macOS_Tests.framework in Frameworks */,
+				1D75A34B272C8B1C00CFF795 /* KMPNativeCoroutinesCombine in Frameworks */,
+				1D75A34D272C8B1C00CFF795 /* KMPNativeCoroutinesCore in Frameworks */,
+				1D75A34F272C8B1C00CFF795 /* KMPNativeCoroutinesRxSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -316,6 +362,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				AD925FB3B122897B070DEFEB /* Pods_iOS_Tests.framework in Frameworks */,
+				1D75A351272C8B2300CFF795 /* KMPNativeCoroutinesCombine in Frameworks */,
+				1D75A353272C8B2300CFF795 /* KMPNativeCoroutinesCore in Frameworks */,
+				1D75A355272C8B2300CFF795 /* KMPNativeCoroutinesRxSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,6 +388,7 @@
 		1D04AED6266E966900920D20 = {
 			isa = PBXGroup;
 			children = (
+				1D75A330272C85BA00CFF795 /* Packages */,
 				1D91395426C7F52900A50CDC /* IntegrationTests */,
 				1D71762826700A4400846F75 /* Combine */,
 				1D5DAF7B2698B5C60059D4B8 /* RxSwift */,
@@ -516,6 +566,14 @@
 			path = Combine;
 			sourceTree = "<group>";
 		};
+		1D75A330272C85BA00CFF795 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				1D75A331272C85BA00CFF795 /* KMP-NativeCoroutines */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
 		1D91395426C7F52900A50CDC /* IntegrationTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -559,13 +617,17 @@
 				1D63BF2F26E3E1DB003363BE /* Sources */,
 				1D63BF3026E3E1DB003363BE /* Frameworks */,
 				1D63BF3126E3E1DB003363BE /* Resources */,
-				05F56092CF477CCFBA1E1F29 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = "tvOS App";
+			packageProductDependencies = (
+				1D75A33E272C85EB00CFF795 /* KMPNativeCoroutinesCombine */,
+				1D75A340272C85EB00CFF795 /* KMPNativeCoroutinesCore */,
+				1D75A342272C85EB00CFF795 /* KMPNativeCoroutinesRxSwift */,
+			);
 			productName = "tvOS App";
 			productReference = 1D63BF3326E3E1DB003363BE /* tvOS App.app */;
 			productType = "com.apple.product-type.application";
@@ -578,7 +640,6 @@
 				1D63BF4226E3E1DD003363BE /* Sources */,
 				1D63BF4326E3E1DD003363BE /* Frameworks */,
 				1D63BF4426E3E1DD003363BE /* Resources */,
-				818D2DEF1FD70C4E6BC3F136 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -586,6 +647,11 @@
 				1D63BF4826E3E1DD003363BE /* PBXTargetDependency */,
 			);
 			name = "tvOS Tests";
+			packageProductDependencies = (
+				1D75A356272C8B2900CFF795 /* KMPNativeCoroutinesCombine */,
+				1D75A358272C8B2900CFF795 /* KMPNativeCoroutinesCore */,
+				1D75A35A272C8B2900CFF795 /* KMPNativeCoroutinesRxSwift */,
+			);
 			productName = "tvOS AppTests";
 			productReference = 1D63BF4626E3E1DD003363BE /* tvOS Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -634,13 +700,17 @@
 				1D63BF8126E4F009003363BE /* Sources */,
 				1D63BF8226E4F009003363BE /* Frameworks */,
 				1D63BF8326E4F009003363BE /* Resources */,
-				0EAD1B882A69A02684AB90AA /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = "watchOS App WatchKit Extension";
+			packageProductDependencies = (
+				1D75A344272C85F600CFF795 /* KMPNativeCoroutinesCombine */,
+				1D75A346272C85F600CFF795 /* KMPNativeCoroutinesCore */,
+				1D75A348272C85F600CFF795 /* KMPNativeCoroutinesRxSwift */,
+			);
 			productName = "watchOS App WatchKit Extension";
 			productReference = 1D63BF8526E4F009003363BE /* watchOS App WatchKit Extension.appex */;
 			productType = "com.apple.product-type.watchkit2-extension";
@@ -653,7 +723,6 @@
 				1D63BF9826E4F00A003363BE /* Sources */,
 				1D63BF9926E4F00A003363BE /* Frameworks */,
 				1D63BF9A26E4F00A003363BE /* Resources */,
-				160F559878DFAC28BF8A4CB8 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -661,6 +730,11 @@
 				1D63BF9E26E4F00A003363BE /* PBXTargetDependency */,
 			);
 			name = "watchOS Tests";
+			packageProductDependencies = (
+				1D75A35C272C8B3000CFF795 /* KMPNativeCoroutinesCombine */,
+				1D75A35E272C8B3000CFF795 /* KMPNativeCoroutinesCore */,
+				1D75A360272C8B3000CFF795 /* KMPNativeCoroutinesRxSwift */,
+			);
 			productName = "watchOS AppTests";
 			productReference = 1D63BF9C26E4F00A003363BE /* watchOS Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -673,13 +747,17 @@
 				1D7175F8267009C500846F75 /* Sources */,
 				1D7175F9267009C500846F75 /* Frameworks */,
 				1D7175FA267009C500846F75 /* Resources */,
-				080D5843F8AB3427A62DA26C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = "macOS App";
+			packageProductDependencies = (
+				1D75A332272C85CC00CFF795 /* KMPNativeCoroutinesCombine */,
+				1D75A334272C85CC00CFF795 /* KMPNativeCoroutinesCore */,
+				1D75A336272C85CC00CFF795 /* KMPNativeCoroutinesRxSwift */,
+			);
 			productName = "macOS App";
 			productReference = 1D7175FC267009C500846F75 /* macOS App.app */;
 			productType = "com.apple.product-type.application";
@@ -692,13 +770,17 @@
 				1D71760F267009E700846F75 /* Sources */,
 				1D717610267009E700846F75 /* Frameworks */,
 				1D717611267009E700846F75 /* Resources */,
-				FFED77523DCCC4CA3D9EBEF9 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = "iOS App";
+			packageProductDependencies = (
+				1D75A338272C85E300CFF795 /* KMPNativeCoroutinesCombine */,
+				1D75A33A272C85E300CFF795 /* KMPNativeCoroutinesCore */,
+				1D75A33C272C85E300CFF795 /* KMPNativeCoroutinesRxSwift */,
+			);
 			productName = "iOS App";
 			productReference = 1D717613267009E700846F75 /* iOS App.app */;
 			productType = "com.apple.product-type.application";
@@ -711,7 +793,6 @@
 				1D81B1372677B72200EEC34D /* Sources */,
 				1D81B1382677B72200EEC34D /* Frameworks */,
 				1D81B1392677B72200EEC34D /* Resources */,
-				2168A08D1F9FDF621307C14C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -719,6 +800,11 @@
 				1D81B1412677B72200EEC34D /* PBXTargetDependency */,
 			);
 			name = "macOS Tests";
+			packageProductDependencies = (
+				1D75A34A272C8B1C00CFF795 /* KMPNativeCoroutinesCombine */,
+				1D75A34C272C8B1C00CFF795 /* KMPNativeCoroutinesCore */,
+				1D75A34E272C8B1C00CFF795 /* KMPNativeCoroutinesRxSwift */,
+			);
 			productName = "macOS Tests";
 			productReference = 1D81B13B2677B72200EEC34D /* macOS Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -731,7 +817,6 @@
 				1D81B1452677B7C000EEC34D /* Sources */,
 				1D81B1462677B7C000EEC34D /* Frameworks */,
 				1D81B1472677B7C000EEC34D /* Resources */,
-				E11B2B87B74D35B89D419FBF /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -739,6 +824,11 @@
 				1D81B14F2677B7C000EEC34D /* PBXTargetDependency */,
 			);
 			name = "iOS Tests";
+			packageProductDependencies = (
+				1D75A350272C8B2300CFF795 /* KMPNativeCoroutinesCombine */,
+				1D75A352272C8B2300CFF795 /* KMPNativeCoroutinesCore */,
+				1D75A354272C8B2300CFF795 /* KMPNativeCoroutinesRxSwift */,
+			);
 			productName = "iOS Tests";
 			productReference = 1D81B1492677B7C000EEC34D /* iOS Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -898,57 +988,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		05F56092CF477CCFBA1E1F29 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-tvOS App/Pods-tvOS App-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-tvOS App/Pods-tvOS App-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-tvOS App/Pods-tvOS App-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		080D5843F8AB3427A62DA26C /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-macOS App/Pods-macOS App-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-macOS App/Pods-macOS App-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-macOS App/Pods-macOS App-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		0EAD1B882A69A02684AB90AA /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-watchOS App WatchKit Extension/Pods-watchOS App WatchKit Extension-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-watchOS App WatchKit Extension/Pods-watchOS App WatchKit Extension-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-watchOS App WatchKit Extension/Pods-watchOS App WatchKit Extension-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		1232ED1EA7C688DF91999096 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -969,57 +1008,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		160F559878DFAC28BF8A4CB8 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-watchOS Tests/Pods-watchOS Tests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-watchOS Tests/Pods-watchOS Tests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-watchOS Tests/Pods-watchOS Tests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		2168A08D1F9FDF621307C14C /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-macOS Tests/Pods-macOS Tests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-macOS Tests/Pods-macOS Tests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-macOS Tests/Pods-macOS Tests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		818D2DEF1FD70C4E6BC3F136 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-tvOS Tests/Pods-tvOS Tests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-tvOS Tests/Pods-tvOS Tests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-tvOS Tests/Pods-tvOS Tests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8727D9E4BC848C417B63EB68 /* [CP] Check Pods Manifest.lock */ = {
@@ -1132,23 +1120,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E11B2B87B74D35B89D419FBF /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-iOS Tests/Pods-iOS Tests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-iOS Tests/Pods-iOS Tests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS Tests/Pods-iOS Tests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		F05115CE68B707DEE4BC8121 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1191,23 +1162,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		FFED77523DCCC4CA3D9EBEF9 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-iOS App/Pods-iOS App-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-iOS App/Pods-iOS App-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS App/Pods-iOS App-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -2932,6 +2886,105 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1D75A332272C85CC00CFF795 /* KMPNativeCoroutinesCombine */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = KMPNativeCoroutinesCombine;
+		};
+		1D75A334272C85CC00CFF795 /* KMPNativeCoroutinesCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = KMPNativeCoroutinesCore;
+		};
+		1D75A336272C85CC00CFF795 /* KMPNativeCoroutinesRxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = KMPNativeCoroutinesRxSwift;
+		};
+		1D75A338272C85E300CFF795 /* KMPNativeCoroutinesCombine */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = KMPNativeCoroutinesCombine;
+		};
+		1D75A33A272C85E300CFF795 /* KMPNativeCoroutinesCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = KMPNativeCoroutinesCore;
+		};
+		1D75A33C272C85E300CFF795 /* KMPNativeCoroutinesRxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = KMPNativeCoroutinesRxSwift;
+		};
+		1D75A33E272C85EB00CFF795 /* KMPNativeCoroutinesCombine */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = KMPNativeCoroutinesCombine;
+		};
+		1D75A340272C85EB00CFF795 /* KMPNativeCoroutinesCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = KMPNativeCoroutinesCore;
+		};
+		1D75A342272C85EB00CFF795 /* KMPNativeCoroutinesRxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = KMPNativeCoroutinesRxSwift;
+		};
+		1D75A344272C85F600CFF795 /* KMPNativeCoroutinesCombine */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = KMPNativeCoroutinesCombine;
+		};
+		1D75A346272C85F600CFF795 /* KMPNativeCoroutinesCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = KMPNativeCoroutinesCore;
+		};
+		1D75A348272C85F600CFF795 /* KMPNativeCoroutinesRxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = KMPNativeCoroutinesRxSwift;
+		};
+		1D75A34A272C8B1C00CFF795 /* KMPNativeCoroutinesCombine */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = KMPNativeCoroutinesCombine;
+		};
+		1D75A34C272C8B1C00CFF795 /* KMPNativeCoroutinesCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = KMPNativeCoroutinesCore;
+		};
+		1D75A34E272C8B1C00CFF795 /* KMPNativeCoroutinesRxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = KMPNativeCoroutinesRxSwift;
+		};
+		1D75A350272C8B2300CFF795 /* KMPNativeCoroutinesCombine */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = KMPNativeCoroutinesCombine;
+		};
+		1D75A352272C8B2300CFF795 /* KMPNativeCoroutinesCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = KMPNativeCoroutinesCore;
+		};
+		1D75A354272C8B2300CFF795 /* KMPNativeCoroutinesRxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = KMPNativeCoroutinesRxSwift;
+		};
+		1D75A356272C8B2900CFF795 /* KMPNativeCoroutinesCombine */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = KMPNativeCoroutinesCombine;
+		};
+		1D75A358272C8B2900CFF795 /* KMPNativeCoroutinesCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = KMPNativeCoroutinesCore;
+		};
+		1D75A35A272C8B2900CFF795 /* KMPNativeCoroutinesRxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = KMPNativeCoroutinesRxSwift;
+		};
+		1D75A35C272C8B3000CFF795 /* KMPNativeCoroutinesCombine */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = KMPNativeCoroutinesCombine;
+		};
+		1D75A35E272C8B3000CFF795 /* KMPNativeCoroutinesCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = KMPNativeCoroutinesCore;
+		};
+		1D75A360272C8B3000CFF795 /* KMPNativeCoroutinesRxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = KMPNativeCoroutinesRxSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 1D04AED7266E966900920D20 /* Project object */;
 }
