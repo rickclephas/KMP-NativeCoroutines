@@ -6,7 +6,7 @@ target 'iOS App' do
 #   pod 'KMPNativeCoroutinesCore', :path => '../'
 #   pod 'KMPNativeCoroutinesCombine', :path => '../'
 #   pod 'KMPNativeCoroutinesRxSwift', :path => '../'
-  pod 'KMPNativeCoroutinesAsync', :path => '../'
+#   pod 'KMPNativeCoroutinesAsync', :path => '../'
 end
 
 target 'iOS Tests' do
@@ -15,7 +15,7 @@ target 'iOS Tests' do
 #   pod 'KMPNativeCoroutinesCore', :path => '../'
 #   pod 'KMPNativeCoroutinesCombine', :path => '../'
 #   pod 'KMPNativeCoroutinesRxSwift', :path => '../'
-  pod 'KMPNativeCoroutinesAsync', :path => '../'
+#   pod 'KMPNativeCoroutinesAsync', :path => '../'
 end
 
 target 'macOS App' do
@@ -24,7 +24,7 @@ target 'macOS App' do
 #   pod 'KMPNativeCoroutinesCore', :path => '../'
 #   pod 'KMPNativeCoroutinesCombine', :path => '../'
 #   pod 'KMPNativeCoroutinesRxSwift', :path => '../'
-  pod 'KMPNativeCoroutinesAsync', :path => '../'
+#   pod 'KMPNativeCoroutinesAsync', :path => '../'
 end
 
 target 'macOS Tests' do
@@ -33,7 +33,7 @@ target 'macOS Tests' do
 #   pod 'KMPNativeCoroutinesCore', :path => '../'
 #   pod 'KMPNativeCoroutinesCombine', :path => '../'
 #   pod 'KMPNativeCoroutinesRxSwift', :path => '../'
-  pod 'KMPNativeCoroutinesAsync', :path => '../'
+#   pod 'KMPNativeCoroutinesAsync', :path => '../'
 end
 
 target 'tvOS App' do
@@ -42,7 +42,7 @@ target 'tvOS App' do
 #   pod 'KMPNativeCoroutinesCore', :path => '../'
 #   pod 'KMPNativeCoroutinesCombine', :path => '../'
 #   pod 'KMPNativeCoroutinesRxSwift', :path => '../'
-  pod 'KMPNativeCoroutinesAsync', :path => '../'
+#   pod 'KMPNativeCoroutinesAsync', :path => '../'
 end
 
 target 'tvOS Tests' do
@@ -51,7 +51,7 @@ target 'tvOS Tests' do
 #   pod 'KMPNativeCoroutinesCore', :path => '../'
 #   pod 'KMPNativeCoroutinesCombine', :path => '../'
 #   pod 'KMPNativeCoroutinesRxSwift', :path => '../'
-  pod 'KMPNativeCoroutinesAsync', :path => '../'
+#   pod 'KMPNativeCoroutinesAsync', :path => '../'
 end
 
 target 'watchOS App WatchKit Extension' do
@@ -60,7 +60,7 @@ target 'watchOS App WatchKit Extension' do
 #   pod 'KMPNativeCoroutinesCore', :path => '../'
 #   pod 'KMPNativeCoroutinesCombine', :path => '../'
 #   pod 'KMPNativeCoroutinesRxSwift', :path => '../'
-  pod 'KMPNativeCoroutinesAsync', :path => '../'
+#   pod 'KMPNativeCoroutinesAsync', :path => '../'
 end
 
 target 'watchOS Tests' do
@@ -69,5 +69,5 @@ target 'watchOS Tests' do
 #   pod 'KMPNativeCoroutinesCore', :path => '../'
 #   pod 'KMPNativeCoroutinesCombine', :path => '../'
 #   pod 'KMPNativeCoroutinesRxSwift', :path => '../'
-  pod 'KMPNativeCoroutinesAsync', :path => '../'
+#   pod 'KMPNativeCoroutinesAsync', :path => '../'
 end
