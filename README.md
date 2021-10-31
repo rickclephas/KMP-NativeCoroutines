@@ -45,7 +45,8 @@ Depending on the implementation you can support as low as iOS 9, macOS 10.9, tvO
 ## Installation
 
 The library consists of a Kotlin and Swift part which you'll need to add to your project.  
-The Kotlin part is available on Maven Central and the Swift part can be installed via CocoaPods.
+The Kotlin part is available on Maven Central and the Swift part can be installed via CocoaPods 
+or the Swift Package Manager.
 
 Make sure to always use the same versions for all the libraries!
 
@@ -60,7 +61,7 @@ plugins {
 }
 ```
 
-### Swift
+### Swift (CocoaPods)
 
 Now for Swift you can choose from a couple of implementations.  
 Add one or more of the following libraries to your `Podfile`:
@@ -69,6 +70,23 @@ pod 'KMPNativeCoroutinesCombine'  # Combine implementation
 pod 'KMPNativeCoroutinesRxSwift'  # RxSwift implementation
 pod 'KMPNativeCoroutinesAsync'    # Swift 5.5 Async/Await implementation
 ```
+
+### Swift (Swift Package Manager)
+
+All Swift implementations are also available via the Swift Package Manager.
+
+> **NOTE:** `KMPNativeCoroutinesAsync` requires Xcode 13.2 which is currently in beta.  
+> To add the async implementation you should add the `-swift-async-await` suffix to the version.
+
+Just add it to your `Package.swift` file:
+```swift
+dependencies: [
+    .package(url: "git@github.com:rickclephas/KMP-NativeCoroutines.git", from: "<version>")
+]
+```
+
+Or add it in Xcode by going to `File` > `Add Packages...` and providing the URL: 
+`git@github.com:rickclephas/KMP-NativeCoroutines.git`.
 
 ## Usage
 
