@@ -11,7 +11,7 @@ buildscript {
 
 allprojects {
     group = "com.rickclephas.kmp"
-    version = "0.6.0"
+    version = "0.7.0"
 
     repositories {
         mavenLocal()
