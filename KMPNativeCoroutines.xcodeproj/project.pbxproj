@@ -15,6 +15,9 @@
 		1D7175BF266FF03A00846F75 /* NativeSuspend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2EC840266D220900B118B0 /* NativeSuspend.swift */; };
 		1D7175C0266FF03F00846F75 /* Future.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2EC86C266D29E800B118B0 /* Future.swift */; };
 		1D7175C1266FF04200846F75 /* Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2EC86A266D290000B118B0 /* Publisher.swift */; };
+		1D75A367272D4B3800CFF795 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1D75A366272D4B3800CFF795 /* RxSwift */; };
+		1D75A369272D4B4900CFF795 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1D75A368272D4B4900CFF795 /* RxSwift */; };
+		1D75A36A272D4BC200CFF795 /* KMPNativeCoroutinesCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D717583266FE90400846F75 /* KMPNativeCoroutinesCore.framework */; };
 		1DA5DCEF267613BB002448E3 /* KMPNativeCoroutinesAsync.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DA5DCE5267613BB002448E3 /* KMPNativeCoroutinesAsync.framework */; platformFilter = ios; };
 		1DA5DCF4267613BB002448E3 /* AsyncFunctionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA5DCF3267613BB002448E3 /* AsyncFunctionTests.swift */; };
 		1DA5DCFD26761404002448E3 /* AsyncFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA5DCFC26761404002448E3 /* AsyncFunction.swift */; };
@@ -33,8 +36,6 @@
 		1DFB127C26A0A446001BE321 /* AsyncStreamTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFB127B26A0A446001BE321 /* AsyncStreamTests.swift */; };
 		1DFC35FC268A2DE3008393FA /* AsyncResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFC35FB268A2DE3008393FA /* AsyncResult.swift */; };
 		1DFC35FE268A2FFE008393FA /* AsyncResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFC35FD268A2FFE008393FA /* AsyncResultTests.swift */; };
-		F894145297A8A7962D7B733F /* Pods_KMPNativeCoroutinesRxSwiftTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CE7291F55D80A8A787D5434 /* Pods_KMPNativeCoroutinesRxSwiftTests.framework */; };
-		FC386DB0642D701EAD014BFC /* Pods_KMPNativeCoroutinesRxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2A255B5783FE4B55220F3B1 /* Pods_KMPNativeCoroutinesRxSwift.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,7 +53,7 @@
 			remoteGlobalIDString = 1DA5DCE4267613BB002448E3;
 			remoteInfo = KMPNativeCoroutinesAsync;
 		};
-		1DA5DD012676192F002448E3 /* PBXContainerItemProxy */ = {
+		1D75A36C272D4BC200CFF795 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1DF8833F266D1BC10058B6F9 /* Project object */;
 			proxyType = 1;
@@ -110,12 +111,6 @@
 		1DFB127B26A0A446001BE321 /* AsyncStreamTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncStreamTests.swift; sourceTree = "<group>"; };
 		1DFC35FB268A2DE3008393FA /* AsyncResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncResult.swift; sourceTree = "<group>"; };
 		1DFC35FD268A2FFE008393FA /* AsyncResultTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncResultTests.swift; sourceTree = "<group>"; };
-		559692840A021744843AA7BC /* Pods-KMPNativeCoroutinesRxSwiftTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KMPNativeCoroutinesRxSwiftTests.release.xcconfig"; path = "Target Support Files/Pods-KMPNativeCoroutinesRxSwiftTests/Pods-KMPNativeCoroutinesRxSwiftTests.release.xcconfig"; sourceTree = "<group>"; };
-		7159DBB1DE3C32A519B6F448 /* Pods-KMPNativeCoroutinesRxSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KMPNativeCoroutinesRxSwift.debug.xcconfig"; path = "Target Support Files/Pods-KMPNativeCoroutinesRxSwift/Pods-KMPNativeCoroutinesRxSwift.debug.xcconfig"; sourceTree = "<group>"; };
-		8CE7291F55D80A8A787D5434 /* Pods_KMPNativeCoroutinesRxSwiftTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KMPNativeCoroutinesRxSwiftTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E2A255B5783FE4B55220F3B1 /* Pods_KMPNativeCoroutinesRxSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KMPNativeCoroutinesRxSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F6186D4AF44B57CA297D923C /* Pods-KMPNativeCoroutinesRxSwiftTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KMPNativeCoroutinesRxSwiftTests.debug.xcconfig"; path = "Target Support Files/Pods-KMPNativeCoroutinesRxSwiftTests/Pods-KMPNativeCoroutinesRxSwiftTests.debug.xcconfig"; sourceTree = "<group>"; };
-		FBCD7E0A69A878E7A85A3FB2 /* Pods-KMPNativeCoroutinesRxSwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KMPNativeCoroutinesRxSwift.release.xcconfig"; path = "Target Support Files/Pods-KMPNativeCoroutinesRxSwift/Pods-KMPNativeCoroutinesRxSwift.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,7 +158,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1DF053052698D5E100A16325 /* KMPNativeCoroutinesCore.framework in Frameworks */,
-				FC386DB0642D701EAD014BFC /* Pods_KMPNativeCoroutinesRxSwift.framework in Frameworks */,
+				1D75A367272D4B3800CFF795 /* RxSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -171,23 +166,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D75A369272D4B4900CFF795 /* RxSwift in Frameworks */,
 				1DF3F9D126936935004C21F2 /* KMPNativeCoroutinesRxSwift.framework in Frameworks */,
-				F894145297A8A7962D7B733F /* Pods_KMPNativeCoroutinesRxSwiftTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		098FB8F5C05D9B59B0FD129C /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				E2A255B5783FE4B55220F3B1 /* Pods_KMPNativeCoroutinesRxSwift.framework */,
-				8CE7291F55D80A8A787D5434 /* Pods_KMPNativeCoroutinesRxSwiftTests.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		1D717584266FE90400846F75 /* KMPNativeCoroutinesCore */ = {
 			isa = PBXGroup;
 			children = (
@@ -207,6 +193,13 @@
 				1D4E2969268A26B000C0D4EF /* FuturePublisher.swift */,
 			);
 			path = KMPNativeCoroutinesCombine;
+			sourceTree = "<group>";
+		};
+		1D75A365272D4B3800CFF795 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		1DA5DCE6267613BB002448E3 /* KMPNativeCoroutinesAsync */ = {
@@ -268,8 +261,7 @@
 				1DF3F936269357FA004C21F2 /* KMPNativeCoroutinesRxSwift */,
 				1DF3F941269357FB004C21F2 /* KMPNativeCoroutinesRxSwiftTests */,
 				1DF88349266D1BC10058B6F9 /* Products */,
-				A1B177BC5C9DC21613BD4CD4 /* Pods */,
-				098FB8F5C05D9B59B0FD129C /* Frameworks */,
+				1D75A365272D4B3800CFF795 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -285,17 +277,6 @@
 				1DF3F9D026936935004C21F2 /* KMPNativeCoroutinesRxSwiftTests.xctest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		A1B177BC5C9DC21613BD4CD4 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				7159DBB1DE3C32A519B6F448 /* Pods-KMPNativeCoroutinesRxSwift.debug.xcconfig */,
-				FBCD7E0A69A878E7A85A3FB2 /* Pods-KMPNativeCoroutinesRxSwift.release.xcconfig */,
-				F6186D4AF44B57CA297D923C /* Pods-KMPNativeCoroutinesRxSwiftTests.debug.xcconfig */,
-				559692840A021744843AA7BC /* Pods-KMPNativeCoroutinesRxSwiftTests.release.xcconfig */,
-			);
-			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -339,6 +320,8 @@
 			dependencies = (
 			);
 			name = KMPNativeCoroutinesCore;
+			packageProductDependencies = (
+			);
 			productName = KMPNativeCoroutinesCore;
 			productReference = 1D717583266FE90400846F75 /* KMPNativeCoroutinesCore.framework */;
 			productType = "com.apple.product-type.framework";
@@ -421,7 +404,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1DF3F9D926936935004C21F2 /* Build configuration list for PBXNativeTarget "KMPNativeCoroutinesRxSwift" */;
 			buildPhases = (
-				1D39DA6C818EDECA53D6C3A5 /* [CP] Check Pods Manifest.lock */,
+				1DF3F9C326936935004C21F2 /* Headers */,
 				1DF3F9C426936935004C21F2 /* Sources */,
 				1DF3F9C526936935004C21F2 /* Frameworks */,
 				1DF3F9C626936935004C21F2 /* Resources */,
@@ -429,9 +412,12 @@
 			buildRules = (
 			);
 			dependencies = (
-				1DF053082698D5E100A16325 /* PBXTargetDependency */,
+				1D75A36D272D4BC200CFF795 /* PBXTargetDependency */,
 			);
 			name = KMPNativeCoroutinesRxSwift;
+			packageProductDependencies = (
+				1D75A366272D4B3800CFF795 /* RxSwift */,
+			);
 			productName = KMPNativeCoroutinesRxSwift;
 			productReference = 1DF3F9C826936935004C21F2 /* KMPNativeCoroutinesRxSwift.framework */;
 			productType = "com.apple.product-type.framework";
@@ -440,11 +426,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1DF3F9DC26936935004C21F2 /* Build configuration list for PBXNativeTarget "KMPNativeCoroutinesRxSwiftTests" */;
 			buildPhases = (
-				A2C5BB189AE58269BB0C8C9A /* [CP] Check Pods Manifest.lock */,
 				1DF3F9CC26936935004C21F2 /* Sources */,
 				1DF3F9CD26936935004C21F2 /* Frameworks */,
 				1DF3F9CE26936935004C21F2 /* Resources */,
-				8509C62BB6CACDD17DDC2743 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -452,6 +436,9 @@
 				1DF3F9D326936935004C21F2 /* PBXTargetDependency */,
 			);
 			name = KMPNativeCoroutinesRxSwiftTests;
+			packageProductDependencies = (
+				1D75A368272D4B4900CFF795 /* RxSwift */,
+			);
 			productName = KMPNativeCoroutinesRxSwiftTests;
 			productReference = 1DF3F9D026936935004C21F2 /* KMPNativeCoroutinesRxSwiftTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -498,6 +485,9 @@
 				Base,
 			);
 			mainGroup = 1DF8833E266D1BC10058B6F9;
+			packageReferences = (
+				1D75A362272D4B2300CFF795 /* XCRemoteSwiftPackageReference "RxSwift" */,
+			);
 			productRefGroup = 1DF88349266D1BC10058B6F9 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -564,70 +554,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		1D39DA6C818EDECA53D6C3A5 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-KMPNativeCoroutinesRxSwift-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		8509C62BB6CACDD17DDC2743 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-KMPNativeCoroutinesRxSwiftTests/Pods-KMPNativeCoroutinesRxSwiftTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-KMPNativeCoroutinesRxSwiftTests/Pods-KMPNativeCoroutinesRxSwiftTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KMPNativeCoroutinesRxSwiftTests/Pods-KMPNativeCoroutinesRxSwiftTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A2C5BB189AE58269BB0C8C9A /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-KMPNativeCoroutinesRxSwiftTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1D71757F266FE90400846F75 /* Sources */ = {
@@ -713,10 +639,10 @@
 			target = 1DA5DCE4267613BB002448E3 /* KMPNativeCoroutinesAsync */;
 			targetProxy = 1DA5DCF0267613BB002448E3 /* PBXContainerItemProxy */;
 		};
-		1DA5DD022676192F002448E3 /* PBXTargetDependency */ = {
+		1D75A36D272D4BC200CFF795 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 1D717582266FE90400846F75 /* KMPNativeCoroutinesCore */;
-			targetProxy = 1DA5DD012676192F002448E3 /* PBXContainerItemProxy */;
+			targetProxy = 1D75A36C272D4BC200CFF795 /* PBXContainerItemProxy */;
 		};
 		1DCA41AC26753C640036C1A3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -997,7 +923,6 @@
 		};
 		1DF3F9DA26936935004C21F2 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7159DBB1DE3C32A519B6F448 /* Pods-KMPNativeCoroutinesRxSwift.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1012,7 +937,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = com.rickclephas.kmp.KMPNativeCoroutinesRxSwift;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -1024,7 +949,6 @@
 		};
 		1DF3F9DB26936935004C21F2 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FBCD7E0A69A878E7A85A3FB2 /* Pods-KMPNativeCoroutinesRxSwift.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1039,7 +963,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = com.rickclephas.kmp.KMPNativeCoroutinesRxSwift;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -1051,7 +975,6 @@
 		};
 		1DF3F9DD26936935004C21F2 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F6186D4AF44B57CA297D923C /* Pods-KMPNativeCoroutinesRxSwiftTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -1062,7 +985,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = com.rickclephas.kmp.KMPNativeCoroutinesRxSwiftTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1073,7 +996,6 @@
 		};
 		1DF3F9DE26936935004C21F2 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 559692840A021744843AA7BC /* Pods-KMPNativeCoroutinesRxSwiftTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -1084,7 +1006,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = com.rickclephas.kmp.KMPNativeCoroutinesRxSwiftTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1299,6 +1221,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		1D75A362272D4B2300CFF795 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:ReactiveX/RxSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1D75A366272D4B3800CFF795 /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1D75A362272D4B2300CFF795 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+		1D75A368272D4B4900CFF795 /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1D75A362272D4B2300CFF795 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 1DF8833F266D1BC10058B6F9 /* Project object */;
 }

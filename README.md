@@ -42,14 +42,15 @@ Depending on the implementation you can support as low as iOS 9, macOS 10.9, tvO
 |---|:---:|:---:|:---:|:---:|:---:|
 |RxSwift|5.0|9.0|10.9|9.0|3.0|
 |Combine|5.0|13.0|10.15|13.0|6.0|
-|Async :construction:|5.5|15.0|12.0|15.0|8.0|
+|Async :construction:|5.5|13.0|10.15|13.0|6.0|
 
-> :construction: : the Async implementation requires Xcode 13 which is currently in beta!
+> :construction: : the Async implementation requires Xcode 13.2 which is currently in beta!
 
 ## Installation
 
 The library consists of a Kotlin and Swift part which you'll need to add to your project.  
-The Kotlin part is available on Maven Central and the Swift part can be installed via CocoaPods.
+The Kotlin part is available on Maven Central and the Swift part can be installed via CocoaPods 
+or the Swift Package Manager.
 
 Make sure to always use the same versions for all the libraries!
 
@@ -64,7 +65,7 @@ plugins {
 }
 ```
 
-### Swift
+### Swift (CocoaPods)
 
 Now for Swift you can choose from a couple of implementations.  
 Add one or more of the following libraries to your `Podfile`:
@@ -73,6 +74,23 @@ pod 'KMPNativeCoroutinesCombine'  # Combine implementation
 pod 'KMPNativeCoroutinesRxSwift'  # RxSwift implementation
 pod 'KMPNativeCoroutinesAsync'    # Swift 5.5 Async/Await implementation
 ```
+
+### Swift (Swift Package Manager)
+
+All Swift implementations are also available via the Swift Package Manager.
+
+> **NOTE:** `KMPNativeCoroutinesAsync` requires Xcode 13.2 which is currently in beta.  
+> To add the async implementation you should add the `-swift-async-await` suffix to the version.
+
+Just add it to your `Package.swift` file:
+```swift
+dependencies: [
+    .package(url: "git@github.com:rickclephas/KMP-NativeCoroutines.git", from: "<version>")
+]
+```
+
+Or add it in Xcode by going to `File` > `Add Packages...` and providing the URL: 
+`git@github.com:rickclephas/KMP-NativeCoroutines.git`.
 
 ## Usage
 
@@ -259,7 +277,7 @@ Meaning every subscription will trigger the collection of the `Flow` or executio
 
 ### Swift 5.5 Async/Await
 
-> :construction: : the Async implementation requires Xcode 13 which is currently in beta!
+> :construction: : the Async implementation requires Xcode 13.2 which is currently in beta!
 
 The Async implementation provides some functions to get async Swift functions and `AsyncStream`s.
 
