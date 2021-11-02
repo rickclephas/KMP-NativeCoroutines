@@ -10,10 +10,6 @@ let package = Package(
             targets: ["KMPNativeCoroutinesCore"]
         ),
         .library(
-            name: "KMPNativeCoroutinesCombine",
-            targets: ["KMPNativeCoroutinesCombine"]
-        ),
-        .library(
             name: "KMPNativeCoroutinesRxSwift",
             targets: ["KMPNativeCoroutinesRxSwift"]
         )
@@ -28,16 +24,6 @@ let package = Package(
         .target(
             name: "KMPNativeCoroutinesCore",
             path: "KMPNativeCoroutinesCore"
-        ),
-        .target(
-            name: "KMPNativeCoroutinesCombine",
-            dependencies: ["KMPNativeCoroutinesCore"],
-            path: "KMPNativeCoroutinesCombine"
-        ),
-        .testTarget(
-            name: "KMPNativeCoroutinesCombineTests",
-            dependencies: ["KMPNativeCoroutinesCombine"],
-            path: "KMPNativeCoroutinesCombineTests"
         ),
         .target(
             name: "KMPNativeCoroutinesRxSwift",
