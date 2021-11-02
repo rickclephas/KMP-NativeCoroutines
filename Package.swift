@@ -12,16 +12,6 @@ let package = Package(
         .library(
             name: "KMPNativeCoroutinesCombine",
             targets: ["KMPNativeCoroutinesCombine"]
-        ),
-        .library(
-            name: "KMPNativeCoroutinesRxSwift",
-            targets: ["KMPNativeCoroutinesRxSwift"]
-        )
-    ],
-    dependencies: [
-        .package(
-            url: "https://github.com/ReactiveX/RxSwift.git",
-            from: "6.0.0"
         )
     ],
     targets: [
@@ -38,16 +28,6 @@ let package = Package(
             name: "KMPNativeCoroutinesCombineTests",
             dependencies: ["KMPNativeCoroutinesCombine"],
             path: "KMPNativeCoroutinesCombineTests"
-        ),
-        .target(
-            name: "KMPNativeCoroutinesRxSwift",
-            dependencies: ["KMPNativeCoroutinesCore", "RxSwift"],
-            path: "KMPNativeCoroutinesRxSwift"
-        ),
-        .testTarget(
-            name: "KMPNativeCoroutinesRxSwiftTests",
-            dependencies: ["KMPNativeCoroutinesRxSwift"],
-            path: "KMPNativeCoroutinesRxSwiftTests"
         )
     ],
     swiftLanguageVersions: [.v5]
