@@ -10,7 +10,11 @@ jobs:
           distribution: 'zulu'
           java-version: '11'
       - uses: gradle/wrapper-validation-action@v1
-      - run: ./gradlew build
+      - run: ./gradlew publishToMavenLocal
+        env:
+          SIGNING_KEY_ID: ${{ secrets.SIGNING_KEY_ID }}
+          SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
+          SIGNING_SECRET_KEY: ${{ secrets.SIGNING_SECRET_KEY }}
   publish-cocoapods-libraries:
     runs-on: macos-11
     steps:
