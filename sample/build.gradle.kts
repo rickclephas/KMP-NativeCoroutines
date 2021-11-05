@@ -4,14 +4,12 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath(Dependencies.Kotlin.gradlePlugin)
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.31")
+        classpath("com.rickclephas.kmp:kmp-nativecoroutines-gradle-plugin")
     }
 }
 
 allprojects {
-    group = "com.rickclephas.kmp"
-    version = "0.7.0"
-
     repositories {
         mavenCentral()
     }

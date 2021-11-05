@@ -4,6 +4,7 @@ import org.gradle.api.Project
 import org.gradle.api.provider.Provider
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.plugin.*
+import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 @Suppress("unused")
 class KmpNativeCoroutinesPlugin: KotlinCompilerPluginSupportPlugin {
@@ -21,7 +22,7 @@ class KmpNativeCoroutinesPlugin: KotlinCompilerPluginSupportPlugin {
     }
 
     override fun isApplicable(kotlinCompilation: KotlinCompilation<*>): Boolean =
-        kotlinCompilation.platformType == KotlinPlatformType.native
+        kotlinCompilation.target.let { it is KotlinNativeTarget && it.konanTarget.family.isAppleFamily }
 
     override fun applyToCompilation(kotlinCompilation: KotlinCompilation<*>): Provider<List<SubpluginOption>> {
         val project = kotlinCompilation.target.project
