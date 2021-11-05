@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
   s.watchos.deployment_target = '6.0'
   s.tvos.deployment_target = '13.0'
 
-  s.dependency 'KMPNativeCoroutinesCore'
+  s.dependency 'KMPNativeCoroutinesCore', s.version.to_s
 
   s.source_files = 'KMPNativeCoroutinesAsync/**/*.swift'
 end
