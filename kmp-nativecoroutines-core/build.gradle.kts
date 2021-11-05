@@ -4,7 +4,6 @@ plugins {
 }
 
 kotlin {
-    jvm()
     val macosX64 = macosX64()
     val iosArm64 = iosArm64()
     val iosX64 = iosX64()
@@ -13,6 +12,12 @@ kotlin {
     val watchosX64 = watchosX64()
     val tvosArm64 = tvosArm64()
     val tvosX64 = tvosX64()
+    jvm()
+    js(BOTH) {
+        browser()
+        nodejs()
+    }
+    linuxX64()
     sourceSets {
         val commonMain by getting {
             dependencies {

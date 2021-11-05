@@ -4,7 +4,6 @@ plugins {
 }
 
 kotlin {
-    jvm()
     macosX64()
     iosArm64()
     iosX64()
@@ -13,4 +12,10 @@ kotlin {
     watchosX64()
     tvosArm64()
     tvosX64()
+    jvm()
+    js(BOTH) {
+        browser()
+        nodejs()
+    }
+    linuxX64()
 }
