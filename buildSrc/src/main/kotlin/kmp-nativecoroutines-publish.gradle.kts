@@ -5,6 +5,7 @@ plugins {
 
 ext["signing.keyId"] = null
 ext["signing.password"] = null
+ext["signing.secretKey"] = null
 ext["signing.secretKeyRingFile"] = null
 ext["ossrhUsername"] = null
 ext["ossrhPassword"] = null
@@ -18,6 +19,7 @@ if (localPropsFile.exists()) {
 } else {
     ext["signing.keyId"] = System.getenv("SIGNING_KEY_ID")
     ext["signing.password"] = System.getenv("SIGNING_PASSWORD")
+    ext["signing.secretKey"] = System.getenv("SIGNING_SECRET_KEY")
     ext["signing.secretKeyRingFile"] = System.getenv("SIGNING_SECRET_KEY_RING_FILE")
     ext["ossrhUsername"] = System.getenv("OSSRH_USERNAME")
     ext["ossrhPassword"] = System.getenv("OSSRH_PASSWORD")
@@ -71,5 +73,8 @@ publishing {
 }
 
 signing {
+    getExtraString("signing.secretKey")?.let { secretKey ->
+        useInMemoryPgpKeys(getExtraString("signing.keyId"), secretKey, getExtraString("signing.password"))
+    }
     sign(publishing.publications)
 }
