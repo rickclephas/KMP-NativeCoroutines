@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name       = 'KMPNativeCoroutinesAsync'
-  s.version    = '0.7.0'
+  s.version    = '0.8.0'
   s.summary    = 'Swift library for Kotlin Coroutines with Swift Async/Await'
 
   s.homepage   = 'https://github.com/rickclephas/KMP-NativeCoroutines'
@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
   s.watchos.deployment_target = '6.0'
   s.tvos.deployment_target = '13.0'
 
-  s.dependency 'KMPNativeCoroutinesCore'
+  s.dependency 'KMPNativeCoroutinesCore', s.version.to_s
 
   s.source_files = 'KMPNativeCoroutinesAsync/**/*.swift'
 end
