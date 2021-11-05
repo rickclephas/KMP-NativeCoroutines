@@ -1,8 +1,10 @@
 plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
-    id("com.rickclephas.kmp.nativecoroutines") version "0.7.0-kotlin-1.5.20"
+    id("com.rickclephas.kmp.nativecoroutines")
 }
+
+version = "1.0"
 
 kotlin {
     val macosX64 = macosX64()
