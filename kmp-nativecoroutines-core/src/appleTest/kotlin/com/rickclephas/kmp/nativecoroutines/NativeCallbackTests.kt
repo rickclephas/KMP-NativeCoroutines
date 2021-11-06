@@ -6,7 +6,7 @@ import kotlin.test.*
 class NativeCallbackTests {
 
     @Test
-    fun `ensure frozen`() {
+    fun `ensure not frozen`() {
         var receivedValue: RandomValue? = null
         val callback: NativeCallback<RandomValue> = callback@{ value, unit ->
             receivedValue = value
@@ -16,8 +16,8 @@ class NativeCallbackTests {
         val value = RandomValue()
         assertFalse(value.isFrozen, "Value shouldn't be frozen yet")
         callback(value)
-        assertTrue(value.isFrozen, "Value should be frozen")
-        assertTrue(receivedValue?.isFrozen == true, "Received value should be frozen")
+        assertFalse(value.isFrozen, "Value shouldn't be frozen yet")
+        assertFalse(receivedValue?.isFrozen == true, "Received value shouldn't be frozen")
     }
 
     @Test

@@ -9,12 +9,12 @@ import kotlin.test.assertTrue
 class NativeCancellableTests {
 
     @Test
-    fun `ensure frozen`() {
+    fun `ensure not frozen`() {
         val job = Job()
         assertFalse(job.isFrozen, "Job shouldn't be frozen yet")
         val nativeCancellable = job.asNativeCancellable()
-        assertTrue(nativeCancellable.isFrozen, "NativeCancellable should be frozen")
-        assertTrue(job.isFrozen, "Job should be frozen after getting the NativeCancellable")
+        assertFalse(nativeCancellable.isFrozen, "NativeCancellable shouldn't be frozen")
+        assertFalse(job.isFrozen, "Job shouldn't be frozen after getting the NativeCancellable")
     }
 
     @Test

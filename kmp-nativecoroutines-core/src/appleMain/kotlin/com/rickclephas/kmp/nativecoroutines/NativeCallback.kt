@@ -1,7 +1,5 @@
 package com.rickclephas.kmp.nativecoroutines
 
-import kotlin.native.concurrent.freeze
-
 /**
  * A callback with a single argument.
  *
@@ -13,4 +11,4 @@ typealias NativeCallback<T> = (T, Unit) -> Unit
 /**
  * Invokes the callback with the specified [value].
  */
-internal inline operator fun <T> NativeCallback<T>.invoke(value: T) = invoke(value.freeze(), Unit)
+internal inline operator fun <T> NativeCallback<T>.invoke(value: T) = invoke(value, Unit)

@@ -4,7 +4,6 @@ import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import platform.Foundation.NSError
-import kotlin.native.concurrent.freeze
 
 /**
  * A function that awaits a suspend function via callbacks.
@@ -40,5 +39,5 @@ fun <T> nativeSuspend(scope: CoroutineScope? = null, block: suspend () -> T): Na
             onError(cause.asNSError())
         }
         return@collect job.asNativeCancellable()
-    }).freeze()
+    })
 }

@@ -6,7 +6,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import platform.Foundation.NSError
-import kotlin.native.concurrent.freeze
 
 /**
  * A function that collects a [Flow] via callbacks.
@@ -44,5 +43,5 @@ fun <T> Flow<T>.asNativeFlow(scope: CoroutineScope? = null): NativeFlow<T> {
             onComplete(cause.asNSError())
         }
         return@collect job.asNativeCancellable()
-    }).freeze()
+    })
 }

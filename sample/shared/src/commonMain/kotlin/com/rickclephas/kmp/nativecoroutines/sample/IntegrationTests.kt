@@ -16,8 +16,4 @@ abstract class IntegrationTests {
 
     val uncompletedJobCount: Int
         get() = job.children.count { !it.isCompleted }
-
-    init {
-        freeze()
-    }
 }

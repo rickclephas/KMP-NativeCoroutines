@@ -10,12 +10,12 @@ import kotlin.test.*
 class NativeFlowTests {
 
     @Test
-    fun `ensure frozen`() {
+    fun `ensure not frozen`() {
         val flow = flow<RandomValue> {  }
         assertFalse(flow.isFrozen, "Flow shouldn't be frozen yet")
         val nativeFlow = flow.asNativeFlow()
-        assertTrue(nativeFlow.isFrozen, "NativeFlow should be frozen")
-        assertTrue(flow.isFrozen, "Flow should be frozen")
+        assertFalse(nativeFlow.isFrozen, "NativeFlow shouldn't be frozen")
+        assertFalse(flow.isFrozen, "Flow shouldn't be frozen")
     }
 
     @Test
