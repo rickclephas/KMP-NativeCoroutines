@@ -7,7 +7,7 @@ object Dependencies {
     }
 
     object Kotlinx {
-        const val coroutinesCore = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2-native-mt"
+        const val coroutinesCore = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1-new-mm-dev2"
     }
 
     object AutoService {
