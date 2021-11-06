@@ -117,6 +117,10 @@
 		1DF1A67626714FBD00945FF9 /* RandomLettersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF1A67426714FBD00945FF9 /* RandomLettersView.swift */; };
 		1DF1A6782671535200945FF9 /* RandomLettersCombineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF1A6772671535200945FF9 /* RandomLettersCombineViewModel.swift */; };
 		1DF1A6792671535200945FF9 /* RandomLettersCombineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF1A6772671535200945FF9 /* RandomLettersCombineViewModel.swift */; };
+		1DF2860027370061004DD6D2 /* NewMemoryModelIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF285FF27370061004DD6D2 /* NewMemoryModelIntegrationTests.swift */; };
+		1DF2860127370061004DD6D2 /* NewMemoryModelIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF285FF27370061004DD6D2 /* NewMemoryModelIntegrationTests.swift */; };
+		1DF2860227370061004DD6D2 /* NewMemoryModelIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF285FF27370061004DD6D2 /* NewMemoryModelIntegrationTests.swift */; };
+		1DF2860327370061004DD6D2 /* NewMemoryModelIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF285FF27370061004DD6D2 /* NewMemoryModelIntegrationTests.swift */; };
 		1F0A1E1603107E57275DCEB3 /* Pods_tvOS_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AC0E65235849C39FBC494E7 /* Pods_tvOS_Tests.framework */; };
 		37CEC1BD1853BFCDEEBE4B52 /* Pods_macOS_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8CAA0A4A2F0DA48EC903C52 /* Pods_macOS_Tests.framework */; };
 		AD925FB3B122897B070DEFEB /* Pods_iOS_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 430255A8B181606267348B23 /* Pods_iOS_Tests.framework */; };
@@ -255,6 +259,7 @@
 		1DF1A67126714EEC00945FF9 /* RandomLettersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomLettersViewModel.swift; sourceTree = "<group>"; };
 		1DF1A67426714FBD00945FF9 /* RandomLettersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomLettersView.swift; sourceTree = "<group>"; };
 		1DF1A6772671535200945FF9 /* RandomLettersCombineViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomLettersCombineViewModel.swift; sourceTree = "<group>"; };
+		1DF285FF27370061004DD6D2 /* NewMemoryModelIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMemoryModelIntegrationTests.swift; sourceTree = "<group>"; };
 		1F4B88ED1385A7F544FDF011 /* Pods-watchOS App WatchKit Extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-watchOS App WatchKit Extension.release.xcconfig"; path = "Target Support Files/Pods-watchOS App WatchKit Extension/Pods-watchOS App WatchKit Extension.release.xcconfig"; sourceTree = "<group>"; };
 		3327CBE919E359C7A6982896 /* Pods-tvOS Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tvOS Tests.debug.xcconfig"; path = "Target Support Files/Pods-tvOS Tests/Pods-tvOS Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		3D1DA8D6E8034D66525F216D /* Pods-macOS Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-macOS Tests.debug.xcconfig"; path = "Target Support Files/Pods-macOS Tests/Pods-macOS Tests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -579,6 +584,7 @@
 			children = (
 				1D91395026C7F04C00A50CDC /* CompilerIntegrationTests.swift */,
 				1D81B1562677E56200EEC34D /* TestUtils.swift */,
+				1DF285FF27370061004DD6D2 /* NewMemoryModelIntegrationTests.swift */,
 			);
 			path = IntegrationTests;
 			sourceTree = "<group>";
@@ -1191,6 +1197,7 @@
 			files = (
 				1D63BF6326E3E244003363BE /* CombineFutureIntegrationTests.swift in Sources */,
 				1D63BF6826E3E252003363BE /* RxSwiftObservableIntegrationTests.swift in Sources */,
+				1DF2860227370061004DD6D2 /* NewMemoryModelIntegrationTests.swift in Sources */,
 				1D63BF6726E3E24F003363BE /* RxSwiftSingleIntegrationTests.swift in Sources */,
 				1D63BF7026E3E26C003363BE /* CompilerIntegrationTests.swift in Sources */,
 				1D63BF6F26E3E269003363BE /* TestUtils.swift in Sources */,
@@ -1224,6 +1231,7 @@
 			files = (
 				1D63BFC326E4F0D5003363BE /* CombineFutureIntegrationTests.swift in Sources */,
 				1D63BFBF26E4F0C6003363BE /* CompilerIntegrationTests.swift in Sources */,
+				1DF2860327370061004DD6D2 /* NewMemoryModelIntegrationTests.swift in Sources */,
 				1D63BFC026E4F0CA003363BE /* TestUtils.swift in Sources */,
 				1D63BFC826E4F0E5003363BE /* RxSwiftObservableIntegrationTests.swift in Sources */,
 				1D63BFC426E4F0D8003363BE /* CombinePublisherIntegrationTests.swift in Sources */,
@@ -1274,6 +1282,7 @@
 			files = (
 				1D81B1542677B7EF00EEC34D /* CombineFutureIntegrationTests.swift in Sources */,
 				1D81B15A2677EDE600EEC34D /* CombinePublisherIntegrationTests.swift in Sources */,
+				1DF2860027370061004DD6D2 /* NewMemoryModelIntegrationTests.swift in Sources */,
 				1D5DAF862698CA040059D4B8 /* RxSwiftObservableIntegrationTests.swift in Sources */,
 				1D91395126C7F04C00A50CDC /* CompilerIntegrationTests.swift in Sources */,
 				1D5DAF832698C67D0059D4B8 /* RxSwiftSingleIntegrationTests.swift in Sources */,
@@ -1287,6 +1296,7 @@
 			files = (
 				1D81B1552677B7EF00EEC34D /* CombineFutureIntegrationTests.swift in Sources */,
 				1D81B15B2677EDE600EEC34D /* CombinePublisherIntegrationTests.swift in Sources */,
+				1DF2860127370061004DD6D2 /* NewMemoryModelIntegrationTests.swift in Sources */,
 				1D5DAF872698CA040059D4B8 /* RxSwiftObservableIntegrationTests.swift in Sources */,
 				1D91395226C7F04C00A50CDC /* CompilerIntegrationTests.swift in Sources */,
 				1D5DAF842698C67D0059D4B8 /* RxSwiftSingleIntegrationTests.swift in Sources */,
