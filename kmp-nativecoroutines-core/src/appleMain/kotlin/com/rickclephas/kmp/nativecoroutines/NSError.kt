@@ -1,5 +1,6 @@
 package com.rickclephas.kmp.nativecoroutines
 
+import kotlinx.cinterop.UnsafeNumber
 import kotlinx.cinterop.convert
 import platform.Foundation.NSError
 import platform.Foundation.NSLocalizedDescriptionKey
@@ -13,6 +14,7 @@ import kotlin.native.concurrent.freeze
  *
  * The Kotlin throwable can be retrieved from the [NSError.userInfo] with the key `KotlinException`.
  */
+@OptIn(UnsafeNumber::class)
 internal fun Throwable.asNSError(): NSError {
     val userInfo = mutableMapOf<Any?, Any>()
     userInfo["KotlinException"] = this.freeze()
