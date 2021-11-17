@@ -7,7 +7,7 @@ env:
   XCODEBUILD_DESTINATION_TVOS: platform=tvOS Simulator,name=Apple TV
   XCODEBUILD_DESTINATION_WATCHOS: platform=watchOS Simulator,name=Apple Watch Series 7 - 45mm
 jobs:
-  publish-kotlin-libraries:
+  run-core-tests:
     runs-on: macos-11
     steps:
       - uses: actions/checkout@v2
@@ -16,7 +16,7 @@ jobs:
           distribution: 'zulu'
           java-version: '11'
       - uses: gradle/wrapper-validation-action@v1
-      - run: ./gradlew :kmp-nativecoroutines-core:clean :kmp-nativecoroutines-core:allTests
+      - run: ./gradlew :kmp-nativecoroutines-core:allTests
   run-combine-tests:
     runs-on: macos-11
     strategy:
@@ -30,7 +30,7 @@ jobs:
       - env:
           XCODEBUILD_DESTINATION: ${{ env[format('XCODEBUILD_DESTINATION_{0}', matrix.destination)] }}
         run: >-
-          xcodebuild clean test
+          xcodebuild test
           -project KMPNativeCoroutines.xcodeproj
           -scheme KMPNativeCoroutinesCombineTests
           -destination "$XCODEBUILD_DESTINATION"
@@ -47,7 +47,7 @@ jobs:
       - env:
           XCODEBUILD_DESTINATION: ${{ env[format('XCODEBUILD_DESTINATION_{0}', matrix.destination)] }}
         run: >-
-          xcodebuild clean test
+          xcodebuild test
           -project KMPNativeCoroutines.xcodeproj
           -scheme KMPNativeCoroutinesRxSwiftTests
           -destination "$XCODEBUILD_DESTINATION"
@@ -83,7 +83,7 @@ jobs:
           XCODEBUILD_DESTINATION: ${{ env[format('XCODEBUILD_DESTINATION_{0}', matrix.destination)] }}
           XCODEBUILD_SCHEME: ${{ matrix.scheme }}
         run: >-
-          xcodebuild clean test
+          xcodebuild test
           -workspace Sample.xcworkspace
           -scheme "$XCODEBUILD_SCHEME"
           -destination "$XCODEBUILD_DESTINATION"
