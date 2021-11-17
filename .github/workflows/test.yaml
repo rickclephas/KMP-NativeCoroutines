@@ -2,10 +2,10 @@ name: Run tests
 on:
   - workflow_dispatch
 env:
-  XCODEBUILD_DESTINATION_IOS: platform=iOS Simulator,name=iPhone 12 Pro Max
-  XCODEBUILD_DESTINATION_OSX: platform=OS X
-  XCODEBUILD_DESTINATION_TVOS: platform=tvOS Simulator,name=Apple TV
-  XCODEBUILD_DESTINATION_WATCHOS: platform=watchOS Simulator,name=Apple Watch Series 7 - 45mm
+  XCODEBUILD_DESTINATION_iOS: platform=iOS Simulator,name=iPhone 12 Pro Max
+  XCODEBUILD_DESTINATION_macOS: platform=OS X
+  XCODEBUILD_DESTINATION_tvOS: platform=tvOS Simulator,name=Apple TV
+  XCODEBUILD_DESTINATION_watchOS: platform=watchOS Simulator,name=Apple Watch Series 7 - 45mm
 jobs:
   run-core-tests:
     runs-on: macos-11
@@ -21,7 +21,7 @@ jobs:
     runs-on: macos-11
     strategy:
       matrix:
-        destination: ['IOS', 'OSX', 'TVOS', 'WATCHOS']
+        destination: ['iOS', 'macOS', 'tvOS', 'watchOS']
     steps:
       - uses: actions/checkout@v2
       - uses: maxim-lobanov/setup-xcode@v1
@@ -32,13 +32,13 @@ jobs:
         run: >-
           xcodebuild test
           -project KMPNativeCoroutines.xcodeproj
-          -scheme KMPNativeCoroutinesCombineTests
+          -scheme KMPNativeCoroutinesCombine
           -destination "$XCODEBUILD_DESTINATION"
   run-rxswift-tests:
     runs-on: macos-11
     strategy:
       matrix:
-        destination: ['IOS', 'OSX', 'TVOS', 'WATCHOS']
+        destination: ['iOS', 'macOS', 'tvOS', 'watchOS']
     steps:
       - uses: actions/checkout@v2
       - uses: maxim-lobanov/setup-xcode@v1
@@ -49,25 +49,22 @@ jobs:
         run: >-
           xcodebuild test
           -project KMPNativeCoroutines.xcodeproj
-          -scheme KMPNativeCoroutinesRxSwiftTests
+          -scheme KMPNativeCoroutinesRxSwift
           -destination "$XCODEBUILD_DESTINATION"
   run-integration-tests:
     runs-on: macos-11
     strategy:
       matrix:
-        destination: ['IOS', 'OSX', 'TVOS', 'WATCHOS']
+        destination: ['iOS', 'macOS', 'tvOS', 'watchOS']
         include:
-          - destination: IOS
+          - destination: iOS
             scheme: iOS Tests
-          - destination: OSX
+          - destination: macOS
             scheme: macOS Tests
-          - destination: TVOS
+          - destination: tvOS
             scheme: tvOS Tests
-          - destination: WATCHOS
+          - destination: watchOS
             scheme: watchOS Tests
-    defaults:
-      run:
-        working-directory: sample
     steps:
       - uses: actions/checkout@v2
       - uses: maxim-lobanov/setup-xcode@v1
@@ -78,10 +75,12 @@ jobs:
           distribution: 'zulu'
           java-version: '11'
       - uses: gradle/wrapper-validation-action@v1
-      - run: pod install
+      - working-directory: sample
+        run: pod install
       - env:
           XCODEBUILD_DESTINATION: ${{ env[format('XCODEBUILD_DESTINATION_{0}', matrix.destination)] }}
           XCODEBUILD_SCHEME: ${{ matrix.scheme }}
+        working-directory: sample
         run: >-
           xcodebuild test
           -workspace Sample.xcworkspace
