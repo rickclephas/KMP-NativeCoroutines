@@ -58,11 +58,11 @@ jobs:
         destination: ['iOS', 'macOS', 'tvOS', 'watchOS']
         include:
           - destination: iOS
-            scheme: iOS Tests
+            scheme: iOS App
           - destination: macOS
-            scheme: macOS Tests
+            scheme: macOS App
           - destination: tvOS
-            scheme: tvOS Tests
+            scheme: tvOS App
           - destination: watchOS
             scheme: watchOS Tests
     steps:
