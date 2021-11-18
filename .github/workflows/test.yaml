@@ -15,6 +15,7 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: '11'
+          cache: 'gradle'
       - uses: gradle/wrapper-validation-action@v1
       - run: ./gradlew :kmp-nativecoroutines-core:allTests
   run-combine-tests:
@@ -77,6 +78,7 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: '11'
+          cache: 'gradle'
       - uses: gradle/wrapper-validation-action@v1
       - run: ./gradlew :shared:generateDummyFramework
       - run: pod install
