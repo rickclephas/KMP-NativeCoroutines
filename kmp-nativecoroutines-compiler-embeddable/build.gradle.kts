@@ -1,20 +1,10 @@
 plugins {
     kotlin("jvm")
-    kotlin("kapt")
     `kmp-nativecoroutines-publish`
 }
 
 dependencies {
     compileOnly(Dependencies.Kotlin.embeddableCompiler)
-    compileOnly(Dependencies.AutoService.annotations)
-    kapt(Dependencies.AutoService.processor)
-}
-
-tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile::class).all {
-    kotlinOptions {
-        jvmTarget = "11"
-        freeCompilerArgs = listOf("-Xjvm-default=all")
-    }
 }
 
 val syncSources by tasks.registering(Sync::class) {
@@ -30,6 +20,10 @@ val syncSources by tasks.registering(Sync::class) {
 
 tasks.compileKotlin.configure {
     dependsOn(syncSources)
+    kotlinOptions {
+        jvmTarget = "11"
+        freeCompilerArgs = listOf("-Xjvm-default=all")
+    }
 }
 
 tasks.clean.configure {
