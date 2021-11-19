@@ -22,7 +22,7 @@ class CompilerIntegrationTests: XCTestCase {
             valueExpectation.fulfill()
             return unit
         }, { _, unit in unit })
-        wait(for: [valueExpectation], timeout: 1)
+        wait(for: [valueExpectation], timeout: 2)
     }
     
     func testReturnDefaultValue() {
@@ -34,7 +34,7 @@ class CompilerIntegrationTests: XCTestCase {
             valueExpectation.fulfill()
             return unit
         }, { _, unit in unit })
-        wait(for: [valueExpectation], timeout: 1)
+        wait(for: [valueExpectation], timeout: 2)
     }
     
     func testReturnGenericValue() {
@@ -46,7 +46,7 @@ class CompilerIntegrationTests: XCTestCase {
             valueExpectation.fulfill()
             return unit
         }, { _, unit in unit })
-        wait(for: [valueExpectation], timeout: 1)
+        wait(for: [valueExpectation], timeout: 2)
     }
     
     func testReturnGenericValues() {
@@ -58,7 +58,7 @@ class CompilerIntegrationTests: XCTestCase {
             valueExpectation.fulfill()
             return unit
         }, { _, unit in unit })
-        wait(for: [valueExpectation], timeout: 1)
+        wait(for: [valueExpectation], timeout: 2)
     }
     
     func testReturnGenericVarargValues() {
@@ -72,7 +72,7 @@ class CompilerIntegrationTests: XCTestCase {
             valueExpectation.fulfill()
             return unit
         }, { _, unit in unit })
-        wait(for: [valueExpectation], timeout: 1)
+        wait(for: [valueExpectation], timeout: 2)
     }
     
     func testReturnGenericValueFromExtension() {
@@ -84,6 +84,6 @@ class CompilerIntegrationTests: XCTestCase {
             valueExpectation.fulfill()
             return unit
         }, { _, unit in unit })
-        wait(for: [valueExpectation], timeout: 1)
+        wait(for: [valueExpectation], timeout: 2)
     }
 }
