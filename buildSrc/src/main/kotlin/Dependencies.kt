@@ -4,6 +4,7 @@ object Dependencies {
         private const val version = "1.6.0"
         const val gradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$version"
         const val compiler = "org.jetbrains.kotlin:kotlin-compiler:$version"
+        const val embeddableCompiler = "org.jetbrains.kotlin:kotlin-compiler-embeddable:$version"
     }
 
     object Kotlinx {
