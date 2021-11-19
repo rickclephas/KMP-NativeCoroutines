@@ -19,25 +19,35 @@ jobs:
         xcode: [ 13.1 ]
         java: [ 11 ]
         platform: [ iOS, macOS, tvOS, watchOS ]
+    name: ${{ format('{0} ({1}, Xcode {2}, JDK {3})', matrix.platform, matrix.os, matrix.xcode, matrix.java) }}
     runs-on: ${{ matrix.os }}
     defaults:
       run:
         working-directory: sample
     steps:
-      - uses: actions/checkout@v2
-      - uses: gradle/wrapper-validation-action@v1
-      - uses: maxim-lobanov/setup-xcode@v1
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Gradle Wrapper Validation
+        uses: gradle/wrapper-validation-action@v1
+      - name: Setup Xcode
+        uses: maxim-lobanov/setup-xcode@v1
         with:
           xcode-version: ${{ matrix.xcode }}
-      - uses: actions/setup-java@v2
+      - name: Setup JDK
+        uses: actions/setup-java@v2
         with:
           distribution: zulu
           java-version: ${{ matrix.java }}
-      - uses: ./.github/actions/cache-gradle
-      - uses: ./.github/actions/cache-konan
-      - run: ./gradlew :shared:generateDummyFramework
-      - run: pod install
-      - env:
+      - name: Cache Gradle
+        uses: ./.github/actions/cache-gradle
+      - name: Cache Konan
+        uses: ./.github/actions/cache-konan
+      - name: Install CocoaPods dependencies
+        run: |
+          ./gradlew :shared:generateDummyFramework
+          pod install
+      - name: Run tests
+        env:
           XCODEBUILD_SCHEME: ${{ env[format('XCODEBUILD_SCHEME_{0}', matrix.platform)] }}
           XCODEBUILD_DESTINATION: ${{ env[format('XCODEBUILD_DESTINATION_{0}', matrix.platform)] }}
         run: >-
