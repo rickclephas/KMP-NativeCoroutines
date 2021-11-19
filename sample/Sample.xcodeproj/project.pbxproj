@@ -13,6 +13,10 @@
 		1D02C12626C82EE800E2FF60 /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D02C12226C82EE800E2FF60 /* TestUtils.swift */; };
 		1D0CA84D2677F6DB0000D612 /* AsyncFunctionIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0CA84C2677F6DB0000D612 /* AsyncFunctionIntegrationTests.swift */; };
 		1D0CA84E2677F6DB0000D612 /* AsyncFunctionIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0CA84C2677F6DB0000D612 /* AsyncFunctionIntegrationTests.swift */; };
+		1D103F132747FFBB001567CA /* AsyncTestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D103F122747FFBB001567CA /* AsyncTestUtils.swift */; };
+		1D103F142747FFBB001567CA /* AsyncTestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D103F122747FFBB001567CA /* AsyncTestUtils.swift */; };
+		1D103F152747FFBB001567CA /* AsyncTestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D103F122747FFBB001567CA /* AsyncTestUtils.swift */; };
+		1D103F162747FFBB001567CA /* AsyncTestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D103F122747FFBB001567CA /* AsyncTestUtils.swift */; };
 		1D4F36B326E5001200F7C772 /* RandomLettersAsyncViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA5DD0526764810002448E3 /* RandomLettersAsyncViewModel.swift */; };
 		1D4F36B426E5001500F7C772 /* AsyncFunctionIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0CA84C2677F6DB0000D612 /* AsyncFunctionIntegrationTests.swift */; };
 		1D4F36B526E5001B00F7C772 /* SwiftUIAsyncTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF82A76267939F70024886B /* SwiftUIAsyncTest.swift */; };
@@ -234,6 +238,7 @@
 		1D02C12126C82EE800E2FF60 /* CompilerIntegrationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompilerIntegrationTests.swift; sourceTree = "<group>"; };
 		1D02C12226C82EE800E2FF60 /* TestUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUtils.swift; sourceTree = "<group>"; };
 		1D0CA84C2677F6DB0000D612 /* AsyncFunctionIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncFunctionIntegrationTests.swift; sourceTree = "<group>"; };
+		1D103F122747FFBB001567CA /* AsyncTestUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncTestUtils.swift; sourceTree = "<group>"; };
 		1D5DAF7C2698B5EB0059D4B8 /* ClockRxSwiftViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockRxSwiftViewModel.swift; sourceTree = "<group>"; };
 		1D5DAF7F2698C3C30059D4B8 /* RandomLettersRxSwiftViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomLettersRxSwiftViewModel.swift; sourceTree = "<group>"; };
 		1D5DAF822698C67D0059D4B8 /* RxSwiftSingleIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxSwiftSingleIntegrationTests.swift; sourceTree = "<group>"; };
@@ -635,6 +640,7 @@
 				1DFC35FF268A3148008393FA /* AsyncResultIntegrationTests.swift */,
 				1D810BC126A20FD30065C740 /* ClockAsyncViewModel.swift */,
 				1D810BC426A214020065C740 /* AsyncStreamIntegrationTests.swift */,
+				1D103F122747FFBB001567CA /* AsyncTestUtils.swift */,
 			);
 			path = Async;
 			sourceTree = "<group>";
@@ -1262,6 +1268,7 @@
 				1D63BF6726E3E24F003363BE /* RxSwiftSingleIntegrationTests.swift in Sources */,
 				1D4F36C526E5032400F7C772 /* AsyncStreamIntegrationTests.swift in Sources */,
 				1D4F36BF26E5030600F7C772 /* TestUtils.swift in Sources */,
+				1D103F152747FFBB001567CA /* AsyncTestUtils.swift in Sources */,
 				1D4F36BE26E5030400F7C772 /* CompilerIntegrationTests.swift in Sources */,
 				1D4F36C126E5031200F7C772 /* AsyncFunctionIntegrationTests.swift in Sources */,
 				1D63BF6426E3E247003363BE /* CombinePublisherIntegrationTests.swift in Sources */,
@@ -1301,6 +1308,7 @@
 				1D63BFC326E4F0D5003363BE /* CombineFutureIntegrationTests.swift in Sources */,
 				1D63BFC826E4F0E5003363BE /* RxSwiftObservableIntegrationTests.swift in Sources */,
 				1D63BFC426E4F0D8003363BE /* CombinePublisherIntegrationTests.swift in Sources */,
+				1D103F162747FFBB001567CA /* AsyncTestUtils.swift in Sources */,
 				1D63BFC726E4F0E2003363BE /* RxSwiftSingleIntegrationTests.swift in Sources */,
 				1D4F36B426E5001500F7C772 /* AsyncFunctionIntegrationTests.swift in Sources */,
 				1D4F36B826E5002300F7C772 /* AsyncStreamIntegrationTests.swift in Sources */,
@@ -1360,6 +1368,7 @@
 				1D02C12526C82EE800E2FF60 /* TestUtils.swift in Sources */,
 				1D0CA84D2677F6DB0000D612 /* AsyncFunctionIntegrationTests.swift in Sources */,
 				1D81B15A2677EDE600EEC34D /* CombinePublisherIntegrationTests.swift in Sources */,
+				1D103F132747FFBB001567CA /* AsyncTestUtils.swift in Sources */,
 				1D5DAF862698CA040059D4B8 /* RxSwiftObservableIntegrationTests.swift in Sources */,
 				1D5DAF832698C67D0059D4B8 /* RxSwiftSingleIntegrationTests.swift in Sources */,
 				1D810BC526A214020065C740 /* AsyncStreamIntegrationTests.swift in Sources */,
@@ -1376,6 +1385,7 @@
 				1D02C12626C82EE800E2FF60 /* TestUtils.swift in Sources */,
 				1D0CA84E2677F6DB0000D612 /* AsyncFunctionIntegrationTests.swift in Sources */,
 				1D81B15B2677EDE600EEC34D /* CombinePublisherIntegrationTests.swift in Sources */,
+				1D103F142747FFBB001567CA /* AsyncTestUtils.swift in Sources */,
 				1D5DAF872698CA040059D4B8 /* RxSwiftObservableIntegrationTests.swift in Sources */,
 				1D5DAF842698C67D0059D4B8 /* RxSwiftSingleIntegrationTests.swift in Sources */,
 				1D810BC626A214020065C740 /* AsyncStreamIntegrationTests.swift in Sources */,
@@ -1665,6 +1675,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1732,6 +1743,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2217,6 +2229,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2284,6 +2297,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2650,6 +2664,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -2716,6 +2731,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -2786,6 +2802,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2852,6 +2869,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

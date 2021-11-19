@@ -20,14 +20,14 @@ class AsyncFunctionIntegrationTests: XCTestCase {
         let sendValue = randomInt()
         let value = try await asyncFunction(for: integrationTests.returnValueNative(value: sendValue, delay: 1000))
         XCTAssertEqual(value.int32Value, sendValue, "Received incorrect value")
-        XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
+        await assertJobCompleted(integrationTests)
     }
     
     func testNilValueReceived() async throws {
         let integrationTests = SuspendIntegrationTests()
         let value = try await asyncFunction(for: integrationTests.returnNullNative(delay: 1000))
         XCTAssertNil(value, "Value should be nil")
-        XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
+        await assertJobCompleted(integrationTests)
     }
     
     func testExceptionReceived() async {
@@ -42,7 +42,7 @@ class AsyncFunctionIntegrationTests: XCTestCase {
             let exception = error.userInfo["KotlinException"]
             XCTAssertTrue(exception is KotlinException, "Error doesn't contain the Kotlin exception")
         }
-        XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
+        await assertJobCompleted(integrationTests)
     }
     
     func testErrorReceived() async {
@@ -57,7 +57,7 @@ class AsyncFunctionIntegrationTests: XCTestCase {
             let exception = error.userInfo["KotlinException"]
             XCTAssertTrue(exception is KotlinThrowable, "Error doesn't contain the Kotlin error")
         }
-        XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
+        await assertJobCompleted(integrationTests)
     }
     
     func testCancellation() async {
@@ -73,7 +73,7 @@ class AsyncFunctionIntegrationTests: XCTestCase {
             handle.cancel()
         }
         let result = await handle.result
-        XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
+        await assertJobCompleted(integrationTests)
         if case let .failure(error) = result {
             let error = error as NSError
             let exception = error.userInfo["KotlinException"]

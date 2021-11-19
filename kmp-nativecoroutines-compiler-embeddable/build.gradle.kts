@@ -4,14 +4,30 @@ plugins {
 }
 
 dependencies {
-    compileOnly(Dependencies.Kotlin.compiler)
+    compileOnly(Dependencies.Kotlin.embeddableCompiler)
+}
+
+val syncSources by tasks.registering(Sync::class) {
+    from(project(":kmp-nativecoroutines-compiler").sourceSets.main.get().allSource)
+    into("src/main/kotlin")
+    filter {
+        when (it) {
+            "import com.intellij.mock.MockProject" -> "import org.jetbrains.kotlin.com.intellij.mock.MockProject"
+            else -> it
+        }
+    }
 }
 
 tasks.compileKotlin.configure {
+    dependsOn(syncSources)
     kotlinOptions {
         jvmTarget = "11"
         freeCompilerArgs = listOf("-Xjvm-default=all")
     }
+}
+
+tasks.clean.configure {
+    delete("src")
 }
 
 val sourcesJar by tasks.registering(Jar::class) {

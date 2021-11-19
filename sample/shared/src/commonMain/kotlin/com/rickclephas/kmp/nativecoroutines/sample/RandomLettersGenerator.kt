@@ -9,7 +9,7 @@ import kotlin.time.ExperimentalTime
 object RandomLettersGenerator {
 
     suspend fun getRandomLetters(throwException: Boolean): String {
-        delay(seconds(2))
+        delay(2.seconds)
         if (throwException) {
             throw RuntimeException("the best exception ever")
         }

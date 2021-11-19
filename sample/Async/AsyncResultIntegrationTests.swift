@@ -24,7 +24,7 @@ class AsyncResultIntegrationTests: XCTestCase {
             return
         }
         XCTAssertEqual(value.int32Value, sendValue, "Received incorrect value")
-        XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
+        await assertJobCompleted(integrationTests)
     }
     
     func testNilValueReceived() async {
@@ -35,7 +35,7 @@ class AsyncResultIntegrationTests: XCTestCase {
             return
         }
         XCTAssertNil(value, "Value should be nil")
-        XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
+        await assertJobCompleted(integrationTests)
     }
     
     func testExceptionReceived() async {
@@ -50,7 +50,7 @@ class AsyncResultIntegrationTests: XCTestCase {
         XCTAssertEqual(nsError.localizedDescription, sendMessage, "Error has incorrect localizedDescription")
         let exception = nsError.userInfo["KotlinException"]
         XCTAssertTrue(exception is KotlinException, "Error doesn't contain the Kotlin exception")
-        XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
+        await assertJobCompleted(integrationTests)
     }
     
     func testErrorReceived() async {
@@ -65,7 +65,7 @@ class AsyncResultIntegrationTests: XCTestCase {
         XCTAssertEqual(nsError.localizedDescription, sendMessage, "Error has incorrect localizedDescription")
         let exception = nsError.userInfo["KotlinException"]
         XCTAssertTrue(exception is KotlinThrowable, "Error doesn't contain the Kotlin error")
-        XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
+        await assertJobCompleted(integrationTests)
     }
     
     func testCancellation() async {
@@ -81,7 +81,7 @@ class AsyncResultIntegrationTests: XCTestCase {
             handle.cancel()
         }
         let handleResult = await handle.result
-        XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
+        await assertJobCompleted(integrationTests)
         guard case let .success(result) = handleResult else {
             XCTFail("Task should complete without an error")
             return
