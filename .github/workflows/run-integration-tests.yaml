@@ -1,6 +1,6 @@
 name: Run integration tests
 concurrency:
-  group: ${{ github.ref }}
+  group: run-integration-tests-${{ github.ref }}
   cancel-in-progress: true
 on:
   workflow_dispatch:

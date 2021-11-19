@@ -1,6 +1,6 @@
 name: Run Swift tests
 concurrency:
-  group: ${{ github.ref }}
+  group: run-swift-tests-${{ github.ref }}
   cancel-in-progress: true
 on:
   workflow_dispatch:
