@@ -82,12 +82,12 @@ All Swift implementations are also available via the Swift Package Manager.
 Just add it to your `Package.swift` file:
 ```swift
 dependencies: [
-    .package(url: "git@github.com:rickclephas/KMP-NativeCoroutines.git", from: "<version>")
+    .package(url: "https://github.com/rickclephas/KMP-NativeCoroutines.git", from: "<version>")
 ]
 ```
 
 Or add it in Xcode by going to `File` > `Add Packages...` and providing the URL: 
-`git@github.com:rickclephas/KMP-NativeCoroutines.git`.
+`https://github.com/rickclephas/KMP-NativeCoroutines.git`.
 
 ## Usage
 
