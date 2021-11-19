@@ -24,7 +24,7 @@ jobs:
         java: [ 11 ]
         platform: [ iOS, macOS, tvOS, watchOS ]
         embeddable-compiler: [ true, false ]
-    name: ${{ format('{0} (embeddable {1}) ({2}, Xcode {3}, JDK {4})', matrix.embeddable-compiler, matrix.platform, matrix.os, matrix.xcode, matrix.java) }}
+    name: ${{ format('{0} (embeddable {1}) ({2}, Xcode {3}, JDK {4})', matrix.platform, matrix.embeddable-compiler, matrix.os, matrix.xcode, matrix.java) }}
     runs-on: ${{ matrix.os }}
     defaults:
       run:
