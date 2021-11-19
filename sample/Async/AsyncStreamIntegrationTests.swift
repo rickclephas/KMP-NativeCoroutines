@@ -22,7 +22,11 @@ class AsyncStreamIntegrationTests: XCTestCase {
         do {
             var receivedValueCount: Int32 = 0
             for try await value in stream {
-                XCTAssertEqual(integrationTests.uncompletedJobCount, 1, "There should be 1 uncompleted job")
+                if receivedValueCount + 1 < sendValueCount {
+                    // Depending on the timing the job might already have completed for the last value,
+                    // so we won't check this for the last value but only for earlier values
+                    XCTAssertEqual(integrationTests.uncompletedJobCount, 1, "There should be 1 uncompleted job")
+                }
                 XCTAssertEqual(value.int32Value, receivedValueCount, "Received incorrect value")
                 receivedValueCount += 1
             }
@@ -47,7 +51,11 @@ class AsyncStreamIntegrationTests: XCTestCase {
         do {
             var receivedValueCount: Int32 = 0
             for try await value in stream {
-                XCTAssertEqual(integrationTests.uncompletedJobCount, 1, "There should be 1 uncompleted job")
+                if receivedValueCount + 1 < sendValueCount {
+                    // Depending on the timing the job might already have completed for the last value,
+                    // so we won't check this for the last value but only for earlier values
+                    XCTAssertEqual(integrationTests.uncompletedJobCount, 1, "There should be 1 uncompleted job")
+                }
                 if receivedValueCount == nullValueIndex {
                     XCTAssertNil(value, "Value should be nil")
                 } else {
