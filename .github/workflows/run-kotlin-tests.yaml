@@ -1,4 +1,7 @@
 name: Run Kotlin tests
+concurrency:
+  group: run-kotlin-tests-${{ github.ref }}
+  cancel-in-progress: true
 on:
   workflow_dispatch:
   pull_request:
