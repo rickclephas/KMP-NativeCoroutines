@@ -1,6 +1,10 @@
 name: Run integration tests
 on:
   workflow_dispatch:
+  pull_request:
+    branches:
+      - master
+      - kotlin/**
 env:
   XCODEBUILD_SCHEME_iOS: iOS App
   XCODEBUILD_SCHEME_macOS: macOS App

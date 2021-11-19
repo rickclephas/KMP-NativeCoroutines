@@ -1,6 +1,9 @@
 name: Run Swift tests
 on:
   workflow_dispatch:
+  pull_request:
+    branches:
+      - master
 env:
   XCODEBUILD_DESTINATION_iOS: platform=iOS Simulator,name=iPhone 12 Pro Max
   XCODEBUILD_DESTINATION_macOS: platform=OS X
