@@ -15,7 +15,7 @@ jobs:
         xcode: [ 13.1 ]
         platform: [ iOS, macOS, tvOS, watchOS ]
         implementation: [ Combine, RxSwift ]
-    name: ${{ format('{0} ({1}, {2}, Xcode {3})', matrix.implementation, matrix.platform, matrix.os, matrix.xcode) }}
+    name: ${{ format('{0} {1} ({2}, Xcode {3})', matrix.implementation, matrix.platform, matrix.os, matrix.xcode) }}
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout
