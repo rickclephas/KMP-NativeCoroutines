@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "1DF88366266D1D270058B6F9"
+               BlueprintIdentifier = "1D71759E266FE9B700846F75"
                BuildableName = "KMPNativeCoroutinesCombine.framework"
                BlueprintName = "KMPNativeCoroutinesCombine"
                ReferencedContainer = "container:KMPNativeCoroutines.xcodeproj">
@@ -32,7 +32,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "1DF8836E266D1D270058B6F9"
+               BlueprintIdentifier = "1DCA41A426753C630036C1A3"
                BuildableName = "KMPNativeCoroutinesCombineTests.xctest"
                BlueprintName = "KMPNativeCoroutinesCombineTests"
                ReferencedContainer = "container:KMPNativeCoroutines.xcodeproj">
@@ -60,7 +60,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "1DF88366266D1D270058B6F9"
+            BlueprintIdentifier = "1D71759E266FE9B700846F75"
             BuildableName = "KMPNativeCoroutinesCombine.framework"
             BlueprintName = "KMPNativeCoroutinesCombine"
             ReferencedContainer = "container:KMPNativeCoroutines.xcodeproj">
