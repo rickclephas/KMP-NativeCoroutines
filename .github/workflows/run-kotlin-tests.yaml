@@ -1,6 +1,6 @@
 name: Run Kotlin tests
 concurrency:
-  group: ${{ github.ref }}
+  group: run-kotlin-tests-${{ github.ref }}
   cancel-in-progress: true
 on:
   workflow_dispatch:
