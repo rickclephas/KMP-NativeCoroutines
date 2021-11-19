@@ -19,7 +19,21 @@ jobs:
         platform: [ iOS, macOS, tvOS, watchOS ]
         implementation: [ Combine, RxSwift ]
         include:
-          - xcode: 13.2-beta
+          - os: macos-11
+            xcode: 13.2-beta
+            platform: iOS
+            implementation: Async
+          - os: macos-11
+            xcode: 13.2-beta
+            platform: macOS
+            implementation: Async
+          - os: macos-11
+            xcode: 13.2-beta
+            platform: tvOS
+            implementation: Async
+          - os: macos-11
+            xcode: 13.2-beta
+            platform: watchOS
             implementation: Async
     name: ${{ format('{0} {1} ({2}, Xcode {3})', matrix.implementation, matrix.platform, matrix.os, matrix.xcode) }}
     runs-on: ${{ matrix.os }}
