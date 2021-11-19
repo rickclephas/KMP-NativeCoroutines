@@ -20,7 +20,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ macos-11 ]
-        xcode: [ 13.1 ]
+        xcode: [ 13.2-beta ]
         java: [ 11 ]
         platform: [ iOS, macOS, tvOS, watchOS ]
     name: ${{ format('{0} ({1}, Xcode {2}, JDK {3})', matrix.platform, matrix.os, matrix.xcode, matrix.java) }}
