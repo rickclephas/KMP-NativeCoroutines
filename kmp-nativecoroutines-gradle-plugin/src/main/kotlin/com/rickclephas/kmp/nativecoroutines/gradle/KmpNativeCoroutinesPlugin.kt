@@ -39,5 +39,5 @@ class KmpNativeCoroutinesPlugin: KotlinCompilerPluginSupportPlugin {
         SubpluginArtifact("com.rickclephas.kmp", "kmp-nativecoroutines-compiler", VERSION)
 
     override fun getPluginArtifact(): SubpluginArtifact =
-        throw UnsupportedOperationException("KMP-NativeCoroutines only supports Kotlin\\Native!")
+        SubpluginArtifact("com.rickclephas.kmp", "kmp-nativecoroutines-compiler-embeddable", VERSION)
 }
