@@ -34,13 +34,7 @@ class AsyncStreamIntegrationTests: XCTestCase {
         } catch {
             XCTFail("Stream should complete without an error")
         }
-        await withCheckedContinuation { (continuation: CheckedContinuation<Void, Never>) in
-            // The job should complete soon after the stream finishes
-            DispatchQueue.global().asyncAfter(deadline: .now() + 1) {
-                XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
-                continuation.resume()
-            }
-        }
+        await assertJobCompleted(integrationTests)
     }
     
     func testNilValueReceived() async {
@@ -67,13 +61,7 @@ class AsyncStreamIntegrationTests: XCTestCase {
         } catch {
             XCTFail("Stream should complete without an error")
         }
-        await withCheckedContinuation { (continuation: CheckedContinuation<Void, Never>) in
-            // The job should complete soon after the stream finishes
-            DispatchQueue.global().asyncAfter(deadline: .now() + 1) {
-                XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
-                continuation.resume()
-            }
-        }
+        await assertJobCompleted(integrationTests)
     }
     
     func testExceptionReceived() async {
@@ -95,13 +83,7 @@ class AsyncStreamIntegrationTests: XCTestCase {
             let exception = error.userInfo["KotlinException"]
             XCTAssertTrue(exception is KotlinException, "Error doesn't contain the Kotlin exception")
         }
-        await withCheckedContinuation { (continuation: CheckedContinuation<Void, Never>) in
-            // The job should complete soon after the stream finishes
-            DispatchQueue.global().asyncAfter(deadline: .now() + 1) {
-                XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
-                continuation.resume()
-            }
-        }
+        await assertJobCompleted(integrationTests)
         XCTAssertEqual(receivedValueCount, exceptionIndex, "Should have received all values before the exception")
     }
     
@@ -124,13 +106,7 @@ class AsyncStreamIntegrationTests: XCTestCase {
             let exception = error.userInfo["KotlinException"]
             XCTAssertTrue(exception is KotlinThrowable, "Error doesn't contain the Kotlin error")
         }
-        await withCheckedContinuation { (continuation: CheckedContinuation<Void, Never>) in
-            // The job should complete soon after the stream finishes
-            DispatchQueue.global().asyncAfter(deadline: .now() + 1) {
-                XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
-                continuation.resume()
-            }
-        }
+        await assertJobCompleted(integrationTests)
         XCTAssertEqual(receivedValueCount, errorIndex, "Should have received all values before the error")
     }
     
@@ -158,13 +134,7 @@ class AsyncStreamIntegrationTests: XCTestCase {
             handle.cancel()
         }
         _ = await handle.result
-        await withCheckedContinuation { (continuation: CheckedContinuation<Void, Never>) in
-            // The job should complete soon after the stream finishes
-            DispatchQueue.global().asyncAfter(deadline: .now() + 1) {
-                XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
-                continuation.resume()
-            }
-        }
+        await assertJobCompleted(integrationTests)
         XCTAssertEqual(callbackCount, 0, "The callback shouldn't be called")
     }
 }
