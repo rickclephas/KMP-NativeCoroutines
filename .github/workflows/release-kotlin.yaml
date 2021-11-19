@@ -1,28 +1,37 @@
-name: Publish a Kotlin compatibility release
+name: Publish a Kotlin release
 on:
   push:
     tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
       - 'v[0-9]+.[0-9]+.[0-9]+-kotlin-[0-9]+.[0-9]+.[0-9]+'
-      - 'v[0-9]+.[0-9]+.[0-9]+-kotlin-[0-9]+.[0-9]+.[0-9]+-new-mm'
+      - 'v[0-9]+.[0-9]+.[0-9]+-new-mm'
 jobs:
   publish-kotlin-libraries:
     runs-on: macos-11
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-java@v2
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Gradle Wrapper Validation
+        uses: gradle/wrapper-validation-action@v1
+      - name: Setup JDK
+        uses: actions/setup-java@v2
         with:
           distribution: 'zulu'
           java-version: '11'
-          cache: 'gradle'
-      - uses: gradle/wrapper-validation-action@v1
-      - run: ./gradlew publishAllPublicationsToSonatypeRepository
+      - name: Cache Gradle
+        uses: ./.github/actions/cache-gradle
+      - name: Cache Konan
+        uses: ./.github/actions/cache-konan
+      - name: Publish to Sonatype
+        run: ./gradlew publishAllPublicationsToSonatypeRepository
         env:
           SIGNING_KEY_ID: ${{ secrets.SIGNING_KEY_ID }}
           SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
           SIGNING_SECRET_KEY: ${{ secrets.SIGNING_SECRET_KEY }}
           OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
-      - run: ./gradlew publishPlugins
+      - name: Publish to Gradle Plugin Portal
+        run: ./gradlew publishPlugins
         env:
           SIGNING_KEY_ID: ${{ secrets.SIGNING_KEY_ID }}
           SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}

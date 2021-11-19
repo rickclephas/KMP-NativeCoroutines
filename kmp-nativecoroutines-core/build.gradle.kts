@@ -22,7 +22,11 @@ kotlin {
         nodejs()
     }
     linuxX64()
+    mingwX64()
     sourceSets {
+        all {
+            languageSettings.optIn("kotlin.RequiresOptIn")
+        }
         val commonMain by getting {
             dependencies {
                 api(Dependencies.Kotlinx.coroutinesCore)
