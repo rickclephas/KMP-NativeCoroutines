@@ -22,4 +22,5 @@ kotlin {
         nodejs()
     }
     linuxX64()
+    mingwX64()
 }
