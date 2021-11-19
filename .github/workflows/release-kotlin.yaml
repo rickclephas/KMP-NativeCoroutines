@@ -3,6 +3,7 @@ on:
   push:
     tags:
       - 'v[0-9]+.[0-9]+.[0-9]+-kotlin-[0-9]+.[0-9]+.[0-9]+'
+      - 'v[0-9]+.[0-9]+.[0-9]+-kotlin-[0-9]+.[0-9]+.[0-9]+-new-mm'
 jobs:
   publish-kotlin-libraries:
     runs-on: macos-11
@@ -12,6 +13,7 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: '11'
+          cache: 'gradle'
       - uses: gradle/wrapper-validation-action@v1
       - run: ./gradlew publishAllPublicationsToSonatypeRepository
         env:
