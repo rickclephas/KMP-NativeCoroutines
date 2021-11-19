@@ -27,7 +27,7 @@ class RxSwiftSingleIntegrationTests: XCTestCase {
         })
         _ = disposable // This is just to remove the unused variable warning
         XCTAssertEqual(integrationTests.uncompletedJobCount, 1, "There should be 1 uncompleted job")
-        wait(for: [valueExpectation, disposedExpectation], timeout: 2)
+        wait(for: [valueExpectation, disposedExpectation], timeout: 3)
         delay(1) // Delay is needed else the job isn't completed yet
         XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
     }
@@ -47,7 +47,7 @@ class RxSwiftSingleIntegrationTests: XCTestCase {
         })
         _ = disposable // This is just to remove the unused variable warning
         XCTAssertEqual(integrationTests.uncompletedJobCount, 1, "There should be 1 uncompleted job")
-        wait(for: [valueExpectation, disposedExpectation], timeout: 2)
+        wait(for: [valueExpectation, disposedExpectation], timeout: 3)
         delay(1) // Delay is needed else the job isn't completed yet
         XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
     }
@@ -73,7 +73,7 @@ class RxSwiftSingleIntegrationTests: XCTestCase {
         })
         _ = disposable // This is just to remove the unused variable warning
         XCTAssertEqual(integrationTests.uncompletedJobCount, 1, "There should be 1 uncompleted job")
-        wait(for: [valueExpectation, errorExpectation, disposedExpectation], timeout: 2)
+        wait(for: [valueExpectation, errorExpectation, disposedExpectation], timeout: 3)
         XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
     }
     
@@ -98,7 +98,7 @@ class RxSwiftSingleIntegrationTests: XCTestCase {
         })
         _ = disposable // This is just to remove the unused variable warning
         XCTAssertEqual(integrationTests.uncompletedJobCount, 1, "There should be 1 uncompleted job")
-        wait(for: [valueExpectation, errorExpectation, disposedExpectation], timeout: 2)
+        wait(for: [valueExpectation, errorExpectation, disposedExpectation], timeout: 3)
         XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
     }
     
@@ -116,7 +116,7 @@ class RxSwiftSingleIntegrationTests: XCTestCase {
             disposedExpectation.fulfill()
         })
         _ = disposable // This is just to remove the unused variable warning
-        wait(for: [valueExpectation, disposedExpectation], timeout: 2)
+        wait(for: [valueExpectation, disposedExpectation], timeout: 3)
     }
     
     func testCancellation() {
@@ -170,7 +170,7 @@ class RxSwiftSingleIntegrationTests: XCTestCase {
         })
         _ = disposable // This is just to remove the unused variable warning
         XCTAssertEqual(integrationTests.uncompletedJobCount, 1, "There should be 1 uncompleted job")
-        wait(for: [valuesExpectation, completionExpectation, disposedExpectation], timeout: 3)
+        wait(for: [valuesExpectation, completionExpectation, disposedExpectation], timeout: 4)
         delay(1) // Delay is needed else the job isn't completed yet
         XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
     }

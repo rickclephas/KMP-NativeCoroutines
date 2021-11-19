@@ -1,0 +1,69 @@
+name: Run integration tests
+concurrency:
+  group: run-integration-tests-${{ github.ref }}
+  cancel-in-progress: true
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - master
+      - kotlin/**
+env:
+  XCODEBUILD_SCHEME_iOS: iOS App
+  XCODEBUILD_SCHEME_macOS: macOS App
+  XCODEBUILD_SCHEME_tvOS: tvOS App
+  XCODEBUILD_SCHEME_watchOS: watchOS Tests
+  XCODEBUILD_DESTINATION_iOS: platform=iOS Simulator,name=iPhone 12 Pro Max
+  XCODEBUILD_DESTINATION_macOS: platform=OS X
+  XCODEBUILD_DESTINATION_tvOS: platform=tvOS Simulator,name=Apple TV
+  XCODEBUILD_DESTINATION_watchOS: platform=watchOS Simulator,name=Apple Watch Series 7 - 45mm
+jobs:
+  run-tests:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ macos-11 ]
+        xcode: [ 13.1 ]
+        java: [ 11 ]
+        platform: [ iOS, macOS, tvOS, watchOS ]
+        embeddable-compiler: [ true, false ]
+    name: ${{ format('{0} (embeddable {1}) ({2}, Xcode {3}, JDK {4})', matrix.platform, matrix.embeddable-compiler, matrix.os, matrix.xcode, matrix.java) }}
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        working-directory: sample
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Gradle Wrapper Validation
+        uses: gradle/wrapper-validation-action@v1
+      - name: Setup Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: ${{ matrix.xcode }}
+      - name: Setup JDK
+        uses: actions/setup-java@v2
+        with:
+          distribution: zulu
+          java-version: ${{ matrix.java }}
+      - name: Cache Gradle
+        uses: ./.github/actions/cache-gradle
+      - name: Cache Konan
+        uses: ./.github/actions/cache-konan
+      - name: Set kotlin.native.useEmbeddableCompilerJar
+        env:
+          KOTLIN_NATIVE_EMBEDDABLE_COMPILER: ${{ matrix.embeddable-compiler }}
+        run: echo "kotlin.native.useEmbeddableCompilerJar=KOTLIN_NATIVE_EMBEDDABLE_COMPILER" >> gradle.properties
+      - name: Install CocoaPods dependencies
+        run: |
+          ./gradlew :shared:generateDummyFramework
+          pod install
+      - name: Run tests
+        env:
+          XCODEBUILD_SCHEME: ${{ env[format('XCODEBUILD_SCHEME_{0}', matrix.platform)] }}
+          XCODEBUILD_DESTINATION: ${{ env[format('XCODEBUILD_DESTINATION_{0}', matrix.platform)] }}
+        run: >-
+          xcodebuild test
+          -workspace Sample.xcworkspace
+          -scheme "$XCODEBUILD_SCHEME"
+          -destination "$XCODEBUILD_DESTINATION"

@@ -20,7 +20,7 @@ object Clock {
         GlobalScope.launch {
             while (true) {
                 _time.value = epochSeconds()
-                delay(seconds(1))
+                delay(1.seconds)
             }
         }
     }
