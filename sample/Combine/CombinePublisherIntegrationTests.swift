@@ -91,6 +91,7 @@ class CombinePublisherIntegrationTests: XCTestCase {
         _ = cancellable // This is just to remove the unused variable warning
         XCTAssertEqual(integrationTests.uncompletedJobCount, 1, "There should be 1 uncompleted job")
         wait(for: [valuesExpectation, completionExpectation], timeout: 4)
+        delay(1) // Delay is needed else the job isn't completed yet
         XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
     }
     
@@ -119,6 +120,7 @@ class CombinePublisherIntegrationTests: XCTestCase {
         _ = cancellable // This is just to remove the unused variable warning
         XCTAssertEqual(integrationTests.uncompletedJobCount, 1, "There should be 1 uncompleted job")
         wait(for: [valuesExpectation, completionExpectation], timeout: 4)
+        delay(1) // Delay is needed else the job isn't completed yet
         XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
     }
     
