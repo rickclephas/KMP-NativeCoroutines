@@ -8,6 +8,6 @@ object Dependencies {
     }
 
     object Kotlinx {
-        const val coroutinesCore = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1-new-mm-dev2"
+        const val coroutinesCore = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0-RC"
     }
 }
