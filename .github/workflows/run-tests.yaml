@@ -111,16 +111,12 @@ jobs:
         env:
           KOTLIN_NATIVE_EMBEDDABLE_COMPILER: ${{ matrix.embeddable-compiler }}
         run: echo "kotlin.native.useEmbeddableCompilerJar=KOTLIN_NATIVE_EMBEDDABLE_COMPILER" >> gradle.properties
-      - name: Install CocoaPods dependencies
-        run: |
-          ./gradlew :shared:generateDummyFramework
-          pod install
       - name: Run tests
         env:
           XCODEBUILD_SCHEME: ${{ env[format('XCODEBUILD_SCHEME_{0}', matrix.platform)] }}
           XCODEBUILD_DESTINATION: ${{ env[format('XCODEBUILD_DESTINATION_{0}', matrix.platform)] }}
         run: >-
           xcodebuild test
-          -workspace Sample.xcworkspace
+          -project Sample.xcodeproj
           -scheme "$XCODEBUILD_SCHEME"
           -destination "$XCODEBUILD_DESTINATION"

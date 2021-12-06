@@ -117,14 +117,6 @@
 		1DF1A67626714FBD00945FF9 /* RandomLettersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF1A67426714FBD00945FF9 /* RandomLettersView.swift */; };
 		1DF1A6782671535200945FF9 /* RandomLettersCombineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF1A6772671535200945FF9 /* RandomLettersCombineViewModel.swift */; };
 		1DF1A6792671535200945FF9 /* RandomLettersCombineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF1A6772671535200945FF9 /* RandomLettersCombineViewModel.swift */; };
-		1F0A1E1603107E57275DCEB3 /* Pods_tvOS_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AC0E65235849C39FBC494E7 /* Pods_tvOS_Tests.framework */; };
-		37CEC1BD1853BFCDEEBE4B52 /* Pods_macOS_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8CAA0A4A2F0DA48EC903C52 /* Pods_macOS_Tests.framework */; };
-		AD925FB3B122897B070DEFEB /* Pods_iOS_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 430255A8B181606267348B23 /* Pods_iOS_Tests.framework */; };
-		B87DF9409827D657010BA035 /* Pods_watchOS_App_WatchKit_Extension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9CF1E937EA4791DEFB43045 /* Pods_watchOS_App_WatchKit_Extension.framework */; };
-		C4D6F3AC74F7B109B556CD3D /* Pods_watchOS_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEB345BD0557542C26300088 /* Pods_watchOS_Tests.framework */; };
-		C777E2D954DA358AD25CC3BF /* Pods_tvOS_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2485C58468A2C0AD4D59101 /* Pods_tvOS_App.framework */; };
-		E2D6702474205AE2CC47D3FA /* Pods_iOS_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C54EBD4C92297D7F9195116 /* Pods_iOS_App.framework */; };
-		E45C268DBAB665FAC90C0C01 /* Pods_macOS_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA86A8D66453FD04AAF5353F /* Pods_macOS_App.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -198,7 +190,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0BC692248E0A96A34E37C6AC /* Pods-iOS Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS Tests.release.xcconfig"; path = "Target Support Files/Pods-iOS Tests/Pods-iOS Tests.release.xcconfig"; sourceTree = "<group>"; };
 		1D04AEFF266E9C0700920D20 /* KMPNativeCoroutinesCombine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KMPNativeCoroutinesCombine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D04AF3C266EB02000920D20 /* KMPNativeCoroutinesCombine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KMPNativeCoroutinesCombine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D5DAF7C2698B5EB0059D4B8 /* ClockRxSwiftViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockRxSwiftViewModel.swift; sourceTree = "<group>"; };
@@ -249,34 +240,11 @@
 		1D81B1562677E56200EEC34D /* TestUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUtils.swift; sourceTree = "<group>"; };
 		1D81B1592677EDE600EEC34D /* CombinePublisherIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombinePublisherIntegrationTests.swift; sourceTree = "<group>"; };
 		1D91395026C7F04C00A50CDC /* CompilerIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompilerIntegrationTests.swift; sourceTree = "<group>"; };
-		1DEE8AB330F1D42D1AF1532C /* Pods-macOS App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-macOS App.release.xcconfig"; path = "Target Support Files/Pods-macOS App/Pods-macOS App.release.xcconfig"; sourceTree = "<group>"; };
 		1DF1A66B2671448500945FF9 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		1DF1A66E2671494800945FF9 /* NavigationBarTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarTitle.swift; sourceTree = "<group>"; };
 		1DF1A67126714EEC00945FF9 /* RandomLettersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomLettersViewModel.swift; sourceTree = "<group>"; };
 		1DF1A67426714FBD00945FF9 /* RandomLettersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomLettersView.swift; sourceTree = "<group>"; };
 		1DF1A6772671535200945FF9 /* RandomLettersCombineViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomLettersCombineViewModel.swift; sourceTree = "<group>"; };
-		1F4B88ED1385A7F544FDF011 /* Pods-watchOS App WatchKit Extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-watchOS App WatchKit Extension.release.xcconfig"; path = "Target Support Files/Pods-watchOS App WatchKit Extension/Pods-watchOS App WatchKit Extension.release.xcconfig"; sourceTree = "<group>"; };
-		3327CBE919E359C7A6982896 /* Pods-tvOS Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tvOS Tests.debug.xcconfig"; path = "Target Support Files/Pods-tvOS Tests/Pods-tvOS Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		3D1DA8D6E8034D66525F216D /* Pods-macOS Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-macOS Tests.debug.xcconfig"; path = "Target Support Files/Pods-macOS Tests/Pods-macOS Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		403C05C9BA3D6C45A44669C7 /* Pods-iOS Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS Tests.debug.xcconfig"; path = "Target Support Files/Pods-iOS Tests/Pods-iOS Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		430255A8B181606267348B23 /* Pods_iOS_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4AB8345A013815C7E3CC5079 /* Pods-macOS App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-macOS App.debug.xcconfig"; path = "Target Support Files/Pods-macOS App/Pods-macOS App.debug.xcconfig"; sourceTree = "<group>"; };
-		4AC0E65235849C39FBC494E7 /* Pods_tvOS_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tvOS_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		547CB6DA931D7FB80FBBAC33 /* Pods-tvOS App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tvOS App.debug.xcconfig"; path = "Target Support Files/Pods-tvOS App/Pods-tvOS App.debug.xcconfig"; sourceTree = "<group>"; };
-		5CEB0373740CCE102A1C59B1 /* Pods-watchOS Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-watchOS Tests.release.xcconfig"; path = "Target Support Files/Pods-watchOS Tests/Pods-watchOS Tests.release.xcconfig"; sourceTree = "<group>"; };
-		5EEA8124C8A8A153CF6FE731 /* Pods-macOS Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-macOS Tests.release.xcconfig"; path = "Target Support Files/Pods-macOS Tests/Pods-macOS Tests.release.xcconfig"; sourceTree = "<group>"; };
-		8C54EBD4C92297D7F9195116 /* Pods_iOS_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		AED4A6755CD680E73BD5A603 /* Pods-watchOS App WatchKit Extension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-watchOS App WatchKit Extension.debug.xcconfig"; path = "Target Support Files/Pods-watchOS App WatchKit Extension/Pods-watchOS App WatchKit Extension.debug.xcconfig"; sourceTree = "<group>"; };
-		B8CAA0A4A2F0DA48EC903C52 /* Pods_macOS_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_macOS_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B9B8A7EE56283DF651E7F0A8 /* Pods-iOS App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS App.release.xcconfig"; path = "Target Support Files/Pods-iOS App/Pods-iOS App.release.xcconfig"; sourceTree = "<group>"; };
-		B9CF1E937EA4791DEFB43045 /* Pods_watchOS_App_WatchKit_Extension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_watchOS_App_WatchKit_Extension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BEAC6D75141FCAE6FCEBC0D9 /* Pods-tvOS App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tvOS App.release.xcconfig"; path = "Target Support Files/Pods-tvOS App/Pods-tvOS App.release.xcconfig"; sourceTree = "<group>"; };
-		C2C42BF31BE9E27C55D04D7E /* Pods-tvOS Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tvOS Tests.release.xcconfig"; path = "Target Support Files/Pods-tvOS Tests/Pods-tvOS Tests.release.xcconfig"; sourceTree = "<group>"; };
-		CA86A8D66453FD04AAF5353F /* Pods_macOS_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_macOS_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		CEB345BD0557542C26300088 /* Pods_watchOS_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_watchOS_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		CED0F4062773AA000731F6BF /* Pods-iOS App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS App.debug.xcconfig"; path = "Target Support Files/Pods-iOS App/Pods-iOS App.debug.xcconfig"; sourceTree = "<group>"; };
-		D2485C58468A2C0AD4D59101 /* Pods_tvOS_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tvOS_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		EC1B350F2A08B7E0F2A8381F /* Pods-watchOS Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-watchOS Tests.debug.xcconfig"; path = "Target Support Files/Pods-watchOS Tests/Pods-watchOS Tests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -284,7 +252,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C777E2D954DA358AD25CC3BF /* Pods_tvOS_App.framework in Frameworks */,
 				1D75A33F272C85EB00CFF795 /* KMPNativeCoroutinesCombine in Frameworks */,
 				1D75A341272C85EB00CFF795 /* KMPNativeCoroutinesCore in Frameworks */,
 				1D75A343272C85EB00CFF795 /* KMPNativeCoroutinesRxSwift in Frameworks */,
@@ -295,7 +262,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1F0A1E1603107E57275DCEB3 /* Pods_tvOS_Tests.framework in Frameworks */,
 				1D75A357272C8B2900CFF795 /* KMPNativeCoroutinesCombine in Frameworks */,
 				1D75A359272C8B2900CFF795 /* KMPNativeCoroutinesCore in Frameworks */,
 				1D75A35B272C8B2900CFF795 /* KMPNativeCoroutinesRxSwift in Frameworks */,
@@ -306,7 +272,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B87DF9409827D657010BA035 /* Pods_watchOS_App_WatchKit_Extension.framework in Frameworks */,
 				1D75A345272C85F600CFF795 /* KMPNativeCoroutinesCombine in Frameworks */,
 				1D75A347272C85F600CFF795 /* KMPNativeCoroutinesCore in Frameworks */,
 				1D75A349272C85F600CFF795 /* KMPNativeCoroutinesRxSwift in Frameworks */,
@@ -317,7 +282,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C4D6F3AC74F7B109B556CD3D /* Pods_watchOS_Tests.framework in Frameworks */,
 				1D75A35D272C8B3000CFF795 /* KMPNativeCoroutinesCombine in Frameworks */,
 				1D75A35F272C8B3000CFF795 /* KMPNativeCoroutinesCore in Frameworks */,
 				1D75A361272C8B3000CFF795 /* KMPNativeCoroutinesRxSwift in Frameworks */,
@@ -328,7 +292,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E45C268DBAB665FAC90C0C01 /* Pods_macOS_App.framework in Frameworks */,
 				1D75A333272C85CC00CFF795 /* KMPNativeCoroutinesCombine in Frameworks */,
 				1D75A335272C85CC00CFF795 /* KMPNativeCoroutinesCore in Frameworks */,
 				1D75A337272C85CC00CFF795 /* KMPNativeCoroutinesRxSwift in Frameworks */,
@@ -339,7 +302,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E2D6702474205AE2CC47D3FA /* Pods_iOS_App.framework in Frameworks */,
 				1D75A339272C85E300CFF795 /* KMPNativeCoroutinesCombine in Frameworks */,
 				1D75A33B272C85E300CFF795 /* KMPNativeCoroutinesCore in Frameworks */,
 				1D75A33D272C85E300CFF795 /* KMPNativeCoroutinesRxSwift in Frameworks */,
@@ -350,7 +312,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				37CEC1BD1853BFCDEEBE4B52 /* Pods_macOS_Tests.framework in Frameworks */,
 				1D75A34B272C8B1C00CFF795 /* KMPNativeCoroutinesCombine in Frameworks */,
 				1D75A34D272C8B1C00CFF795 /* KMPNativeCoroutinesCore in Frameworks */,
 				1D75A34F272C8B1C00CFF795 /* KMPNativeCoroutinesRxSwift in Frameworks */,
@@ -361,7 +322,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AD925FB3B122897B070DEFEB /* Pods_iOS_Tests.framework in Frameworks */,
 				1D75A351272C8B2300CFF795 /* KMPNativeCoroutinesCombine in Frameworks */,
 				1D75A353272C8B2300CFF795 /* KMPNativeCoroutinesCore in Frameworks */,
 				1D75A355272C8B2300CFF795 /* KMPNativeCoroutinesRxSwift in Frameworks */,
@@ -426,14 +386,6 @@
 			children = (
 				1D04AF3C266EB02000920D20 /* KMPNativeCoroutinesCombine.framework */,
 				1D04AEFF266E9C0700920D20 /* KMPNativeCoroutinesCombine.framework */,
-				8C54EBD4C92297D7F9195116 /* Pods_iOS_App.framework */,
-				CA86A8D66453FD04AAF5353F /* Pods_macOS_App.framework */,
-				430255A8B181606267348B23 /* Pods_iOS_Tests.framework */,
-				B8CAA0A4A2F0DA48EC903C52 /* Pods_macOS_Tests.framework */,
-				D2485C58468A2C0AD4D59101 /* Pods_tvOS_App.framework */,
-				4AC0E65235849C39FBC494E7 /* Pods_tvOS_Tests.framework */,
-				B9CF1E937EA4791DEFB43045 /* Pods_watchOS_App_WatchKit_Extension.framework */,
-				CEB345BD0557542C26300088 /* Pods_watchOS_Tests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -586,22 +538,6 @@
 		BA4BEB357C3A9E0685F6DF25 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				CED0F4062773AA000731F6BF /* Pods-iOS App.debug.xcconfig */,
-				B9B8A7EE56283DF651E7F0A8 /* Pods-iOS App.release.xcconfig */,
-				4AB8345A013815C7E3CC5079 /* Pods-macOS App.debug.xcconfig */,
-				1DEE8AB330F1D42D1AF1532C /* Pods-macOS App.release.xcconfig */,
-				403C05C9BA3D6C45A44669C7 /* Pods-iOS Tests.debug.xcconfig */,
-				0BC692248E0A96A34E37C6AC /* Pods-iOS Tests.release.xcconfig */,
-				3D1DA8D6E8034D66525F216D /* Pods-macOS Tests.debug.xcconfig */,
-				5EEA8124C8A8A153CF6FE731 /* Pods-macOS Tests.release.xcconfig */,
-				547CB6DA931D7FB80FBBAC33 /* Pods-tvOS App.debug.xcconfig */,
-				BEAC6D75141FCAE6FCEBC0D9 /* Pods-tvOS App.release.xcconfig */,
-				3327CBE919E359C7A6982896 /* Pods-tvOS Tests.debug.xcconfig */,
-				C2C42BF31BE9E27C55D04D7E /* Pods-tvOS Tests.release.xcconfig */,
-				AED4A6755CD680E73BD5A603 /* Pods-watchOS App WatchKit Extension.debug.xcconfig */,
-				1F4B88ED1385A7F544FDF011 /* Pods-watchOS App WatchKit Extension.release.xcconfig */,
-				EC1B350F2A08B7E0F2A8381F /* Pods-watchOS Tests.debug.xcconfig */,
-				5CEB0373740CCE102A1C59B1 /* Pods-watchOS Tests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -613,7 +549,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1D63BF5E26E3E1DD003363BE /* Build configuration list for PBXNativeTarget "tvOS App" */;
 			buildPhases = (
-				92FA82B157F03A398C1269B1 /* [CP] Check Pods Manifest.lock */,
+				1DB9CD1D275E935100E13AFD /* ShellScript */,
 				1D63BF2F26E3E1DB003363BE /* Sources */,
 				1D63BF3026E3E1DB003363BE /* Frameworks */,
 				1D63BF3126E3E1DB003363BE /* Resources */,
@@ -636,7 +572,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1D63BF5F26E3E1DD003363BE /* Build configuration list for PBXNativeTarget "tvOS Tests" */;
 			buildPhases = (
-				A7B69D655FF9A9A7270CF5D9 /* [CP] Check Pods Manifest.lock */,
+				1DB9CD21275E95D200E13AFD /* ShellScript */,
 				1D63BF4226E3E1DD003363BE /* Sources */,
 				1D63BF4326E3E1DD003363BE /* Frameworks */,
 				1D63BF4426E3E1DD003363BE /* Resources */,
@@ -696,7 +632,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1D63BFBA26E4F00A003363BE /* Build configuration list for PBXNativeTarget "watchOS App WatchKit Extension" */;
 			buildPhases = (
-				8727D9E4BC848C417B63EB68 /* [CP] Check Pods Manifest.lock */,
+				1DB9CD1E275E937500E13AFD /* ShellScript */,
 				1D63BF8126E4F009003363BE /* Sources */,
 				1D63BF8226E4F009003363BE /* Frameworks */,
 				1D63BF8326E4F009003363BE /* Resources */,
@@ -719,7 +655,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1D63BFBD26E4F00A003363BE /* Build configuration list for PBXNativeTarget "watchOS Tests" */;
 			buildPhases = (
-				1232ED1EA7C688DF91999096 /* [CP] Check Pods Manifest.lock */,
+				1DB9CD22275E95DA00E13AFD /* ShellScript */,
 				1D63BF9826E4F00A003363BE /* Sources */,
 				1D63BF9926E4F00A003363BE /* Frameworks */,
 				1D63BF9A26E4F00A003363BE /* Resources */,
@@ -743,7 +679,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1D71760C267009C600846F75 /* Build configuration list for PBXNativeTarget "macOS App" */;
 			buildPhases = (
-				A21E3040ED2FD348221166B6 /* [CP] Check Pods Manifest.lock */,
+				1D5CF257275E887D002389EE /* ShellScript */,
 				1D7175F8267009C500846F75 /* Sources */,
 				1D7175F9267009C500846F75 /* Frameworks */,
 				1D7175FA267009C500846F75 /* Resources */,
@@ -766,7 +702,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1D717624267009E800846F75 /* Build configuration list for PBXNativeTarget "iOS App" */;
 			buildPhases = (
-				F67BFDE9F81CA353D4B7DD02 /* [CP] Check Pods Manifest.lock */,
+				1D5CF258275E8992002389EE /* ShellScript */,
 				1D71760F267009E700846F75 /* Sources */,
 				1D717610267009E700846F75 /* Frameworks */,
 				1D717611267009E700846F75 /* Resources */,
@@ -789,7 +725,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1D81B1422677B72200EEC34D /* Build configuration list for PBXNativeTarget "macOS Tests" */;
 			buildPhases = (
-				F05115CE68B707DEE4BC8121 /* [CP] Check Pods Manifest.lock */,
+				1DB9CD20275E95CA00E13AFD /* ShellScript */,
 				1D81B1372677B72200EEC34D /* Sources */,
 				1D81B1382677B72200EEC34D /* Frameworks */,
 				1D81B1392677B72200EEC34D /* Resources */,
@@ -813,7 +749,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1D81B1502677B7C000EEC34D /* Build configuration list for PBXNativeTarget "iOS Tests" */;
 			buildPhases = (
-				993BF42114784491BB187B2C /* [CP] Check Pods Manifest.lock */,
+				1DB9CD1F275E95A800E13AFD /* ShellScript */,
 				1D81B1452677B7C000EEC34D /* Sources */,
 				1D81B1462677B7C000EEC34D /* Frameworks */,
 				1D81B1472677B7C000EEC34D /* Resources */,
@@ -988,7 +924,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1232ED1EA7C688DF91999096 /* [CP] Check Pods Manifest.lock */ = {
+		1D5CF257275E887D002389EE /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -996,21 +932,16 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
 			);
-			name = "[CP] Check Pods Manifest.lock";
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-watchOS Tests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
+			shellScript = "cd \"$SRCROOT\"\n./gradlew :shared:embedAndSignAppleFrameworkForXcode\n";
 		};
-		8727D9E4BC848C417B63EB68 /* [CP] Check Pods Manifest.lock */ = {
+		1D5CF258275E8992002389EE /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1018,21 +949,16 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
 			);
-			name = "[CP] Check Pods Manifest.lock";
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-watchOS App WatchKit Extension-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
+			shellScript = "cd \"$SRCROOT\"\n./gradlew :shared:embedAndSignAppleFrameworkForXcode\n";
 		};
-		92FA82B157F03A398C1269B1 /* [CP] Check Pods Manifest.lock */ = {
+		1DB9CD1D275E935100E13AFD /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1040,21 +966,16 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
 			);
-			name = "[CP] Check Pods Manifest.lock";
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-tvOS App-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
+			shellScript = "cd \"$SRCROOT\"\n./gradlew :shared:embedAndSignAppleFrameworkForXcode\n";
 		};
-		993BF42114784491BB187B2C /* [CP] Check Pods Manifest.lock */ = {
+		1DB9CD1E275E937500E13AFD /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1062,21 +983,16 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
 			);
-			name = "[CP] Check Pods Manifest.lock";
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-iOS Tests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
+			shellScript = "cd \"$SRCROOT\"\n./gradlew :shared:embedAndSignAppleFrameworkForXcode\n";
 		};
-		A21E3040ED2FD348221166B6 /* [CP] Check Pods Manifest.lock */ = {
+		1DB9CD1F275E95A800E13AFD /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1084,21 +1000,16 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
 			);
-			name = "[CP] Check Pods Manifest.lock";
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-macOS App-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
+			shellScript = "cd \"$SRCROOT\"\n./gradlew :shared:embedAndSignAppleFrameworkForXcode\n";
 		};
-		A7B69D655FF9A9A7270CF5D9 /* [CP] Check Pods Manifest.lock */ = {
+		1DB9CD20275E95CA00E13AFD /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1106,21 +1017,16 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
 			);
-			name = "[CP] Check Pods Manifest.lock";
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-tvOS Tests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
+			shellScript = "cd \"$SRCROOT\"\n./gradlew :shared:embedAndSignAppleFrameworkForXcode\n";
 		};
-		F05115CE68B707DEE4BC8121 /* [CP] Check Pods Manifest.lock */ = {
+		1DB9CD21275E95D200E13AFD /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1128,21 +1034,16 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
 			);
-			name = "[CP] Check Pods Manifest.lock";
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-macOS Tests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
+			shellScript = "cd \"$SRCROOT\"\n./gradlew :shared:embedAndSignAppleFrameworkForXcode\n";
 		};
-		F67BFDE9F81CA353D4B7DD02 /* [CP] Check Pods Manifest.lock */ = {
+		1DB9CD22275E95DA00E13AFD /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1150,19 +1051,14 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
 			);
-			name = "[CP] Check Pods Manifest.lock";
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-iOS App-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
+			shellScript = "cd \"$SRCROOT\"\n./gradlew :shared:embedAndSignAppleFrameworkForXcode\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1379,7 +1275,6 @@
 		};
 		1D63BF5826E3E1DD003363BE /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 547CB6DA931D7FB80FBBAC33 /* Pods-tvOS App.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
@@ -1420,6 +1315,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1442,6 +1338,11 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					NativeCoroutinesSampleShared,
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.rickclephas.kmp.nativecoroutines.sample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
@@ -1455,7 +1356,6 @@
 		};
 		1D63BF5926E3E1DD003363BE /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BEAC6D75141FCAE6FCEBC0D9 /* Pods-tvOS App.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
@@ -1496,6 +1396,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1511,6 +1412,11 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					NativeCoroutinesSampleShared,
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.rickclephas.kmp.nativecoroutines.sample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
@@ -1525,7 +1431,6 @@
 		};
 		1D63BF5A26E3E1DD003363BE /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3327CBE919E359C7A6982896 /* Pods-tvOS Tests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1563,6 +1468,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1586,6 +1492,11 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					NativeCoroutinesSampleShared,
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.rickclephas.kmp.nativecoroutines.sample.tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
@@ -1599,7 +1510,6 @@
 		};
 		1D63BF5B26E3E1DD003363BE /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C2C42BF31BE9E27C55D04D7E /* Pods-tvOS Tests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1637,6 +1547,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1653,6 +1564,11 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					NativeCoroutinesSampleShared,
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.rickclephas.kmp.nativecoroutines.sample.tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
@@ -1931,7 +1847,6 @@
 		};
 		1D63BFB426E4F00A003363BE /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AED4A6755CD680E73BD5A603 /* Pods-watchOS App WatchKit Extension.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
@@ -1971,6 +1886,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1994,6 +1910,11 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					NativeCoroutinesSampleShared,
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.rickclephas.kmp.nativecoroutines.sample.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
@@ -2008,7 +1929,6 @@
 		};
 		1D63BFB526E4F00A003363BE /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1F4B88ED1385A7F544FDF011 /* Pods-watchOS App WatchKit Extension.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
@@ -2048,6 +1968,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -2064,6 +1985,11 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					NativeCoroutinesSampleShared,
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.rickclephas.kmp.nativecoroutines.sample.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
@@ -2079,7 +2005,6 @@
 		};
 		1D63BFB626E4F00A003363BE /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EC1B350F2A08B7E0F2A8381F /* Pods-watchOS Tests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -2117,6 +2042,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -2140,6 +2066,11 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					NativeCoroutinesSampleShared,
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.rickclephas.kmp.watchOS-AppTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -2153,7 +2084,6 @@
 		};
 		1D63BFB726E4F00A003363BE /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5CEB0373740CCE102A1C59B1 /* Pods-watchOS Tests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -2191,6 +2121,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -2207,6 +2138,11 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					NativeCoroutinesSampleShared,
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.rickclephas.kmp.watchOS-AppTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -2221,7 +2157,6 @@
 		};
 		1D71760D267009C600846F75 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4AB8345A013815C7E3CC5079 /* Pods-macOS App.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -2264,6 +2199,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -2287,6 +2223,11 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					NativeCoroutinesSampleShared,
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.rickclephas.kmp.nativecoroutines.sample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -2298,7 +2239,6 @@
 		};
 		1D71760E267009C600846F75 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1DEE8AB330F1D42D1AF1532C /* Pods-macOS App.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -2341,6 +2281,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -2357,6 +2298,11 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					NativeCoroutinesSampleShared,
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.rickclephas.kmp.nativecoroutines.sample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -2368,7 +2314,6 @@
 		};
 		1D717625267009E800846F75 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CED0F4062773AA000731F6BF /* Pods-iOS App.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -2409,6 +2354,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -2432,6 +2378,11 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					NativeCoroutinesSampleShared,
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.rickclephas.kmp.nativecoroutines.sample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -2444,7 +2395,6 @@
 		};
 		1D717626267009E800846F75 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B9B8A7EE56283DF651E7F0A8 /* Pods-iOS App.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -2485,6 +2435,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -2501,6 +2452,11 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					NativeCoroutinesSampleShared,
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.rickclephas.kmp.nativecoroutines.sample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -2514,7 +2470,6 @@
 		};
 		1D81B1432677B72200EEC34D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3D1DA8D6E8034D66525F216D /* Pods-macOS Tests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -2552,6 +2507,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -2576,6 +2532,11 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					NativeCoroutinesSampleShared,
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.rickclephas.kmp.nativecoroutines.sample.tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -2587,7 +2548,6 @@
 		};
 		1D81B1442677B72200EEC34D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5EEA8124C8A8A153CF6FE731 /* Pods-macOS Tests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -2625,6 +2585,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -2642,6 +2603,11 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					NativeCoroutinesSampleShared,
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.rickclephas.kmp.nativecoroutines.sample.tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -2653,7 +2619,6 @@
 		};
 		1D81B1512677B7C000EEC34D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 403C05C9BA3D6C45A44669C7 /* Pods-iOS Tests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -2690,6 +2655,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -2714,6 +2680,11 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					NativeCoroutinesSampleShared,
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.rickclephas.kmp.nativecoroutines.sample.tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -2726,7 +2697,6 @@
 		};
 		1D81B1522677B7C000EEC34D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0BC692248E0A96A34E37C6AC /* Pods-iOS Tests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -2763,6 +2733,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -2780,6 +2751,11 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					NativeCoroutinesSampleShared,
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.rickclephas.kmp.nativecoroutines.sample.tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
