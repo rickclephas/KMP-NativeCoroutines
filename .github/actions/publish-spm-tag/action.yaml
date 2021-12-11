@@ -1,0 +1,19 @@
+name: Publish a SPM tag
+inputs:
+  package-name:
+    description: The name of the SPM package branch
+    required: true
+  version-name:
+    description: The name of the version tag to publish
+    required: true
+runs:
+  using: composite
+  steps:
+    - run: |
+        git config --local user.name "GitHub Actions"
+        git config --local user.email "actions@github.com"
+        git checkout spm/${{ inputs.package-name }}
+        git merge --no-edit ${{ inputs.version-name }}
+        git tag ${{ inputs.version-name }}-spm-${{ inputs.package-name }}
+        git push origin spm/${{ inputs.package-name }}:spm/${{ inputs.package-name }}
+        git push origin ${{ inputs.version-name }}-spm-${{ inputs.package-name }}
