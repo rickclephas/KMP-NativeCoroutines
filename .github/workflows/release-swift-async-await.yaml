@@ -17,3 +17,15 @@ jobs:
         run: pod trunk push KMPNativeCoroutinesAsync.podspec --synchronous
         env:
           COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
+  publish-spm-async:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Publish Async SPM tag
+        uses: ./.github/actions/publish-spm-tag
+        with:
+          package-name: async
+          version-name: ${{ github.ref_name }}
