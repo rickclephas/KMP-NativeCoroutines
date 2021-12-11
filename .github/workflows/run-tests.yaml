@@ -46,26 +46,9 @@ jobs:
       fail-fast: false
       matrix:
         os: [ macos-11 ]
-        xcode: [ 13.1 ]
+        xcode: [ 13.2 ]
         platform: [ iOS, macOS, tvOS, watchOS ]
-        implementation: [ Combine, RxSwift ]
-        include:
-          - os: macos-11
-            xcode: 13.2-beta
-            platform: iOS
-            implementation: Async
-          - os: macos-11
-            xcode: 13.2-beta
-            platform: macOS
-            implementation: Async
-          - os: macos-11
-            xcode: 13.2-beta
-            platform: tvOS
-            implementation: Async
-          - os: macos-11
-            xcode: 13.2-beta
-            platform: watchOS
-            implementation: Async
+        implementation: [ Async, Combine, RxSwift ]
     name: ${{ format('{0} {1} ({2}, Xcode {3})', matrix.implementation, matrix.platform, matrix.os, matrix.xcode) }}
     runs-on: ${{ matrix.os }}
     steps:
@@ -92,7 +75,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ macos-11 ]
-        xcode: [ 13.2-beta ]
+        xcode: [ 13.2 ]
         java: [ 11 ]
         platform: [ iOS, macOS, tvOS, watchOS ]
         embeddable-compiler: [ true, false ]
