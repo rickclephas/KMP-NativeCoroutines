@@ -31,6 +31,18 @@ jobs:
         run: pod trunk push KMPNativeCoroutinesCombine.podspec --synchronous
         env:
           COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
+  publish-spm-combine:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Publish Combine SPM tag
+        uses: ./.github/actions/publish-spm-tag
+        with:
+          package-name: combine
+          version-name: ${{ github.ref_name }}
   publish-cocoapods-rxswift:
     needs: publish-cocoapods-core
     runs-on: macos-11
@@ -45,3 +57,15 @@ jobs:
         run: pod trunk push KMPNativeCoroutinesRxSwift.podspec --synchronous
         env:
           COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
+  publish-spm-rxswift:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Publish RxSwift SPM tag
+        uses: ./.github/actions/publish-spm-tag
+        with:
+          package-name: rxswift
+          version-name: ${{ github.ref_name }}
