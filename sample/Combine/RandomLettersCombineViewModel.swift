@@ -26,14 +26,12 @@ class RandomLettersCombineViewModel: RandomLettersViewModel {
             // Update the UI on the main thread
             .receive(on: DispatchQueue.main)
             .sink { [weak self] completion in
-                guard let self = self else { return }
                 if case let .failure(error) = completion {
-                    self.result = .failure(error)
+                    self?.result = .failure(error)
                 }
-                self.isLoading = false
+                self?.isLoading = false
             } receiveValue: { [weak self] word in
-                guard let self = self else { return }
-                self.result = .success(word)
+                self?.result = .success(word)
             }.store(in: &cancellables)
     }
 }
