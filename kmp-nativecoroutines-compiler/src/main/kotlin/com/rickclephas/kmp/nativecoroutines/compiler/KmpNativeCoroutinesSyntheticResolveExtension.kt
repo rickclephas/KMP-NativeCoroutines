@@ -27,14 +27,14 @@ internal class KmpNativeCoroutinesSyntheticResolveExtension(
     // Instead we'll use reflection to use the same code the compiler is using.
     // https://github.com/JetBrains/kotlin/blob/fe8f7cfcae3b33ba7ee5d06cd45e5e68f3c421a8/compiler/frontend/src/org/jetbrains/kotlin/resolve/lazy/descriptors/LazyClassMemberScope.kt#L64
     @Suppress("UNCHECKED_CAST")
-    private fun ClassDescriptor.getDeclarations(): MutableSet<DeclarationDescriptor> {
+    private fun ClassDescriptor.getDeclarations(): List<DeclarationDescriptor> {
         val memberScope = unsubstitutedMemberScope
-        if (memberScope !is LazyClassMemberScope) return mutableSetOf()
+        if (memberScope !is LazyClassMemberScope) return emptyList()
         return AbstractLazyMemberScope::class.java.declaredMethods
             .first { it.name == "computeDescriptorsFromDeclaredElements" }
             .apply { isAccessible = true }
             .invoke(memberScope, DescriptorKindFilter.ALL, MemberScope.ALL_NAME_FILTER,
-                NoLookupLocation.WHEN_GET_ALL_DESCRIPTORS) as MutableSet<DeclarationDescriptor>
+                NoLookupLocation.WHEN_GET_ALL_DESCRIPTORS) as List<DeclarationDescriptor>
     }
 
     // Checking some return types will recursively call our synthetic resolve extension again.
