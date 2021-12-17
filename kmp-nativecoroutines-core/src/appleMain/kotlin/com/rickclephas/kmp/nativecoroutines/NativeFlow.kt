@@ -2,7 +2,6 @@ package com.rickclephas.kmp.nativecoroutines
 
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -23,7 +22,6 @@ typealias NativeFlow<T> = (onItem: NativeCallback<T>, onComplete: NativeCallback
  * @receiver the [Flow] to collect.
  * @see Flow.collect
  */
-@OptIn(InternalCoroutinesApi::class)
 fun <T> Flow<T>.asNativeFlow(scope: CoroutineScope? = null): NativeFlow<T> {
     val coroutineScope = scope ?: defaultCoroutineScope
     return (collect@{ onItem: NativeCallback<T>, onComplete: NativeCallback<NSError?> ->
