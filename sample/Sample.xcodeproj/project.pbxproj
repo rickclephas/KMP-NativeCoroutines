@@ -7,6 +7,32 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1D02C12326C82EE800E2FF60 /* CompilerIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D02C12126C82EE800E2FF60 /* CompilerIntegrationTests.swift */; };
+		1D02C12426C82EE800E2FF60 /* CompilerIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D02C12126C82EE800E2FF60 /* CompilerIntegrationTests.swift */; };
+		1D02C12526C82EE800E2FF60 /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D02C12226C82EE800E2FF60 /* TestUtils.swift */; };
+		1D02C12626C82EE800E2FF60 /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D02C12226C82EE800E2FF60 /* TestUtils.swift */; };
+		1D0CA84D2677F6DB0000D612 /* AsyncFunctionIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0CA84C2677F6DB0000D612 /* AsyncFunctionIntegrationTests.swift */; };
+		1D0CA84E2677F6DB0000D612 /* AsyncFunctionIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0CA84C2677F6DB0000D612 /* AsyncFunctionIntegrationTests.swift */; };
+		1D103F132747FFBB001567CA /* AsyncTestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D103F122747FFBB001567CA /* AsyncTestUtils.swift */; };
+		1D103F142747FFBB001567CA /* AsyncTestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D103F122747FFBB001567CA /* AsyncTestUtils.swift */; };
+		1D103F152747FFBB001567CA /* AsyncTestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D103F122747FFBB001567CA /* AsyncTestUtils.swift */; };
+		1D103F162747FFBB001567CA /* AsyncTestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D103F122747FFBB001567CA /* AsyncTestUtils.swift */; };
+		1D4F36B326E5001200F7C772 /* RandomLettersAsyncViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA5DD0526764810002448E3 /* RandomLettersAsyncViewModel.swift */; };
+		1D4F36B426E5001500F7C772 /* AsyncFunctionIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0CA84C2677F6DB0000D612 /* AsyncFunctionIntegrationTests.swift */; };
+		1D4F36B526E5001B00F7C772 /* SwiftUIAsyncTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF82A76267939F70024886B /* SwiftUIAsyncTest.swift */; };
+		1D4F36B626E5001E00F7C772 /* AsyncResultIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFC35FF268A3148008393FA /* AsyncResultIntegrationTests.swift */; };
+		1D4F36B726E5002000F7C772 /* ClockAsyncViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D810BC126A20FD30065C740 /* ClockAsyncViewModel.swift */; };
+		1D4F36B826E5002300F7C772 /* AsyncStreamIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D810BC426A214020065C740 /* AsyncStreamIntegrationTests.swift */; };
+		1D4F36BC26E500B800F7C772 /* CompilerIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D02C12126C82EE800E2FF60 /* CompilerIntegrationTests.swift */; };
+		1D4F36BD26E500BA00F7C772 /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D02C12226C82EE800E2FF60 /* TestUtils.swift */; };
+		1D4F36BE26E5030400F7C772 /* CompilerIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D02C12126C82EE800E2FF60 /* CompilerIntegrationTests.swift */; };
+		1D4F36BF26E5030600F7C772 /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D02C12226C82EE800E2FF60 /* TestUtils.swift */; };
+		1D4F36C026E5030E00F7C772 /* RandomLettersAsyncViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA5DD0526764810002448E3 /* RandomLettersAsyncViewModel.swift */; };
+		1D4F36C126E5031200F7C772 /* AsyncFunctionIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0CA84C2677F6DB0000D612 /* AsyncFunctionIntegrationTests.swift */; };
+		1D4F36C226E5031500F7C772 /* SwiftUIAsyncTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF82A76267939F70024886B /* SwiftUIAsyncTest.swift */; };
+		1D4F36C326E5031D00F7C772 /* AsyncResultIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFC35FF268A3148008393FA /* AsyncResultIntegrationTests.swift */; };
+		1D4F36C426E5032100F7C772 /* ClockAsyncViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D810BC126A20FD30065C740 /* ClockAsyncViewModel.swift */; };
+		1D4F36C526E5032400F7C772 /* AsyncStreamIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D810BC426A214020065C740 /* AsyncStreamIntegrationTests.swift */; };
 		1D5DAF7D2698B5EB0059D4B8 /* ClockRxSwiftViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D5DAF7C2698B5EB0059D4B8 /* ClockRxSwiftViewModel.swift */; };
 		1D5DAF7E2698B5EB0059D4B8 /* ClockRxSwiftViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D5DAF7C2698B5EB0059D4B8 /* ClockRxSwiftViewModel.swift */; };
 		1D5DAF802698C3C30059D4B8 /* RandomLettersRxSwiftViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D5DAF7F2698C3C30059D4B8 /* RandomLettersRxSwiftViewModel.swift */; };
@@ -33,8 +59,6 @@
 		1D63BF6C26E3E261003363BE /* NavigationBarTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF1A66E2671494800945FF9 /* NavigationBarTitle.swift */; };
 		1D63BF6D26E3E263003363BE /* RandomLettersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF1A67126714EEC00945FF9 /* RandomLettersViewModel.swift */; };
 		1D63BF6E26E3E266003363BE /* RandomLettersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF1A67426714FBD00945FF9 /* RandomLettersView.swift */; };
-		1D63BF6F26E3E269003363BE /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D81B1562677E56200EEC34D /* TestUtils.swift */; };
-		1D63BF7026E3E26C003363BE /* CompilerIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D91395026C7F04C00A50CDC /* CompilerIntegrationTests.swift */; };
 		1D63BF7726E4F006003363BE /* watchOS App WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 1D63BF7626E4F006003363BE /* watchOS App WatchKit App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		1D63BF7D26E4F006003363BE /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D63BF7B26E4F006003363BE /* Interface.storyboard */; };
 		1D63BF7F26E4F009003363BE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1D63BF7E26E4F009003363BE /* Assets.xcassets */; };
@@ -44,8 +68,6 @@
 		1D63BF9126E4F009003363BE /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D63BF9026E4F009003363BE /* ComplicationController.swift */; };
 		1D63BF9326E4F00A003363BE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1D63BF9226E4F00A003363BE /* Assets.xcassets */; };
 		1D63BF9626E4F00A003363BE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1D63BF9526E4F00A003363BE /* Preview Assets.xcassets */; };
-		1D63BFBF26E4F0C6003363BE /* CompilerIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D91395026C7F04C00A50CDC /* CompilerIntegrationTests.swift */; };
-		1D63BFC026E4F0CA003363BE /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D81B1562677E56200EEC34D /* TestUtils.swift */; };
 		1D63BFC126E4F0CD003363BE /* ClockCombineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D71762926700A6000846F75 /* ClockCombineViewModel.swift */; };
 		1D63BFC226E4F0D1003363BE /* RandomLettersCombineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF1A6772671535200945FF9 /* RandomLettersCombineViewModel.swift */; };
 		1D63BFC326E4F0D5003363BE /* CombineFutureIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D81B1532677B7EF00EEC34D /* CombineFutureIntegrationTests.swift */; };
@@ -60,6 +82,14 @@
 		1D63BFCC26E4F0F1003363BE /* NavigationBarTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF1A66E2671494800945FF9 /* NavigationBarTitle.swift */; };
 		1D63BFCD26E4F0F4003363BE /* RandomLettersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF1A67126714EEC00945FF9 /* RandomLettersViewModel.swift */; };
 		1D63BFCE26E4F0FD003363BE /* RandomLettersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF1A67426714FBD00945FF9 /* RandomLettersView.swift */; };
+		1D7134E8272EBA5700D4A256 /* KMPNativeCoroutinesAsync in Frameworks */ = {isa = PBXBuildFile; productRef = 1D7134E7272EBA5700D4A256 /* KMPNativeCoroutinesAsync */; };
+		1D7134EA272EBA5D00D4A256 /* KMPNativeCoroutinesAsync in Frameworks */ = {isa = PBXBuildFile; productRef = 1D7134E9272EBA5D00D4A256 /* KMPNativeCoroutinesAsync */; };
+		1D7134EC272EBA6100D4A256 /* KMPNativeCoroutinesAsync in Frameworks */ = {isa = PBXBuildFile; productRef = 1D7134EB272EBA6100D4A256 /* KMPNativeCoroutinesAsync */; };
+		1D7134EE272EBA6600D4A256 /* KMPNativeCoroutinesAsync in Frameworks */ = {isa = PBXBuildFile; productRef = 1D7134ED272EBA6600D4A256 /* KMPNativeCoroutinesAsync */; };
+		1D7134F0272EBA6B00D4A256 /* KMPNativeCoroutinesAsync in Frameworks */ = {isa = PBXBuildFile; productRef = 1D7134EF272EBA6B00D4A256 /* KMPNativeCoroutinesAsync */; };
+		1D7134F2272EBA6F00D4A256 /* KMPNativeCoroutinesAsync in Frameworks */ = {isa = PBXBuildFile; productRef = 1D7134F1272EBA6F00D4A256 /* KMPNativeCoroutinesAsync */; };
+		1D7134F4272EBA7600D4A256 /* KMPNativeCoroutinesAsync in Frameworks */ = {isa = PBXBuildFile; productRef = 1D7134F3272EBA7600D4A256 /* KMPNativeCoroutinesAsync */; };
+		1D7134F6272EBA7B00D4A256 /* KMPNativeCoroutinesAsync in Frameworks */ = {isa = PBXBuildFile; productRef = 1D7134F5272EBA7B00D4A256 /* KMPNativeCoroutinesAsync */; };
 		1D7175FF267009C500846F75 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7175FE267009C500846F75 /* AppDelegate.swift */; };
 		1D717603267009C600846F75 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1D717602267009C600846F75 /* Assets.xcassets */; };
 		1D717606267009C600846F75 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1D717605267009C600846F75 /* Preview Assets.xcassets */; };
@@ -99,14 +129,16 @@
 		1D75A35D272C8B3000CFF795 /* KMPNativeCoroutinesCombine in Frameworks */ = {isa = PBXBuildFile; productRef = 1D75A35C272C8B3000CFF795 /* KMPNativeCoroutinesCombine */; };
 		1D75A35F272C8B3000CFF795 /* KMPNativeCoroutinesCore in Frameworks */ = {isa = PBXBuildFile; productRef = 1D75A35E272C8B3000CFF795 /* KMPNativeCoroutinesCore */; };
 		1D75A361272C8B3000CFF795 /* KMPNativeCoroutinesRxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1D75A360272C8B3000CFF795 /* KMPNativeCoroutinesRxSwift */; };
+		1D810BC226A20FD30065C740 /* ClockAsyncViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D810BC126A20FD30065C740 /* ClockAsyncViewModel.swift */; };
+		1D810BC326A20FD30065C740 /* ClockAsyncViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D810BC126A20FD30065C740 /* ClockAsyncViewModel.swift */; };
+		1D810BC526A214020065C740 /* AsyncStreamIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D810BC426A214020065C740 /* AsyncStreamIntegrationTests.swift */; };
+		1D810BC626A214020065C740 /* AsyncStreamIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D810BC426A214020065C740 /* AsyncStreamIntegrationTests.swift */; };
 		1D81B1542677B7EF00EEC34D /* CombineFutureIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D81B1532677B7EF00EEC34D /* CombineFutureIntegrationTests.swift */; };
 		1D81B1552677B7EF00EEC34D /* CombineFutureIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D81B1532677B7EF00EEC34D /* CombineFutureIntegrationTests.swift */; };
-		1D81B1572677E56200EEC34D /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D81B1562677E56200EEC34D /* TestUtils.swift */; };
-		1D81B1582677E56200EEC34D /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D81B1562677E56200EEC34D /* TestUtils.swift */; };
 		1D81B15A2677EDE600EEC34D /* CombinePublisherIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D81B1592677EDE600EEC34D /* CombinePublisherIntegrationTests.swift */; };
 		1D81B15B2677EDE600EEC34D /* CombinePublisherIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D81B1592677EDE600EEC34D /* CombinePublisherIntegrationTests.swift */; };
-		1D91395126C7F04C00A50CDC /* CompilerIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D91395026C7F04C00A50CDC /* CompilerIntegrationTests.swift */; };
-		1D91395226C7F04C00A50CDC /* CompilerIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D91395026C7F04C00A50CDC /* CompilerIntegrationTests.swift */; };
+		1DA5DD0626764810002448E3 /* RandomLettersAsyncViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA5DD0526764810002448E3 /* RandomLettersAsyncViewModel.swift */; };
+		1DA5DD0726764810002448E3 /* RandomLettersAsyncViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA5DD0526764810002448E3 /* RandomLettersAsyncViewModel.swift */; };
 		1DF1A66C2671448500945FF9 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF1A66B2671448500945FF9 /* RootView.swift */; };
 		1DF1A66D2671448500945FF9 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF1A66B2671448500945FF9 /* RootView.swift */; };
 		1DF1A66F2671494800945FF9 /* NavigationBarTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF1A66E2671494800945FF9 /* NavigationBarTitle.swift */; };
@@ -121,6 +153,10 @@
 		1DF2860127370061004DD6D2 /* NewMemoryModelIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF285FF27370061004DD6D2 /* NewMemoryModelIntegrationTests.swift */; };
 		1DF2860227370061004DD6D2 /* NewMemoryModelIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF285FF27370061004DD6D2 /* NewMemoryModelIntegrationTests.swift */; };
 		1DF2860327370061004DD6D2 /* NewMemoryModelIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF285FF27370061004DD6D2 /* NewMemoryModelIntegrationTests.swift */; };
+		1DF82A77267939F70024886B /* SwiftUIAsyncTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF82A76267939F70024886B /* SwiftUIAsyncTest.swift */; };
+		1DF82A78267939F70024886B /* SwiftUIAsyncTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF82A76267939F70024886B /* SwiftUIAsyncTest.swift */; };
+		1DFC3602268A316D008393FA /* AsyncResultIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFC35FF268A3148008393FA /* AsyncResultIntegrationTests.swift */; };
+		1DFC3603268A316D008393FA /* AsyncResultIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFC35FF268A3148008393FA /* AsyncResultIntegrationTests.swift */; };
 		1F0A1E1603107E57275DCEB3 /* Pods_tvOS_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AC0E65235849C39FBC494E7 /* Pods_tvOS_Tests.framework */; };
 		37CEC1BD1853BFCDEEBE4B52 /* Pods_macOS_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8CAA0A4A2F0DA48EC903C52 /* Pods_macOS_Tests.framework */; };
 		AD925FB3B122897B070DEFEB /* Pods_iOS_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 430255A8B181606267348B23 /* Pods_iOS_Tests.framework */; };
@@ -203,8 +239,10 @@
 
 /* Begin PBXFileReference section */
 		0BC692248E0A96A34E37C6AC /* Pods-iOS Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS Tests.release.xcconfig"; path = "Target Support Files/Pods-iOS Tests/Pods-iOS Tests.release.xcconfig"; sourceTree = "<group>"; };
-		1D04AEFF266E9C0700920D20 /* KMPNativeCoroutinesCombine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KMPNativeCoroutinesCombine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		1D04AF3C266EB02000920D20 /* KMPNativeCoroutinesCombine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KMPNativeCoroutinesCombine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D02C12126C82EE800E2FF60 /* CompilerIntegrationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompilerIntegrationTests.swift; sourceTree = "<group>"; };
+		1D02C12226C82EE800E2FF60 /* TestUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUtils.swift; sourceTree = "<group>"; };
+		1D0CA84C2677F6DB0000D612 /* AsyncFunctionIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncFunctionIntegrationTests.swift; sourceTree = "<group>"; };
+		1D103F122747FFBB001567CA /* AsyncTestUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncTestUtils.swift; sourceTree = "<group>"; };
 		1D5DAF7C2698B5EB0059D4B8 /* ClockRxSwiftViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockRxSwiftViewModel.swift; sourceTree = "<group>"; };
 		1D5DAF7F2698C3C30059D4B8 /* RandomLettersRxSwiftViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomLettersRxSwiftViewModel.swift; sourceTree = "<group>"; };
 		1D5DAF822698C67D0059D4B8 /* RxSwiftSingleIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxSwiftSingleIntegrationTests.swift; sourceTree = "<group>"; };
@@ -247,12 +285,13 @@
 		1D71762C26700A6E00846F75 /* ClockViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClockViewModel.swift; sourceTree = "<group>"; };
 		1D71762D26700A6E00846F75 /* ClockView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClockView.swift; sourceTree = "<group>"; };
 		1D75A331272C85BA00CFF795 /* KMP-NativeCoroutines */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "KMP-NativeCoroutines"; path = ..; sourceTree = "<group>"; };
+		1D810BC126A20FD30065C740 /* ClockAsyncViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockAsyncViewModel.swift; sourceTree = "<group>"; };
+		1D810BC426A214020065C740 /* AsyncStreamIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncStreamIntegrationTests.swift; sourceTree = "<group>"; };
 		1D81B13B2677B72200EEC34D /* macOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "macOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D81B1492677B7C000EEC34D /* iOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "iOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D81B1532677B7EF00EEC34D /* CombineFutureIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineFutureIntegrationTests.swift; sourceTree = "<group>"; };
-		1D81B1562677E56200EEC34D /* TestUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUtils.swift; sourceTree = "<group>"; };
 		1D81B1592677EDE600EEC34D /* CombinePublisherIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombinePublisherIntegrationTests.swift; sourceTree = "<group>"; };
-		1D91395026C7F04C00A50CDC /* CompilerIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompilerIntegrationTests.swift; sourceTree = "<group>"; };
+		1DA5DD0526764810002448E3 /* RandomLettersAsyncViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomLettersAsyncViewModel.swift; sourceTree = "<group>"; };
 		1DEE8AB330F1D42D1AF1532C /* Pods-macOS App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-macOS App.release.xcconfig"; path = "Target Support Files/Pods-macOS App/Pods-macOS App.release.xcconfig"; sourceTree = "<group>"; };
 		1DF1A66B2671448500945FF9 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		1DF1A66E2671494800945FF9 /* NavigationBarTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarTitle.swift; sourceTree = "<group>"; };
@@ -260,6 +299,8 @@
 		1DF1A67426714FBD00945FF9 /* RandomLettersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomLettersView.swift; sourceTree = "<group>"; };
 		1DF1A6772671535200945FF9 /* RandomLettersCombineViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomLettersCombineViewModel.swift; sourceTree = "<group>"; };
 		1DF285FF27370061004DD6D2 /* NewMemoryModelIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMemoryModelIntegrationTests.swift; sourceTree = "<group>"; };
+		1DF82A76267939F70024886B /* SwiftUIAsyncTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIAsyncTest.swift; sourceTree = "<group>"; };
+		1DFC35FF268A3148008393FA /* AsyncResultIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncResultIntegrationTests.swift; sourceTree = "<group>"; };
 		1F4B88ED1385A7F544FDF011 /* Pods-watchOS App WatchKit Extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-watchOS App WatchKit Extension.release.xcconfig"; path = "Target Support Files/Pods-watchOS App WatchKit Extension/Pods-watchOS App WatchKit Extension.release.xcconfig"; sourceTree = "<group>"; };
 		3327CBE919E359C7A6982896 /* Pods-tvOS Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tvOS Tests.debug.xcconfig"; path = "Target Support Files/Pods-tvOS Tests/Pods-tvOS Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		3D1DA8D6E8034D66525F216D /* Pods-macOS Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-macOS Tests.debug.xcconfig"; path = "Target Support Files/Pods-macOS Tests/Pods-macOS Tests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -292,6 +333,7 @@
 				C777E2D954DA358AD25CC3BF /* Pods_tvOS_App.framework in Frameworks */,
 				1D75A33F272C85EB00CFF795 /* KMPNativeCoroutinesCombine in Frameworks */,
 				1D75A341272C85EB00CFF795 /* KMPNativeCoroutinesCore in Frameworks */,
+				1D7134F0272EBA6B00D4A256 /* KMPNativeCoroutinesAsync in Frameworks */,
 				1D75A343272C85EB00CFF795 /* KMPNativeCoroutinesRxSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -303,6 +345,7 @@
 				1F0A1E1603107E57275DCEB3 /* Pods_tvOS_Tests.framework in Frameworks */,
 				1D75A357272C8B2900CFF795 /* KMPNativeCoroutinesCombine in Frameworks */,
 				1D75A359272C8B2900CFF795 /* KMPNativeCoroutinesCore in Frameworks */,
+				1D7134F2272EBA6F00D4A256 /* KMPNativeCoroutinesAsync in Frameworks */,
 				1D75A35B272C8B2900CFF795 /* KMPNativeCoroutinesRxSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -314,6 +357,7 @@
 				B87DF9409827D657010BA035 /* Pods_watchOS_App_WatchKit_Extension.framework in Frameworks */,
 				1D75A345272C85F600CFF795 /* KMPNativeCoroutinesCombine in Frameworks */,
 				1D75A347272C85F600CFF795 /* KMPNativeCoroutinesCore in Frameworks */,
+				1D7134F4272EBA7600D4A256 /* KMPNativeCoroutinesAsync in Frameworks */,
 				1D75A349272C85F600CFF795 /* KMPNativeCoroutinesRxSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -325,6 +369,7 @@
 				C4D6F3AC74F7B109B556CD3D /* Pods_watchOS_Tests.framework in Frameworks */,
 				1D75A35D272C8B3000CFF795 /* KMPNativeCoroutinesCombine in Frameworks */,
 				1D75A35F272C8B3000CFF795 /* KMPNativeCoroutinesCore in Frameworks */,
+				1D7134F6272EBA7B00D4A256 /* KMPNativeCoroutinesAsync in Frameworks */,
 				1D75A361272C8B3000CFF795 /* KMPNativeCoroutinesRxSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -336,6 +381,7 @@
 				E45C268DBAB665FAC90C0C01 /* Pods_macOS_App.framework in Frameworks */,
 				1D75A333272C85CC00CFF795 /* KMPNativeCoroutinesCombine in Frameworks */,
 				1D75A335272C85CC00CFF795 /* KMPNativeCoroutinesCore in Frameworks */,
+				1D7134E8272EBA5700D4A256 /* KMPNativeCoroutinesAsync in Frameworks */,
 				1D75A337272C85CC00CFF795 /* KMPNativeCoroutinesRxSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -347,6 +393,7 @@
 				E2D6702474205AE2CC47D3FA /* Pods_iOS_App.framework in Frameworks */,
 				1D75A339272C85E300CFF795 /* KMPNativeCoroutinesCombine in Frameworks */,
 				1D75A33B272C85E300CFF795 /* KMPNativeCoroutinesCore in Frameworks */,
+				1D7134EA272EBA5D00D4A256 /* KMPNativeCoroutinesAsync in Frameworks */,
 				1D75A33D272C85E300CFF795 /* KMPNativeCoroutinesRxSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -358,6 +405,7 @@
 				37CEC1BD1853BFCDEEBE4B52 /* Pods_macOS_Tests.framework in Frameworks */,
 				1D75A34B272C8B1C00CFF795 /* KMPNativeCoroutinesCombine in Frameworks */,
 				1D75A34D272C8B1C00CFF795 /* KMPNativeCoroutinesCore in Frameworks */,
+				1D7134EC272EBA6100D4A256 /* KMPNativeCoroutinesAsync in Frameworks */,
 				1D75A34F272C8B1C00CFF795 /* KMPNativeCoroutinesRxSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -369,6 +417,7 @@
 				AD925FB3B122897B070DEFEB /* Pods_iOS_Tests.framework in Frameworks */,
 				1D75A351272C8B2300CFF795 /* KMPNativeCoroutinesCombine in Frameworks */,
 				1D75A353272C8B2300CFF795 /* KMPNativeCoroutinesCore in Frameworks */,
+				1D7134EE272EBA6600D4A256 /* KMPNativeCoroutinesAsync in Frameworks */,
 				1D75A355272C8B2300CFF795 /* KMPNativeCoroutinesRxSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -390,11 +439,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1D02C12026C82EE800E2FF60 /* IntegrationTests */ = {
+			isa = PBXGroup;
+			children = (
+				1D02C12126C82EE800E2FF60 /* CompilerIntegrationTests.swift */,
+				1D02C12226C82EE800E2FF60 /* TestUtils.swift */,
+				1DF285FF27370061004DD6D2 /* NewMemoryModelIntegrationTests.swift */,
+			);
+			path = IntegrationTests;
+			sourceTree = "<group>";
+		};
 		1D04AED6266E966900920D20 = {
 			isa = PBXGroup;
 			children = (
 				1D75A330272C85BA00CFF795 /* Packages */,
-				1D91395426C7F52900A50CDC /* IntegrationTests */,
+				1DA5DD04267647F6002448E3 /* Async */,
+				1D02C12026C82EE800E2FF60 /* IntegrationTests */,
 				1D71762826700A4400846F75 /* Combine */,
 				1D5DAF7B2698B5C60059D4B8 /* RxSwift */,
 				1D71762726700A1800846F75 /* UI */,
@@ -429,8 +489,6 @@
 		1D04AEFE266E9C0700920D20 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				1D04AF3C266EB02000920D20 /* KMPNativeCoroutinesCombine.framework */,
-				1D04AEFF266E9C0700920D20 /* KMPNativeCoroutinesCombine.framework */,
 				8C54EBD4C92297D7F9195116 /* Pods_iOS_App.framework */,
 				CA86A8D66453FD04AAF5353F /* Pods_macOS_App.framework */,
 				430255A8B181606267348B23 /* Pods_iOS_Tests.framework */,
@@ -579,14 +637,18 @@
 			name = Packages;
 			sourceTree = "<group>";
 		};
-		1D91395426C7F52900A50CDC /* IntegrationTests */ = {
+		1DA5DD04267647F6002448E3 /* Async */ = {
 			isa = PBXGroup;
 			children = (
-				1D91395026C7F04C00A50CDC /* CompilerIntegrationTests.swift */,
-				1D81B1562677E56200EEC34D /* TestUtils.swift */,
-				1DF285FF27370061004DD6D2 /* NewMemoryModelIntegrationTests.swift */,
+				1DA5DD0526764810002448E3 /* RandomLettersAsyncViewModel.swift */,
+				1D0CA84C2677F6DB0000D612 /* AsyncFunctionIntegrationTests.swift */,
+				1DF82A76267939F70024886B /* SwiftUIAsyncTest.swift */,
+				1DFC35FF268A3148008393FA /* AsyncResultIntegrationTests.swift */,
+				1D810BC126A20FD30065C740 /* ClockAsyncViewModel.swift */,
+				1D810BC426A214020065C740 /* AsyncStreamIntegrationTests.swift */,
+				1D103F122747FFBB001567CA /* AsyncTestUtils.swift */,
 			);
-			path = IntegrationTests;
+			path = Async;
 			sourceTree = "<group>";
 		};
 		BA4BEB357C3A9E0685F6DF25 /* Pods */ = {
@@ -633,6 +695,7 @@
 				1D75A33E272C85EB00CFF795 /* KMPNativeCoroutinesCombine */,
 				1D75A340272C85EB00CFF795 /* KMPNativeCoroutinesCore */,
 				1D75A342272C85EB00CFF795 /* KMPNativeCoroutinesRxSwift */,
+				1D7134EF272EBA6B00D4A256 /* KMPNativeCoroutinesAsync */,
 			);
 			productName = "tvOS App";
 			productReference = 1D63BF3326E3E1DB003363BE /* tvOS App.app */;
@@ -657,6 +720,7 @@
 				1D75A356272C8B2900CFF795 /* KMPNativeCoroutinesCombine */,
 				1D75A358272C8B2900CFF795 /* KMPNativeCoroutinesCore */,
 				1D75A35A272C8B2900CFF795 /* KMPNativeCoroutinesRxSwift */,
+				1D7134F1272EBA6F00D4A256 /* KMPNativeCoroutinesAsync */,
 			);
 			productName = "tvOS AppTests";
 			productReference = 1D63BF4626E3E1DD003363BE /* tvOS Tests.xctest */;
@@ -716,6 +780,7 @@
 				1D75A344272C85F600CFF795 /* KMPNativeCoroutinesCombine */,
 				1D75A346272C85F600CFF795 /* KMPNativeCoroutinesCore */,
 				1D75A348272C85F600CFF795 /* KMPNativeCoroutinesRxSwift */,
+				1D7134F3272EBA7600D4A256 /* KMPNativeCoroutinesAsync */,
 			);
 			productName = "watchOS App WatchKit Extension";
 			productReference = 1D63BF8526E4F009003363BE /* watchOS App WatchKit Extension.appex */;
@@ -740,6 +805,7 @@
 				1D75A35C272C8B3000CFF795 /* KMPNativeCoroutinesCombine */,
 				1D75A35E272C8B3000CFF795 /* KMPNativeCoroutinesCore */,
 				1D75A360272C8B3000CFF795 /* KMPNativeCoroutinesRxSwift */,
+				1D7134F5272EBA7B00D4A256 /* KMPNativeCoroutinesAsync */,
 			);
 			productName = "watchOS AppTests";
 			productReference = 1D63BF9C26E4F00A003363BE /* watchOS Tests.xctest */;
@@ -763,6 +829,7 @@
 				1D75A332272C85CC00CFF795 /* KMPNativeCoroutinesCombine */,
 				1D75A334272C85CC00CFF795 /* KMPNativeCoroutinesCore */,
 				1D75A336272C85CC00CFF795 /* KMPNativeCoroutinesRxSwift */,
+				1D7134E7272EBA5700D4A256 /* KMPNativeCoroutinesAsync */,
 			);
 			productName = "macOS App";
 			productReference = 1D7175FC267009C500846F75 /* macOS App.app */;
@@ -786,6 +853,7 @@
 				1D75A338272C85E300CFF795 /* KMPNativeCoroutinesCombine */,
 				1D75A33A272C85E300CFF795 /* KMPNativeCoroutinesCore */,
 				1D75A33C272C85E300CFF795 /* KMPNativeCoroutinesRxSwift */,
+				1D7134E9272EBA5D00D4A256 /* KMPNativeCoroutinesAsync */,
 			);
 			productName = "iOS App";
 			productReference = 1D717613267009E700846F75 /* iOS App.app */;
@@ -810,6 +878,7 @@
 				1D75A34A272C8B1C00CFF795 /* KMPNativeCoroutinesCombine */,
 				1D75A34C272C8B1C00CFF795 /* KMPNativeCoroutinesCore */,
 				1D75A34E272C8B1C00CFF795 /* KMPNativeCoroutinesRxSwift */,
+				1D7134EB272EBA6100D4A256 /* KMPNativeCoroutinesAsync */,
 			);
 			productName = "macOS Tests";
 			productReference = 1D81B13B2677B72200EEC34D /* macOS Tests.xctest */;
@@ -834,6 +903,7 @@
 				1D75A350272C8B2300CFF795 /* KMPNativeCoroutinesCombine */,
 				1D75A352272C8B2300CFF795 /* KMPNativeCoroutinesCore */,
 				1D75A354272C8B2300CFF795 /* KMPNativeCoroutinesRxSwift */,
+				1D7134ED272EBA6600D4A256 /* KMPNativeCoroutinesAsync */,
 			);
 			productName = "iOS Tests";
 			productReference = 1D81B1492677B7C000EEC34D /* iOS Tests.xctest */;
@@ -1179,12 +1249,15 @@
 			files = (
 				1D63BF6626E3E24D003363BE /* RandomLettersRxSwiftViewModel.swift in Sources */,
 				1D63BF3626E3E1DB003363BE /* AppDelegate.swift in Sources */,
+				1D4F36C026E5030E00F7C772 /* RandomLettersAsyncViewModel.swift in Sources */,
 				1D63BF6126E3E23E003363BE /* ClockCombineViewModel.swift in Sources */,
 				1D63BF6926E3E258003363BE /* ClockView.swift in Sources */,
 				1D63BF6B26E3E25E003363BE /* RootView.swift in Sources */,
 				1D63BF6D26E3E263003363BE /* RandomLettersViewModel.swift in Sources */,
 				1D63BF6C26E3E261003363BE /* NavigationBarTitle.swift in Sources */,
+				1D4F36C426E5032100F7C772 /* ClockAsyncViewModel.swift in Sources */,
 				1D63BF6226E3E242003363BE /* RandomLettersCombineViewModel.swift in Sources */,
+				1D4F36C226E5031500F7C772 /* SwiftUIAsyncTest.swift in Sources */,
 				1D63BF6E26E3E266003363BE /* RandomLettersView.swift in Sources */,
 				1D63BF6526E3E24A003363BE /* ClockRxSwiftViewModel.swift in Sources */,
 				1D63BF6A26E3E25B003363BE /* ClockViewModel.swift in Sources */,
@@ -1195,12 +1268,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D4F36C326E5031D00F7C772 /* AsyncResultIntegrationTests.swift in Sources */,
 				1D63BF6326E3E244003363BE /* CombineFutureIntegrationTests.swift in Sources */,
 				1D63BF6826E3E252003363BE /* RxSwiftObservableIntegrationTests.swift in Sources */,
 				1DF2860227370061004DD6D2 /* NewMemoryModelIntegrationTests.swift in Sources */,
 				1D63BF6726E3E24F003363BE /* RxSwiftSingleIntegrationTests.swift in Sources */,
-				1D63BF7026E3E26C003363BE /* CompilerIntegrationTests.swift in Sources */,
-				1D63BF6F26E3E269003363BE /* TestUtils.swift in Sources */,
+				1D4F36C526E5032400F7C772 /* AsyncStreamIntegrationTests.swift in Sources */,
+				1D4F36BF26E5030600F7C772 /* TestUtils.swift in Sources */,
+				1D103F152747FFBB001567CA /* AsyncTestUtils.swift in Sources */,
+				1D4F36BE26E5030400F7C772 /* CompilerIntegrationTests.swift in Sources */,
+				1D4F36C126E5031200F7C772 /* AsyncFunctionIntegrationTests.swift in Sources */,
 				1D63BF6426E3E247003363BE /* CombinePublisherIntegrationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1209,6 +1286,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D4F36B326E5001200F7C772 /* RandomLettersAsyncViewModel.swift in Sources */,
 				1D63BF9126E4F009003363BE /* ComplicationController.swift in Sources */,
 				1D63BFCC26E4F0F1003363BE /* NavigationBarTitle.swift in Sources */,
 				1D63BF8B26E4F009003363BE /* HostingController.swift in Sources */,
@@ -1217,6 +1295,8 @@
 				1D63BFC626E4F0DE003363BE /* RandomLettersRxSwiftViewModel.swift in Sources */,
 				1D63BFC126E4F0CD003363BE /* ClockCombineViewModel.swift in Sources */,
 				1D63BFC926E4F0E8003363BE /* ClockView.swift in Sources */,
+				1D4F36B526E5001B00F7C772 /* SwiftUIAsyncTest.swift in Sources */,
+				1D4F36B726E5002000F7C772 /* ClockAsyncViewModel.swift in Sources */,
 				1D63BF8F26E4F009003363BE /* ExtensionDelegate.swift in Sources */,
 				1D63BFCA26E4F0EB003363BE /* ClockViewModel.swift in Sources */,
 				1D63BFCE26E4F0FD003363BE /* RandomLettersView.swift in Sources */,
@@ -1229,13 +1309,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D4F36B626E5001E00F7C772 /* AsyncResultIntegrationTests.swift in Sources */,
+				1D4F36BC26E500B800F7C772 /* CompilerIntegrationTests.swift in Sources */,
+				1D4F36BD26E500BA00F7C772 /* TestUtils.swift in Sources */,
 				1D63BFC326E4F0D5003363BE /* CombineFutureIntegrationTests.swift in Sources */,
 				1D63BFBF26E4F0C6003363BE /* CompilerIntegrationTests.swift in Sources */,
 				1DF2860327370061004DD6D2 /* NewMemoryModelIntegrationTests.swift in Sources */,
 				1D63BFC026E4F0CA003363BE /* TestUtils.swift in Sources */,
 				1D63BFC826E4F0E5003363BE /* RxSwiftObservableIntegrationTests.swift in Sources */,
 				1D63BFC426E4F0D8003363BE /* CombinePublisherIntegrationTests.swift in Sources */,
+				1D103F162747FFBB001567CA /* AsyncTestUtils.swift in Sources */,
 				1D63BFC726E4F0E2003363BE /* RxSwiftSingleIntegrationTests.swift in Sources */,
+				1D4F36B426E5001500F7C772 /* AsyncFunctionIntegrationTests.swift in Sources */,
+				1D4F36B826E5002300F7C772 /* AsyncStreamIntegrationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1245,12 +1331,15 @@
 			files = (
 				1D71763026700A6E00846F75 /* ClockView.swift in Sources */,
 				1D7175FF267009C500846F75 /* AppDelegate.swift in Sources */,
+				1DA5DD0626764810002448E3 /* RandomLettersAsyncViewModel.swift in Sources */,
 				1DF1A66F2671494800945FF9 /* NavigationBarTitle.swift in Sources */,
 				1D71762A26700A6000846F75 /* ClockCombineViewModel.swift in Sources */,
 				1D71762E26700A6E00846F75 /* ClockViewModel.swift in Sources */,
 				1DF1A6782671535200945FF9 /* RandomLettersCombineViewModel.swift in Sources */,
 				1DF1A67226714EEC00945FF9 /* RandomLettersViewModel.swift in Sources */,
+				1D810BC226A20FD30065C740 /* ClockAsyncViewModel.swift in Sources */,
 				1D5DAF802698C3C30059D4B8 /* RandomLettersRxSwiftViewModel.swift in Sources */,
+				1DF82A77267939F70024886B /* SwiftUIAsyncTest.swift in Sources */,
 				1DF1A66C2671448500945FF9 /* RootView.swift in Sources */,
 				1DF1A67526714FBD00945FF9 /* RandomLettersView.swift in Sources */,
 				1D5DAF7D2698B5EB0059D4B8 /* ClockRxSwiftViewModel.swift in Sources */,
@@ -1262,6 +1351,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1D5DAF7E2698B5EB0059D4B8 /* ClockRxSwiftViewModel.swift in Sources */,
+				1D810BC326A20FD30065C740 /* ClockAsyncViewModel.swift in Sources */,
 				1D5DAF812698C3C30059D4B8 /* RandomLettersRxSwiftViewModel.swift in Sources */,
 				1D717616267009E700846F75 /* AppDelegate.swift in Sources */,
 				1DF1A6702671494800945FF9 /* NavigationBarTitle.swift in Sources */,
@@ -1269,7 +1359,9 @@
 				1D71763126700A6E00846F75 /* ClockView.swift in Sources */,
 				1DF1A6792671535200945FF9 /* RandomLettersCombineViewModel.swift in Sources */,
 				1DF1A66D2671448500945FF9 /* RootView.swift in Sources */,
+				1DF82A78267939F70024886B /* SwiftUIAsyncTest.swift in Sources */,
 				1D717618267009E700846F75 /* SceneDelegate.swift in Sources */,
+				1DA5DD0726764810002448E3 /* RandomLettersAsyncViewModel.swift in Sources */,
 				1DF1A67326714EEC00945FF9 /* RandomLettersViewModel.swift in Sources */,
 				1D71762B26700A6000846F75 /* ClockCombineViewModel.swift in Sources */,
 				1D71762F26700A6E00846F75 /* ClockViewModel.swift in Sources */,
@@ -1280,13 +1372,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D02C12326C82EE800E2FF60 /* CompilerIntegrationTests.swift in Sources */,
+				1DFC3602268A316D008393FA /* AsyncResultIntegrationTests.swift in Sources */,
 				1D81B1542677B7EF00EEC34D /* CombineFutureIntegrationTests.swift in Sources */,
+				1D02C12526C82EE800E2FF60 /* TestUtils.swift in Sources */,
+				1D0CA84D2677F6DB0000D612 /* AsyncFunctionIntegrationTests.swift in Sources */,
 				1D81B15A2677EDE600EEC34D /* CombinePublisherIntegrationTests.swift in Sources */,
 				1DF2860027370061004DD6D2 /* NewMemoryModelIntegrationTests.swift in Sources */,
+				1D103F132747FFBB001567CA /* AsyncTestUtils.swift in Sources */,
 				1D5DAF862698CA040059D4B8 /* RxSwiftObservableIntegrationTests.swift in Sources */,
-				1D91395126C7F04C00A50CDC /* CompilerIntegrationTests.swift in Sources */,
 				1D5DAF832698C67D0059D4B8 /* RxSwiftSingleIntegrationTests.swift in Sources */,
-				1D81B1572677E56200EEC34D /* TestUtils.swift in Sources */,
+				1D810BC526A214020065C740 /* AsyncStreamIntegrationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1294,13 +1390,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D02C12426C82EE800E2FF60 /* CompilerIntegrationTests.swift in Sources */,
+				1DFC3603268A316D008393FA /* AsyncResultIntegrationTests.swift in Sources */,
 				1D81B1552677B7EF00EEC34D /* CombineFutureIntegrationTests.swift in Sources */,
+				1D02C12626C82EE800E2FF60 /* TestUtils.swift in Sources */,
+				1D0CA84E2677F6DB0000D612 /* AsyncFunctionIntegrationTests.swift in Sources */,
 				1D81B15B2677EDE600EEC34D /* CombinePublisherIntegrationTests.swift in Sources */,
 				1DF2860127370061004DD6D2 /* NewMemoryModelIntegrationTests.swift in Sources */,
+				1D103F142747FFBB001567CA /* AsyncTestUtils.swift in Sources */,
 				1D5DAF872698CA040059D4B8 /* RxSwiftObservableIntegrationTests.swift in Sources */,
-				1D91395226C7F04C00A50CDC /* CompilerIntegrationTests.swift in Sources */,
 				1D5DAF842698C67D0059D4B8 /* RxSwiftSingleIntegrationTests.swift in Sources */,
-				1D81B1582677E56200EEC34D /* TestUtils.swift in Sources */,
+				1D810BC626A214020065C740 /* AsyncStreamIntegrationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1603,7 +1703,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 14.5;
+				TVOS_DEPLOYMENT_TARGET = 13.0;
 			};
 			name = Debug;
 		};
@@ -1670,7 +1770,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 14.5;
+				TVOS_DEPLOYMENT_TARGET = 13.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1869,7 +1969,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 7.4;
+				WATCHOS_DEPLOYMENT_TARGET = 6.0;
 			};
 			name = Debug;
 		};
@@ -1935,7 +2035,7 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				VALIDATE_PRODUCT = YES;
-				WATCHOS_DEPLOYMENT_TARGET = 7.4;
+				WATCHOS_DEPLOYMENT_TARGET = 6.0;
 			};
 			name = Release;
 		};
@@ -2012,7 +2112,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 7.4;
+				WATCHOS_DEPLOYMENT_TARGET = 7.0;
 			};
 			name = Debug;
 		};
@@ -2083,7 +2183,7 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				VALIDATE_PRODUCT = YES;
-				WATCHOS_DEPLOYMENT_TARGET = 7.4;
+				WATCHOS_DEPLOYMENT_TARGET = 7.0;
 			};
 			name = Release;
 		};
@@ -2157,7 +2257,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 7.4;
+				WATCHOS_DEPLOYMENT_TARGET = 6.0;
 			};
 			name = Debug;
 		};
@@ -2225,7 +2325,7 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				VALIDATE_PRODUCT = YES;
-				WATCHOS_DEPLOYMENT_TARGET = 7.4;
+				WATCHOS_DEPLOYMENT_TARGET = 6.0;
 			};
 			name = Release;
 		};
@@ -2906,6 +3006,38 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		1D7134E7272EBA5700D4A256 /* KMPNativeCoroutinesAsync */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = KMPNativeCoroutinesAsync;
+		};
+		1D7134E9272EBA5D00D4A256 /* KMPNativeCoroutinesAsync */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = KMPNativeCoroutinesAsync;
+		};
+		1D7134EB272EBA6100D4A256 /* KMPNativeCoroutinesAsync */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = KMPNativeCoroutinesAsync;
+		};
+		1D7134ED272EBA6600D4A256 /* KMPNativeCoroutinesAsync */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = KMPNativeCoroutinesAsync;
+		};
+		1D7134EF272EBA6B00D4A256 /* KMPNativeCoroutinesAsync */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = KMPNativeCoroutinesAsync;
+		};
+		1D7134F1272EBA6F00D4A256 /* KMPNativeCoroutinesAsync */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = KMPNativeCoroutinesAsync;
+		};
+		1D7134F3272EBA7600D4A256 /* KMPNativeCoroutinesAsync */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = KMPNativeCoroutinesAsync;
+		};
+		1D7134F5272EBA7B00D4A256 /* KMPNativeCoroutinesAsync */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = KMPNativeCoroutinesAsync;
+		};
 		1D75A332272C85CC00CFF795 /* KMPNativeCoroutinesCombine */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = KMPNativeCoroutinesCombine;
