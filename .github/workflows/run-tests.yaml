@@ -1,6 +1,6 @@
-name: Run integration tests
+name: Run tests
 concurrency:
-  group: run-integration-tests-${{ github.ref }}
+  group: run-tests-${{ github.ref }}
   cancel-in-progress: true
 on:
   workflow_dispatch:
@@ -9,26 +9,83 @@ on:
       - master
       - kotlin/**
 env:
-  XCODEBUILD_SCHEME_iOS: iOS App
-  XCODEBUILD_SCHEME_macOS: macOS App
-  XCODEBUILD_SCHEME_tvOS: tvOS App
-  XCODEBUILD_SCHEME_watchOS: watchOS Tests
   XCODEBUILD_DESTINATION_iOS: platform=iOS Simulator,name=iPhone 12 Pro Max
   XCODEBUILD_DESTINATION_macOS: platform=OS X
   XCODEBUILD_DESTINATION_tvOS: platform=tvOS Simulator,name=Apple TV
   XCODEBUILD_DESTINATION_watchOS: platform=watchOS Simulator,name=Apple Watch Series 7 - 45mm
 jobs:
-  run-tests:
+  run-kotlin-tests:
     strategy:
       fail-fast: false
       matrix:
         os: [ macos-11 ]
-        xcode: [ 13.2-beta ]
+        java: [ 11 ]
+        module: [ core ]
+    name: ${{ format('{0} ({1}, JDK {2})', matrix.module, matrix.os, matrix.java) }}
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Gradle Wrapper Validation
+        uses: gradle/wrapper-validation-action@v1
+      - name: Setup JDK
+        uses: actions/setup-java@v2
+        with:
+          distribution: zulu
+          java-version: ${{ matrix.java }}
+      - name: Cache Gradle
+        uses: ./.github/actions/cache-gradle
+      - name: Cache Konan
+        uses: ./.github/actions/cache-konan
+      - name: Run tests
+        env:
+          GRADLE_MODULE: ${{ format(':kmp-nativecoroutines-{0}', matrix.module) }}
+        run: ./gradlew $GRADLE_MODULE:allTests
+  run-swift-tests:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ macos-11 ]
+        xcode: [ 13.2 ]
+        platform: [ iOS, macOS, tvOS, watchOS ]
+        implementation: [ Async, Combine, RxSwift ]
+    name: ${{ format('{0} {1} ({2}, Xcode {3})', matrix.implementation, matrix.platform, matrix.os, matrix.xcode) }}
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: ${{ matrix.xcode }}
+      - name: Run tests
+        env:
+          XCODEBUILD_SCHEME: ${{ format('KMPNativeCoroutines{0}', matrix.implementation) }}
+          XCODEBUILD_DESTINATION: ${{ env[format('XCODEBUILD_DESTINATION_{0}', matrix.platform)] }}
+        run: >-
+          xcodebuild test
+          -project KMPNativeCoroutines.xcodeproj
+          -scheme "$XCODEBUILD_SCHEME"
+          -destination "$XCODEBUILD_DESTINATION"
+  run-integration-tests:
+    needs:
+      - run-kotlin-tests
+      - run-swift-tests
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ macos-11 ]
+        xcode: [ 13.2 ]
         java: [ 11 ]
         platform: [ iOS, macOS, tvOS, watchOS ]
         embeddable-compiler: [ true, false ]
     name: ${{ format('{0} (embeddable {1}) ({2}, Xcode {3}, JDK {4})', matrix.platform, matrix.embeddable-compiler, matrix.os, matrix.xcode, matrix.java) }}
     runs-on: ${{ matrix.os }}
+    env:
+      XCODEBUILD_SCHEME_iOS: iOS App
+      XCODEBUILD_SCHEME_macOS: macOS App
+      XCODEBUILD_SCHEME_tvOS: tvOS App
+      XCODEBUILD_SCHEME_watchOS: watchOS Tests
     defaults:
       run:
         working-directory: sample
