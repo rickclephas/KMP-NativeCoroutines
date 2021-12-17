@@ -158,7 +158,6 @@ class Clock {
 
 If you don't provide a `CoroutineScope` the default scope will be used which is defined as:
 ```kotlin
-@SharedImmutable
 internal val defaultCoroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
 ```
 
