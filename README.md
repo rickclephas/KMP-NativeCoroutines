@@ -27,7 +27,7 @@ Compatibility versions for older and early access Kotlin versions are also avail
 
 | Version      | Version suffix  |   Kotlin   |     Coroutines      |
 |--------------|-----------------|:----------:|:-------------------:|
-| _latest_     | -new-mm         |   1.6.10   |      1.6.0-RC2      |
+| _latest_     | -new-mm         |   1.6.10   |      1.6.0-RC3      |
 | **_latest_** | **_no suffix_** | **1.6.10** | **1.5.2-native-mt** |
 | _latest_     | -kotlin-1.6.0   |   1.6.0    |   1.5.2-native-mt   |
 | 0.9.0        | -new-mm-3       |   1.6.0    |      1.6.0-RC2      |
