@@ -25,14 +25,11 @@ class RandomLettersRxSwiftViewModel: RandomLettersViewModel {
             // Update the UI on the main thread
             .observe(on: MainScheduler.instance)
             .subscribe(onSuccess: { [weak self] word in
-                guard let self = self else { return }
-                self.result = .success(word)
+                self?.result = .success(word)
             }, onFailure: { [weak self] error in
-                guard let self = self else { return }
-                self.result = .failure(error)
+                self?.result = .failure(error)
             }, onDisposed: { [weak self] in
-                guard let self = self else { return }
-                self.isLoading = false
+                self?.isLoading = false
             })
     }
 }

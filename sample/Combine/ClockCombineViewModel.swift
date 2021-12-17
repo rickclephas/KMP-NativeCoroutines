@@ -39,8 +39,7 @@ class ClockCombineViewModel: ClockViewModel {
             // Update the UI on the main thread
             .receive(on: DispatchQueue.main)
             .sink { [weak self] time in
-                guard let self = self else { return }
-                self.time = time
+                self?.time = time
             }
     }
     

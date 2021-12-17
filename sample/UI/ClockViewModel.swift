@@ -8,6 +8,7 @@
 import Foundation
 
 /// A type of object that is used as the view model for the `ClockView`.
+@MainActor
 protocol ClockViewModel: ObservableObject {
     /// The current time formatted as "HH:mm:ss".
     var time: String { get }
