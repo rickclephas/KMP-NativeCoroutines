@@ -37,12 +37,10 @@ class ClockRxSwiftViewModel: ClockViewModel {
             // Update the UI on the main thread
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] time in
-                guard let self = self else { return }
-                self.time = time
+                self?.time = time
             }, onError: { [weak self] _ in
                 // Replace any errors with a text message :)
-                guard let self = self else { return }
-                self.time = "Ohno error!"
+                self?.time = "Ohno error!"
             })
     }
     

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import NativeCoroutinesSampleShared
 
 struct RootView: View {
     var body: some View {
@@ -24,6 +25,19 @@ struct RootView: View {
                 }
                 NavigationLink(destination: RandomLettersView(viewModel: RandomLettersRxSwiftViewModel())) {
                     Text("Random letters")
+                }
+            }
+            Section(header: Text("Async/Await")) {
+                NavigationLink(destination: ClockView(viewModel: ClockAsyncViewModel())) {
+                    Text("Clock")
+                }
+                NavigationLink(destination: RandomLettersView(viewModel: RandomLettersAsyncViewModel())) {
+                    Text("Random letters")
+                }
+                if #available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *) {
+                    NavigationLink(destination: SwiftUIAsyncTest(tests: SuspendIntegrationTests())) {
+                        Text("SwiftUI test")
+                    }
                 }
             }
         }.navigationBarTitle(inlineTitle: "KMP-NativeCoroutines")
