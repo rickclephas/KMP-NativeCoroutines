@@ -9,7 +9,7 @@ import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 
 /**
- * This class will make the compiler fail with a recursion error
+ * This class made the compiler fail with a recursion error
  * when both KMP-NativeCoroutines and `kotlinx.serialization` are applied to the project.
  * The recursion is triggered by the [descriptor] property,
  * to work around this error the return type of [descriptor] can be specified explicitly:
