@@ -9,7 +9,8 @@ inputs:
 runs:
   using: composite
   steps:
-    - run: |
+    - shell: bash
+      run: |
         git config --local user.name "GitHub Actions"
         git config --local user.email "actions@github.com"
         git checkout spm/${{ inputs.package-name }}
