@@ -1,4 +1,4 @@
-package com.rickclephas.kmp.nativecoroutines.sample
+package com.rickclephas.kmp.nativecoroutines.sample.tests
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
