@@ -16,7 +16,6 @@ import org.jetbrains.kotlin.resolve.lazy.descriptors.LazyClassMemberScope
 import org.jetbrains.kotlin.resolve.scopes.DescriptorKindFilter
 import org.jetbrains.kotlin.resolve.scopes.MemberScope
 import org.jetbrains.kotlin.types.KotlinType
-import java.lang.Integer.min
 import java.util.ArrayList
 
 internal class KmpNativeCoroutinesSyntheticResolveExtension(
@@ -24,7 +23,7 @@ internal class KmpNativeCoroutinesSyntheticResolveExtension(
 ): SyntheticResolveExtension {
 
     // We need the user declared functions. Unfortunately there doesn't seem to be an official way for that.
-    // Instead we'll use reflection to use the same code the compiler is using.
+    // Instead, we'll use reflection to use the same code the compiler is using.
     // https://github.com/JetBrains/kotlin/blob/fe8f7cfcae3b33ba7ee5d06cd45e5e68f3c421a8/compiler/frontend/src/org/jetbrains/kotlin/resolve/lazy/descriptors/LazyClassMemberScope.kt#L64
     @Suppress("UNCHECKED_CAST")
     private fun ClassDescriptor.getDeclarations(): List<DeclarationDescriptor> {
@@ -37,16 +36,20 @@ internal class KmpNativeCoroutinesSyntheticResolveExtension(
                 NoLookupLocation.WHEN_GET_ALL_DESCRIPTORS) as List<DeclarationDescriptor>
     }
 
-    // Checking some return types will recursively call our synthetic resolve extension again.
-    // We'll use the stacktrace to check for this and prevent infinite loops.
+    private val syntheticResolveExtensionClassName =
+        "org.jetbrains.kotlin.resolve.extensions.SyntheticResolveExtension\$Companion\$getInstance\$1"
+
+    // Our SyntheticResolveExtension might be called recursively, either by some other plugin
+    // or by our own SyntheticResolveExtension when we try to check some return types.
+    // To prevent these loops we'll check the current stacktrace for the `syntheticResolveExtensionClassName`.
+    // It should only occur once, if it occurs more than once then this is a recursive call.
     private fun isRecursiveCall(): Boolean {
-        val stackTrace = Throwable().stackTrace
-        val currentElement = stackTrace.getOrNull(1) ?: return false
-        // The original call should be in the first 100 elements
-        for (i in 2 until min(100, stackTrace.size)) {
-            if (stackTrace[i].className == currentElement.className)
-                return true
-        }
+        Throwable().stackTrace.fold(0) { acc, element ->
+            when (element.className) {
+                syntheticResolveExtensionClassName -> acc + 1
+                else -> acc
+            }.also { if (it > 1) return true }
+        }.also { if (it < 1) throw IllegalStateException("Not called from SyntheticResolveExtension") }
         return false
     }
 

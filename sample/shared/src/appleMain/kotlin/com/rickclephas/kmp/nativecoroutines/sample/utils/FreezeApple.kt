@@ -1,4 +1,4 @@
-package com.rickclephas.kmp.nativecoroutines.sample
+package com.rickclephas.kmp.nativecoroutines.sample.utils
 
 import kotlin.native.concurrent.freeze
 
