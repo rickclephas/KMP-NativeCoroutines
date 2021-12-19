@@ -1,5 +1,6 @@
 plugins {
     kotlin("multiplatform")
+    kotlin("plugin.serialization")
     id("com.rickclephas.kmp.nativecoroutines")
 }
 
@@ -24,7 +25,7 @@ kotlin {
         }
         val commonMain by getting {
             dependencies {
-
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.1")
             }
         }
         val commonTest by getting {
