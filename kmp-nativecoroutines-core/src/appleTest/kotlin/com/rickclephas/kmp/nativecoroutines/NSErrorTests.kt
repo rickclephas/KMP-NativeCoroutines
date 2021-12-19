@@ -1,5 +1,6 @@
 package com.rickclephas.kmp.nativecoroutines
 
+import kotlinx.cinterop.UnsafeNumber
 import kotlinx.cinterop.convert
 import kotlin.native.concurrent.isFrozen
 import kotlin.test.*
@@ -16,6 +17,7 @@ class NSErrorTests {
     }
 
     @Test
+    @OptIn(UnsafeNumber::class)
     fun `ensure NSError domain and code are correct`() {
         val exception = RandomException()
         val nsError = exception.asNSError()
