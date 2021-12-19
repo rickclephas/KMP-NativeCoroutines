@@ -1,6 +1,7 @@
-package com.rickclephas.kmp.nativecoroutines.sample
+package com.rickclephas.kmp.nativecoroutines.sample.tests
 
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutineScope
+import com.rickclephas.kmp.nativecoroutines.sample.utils.freeze
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
