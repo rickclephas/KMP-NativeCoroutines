@@ -8,12 +8,13 @@ import kotlin.test.*
 class NSErrorTests {
 
     @Test
-    fun `ensure not frozen`() {
+    fun `ensure mutable`() {
         val exception = RandomException()
         assertFalse(exception.isFrozen, "Exception shouldn't be frozen yet")
         val nsError = exception.asNSError()
-        // TODO: check why NSError is frozen
-        // assertFalse(nsError.isFrozen, "NSError shouldn't be frozen")
+        // Note: ObjC objects are always considered frozen even though they are still mutable
+        // https://youtrack.jetbrains.com/issue/KT-50379
+        assertTrue(nsError.isFrozen, "NSError should be frozen")
         assertFalse(exception.isFrozen, "Exception shouldn't be frozen")
     }
 
