@@ -7,9 +7,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlin.time.Duration.Companion.seconds
-import kotlin.time.ExperimentalTime
 
-@OptIn(ExperimentalTime::class, DelicateCoroutinesApi::class)
+@OptIn(DelicateCoroutinesApi::class)
 object Clock {
 
     @Suppress("ObjectPropertyName")
