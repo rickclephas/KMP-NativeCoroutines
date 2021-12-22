@@ -13,6 +13,7 @@ class KmpNativeCoroutinesComponentRegistrar: ComponentRegistrar {
         val suffix = configuration.get(SUFFIX_KEY) ?: return
         val nameGenerator =  NameGenerator(suffix)
         SyntheticResolveExtension.registerExtension(project, KmpNativeCoroutinesSyntheticResolveExtension(nameGenerator))
+        SyntheticResolveExtension.registerExtension(project, KmpNativeCoroutinesSyntheticResolveExtension.RecursiveCallSyntheticResolveExtension())
         IrGenerationExtension.registerExtension(project, KmpNativeCoroutinesIrGenerationExtension(nameGenerator))
     }
 }
