@@ -36,6 +36,9 @@ internal class KmpNativeCoroutinesSyntheticResolveExtension(
                 NoLookupLocation.WHEN_GET_ALL_DESCRIPTORS) as List<DeclarationDescriptor>
     }
 
+    // We need two extensions so that we can check for recursion calls with `syntheticResolveExtensionClassName`.
+    class RecursiveCallSyntheticResolveExtension : SyntheticResolveExtension
+
     private val syntheticResolveExtensionClassName =
         "org.jetbrains.kotlin.resolve.extensions.SyntheticResolveExtension\$Companion\$getInstance\$1"
 
