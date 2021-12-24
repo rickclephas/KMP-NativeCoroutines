@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import platform.Foundation.NSError
 import kotlin.native.concurrent.freeze
+import kotlin.reflect.KClass
 
 /**
  * A function that collects a [Flow] via callbacks.
@@ -20,10 +21,14 @@ typealias NativeFlow<T> = (onItem: NativeCallback<T>, onComplete: NativeCallback
  * Creates a [NativeFlow] for this [Flow].
  *
  * @param scope the [CoroutineScope] to use for the collection, or `null` to use the [defaultCoroutineScope].
+ * @param propagatedExceptions a list of [Throwable] types that should be propagated as [NSError]s.
  * @receiver the [Flow] to collect.
  * @see Flow.collect
  */
-fun <T> Flow<T>.asNativeFlow(scope: CoroutineScope? = null): NativeFlow<T> {
+fun <T> Flow<T>.asNativeFlow(
+    scope: CoroutineScope? = null,
+    propagatedExceptions: List<KClass<out Throwable>> = listOf(CancellationException::class)
+): NativeFlow<T> {
     val coroutineScope = scope ?: defaultCoroutineScope
     return (collect@{ onItem: NativeCallback<T>, onComplete: NativeCallback<NSError?> ->
         val job = coroutineScope.launch {
@@ -35,13 +40,13 @@ fun <T> Flow<T>.asNativeFlow(scope: CoroutineScope? = null): NativeFlow<T> {
                 // this is required since the job could be cancelled before it is started
                 throw e
             }  catch (e: Throwable) {
-                onComplete(e.asNSError())
+                onComplete(e.asNSError(propagatedExceptions))
             }
         }
         job.invokeOnCompletion { cause ->
             // Only handle CancellationExceptions, all other exceptions should be handled inside the job
             if (cause !is CancellationException) return@invokeOnCompletion
-            onComplete(cause.asNSError())
+            onComplete(cause.asNSError(propagatedExceptions))
         }
         return@collect job.asNativeCancellable()
     }).freeze()

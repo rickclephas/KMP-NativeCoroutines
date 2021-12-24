@@ -37,7 +37,7 @@ class NativeFlowTests {
         val exception = RandomException()
         val flow = flow<RandomValue> { throw exception }
         val job = Job()
-        val nativeFlow = flow.asNativeFlow(CoroutineScope(job))
+        val nativeFlow = flow.asNativeFlow(CoroutineScope(job), listOf(RandomException::class))
         val completionCount = AtomicInt(0)
         nativeFlow({ _, _ -> }, { error, _ ->
             assertNotNull(error, "Flow should complete with an error")
