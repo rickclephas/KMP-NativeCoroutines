@@ -3,8 +3,7 @@ package com.rickclephas.kmp.nativecoroutines.sample.tests
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesIgnore
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutineThrows
 import com.rickclephas.kmp.nativecoroutines.sample.utils.freeze
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.*
 import kotlin.coroutines.cancellation.CancellationException
 
 class CompilerIntegrationTests<V>: IntegrationTests() {
@@ -24,6 +23,13 @@ class CompilerIntegrationTests<V>: IntegrationTests() {
     @get:NativeCoroutineThrows(TestException::class)
     val flowThrow: Flow<Int> = flow {
         throw TestException()
+    }
+
+    val stateFlow: StateFlow<Int> = MutableStateFlow(1)
+
+    val sharedFlow: SharedFlow<Int> = MutableSharedFlow<Int>(2).apply {
+        tryEmit(1)
+        tryEmit(2)
     }
 
     suspend fun returnGenericClassValue(value: V): V {

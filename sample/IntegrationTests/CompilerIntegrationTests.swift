@@ -53,6 +53,18 @@ class CompilerIntegrationTests: XCTestCase {
         wait(for: [errorExpectation], timeout: 2)
     }
     
+    func testStateFlowValue() {
+        let integrationTests = IntegrationTests()
+        let value = integrationTests.stateFlowNativeValue
+        XCTAssertEqual(value, 1, "Received inccorect value")
+    }
+    
+    func testSharedFlowReplayCache() {
+        let integrationTests = IntegrationTests()
+        let replayCache = integrationTests.sharedFlowNativeReplayCache
+        XCTAssertEqual(replayCache, [1, 2], "Received inccorect value")
+    }
+    
     func testReturnGenericClassValue() {
         let integrationTests = IntegrationTests()
         let valueExpectation = expectation(description: "Waiting for value")
