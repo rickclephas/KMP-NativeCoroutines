@@ -1,8 +1,30 @@
 package com.rickclephas.kmp.nativecoroutines.sample.tests
 
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesIgnore
+import com.rickclephas.kmp.nativecoroutines.NativeCoroutineThrows
+import com.rickclephas.kmp.nativecoroutines.sample.utils.freeze
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import kotlin.coroutines.cancellation.CancellationException
 
 class CompilerIntegrationTests<V>: IntegrationTests() {
+
+    private class TestException: Exception("com.rickclephas.kmp.nativecoroutines.sample.tests.TestException")
+
+    @Throws(TestException::class, CancellationException::class)
+    suspend fun throwWithThrows() {
+        throw TestException()
+    }
+
+    @NativeCoroutineThrows(TestException::class)
+    suspend fun throwWithNativeCoroutineThrows() {
+        throw TestException()
+    }
+
+    @get:NativeCoroutineThrows(TestException::class)
+    val flowThrow: Flow<Int> = flow {
+        throw TestException()
+    }
 
     suspend fun returnGenericClassValue(value: V): V {
         return value
@@ -31,5 +53,9 @@ class CompilerIntegrationTests<V>: IntegrationTests() {
     @NativeCoroutinesIgnore
     suspend fun returnIgnoredValue(value: Int): Int {
         return value
+    }
+
+    init {
+        freeze()
     }
 }

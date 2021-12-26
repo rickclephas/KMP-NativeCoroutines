@@ -1,5 +1,6 @@
 package com.rickclephas.kmp.nativecoroutines.sample.tests
 
+import com.rickclephas.kmp.nativecoroutines.sample.utils.freeze
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -39,5 +40,9 @@ class SuspendIntegrationTests: IntegrationTests() {
                 emit(it)
             }
         }
+    }
+
+    init {
+        freeze()
     }
 }
