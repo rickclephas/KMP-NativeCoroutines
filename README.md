@@ -144,6 +144,60 @@ class RandomLettersGenerator {
 The plugin is currently unable to generate native versions for global properties and functions.  
 In such cases you have to manually create the native versions in your Kotlin native code.
 
+#### Exception propagation
+
+> Note: for more information about ObjC interop and exceptions please take a look at the 
+> [Kotlin docs](https://kotlinlang.org/docs/native-objc-interop.html#errors-and-exceptions).
+
+KMP-NativeCoroutines uses the Kotlin Native runtime to propagate `Exception`s as `NSError`s to Swift/ObjC.  
+This means that by default only `CancellationException`s are propagated.
+
+To propagate other exceptions you should mark your functions with the `Throws` annotation.  
+E.g. use the following to propagate all types of `Throwable`s:
+```kotlin
+@Throws(Throwable::class)
+suspend fun throwingSuspendFunction() { }
+```
+
+> **Note:** to ignore the `Throws` annotation set the `useThrowsAnnotation` config option to `false`.
+
+You can also use the `NativeCoroutineThrows` annotation:
+```kotlin
+@NativeCoroutineThrows(Throwable::class)
+suspend fun throwingSuspendFunction() { }
+
+@get:NativeCoroutineThrows(Throwable::class)
+val throwingFlow: Flow<Int> = flow { }
+```
+
+> **Note:** if both `Throws` and `NativeCoroutineThrows` are specified 
+> only the `NativeCoroutineThrows` one will be used by KMP-NativeCoroutines.
+
+To reduce code duplication you can also use the `NativeCoroutineThrows` annotation on a class.  
+```kotlin
+@NativeCoroutineThrows(MyException::class)
+class ExceptionThrower {
+    suspend fun throwMyException() {
+        // This exception will be propagated to Swift/ObjC
+        throw MyException()
+    }
+    
+    @Throws(MyOtherException::class)
+    suspend fun throwMyException() {
+        // Note that annotations on the function or property have a higher precedence.
+        // This means that the following exception will terminate the program.
+        throw MyException()
+    }
+}
+```
+
+or you could specify the exceptions in your `build.gradle.kts`:
+```kotlin
+nativeCoroutines {
+    propagatedExceptions = arrayOf("my.company.MyException")
+}
+```
+
 #### Custom suffix
 
 If you don't like the naming of these generated properties/functions, you can easily change the suffix.  
