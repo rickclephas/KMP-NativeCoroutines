@@ -13,9 +13,7 @@ import org.jetbrains.kotlin.ir.declarations.IrDeclaration
 import org.jetbrains.kotlin.ir.declarations.IrFunction
 import org.jetbrains.kotlin.ir.declarations.IrProperty
 import org.jetbrains.kotlin.ir.declarations.IrSimpleFunction
-import org.jetbrains.kotlin.ir.expressions.IrBlockBody
-import org.jetbrains.kotlin.ir.expressions.IrExpression
-import org.jetbrains.kotlin.ir.expressions.IrVararg
+import org.jetbrains.kotlin.ir.expressions.*
 import org.jetbrains.kotlin.ir.expressions.impl.IrClassReferenceImpl
 import org.jetbrains.kotlin.ir.types.*
 import org.jetbrains.kotlin.ir.types.impl.IrSimpleTypeImpl
@@ -199,20 +197,22 @@ internal class KmpNativeCoroutinesIrTransformer(
     ))
 
     private fun IrBuilderWithScope.createPropagatedExceptionsArray(originalDeclaration: IrDeclaration): IrExpression {
-        // Use the annotations on the declaration whenever possible
-        val annotation = originalDeclaration.annotations.findNativeCoroutineThrowsAnnotation()
-            ?: useThrowsAnnotation.ifTrue { originalDeclaration.annotations.findThrowsAnnotation() }
-        annotation?.getValueArgument(0)?.let { vararg ->
-            if (vararg !is IrVararg) throw IllegalArgumentException("Unexpected vararg: $vararg")
-            return irArrayOf(vararg.varargElementType, vararg.elements)
+        // Find the annotation on the declaration (or a parent class)
+        fun IrDeclaration.getAnnotation(): IrConstructorCall? =
+            annotations.findNativeCoroutineThrowsAnnotation() ?:
+            useThrowsAnnotation.ifTrue { originalDeclaration.annotations.findThrowsAnnotation() } ?:
+            parentClassOrNull?.getAnnotation()
+        val annotation = originalDeclaration.getAnnotation()
+        // Combine the propagatedExceptionClasses list with the classes from the annotation
+        val propagatedExceptions = buildList {
+            propagatedExceptionClasses.forEach {
+                add(IrClassReferenceImpl(startOffset, endOffset, propagatedExceptionsArrayElementType, it, it.defaultType))
+            }
+            annotation?.getValueArgument(0)?.let { vararg ->
+                if (vararg !is IrVararg) throw IllegalArgumentException("Unexpected vararg: $vararg")
+                addAll(vararg.elements)
+            }
         }
-        // Use the annotations on the parent class whenever possible
-        originalDeclaration.parentClassOrNull?.let { parentClass ->
-            return createPropagatedExceptionsArray(parentClass)
-        }
-        // Use the propagatedExceptionClasses list
-        return irArrayOf(propagatedExceptionsArrayElementType, propagatedExceptionClasses.map {
-            IrClassReferenceImpl(startOffset, endOffset, propagatedExceptionsArrayElementType, it, it.defaultType)
-        })
+        return irArrayOf(propagatedExceptionsArrayElementType, propagatedExceptions)
     }
 }

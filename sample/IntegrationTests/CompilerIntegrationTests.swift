@@ -12,7 +12,9 @@ import NativeCoroutinesSampleShared
 class CompilerIntegrationTests: XCTestCase {
     
     private typealias IntegrationTests = NativeCoroutinesSampleShared.CompilerIntegrationTests<NSNumber>
-    private let testExceptionMessage = "com.rickclephas.kmp.nativecoroutines.sample.tests.TestException"
+    private let testExceptionMessage = "com.rickclephas.kmp.nativecoroutines.sample.utils.TestException"
+    private let classTestExceptionMessage = "com.rickclephas.kmp.nativecoroutines.sample.utils.ClassTestException"
+    private let moduleTestExceptionMessage = "com.rickclephas.kmp.nativecoroutines.sample.utils.ModuleTestException"
     
     func testThrowWithThrows() {
         let integrationTests = IntegrationTests()
@@ -34,6 +36,32 @@ class CompilerIntegrationTests: XCTestCase {
             let error = error as NSError
             let exception = error.userInfo["KotlinException"] as! KotlinThrowable
             XCTAssertEqual(exception.message, self.testExceptionMessage, "Received incorrect exception")
+            errorExpectation.fulfill()
+            return unit
+        })
+        wait(for: [errorExpectation], timeout: 2)
+    }
+    
+    func testThrowWithNativeCoroutineThrowsOnClass() {
+        let integrationTests = IntegrationTests()
+        let errorExpectation = expectation(description: "Waiting for error")
+        _ = integrationTests.throwWithNativeCoroutineThrowsOnClassNative()({ _, unit in unit}, { error, unit in
+            let error = error as NSError
+            let exception = error.userInfo["KotlinException"] as! KotlinThrowable
+            XCTAssertEqual(exception.message, self.classTestExceptionMessage, "Received incorrect exception")
+            errorExpectation.fulfill()
+            return unit
+        })
+        wait(for: [errorExpectation], timeout: 2)
+    }
+    
+    func testThrowWithPropagatedExceptionInModule() {
+        let integrationTests = IntegrationTests()
+        let errorExpectation = expectation(description: "Waiting for error")
+        _ = integrationTests.throwWithPropagatedExceptionInModuleNative()({ _, unit in unit}, { error, unit in
+            let error = error as NSError
+            let exception = error.userInfo["KotlinException"] as! KotlinThrowable
+            XCTAssertEqual(exception.message, self.moduleTestExceptionMessage, "Received incorrect exception")
             errorExpectation.fulfill()
             return unit
         })

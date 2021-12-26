@@ -2,13 +2,15 @@ package com.rickclephas.kmp.nativecoroutines.sample.tests
 
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesIgnore
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutineThrows
+import com.rickclephas.kmp.nativecoroutines.sample.utils.ClassTestException
+import com.rickclephas.kmp.nativecoroutines.sample.utils.ModuleTestException
+import com.rickclephas.kmp.nativecoroutines.sample.utils.TestException
 import com.rickclephas.kmp.nativecoroutines.sample.utils.freeze
 import kotlinx.coroutines.flow.*
 import kotlin.coroutines.cancellation.CancellationException
 
+@NativeCoroutineThrows(ClassTestException::class)
 class CompilerIntegrationTests<V>: IntegrationTests() {
-
-    private class TestException: Exception("com.rickclephas.kmp.nativecoroutines.sample.tests.TestException")
 
     @Throws(TestException::class, CancellationException::class)
     suspend fun throwWithThrows() {
@@ -18,6 +20,14 @@ class CompilerIntegrationTests<V>: IntegrationTests() {
     @NativeCoroutineThrows(TestException::class)
     suspend fun throwWithNativeCoroutineThrows() {
         throw TestException()
+    }
+
+    suspend fun throwWithNativeCoroutineThrowsOnClass() {
+        throw ClassTestException()
+    }
+
+    suspend fun throwWithPropagatedExceptionInModule() {
+        throw ModuleTestException()
     }
 
     @get:NativeCoroutineThrows(TestException::class)

@@ -11,7 +11,7 @@ import kotlin.reflect.KClass
  *
  * @see Throws
  */
-@Target(AnnotationTarget.PROPERTY_GETTER, AnnotationTarget.FUNCTION)
+@Target(AnnotationTarget.PROPERTY_GETTER, AnnotationTarget.FUNCTION, AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.SOURCE)
 @MustBeDocumented
 annotation class NativeCoroutineThrows(vararg val exceptionClasses: KClass<out Throwable>)
