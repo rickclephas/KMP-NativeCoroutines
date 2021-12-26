@@ -27,7 +27,7 @@ typealias NativeFlow<T> = (onItem: NativeCallback<T>, onComplete: NativeCallback
  */
 fun <T> Flow<T>.asNativeFlow(
     scope: CoroutineScope? = null,
-    propagatedExceptions: Array<KClass<out Throwable>> = arrayOf(CancellationException::class)
+    propagatedExceptions: Array<KClass<out Throwable>> = arrayOf()
 ): NativeFlow<T> {
     val coroutineScope = scope ?: defaultCoroutineScope
     return (collect@{ onItem: NativeCallback<T>, onComplete: NativeCallback<NSError?> ->

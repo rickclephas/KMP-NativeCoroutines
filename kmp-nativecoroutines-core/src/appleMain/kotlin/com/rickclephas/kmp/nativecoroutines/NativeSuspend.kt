@@ -24,7 +24,7 @@ typealias NativeSuspend<T> = (onResult: NativeCallback<T>, onError: NativeCallba
  */
 fun <T> nativeSuspend(
     scope: CoroutineScope? = null,
-    propagatedExceptions: Array<KClass<out Throwable>> = arrayOf(CancellationException::class),
+    propagatedExceptions: Array<KClass<out Throwable>> = arrayOf(),
     block: suspend () -> T
 ): NativeSuspend<T> {
     val coroutineScope = scope ?: defaultCoroutineScope
