@@ -52,7 +52,7 @@ class NativeSuspendTests {
     fun `ensure exceptions are received as errors`() = runBlocking {
         val exception = RandomException()
         val job = Job()
-        val nativeSuspend = nativeSuspend(CoroutineScope(job), listOf(RandomException::class)) {
+        val nativeSuspend = nativeSuspend(CoroutineScope(job), arrayOf(RandomException::class)) {
             delayAndThrow(100, exception)
         }
         val receivedResultCount = AtomicInt(0)
