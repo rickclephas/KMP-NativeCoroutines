@@ -10,7 +10,7 @@ open class KmpNativeCoroutinesExtension {
     /**
      * The default array of [Throwable] types that should be propagated as `NSError`s.
      */
-    var propagatedExceptions: Array<String> = arrayOf("kotlin.coroutines.cancellation.CancellationException")
+    var propagatedExceptions: Array<String> = arrayOf()
 
     /**
      * Indicates if the [Throws] annotation is used to generate the [propagatedExceptions] list.

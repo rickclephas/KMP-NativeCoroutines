@@ -2,6 +2,7 @@ package com.rickclephas.kmp.nativecoroutines
 
 import kotlinx.cinterop.*
 import platform.Foundation.NSError
+import kotlin.coroutines.cancellation.CancellationException
 import kotlin.native.concurrent.freeze
 import kotlin.native.internal.GCUnsafeCall
 import kotlin.reflect.KClass
@@ -10,6 +11,7 @@ import kotlin.reflect.KClass
  * Uses Kotlin Native runtime functions to convert a [Throwable] to a [NSError].
  *
  * Warning: [Throwable]s that aren't of a [propagatedExceptions] type will terminate the program.
+ * Note: [CancellationException]s are always propagated.
  *
  * @param propagatedExceptions an array of [Throwable] types that should be propagated as [NSError]s.
  */
@@ -17,7 +19,8 @@ internal fun Throwable.asNSError(
     propagatedExceptions: Array<KClass<out Throwable>>
 ): NSError {
     freeze()
-    val shouldPropagate = propagatedExceptions.any { it.isInstance(this) }
+    val shouldPropagate = CancellationException::class.isInstance(this) ||
+            propagatedExceptions.any { it.isInstance(this) }
     return memScoped {
         val error = alloc<ObjCObjectVar<NSError>>()
         val types = when (shouldPropagate) {
