@@ -21,13 +21,13 @@ typealias NativeFlow<T> = (onItem: NativeCallback<T>, onComplete: NativeCallback
  * Creates a [NativeFlow] for this [Flow].
  *
  * @param scope the [CoroutineScope] to use for the collection, or `null` to use the [defaultCoroutineScope].
- * @param propagatedExceptions a list of [Throwable] types that should be propagated as [NSError]s.
+ * @param propagatedExceptions an array of [Throwable] types that should be propagated as [NSError]s.
  * @receiver the [Flow] to collect.
  * @see Flow.collect
  */
 fun <T> Flow<T>.asNativeFlow(
     scope: CoroutineScope? = null,
-    propagatedExceptions: List<KClass<out Throwable>> = listOf(CancellationException::class)
+    propagatedExceptions: Array<KClass<out Throwable>> = arrayOf(CancellationException::class)
 ): NativeFlow<T> {
     val coroutineScope = scope ?: defaultCoroutineScope
     return (collect@{ onItem: NativeCallback<T>, onComplete: NativeCallback<NSError?> ->

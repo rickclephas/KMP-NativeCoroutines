@@ -19,12 +19,12 @@ typealias NativeSuspend<T> = (onResult: NativeCallback<T>, onError: NativeCallba
  * Creates a [NativeSuspend] for the provided suspend [block].
  *
  * @param scope the [CoroutineScope] to run the [block] in, or `null` to use the [defaultCoroutineScope].
- * @param propagatedExceptions a list of [Throwable] types that should be propagated as [NSError]s.
+ * @param propagatedExceptions an array of [Throwable] types that should be propagated as [NSError]s.
  * @param block the suspend block to await.
  */
 fun <T> nativeSuspend(
     scope: CoroutineScope? = null,
-    propagatedExceptions: List<KClass<out Throwable>> = listOf(CancellationException::class),
+    propagatedExceptions: Array<KClass<out Throwable>> = arrayOf(CancellationException::class),
     block: suspend () -> T
 ): NativeSuspend<T> {
     val coroutineScope = scope ?: defaultCoroutineScope

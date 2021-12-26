@@ -11,10 +11,10 @@ import kotlin.reflect.KClass
  *
  * Warning: [Throwable]s that aren't of a [propagatedExceptions] type will terminate the program.
  *
- * @param propagatedExceptions a list of [Throwable] types that should be propagated as [NSError]s.
+ * @param propagatedExceptions an array of [Throwable] types that should be propagated as [NSError]s.
  */
 internal fun Throwable.asNSError(
-    propagatedExceptions: List<KClass<out Throwable>>
+    propagatedExceptions: Array<KClass<out Throwable>>
 ): NSError {
     freeze()
     val shouldPropagate = propagatedExceptions.any { it.isInstance(this) }
