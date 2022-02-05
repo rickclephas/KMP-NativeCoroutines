@@ -100,6 +100,16 @@ Just use the wrapper functions in Swift to get Observables, Publishers, AsyncStr
 
 ### Kotlin
 
+> **WARNING:** The Kotlin part of this library consists of helper functions and a Kotlin compiler plugin.  
+> Using the plugin removes the boilerplate code from your project, however **Kotlin compiler plugins aren't stable**!
+> 
+> The plugin is known to cause recursion errors in some scenarios such as in [#4][GH-4] and [#23][GH-23].  
+> To prevent such recursion errors it's best to explicitly define the (return) types of public 
+> properties and functions.
+
+[GH-4]: https://github.com/rickclephas/KMP-NativeCoroutines/issues/4
+[GH-23]: https://github.com/rickclephas/KMP-NativeCoroutines/issues/23
+
 The plugin will automagically generate the necessary code for you! 🔮
 
 Your `Flow` properties/functions get a `Native` version:
