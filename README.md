@@ -30,7 +30,7 @@ This library solves both of these limitations 😄.
 [new-mm]: https://github.com/JetBrains/kotlin/blob/0b871d7534a9c8e90fb9ad61cd5345716448d08c/kotlin-native/NEW_MM.md
 [native-mt]: https://github.com/kotlin/kotlinx.coroutines/issues/462
 
-As of version `0.10.0` the library uses Kotlin version `1.6.10`.  
+The latest version of the library uses Kotlin version `1.6.10`.  
 Compatibility versions for older Kotlin versions are also available:
 
 | Version      | Version suffix  |   Kotlin   |     Coroutines      |
@@ -99,6 +99,16 @@ Using your Kotlin Coroutines code from Swift is almost as easy as calling the Ko
 Just use the wrapper functions in Swift to get Observables, Publishers, AsyncStreams or async functions.
 
 ### Kotlin
+
+> **WARNING:** The Kotlin part of this library consists of helper functions and a Kotlin compiler plugin.  
+> Using the plugin removes the boilerplate code from your project, however **Kotlin compiler plugins aren't stable**!
+> 
+> The plugin is known to cause recursion errors in some scenarios such as in [#4][GH-4] and [#23][GH-23].  
+> To prevent such recursion errors it's best to explicitly define the (return) types of public 
+> properties and functions.
+
+[GH-4]: https://github.com/rickclephas/KMP-NativeCoroutines/issues/4
+[GH-23]: https://github.com/rickclephas/KMP-NativeCoroutines/issues/23
 
 The plugin will automagically generate the necessary code for you! 🔮
 
