@@ -141,7 +141,7 @@ internal class KmpNativeCoroutinesSyntheticResolveExtension(
     }
 
     private fun createPropertyDescriptor(
-        containingDeclaration: DeclarationDescriptor,
+        containingDeclaration: ClassDescriptor,
         visibility: DescriptorVisibility,
         name: Name,
         outType: KotlinType,
@@ -150,7 +150,7 @@ internal class KmpNativeCoroutinesSyntheticResolveExtension(
     ): PropertyDescriptor = PropertyDescriptorImpl.create(
         containingDeclaration,
         Annotations.EMPTY,
-        Modality.FINAL,
+        if (containingDeclaration.kind.isInterface) Modality.OPEN else Modality.FINAL,
         visibility,
         false,
         name,
@@ -173,7 +173,7 @@ internal class KmpNativeCoroutinesSyntheticResolveExtension(
             PropertyGetterDescriptorImpl(
                 this,
                 Annotations.EMPTY,
-                Modality.FINAL,
+                modality,
                 visibility,
                 false,
                 false,
@@ -247,7 +247,7 @@ internal class KmpNativeCoroutinesSyntheticResolveExtension(
                 typeParameters,
                 valueParameters,
                 returnType,
-                Modality.FINAL,
+                if (thisDescriptor.kind.isInterface) Modality.OPEN else Modality.FINAL,
                 coroutinesFunctionDescriptor.visibility
             )
         }
