@@ -109,7 +109,8 @@ internal class KmpNativeCoroutinesSyntheticResolveExtension(
         val type = thisDescriptor.module.getExpandedNativeFlowType(valueType)
         return createPropertyDescriptor(thisDescriptor, coroutinesPropertyDescriptor.visibility,
             name, type, coroutinesPropertyDescriptor.dispatchReceiverParameter,
-            coroutinesPropertyDescriptor.extensionReceiverParameter
+            coroutinesPropertyDescriptor.extensionReceiverParameter,
+            coroutinesPropertyDescriptor.contextReceiverParameters
         )
     }
 
@@ -122,7 +123,8 @@ internal class KmpNativeCoroutinesSyntheticResolveExtension(
             ?: throw IllegalStateException("Coroutines property doesn't have a value type")
         return createPropertyDescriptor(thisDescriptor, coroutinesPropertyDescriptor.visibility,
             name, valueType, coroutinesPropertyDescriptor.dispatchReceiverParameter,
-            coroutinesPropertyDescriptor.extensionReceiverParameter
+            coroutinesPropertyDescriptor.extensionReceiverParameter,
+            coroutinesPropertyDescriptor.contextReceiverParameters
         )
     }
 
@@ -136,7 +138,8 @@ internal class KmpNativeCoroutinesSyntheticResolveExtension(
         val type = thisDescriptor.module.createListType(valueType)
         return createPropertyDescriptor(thisDescriptor, coroutinesPropertyDescriptor.visibility,
             name, type, coroutinesPropertyDescriptor.dispatchReceiverParameter,
-            coroutinesPropertyDescriptor.extensionReceiverParameter
+            coroutinesPropertyDescriptor.extensionReceiverParameter,
+            coroutinesPropertyDescriptor.contextReceiverParameters
         )
     }
 
@@ -146,7 +149,8 @@ internal class KmpNativeCoroutinesSyntheticResolveExtension(
         name: Name,
         outType: KotlinType,
         dispatchReceiverParameter: ReceiverParameterDescriptor?,
-        extensionReceiverParameter: ReceiverParameterDescriptor?
+        extensionReceiverParameter: ReceiverParameterDescriptor?,
+        contextReceiverParameters: List<ReceiverParameterDescriptor>
     ): PropertyDescriptor = PropertyDescriptorImpl.create(
         containingDeclaration,
         Annotations.EMPTY,
@@ -167,7 +171,8 @@ internal class KmpNativeCoroutinesSyntheticResolveExtension(
             outType,
             emptyList(),
             dispatchReceiverParameter,
-            extensionReceiverParameter
+            extensionReceiverParameter,
+            contextReceiverParameters
         )
         initialize(
             PropertyGetterDescriptorImpl(
@@ -244,6 +249,7 @@ internal class KmpNativeCoroutinesSyntheticResolveExtension(
             initialize(
                 extensionReceiverParameter,
                 coroutinesFunctionDescriptor.dispatchReceiverParameter,
+                coroutinesFunctionDescriptor.contextReceiverParameters,
                 typeParameters,
                 valueParameters,
                 returnType,
