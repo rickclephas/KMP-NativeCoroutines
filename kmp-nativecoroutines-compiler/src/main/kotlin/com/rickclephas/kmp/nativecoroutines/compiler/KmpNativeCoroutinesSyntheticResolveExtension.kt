@@ -36,6 +36,9 @@ internal class KmpNativeCoroutinesSyntheticResolveExtension(
                 NoLookupLocation.WHEN_GET_ALL_DESCRIPTORS) as MutableSet<DeclarationDescriptor>
     }
 
+    // We need two extensions so that we can check for recursion calls with `syntheticResolveExtensionClassName`.
+    class RecursiveCallSyntheticResolveExtension : SyntheticResolveExtension
+
     private val syntheticResolveExtensionClassName =
         "org.jetbrains.kotlin.resolve.extensions.SyntheticResolveExtension\$Companion\$getInstance\$1"
 
@@ -106,7 +109,8 @@ internal class KmpNativeCoroutinesSyntheticResolveExtension(
         val type = thisDescriptor.module.getExpandedNativeFlowType(valueType)
         return createPropertyDescriptor(thisDescriptor, coroutinesPropertyDescriptor.visibility,
             name, type, coroutinesPropertyDescriptor.dispatchReceiverParameter,
-            coroutinesPropertyDescriptor.extensionReceiverParameter
+            coroutinesPropertyDescriptor.extensionReceiverParameter,
+            coroutinesPropertyDescriptor.contextReceiverParameters
         )
     }
 
@@ -119,7 +123,8 @@ internal class KmpNativeCoroutinesSyntheticResolveExtension(
             ?: throw IllegalStateException("Coroutines property doesn't have a value type")
         return createPropertyDescriptor(thisDescriptor, coroutinesPropertyDescriptor.visibility,
             name, valueType, coroutinesPropertyDescriptor.dispatchReceiverParameter,
-            coroutinesPropertyDescriptor.extensionReceiverParameter
+            coroutinesPropertyDescriptor.extensionReceiverParameter,
+            coroutinesPropertyDescriptor.contextReceiverParameters
         )
     }
 
@@ -133,21 +138,23 @@ internal class KmpNativeCoroutinesSyntheticResolveExtension(
         val type = thisDescriptor.module.createListType(valueType)
         return createPropertyDescriptor(thisDescriptor, coroutinesPropertyDescriptor.visibility,
             name, type, coroutinesPropertyDescriptor.dispatchReceiverParameter,
-            coroutinesPropertyDescriptor.extensionReceiverParameter
+            coroutinesPropertyDescriptor.extensionReceiverParameter,
+            coroutinesPropertyDescriptor.contextReceiverParameters
         )
     }
 
     private fun createPropertyDescriptor(
-        containingDeclaration: DeclarationDescriptor,
+        containingDeclaration: ClassDescriptor,
         visibility: DescriptorVisibility,
         name: Name,
         outType: KotlinType,
         dispatchReceiverParameter: ReceiverParameterDescriptor?,
-        extensionReceiverParameter: ReceiverParameterDescriptor?
+        extensionReceiverParameter: ReceiverParameterDescriptor?,
+        contextReceiverParameters: List<ReceiverParameterDescriptor>
     ): PropertyDescriptor = PropertyDescriptorImpl.create(
         containingDeclaration,
         Annotations.EMPTY,
-        Modality.FINAL,
+        if (containingDeclaration.kind.isInterface) Modality.OPEN else Modality.FINAL,
         visibility,
         false,
         name,
@@ -164,13 +171,14 @@ internal class KmpNativeCoroutinesSyntheticResolveExtension(
             outType,
             emptyList(),
             dispatchReceiverParameter,
-            extensionReceiverParameter
+            extensionReceiverParameter,
+            contextReceiverParameters
         )
         initialize(
             PropertyGetterDescriptorImpl(
                 this,
                 Annotations.EMPTY,
-                Modality.FINAL,
+                modality,
                 visibility,
                 false,
                 false,
@@ -241,10 +249,11 @@ internal class KmpNativeCoroutinesSyntheticResolveExtension(
             initialize(
                 extensionReceiverParameter,
                 coroutinesFunctionDescriptor.dispatchReceiverParameter,
+                coroutinesFunctionDescriptor.contextReceiverParameters,
                 typeParameters,
                 valueParameters,
                 returnType,
-                Modality.FINAL,
+                if (thisDescriptor.kind.isInterface) Modality.OPEN else Modality.FINAL,
                 coroutinesFunctionDescriptor.visibility
             )
         }
