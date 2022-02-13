@@ -98,4 +98,16 @@ class CompilerIntegrationTests: XCTestCase {
         }, { _, unit in unit })
         wait(for: [valueExpectation], timeout: 2)
     }
+    
+    func testReturnGenericFlow() {
+        let integrationTests = IntegrationTests()
+        let valueExpectation = expectation(description: "Waiting for value")
+        let sendValue = NSNumber(value: randomInt())
+        _ = integrationTests.returnGenericFlowNative(value: sendValue)({ value, unit in
+            XCTAssertEqual(value as! NSNumber, sendValue, "Received incorrect value")
+            valueExpectation.fulfill()
+            return unit
+        }, { _, unit in unit })
+        wait(for: [valueExpectation], timeout: 2)
+    }
 }

@@ -233,9 +233,10 @@ internal class KmpNativeCoroutinesSyntheticResolveExtension(
             returnType = returnType.replaceFunctionGenerics(coroutinesFunctionDescriptor, typeParameters)
 
             // Convert Flow types to NativeFlow
-            val flowValueType = coroutinesFunctionDescriptor.getFlowValueTypeOrNull()
+            val flowValueType = coroutinesFunctionDescriptor.getFlowValueTypeOrNull()?.type
+                ?.replaceFunctionGenerics(coroutinesFunctionDescriptor, typeParameters)
             if (flowValueType != null)
-                returnType = thisDescriptor.module.getExpandedNativeFlowType(flowValueType.type)
+                returnType = thisDescriptor.module.getExpandedNativeFlowType(flowValueType)
 
             // Convert suspend function to NativeSuspend
             if (coroutinesFunctionDescriptor.isSuspend)
