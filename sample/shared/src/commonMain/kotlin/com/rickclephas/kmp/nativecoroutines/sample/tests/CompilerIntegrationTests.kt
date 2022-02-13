@@ -1,6 +1,8 @@
 package com.rickclephas.kmp.nativecoroutines.sample.tests
 
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesIgnore
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 
 class CompilerIntegrationTests<V>: IntegrationTests() {
 
@@ -32,6 +34,10 @@ class CompilerIntegrationTests<V>: IntegrationTests() {
 
     suspend fun <T> List<T>.returnGenericValueFromExtension(value: T): T {
         return value
+    }
+
+    fun <T> returnGenericFlow(value: T): Flow<T> = flow {
+        emit(value)
     }
 
     @NativeCoroutinesIgnore
