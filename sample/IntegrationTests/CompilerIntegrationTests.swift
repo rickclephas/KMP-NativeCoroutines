@@ -49,6 +49,18 @@ class CompilerIntegrationTests: XCTestCase {
         wait(for: [valueExpectation], timeout: 2)
     }
     
+    func testReturnConstrainedGenericValue() {
+        let integrationTests = IntegrationTests()
+        let valueExpectation = expectation(description: "Waiting for value")
+        let sendValue = integrationTests.returnAppendable(value: randomString())
+        _ = integrationTests.returnConstrainedGenericValueNative(value: sendValue)({ value, unit in
+            XCTAssertIdentical(value, sendValue, "Received incorrect value")
+            valueExpectation.fulfill()
+            return unit
+        }, { _, unit in unit })
+        wait(for: [valueExpectation], timeout: 2)
+    }
+    
     func testReturnGenericValues() {
         let integrationTests = IntegrationTests()
         let valueExpectation = expectation(description: "Waiting for values")
@@ -80,6 +92,18 @@ class CompilerIntegrationTests: XCTestCase {
         let valueExpectation = expectation(description: "Waiting for value")
         let sendValue = NSNumber(value: randomInt())
         _ = integrationTests.returnGenericValueFromExtensionNative([], value: sendValue)({ value, unit in
+            XCTAssertEqual(value as! NSNumber, sendValue, "Received incorrect value")
+            valueExpectation.fulfill()
+            return unit
+        }, { _, unit in unit })
+        wait(for: [valueExpectation], timeout: 2)
+    }
+    
+    func testReturnGenericFlow() {
+        let integrationTests = IntegrationTests()
+        let valueExpectation = expectation(description: "Waiting for value")
+        let sendValue = NSNumber(value: randomInt())
+        _ = integrationTests.returnGenericFlowNative(value: sendValue)({ value, unit in
             XCTAssertEqual(value as! NSNumber, sendValue, "Received incorrect value")
             valueExpectation.fulfill()
             return unit
