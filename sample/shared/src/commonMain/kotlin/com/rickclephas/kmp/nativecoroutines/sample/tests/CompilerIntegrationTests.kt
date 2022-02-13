@@ -16,6 +16,12 @@ class CompilerIntegrationTests<V>: IntegrationTests() {
         return value
     }
 
+    fun returnAppendable(value: String): Appendable = StringBuilder(value)
+
+    suspend fun <T: Appendable> returnConstrainedGenericValue(value: T): T {
+        return value
+    }
+
     suspend fun <T> returnGenericValues(values: List<T>): List<T> {
         return values
     }

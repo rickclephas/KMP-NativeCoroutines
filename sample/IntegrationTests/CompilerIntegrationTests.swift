@@ -49,6 +49,18 @@ class CompilerIntegrationTests: XCTestCase {
         wait(for: [valueExpectation], timeout: 2)
     }
     
+    func testReturnConstrainedGenericValue() {
+        let integrationTests = IntegrationTests()
+        let valueExpectation = expectation(description: "Waiting for value")
+        let sendValue = integrationTests.returnAppendable(value: randomString())
+        _ = integrationTests.returnConstrainedGenericValueNative(value: sendValue)({ value, unit in
+            XCTAssertIdentical(value, sendValue, "Received incorrect value")
+            valueExpectation.fulfill()
+            return unit
+        }, { _, unit in unit })
+        wait(for: [valueExpectation], timeout: 2)
+    }
+    
     func testReturnGenericValues() {
         let integrationTests = IntegrationTests()
         let valueExpectation = expectation(description: "Waiting for values")
