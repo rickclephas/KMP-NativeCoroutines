@@ -18,6 +18,24 @@ public func createPublisher<Output, Failure: Error, Unit>(
         .eraseToAnyPublisher()
 }
 
+extension Publisher {
+    /// Creates a `NativeFlow` for this `Publisher`.
+    func asNativeFlow() -> NativeFlow<Output, Error, Void> {
+        return { onItem, onComplete in
+            let cancellable = sink { completion in
+                if case let .failure(error) = completion {
+                    onComplete(error, ())
+                } else {
+                    onComplete(nil, ())
+                }
+            } receiveValue: { value in
+                onItem(value, ())
+            }
+            return { cancellable.cancel() }
+        }
+    }
+}
+
 internal struct NativeFlowPublisher<Output, Failure: Error, Unit>: Publisher {
     
     typealias Output = Output
