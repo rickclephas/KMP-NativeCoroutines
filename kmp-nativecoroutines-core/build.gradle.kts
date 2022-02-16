@@ -35,6 +35,8 @@ kotlin {
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))
+
+                implementation(Dependencies.Kotlinx.coroutinesTest)
             }
         }
         val supportedTargetMain by creating {
