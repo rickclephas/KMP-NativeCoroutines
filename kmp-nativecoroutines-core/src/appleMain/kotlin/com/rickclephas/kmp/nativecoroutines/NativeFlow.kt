@@ -2,7 +2,10 @@ package com.rickclephas.kmp.nativecoroutines
 
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.channels.trySendBlocking
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import platform.Foundation.NSError
@@ -14,7 +17,10 @@ import kotlin.native.concurrent.freeze
  * The function takes an `onItem` and `onComplete` callback
  * and returns a cancellable that can be used to cancel the collection.
  */
-typealias NativeFlow<T> = (onItem: NativeCallback<T>, onComplete: NativeCallback<NSError?>) -> NativeCancellable
+typealias NativeFlow<T, Unit> = (
+    onItem: NativeCallback<T>,
+    onComplete: NativeCallback<NSError?>
+) -> NativeCancellable<Unit>
 
 /**
  * Creates a [NativeFlow] for this [Flow].
@@ -23,7 +29,7 @@ typealias NativeFlow<T> = (onItem: NativeCallback<T>, onComplete: NativeCallback
  * @receiver the [Flow] to collect.
  * @see Flow.collect
  */
-fun <T> Flow<T>.asNativeFlow(scope: CoroutineScope? = null): NativeFlow<T> {
+fun <T> Flow<T>.asNativeFlow(scope: CoroutineScope? = null): NativeFlow<T, Unit> {
     val coroutineScope = scope ?: defaultCoroutineScope
     return (collect@{ onItem: NativeCallback<T>, onComplete: NativeCallback<NSError?> ->
         val job = coroutineScope.launch {
@@ -45,4 +51,17 @@ fun <T> Flow<T>.asNativeFlow(scope: CoroutineScope? = null): NativeFlow<T> {
         }
         return@collect job.asNativeCancellable()
     }).freeze()
+}
+
+/**
+ * Creates a cold [Flow] for this [NativeFlow].
+ *
+ * @see callbackFlow
+ */
+fun <T, Unit> NativeFlow<T, Unit>.asFlow(): Flow<T> = callbackFlow {
+    val cancellable = invoke(
+        { value, _ -> trySendBlocking(value) },
+        { error, _ -> close(error?.let { RuntimeException("NSError: $it") }) } // TODO: Convert NSError
+    )
+    awaitClose { cancellable() }
 }
