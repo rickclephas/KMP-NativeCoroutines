@@ -1,11 +1,11 @@
 package com.rickclephas.kmp.nativecoroutines
 
+import kotlinx.atomicfu.atomic
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 import kotlin.coroutines.cancellation.CancellationException
-import kotlin.native.concurrent.AtomicInt
 import kotlin.native.concurrent.isFrozen
 import kotlin.test.*
 
@@ -35,13 +35,13 @@ class AppleNativeSuspendTests {
         val value = RandomValue()
         val job = Job()
         val nativeSuspend = nativeSuspend(CoroutineScope(job)) { delayAndReturn(100, value) }
-        val receivedResultCount = AtomicInt(0)
-        val receivedErrorCount = AtomicInt(0)
+        val receivedResultCount = atomic(0)
+        val receivedErrorCount = atomic(0)
         nativeSuspend({ receivedValue, _ ->
             assertSame(value, receivedValue, "Received incorrect value")
-            receivedResultCount.increment()
+            receivedResultCount.incrementAndGet()
         }, { _, _ ->
-            receivedErrorCount.increment()
+            receivedErrorCount.incrementAndGet()
         })
         job.children.forEach { it.join() } // Waits for the function to complete
         assertEquals(1, receivedResultCount.value, "Result callback should be called once")
@@ -53,15 +53,15 @@ class AppleNativeSuspendTests {
         val exception = RandomException()
         val job = Job()
         val nativeSuspend = nativeSuspend(CoroutineScope(job)) { delayAndThrow(100, exception) }
-        val receivedResultCount = AtomicInt(0)
-        val receivedErrorCount = AtomicInt(0)
+        val receivedResultCount = atomic(0)
+        val receivedErrorCount = atomic(0)
         nativeSuspend({ _, _ ->
-            receivedResultCount.increment()
+            receivedResultCount.incrementAndGet()
         }, { error, _ ->
             assertNotNull(error, "Function should complete with an error")
             val kotlinException = error.kotlinCause
             assertSame(exception, kotlinException, "Kotlin exception should be the same exception")
-            receivedErrorCount.increment()
+            receivedErrorCount.incrementAndGet()
         })
         job.children.forEach { it.join() } // Waits for the function to complete
         assertEquals(1, receivedErrorCount.value, "Error callback should be called once")
@@ -72,15 +72,15 @@ class AppleNativeSuspendTests {
     fun `ensure function is cancelled`() = runBlocking {
         val job = Job()
         val nativeSuspend = nativeSuspend(CoroutineScope(job)) { delayAndReturn(5_000, RandomValue()) }
-        val receivedResultCount = AtomicInt(0)
-        val receivedErrorCount = AtomicInt(0)
+        val receivedResultCount = atomic(0)
+        val receivedErrorCount = atomic(0)
         val cancel = nativeSuspend({ _, _ ->
-            receivedResultCount.increment()
+            receivedResultCount.incrementAndGet()
         }, { error, _ ->
             assertNotNull(error, "Function should complete with an error")
             val exception = error.kotlinCause
             assertIs<CancellationException>(exception, "Error should contain CancellationException")
-            receivedErrorCount.increment()
+            receivedErrorCount.incrementAndGet()
         })
         delay(100) // Gives the function some time to start
         cancel()

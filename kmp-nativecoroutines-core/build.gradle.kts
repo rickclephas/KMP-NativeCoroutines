@@ -37,6 +37,7 @@ kotlin {
                 implementation(kotlin("test"))
 
                 implementation(Dependencies.Kotlinx.coroutinesTest)
+                implementation(Dependencies.Kotlinx.atomicfu)
             }
         }
         val supportedTargetMain by creating {
