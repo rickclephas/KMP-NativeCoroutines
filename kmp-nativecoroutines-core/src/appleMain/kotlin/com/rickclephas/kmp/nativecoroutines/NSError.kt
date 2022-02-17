@@ -10,7 +10,7 @@ actual typealias NativeError = NSError
 
 internal actual fun Throwable.asNativeError(): NativeError = this.asNSError()
 
-actual val NativeError.kotlinCause
+internal actual val NativeError.kotlinCause
     get() = this.userInfo["KotlinException"] as? Throwable
 
 /**
