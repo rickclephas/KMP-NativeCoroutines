@@ -2,13 +2,15 @@ package com.rickclephas.kmp.nativecoroutines
 
 import kotlinx.atomicfu.atomic
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.runTest
 import kotlin.coroutines.cancellation.CancellationException
 import kotlin.native.concurrent.isFrozen
 import kotlin.test.*
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class NativeSuspendTests {
 
     private suspend fun delayAndReturn(delay: Long, value: RandomValue): RandomValue {
@@ -31,7 +33,7 @@ class NativeSuspendTests {
     }
 
     @Test
-    fun `ensure correct result is received`() = runBlocking {
+    fun `ensure correct result is received`() = runTest {
         val value = RandomValue()
         val job = Job()
         val nativeSuspend = nativeSuspend(CoroutineScope(job)) { delayAndReturn(100, value) }
@@ -49,7 +51,7 @@ class NativeSuspendTests {
     }
 
     @Test
-    fun `ensure exceptions are received as errors`() = runBlocking {
+    fun `ensure exceptions are received as errors`() = runTest {
         val exception = RandomException()
         val job = Job()
         val nativeSuspend = nativeSuspend(CoroutineScope(job)) { delayAndThrow(100, exception) }
@@ -69,7 +71,7 @@ class NativeSuspendTests {
     }
 
     @Test
-    fun `ensure function is cancelled`() = runBlocking {
+    fun `ensure function is cancelled`() = runTest {
         val job = Job()
         val nativeSuspend = nativeSuspend(CoroutineScope(job)) { delayAndReturn(5_000, RandomValue()) }
         val receivedResultCount = atomic(0)
