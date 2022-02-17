@@ -37,6 +37,6 @@ class NSErrorTests {
     fun `ensure exception is part of user info`() {
         val exception = RandomException()
         val nsError = exception.asNativeError()
-        assertSame(exception, nsError.userInfo["KotlinException"], "Exception isn't part of the user info")
+        assertSame(exception, nsError.kotlinCause, "Exception isn't part of the user info")
     }
 }

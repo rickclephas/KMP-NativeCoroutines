@@ -58,7 +58,7 @@ class NativeSuspendTests {
             receivedResultCount.incrementAndGet()
         }, { error, _ ->
             assertNotNull(error, "Function should complete with an error")
-            val kotlinException = error.userInfo["KotlinException"]
+            val kotlinException = error.kotlinCause
             assertSame(exception, kotlinException, "Kotlin exception should be the same exception")
             receivedErrorCount.incrementAndGet()
         })
@@ -77,7 +77,7 @@ class NativeSuspendTests {
             receivedResultCount.incrementAndGet()
         }, { error, _ ->
             assertNotNull(error, "Function should complete with an error")
-            val exception = error.userInfo["KotlinException"]
+            val exception = error.kotlinCause
             assertIs<CancellationException>(exception, "Error should contain CancellationException")
             receivedErrorCount.incrementAndGet()
         })
