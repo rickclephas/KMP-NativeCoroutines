@@ -41,7 +41,7 @@ class AppleNativeFlowTests {
         val completionCount = AtomicInt(0)
         nativeFlow({ _, _ -> }, { error, _ ->
             assertNotNull(error, "Flow should complete with an error")
-            val kotlinException = error.userInfo["KotlinException"]
+            val kotlinException = error.kotlinCause
             assertSame(exception, kotlinException, "Kotlin exception should be the same exception")
             completionCount.increment()
         })
@@ -72,7 +72,7 @@ class AppleNativeFlowTests {
         val completionCount = AtomicInt(0)
         val cancel = nativeFlow({ _, _ -> }, { error, _ ->
             assertNotNull(error, "Flow should complete with an error")
-            val exception = error.userInfo["KotlinException"]
+            val exception = error.kotlinCause
             assertIs<CancellationException>(exception, "Error should contain CancellationException")
             completionCount.increment()
         })
