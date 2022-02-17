@@ -11,7 +11,7 @@ class NativeFlowTests {
 
     @Test
     fun `ensure frozen`() {
-        val flow = flow<RandomValue> {  }
+        val flow = flow<RandomValue> { }
         assertFalse(flow.isFrozen, "Flow shouldn't be frozen yet")
         val nativeFlow = flow.asNativeFlow()
         assertTrue(nativeFlow.isFrozen, "NativeFlow should be frozen")
@@ -19,8 +19,8 @@ class NativeFlowTests {
     }
 
     @Test
-    fun `ensure completion callback is invoked`() = runBlocking {
-        val flow = flow<RandomValue> {  }
+    fun `ensure completion callback is invoked`() = kotlinx.coroutines.runBlocking {
+        val flow = flow<RandomValue> { }
         val job = Job()
         val nativeFlow = flow.asNativeFlow(CoroutineScope(job))
         val completionCount = atomic(0)
@@ -33,7 +33,7 @@ class NativeFlowTests {
     }
 
     @Test
-    fun `ensure exceptions are received as errors`() = runBlocking {
+    fun `ensure exceptions are received as errors`() = kotlinx.coroutines.runBlocking {
         val exception = RandomException()
         val flow = flow<RandomValue> { throw exception }
         val job = Job()
@@ -50,7 +50,7 @@ class NativeFlowTests {
     }
 
     @Test
-    fun `ensure values are received`() = runBlocking {
+    fun `ensure values are received`() = kotlinx.coroutines.runBlocking {
         val values = listOf(RandomValue(), RandomValue(), RandomValue(), RandomValue())
         val flow = flow { values.forEach { emit(it) } }
         val job = Job()
@@ -61,11 +61,15 @@ class NativeFlowTests {
             receivedValueCount.incrementAndGet()
         }, { _, _ -> })
         job.children.forEach { it.join() } // Waits for the collection to complete
-        assertEquals(values.size, receivedValueCount.value, "Item callback should be called for every value")
+        assertEquals(
+            values.size,
+            receivedValueCount.value,
+            "Item callback should be called for every value"
+        )
     }
 
     @Test
-    fun `ensure collection is cancelled`() = runBlocking {
+    fun `ensure collection is cancelled`() = kotlinx.coroutines.runBlocking {
         val flow = MutableSharedFlow<RandomValue>()
         val job = Job()
         val nativeFlow = flow.asNativeFlow(CoroutineScope(job))
