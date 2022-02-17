@@ -30,12 +30,12 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(Dependencies.Kotlinx.coroutinesCore)
-                implementation(Dependencies.Kotlinx.atomicfu)
             }
         }
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))
+                implementation(Dependencies.Kotlinx.atomicfu)
             }
         }
         val appleMain by creating {
