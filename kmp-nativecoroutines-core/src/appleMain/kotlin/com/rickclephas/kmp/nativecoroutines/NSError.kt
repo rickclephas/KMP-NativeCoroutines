@@ -6,6 +6,13 @@ import platform.Foundation.NSError
 import platform.Foundation.NSLocalizedDescriptionKey
 import kotlin.native.concurrent.freeze
 
+actual typealias PlatformError = NSError
+
+internal actual fun Throwable.asPlatformError(): PlatformError = this.asNSError()
+
+actual val PlatformError.kotlinCause
+    get() = this.userInfo["KotlinException"] as? Throwable
+
 /**
  * Converts a [Throwable] to a [NSError].
  *

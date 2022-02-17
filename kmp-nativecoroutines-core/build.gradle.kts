@@ -35,13 +35,22 @@ kotlin {
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))
+
+                implementation(Dependencies.Kotlinx.coroutinesTest)
+                implementation(Dependencies.Kotlinx.atomicfu)
             }
         }
-        val appleMain by creating {
+        val supportedTargetMain by creating {
             dependsOn(commonMain)
         }
-        val appleTest by creating {
+        val supportedTargetTest by creating {
             dependsOn(commonTest)
+        }
+        val appleMain by creating {
+            dependsOn(supportedTargetMain)
+        }
+        val appleTest by creating {
+            dependsOn(supportedTargetTest)
         }
         listOf(
             macosX64, macosArm64,
@@ -55,6 +64,12 @@ kotlin {
             getByName("${it.targetName}Test") {
                 dependsOn(appleTest)
             }
+        }
+        val jsMain by getting {
+            dependsOn(supportedTargetMain)
+        }
+        val jsTest by getting {
+            dependsOn(supportedTargetTest)
         }
     }
 }
