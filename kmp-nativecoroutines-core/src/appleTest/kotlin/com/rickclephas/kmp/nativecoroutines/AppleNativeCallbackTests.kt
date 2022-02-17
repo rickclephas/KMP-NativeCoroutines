@@ -3,7 +3,7 @@ package com.rickclephas.kmp.nativecoroutines
 import kotlin.native.concurrent.isFrozen
 import kotlin.test.*
 
-class NativeCallbackTests {
+class AppleNativeCallbackTests {
 
     @Test
     fun `ensure frozen`() {

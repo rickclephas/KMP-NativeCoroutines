@@ -9,7 +9,7 @@ import kotlin.native.concurrent.AtomicInt
 import kotlin.native.concurrent.isFrozen
 import kotlin.test.*
 
-class NativeSuspendTests {
+class AppleNativeSuspendTests {
 
     private suspend fun delayAndReturn(delay: Long, value: RandomValue): RandomValue {
         delay(delay)

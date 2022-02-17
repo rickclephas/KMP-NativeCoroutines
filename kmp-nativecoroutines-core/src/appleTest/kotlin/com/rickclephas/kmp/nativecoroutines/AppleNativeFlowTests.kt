@@ -7,7 +7,7 @@ import kotlin.native.concurrent.AtomicInt
 import kotlin.native.concurrent.isFrozen
 import kotlin.test.*
 
-class NativeFlowTests {
+class AppleNativeFlowTests {
 
     @Test
     fun `ensure frozen`() {
