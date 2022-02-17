@@ -3,10 +3,10 @@ package com.rickclephas.kmp.nativecoroutines
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.runBlocking
 import kotlin.coroutines.cancellation.CancellationException
 import kotlin.test.*
 import kotlinx.atomicfu.atomic
+import kotlinx.coroutines.test.runTest
 
 class NativeSuspendTests {
 
@@ -21,7 +21,7 @@ class NativeSuspendTests {
     }
 
     @Test
-    fun ensure_correct_result_is_received() = runBlocking {
+    fun ensure_correct_result_is_received() = runTest {
         val value = RandomValue()
         val job = Job()
         val nativeSuspend = nativeSuspend(CoroutineScope(job)) { delayAndReturn(100, value) }
@@ -39,7 +39,7 @@ class NativeSuspendTests {
     }
 
     @Test
-    fun ensure_exceptions_are_received_as_errors() = runBlocking {
+    fun ensure_exceptions_are_received_as_errors() = runTest {
         val exception = RandomException()
         val job = Job()
         val nativeSuspend = nativeSuspend(CoroutineScope(job)) { delayAndThrow(100, exception) }
@@ -59,7 +59,7 @@ class NativeSuspendTests {
     }
 
     @Test
-    fun ensure_function_is_cancelled() = runBlocking {
+    fun ensure_function_is_cancelled() = runTest {
         val job = Job()
         val nativeSuspend = nativeSuspend(CoroutineScope(job)) { delayAndReturn(5_000, RandomValue()) }
         val receivedResultCount = atomic(0)

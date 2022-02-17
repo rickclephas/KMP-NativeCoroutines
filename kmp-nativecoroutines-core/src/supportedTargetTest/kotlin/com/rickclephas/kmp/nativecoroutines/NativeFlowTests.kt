@@ -4,11 +4,12 @@ import kotlinx.atomicfu.atomic
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.test.runTest
 import kotlin.test.*
 
 class NativeFlowTests {
     @Test
-    fun ensure_completion_callback_is_invoked() = runBlocking {
+    fun ensure_completion_callback_is_invoked() = runTest {
         val flow = flow<RandomValue> {  }
         val job = Job()
         val nativeFlow = flow.asNativeFlow(CoroutineScope(job))
@@ -22,7 +23,7 @@ class NativeFlowTests {
     }
 
     @Test
-    fun ensure_exceptions_are_received_as_errors() = runBlocking {
+    fun ensure_exceptions_are_received_as_errors() = runTest {
         val exception = RandomException()
         val flow = flow<RandomValue> { throw exception }
         val job = Job()
@@ -39,7 +40,7 @@ class NativeFlowTests {
     }
 
     @Test
-    fun ensure_values_are_received() = runBlocking {
+    fun ensure_values_are_received() = runTest {
         val values = listOf(RandomValue(), RandomValue(), RandomValue(), RandomValue())
         val flow = flow { values.forEach { emit(it) } }
         val job = Job()
@@ -54,7 +55,7 @@ class NativeFlowTests {
     }
 
     @Test
-    fun ensure_collection_is_cancelled() = runBlocking {
+    fun ensure_collection_is_cancelled() = runTest {
         val flow = MutableSharedFlow<RandomValue>()
         val job = Job()
         val nativeFlow = flow.asNativeFlow(CoroutineScope(job))
