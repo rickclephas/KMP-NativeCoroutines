@@ -30,6 +30,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(Dependencies.Kotlinx.coroutinesCore)
+                implementation(Dependencies.Kotlinx.atomicfu)
             }
         }
         val commonTest by getting {
