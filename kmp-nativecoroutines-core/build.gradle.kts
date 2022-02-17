@@ -63,11 +63,5 @@ kotlin {
                 dependsOn(appleTest)
             }
         }
-        val jsMain by getting {
-            dependsOn(supportedTargetMain)
-        }
-        val jsTest by getting {
-            dependsOn(supportedTargetTest)
-        }
     }
 }
