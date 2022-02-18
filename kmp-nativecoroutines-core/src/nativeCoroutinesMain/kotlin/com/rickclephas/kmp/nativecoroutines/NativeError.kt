@@ -9,5 +9,3 @@ expect class NativeError
  * Converts a [Throwable] to a [NativeError].
  */
 internal expect fun Throwable.asNativeError(): NativeError
-
-internal expect val NativeError.kotlinCause: Throwable?

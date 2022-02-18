@@ -26,6 +26,3 @@ internal actual fun Throwable.asNativeError(): NativeError {
     }
     return NSError.errorWithDomain("KotlinException", 0.convert(), userInfo)
 }
-
-internal actual val NativeError.kotlinCause
-    get() = this.userInfo["KotlinException"] as? Throwable
