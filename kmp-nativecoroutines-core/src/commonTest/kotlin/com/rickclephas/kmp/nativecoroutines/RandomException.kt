@@ -5,5 +5,4 @@ import kotlin.random.Random
 /**
  * An exception with a message consisting of 20 random capital letter.
  */
-internal class RandomException: Exception(Random.nextString(20)
-)
+internal class RandomException: Exception(Random.nextString(20))
