@@ -38,11 +38,17 @@ kotlin {
                 implementation(Dependencies.Kotlinx.atomicfu)
             }
         }
-        val appleMain by creating {
+        val nativeCoroutinesMain by creating {
             dependsOn(commonMain)
         }
-        val appleTest by creating {
+        val nativeCoroutinesTest by creating {
             dependsOn(commonTest)
+        }
+        val appleMain by creating {
+            dependsOn(nativeCoroutinesMain)
+        }
+        val appleTest by creating {
+            dependsOn(nativeCoroutinesTest)
         }
         listOf(
             macosX64, macosArm64,

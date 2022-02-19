@@ -2,9 +2,7 @@ package com.rickclephas.kmp.nativecoroutines
 
 import kotlinx.atomicfu.atomic
 import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.flow
-import kotlin.native.concurrent.isFrozen
+import kotlinx.coroutines.flow.*
 import kotlin.test.*
 
 class NativeFlowTests {
@@ -19,8 +17,8 @@ class NativeFlowTests {
     }
 
     @Test
-    fun `ensure completion callback is invoked`() = runBlocking {
-        val flow = flow<RandomValue> {  }
+    fun ensureCompletionCallbackIsInvoked() = runBlocking {
+        val flow = flow<RandomValue> { }
         val job = Job()
         val nativeFlow = flow.asNativeFlow(CoroutineScope(job))
         val completionCount = atomic(0)
@@ -33,7 +31,7 @@ class NativeFlowTests {
     }
 
     @Test
-    fun `ensure exceptions are received as errors`() = runBlocking {
+    fun ensureExceptionsAreReceivedAsErrors() = runBlocking {
         val exception = RandomException()
         val flow = flow<RandomValue> { throw exception }
         val job = Job()
@@ -41,7 +39,7 @@ class NativeFlowTests {
         val completionCount = atomic(0)
         nativeFlow({ _, _ -> }, { error, _ ->
             assertNotNull(error, "Flow should complete with an error")
-            val kotlinException = error.userInfo["KotlinException"]
+            val kotlinException = error.kotlinCause
             assertSame(exception, kotlinException, "Kotlin exception should be the same exception")
             completionCount.incrementAndGet()
         })
@@ -50,7 +48,7 @@ class NativeFlowTests {
     }
 
     @Test
-    fun `ensure values are received`() = runBlocking {
+    fun ensureValuesAreReceived() = runBlocking {
         val values = listOf(RandomValue(), RandomValue(), RandomValue(), RandomValue())
         val flow = flow { values.forEach { emit(it) } }
         val job = Job()
@@ -61,18 +59,22 @@ class NativeFlowTests {
             receivedValueCount.incrementAndGet()
         }, { _, _ -> })
         job.children.forEach { it.join() } // Waits for the collection to complete
-        assertEquals(values.size, receivedValueCount.value, "Item callback should be called for every value")
+        assertEquals(
+            values.size,
+            receivedValueCount.value,
+            "Item callback should be called for every value"
+        )
     }
 
     @Test
-    fun `ensure collection is cancelled`() = runBlocking {
+    fun ensureCollectionIsCancelled() = runBlocking {
         val flow = MutableSharedFlow<RandomValue>()
         val job = Job()
         val nativeFlow = flow.asNativeFlow(CoroutineScope(job))
         val completionCount = atomic(0)
         val cancel = nativeFlow({ _, _ -> }, { error, _ ->
             assertNotNull(error, "Flow should complete with an error")
-            val exception = error.userInfo["KotlinException"]
+            val exception = error.kotlinCause
             assertIs<CancellationException>(exception, "Error should contain CancellationException")
             completionCount.incrementAndGet()
         })
