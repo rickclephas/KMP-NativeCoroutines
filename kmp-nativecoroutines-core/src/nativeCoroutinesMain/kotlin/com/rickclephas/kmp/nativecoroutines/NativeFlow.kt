@@ -5,8 +5,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import platform.Foundation.NSError
-import kotlin.native.concurrent.freeze
 import kotlin.reflect.KClass
 
 /**
@@ -15,7 +13,7 @@ import kotlin.reflect.KClass
  * The function takes an `onItem` and `onComplete` callback
  * and returns a cancellable that can be used to cancel the collection.
  */
-typealias NativeFlow<T> = (onItem: NativeCallback<T>, onComplete: NativeCallback<NSError?>) -> NativeCancellable
+typealias NativeFlow<T> = (onItem: NativeCallback<T>, onComplete: NativeCallback<NativeError?>) -> NativeCancellable
 
 /**
  * Creates a [NativeFlow] for this [Flow].
@@ -30,7 +28,7 @@ fun <T> Flow<T>.asNativeFlow(
     propagatedExceptions: Array<KClass<out Throwable>> = arrayOf()
 ): NativeFlow<T> {
     val coroutineScope = scope ?: defaultCoroutineScope
-    return (collect@{ onItem: NativeCallback<T>, onComplete: NativeCallback<NSError?> ->
+    return (collect@{ onItem: NativeCallback<T>, onComplete: NativeCallback<NativeError?> ->
         val job = coroutineScope.launch {
             try {
                 collect { onItem(it) }

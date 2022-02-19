@@ -1,7 +1,6 @@
 package com.rickclephas.kmp.nativecoroutines
 
 import kotlinx.coroutines.Job
-import kotlin.native.concurrent.freeze
 
 /**
  * A function that cancels the coroutines [Job].

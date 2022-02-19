@@ -7,6 +7,8 @@ import kotlin.native.concurrent.freeze
 import kotlin.native.internal.GCUnsafeCall
 import kotlin.reflect.KClass
 
+actual typealias NativeError = NSError
+
 /**
  * Uses Kotlin Native runtime functions to convert a [Throwable] to a [NSError].
  *
@@ -43,4 +45,5 @@ private external fun rethrowExceptionAsNSError(
     exception: Throwable,
     error: CPointer<ObjCObjectVar<NSError>>,
     types: CArrayPointer<CPointerVar<*>>
+)
 )

@@ -3,8 +3,6 @@ package com.rickclephas.kmp.nativecoroutines
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-import platform.Foundation.NSError
-import kotlin.native.concurrent.freeze
 import kotlin.reflect.KClass
 
 /**
@@ -13,7 +11,7 @@ import kotlin.reflect.KClass
  * The function takes an `onResult` and `onError` callback
  * and returns a cancellable that can be used to cancel the suspend function.
  */
-typealias NativeSuspend<T> = (onResult: NativeCallback<T>, onError: NativeCallback<NSError>) -> NativeCancellable
+typealias NativeSuspend<T> = (onResult: NativeCallback<T>, onError: NativeCallback<NativeError>) -> NativeCancellable
 
 /**
  * Creates a [NativeSuspend] for the provided suspend [block].
@@ -28,7 +26,7 @@ fun <T> nativeSuspend(
     block: suspend () -> T
 ): NativeSuspend<T> {
     val coroutineScope = scope ?: defaultCoroutineScope
-    return (collect@{ onResult: NativeCallback<T>, onError: NativeCallback<NSError> ->
+    return (collect@{ onResult: NativeCallback<T>, onError: NativeCallback<NativeError> ->
         val job = coroutineScope.launch {
             try {
                 onResult(block())

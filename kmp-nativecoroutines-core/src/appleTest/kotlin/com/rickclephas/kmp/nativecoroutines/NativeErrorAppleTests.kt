@@ -8,10 +8,10 @@ import kotlin.native.internal.ObjCErrorException
 import kotlin.random.Random
 import kotlin.test.*
 
-class NSErrorTests {
+class NativeErrorAppleTests {
 
     @Test
-    fun `ensure frozen`() {
+    fun ensureFrozen() {
         val exception = RandomException()
         assertFalse(exception.isFrozen, "Exception shouldn't be frozen yet")
         val nsError = exception.asNSError(arrayOf(RandomException::class))
@@ -20,7 +20,8 @@ class NSErrorTests {
     }
 
     @Test
-    fun `ensure NSError domain and code are correct`() {
+    @OptIn(UnsafeNumber::class)
+    fun ensureNSErrorDomainAndCodeAreCorrect() {
         val exception = RandomException()
         val nsError = exception.asNSError(arrayOf(RandomException::class))
         assertEquals("KotlinException", nsError.domain, "Incorrect NSError domain")
@@ -28,7 +29,7 @@ class NSErrorTests {
     }
 
     @Test
-    fun `ensure localizedDescription is set to message`() {
+    fun ensureLocalizedDescriptionIsSetToMessage() {
         val exception = RandomException()
         val nsError = exception.asNSError(arrayOf(RandomException::class))
         assertEquals(exception.message, nsError.localizedDescription,
@@ -36,10 +37,11 @@ class NSErrorTests {
     }
 
     @Test
-    fun `ensure exception is part of user info`() {
+    fun ensureExceptionIsPartOfUserInfo() {
         val exception = RandomException()
         val nsError = exception.asNSError(arrayOf(RandomException::class))
         assertSame(exception, nsError.userInfo["KotlinException"], "Exception isn't part of the user info")
+        assertSame(exception, nsError.kotlinCause, "Incorrect kotlinCause")
     }
 
     @Test
