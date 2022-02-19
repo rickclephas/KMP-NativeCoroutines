@@ -2,24 +2,13 @@ package com.rickclephas.kmp.nativecoroutines
 
 import kotlinx.atomicfu.atomic
 import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.flow
-import kotlin.native.concurrent.isFrozen
+import kotlinx.coroutines.flow.*
 import kotlin.test.*
 
 class NativeFlowTests {
 
     @Test
-    fun `ensure frozen`() {
-        val flow = flow<RandomValue> { }
-        assertFalse(flow.isFrozen, "Flow shouldn't be frozen yet")
-        val nativeFlow = flow.asNativeFlow()
-        assertTrue(nativeFlow.isFrozen, "NativeFlow should be frozen")
-        assertTrue(flow.isFrozen, "Flow should be frozen")
-    }
-
-    @Test
-    fun `ensure completion callback is invoked`() = kotlinx.coroutines.runBlocking {
+    fun `ensure completion callback is invoked`() = runBlocking {
         val flow = flow<RandomValue> { }
         val job = Job()
         val nativeFlow = flow.asNativeFlow(CoroutineScope(job))
@@ -33,7 +22,7 @@ class NativeFlowTests {
     }
 
     @Test
-    fun `ensure exceptions are received as errors`() = kotlinx.coroutines.runBlocking {
+    fun `ensure exceptions are received as errors`() = runBlocking {
         val exception = RandomException()
         val flow = flow<RandomValue> { throw exception }
         val job = Job()
@@ -50,7 +39,7 @@ class NativeFlowTests {
     }
 
     @Test
-    fun `ensure values are received`() = kotlinx.coroutines.runBlocking {
+    fun `ensure values are received`() = runBlocking {
         val values = listOf(RandomValue(), RandomValue(), RandomValue(), RandomValue())
         val flow = flow { values.forEach { emit(it) } }
         val job = Job()
@@ -69,7 +58,7 @@ class NativeFlowTests {
     }
 
     @Test
-    fun `ensure collection is cancelled`() = kotlinx.coroutines.runBlocking {
+    fun `ensure collection is cancelled`() = runBlocking {
         val flow = MutableSharedFlow<RandomValue>()
         val job = Job()
         val nativeFlow = flow.asNativeFlow(CoroutineScope(job))
