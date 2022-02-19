@@ -16,7 +16,7 @@ class NativeCallbackAppleTests {
         val value = RandomValue()
         assertFalse(value.isFrozen, "Value shouldn't be frozen yet")
         callback(value)
-        assertFalse(value.isFrozen, "Value shouldn't be frozen yet")
+        assertFalse(value.isFrozen, "Value shouldn't be frozen")
         assertFalse(receivedValue?.isFrozen == true, "Received value shouldn't be frozen")
     }
 }
