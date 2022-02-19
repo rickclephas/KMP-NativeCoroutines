@@ -1,13 +1,7 @@
 package com.rickclephas.kmp.nativecoroutines
 
 import kotlinx.atomicfu.atomic
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.test.runTest
-import kotlin.coroutines.cancellation.CancellationException
-import kotlin.native.concurrent.isFrozen
+import kotlinx.coroutines.*
 import kotlin.test.*
 
 @OptIn(ExperimentalCoroutinesApi::class)
@@ -24,16 +18,7 @@ class NativeSuspendTests {
     }
 
     @Test
-    fun `ensure frozen`() {
-        val value = RandomValue()
-        assertFalse(value.isFrozen, "Value shouldn't be frozen yet")
-        val nativeSuspend = nativeSuspend { delayAndReturn(0, value) }
-        assertTrue(nativeSuspend.isFrozen, "NativeSuspend should be frozen")
-        assertTrue(value.isFrozen, "Value should be frozen")
-    }
-
-    @Test
-    fun `ensure correct result is received`() = runTest {
+    fun ensureCorrectResultIsReceived() = runBlocking {
         val value = RandomValue()
         val job = Job()
         val nativeSuspend = nativeSuspend(CoroutineScope(job)) { delayAndReturn(100, value) }
@@ -51,7 +36,7 @@ class NativeSuspendTests {
     }
 
     @Test
-    fun `ensure exceptions are received as errors`() = runTest {
+    fun ensureExceptionsAreReceivedAsErrors() = runBlocking {
         val exception = RandomException()
         val job = Job()
         val nativeSuspend = nativeSuspend(CoroutineScope(job)) { delayAndThrow(100, exception) }
@@ -61,7 +46,7 @@ class NativeSuspendTests {
             receivedResultCount.incrementAndGet()
         }, { error, _ ->
             assertNotNull(error, "Function should complete with an error")
-            val kotlinException = error.userInfo["KotlinException"]
+            val kotlinException = error.kotlinCause
             assertSame(exception, kotlinException, "Kotlin exception should be the same exception")
             receivedErrorCount.incrementAndGet()
         })
@@ -71,7 +56,7 @@ class NativeSuspendTests {
     }
 
     @Test
-    fun `ensure function is cancelled`() = runTest {
+    fun ensureFunctionIsCancelled() = runBlocking {
         val job = Job()
         val nativeSuspend = nativeSuspend(CoroutineScope(job)) { delayAndReturn(5_000, RandomValue()) }
         val receivedResultCount = atomic(0)
@@ -80,7 +65,7 @@ class NativeSuspendTests {
             receivedResultCount.incrementAndGet()
         }, { error, _ ->
             assertNotNull(error, "Function should complete with an error")
-            val exception = error.userInfo["KotlinException"]
+            val exception = error.kotlinCause
             assertIs<CancellationException>(exception, "Error should contain CancellationException")
             receivedErrorCount.incrementAndGet()
         })
