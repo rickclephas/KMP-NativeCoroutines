@@ -5,7 +5,7 @@ import kotlin.test.*
 class NativeCallbackTests {
 
     @Test
-    fun `ensure invoked`() {
+    fun ensureInvoked() {
         var invokeCount = 0
         var receivedValue: RandomValue? = null
         val callback: NativeCallback<RandomValue> = callback@{ value, unit ->

@@ -6,7 +6,7 @@ import kotlin.test.*
 class NativeCallbackAppleTests {
 
     @Test
-    fun `ensure frozen`() {
+    fun ensureFrozen() {
         var receivedValue: RandomValue? = null
         val callback: NativeCallback<RandomValue> = callback@{ value, unit ->
             receivedValue = value

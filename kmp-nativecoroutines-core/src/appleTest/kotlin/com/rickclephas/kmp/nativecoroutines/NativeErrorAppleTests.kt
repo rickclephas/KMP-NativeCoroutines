@@ -8,7 +8,7 @@ import kotlin.test.*
 class NativeErrorAppleTests {
 
     @Test
-    fun `ensure frozen`() {
+    fun ensureFrozen() {
         val exception = RandomException()
         assertFalse(exception.isFrozen, "Exception shouldn't be frozen yet")
         val nsError = exception.asNativeError()
@@ -18,7 +18,7 @@ class NativeErrorAppleTests {
 
     @Test
     @OptIn(UnsafeNumber::class)
-    fun `ensure NSError domain and code are correct`() {
+    fun ensureNSErrorDomainAndCodeAreCorrect() {
         val exception = RandomException()
         val nsError = exception.asNativeError()
         assertEquals("KotlinException", nsError.domain, "Incorrect NSError domain")
@@ -26,7 +26,7 @@ class NativeErrorAppleTests {
     }
 
     @Test
-    fun `ensure localizedDescription is set to message`() {
+    fun ensureLocalizedDescriptionIsSetToMessage() {
         val exception = RandomException()
         val nsError = exception.asNativeError()
         assertEquals(exception.message, nsError.localizedDescription,
@@ -34,7 +34,7 @@ class NativeErrorAppleTests {
     }
 
     @Test
-    fun `ensure exception is part of user info`() {
+    fun ensureExceptionIsPartOfUserInfo() {
         val exception = RandomException()
         val nsError = exception.asNativeError()
         assertSame(exception, nsError.userInfo["KotlinException"], "Exception isn't part of the user info")

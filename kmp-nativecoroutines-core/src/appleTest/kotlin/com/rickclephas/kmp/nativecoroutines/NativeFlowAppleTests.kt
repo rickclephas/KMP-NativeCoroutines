@@ -7,7 +7,7 @@ import kotlin.test.*
 class NativeFlowAppleTests {
 
     @Test
-    fun `ensure frozen`() {
+    fun ensureFrozen() {
         val flow = flow<RandomValue> { }
         assertFalse(flow.isFrozen, "Flow shouldn't be frozen yet")
         val nativeFlow = flow.asNativeFlow()

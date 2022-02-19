@@ -7,7 +7,7 @@ import kotlin.test.*
 class NativeCancellableAppleTests {
 
     @Test
-    fun `ensure frozen`() {
+    fun ensureFrozen() {
         val job = Job()
         assertFalse(job.isFrozen, "Job shouldn't be frozen yet")
         val nativeCancellable = job.asNativeCancellable()

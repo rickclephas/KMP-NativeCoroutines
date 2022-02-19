@@ -6,7 +6,7 @@ import kotlin.test.*
 class NativeCancellableTests {
 
     @Test
-    fun `ensure that the job gets cancelled`() {
+    fun ensureThatTheJobGetsCancelled() {
         val job = Job()
         val nativeCancellable = job.asNativeCancellable()
         assertFalse(job.isCancelled, "Job shouldn't be cancelled yet")

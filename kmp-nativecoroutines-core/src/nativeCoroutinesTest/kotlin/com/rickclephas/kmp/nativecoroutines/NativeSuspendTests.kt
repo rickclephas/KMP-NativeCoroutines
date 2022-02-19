@@ -17,7 +17,7 @@ class NativeSuspendTests {
     }
 
     @Test
-    fun `ensure correct result is received`() = runBlocking {
+    fun ensureCorrectResultIsReceived() = runBlocking {
         val value = RandomValue()
         val job = Job()
         val nativeSuspend = nativeSuspend(CoroutineScope(job)) { delayAndReturn(100, value) }
@@ -35,7 +35,7 @@ class NativeSuspendTests {
     }
 
     @Test
-    fun `ensure exceptions are received as errors`() = runBlocking {
+    fun ensureExceptionsAreReceivedAsErrors() = runBlocking {
         val exception = RandomException()
         val job = Job()
         val nativeSuspend = nativeSuspend(CoroutineScope(job)) { delayAndThrow(100, exception) }
@@ -55,7 +55,7 @@ class NativeSuspendTests {
     }
 
     @Test
-    fun `ensure function is cancelled`() = runBlocking {
+    fun ensureFunctionIsCancelled() = runBlocking {
         val job = Job()
         val nativeSuspend = nativeSuspend(CoroutineScope(job)) { delayAndReturn(5_000, RandomValue()) }
         val receivedResultCount = atomic(0)
