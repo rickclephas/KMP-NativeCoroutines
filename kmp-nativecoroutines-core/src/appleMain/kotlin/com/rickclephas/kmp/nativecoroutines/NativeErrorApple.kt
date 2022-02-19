@@ -17,7 +17,7 @@ actual typealias NativeError = NSError
  *
  * @param propagatedExceptions an array of [Throwable] types that should be propagated as [NSError]s.
  */
-internal fun Throwable.asNSError(
+internal actual fun Throwable.asNativeError(
     propagatedExceptions: Array<KClass<out Throwable>>
 ): NSError {
     freeze()
@@ -27,12 +27,12 @@ internal fun Throwable.asNSError(
         val error = alloc<ObjCObjectVar<NSError>>()
         val types = when (shouldPropagate) {
             true -> allocArray<CPointerVar<*>>(2).apply {
-                val typeInfo = getTypeInfo(this@asNSError)
+                val typeInfo = getTypeInfo(this@asNativeError)
                 set(0, interpretCPointer<CPointed>(typeInfo))
             }
             false -> allocArray(1)
         }
-        rethrowExceptionAsNSError(this@asNSError, error.ptr, types)
+        rethrowExceptionAsNSError(this@asNativeError, error.ptr, types)
         error.value
     }
 }
@@ -45,5 +45,4 @@ private external fun rethrowExceptionAsNSError(
     exception: Throwable,
     error: CPointer<ObjCObjectVar<NSError>>,
     types: CArrayPointer<CPointerVar<*>>
-)
 )

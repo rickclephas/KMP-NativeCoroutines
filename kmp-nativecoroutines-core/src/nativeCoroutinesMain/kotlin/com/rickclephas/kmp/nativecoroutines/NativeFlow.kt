@@ -19,7 +19,7 @@ typealias NativeFlow<T> = (onItem: NativeCallback<T>, onComplete: NativeCallback
  * Creates a [NativeFlow] for this [Flow].
  *
  * @param scope the [CoroutineScope] to use for the collection, or `null` to use the [defaultCoroutineScope].
- * @param propagatedExceptions an array of [Throwable] types that should be propagated as [NSError]s.
+ * @param propagatedExceptions an array of [Throwable] types that should be propagated to ObjC/Swift.
  * @receiver the [Flow] to collect.
  * @see Flow.collect
  */
@@ -38,13 +38,13 @@ fun <T> Flow<T>.asNativeFlow(
                 // this is required since the job could be cancelled before it is started
                 throw e
             }  catch (e: Throwable) {
-                onComplete(e.asNSError(propagatedExceptions))
+                onComplete(e.asNativeError(propagatedExceptions))
             }
         }
         job.invokeOnCompletion { cause ->
             // Only handle CancellationExceptions, all other exceptions should be handled inside the job
             if (cause !is CancellationException) return@invokeOnCompletion
-            onComplete(cause.asNSError(propagatedExceptions))
+            onComplete(cause.asNativeError(propagatedExceptions))
         }
         return@collect job.asNativeCancellable()
     }).freeze()
