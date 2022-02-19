@@ -36,6 +36,7 @@ kotlin {
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))
+                implementation(Dependencies.Kotlinx.atomicfu)
             }
         }
         val appleMain by creating {

@@ -144,7 +144,7 @@ internal class KmpNativeCoroutinesSyntheticResolveExtension(
     }
 
     private fun createPropertyDescriptor(
-        containingDeclaration: DeclarationDescriptor,
+        containingDeclaration: ClassDescriptor,
         visibility: DescriptorVisibility,
         name: Name,
         outType: KotlinType,
@@ -153,7 +153,7 @@ internal class KmpNativeCoroutinesSyntheticResolveExtension(
     ): PropertyDescriptor = PropertyDescriptorImpl.create(
         containingDeclaration,
         Annotations.EMPTY,
-        Modality.FINAL,
+        if (containingDeclaration.kind.isInterface) Modality.OPEN else Modality.FINAL,
         visibility,
         false,
         name,
@@ -176,7 +176,7 @@ internal class KmpNativeCoroutinesSyntheticResolveExtension(
             PropertyGetterDescriptorImpl(
                 this,
                 Annotations.EMPTY,
-                Modality.FINAL,
+                modality,
                 visibility,
                 false,
                 false,
@@ -236,9 +236,10 @@ internal class KmpNativeCoroutinesSyntheticResolveExtension(
             returnType = returnType.replaceFunctionGenerics(coroutinesFunctionDescriptor, typeParameters)
 
             // Convert Flow types to NativeFlow
-            val flowValueType = coroutinesFunctionDescriptor.getFlowValueTypeOrNull()
+            val flowValueType = coroutinesFunctionDescriptor.getFlowValueTypeOrNull()?.type
+                ?.replaceFunctionGenerics(coroutinesFunctionDescriptor, typeParameters)
             if (flowValueType != null)
-                returnType = thisDescriptor.module.getExpandedNativeFlowType(flowValueType.type)
+                returnType = thisDescriptor.module.getExpandedNativeFlowType(flowValueType)
 
             // Convert suspend function to NativeSuspend
             if (coroutinesFunctionDescriptor.isSuspend)
@@ -250,7 +251,7 @@ internal class KmpNativeCoroutinesSyntheticResolveExtension(
                 typeParameters,
                 valueParameters,
                 returnType,
-                Modality.FINAL,
+                if (thisDescriptor.kind.isInterface) Modality.OPEN else Modality.FINAL,
                 coroutinesFunctionDescriptor.visibility
             )
         }

@@ -72,7 +72,7 @@ plugins {
 
 ### Swift (Swift Package Manager)
 
-All Swift implementations are also available via the Swift Package Manager.  
+The Swift implementations are available via the Swift Package Manager.  
 Just add it to your `Package.swift` file:
 ```swift
 dependencies: [
@@ -85,8 +85,7 @@ Or add it in Xcode by going to `File` > `Add Packages...` and providing the URL:
 
 ### Swift (CocoaPods)
 
-Now for Swift you can choose from a couple of implementations.  
-Add one or more of the following libraries to your `Podfile`:
+If you use CocoaPods add one or more of the following libraries to your `Podfile`:
 ```ruby
 pod 'KMPNativeCoroutinesAsync'    # Swift 5.5 Async/Await implementation
 pod 'KMPNativeCoroutinesCombine'  # Combine implementation
@@ -96,9 +95,19 @@ pod 'KMPNativeCoroutinesRxSwift'  # RxSwift implementation
 ## Usage
 
 Using your Kotlin Coroutines code from Swift is almost as easy as calling the Kotlin code.   
-Just use the wrapper functions in Swift to get Observables, Publishers, AsyncStreams or async functions.
+Just use the wrapper functions in Swift to get async functions, AsyncStreams, Publishers or Observables.
 
 ### Kotlin
+
+> **WARNING:** The Kotlin part of this library consists of helper functions and a Kotlin compiler plugin.  
+> Using the plugin removes the boilerplate code from your project, however **Kotlin compiler plugins aren't stable**!
+> 
+> The plugin is known to cause recursion errors in some scenarios such as in [#4][GH-4] and [#23][GH-23].  
+> To prevent such recursion errors it's best to explicitly define the (return) types of public 
+> properties and functions.
+
+[GH-4]: https://github.com/rickclephas/KMP-NativeCoroutines/issues/4
+[GH-23]: https://github.com/rickclephas/KMP-NativeCoroutines/issues/23
 
 The plugin will automagically generate the necessary code for you! 🔮
 
