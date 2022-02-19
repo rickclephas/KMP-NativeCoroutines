@@ -4,7 +4,6 @@ import kotlinx.atomicfu.atomic
 import kotlinx.coroutines.*
 import kotlin.test.*
 
-@OptIn(ExperimentalCoroutinesApi::class)
 class NativeSuspendTests {
 
     private suspend fun delayAndReturn(delay: Long, value: RandomValue): RandomValue {

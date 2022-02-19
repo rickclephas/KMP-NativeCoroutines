@@ -5,7 +5,6 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import kotlin.test.*
 
-@OptIn(ExperimentalCoroutinesApi::class)
 class NativeFlowTests {
 
     @Test
