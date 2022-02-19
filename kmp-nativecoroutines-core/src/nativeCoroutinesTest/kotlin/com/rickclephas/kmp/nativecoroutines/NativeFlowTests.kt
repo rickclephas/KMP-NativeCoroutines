@@ -3,13 +3,14 @@ package com.rickclephas.kmp.nativecoroutines
 import kotlinx.atomicfu.atomic
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.test.runTest
 import kotlin.test.*
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class NativeFlowTests {
 
     @Test
-    fun ensureCompletionCallbackIsInvoked() = runBlocking {
+    fun ensureCompletionCallbackIsInvoked() = runTest {
         val flow = flow<RandomValue> { }
         val job = Job()
         val nativeFlow = flow.asNativeFlow(CoroutineScope(job))
@@ -23,7 +24,7 @@ class NativeFlowTests {
     }
 
     @Test
-    fun ensureExceptionsAreReceivedAsErrors() = runBlocking {
+    fun ensureExceptionsAreReceivedAsErrors() = runTest {
         val exception = RandomException()
         val flow = flow<RandomValue> { throw exception }
         val job = Job()
@@ -40,7 +41,7 @@ class NativeFlowTests {
     }
 
     @Test
-    fun ensureValuesAreReceived() = runBlocking {
+    fun ensureValuesAreReceived() = runTest {
         val values = listOf(RandomValue(), RandomValue(), RandomValue(), RandomValue())
         val flow = flow { values.forEach { emit(it) } }
         val job = Job()
@@ -59,7 +60,7 @@ class NativeFlowTests {
     }
 
     @Test
-    fun ensureCollectionIsCancelled() = runBlocking {
+    fun ensureCollectionIsCancelled() = runTest {
         val flow = MutableSharedFlow<RandomValue>()
         val job = Job()
         val nativeFlow = flow.asNativeFlow(CoroutineScope(job))
