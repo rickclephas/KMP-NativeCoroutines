@@ -6,6 +6,8 @@ import platform.Foundation.NSError
 import platform.Foundation.NSLocalizedDescriptionKey
 import kotlin.native.concurrent.freeze
 
+actual typealias NativeError = NSError
+
 /**
  * Converts a [Throwable] to a [NSError].
  *
@@ -15,7 +17,7 @@ import kotlin.native.concurrent.freeze
  * The Kotlin throwable can be retrieved from the [NSError.userInfo] with the key `KotlinException`.
  */
 @OptIn(UnsafeNumber::class)
-internal fun Throwable.asNSError(): NSError {
+internal actual fun Throwable.asNativeError(): NativeError {
     val userInfo = mutableMapOf<Any?, Any>()
     userInfo["KotlinException"] = this.freeze()
     val message = message

@@ -1,7 +1,5 @@
 package com.rickclephas.kmp.nativecoroutines
 
-import kotlin.native.concurrent.freeze
-
 /**
  * A callback with a single argument.
  *
