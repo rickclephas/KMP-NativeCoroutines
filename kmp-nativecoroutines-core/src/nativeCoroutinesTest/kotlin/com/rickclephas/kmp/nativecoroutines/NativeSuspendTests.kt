@@ -17,15 +17,6 @@ class NativeSuspendTests {
     }
 
     @Test
-    fun `ensure not frozen`() {
-        val value = RandomValue()
-        assertFalse(value.isFrozen, "Value shouldn't be frozen yet")
-        val nativeSuspend = nativeSuspend { delayAndReturn(0, value) }
-        assertFalse(nativeSuspend.isFrozen, "NativeSuspend shouldn't be frozen")
-        assertFalse(value.isFrozen, "Value shouldn't be frozen")
-    }
-
-    @Test
     fun ensureCorrectResultIsReceived() = runBlocking {
         val value = RandomValue()
         val job = Job()

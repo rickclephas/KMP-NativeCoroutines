@@ -8,15 +8,6 @@ import kotlin.test.*
 class NativeFlowTests {
 
     @Test
-    fun `ensure not frozen`() {
-        val flow = flow<RandomValue> {  }
-        assertFalse(flow.isFrozen, "Flow shouldn't be frozen yet")
-        val nativeFlow = flow.asNativeFlow()
-        assertFalse(nativeFlow.isFrozen, "NativeFlow shouldn't be frozen")
-        assertFalse(flow.isFrozen, "Flow shouldn't be frozen")
-    }
-
-    @Test
     fun ensureCompletionCallbackIsInvoked() = runBlocking {
         val flow = flow<RandomValue> { }
         val job = Job()

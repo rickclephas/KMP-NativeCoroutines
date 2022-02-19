@@ -8,7 +8,7 @@ import kotlin.test.*
 class NativeErrorAppleTests {
 
     @Test
-    fun `ensure mutable`() {
+    fun ensureMutable() {
         val exception = RandomException()
         assertFalse(exception.isFrozen, "Exception shouldn't be frozen yet")
         val nsError = exception.asNativeError()
