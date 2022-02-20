@@ -36,7 +36,9 @@ class NativeSuspendTests {
     @Test
     fun ensureExceptionsAreReceivedAsErrors() = runTest {
         val exception = RandomException()
-        val nativeSuspend = nativeSuspend(this) { delayAndThrow(100, exception) }
+        val nativeSuspend = nativeSuspend(this, arrayOf(RandomException::class)) {
+            delayAndThrow(100, exception)
+        }
         val receivedResultCount = atomic(0)
         val receivedErrorCount = atomic(0)
         nativeSuspend({ _, _ ->
