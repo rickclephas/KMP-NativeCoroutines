@@ -4,7 +4,6 @@ import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.suspendCancellableCoroutine
-import platform.Foundation.NSError
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.native.concurrent.freeze
@@ -17,7 +16,7 @@ import kotlin.native.concurrent.freeze
  */
 typealias NativeSuspend<T, Unit> = (
     onResult: NativeCallback<T>,
-    onError: NativeCallback<NSError>
+    onError: NativeCallback<NativeError>
 ) -> NativeCancellable<Unit>
 
 /**

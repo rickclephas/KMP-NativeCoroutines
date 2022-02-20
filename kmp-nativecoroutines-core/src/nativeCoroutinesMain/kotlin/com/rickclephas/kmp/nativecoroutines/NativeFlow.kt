@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
  */
 typealias NativeFlow<T, Unit> = (
     onItem: NativeCallback<T>,
-    onComplete: NativeCallback<NSError?>
+    onComplete: NativeCallback<NativeError?>
 ) -> NativeCancellable<Unit>
 
 /**
