@@ -2,6 +2,7 @@ buildscript {
     repositories {
         gradlePluginPortal()
         mavenCentral()
+        mavenLocal()
     }
     dependencies {
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.10")
@@ -13,5 +14,6 @@ buildscript {
 allprojects {
     repositories {
         mavenCentral()
+        mavenLocal()
     }
 }
