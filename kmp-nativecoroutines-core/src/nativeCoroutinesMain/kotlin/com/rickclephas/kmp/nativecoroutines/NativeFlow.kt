@@ -8,8 +8,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import platform.Foundation.NSError
-import kotlin.native.concurrent.freeze
 
 /**
  * A function that collects a [Flow] via callbacks.
@@ -31,7 +29,7 @@ typealias NativeFlow<T, Unit> = (
  */
 fun <T> Flow<T>.asNativeFlow(scope: CoroutineScope? = null): NativeFlow<T, Unit> {
     val coroutineScope = scope ?: defaultCoroutineScope
-    return (collect@{ onItem: NativeCallback<T>, onComplete: NativeCallback<NSError?> ->
+    return (collect@{ onItem: NativeCallback<T>, onComplete: NativeCallback<NativeError?> ->
         val job = coroutineScope.launch {
             try {
                 collect { onItem(it) }
@@ -41,13 +39,13 @@ fun <T> Flow<T>.asNativeFlow(scope: CoroutineScope? = null): NativeFlow<T, Unit>
                 // this is required since the job could be cancelled before it is started
                 throw e
             }  catch (e: Throwable) {
-                onComplete(e.asNSError())
+                onComplete(e.asNativeError())
             }
         }
         job.invokeOnCompletion { cause ->
             // Only handle CancellationExceptions, all other exceptions should be handled inside the job
             if (cause !is CancellationException) return@invokeOnCompletion
-            onComplete(cause.asNSError())
+            onComplete(cause.asNativeError())
         }
         return@collect job.asNativeCancellable()
     }).freeze()

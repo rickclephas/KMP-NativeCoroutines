@@ -28,7 +28,7 @@ typealias NativeSuspend<T, Unit> = (
  */
 fun <T> nativeSuspend(scope: CoroutineScope? = null, block: suspend () -> T): NativeSuspend<T, Unit> {
     val coroutineScope = scope ?: defaultCoroutineScope
-    return (collect@{ onResult: NativeCallback<T>, onError: NativeCallback<NSError> ->
+    return (collect@{ onResult: NativeCallback<T>, onError: NativeCallback<NativeError> ->
         val job = coroutineScope.launch {
             try {
                 onResult(block())
@@ -37,13 +37,13 @@ fun <T> nativeSuspend(scope: CoroutineScope? = null, block: suspend () -> T): Na
                 // this is required since the job could be cancelled before it is started
                 throw e
             } catch (e: Throwable) {
-                onError(e.asNSError())
+                onError(e.asNativeError())
             }
         }
         job.invokeOnCompletion { cause ->
             // Only handle CancellationExceptions, all other exceptions should be handled inside the job
             if (cause !is CancellationException) return@invokeOnCompletion
-            onError(cause.asNSError())
+            onError(cause.asNativeError())
         }
         return@collect job.asNativeCancellable()
     }).freeze()
