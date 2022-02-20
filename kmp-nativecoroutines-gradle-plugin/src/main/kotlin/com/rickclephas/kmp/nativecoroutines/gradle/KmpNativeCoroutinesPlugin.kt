@@ -24,12 +24,19 @@ class KmpNativeCoroutinesPlugin: KotlinCompilerPluginSupportPlugin {
     override fun isApplicable(kotlinCompilation: KotlinCompilation<*>): Boolean =
         kotlinCompilation.target.let { it is KotlinNativeTarget && it.konanTarget.family.isAppleFamily }
 
+    @OptIn(ExperimentalStdlibApi::class)
     override fun applyToCompilation(kotlinCompilation: KotlinCompilation<*>): Provider<List<SubpluginOption>> {
         val project = kotlinCompilation.target.project
         val extension = project.extensions.findByType(KmpNativeCoroutinesExtension::class.java)
             ?: KmpNativeCoroutinesExtension()
         return project.provider {
-            listOf(SubpluginOption("suffix", extension.suffix))
+            buildList {
+                add(SubpluginOption("suffix", extension.suffix))
+                extension.propagatedExceptions.forEach {
+                    add(SubpluginOption("propagatedExceptions", it))
+                }
+                add(SubpluginOption("useThrowsAnnotation", extension.useThrowsAnnotation.toString()))
+            }
         }
     }
 

@@ -73,3 +73,7 @@ afterEvaluate {
         it.baseName = "NativeCoroutinesSampleShared"
     }
 }
+
+nativeCoroutines {
+    propagatedExceptions = arrayOf("com.rickclephas.kmp.nativecoroutines.sample.utils.ModuleTestException")
+}

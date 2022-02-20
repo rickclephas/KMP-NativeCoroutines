@@ -16,6 +16,8 @@ import org.jetbrains.kotlin.resolve.lazy.descriptors.LazyClassMemberScope
 import org.jetbrains.kotlin.resolve.scopes.DescriptorKindFilter
 import org.jetbrains.kotlin.resolve.scopes.MemberScope
 import org.jetbrains.kotlin.types.KotlinType
+import org.jetbrains.kotlin.types.KotlinTypeFactory
+import org.jetbrains.kotlin.types.typeUtil.asTypeProjection
 import java.util.ArrayList
 
 internal class KmpNativeCoroutinesSyntheticResolveExtension(
@@ -133,7 +135,8 @@ internal class KmpNativeCoroutinesSyntheticResolveExtension(
     ): PropertyDescriptor {
         val valueType = coroutinesPropertyDescriptor.getSharedFlowValueTypeOrNull()?.type
             ?: throw IllegalStateException("Coroutines property doesn't have a value type")
-        val type = thisDescriptor.module.createListType(valueType)
+        val type = KotlinTypeFactory.simpleType(thisDescriptor.builtIns.list.defaultType,
+            arguments = listOf(valueType.asTypeProjection()))
         return createPropertyDescriptor(thisDescriptor, coroutinesPropertyDescriptor.visibility,
             name, type, coroutinesPropertyDescriptor.dispatchReceiverParameter,
             coroutinesPropertyDescriptor.extensionReceiverParameter

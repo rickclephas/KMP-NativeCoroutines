@@ -1,7 +1,6 @@
 package com.rickclephas.kmp.nativecoroutines.sample.tests
 
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutineScope
-import com.rickclephas.kmp.nativecoroutines.sample.utils.freeze
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -17,8 +16,4 @@ abstract class IntegrationTests {
 
     val uncompletedJobCount: Int
         get() = job.children.count { !it.isCompleted }
-
-    init {
-        freeze()
-    }
 }

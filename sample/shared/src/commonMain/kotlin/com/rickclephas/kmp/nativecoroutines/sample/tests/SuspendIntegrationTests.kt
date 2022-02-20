@@ -1,8 +1,10 @@
 package com.rickclephas.kmp.nativecoroutines.sample.tests
 
+import com.rickclephas.kmp.nativecoroutines.sample.utils.freeze
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlin.coroutines.cancellation.CancellationException
 
 class SuspendIntegrationTests: IntegrationTests() {
 
@@ -16,11 +18,13 @@ class SuspendIntegrationTests: IntegrationTests() {
         return null
     }
 
+    @Throws(Exception::class)
     suspend fun throwException(message: String, delay: Long): Int {
         delay(delay)
         throw Exception(message)
     }
 
+    @Throws(Error::class, CancellationException::class)
     suspend fun throwError(message: String, delay: Long): Int {
         delay(delay)
         throw Error(message)
@@ -39,5 +43,9 @@ class SuspendIntegrationTests: IntegrationTests() {
                 emit(it)
             }
         }
+    }
+
+    init {
+        freeze()
     }
 }

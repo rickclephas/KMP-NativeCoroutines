@@ -9,26 +9,26 @@ import org.jetbrains.kotlin.backend.common.ir.passTypeArgumentsFrom
 import org.jetbrains.kotlin.backend.common.lower.DeclarationIrBuilder
 import org.jetbrains.kotlin.ir.IrStatement
 import org.jetbrains.kotlin.ir.builders.*
+import org.jetbrains.kotlin.ir.declarations.IrDeclaration
 import org.jetbrains.kotlin.ir.declarations.IrFunction
 import org.jetbrains.kotlin.ir.declarations.IrProperty
 import org.jetbrains.kotlin.ir.declarations.IrSimpleFunction
-import org.jetbrains.kotlin.ir.expressions.IrBlockBody
-import org.jetbrains.kotlin.ir.expressions.IrExpression
-import org.jetbrains.kotlin.ir.types.classifierOrFail
+import org.jetbrains.kotlin.ir.expressions.*
+import org.jetbrains.kotlin.ir.expressions.impl.IrClassReferenceImpl
+import org.jetbrains.kotlin.ir.types.*
 import org.jetbrains.kotlin.ir.types.impl.IrSimpleTypeImpl
-import org.jetbrains.kotlin.ir.types.typeOrNull
+import org.jetbrains.kotlin.ir.types.impl.makeTypeProjection
 import org.jetbrains.kotlin.ir.util.*
+import org.jetbrains.kotlin.name.FqName
+import org.jetbrains.kotlin.types.Variance
+import org.jetbrains.kotlin.utils.addToStdlib.ifTrue
 
 internal class KmpNativeCoroutinesIrTransformer(
     private val context: IrPluginContext,
-    private val nameGenerator: NameGenerator
+    private val nameGenerator: NameGenerator,
+    propagatedExceptions: List<FqName>,
+    private val useThrowsAnnotation: Boolean
 ): IrElementTransformerVoidWithContext() {
-
-    private val nativeSuspendFunction = context.referenceNativeSuspendFunction()
-    private val nativeFlowFunction = context.referenceNativeFlowFunction()
-    private val stateFlowValueProperty = context.referenceStateFlowValueProperty()
-    private val sharedFlowReplayCacheProperty = context.referenceSharedFlowReplayCacheProperty()
-    private val listClass = context.referenceListClass()
 
     override fun visitPropertyNew(declaration: IrProperty): IrStatement {
         if (declaration.isFakeOverride || declaration.getter?.body != null || declaration.setter != null)
@@ -57,6 +57,8 @@ internal class KmpNativeCoroutinesIrTransformer(
         return super.visitPropertyNew(declaration)
     }
 
+    private val stateFlowValueProperty = context.referenceStateFlowValueProperty()
+
     private fun createNativeValueBody(getter: IrFunction, originalGetter: IrSimpleFunction): IrBlockBody {
         val originalReturnType = originalGetter.returnType as? IrSimpleTypeImpl
             ?: throw IllegalStateException("Unsupported return type ${originalGetter.returnType}")
@@ -72,6 +74,8 @@ internal class KmpNativeCoroutinesIrTransformer(
         }
     }
 
+    private val sharedFlowReplayCacheProperty = context.referenceSharedFlowReplayCacheProperty()
+
     private fun createNativeReplayCacheBody(getter: IrFunction, originalGetter: IrSimpleFunction): IrBlockBody {
         val originalReturnType = originalGetter.returnType as? IrSimpleTypeImpl
             ?: throw IllegalStateException("Unsupported return type ${originalGetter.returnType}")
@@ -79,7 +83,7 @@ internal class KmpNativeCoroutinesIrTransformer(
             originalGetter.startOffset, originalGetter.endOffset).irBlockBody {
             val valueType = originalReturnType.getSharedFlowValueTypeOrNull()?.typeOrNull as? IrSimpleTypeImpl
                 ?: throw IllegalStateException("Unsupported StateFlow value type $originalReturnType")
-            val returnType = IrSimpleTypeImpl(listClass, false, listOf(valueType), emptyList())
+            val returnType = context.irBuiltIns.listClass.typeWith(listOf(valueType))
             val valueGetter = sharedFlowReplayCacheProperty.owner.getter?.symbol
                 ?: throw IllegalStateException("Couldn't find StateFlow value getter")
             +irReturn(irCall(valueGetter, returnType).apply {
@@ -102,6 +106,9 @@ internal class KmpNativeCoroutinesIrTransformer(
         return super.visitFunctionNew(declaration)
     }
 
+    private val nativeSuspendFunction = context.referenceNativeSuspendFunction()
+    private val nativeFlowFunction = context.referenceNativeFlowFunction()
+
     private fun createNativeBody(declaration: IrFunction, originalFunction: IrSimpleFunction): IrBlockBody {
         val originalReturnType = originalFunction.returnType as? IrSimpleTypeImpl
             ?: throw IllegalStateException("Unsupported return type ${originalFunction.returnType}")
@@ -110,8 +117,9 @@ internal class KmpNativeCoroutinesIrTransformer(
             // Call original function
             var returnType = originalReturnType
             var call: IrExpression = callOriginalFunction(declaration, originalFunction)
-            // Call nativeCoroutineScope
+            // Call nativeCoroutineScope and create propagatedExceptions array
             val nativeCoroutineScope = callNativeCoroutineScope(declaration)
+            val propagatedExceptions = createPropagatedExceptionsArray(originalFunction)
             // Convert Flow types to NativeFlow
             val flowValueType = returnType.getFlowValueTypeOrNull()
             if (flowValueType != null) {
@@ -126,6 +134,7 @@ internal class KmpNativeCoroutinesIrTransformer(
                 call = irCall(nativeFlowFunction, returnType).apply {
                     putTypeArgument(0, valueType)
                     putValueArgument(0, nativeCoroutineScope)
+                    putValueArgument(1, propagatedExceptions)
                     extensionReceiver = call
                 }
             }
@@ -149,7 +158,8 @@ internal class KmpNativeCoroutinesIrTransformer(
                 call = irCall(nativeSuspendFunction, returnType).apply {
                     putTypeArgument(0, lambda.function.returnType)
                     putValueArgument(0, nativeCoroutineScope)
-                    putValueArgument(1, lambda)
+                    putValueArgument(1, propagatedExceptions)
+                    putValueArgument(2, lambda)
                 }
             }
             +irReturn(call)
@@ -177,5 +187,32 @@ internal class KmpNativeCoroutinesIrTransformer(
         return irCall(getter).apply {
             dispatchReceiver = function.dispatchReceiverParameter?.let { irGet(it) }
         }
+    }
+
+    private val propagatedExceptionClasses = propagatedExceptions.map {
+        context.referenceClass(it) ?: throw NoSuchElementException("Couldn't find $it symbol")
+    }
+    private val propagatedExceptionsArrayElementType = context.irBuiltIns.kClassClass.typeWithArguments(listOf(
+        makeTypeProjection(context.irBuiltIns.throwableType, Variance.OUT_VARIANCE)
+    ))
+
+    private fun IrBuilderWithScope.createPropagatedExceptionsArray(originalDeclaration: IrDeclaration): IrExpression {
+        // Find the annotation on the declaration (or a parent class)
+        fun IrDeclaration.getAnnotation(): IrConstructorCall? =
+            annotations.findNativeCoroutineThrowsAnnotation() ?:
+            useThrowsAnnotation.ifTrue { originalDeclaration.annotations.findThrowsAnnotation() } ?:
+            parentClassOrNull?.getAnnotation()
+        val annotation = originalDeclaration.getAnnotation()
+        // Combine the propagatedExceptionClasses list with the classes from the annotation
+        val propagatedExceptions = buildList {
+            propagatedExceptionClasses.forEach {
+                add(IrClassReferenceImpl(startOffset, endOffset, propagatedExceptionsArrayElementType, it, it.defaultType))
+            }
+            annotation?.getValueArgument(0)?.let { vararg ->
+                if (vararg !is IrVararg) throw IllegalArgumentException("Unexpected vararg: $vararg")
+                addAll(vararg.elements)
+            }
+        }
+        return irArrayOf(propagatedExceptionsArrayElementType, propagatedExceptions)
     }
 }

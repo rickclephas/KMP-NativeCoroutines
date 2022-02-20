@@ -1,28 +1,24 @@
 package com.rickclephas.kmp.nativecoroutines
 
-import kotlinx.cinterop.UnsafeNumber
-import kotlinx.cinterop.convert
 import platform.Foundation.NSError
-import platform.Foundation.NSLocalizedDescriptionKey
+import kotlin.coroutines.cancellation.CancellationException
 import kotlin.native.concurrent.freeze
+import kotlin.reflect.KClass
+import com.rickclephas.kmp.nserrorkt.throwAsNSError
 
 actual typealias NativeError = NSError
 
 /**
- * Converts a [Throwable] to a [NSError].
+ * Uses Kotlin Native runtime functions to convert a [Throwable] to a [NSError].
  *
- * The returned [NSError] has `KotlinException` as the [NSError.domain], `0` as the [NSError.code] and
- * the [NSError.localizedDescription] is set to the [Throwable.message].
+ * Warning: [Throwable]s that aren't of a [propagatedExceptions] type will terminate the program.
+ * Note: [CancellationException]s are always propagated.
  *
- * The Kotlin throwable can be retrieved from the [NSError.userInfo] with the key `KotlinException`.
+ * @param propagatedExceptions an array of [Throwable] types that should be propagated as [NSError]s.
  */
-@OptIn(UnsafeNumber::class)
-internal actual fun Throwable.asNativeError(): NativeError {
-    val userInfo = mutableMapOf<Any?, Any>()
-    userInfo["KotlinException"] = this.freeze()
-    val message = message
-    if (message != null) {
-        userInfo[NSLocalizedDescriptionKey] = message
-    }
-    return NSError.errorWithDomain("KotlinException", 0.convert(), userInfo)
-}
+internal actual fun Throwable.asNativeError(
+    propagatedExceptions: Array<KClass<out Throwable>>
+): NSError = freeze().throwAsNSError(*propagatedExceptions.run {
+    if (contains(CancellationException::class)) this
+    else plus(CancellationException::class)
+})

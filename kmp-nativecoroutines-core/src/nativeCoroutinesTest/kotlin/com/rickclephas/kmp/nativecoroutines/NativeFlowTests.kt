@@ -24,7 +24,7 @@ class NativeFlowTests {
     fun ensureExceptionsAreReceivedAsErrors() = runTest {
         val exception = RandomException()
         val flow = flow<RandomValue> { throw exception }
-        val nativeFlow = flow.asNativeFlow(this)
+        val nativeFlow = flow.asNativeFlow(this, arrayOf(RandomException::class))
         val completionCount = atomic(0)
         nativeFlow({ _, _ -> }, { error, _ ->
             assertNotNull(error, "Flow should complete with an error")

@@ -12,8 +12,14 @@ class KmpNativeCoroutinesComponentRegistrar: ComponentRegistrar {
     override fun registerProjectComponents(project: MockProject, configuration: CompilerConfiguration) {
         val suffix = configuration.get(SUFFIX_KEY) ?: return
         val nameGenerator =  NameGenerator(suffix)
-        SyntheticResolveExtension.registerExtension(project, KmpNativeCoroutinesSyntheticResolveExtension(nameGenerator))
-        SyntheticResolveExtension.registerExtension(project, KmpNativeCoroutinesSyntheticResolveExtension.RecursiveCallSyntheticResolveExtension())
-        IrGenerationExtension.registerExtension(project, KmpNativeCoroutinesIrGenerationExtension(nameGenerator))
+        KmpNativeCoroutinesSyntheticResolveExtension(nameGenerator)
+            .let { SyntheticResolveExtension.registerExtension(project, it) }
+        KmpNativeCoroutinesSyntheticResolveExtension.RecursiveCallSyntheticResolveExtension()
+            .let { SyntheticResolveExtension.registerExtension(project, it) }
+        KmpNativeCoroutinesIrGenerationExtension(
+            nameGenerator,
+            configuration.getList(PROPAGATED_EXCEPTIONS_KEY),
+            configuration.get(USE_THROWS_ANNOTATION_KEY, true)
+        ).let { IrGenerationExtension.registerExtension(project, it) }
     }
 }

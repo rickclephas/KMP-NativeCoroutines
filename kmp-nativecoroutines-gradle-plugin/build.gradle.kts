@@ -1,7 +1,6 @@
 plugins {
     `java-gradle-plugin`
     kotlin("jvm")
-    kotlin("kapt")
     `kmp-nativecoroutines-publish`
     id("com.gradle.plugin-publish") version "0.15.0"
 }
@@ -12,6 +11,10 @@ val copyVersionTemplate by tasks.registering(Copy::class) {
     into(layout.buildDirectory.dir("generated/kmp-nativecoroutines-version/main"))
     expand("version" to "$version")
     filteringCharset = "UTF-8"
+}
+
+kotlin.sourceSets.all {
+    languageSettings.optIn("kotlin.RequiresOptIn")
 }
 
 tasks.compileKotlin {
