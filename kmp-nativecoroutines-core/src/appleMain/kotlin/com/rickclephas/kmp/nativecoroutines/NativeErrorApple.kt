@@ -18,4 +18,7 @@ actual typealias NativeError = NSError
  */
 internal actual fun Throwable.asNativeError(
     propagatedExceptions: Array<KClass<out Throwable>>
-): NSError = freeze().throwAsNSError(*propagatedExceptions)
+): NSError = freeze().throwAsNSError(*propagatedExceptions.run {
+    if (contains(CancellationException::class)) this
+    else plus(CancellationException::class)
+})
