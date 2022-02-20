@@ -47,6 +47,9 @@ kotlin {
         }
         val appleMain by creating {
             dependsOn(nativeCoroutinesMain)
+            dependencies {
+                api("com.rickclephas.kmp:nserror-kt:0.1.0-SNAPSHOT")
+            }
         }
         val appleTest by creating {
             dependsOn(nativeCoroutinesTest)

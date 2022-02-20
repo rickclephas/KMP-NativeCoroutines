@@ -1,11 +1,10 @@
 package com.rickclephas.kmp.nativecoroutines
 
-import kotlinx.cinterop.*
 import platform.Foundation.NSError
 import kotlin.coroutines.cancellation.CancellationException
 import kotlin.native.concurrent.freeze
-import kotlin.native.internal.GCUnsafeCall
 import kotlin.reflect.KClass
+import com.rickclephas.kmp.nserrorkt.throwAsNSError
 
 actual typealias NativeError = NSError
 
@@ -19,30 +18,4 @@ actual typealias NativeError = NSError
  */
 internal actual fun Throwable.asNativeError(
     propagatedExceptions: Array<KClass<out Throwable>>
-): NSError {
-    freeze()
-    val shouldPropagate = CancellationException::class.isInstance(this) ||
-            propagatedExceptions.any { it.isInstance(this) }
-    return memScoped {
-        val error = alloc<ObjCObjectVar<NSError>>()
-        val types = when (shouldPropagate) {
-            true -> allocArray<CPointerVar<*>>(2).apply {
-                val typeInfo = getTypeInfo(this@asNativeError)
-                set(0, interpretCPointer<CPointed>(typeInfo))
-            }
-            false -> allocArray(1)
-        }
-        rethrowExceptionAsNSError(this@asNativeError, error.ptr, types)
-        error.value
-    }
-}
-
-@GCUnsafeCall("Kotlin_Any_getTypeInfo")
-private external fun getTypeInfo(obj: Any): NativePtr
-
-@GCUnsafeCall("Kotlin_ObjCExport_RethrowExceptionAsNSError")
-private external fun rethrowExceptionAsNSError(
-    exception: Throwable,
-    error: CPointer<ObjCObjectVar<NSError>>,
-    types: CArrayPointer<CPointerVar<*>>
-)
+): NSError = freeze().throwAsNSError(*propagatedExceptions)

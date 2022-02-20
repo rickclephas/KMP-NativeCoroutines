@@ -2,6 +2,7 @@ buildscript {
     repositories {
         gradlePluginPortal()
         mavenCentral()
+        mavenLocal()
     }
     dependencies {
         classpath(Dependencies.Kotlin.gradlePlugin)
@@ -14,6 +15,7 @@ allprojects {
 
     repositories {
         mavenCentral()
+        mavenLocal()
     }
 }
 
