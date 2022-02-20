@@ -1,6 +1,5 @@
 package com.rickclephas.kmp.nativecoroutines.sample.tests
 
-import com.rickclephas.kmp.nativecoroutines.NativeCoroutineThrows
 import com.rickclephas.kmp.nativecoroutines.sample.utils.freeze
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
@@ -22,9 +21,7 @@ class FlowIntegrationTests: IntegrationTests() {
         }
     }
 
-//    TODO: Using Throws will fail the build with Kotlin_ObjCExport_RethrowExceptionAsNSError already exists error
-//    @Throws(Exception::class)
-    @NativeCoroutineThrows(Exception::class)
+    @Throws(Exception::class)
     fun getFlowWithException(count: Int, exceptionIndex: Int, message: String, delay: Long): Flow<Int> = flow {
         repeat(count) {
             delay(delay)
@@ -33,9 +30,7 @@ class FlowIntegrationTests: IntegrationTests() {
         }
     }
 
-//    TODO: Using Throws will fail the build with Kotlin_ObjCExport_RethrowExceptionAsNSError already exists error
-//    @Throws(Error::class)
-    @NativeCoroutineThrows(Error::class)
+    @Throws(Error::class)
     fun getFlowWithError(count: Int, errorIndex: Int, message: String, delay: Long): Flow<Int> = flow {
         repeat(count) {
             delay(delay)
