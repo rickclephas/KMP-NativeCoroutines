@@ -17,10 +17,9 @@ class NativeSuspendTests {
     }
 
     @Test
-    fun ensureCorrectResultIsReceived() = runBlocking {
+    fun ensureCorrectResultIsReceived() = runTest {
         val value = RandomValue()
-        val job = Job()
-        val nativeSuspend = nativeSuspend(CoroutineScope(job)) { delayAndReturn(100, value) }
+        val nativeSuspend = nativeSuspend(this) { delayAndReturn(100, value) }
         val receivedResultCount = atomic(0)
         val receivedErrorCount = atomic(0)
         nativeSuspend({ receivedValue, _ ->
@@ -29,18 +28,15 @@ class NativeSuspendTests {
         }, { _, _ ->
             receivedErrorCount.incrementAndGet()
         })
-        job.children.forEach { it.join() } // Waits for the function to complete
+        runCurrent()
         assertEquals(1, receivedResultCount.value, "Result callback should be called once")
         assertEquals(0, receivedErrorCount.value, "Error callback shouldn't be called")
     }
 
     @Test
-    fun ensureExceptionsAreReceivedAsErrors() = runBlocking {
+    fun ensureExceptionsAreReceivedAsErrors() = runTest {
         val exception = RandomException()
-        val job = Job()
-        val nativeSuspend = nativeSuspend(CoroutineScope(job), arrayOf(RandomException::class)) {
-            delayAndThrow(100, exception)
-        }
+        val nativeSuspend = nativeSuspend(this) { delayAndThrow(100, exception) }
         val receivedResultCount = atomic(0)
         val receivedErrorCount = atomic(0)
         nativeSuspend({ _, _ ->
@@ -51,15 +47,14 @@ class NativeSuspendTests {
             assertSame(exception, kotlinException, "Kotlin exception should be the same exception")
             receivedErrorCount.incrementAndGet()
         })
-        job.children.forEach { it.join() } // Waits for the function to complete
+        runCurrent()
         assertEquals(1, receivedErrorCount.value, "Error callback should be called once")
         assertEquals(0, receivedResultCount.value, "Result callback shouldn't be called")
     }
 
     @Test
-    fun ensureFunctionIsCancelled() = runBlocking {
-        val job = Job()
-        val nativeSuspend = nativeSuspend(CoroutineScope(job)) { delayAndReturn(5_000, RandomValue()) }
+    fun ensureFunctionIsCancelled() = runTest {
+        val nativeSuspend = nativeSuspend(this) { delayAndReturn(5_000, RandomValue()) }
         val receivedResultCount = atomic(0)
         val receivedErrorCount = atomic(0)
         val cancel = nativeSuspend({ _, _ ->
@@ -72,7 +67,7 @@ class NativeSuspendTests {
         })
         delay(100) // Gives the function some time to start
         cancel()
-        job.children.forEach { it.join() } // Waits for the function to complete
+        runCurrent()
         assertEquals(1, receivedErrorCount.value, "Error callback should be called once")
         assertEquals(0, receivedResultCount.value, "Result callback shouldn't be called")
     }
