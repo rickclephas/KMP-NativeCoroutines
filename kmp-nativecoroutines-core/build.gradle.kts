@@ -36,6 +36,7 @@ kotlin {
             dependencies {
                 implementation(kotlin("test"))
                 implementation(Dependencies.Kotlinx.atomicfu)
+                implementation(Dependencies.Kotlinx.coroutinesTest)
             }
         }
         val nativeCoroutinesMain by creating {
