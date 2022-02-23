@@ -13,8 +13,3 @@ internal actual fun runTest(
     context: CoroutineContext,
     block: suspend CoroutineScope.() -> Unit
 ): TestResult = kotlinx.coroutines.test.runTest(context = context, testBody = block)
-
-@Suppress("SuspendFunctionOnCoroutineScope")
-internal actual suspend fun CoroutineScope.runCurrent() {
-    coroutineContext[Job]?.children?.forEach { it.join() }
-}
