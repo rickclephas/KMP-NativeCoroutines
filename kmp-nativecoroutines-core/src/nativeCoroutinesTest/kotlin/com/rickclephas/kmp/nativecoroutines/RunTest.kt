@@ -1,6 +1,11 @@
 package com.rickclephas.kmp.nativecoroutines
 
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.test.TestScope
+import kotlinx.coroutines.test.advanceUntilIdle
+import kotlinx.coroutines.test.runCurrent
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
 
@@ -20,4 +25,12 @@ internal expect fun runTest(
     block: suspend CoroutineScope.() -> Unit
 ): TestResult
 
-internal expect suspend fun CoroutineScope.runCurrent()
+@OptIn(ExperimentalCoroutinesApi::class)
+@Suppress("SuspendFunctionOnCoroutineScope")
+internal suspend fun CoroutineScope.runCurrent() {
+    if (this is TestScope) {
+        this.advanceUntilIdle()
+    } else {
+        coroutineContext[Job]?.children?.forEach { it.join() }
+    }
+}

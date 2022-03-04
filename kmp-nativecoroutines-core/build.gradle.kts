@@ -45,6 +45,12 @@ kotlin {
         val nativeCoroutinesTest by creating {
             dependsOn(commonTest)
         }
+        val jsMain by getting {
+            dependsOn(nativeCoroutinesMain)
+        }
+        val jsTest by getting {
+            dependsOn(nativeCoroutinesTest)
+        }
         val appleMain by creating {
             dependsOn(nativeCoroutinesMain)
         }
