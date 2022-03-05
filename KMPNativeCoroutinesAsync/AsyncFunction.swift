@@ -18,7 +18,7 @@ public func asyncFunction<Result, Failure: Error, Unit>(
     try await AsyncFunctionTask(nativeSuspend: nativeSuspend).awaitResult()
 }
 
-private class AsyncFunctionTask<Result, Failure: Error, Unit> {
+private class AsyncFunctionTask<Result, Failure: Error, Unit>: @unchecked Sendable {
     
     private let semaphore = DispatchSemaphore(value: 1)
     private var nativeCancellable: NativeCancellable<Unit>?

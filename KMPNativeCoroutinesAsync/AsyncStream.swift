@@ -18,7 +18,7 @@ public func asyncStream<Output, Failure: Error, Unit>(
     return AsyncThrowingStream { try await iterator.next() }
 }
 
-private class NativeFlowAsyncIterator<Output, Failure: Error, Unit> : AsyncIteratorProtocol {
+private class NativeFlowAsyncIterator<Output, Failure: Error, Unit>: AsyncIteratorProtocol, @unchecked Sendable {
     
     private let semaphore = DispatchSemaphore(value: 1)
     private var nativeCancellable: NativeCancellable<Unit>?
