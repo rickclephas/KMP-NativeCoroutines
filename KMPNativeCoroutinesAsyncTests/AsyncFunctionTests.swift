@@ -28,10 +28,11 @@ class AsyncFunctionTests: XCTestCase {
         handle.cancel()
         let result = await handle.result
         XCTAssertEqual(cancelCount, 1, "Cancellable should be invoked once")
-        guard case .failure(_) = result else {
+        guard case let .failure(error) = result else {
             XCTFail("Function should fail with an error")
             return
         }
+        XCTAssertTrue(error is CancellationError, "Error should be a CancellationError")
     }
     
     func testCompletionWithValue() async {

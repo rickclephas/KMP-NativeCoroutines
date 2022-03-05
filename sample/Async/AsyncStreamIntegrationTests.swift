@@ -112,29 +112,23 @@ class AsyncStreamIntegrationTests: XCTestCase {
     
     func testCancellation() async {
         let integrationTests = FlowIntegrationTests()
-        var callbackCount = 0
-        let stream = asyncStream(for: integrationTests.getFlowWithCallbackNative(count: 5, callbackIndex: 2, delay: 1000) {
-            callbackCount += 1
-        })
-        let handle = Task<Int32, Never> {
+        let handle = Task<Void, Never> {
             do {
-                var receivedValueCount: Int32 = 0
+                let stream = asyncStream(for: integrationTests.getFlowWithCallbackNative(count: 5, callbackIndex: 2, delay: 1000) {
+                    XCTFail("The callback shouldn't be called")
+                })
                 for try await _ in stream {
                     XCTAssertEqual(integrationTests.uncompletedJobCount, 1, "There should be 1 uncompleted job")
-                    receivedValueCount += 1
                 }
-                return receivedValueCount
             } catch {
                 XCTFail("Stream should be cancelled without an error")
-                return -1
             }
         }
         DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
             XCTAssertEqual(integrationTests.activeJobCount, 1, "There should be 1 active job")
             handle.cancel()
         }
-        _ = await handle.result
+        await handle.value
         await assertJobCompleted(integrationTests)
-        XCTAssertEqual(callbackCount, 0, "The callback shouldn't be called")
     }
 }

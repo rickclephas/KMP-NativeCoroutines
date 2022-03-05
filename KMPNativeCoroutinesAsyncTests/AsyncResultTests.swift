@@ -32,10 +32,11 @@ class AsyncResultTests: XCTestCase {
             XCTFail("Task should complete without an error")
             return
         }
-        guard case .failure(_) = result else {
+        guard case let .failure(error) = result else {
             XCTFail("Function should fail with an error")
             return
         }
+        XCTAssertTrue(error is CancellationError, "Error should be a CancellationError")
     }
     
     func testCompletionWithValue() async {
