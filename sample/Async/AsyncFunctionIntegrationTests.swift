@@ -7,7 +7,7 @@
 
 import XCTest
 import KMPNativeCoroutinesAsync
-import NativeCoroutinesSampleShared
+@preconcurrency import NativeCoroutinesSampleShared
 
 class AsyncFunctionIntegrationTests: XCTestCase {
     

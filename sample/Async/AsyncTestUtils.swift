@@ -6,7 +6,7 @@
 //
 
 import XCTest
-import NativeCoroutinesSampleShared
+@preconcurrency import NativeCoroutinesSampleShared
 
 func assertJobCompleted(_ integrationTests: IntegrationTests) async {
     await withCheckedContinuation { (continuation: CheckedContinuation<Void, Never>) in
