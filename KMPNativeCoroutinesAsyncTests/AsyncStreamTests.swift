@@ -15,8 +15,11 @@ class AsyncStreamTests: XCTestCase {
 
     func testCancellableInvoked() async {
         var cancelCount = 0
-        let nativeFlow: NativeFlow<TestValue, NSError, Void> = { _, _ in
-            return { cancelCount += 1 }
+        let nativeFlow: NativeFlow<TestValue, Error, Void> = { _, _, cancelCallback in
+            return {
+                cancelCount += 1
+                cancelCallback(CancellationError(), ())
+            }
         }
         let handle = Task {
             for try await _ in asyncStream(for: nativeFlow) { }
@@ -33,12 +36,18 @@ class AsyncStreamTests: XCTestCase {
     
     func testCompletionWithCorrectValues() async {
         let values = [TestValue(), TestValue(), TestValue(), TestValue(), TestValue()]
-        let nativeFlow: NativeFlow<TestValue, NSError, Void> = { itemCallback, completionCallback in
-            for value in values {
-                itemCallback(value, ())
+        let nativeFlow: NativeFlow<TestValue, NSError, Void> = { itemCallback, completionCallback, _ in
+            let handle = Task {
+                for value in values {
+                    await withCheckedContinuation { continuation in
+                        itemCallback(value, {
+                            continuation.resume()
+                        }, ())
+                    }
+                }
+                completionCallback(nil, ())
             }
-            completionCallback(nil, ())
-            return { }
+            return { handle.cancel() }
         }
         var valueCount = 0
         do {
@@ -54,7 +63,7 @@ class AsyncStreamTests: XCTestCase {
     
     func testCompletionWithError() async {
         let sendError = NSError(domain: "Test", code: 0)
-        let nativeFlow: NativeFlow<TestValue, NSError, Void> = { _, completionCallback in
+        let nativeFlow: NativeFlow<TestValue, NSError, Void> = { _, completionCallback, _ in
             completionCallback(sendError, ())
             return { }
         }

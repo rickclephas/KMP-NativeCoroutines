@@ -10,7 +10,11 @@ import kotlinx.coroutines.launch
  * The function takes an `onResult` and `onError` callback
  * and returns a cancellable that can be used to cancel the suspend function.
  */
-typealias NativeSuspend<T> = (onResult: NativeCallback<T>, onError: NativeCallback<NativeError>) -> NativeCancellable
+typealias NativeSuspend<T> = (
+    onResult: NativeCallback<T>,
+    onError: NativeCallback<NativeError>,
+    onCancelled: NativeCallback<NativeError>
+) -> NativeCancellable
 
 /**
  * Creates a [NativeSuspend] for the provided suspend [block].
@@ -20,7 +24,9 @@ typealias NativeSuspend<T> = (onResult: NativeCallback<T>, onError: NativeCallba
  */
 fun <T> nativeSuspend(scope: CoroutineScope? = null, block: suspend () -> T): NativeSuspend<T> {
     val coroutineScope = scope ?: defaultCoroutineScope
-    return (collect@{ onResult: NativeCallback<T>, onError: NativeCallback<NativeError> ->
+    return (collect@{ onResult: NativeCallback<T>,
+                      onError: NativeCallback<NativeError>,
+                      onCancelled: NativeCallback<NativeError> ->
         val job = coroutineScope.launch {
             try {
                 onResult(block())
@@ -35,7 +41,7 @@ fun <T> nativeSuspend(scope: CoroutineScope? = null, block: suspend () -> T): Na
         job.invokeOnCompletion { cause ->
             // Only handle CancellationExceptions, all other exceptions should be handled inside the job
             if (cause !is CancellationException) return@invokeOnCompletion
-            onError(cause.asNativeError())
+            onCancelled(cause.asNativeError())
         }
         return@collect job.asNativeCancellable()
     }).freeze()

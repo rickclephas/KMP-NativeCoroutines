@@ -5,6 +5,7 @@
 //  Created by Rick Clephas on 13/06/2021.
 //
 
+import Dispatch
 import KMPNativeCoroutinesCore
 
 /// Wraps the `NativeSuspend` in an async function.
@@ -14,28 +15,79 @@ import KMPNativeCoroutinesCore
 public func asyncFunction<Result, Failure: Error, Unit>(
     for nativeSuspend: @escaping NativeSuspend<Result, Failure, Unit>
 ) async throws -> Result {
-    for try await result in asyncStream(for: nativeSuspend) {
-        return result
-    }
-    try Task.checkCancellation()
-    fatalError("NativeSuspend should always return a value")
+    try await AsyncFunctionTask(nativeSuspend: nativeSuspend).awaitResult()
 }
 
-private func asyncStream<Result, Failure: Error, Unit>(
-    for nativeSuspend: @escaping NativeSuspend<Result, Failure, Unit>
-) -> AsyncThrowingStream<Result, Error> {
-    return AsyncThrowingStream<Result, Error> { continuation in
-        let nativeCancellable = nativeSuspend({ output, unit in
-            continuation.yield(output)
-            continuation.finish()
+private class AsyncFunctionTask<Result, Failure: Error, Unit> {
+    
+    private let semaphore = DispatchSemaphore(value: 1)
+    private var nativeCancellable: NativeCancellable<Unit>?
+    private var result: Result? = nil
+    private var error: Failure? = nil
+    private var cancellationError: Failure? = nil
+    private var continuation: UnsafeContinuation<Result, Error>? = nil
+    
+    init(nativeSuspend: NativeSuspend<Result, Failure, Unit>) {
+        nativeCancellable = nativeSuspend({ result, unit in
+            self.semaphore.wait()
+            defer { self.semaphore.signal() }
+            if let continuation = self.continuation {
+                continuation.resume(returning: result)
+                self.continuation = nil
+                self.nativeCancellable = nil
+            } else {
+                self.result = result
+            }
             return unit
         }, { error, unit in
-            continuation.finish(throwing: error)
+            self.semaphore.wait()
+            defer { self.semaphore.signal() }
+            if let continuation = self.continuation {
+                continuation.resume(throwing: error)
+                self.continuation = nil
+                self.nativeCancellable = nil
+            } else {
+                self.error = error
+            }
+            return unit
+        }, { cancellationError, unit in
+            self.semaphore.wait()
+            defer { self.semaphore.signal() }
+            if let continuation = self.continuation {
+                continuation.resume(throwing: CancellationError()) // TODO: Convert cancellationError
+                self.continuation = nil
+                self.nativeCancellable = nil
+            } else {
+                self.cancellationError = cancellationError
+            }
             return unit
         })
-        continuation.onTermination = { @Sendable termination in
-            guard case .cancelled = termination else { return }
-            _ = nativeCancellable()
+    }
+    
+    func awaitResult() async throws -> Result {
+        try await withTaskCancellationHandler {
+            _ = nativeCancellable?()
+            nativeCancellable = nil
+        } operation: {
+            try await withUnsafeThrowingContinuation { continuation in
+                self.semaphore.wait()
+                defer { self.semaphore.signal() }
+                if let result = self.result {
+                    continuation.resume(returning: result)
+                    self.nativeCancellable = nil
+                } else if let error = self.error {
+                    continuation.resume(throwing: error)
+                    self.nativeCancellable = nil
+                } else if self.cancellationError != nil {
+                    continuation.resume(throwing: CancellationError()) // TODO: Convert cancellationError
+                    self.nativeCancellable = nil
+                } else {
+                    guard self.continuation == nil else {
+                        fatalError("") // TODO: Add error message
+                    }
+                    self.continuation = continuation
+                }
+            }
         }
     }
 }

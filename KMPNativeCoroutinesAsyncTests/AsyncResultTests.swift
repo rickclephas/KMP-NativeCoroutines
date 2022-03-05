@@ -15,10 +15,10 @@ class AsyncResultTests: XCTestCase {
 
     func testCancellableInvoked() async {
         var cancelCount = 0
-        let nativeSuspend: NativeSuspend<String, Error, Void> = { _, errorCallback in
+        let nativeSuspend: NativeSuspend<String, Error, Void> = { _, _, cancelCallback in
             return {
                 cancelCount += 1
-                errorCallback(CancellationError(), ())
+                cancelCallback(CancellationError(), ())
             }
         }
         let handle = Task {
@@ -41,7 +41,7 @@ class AsyncResultTests: XCTestCase {
     
     func testCompletionWithValue() async {
         let value = TestValue()
-        let nativeSuspend: NativeSuspend<TestValue, NSError, Void> = { resultCallback, _ in
+        let nativeSuspend: NativeSuspend<TestValue, NSError, Void> = { resultCallback, _, _ in
             resultCallback(value, ())
             return { }
         }
@@ -55,7 +55,7 @@ class AsyncResultTests: XCTestCase {
     
     func testCompletionWithError() async {
         let sendError = NSError(domain: "Test", code: 0)
-        let nativeSuspend: NativeSuspend<TestValue, NSError, Void> = { _, errorCallback in
+        let nativeSuspend: NativeSuspend<TestValue, NSError, Void> = { _, errorCallback, _ in
             errorCallback(sendError, ())
             return { }
         }

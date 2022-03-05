@@ -38,15 +38,18 @@ internal class NativeFlowSubscription<Output, Failure, Unit, S: Subscriber>: Sub
     
     init(nativeFlow: NativeFlow<Output, Failure, Unit>, subscriber: S) {
         self.subscriber = subscriber
-        nativeCancellable = nativeFlow({ item, unit in
+        nativeCancellable = nativeFlow({ item, next, _ in
             _ = self.subscriber?.receive(item)
-            return unit
+            return next()
         }, { error, unit in
             if let error = error {
                 self.subscriber?.receive(completion: .failure(error))
             } else {
                 self.subscriber?.receive(completion: .finished)
             }
+            return unit
+        }, { cancellationError, unit in
+            self.subscriber?.receive(completion: .failure(cancellationError))
             return unit
         })
     }
