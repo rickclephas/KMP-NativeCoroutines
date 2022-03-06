@@ -18,7 +18,7 @@ class AsyncSequenceTests: XCTestCase {
         let nativeFlow: NativeFlow<TestValue, Error, Void> = { _, _, cancelCallback in
             return {
                 cancelCount += 1
-                cancelCallback(CancellationError(), ())
+                cancelCallback(NSError(domain: "Ignored", code: 0), ())
             }
         }
         let handle = Task {
