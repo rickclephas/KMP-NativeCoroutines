@@ -31,33 +31,30 @@ private class AsyncFunctionTask<Result, Failure: Error, Unit>: @unchecked Sendab
         nativeCancellable = nativeSuspend({ result, unit in
             self.semaphore.wait()
             defer { self.semaphore.signal() }
+            self.result = result
             if let continuation = self.continuation {
                 continuation.resume(returning: result)
                 self.continuation = nil
-            } else {
-                self.result = result
             }
             self.nativeCancellable = nil
             return unit
         }, { error, unit in
             self.semaphore.wait()
             defer { self.semaphore.signal() }
+            self.error = error
             if let continuation = self.continuation {
                 continuation.resume(throwing: error)
                 self.continuation = nil
-            } else {
-                self.error = error
             }
             self.nativeCancellable = nil
             return unit
         }, { cancellationError, unit in
             self.semaphore.wait()
             defer { self.semaphore.signal() }
+            self.cancellationError = cancellationError
             if let continuation = self.continuation {
                 continuation.resume(throwing: CancellationError())
                 self.continuation = nil
-            } else {
-                self.cancellationError = cancellationError
             }
             self.nativeCancellable = nil
             return unit
