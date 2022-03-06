@@ -1,15 +1,15 @@
 //
-//  AsyncStreamTests.swift
-//  AsyncStreamTests
+//  AsyncSequenceTests.swift
+//  AsyncSequenceTests
 //
-//  Created by Rick Clephas on 15/07/2021.
+//  Created by Rick Clephas on 06/03/2022.
 //
 
 import XCTest
 import KMPNativeCoroutinesCore
 import KMPNativeCoroutinesAsync
 
-class AsyncStreamTests: XCTestCase {
+class AsyncSequenceTests: XCTestCase {
     
     private class TestValue { }
 
@@ -22,16 +22,17 @@ class AsyncStreamTests: XCTestCase {
             }
         }
         let handle = Task {
-            for try await _ in asyncStream(for: nativeFlow) { }
+            for try await _ in asyncSequence(for: nativeFlow) { }
         }
         XCTAssertEqual(cancelCount, 0, "Cancellable shouldn't be invoked yet")
         handle.cancel()
         let result = await handle.result
         XCTAssertEqual(cancelCount, 1, "Cancellable should be invoked once")
-        guard case .success(_) = result else {
-            XCTFail("Task should complete without an error")
+        guard case let .failure(error) = result else {
+            XCTFail("Task should fail with an error")
             return
         }
+        XCTAssertTrue(error is CancellationError, "Error should be a CancellationError")
     }
     
     func testCompletionWithCorrectValues() async {
@@ -51,7 +52,7 @@ class AsyncStreamTests: XCTestCase {
         }
         var valueCount = 0
         do {
-            for try await receivedValue in asyncStream(for: nativeFlow) {
+            for try await receivedValue in asyncSequence(for: nativeFlow) {
                 XCTAssertIdentical(receivedValue, values[valueCount], "Received incorrect value")
                 valueCount += 1
             }
@@ -69,7 +70,7 @@ class AsyncStreamTests: XCTestCase {
         }
         var valueCount = 0
         do {
-            for try await _ in asyncStream(for: nativeFlow) {
+            for try await _ in asyncSequence(for: nativeFlow) {
                 valueCount += 1
             }
             XCTFail("Stream should complete with an error")

@@ -1,15 +1,15 @@
 //
-//  AsyncStreamIntegrationTests.swift
-//  AsyncStreamIntegrationTests
+//  AsyncSequenceIntegrationTests.swift
+//  AsyncSequenceIntegrationTests
 //
-//  Created by Rick Clephas on 16/07/2021.
+//  Created by Rick Clephas on 06/03/2022.
 //
 
 import XCTest
 import KMPNativeCoroutinesAsync
 import NativeCoroutinesSampleShared
 
-class AsyncStreamIntegrationTests: XCTestCase {
+class AsyncSequenceIntegrationTests: XCTestCase {
     
     override func setUp() {
         CoroutinesAppleKt.doInitCoroutinesFromMainThread()
@@ -18,7 +18,7 @@ class AsyncStreamIntegrationTests: XCTestCase {
     func testValuesReceived() async {
         let integrationTests = FlowIntegrationTests()
         let sendValueCount = randomInt(min: 5, max: 20)
-        let stream = asyncStream(for: integrationTests.getFlowNative(count: sendValueCount, delay: 100))
+        let stream = asyncSequence(for: integrationTests.getFlowNative(count: sendValueCount, delay: 100))
         do {
             var receivedValueCount: Int32 = 0
             for try await value in stream {
@@ -41,7 +41,7 @@ class AsyncStreamIntegrationTests: XCTestCase {
         let integrationTests = FlowIntegrationTests()
         let sendValueCount = randomInt(min: 5, max: 20)
         let nullValueIndex = randomInt(min: 0, max: sendValueCount - 1)
-        let stream = asyncStream(for: integrationTests.getFlowWithNullNative(count: sendValueCount, nullIndex: nullValueIndex, delay: 100))
+        let stream = asyncSequence(for: integrationTests.getFlowWithNullNative(count: sendValueCount, nullIndex: nullValueIndex, delay: 100))
         do {
             var receivedValueCount: Int32 = 0
             for try await value in stream {
@@ -69,7 +69,7 @@ class AsyncStreamIntegrationTests: XCTestCase {
         let sendValueCount = randomInt(min: 5, max: 20)
         let exceptionIndex = randomInt(min: 1, max: sendValueCount - 1)
         let sendMessage = randomString()
-        let stream = asyncStream(for: integrationTests.getFlowWithExceptionNative(count: sendValueCount, exceptionIndex: exceptionIndex, message: sendMessage, delay: 100))
+        let stream = asyncSequence(for: integrationTests.getFlowWithExceptionNative(count: sendValueCount, exceptionIndex: exceptionIndex, message: sendMessage, delay: 100))
         var receivedValueCount: Int32 = 0
         do {
             for try await _ in stream {
@@ -92,7 +92,7 @@ class AsyncStreamIntegrationTests: XCTestCase {
         let sendValueCount = randomInt(min: 5, max: 20)
         let errorIndex = randomInt(min: 1, max: sendValueCount - 1)
         let sendMessage = randomString()
-        let stream = asyncStream(for: integrationTests.getFlowWithErrorNative(count: sendValueCount, errorIndex: errorIndex, message: sendMessage, delay: 100))
+        let stream = asyncSequence(for: integrationTests.getFlowWithErrorNative(count: sendValueCount, errorIndex: errorIndex, message: sendMessage, delay: 100))
         var receivedValueCount: Int32 = 0
         do {
             for try await _ in stream {
@@ -114,7 +114,7 @@ class AsyncStreamIntegrationTests: XCTestCase {
         let integrationTests = FlowIntegrationTests()
         let handle = Task<Void, Never> {
             do {
-                let stream = asyncStream(for: integrationTests.getFlowWithCallbackNative(count: 5, callbackIndex: 2, delay: 1000) {
+                let stream = asyncSequence(for: integrationTests.getFlowWithCallbackNative(count: 5, callbackIndex: 2, delay: 1000) {
                     XCTFail("The callback shouldn't be called")
                 })
                 for try await _ in stream {

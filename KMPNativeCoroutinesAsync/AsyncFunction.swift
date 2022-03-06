@@ -34,10 +34,10 @@ private class AsyncFunctionTask<Result, Failure: Error, Unit>: @unchecked Sendab
             if let continuation = self.continuation {
                 continuation.resume(returning: result)
                 self.continuation = nil
-                self.nativeCancellable = nil
             } else {
                 self.result = result
             }
+            self.nativeCancellable = nil
             return unit
         }, { error, unit in
             self.semaphore.wait()
@@ -45,21 +45,21 @@ private class AsyncFunctionTask<Result, Failure: Error, Unit>: @unchecked Sendab
             if let continuation = self.continuation {
                 continuation.resume(throwing: error)
                 self.continuation = nil
-                self.nativeCancellable = nil
             } else {
                 self.error = error
             }
+            self.nativeCancellable = nil
             return unit
         }, { cancellationError, unit in
             self.semaphore.wait()
             defer { self.semaphore.signal() }
             if let continuation = self.continuation {
-                continuation.resume(throwing: CancellationError()) // TODO: Convert cancellationError
+                continuation.resume(throwing: CancellationError())
                 self.continuation = nil
-                self.nativeCancellable = nil
             } else {
                 self.cancellationError = cancellationError
             }
+            self.nativeCancellable = nil
             return unit
         })
     }
@@ -74,16 +74,13 @@ private class AsyncFunctionTask<Result, Failure: Error, Unit>: @unchecked Sendab
                 defer { self.semaphore.signal() }
                 if let result = self.result {
                     continuation.resume(returning: result)
-                    self.nativeCancellable = nil
                 } else if let error = self.error {
                     continuation.resume(throwing: error)
-                    self.nativeCancellable = nil
                 } else if self.cancellationError != nil {
-                    continuation.resume(throwing: CancellationError()) // TODO: Convert cancellationError
-                    self.nativeCancellable = nil
+                    continuation.resume(throwing: CancellationError())
                 } else {
                     guard self.continuation == nil else {
-                        fatalError("") // TODO: Add error message
+                        fatalError("Concurrent calls to awaitResult aren't supported")
                     }
                     self.continuation = continuation
                 }

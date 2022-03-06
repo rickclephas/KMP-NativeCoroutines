@@ -27,7 +27,7 @@ class ClockAsyncViewModel: ClockViewModel {
     
     func startMonitoring() {
         task = Task { [weak self] in
-            let timeStream = asyncStream(for: clock.timeNative)
+            let timeStream = asyncSequence(for: clock.timeNative)
                 .map { [weak self] time -> String in
                     guard let self = self else { return "" }
                     let date = Date(timeIntervalSince1970: time.doubleValue)
