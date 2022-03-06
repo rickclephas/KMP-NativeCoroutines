@@ -79,8 +79,8 @@ class NativeSuspendTests {
         delay(100) // Gives the function some time to start
         cancel()
         runCurrent()
-        assertEquals(1, receivedErrorCount.value, "Cancellation callback should be called once")
-        assertEquals(0, receivedResultCount.value, "Result callback shouldn't be called")
+        assertEquals(1, receivedCancellationCount.value, "Cancellation callback should be called once")
+        assertEquals(0, receivedErrorCount.value, "Error callback shouldn't be called")
         assertEquals(0, receivedResultCount.value, "Result callback shouldn't be called")
     }
 }
