@@ -15,7 +15,7 @@ class ObservableTests: XCTestCase {
 
     func testDisposableInvoked() {
         var cancelCount = 0
-        let nativeFlow: NativeFlow<TestValue, NSError, Void> = { _, _ in
+        let nativeFlow: NativeFlow<TestValue, NSError, Void> = { _, _, _ in
             return { cancelCount += 1 }
         }
         let disposable = createObservable(for: nativeFlow).subscribe()
@@ -26,9 +26,9 @@ class ObservableTests: XCTestCase {
     
     func testCompletionWithCorrectValues() {
         let values = [TestValue(), TestValue(), TestValue(), TestValue(), TestValue()]
-        let nativeFlow: NativeFlow<TestValue, NSError, Void> = { itemCallback, completionCallback in
+        let nativeFlow: NativeFlow<TestValue, NSError, Void> = { itemCallback, completionCallback, _ in
             for value in values {
-                itemCallback(value, ())
+                itemCallback(value, {}, ())
             }
             completionCallback(nil, ())
             return { }
@@ -51,7 +51,7 @@ class ObservableTests: XCTestCase {
     
     func testCompletionWithError() {
         let error = NSError(domain: "Test", code: 0)
-        let nativeFlow: NativeFlow<TestValue, NSError, Void> = { _, completionCallback in
+        let nativeFlow: NativeFlow<TestValue, NSError, Void> = { _, completionCallback, _ in
             completionCallback(error, ())
             return { }
         }

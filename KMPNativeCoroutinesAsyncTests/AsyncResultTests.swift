@@ -15,10 +15,10 @@ class AsyncResultTests: XCTestCase {
 
     func testCancellableInvoked() async {
         var cancelCount = 0
-        let nativeSuspend: NativeSuspend<String, Error, Void> = { _, errorCallback in
+        let nativeSuspend: NativeSuspend<String, Error, Void> = { _, _, cancelCallback in
             return {
                 cancelCount += 1
-                errorCallback(CancellationError(), ())
+                cancelCallback(NSError(domain: "Ignored", code: 0), ())
             }
         }
         let handle = Task {
@@ -32,15 +32,16 @@ class AsyncResultTests: XCTestCase {
             XCTFail("Task should complete without an error")
             return
         }
-        guard case .failure(_) = result else {
+        guard case let .failure(error) = result else {
             XCTFail("Function should fail with an error")
             return
         }
+        XCTAssertTrue(error is CancellationError, "Error should be a CancellationError")
     }
     
     func testCompletionWithValue() async {
         let value = TestValue()
-        let nativeSuspend: NativeSuspend<TestValue, NSError, Void> = { resultCallback, _ in
+        let nativeSuspend: NativeSuspend<TestValue, NSError, Void> = { resultCallback, _, _ in
             resultCallback(value, ())
             return { }
         }
@@ -54,7 +55,7 @@ class AsyncResultTests: XCTestCase {
     
     func testCompletionWithError() async {
         let sendError = NSError(domain: "Test", code: 0)
-        let nativeSuspend: NativeSuspend<TestValue, NSError, Void> = { _, errorCallback in
+        let nativeSuspend: NativeSuspend<TestValue, NSError, Void> = { _, errorCallback, _ in
             errorCallback(sendError, ())
             return { }
         }

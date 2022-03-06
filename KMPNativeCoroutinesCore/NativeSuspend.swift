@@ -11,5 +11,6 @@
 /// and returns a cancellable that can be used to cancel the suspend function.
 public typealias NativeSuspend<Result, Failure: Error, Unit> = (
     _ onResult: @escaping NativeCallback<Result, Unit>,
-    _ onError: @escaping NativeCallback<Failure, Unit>
+    _ onError: @escaping NativeCallback<Failure, Unit>,
+    _ onCancelled: @escaping NativeCallback<Failure, Unit>
 ) -> NativeCancellable<Unit>

@@ -22,6 +22,9 @@ public func createSingle<Result, Failure: Error, Unit>(
             }, { error, unit in
                 observer(.failure(error))
                 return unit
+            }, { cancellationError, unit in
+                observer(.failure(cancellationError))
+                return unit
             })
             return Disposables.create { _ = nativeCancellable() }
         }

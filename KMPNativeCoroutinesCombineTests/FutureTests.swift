@@ -15,7 +15,7 @@ class FutureTests: XCTestCase {
 
     func testCancellableInvoked() {
         var cancelCount = 0
-        let nativeSuspend: NativeSuspend<TestValue, NSError, Void> = { _, _ in
+        let nativeSuspend: NativeSuspend<TestValue, NSError, Void> = { _, _, _ in
             return { cancelCount += 1 }
         }
         let cancellable = createFuture(for: nativeSuspend)
@@ -27,7 +27,7 @@ class FutureTests: XCTestCase {
     
     func testCompletionWithValue() {
         let value = TestValue()
-        let nativeSuspend: NativeSuspend<TestValue, NSError, Void> = { resultCallback, _ in
+        let nativeSuspend: NativeSuspend<TestValue, NSError, Void> = { resultCallback, _, _ in
             resultCallback(value, ())
             return { }
         }
@@ -51,7 +51,7 @@ class FutureTests: XCTestCase {
     
     func testCompletionWithError() {
         let error = NSError(domain: "Test", code: 0)
-        let nativeSuspend: NativeSuspend<TestValue, NSError, Void> = { _, errorCallback in
+        let nativeSuspend: NativeSuspend<TestValue, NSError, Void> = { _, errorCallback, _ in
             errorCallback(error, ())
             return { }
         }
