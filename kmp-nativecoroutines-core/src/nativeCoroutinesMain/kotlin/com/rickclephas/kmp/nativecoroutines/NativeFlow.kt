@@ -36,7 +36,7 @@ fun <T> Flow<T>.asNativeFlow(scope: CoroutineScope? = null): NativeFlow<T> {
             try {
                 collect {
                     suspendCoroutine<Unit> { cont ->
-                        onItem(it, { cont.resume(Unit) }, Unit)
+                        onItem(it) { cont.resume(Unit) }
                     }
                 }
                 onComplete(null)

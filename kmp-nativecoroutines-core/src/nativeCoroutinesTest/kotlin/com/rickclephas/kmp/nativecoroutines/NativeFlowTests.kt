@@ -72,7 +72,7 @@ class NativeFlowTests {
         val cancel = nativeFlow({ _, _, _ -> }, { _, _ ->
             completionCount.incrementAndGet()
         }, { error, _ ->
-            assertNotNull(error, "Flow should complete with an cancellation error")
+            assertNotNull(error, "Flow should complete with a cancellation error")
             val exception = error.kotlinCause
             assertIs<CancellationException>(exception, "Error should contain CancellationException")
             cancellationCount.incrementAndGet()

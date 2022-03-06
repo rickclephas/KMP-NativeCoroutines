@@ -57,7 +57,7 @@ class AsyncSequenceTests: XCTestCase {
                 valueCount += 1
             }
         } catch {
-            XCTFail("Stream should complete without error")
+            XCTFail("Sequence should complete without error")
         }
         XCTAssertEqual(valueCount, values.count, "All values should be received")
     }
@@ -73,7 +73,7 @@ class AsyncSequenceTests: XCTestCase {
             for try await _ in asyncSequence(for: nativeFlow) {
                 valueCount += 1
             }
-            XCTFail("Stream should complete with an error")
+            XCTFail("Sequence should complete with an error")
         } catch {
             XCTAssertEqual(error as NSError, sendError, "Received incorrect error")
         }
