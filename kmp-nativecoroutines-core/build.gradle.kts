@@ -35,13 +35,21 @@ kotlin {
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))
+                implementation(Dependencies.Kotlinx.atomicfu)
+                implementation(Dependencies.Kotlinx.coroutinesTest)
             }
         }
-        val appleMain by creating {
+        val nativeCoroutinesMain by creating {
             dependsOn(commonMain)
         }
-        val appleTest by creating {
+        val nativeCoroutinesTest by creating {
             dependsOn(commonTest)
+        }
+        val appleMain by creating {
+            dependsOn(nativeCoroutinesMain)
+        }
+        val appleTest by creating {
+            dependsOn(nativeCoroutinesTest)
         }
         listOf(
             macosX64, macosArm64,
