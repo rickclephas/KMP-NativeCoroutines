@@ -11,7 +11,7 @@ internal val SimpleFunctionDescriptor.isCoroutinesFunction: Boolean
 internal val SimpleFunctionDescriptor.needsNativeFunction: Boolean
     get() = effectiveVisibility().publicApi &&
             !hasIgnoreAnnotation &&
-            overriddenDescriptors.isEmpty() &&
+            overriddenDescriptors.size != 1 &&
             isCoroutinesFunction
 
 internal val IrSimpleFunction.isCoroutinesFunction: Boolean
@@ -20,7 +20,7 @@ internal val IrSimpleFunction.isCoroutinesFunction: Boolean
 internal val IrSimpleFunction.needsNativeFunction: Boolean
     get() = visibility.isPublicAPI &&
             !hasIgnoreAnnotation &&
-            overriddenSymbols.isEmpty() &&
+            overriddenSymbols.size != 1 &&
             isCoroutinesFunction
 
 internal val IrFunction.isNativeCoroutinesFunction: Boolean
