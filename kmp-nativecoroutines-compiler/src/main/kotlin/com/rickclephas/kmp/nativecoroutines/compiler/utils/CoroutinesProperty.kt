@@ -10,7 +10,7 @@ internal val PropertyDescriptor.isCoroutinesProperty: Boolean
 internal val PropertyDescriptor.needsNativeProperty: Boolean
     get() = effectiveVisibility().publicApi &&
             !hasIgnoreAnnotation &&
-            overriddenDescriptors.isEmpty() &&
+            overriddenDescriptors.size != 1 &&
             isCoroutinesProperty
 
 internal val IrProperty.isCoroutinesProperty: Boolean
@@ -19,5 +19,5 @@ internal val IrProperty.isCoroutinesProperty: Boolean
 internal val IrProperty.needsNativeProperty: Boolean
     get() = visibility.isPublicAPI &&
             !hasIgnoreAnnotation &&
-            overriddenSymbols.isEmpty() &&
+            overriddenSymbols.size != 1 &&
             isCoroutinesProperty
