@@ -1,6 +1,5 @@
 plugins {
     kotlin("multiplatform")
-    kotlin("native.cocoapods")
     kotlin("plugin.serialization")
     id("com.rickclephas.kmp.nativecoroutines")
 }
@@ -46,6 +45,9 @@ kotlin {
             watchosArm32, watchosArm64, watchosX64, watchosSimulatorArm64,
             tvosArm64, tvosX64, tvosSimulatorArm64
         ).forEach {
+            it.binaries.framework {
+                baseName = "NativeCoroutinesSampleShared"
+            }
             getByName("${it.targetName}Main") {
                 dependsOn(appleMain)
             }
@@ -53,23 +55,5 @@ kotlin {
                 dependsOn(appleTest)
             }
         }
-    }
-    cocoapods {
-        summary = "Shared Kotlin code for the KMP-NativeCoroutines Sample"
-        homepage = "https://github.com/rickclephas/KMP-NativeCoroutines"
-        framework {
-            baseName = "NativeCoroutinesSampleShared"
-        }
-        ios.deploymentTarget = "13.0"
-        osx.deploymentTarget = "10.15"
-        watchos.deploymentTarget = "6.0"
-        tvos.deploymentTarget = "13.0"
-        podfile = project.file("../Podfile")
-    }
-}
-
-afterEvaluate {
-    tasks.withType(org.jetbrains.kotlin.gradle.tasks.FatFrameworkTask::class.java).forEach {
-        it.baseName = "NativeCoroutinesSampleShared"
     }
 }
