@@ -139,6 +139,10 @@
 		1D81B15B2677EDE600EEC34D /* CombinePublisherIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D81B1592677EDE600EEC34D /* CombinePublisherIntegrationTests.swift */; };
 		1DA5DD0626764810002448E3 /* RandomLettersAsyncViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA5DD0526764810002448E3 /* RandomLettersAsyncViewModel.swift */; };
 		1DA5DD0726764810002448E3 /* RandomLettersAsyncViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA5DD0526764810002448E3 /* RandomLettersAsyncViewModel.swift */; };
+		1DCF5F4F27EF462E0066E841 /* GH51Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DCF5F4E27EF462E0066E841 /* GH51Tests.swift */; };
+		1DCF5F5027EF462E0066E841 /* GH51Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DCF5F4E27EF462E0066E841 /* GH51Tests.swift */; };
+		1DCF5F5127EF462E0066E841 /* GH51Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DCF5F4E27EF462E0066E841 /* GH51Tests.swift */; };
+		1DCF5F5227EF462E0066E841 /* GH51Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DCF5F4E27EF462E0066E841 /* GH51Tests.swift */; };
 		1DF1A66C2671448500945FF9 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF1A66B2671448500945FF9 /* RootView.swift */; };
 		1DF1A66D2671448500945FF9 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF1A66B2671448500945FF9 /* RootView.swift */; };
 		1DF1A66F2671494800945FF9 /* NavigationBarTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF1A66E2671494800945FF9 /* NavigationBarTitle.swift */; };
@@ -281,6 +285,7 @@
 		1D81B1532677B7EF00EEC34D /* CombineFutureIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineFutureIntegrationTests.swift; sourceTree = "<group>"; };
 		1D81B1592677EDE600EEC34D /* CombinePublisherIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombinePublisherIntegrationTests.swift; sourceTree = "<group>"; };
 		1DA5DD0526764810002448E3 /* RandomLettersAsyncViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomLettersAsyncViewModel.swift; sourceTree = "<group>"; };
+		1DCF5F4E27EF462E0066E841 /* GH51Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GH51Tests.swift; sourceTree = "<group>"; };
 		1D91395026C7F04C00A50CDC /* CompilerIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompilerIntegrationTests.swift; sourceTree = "<group>"; };
 		1DF1A66B2671448500945FF9 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		1DF1A66E2671494800945FF9 /* NavigationBarTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarTitle.swift; sourceTree = "<group>"; };
@@ -402,6 +407,7 @@
 			children = (
 				1D02C12126C82EE800E2FF60 /* CompilerIntegrationTests.swift */,
 				1D02C12226C82EE800E2FF60 /* TestUtils.swift */,
+				1DCF5F4E27EF462E0066E841 /* GH51Tests.swift */,
 			);
 			path = IntegrationTests;
 			sourceTree = "<group>";
@@ -1172,6 +1178,7 @@
 				1D103F152747FFBB001567CA /* AsyncTestUtils.swift in Sources */,
 				1D4F36BE26E5030400F7C772 /* CompilerIntegrationTests.swift in Sources */,
 				1D4F36C126E5031200F7C772 /* AsyncFunctionIntegrationTests.swift in Sources */,
+				1DCF5F5127EF462E0066E841 /* GH51Tests.swift in Sources */,
 				1D63BF6426E3E247003363BE /* CombinePublisherIntegrationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1212,6 +1219,7 @@
 				1D103F162747FFBB001567CA /* AsyncTestUtils.swift in Sources */,
 				1D63BFC726E4F0E2003363BE /* RxSwiftSingleIntegrationTests.swift in Sources */,
 				1D4F36B426E5001500F7C772 /* AsyncFunctionIntegrationTests.swift in Sources */,
+				1DCF5F5227EF462E0066E841 /* GH51Tests.swift in Sources */,
 				1D4F36B826E5002300F7C772 /* AsyncStreamIntegrationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1272,6 +1280,7 @@
 				1D103F132747FFBB001567CA /* AsyncTestUtils.swift in Sources */,
 				1D5DAF862698CA040059D4B8 /* RxSwiftObservableIntegrationTests.swift in Sources */,
 				1D5DAF832698C67D0059D4B8 /* RxSwiftSingleIntegrationTests.swift in Sources */,
+				1DCF5F4F27EF462E0066E841 /* GH51Tests.swift in Sources */,
 				1D810BC526A214020065C740 /* AsyncStreamIntegrationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1289,6 +1298,7 @@
 				1D103F142747FFBB001567CA /* AsyncTestUtils.swift in Sources */,
 				1D5DAF872698CA040059D4B8 /* RxSwiftObservableIntegrationTests.swift in Sources */,
 				1D5DAF842698C67D0059D4B8 /* RxSwiftSingleIntegrationTests.swift in Sources */,
+				1DCF5F5027EF462E0066E841 /* GH51Tests.swift in Sources */,
 				1D810BC626A214020065C740 /* AsyncStreamIntegrationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
