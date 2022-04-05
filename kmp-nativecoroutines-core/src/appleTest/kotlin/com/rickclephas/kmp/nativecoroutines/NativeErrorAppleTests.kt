@@ -8,13 +8,11 @@ import kotlin.test.*
 class NativeErrorAppleTests {
 
     @Test
-    fun ensureMutable() {
+    fun ensureNotFrozen() {
         val exception = RandomException()
         assertFalse(exception.isFrozen, "Exception shouldn't be frozen yet")
         val nsError = exception.asNativeError()
-        // Note: ObjC objects are always considered frozen even though they are still mutable
-        // https://youtrack.jetbrains.com/issue/KT-50379
-        assertTrue(nsError.isFrozen, "NSError should be frozen")
+        assertFalse(nsError.isFrozen, "NSError should be frozen")
         assertFalse(exception.isFrozen, "Exception shouldn't be frozen")
     }
 
