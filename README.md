@@ -91,7 +91,7 @@ pod 'KMPNativeCoroutinesAsync', '<version>'    # Swift 5.5 Async/Await implement
 pod 'KMPNativeCoroutinesCombine', '<version>'  # Combine implementation
 pod 'KMPNativeCoroutinesRxSwift', '<version>'  # RxSwift implementation
 ```
-The version for CocoaPods should not contain the version suffix.
+**Note:** the version for CocoaPods should not contain the Kotlin version suffix (e.g. `-new-mm` or `-kotlin-1.6.0`).
 
 ## Usage
 
