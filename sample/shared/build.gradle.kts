@@ -1,5 +1,7 @@
 plugins {
+    @Suppress("DSL_SCOPE_VIOLATION")
     alias(libs.plugins.kotlin.multiplatform)
+    @Suppress("DSL_SCOPE_VIOLATION")
     alias(libs.plugins.kotlin.plugin.serialization)
     id("com.rickclephas.kmp.nativecoroutines")
 }
