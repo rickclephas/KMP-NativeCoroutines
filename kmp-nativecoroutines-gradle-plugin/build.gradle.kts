@@ -1,9 +1,10 @@
 plugins {
     `java-gradle-plugin`
-    kotlin("jvm")
-    kotlin("kapt")
+    @Suppress("DSL_SCOPE_VIOLATION")
+    alias(libs.plugins.kotlin.jvm)
     `kmp-nativecoroutines-publish`
-    id("com.gradle.plugin-publish") version "0.15.0"
+    @Suppress("DSL_SCOPE_VIOLATION")
+    alias(libs.plugins.gradle.plugin.publish)
 }
 
 val copyVersionTemplate by tasks.registering(Copy::class) {
@@ -42,7 +43,7 @@ gradlePlugin {
 }
 
 dependencies {
-    implementation(Dependencies.Kotlin.gradlePlugin)
+    implementation(libs.kotlin.gradle.plugin)
 }
 
 val sourcesJar by tasks.registering(Jar::class) {

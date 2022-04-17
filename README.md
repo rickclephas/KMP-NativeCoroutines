@@ -83,14 +83,21 @@ dependencies: [
 Or add it in Xcode by going to `File` > `Add Packages...` and providing the URL:
 `https://github.com/rickclephas/KMP-NativeCoroutines.git`.
 
+**Note:** the version for the Swift package should not contain the Kotlin version suffix 
+(e.g. `-new-mm` or `-kotlin-1.6.0`).
+
+**Tip:** If you only need a single implementation you can also use the SPM specific versions with suffixes 
+`-spm-async`, `-spm-combine` and `-spm-rxswift`. 
+
 ### Swift (CocoaPods)
 
 If you use CocoaPods add one or more of the following libraries to your `Podfile`:
 ```ruby
-pod 'KMPNativeCoroutinesAsync'    # Swift 5.5 Async/Await implementation
-pod 'KMPNativeCoroutinesCombine'  # Combine implementation
-pod 'KMPNativeCoroutinesRxSwift'  # RxSwift implementation
+pod 'KMPNativeCoroutinesAsync', '<version>'    # Swift 5.5 Async/Await implementation
+pod 'KMPNativeCoroutinesCombine', '<version>'  # Combine implementation
+pod 'KMPNativeCoroutinesRxSwift', '<version>'  # RxSwift implementation
 ```
+**Note:** the version for CocoaPods should not contain the Kotlin version suffix (e.g. `-new-mm` or `-kotlin-1.6.0`).
 
 ## Usage
 

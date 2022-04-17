@@ -3,9 +3,6 @@ buildscript {
         gradlePluginPortal()
         mavenCentral()
     }
-    dependencies {
-        classpath(Dependencies.Kotlin.gradlePlugin)
-    }
 }
 
 allprojects {
