@@ -1,5 +1,5 @@
 plugins {
-    kotlin("multiplatform")
+    alias(libs.plugins.kotlin.multiplatform)
     `kmp-nativecoroutines-publish`
 }
 
@@ -29,14 +29,14 @@ kotlin {
         }
         val commonMain by getting {
             dependencies {
-                api(Dependencies.Kotlinx.coroutinesCore)
+                api(libs.kotlinx.coroutines.core)
             }
         }
         val commonTest by getting {
             dependencies {
-                implementation(kotlin("test"))
-                implementation(Dependencies.Kotlinx.atomicfu)
-                implementation(Dependencies.Kotlinx.coroutinesTest)
+                implementation(libs.kotlin.test)
+                implementation(libs.kotlinx.atomicfu)
+                implementation(libs.kotlinx.coroutines.test)
             }
         }
         val nativeCoroutinesMain by creating {

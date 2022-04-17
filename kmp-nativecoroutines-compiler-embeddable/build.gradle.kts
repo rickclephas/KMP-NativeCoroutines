@@ -1,10 +1,10 @@
 plugins {
-    kotlin("jvm")
+    alias(libs.plugins.kotlin.jvm)
     `kmp-nativecoroutines-publish`
 }
 
 dependencies {
-    compileOnly(Dependencies.Kotlin.embeddableCompiler)
+    compileOnly(libs.kotlin.compiler.embeddable)
 }
 
 val syncSources by tasks.registering(Sync::class) {

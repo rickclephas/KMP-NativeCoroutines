@@ -1,10 +1,10 @@
 plugins {
-    kotlin("jvm")
+    alias(libs.plugins.kotlin.jvm)
     `kmp-nativecoroutines-publish`
 }
 
 dependencies {
-    compileOnly(Dependencies.Kotlin.compiler)
+    compileOnly(libs.kotlin.compiler)
 }
 
 tasks.compileKotlin.configure {
