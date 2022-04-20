@@ -30,13 +30,13 @@ This library solves both of these limitations 😄.
 [new-mm]: https://github.com/JetBrains/kotlin/blob/0b871d7534a9c8e90fb9ad61cd5345716448d08c/kotlin-native/NEW_MM.md
 [native-mt]: https://github.com/kotlin/kotlinx.coroutines/issues/462
 
-The latest version of the library uses Kotlin version `1.6.20`.  
+The latest version of the library uses Kotlin version `1.6.21`.  
 Compatibility versions for older Kotlin versions are also available:
 
 | Version      | Version suffix  |   Kotlin   |     Coroutines      |
 |--------------|-----------------|:----------:|:-------------------:|
-| _latest_     | -new-mm         |   1.6.20   |        1.6.1        |
-| **_latest_** | **_no suffix_** | **1.6.20** | **1.6.1-native-mt** |
+| _latest_     | -new-mm         |   1.6.21   |        1.6.1        |
+| **_latest_** | **_no suffix_** | **1.6.21** | **1.6.1-native-mt** |
 | 0.11.4       | -new-mm         |   1.6.10   |        1.6.0        |
 | 0.11.4       | _no suffix_     |   1.6.10   |   1.6.0-native-mt   |
 | 0.11.4       | -kotlin-1.6.0   |   1.6.0    |   1.6.0-native-mt   |
