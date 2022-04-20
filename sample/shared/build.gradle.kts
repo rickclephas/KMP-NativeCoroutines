@@ -1,6 +1,8 @@
 plugins {
-    kotlin("multiplatform")
-    kotlin("plugin.serialization")
+    @Suppress("DSL_SCOPE_VIOLATION")
+    alias(libs.plugins.kotlin.multiplatform)
+    @Suppress("DSL_SCOPE_VIOLATION")
+    alias(libs.plugins.kotlin.plugin.serialization)
     id("com.rickclephas.kmp.nativecoroutines")
 }
 
@@ -25,12 +27,12 @@ kotlin {
         }
         val commonMain by getting {
             dependencies {
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.1")
+                implementation(libs.kotlinx.serialization.json)
             }
         }
         val commonTest by getting {
             dependencies {
-                implementation(kotlin("test"))
+                implementation(libs.kotlin.test)
             }
         }
         val appleMain by creating {
