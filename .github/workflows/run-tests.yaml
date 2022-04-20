@@ -19,7 +19,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ macos-11 ]
+        os: [ macos-12 ]
         java: [ 11 ]
         module: [ core ]
     name: ${{ format('{0} ({1}, JDK {2})', matrix.module, matrix.os, matrix.java) }}
@@ -47,8 +47,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ macos-11 ]
-        xcode: [ 13.2 ]
+        os: [ macos-12 ]
+        xcode: [ 13.3.1 ]
         platform: [ iOS, macOS, tvOS, watchOS ]
         implementation: [ Async, Combine, RxSwift ]
     name: ${{ format('{0} {1} ({2}, Xcode {3})', matrix.implementation, matrix.platform, matrix.os, matrix.xcode) }}
@@ -77,8 +77,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ macos-11 ]
-        xcode: [ 13.2 ]
+        os: [ macos-12 ]
+        xcode: [ 13.3.1 ]
         java: [ 11 ]
         platform: [ iOS, macOS, tvOS, watchOS ]
         embeddable-compiler: [ true, false ]
