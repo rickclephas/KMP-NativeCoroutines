@@ -3,7 +3,8 @@ plugins {
     alias(libs.plugins.kotlin.multiplatform)
     @Suppress("DSL_SCOPE_VIOLATION")
     alias(libs.plugins.kotlin.plugin.serialization)
-    id("com.rickclephas.kmp.nativecoroutines")
+    @Suppress("DSL_SCOPE_VIOLATION")
+    alias(libs.plugins.ksp)
 }
 
 version = "1.0"
@@ -28,6 +29,8 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(libs.kotlinx.serialization.json)
+                implementation("com.rickclephas.kmp:kmp-nativecoroutines-annotations")
+                implementation("com.rickclephas.kmp:kmp-nativecoroutines-core")
             }
         }
         val commonTest by getting {
@@ -58,4 +61,8 @@ kotlin {
             }
         }
     }
+}
+
+dependencies {
+    add("kspIosArm64", "com.rickclephas.kmp:kmp-nativecoroutines-ksp")
 }
