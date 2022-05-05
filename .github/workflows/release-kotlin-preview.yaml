@@ -1,0 +1,31 @@
+name: Publish a Kotlin preview release
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+-kotlin-[0-9]+.[0-9]+.[0-9]+-Beta'
+      - 'v[0-9]+.[0-9]+.[0-9]+-new-mm-kotlin-[0-9]+.[0-9]+.[0-9]+-Beta'
+jobs:
+  publish-kotlin-libraries:
+    runs-on: macos-12
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Gradle Wrapper Validation
+        uses: gradle/wrapper-validation-action@v1
+      - name: Setup JDK
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'zulu'
+          java-version: '11'
+      - name: Cache Gradle
+        uses: ./.github/actions/cache-gradle
+      - name: Cache Konan
+        uses: ./.github/actions/cache-konan
+      - name: Publish to Sonatype
+        run: ./gradlew publishAllPublicationsToSonatypeRepository
+        env:
+          SIGNING_KEY_ID: ${{ secrets.SIGNING_KEY_ID }}
+          SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
+          SIGNING_SECRET_KEY: ${{ secrets.SIGNING_SECRET_KEY }}
+          OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
