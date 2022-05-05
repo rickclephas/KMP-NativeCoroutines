@@ -26,7 +26,7 @@ internal fun KotlinType.replaceFunctionGenerics(
         }
         // Only create a new type if something was replaced
         if (typeConstructor == null && !shouldReplaceArguments) return null
-        return KotlinTypeFactory.simpleType(annotations, typeConstructor ?: constructor, arguments, isMarkedNullable)
+        return KotlinTypeFactory.simpleType(attributes, typeConstructor ?: constructor, arguments, isMarkedNullable)
     }
     return this.replaceFunctionGenerics() ?: this
 }
