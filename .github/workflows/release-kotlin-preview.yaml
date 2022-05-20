@@ -4,6 +4,8 @@ on:
     tags:
       - 'v[0-9]+.[0-9]+.[0-9]+-kotlin-[0-9]+.[0-9]+.[0-9]+-Beta'
       - 'v[0-9]+.[0-9]+.[0-9]+-new-mm-kotlin-[0-9]+.[0-9]+.[0-9]+-Beta'
+      - 'v[0-9]+.[0-9]+.[0-9]+-kotlin-[0-9]+.[0-9]+.[0-9]+-RC'
+      - 'v[0-9]+.[0-9]+.[0-9]+-new-mm-kotlin-[0-9]+.[0-9]+.[0-9]+-RC'
 jobs:
   publish-kotlin-libraries:
     runs-on: macos-12
