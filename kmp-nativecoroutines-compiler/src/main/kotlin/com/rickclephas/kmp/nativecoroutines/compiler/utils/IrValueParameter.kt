@@ -33,9 +33,9 @@ private fun IrValueParameter.hasSameTypeAs(other: IrValueParameter): Boolean {
             if (this !is IrSimpleType || other !is IrSimpleType)
                 return this == other
             // else run the same code from the equals check except for the arguments
-            // https://github.com/JetBrains/kotlin/blob/486c6b3c15dfa245693c3df2c58c8353d75deddb/compiler/ir/ir.tree/src/org/jetbrains/kotlin/ir/types/impl/IrSimpleTypeImpl.kt#L26
+            // https://github.com/JetBrains/kotlin/blob/01a24fdc0821a5c598a9bbd54774198730c044bd/compiler/ir/ir.tree/src/org/jetbrains/kotlin/ir/types/impl/IrSimpleTypeImpl.kt#L27
             if (!FqNameEqualityChecker.areEqual(this.classifier, other.classifier) ||
-                hasQuestionMark != other.hasQuestionMark || arguments.size != other.arguments.size)
+                nullability != other.nullability || arguments.size != other.arguments.size)
                 return false
             // Check if the arguments are the same
             for (i in arguments.indices) {
