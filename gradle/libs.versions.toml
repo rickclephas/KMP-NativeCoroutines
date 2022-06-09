@@ -1,6 +1,6 @@
 [versions]
 kotlin = "1.7.0"
-kotlinx-coroutines = "1.6.1"
+kotlinx-coroutines = "1.6.2"
 
 [libraries]
 kotlin-compiler = { module = "org.jetbrains.kotlin:kotlin-compiler", version.ref = "kotlin" }
