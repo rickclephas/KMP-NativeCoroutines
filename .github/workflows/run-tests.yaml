@@ -113,7 +113,7 @@ jobs:
       - name: Set kotlin.native.useEmbeddableCompilerJar
         env:
           KOTLIN_NATIVE_EMBEDDABLE_COMPILER: ${{ matrix.embeddable-compiler }}
-        run: echo "kotlin.native.useEmbeddableCompilerJar=KOTLIN_NATIVE_EMBEDDABLE_COMPILER" >> gradle.properties
+        run: echo "kotlin.native.useEmbeddableCompilerJar=$KOTLIN_NATIVE_EMBEDDABLE_COMPILER" >> gradle.properties
       - name: Run tests
         env:
           XCODEBUILD_SCHEME: ${{ env[format('XCODEBUILD_SCHEME_{0}', matrix.platform)] }}
