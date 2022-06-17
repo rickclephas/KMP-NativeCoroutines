@@ -12,7 +12,7 @@ jobs:
       - name: Setup Xcode
         uses: maxim-lobanov/setup-xcode@v1
         with:
-          xcode-version: '13.3.1'
+          xcode-version: '13.4.1'
       - name: Publish KMPNativeCoroutinesCore
         run: pod trunk push KMPNativeCoroutinesCore.podspec --synchronous
         env:
@@ -26,7 +26,7 @@ jobs:
       - name: Setup Xcode
         uses: maxim-lobanov/setup-xcode@v1
         with:
-          xcode-version: '13.3.1'
+          xcode-version: '13.4.1'
       - name: Publish KMPNativeCoroutinesAsync
         run: pod trunk push KMPNativeCoroutinesAsync.podspec --synchronous
         env:
@@ -52,7 +52,7 @@ jobs:
       - name: Setup Xcode
         uses: maxim-lobanov/setup-xcode@v1
         with:
-          xcode-version: '13.3.1'
+          xcode-version: '13.4.1'
       - name: Publish KMPNativeCoroutinesCombine
         run: pod trunk push KMPNativeCoroutinesCombine.podspec --synchronous
         env:
@@ -78,7 +78,7 @@ jobs:
       - name: Setup Xcode
         uses: maxim-lobanov/setup-xcode@v1
         with:
-          xcode-version: '13.3.1'
+          xcode-version: '13.4.1'
       - name: Publish KMPNativeCoroutinesRxSwift
         run: pod trunk push KMPNativeCoroutinesRxSwift.podspec --synchronous
         env:
