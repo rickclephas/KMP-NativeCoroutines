@@ -7,7 +7,7 @@ buildscript {
 
 allprojects {
     group = "com.rickclephas.kmp"
-    version = "0.12.4"
+    version = "0.12.4-new-mm"
 
     repositories {
         mavenCentral()
