@@ -1,6 +1,7 @@
 package com.rickclephas.kmp.nativecoroutines.sample.utils
 
-// IntelliJ can't find it, but it's there :)
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.initMainThread
 
+@OptIn(ExperimentalCoroutinesApi::class)
 fun initCoroutinesFromMainThread() = initMainThread()
