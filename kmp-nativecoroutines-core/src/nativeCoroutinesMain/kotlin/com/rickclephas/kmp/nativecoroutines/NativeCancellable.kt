@@ -13,4 +13,4 @@ typealias NativeCancellable = () -> Unit
  * The returned cancellable will cancel the job without a cause.
  * @see Job.cancel
  */
-internal inline fun Job.asNativeCancellable(): NativeCancellable = { cancel() }.freeze()
+internal inline fun Job.asNativeCancellable(): NativeCancellable = { cancel() }

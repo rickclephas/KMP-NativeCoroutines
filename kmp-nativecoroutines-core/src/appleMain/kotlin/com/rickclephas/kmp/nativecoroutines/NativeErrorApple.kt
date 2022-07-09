@@ -4,7 +4,6 @@ import kotlinx.cinterop.UnsafeNumber
 import kotlinx.cinterop.convert
 import platform.Foundation.NSError
 import platform.Foundation.NSLocalizedDescriptionKey
-import kotlin.native.concurrent.freeze
 
 actual typealias NativeError = NSError
 
@@ -19,7 +18,7 @@ actual typealias NativeError = NSError
 @OptIn(UnsafeNumber::class)
 internal actual fun Throwable.asNativeError(): NativeError {
     val userInfo = mutableMapOf<Any?, Any>()
-    userInfo["KotlinException"] = this.freeze()
+    userInfo["KotlinException"] = this
     val message = message
     if (message != null) {
         userInfo[NSLocalizedDescriptionKey] = message

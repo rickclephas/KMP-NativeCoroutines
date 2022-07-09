@@ -11,10 +11,6 @@ import NativeCoroutinesSampleShared
 
 class AsyncResultIntegrationTests: XCTestCase {
     
-    override func setUp() {
-        CoroutinesAppleKt.doInitCoroutinesFromMainThread()
-    }
-    
     func testValueReceived() async {
         let integrationTests = SuspendIntegrationTests()
         let sendValue = randomInt()

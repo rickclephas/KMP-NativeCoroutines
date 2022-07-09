@@ -12,11 +12,11 @@ class NativeSuspendAppleTests {
     }
 
     @Test
-    fun ensureFrozen() {
+    fun ensureNotFrozen() {
         val value = RandomValue()
         assertFalse(value.isFrozen, "Value shouldn't be frozen yet")
         val nativeSuspend = nativeSuspend { delayAndReturn(0, value) }
-        assertTrue(nativeSuspend.isFrozen, "NativeSuspend should be frozen")
-        assertTrue(value.isFrozen, "Value should be frozen")
+        assertFalse(nativeSuspend.isFrozen, "NativeSuspend shouldn't be frozen")
+        assertFalse(value.isFrozen, "Value shouldn't be frozen")
     }
 }

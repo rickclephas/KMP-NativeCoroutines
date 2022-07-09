@@ -8,12 +8,12 @@ import kotlin.test.*
 class NativeErrorAppleTests {
 
     @Test
-    fun ensureFrozen() {
+    fun ensureNotFrozen() {
         val exception = RandomException()
         assertFalse(exception.isFrozen, "Exception shouldn't be frozen yet")
         val nsError = exception.asNativeError()
-        assertTrue(nsError.isFrozen, "NSError should be frozen")
-        assertTrue(exception.isFrozen, "Exception should be frozen")
+        assertFalse(nsError.isFrozen, "NSError should be frozen")
+        assertFalse(exception.isFrozen, "Exception shouldn't be frozen")
     }
 
     @Test
