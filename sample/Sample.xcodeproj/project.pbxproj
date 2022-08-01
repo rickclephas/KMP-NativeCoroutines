@@ -153,6 +153,10 @@
 		1DF1A67626714FBD00945FF9 /* RandomLettersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF1A67426714FBD00945FF9 /* RandomLettersView.swift */; };
 		1DF1A6782671535200945FF9 /* RandomLettersCombineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF1A6772671535200945FF9 /* RandomLettersCombineViewModel.swift */; };
 		1DF1A6792671535200945FF9 /* RandomLettersCombineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF1A6772671535200945FF9 /* RandomLettersCombineViewModel.swift */; };
+		1DF2860027370061004DD6D2 /* NewMemoryModelIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF285FF27370061004DD6D2 /* NewMemoryModelIntegrationTests.swift */; };
+		1DF2860127370061004DD6D2 /* NewMemoryModelIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF285FF27370061004DD6D2 /* NewMemoryModelIntegrationTests.swift */; };
+		1DF2860227370061004DD6D2 /* NewMemoryModelIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF285FF27370061004DD6D2 /* NewMemoryModelIntegrationTests.swift */; };
+		1DF2860327370061004DD6D2 /* NewMemoryModelIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF285FF27370061004DD6D2 /* NewMemoryModelIntegrationTests.swift */; };
 		1DF82A77267939F70024886B /* SwiftUIAsyncTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF82A76267939F70024886B /* SwiftUIAsyncTest.swift */; };
 		1DF82A78267939F70024886B /* SwiftUIAsyncTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF82A76267939F70024886B /* SwiftUIAsyncTest.swift */; };
 		1DFC3602268A316D008393FA /* AsyncResultIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFC35FF268A3148008393FA /* AsyncResultIntegrationTests.swift */; };
@@ -292,6 +296,7 @@
 		1DF1A67126714EEC00945FF9 /* RandomLettersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomLettersViewModel.swift; sourceTree = "<group>"; };
 		1DF1A67426714FBD00945FF9 /* RandomLettersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomLettersView.swift; sourceTree = "<group>"; };
 		1DF1A6772671535200945FF9 /* RandomLettersCombineViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomLettersCombineViewModel.swift; sourceTree = "<group>"; };
+		1DF285FF27370061004DD6D2 /* NewMemoryModelIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMemoryModelIntegrationTests.swift; sourceTree = "<group>"; };
 		1DF82A76267939F70024886B /* SwiftUIAsyncTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIAsyncTest.swift; sourceTree = "<group>"; };
 		1DFC35FF268A3148008393FA /* AsyncResultIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncResultIntegrationTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -408,6 +413,7 @@
 				1D02C12126C82EE800E2FF60 /* CompilerIntegrationTests.swift */,
 				1D02C12226C82EE800E2FF60 /* TestUtils.swift */,
 				1DCF5F4E27EF462E0066E841 /* GH51Tests.swift */,
+				1DF285FF27370061004DD6D2 /* NewMemoryModelIntegrationTests.swift */,
 			);
 			path = IntegrationTests;
 			sourceTree = "<group>";
@@ -1172,6 +1178,7 @@
 				1D4F36C326E5031D00F7C772 /* AsyncResultIntegrationTests.swift in Sources */,
 				1D63BF6326E3E244003363BE /* CombineFutureIntegrationTests.swift in Sources */,
 				1D63BF6826E3E252003363BE /* RxSwiftObservableIntegrationTests.swift in Sources */,
+				1DF2860227370061004DD6D2 /* NewMemoryModelIntegrationTests.swift in Sources */,
 				1D63BF6726E3E24F003363BE /* RxSwiftSingleIntegrationTests.swift in Sources */,
 				1D4F36C526E5032400F7C772 /* AsyncStreamIntegrationTests.swift in Sources */,
 				1D4F36BF26E5030600F7C772 /* TestUtils.swift in Sources */,
@@ -1214,6 +1221,9 @@
 				1D4F36BC26E500B800F7C772 /* CompilerIntegrationTests.swift in Sources */,
 				1D4F36BD26E500BA00F7C772 /* TestUtils.swift in Sources */,
 				1D63BFC326E4F0D5003363BE /* CombineFutureIntegrationTests.swift in Sources */,
+				1D63BFBF26E4F0C6003363BE /* CompilerIntegrationTests.swift in Sources */,
+				1DF2860327370061004DD6D2 /* NewMemoryModelIntegrationTests.swift in Sources */,
+				1D63BFC026E4F0CA003363BE /* TestUtils.swift in Sources */,
 				1D63BFC826E4F0E5003363BE /* RxSwiftObservableIntegrationTests.swift in Sources */,
 				1D63BFC426E4F0D8003363BE /* CombinePublisherIntegrationTests.swift in Sources */,
 				1D103F162747FFBB001567CA /* AsyncTestUtils.swift in Sources */,
@@ -1277,6 +1287,7 @@
 				1D02C12526C82EE800E2FF60 /* TestUtils.swift in Sources */,
 				1D0CA84D2677F6DB0000D612 /* AsyncFunctionIntegrationTests.swift in Sources */,
 				1D81B15A2677EDE600EEC34D /* CombinePublisherIntegrationTests.swift in Sources */,
+				1DF2860027370061004DD6D2 /* NewMemoryModelIntegrationTests.swift in Sources */,
 				1D103F132747FFBB001567CA /* AsyncTestUtils.swift in Sources */,
 				1D5DAF862698CA040059D4B8 /* RxSwiftObservableIntegrationTests.swift in Sources */,
 				1D5DAF832698C67D0059D4B8 /* RxSwiftSingleIntegrationTests.swift in Sources */,
@@ -1295,6 +1306,7 @@
 				1D02C12626C82EE800E2FF60 /* TestUtils.swift in Sources */,
 				1D0CA84E2677F6DB0000D612 /* AsyncFunctionIntegrationTests.swift in Sources */,
 				1D81B15B2677EDE600EEC34D /* CombinePublisherIntegrationTests.swift in Sources */,
+				1DF2860127370061004DD6D2 /* NewMemoryModelIntegrationTests.swift in Sources */,
 				1D103F142747FFBB001567CA /* AsyncTestUtils.swift in Sources */,
 				1D5DAF872698CA040059D4B8 /* RxSwiftObservableIntegrationTests.swift in Sources */,
 				1D5DAF842698C67D0059D4B8 /* RxSwiftSingleIntegrationTests.swift in Sources */,
