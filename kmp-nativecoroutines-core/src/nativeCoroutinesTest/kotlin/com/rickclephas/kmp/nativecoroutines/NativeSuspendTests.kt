@@ -1,8 +1,11 @@
 package com.rickclephas.kmp.nativecoroutines
 
 import kotlinx.coroutines.*
+import kotlinx.coroutines.test.advanceUntilIdle
+import kotlinx.coroutines.test.runTest
 import kotlin.test.*
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class NativeSuspendTests {
 
     private suspend fun delayAndReturn(delay: Long, value: RandomValue): RandomValue {
@@ -27,7 +30,7 @@ class NativeSuspendTests {
         }, { _, _ ->
             receivedErrorCount++
         })
-        runCurrent()
+        advanceUntilIdle()
         assertEquals(1, receivedResultCount, "Result callback should be called once")
         assertEquals(0, receivedErrorCount, "Error callback shouldn't be called")
     }
@@ -46,7 +49,7 @@ class NativeSuspendTests {
             assertSame(exception, kotlinException, "Kotlin exception should be the same exception")
             receivedErrorCount++
         })
-        runCurrent()
+        advanceUntilIdle()
         assertEquals(1, receivedErrorCount, "Error callback should be called once")
         assertEquals(0, receivedResultCount, "Result callback shouldn't be called")
     }
@@ -66,7 +69,7 @@ class NativeSuspendTests {
         })
         delay(100) // Gives the function some time to start
         cancel()
-        runCurrent()
+        advanceUntilIdle()
         assertEquals(1, receivedErrorCount, "Error callback should be called once")
         assertEquals(0, receivedResultCount, "Result callback shouldn't be called")
     }
