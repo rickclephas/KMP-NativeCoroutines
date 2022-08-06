@@ -17,7 +17,7 @@
                BlueprintIdentifier = "1D63BF7526E4F006003363BE"
                BuildableName = "watchOS App WatchKit App.app"
                BlueprintName = "watchOS App WatchKit App"
-               ReferencedContainer = "container:Sample.xcodeproj">
+               ReferencedContainer = "container:KMPNativeCoroutinesSample.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -31,7 +31,7 @@
                BlueprintIdentifier = "1D63BF7226E4F006003363BE"
                BuildableName = "watchOS App.app"
                BlueprintName = "watchOS App"
-               ReferencedContainer = "container:Sample.xcodeproj">
+               ReferencedContainer = "container:KMPNativeCoroutinesSample.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -64,7 +64,7 @@
             BlueprintIdentifier = "1D63BF7526E4F006003363BE"
             BuildableName = "watchOS App WatchKit App.app"
             BlueprintName = "watchOS App WatchKit App"
-            ReferencedContainer = "container:Sample.xcodeproj">
+            ReferencedContainer = "container:KMPNativeCoroutinesSample.xcodeproj">
          </BuildableReference>
       </RemoteRunnable>
    </LaunchAction>
@@ -84,7 +84,7 @@
             BlueprintIdentifier = "1D63BF7526E4F006003363BE"
             BuildableName = "watchOS App WatchKit App.app"
             BlueprintName = "watchOS App WatchKit App"
-            ReferencedContainer = "container:Sample.xcodeproj">
+            ReferencedContainer = "container:KMPNativeCoroutinesSample.xcodeproj">
          </BuildableReference>
       </RemoteRunnable>
       <MacroExpansion>
@@ -93,7 +93,7 @@
             BlueprintIdentifier = "1D63BF7526E4F006003363BE"
             BuildableName = "watchOS App WatchKit App.app"
             BlueprintName = "watchOS App WatchKit App"
-            ReferencedContainer = "container:Sample.xcodeproj">
+            ReferencedContainer = "container:KMPNativeCoroutinesSample.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>
