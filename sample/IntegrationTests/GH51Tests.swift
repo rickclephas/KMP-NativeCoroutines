@@ -15,22 +15,22 @@ class GH51Tests: XCTestCase {
         let interfaceC = InterfaceCImpl()
         let valueExpectation = expectation(description: "Waiting for value")
         let sendValue = randomInt()
-        _ = interfaceC.fooNative(value: sendValue)({ value, unit in
+        _ = interfaceC.fooNative(value: sendValue)({ value, next, _ in
             XCTAssertEqual(value.int32Value, sendValue, "Received incorrect value")
             valueExpectation.fulfill()
-            return unit
-        }, { _, unit in unit })
+            return next()
+        }, { _, unit in unit }, { _, unit in unit })
         wait(for: [valueExpectation], timeout: 2)
     }
     
     func testInterfaceCImplBar() {
         let interfaceC = InterfaceCImpl()
         let valueExpectation = expectation(description: "Waiting for value")
-        _ = interfaceC.barNative({ value, unit in
+        _ = interfaceC.barNative({ value, next, _ in
             XCTAssertEqual(value, 1, "Received incorrect value")
             valueExpectation.fulfill()
-            return unit
-        }, { _, unit in unit })
+            return next()
+        }, { _, unit in unit }, { _, unit in unit })
         wait(for: [valueExpectation], timeout: 2)
     }
     
@@ -38,22 +38,22 @@ class GH51Tests: XCTestCase {
         let classC = ClassCImpl()
         let valueExpectation = expectation(description: "Waiting for value")
         let sendValue = randomInt()
-        _ = classC.fooNative(value: sendValue)({ value, unit in
+        _ = classC.fooNative(value: sendValue)({ value, next, _ in
             XCTAssertEqual(value.int32Value, sendValue, "Received incorrect value")
             valueExpectation.fulfill()
-            return unit
-        }, { _, unit in unit })
+            return next()
+        }, { _, unit in unit }, { _, unit in unit })
         wait(for: [valueExpectation], timeout: 2)
     }
     
     func testClassCImplBar() {
         let classC = ClassCImpl()
         let valueExpectation = expectation(description: "Waiting for value")
-        _ = classC.barNative({ value, unit in
+        _ = classC.barNative({ value, next, _ in
             XCTAssertEqual(value, 1, "Received incorrect value")
             valueExpectation.fulfill()
-            return unit
-        }, { _, unit in unit })
+            return next()
+        }, { _, unit in unit }, { _, unit in unit })
         wait(for: [valueExpectation], timeout: 2)
     }
 }
