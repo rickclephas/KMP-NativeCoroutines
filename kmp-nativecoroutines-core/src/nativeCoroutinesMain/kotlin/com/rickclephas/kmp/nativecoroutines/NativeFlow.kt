@@ -54,5 +54,5 @@ fun <T> Flow<T>.asNativeFlow(scope: CoroutineScope? = null): NativeFlow<T> {
             onCancelled(cause.asNativeError())
         }
         return@collect job.asNativeCancellable()
-    }).freeze()
+    })
 }

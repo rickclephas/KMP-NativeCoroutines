@@ -44,5 +44,5 @@ fun <T> nativeSuspend(scope: CoroutineScope? = null, block: suspend () -> T): Na
             onCancelled(cause.asNativeError())
         }
         return@collect job.asNativeCancellable()
-    }).freeze()
+    })
 }

@@ -1,15 +1,16 @@
 plugins {
-    kotlin("jvm")
+    @Suppress("DSL_SCOPE_VIOLATION")
+    alias(libs.plugins.kotlin.jvm)
     `kmp-nativecoroutines-publish`
 }
 
 dependencies {
-    compileOnly(Dependencies.Kotlin.embeddableCompiler)
+    compileOnly(libs.kotlin.compiler.embeddable)
 }
 
 val syncSources by tasks.registering(Sync::class) {
-    from(project(":kmp-nativecoroutines-compiler").sourceSets.main.get().allSource)
-    into("src/main/kotlin")
+    from(project(":kmp-nativecoroutines-compiler").files("src/main"))
+    into("src/main")
     filter {
         when (it) {
             "import com.intellij.mock.MockProject" -> "import org.jetbrains.kotlin.com.intellij.mock.MockProject"

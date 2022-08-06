@@ -72,9 +72,11 @@ publishing {
     }
 }
 
-signing {
-    getExtraString("signing.secretKey")?.let { secretKey ->
-        useInMemoryPgpKeys(getExtraString("signing.keyId"), secretKey, getExtraString("signing.password"))
+getExtraString("signing.keyId")?.let { keyId ->
+    signing {
+        getExtraString("signing.secretKey")?.let { secretKey ->
+            useInMemoryPgpKeys(keyId, secretKey, getExtraString("signing.password"))
+        }
+        sign(publishing.publications)
     }
-    sign(publishing.publications)
 }
