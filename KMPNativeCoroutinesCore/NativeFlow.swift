@@ -7,7 +7,7 @@
 
 /// A function that collects a Kotlin coroutines Flow via callbacks.
 ///
-/// The function takes an `onItem` and `onComplete` callback
+/// The function takes an `onItem`, `onComplete` and `onCancelled` callback
 /// and returns a cancellable that can be used to cancel the collection.
 public typealias NativeFlow<Output, Failure: Error, Unit> = (
     _ onItem: @escaping NativeCallback2<Output, () -> Unit, Unit>,

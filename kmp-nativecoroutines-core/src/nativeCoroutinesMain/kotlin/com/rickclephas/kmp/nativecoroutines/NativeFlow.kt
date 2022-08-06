@@ -11,7 +11,7 @@ import kotlin.coroutines.suspendCoroutine
 /**
  * A function that collects a [Flow] via callbacks.
  *
- * The function takes an `onItem` and `onComplete` callback
+ * The function takes an `onItem`, `onComplete` and `onCancelled` callback
  * and returns a cancellable that can be used to cancel the collection.
  */
 typealias NativeFlow<T> = (

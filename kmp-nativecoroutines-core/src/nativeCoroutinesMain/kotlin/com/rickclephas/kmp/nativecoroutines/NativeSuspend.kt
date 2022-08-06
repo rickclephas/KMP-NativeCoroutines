@@ -7,7 +7,7 @@ import kotlinx.coroutines.launch
 /**
  * A function that awaits a suspend function via callbacks.
  *
- * The function takes an `onResult` and `onError` callback
+ * The function takes an `onResult`, `onError` and `onCancelled` callback
  * and returns a cancellable that can be used to cancel the suspend function.
  */
 typealias NativeSuspend<T> = (
