@@ -3,8 +3,11 @@ package com.rickclephas.kmp.nativecoroutines
 import kotlinx.atomicfu.atomic
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.test.advanceUntilIdle
+import kotlinx.coroutines.test.runTest
 import kotlin.test.*
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class NativeFlowTests {
 
     @Test
@@ -16,7 +19,7 @@ class NativeFlowTests {
             assertNull(error, "Flow should complete without an error")
             completionCount.incrementAndGet()
         })
-        runCurrent()
+        advanceUntilIdle()
         assertEquals(1, completionCount.value, "Completion callback should be called once")
     }
 
@@ -32,7 +35,7 @@ class NativeFlowTests {
             assertSame(exception, kotlinException, "Kotlin exception should be the same exception")
             completionCount.incrementAndGet()
         })
-        runCurrent()
+        advanceUntilIdle()
         assertEquals(1, completionCount.value, "Completion callback should be called once")
     }
 
@@ -46,7 +49,7 @@ class NativeFlowTests {
             assertSame(values[receivedValueCount.value], value, "Received incorrect value")
             receivedValueCount.incrementAndGet()
         }, { _, _ -> })
-        runCurrent()
+        advanceUntilIdle()
         assertEquals(
             values.size,
             receivedValueCount.value,
@@ -67,7 +70,7 @@ class NativeFlowTests {
         })
         delay(100) // Gives the collection some time to start
         cancel()
-        runCurrent()
+        advanceUntilIdle()
         assertEquals(1, completionCount.value, "Completion callback should be called once")
     }
 }
