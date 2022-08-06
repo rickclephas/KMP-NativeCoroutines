@@ -35,7 +35,7 @@ fun <T> Flow<T>.asNativeFlow(scope: CoroutineScope? = null): NativeFlow<T> {
         val job = coroutineScope.launch {
             try {
                 collect {
-                    suspendCoroutine<Unit> { cont ->
+                    suspendCoroutine { cont ->
                         onItem(it) { cont.resume(Unit) }
                     }
                 }

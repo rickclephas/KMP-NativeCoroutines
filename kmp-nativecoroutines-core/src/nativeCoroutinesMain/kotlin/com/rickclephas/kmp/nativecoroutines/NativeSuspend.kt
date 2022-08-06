@@ -20,7 +20,7 @@ typealias NativeSuspend<T> = (
  * Creates a [NativeSuspend] for the provided suspend [block].
  *
  * @param scope the [CoroutineScope] to run the [block] in, or `null` to use the [defaultCoroutineScope].
- * @param block the suspend block to await.
+ * @param block the suspend-block to await.
  */
 fun <T> nativeSuspend(scope: CoroutineScope? = null, block: suspend () -> T): NativeSuspend<T> {
     val coroutineScope = scope ?: defaultCoroutineScope
