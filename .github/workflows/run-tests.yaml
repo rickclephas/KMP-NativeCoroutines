@@ -120,6 +120,6 @@ jobs:
           XCODEBUILD_DESTINATION: ${{ env[format('XCODEBUILD_DESTINATION_{0}', matrix.platform)] }}
         run: >-
           xcodebuild test
-          -project Sample.xcodeproj
+          -project KMPNativeCoroutinesSample.xcodeproj
           -scheme "$XCODEBUILD_SCHEME"
           -destination "$XCODEBUILD_DESTINATION"

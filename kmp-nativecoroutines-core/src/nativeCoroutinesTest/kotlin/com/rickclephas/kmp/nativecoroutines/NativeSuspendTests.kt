@@ -2,8 +2,11 @@ package com.rickclephas.kmp.nativecoroutines
 
 import kotlinx.atomicfu.atomic
 import kotlinx.coroutines.*
+import kotlinx.coroutines.test.advanceUntilIdle
+import kotlinx.coroutines.test.runTest
 import kotlin.test.*
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class NativeSuspendTests {
 
     private suspend fun delayAndReturn(delay: Long, value: RandomValue): RandomValue {
@@ -31,7 +34,7 @@ class NativeSuspendTests {
         }, { _, _ ->
             receivedCancellationCount.incrementAndGet()
         })
-        runCurrent()
+        advanceUntilIdle()
         assertEquals(1, receivedResultCount.value, "Result callback should be called once")
         assertEquals(0, receivedErrorCount.value, "Error callback shouldn't be called")
         assertEquals(0, receivedCancellationCount.value, "Cancellation callback shouldn't be called")
@@ -54,7 +57,7 @@ class NativeSuspendTests {
         }, { _, _ ->
             receivedCancellationCount.incrementAndGet()
         })
-        runCurrent()
+        advanceUntilIdle()
         assertEquals(1, receivedErrorCount.value, "Error callback should be called once")
         assertEquals(0, receivedResultCount.value, "Result callback shouldn't be called")
         assertEquals(0, receivedCancellationCount.value, "Cancellation callback shouldn't be called")
@@ -78,7 +81,7 @@ class NativeSuspendTests {
         })
         delay(100) // Gives the function some time to start
         cancel()
-        runCurrent()
+        advanceUntilIdle()
         assertEquals(1, receivedCancellationCount.value, "Cancellation callback should be called once")
         assertEquals(0, receivedErrorCount.value, "Error callback shouldn't be called")
         assertEquals(0, receivedResultCount.value, "Result callback shouldn't be called")

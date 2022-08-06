@@ -3,8 +3,11 @@ package com.rickclephas.kmp.nativecoroutines
 import kotlinx.atomicfu.atomic
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.test.advanceUntilIdle
+import kotlinx.coroutines.test.runTest
 import kotlin.test.*
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class NativeFlowTests {
 
     @Test
@@ -19,7 +22,7 @@ class NativeFlowTests {
         }, { _, _ ->
             cancellationCount.incrementAndGet()
         })
-        runCurrent()
+        advanceUntilIdle()
         assertEquals(1, completionCount.value, "Completion callback should be called once")
         assertEquals(0, cancellationCount.value, "Cancellation callback shouldn't be called")
     }
@@ -39,7 +42,7 @@ class NativeFlowTests {
         }, { _, _ ->
             cancellationCount.incrementAndGet()
         })
-        runCurrent()
+        advanceUntilIdle()
         assertEquals(1, completionCount.value, "Completion callback should be called once")
         assertEquals(0, cancellationCount.value, "Cancellation callback shouldn't be called")
     }
@@ -55,7 +58,7 @@ class NativeFlowTests {
             receivedValueCount.incrementAndGet()
             next()
         }, { _, _ -> }, { _, _ -> })
-        runCurrent()
+        advanceUntilIdle()
         assertEquals(
             values.size,
             receivedValueCount.value,
@@ -79,7 +82,7 @@ class NativeFlowTests {
         })
         delay(100) // Gives the collection some time to start
         cancel()
-        runCurrent()
+        advanceUntilIdle()
         assertEquals(1, cancellationCount.value, "Cancellation callback should be called once")
         assertEquals(0, completionCount.value, "Completion callback shouldn't be called")
     }
