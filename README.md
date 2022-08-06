@@ -10,7 +10,7 @@ The most important limitation is cancellation support.
 Kotlin suspend functions are exposed to Swift as functions with a completion handler.  
 This allows you to easily use them from your Swift code, but it doesn't support cancellation.
 
-> While Swift 5.5 brings async functions to Swift, it doesn't solve this issue.  
+> **Note**: while Swift 5.5 brings async functions to Swift, it doesn't solve this issue.  
 > For interoperability with ObjC all functions with a completion handler can be called like an async function.  
 > This means starting with Swift 5.5 your Kotlin suspend functions will look like Swift async functions.  
 > But that's just syntactic sugar, so there's still no cancellation support.
@@ -22,7 +22,7 @@ This library solves both of these limitations 😄.
 
 ## Compatibility
 
-> **NOTE:** at the moment the [new Kotlin Native memory model][new-mm] is still experimental.  
+> **Note**: at the moment the [new Kotlin Native memory model][new-mm] is still experimental.  
 > The regular versions of this library are therefore currently using the [`-native-mt`][native-mt] versions 
 > of the kotlinx.coroutines library.  
 > If you would like to try the new memory model, please use the `-new-mm` versions instead.
@@ -83,11 +83,11 @@ dependencies: [
 Or add it in Xcode by going to `File` > `Add Packages...` and providing the URL:
 `https://github.com/rickclephas/KMP-NativeCoroutines.git`.
 
-**Note:** the version for the Swift package should not contain the Kotlin version suffix 
-(e.g. `-new-mm` or `-kotlin-1.6.0`).
+> **Note**: the version for the Swift package should not contain the Kotlin version suffix
+> (e.g. `-new-mm` or `-kotlin-1.6.0`).
 
-**Tip:** If you only need a single implementation you can also use the SPM specific versions with suffixes 
-`-spm-async`, `-spm-combine` and `-spm-rxswift`. 
+> **Note**: if you only need a single implementation you can also use the SPM specific versions with suffixes
+> `-spm-async`, `-spm-combine` and `-spm-rxswift`.
 
 ### Swift (CocoaPods)
 
@@ -97,7 +97,7 @@ pod 'KMPNativeCoroutinesAsync', '<version>'    # Swift 5.5 Async/Await implement
 pod 'KMPNativeCoroutinesCombine', '<version>'  # Combine implementation
 pod 'KMPNativeCoroutinesRxSwift', '<version>'  # RxSwift implementation
 ```
-**Note:** the version for CocoaPods should not contain the Kotlin version suffix (e.g. `-new-mm` or `-kotlin-1.6.0`).
+> **Note**: the version for CocoaPods should not contain the Kotlin version suffix (e.g. `-new-mm` or `-kotlin-1.6.0`).
 
 ## Usage
 
@@ -106,7 +106,7 @@ Just use the wrapper functions in Swift to get async functions, AsyncStreams, Pu
 
 ### Kotlin
 
-> **WARNING:** The Kotlin part of this library consists of helper functions and a Kotlin compiler plugin.  
+> **Warning**: the Kotlin part of this library consists of helper functions and a Kotlin compiler plugin.  
 > Using the plugin removes the boilerplate code from your project, however **Kotlin compiler plugins aren't stable**!
 > 
 > The plugin is known to cause recursion errors in some scenarios such as in [#4][GH-4] and [#23][GH-23].  
@@ -281,8 +281,8 @@ You can also use the `createPublisher(for:)` function for suspend functions that
 let publisher = createPublisher(for: randomLettersGenerator.getRandomLettersFlowNative())
 ```
 
-**Note:** these functions create deferred `AnyPublisher`s.  
-Meaning every subscription will trigger the collection of the `Flow` or execution of the suspend function.
+> **Note**: these functions create deferred `AnyPublisher`s.  
+> Meaning every subscription will trigger the collection of the `Flow` or execution of the suspend function.
 
 ### RxSwift
 
@@ -331,5 +331,5 @@ You can also use the `createObservable(for:)` function for suspend functions tha
 let observable = createObservable(for: randomLettersGenerator.getRandomLettersFlowNative())
 ```
 
-**Note:** these functions create deferred `Observable`s and `Single`s.  
-Meaning every subscription will trigger the collection of the `Flow` or execution of the suspend function.
+> **Note**: these functions create deferred `Observable`s and `Single`s.  
+> Meaning every subscription will trigger the collection of the `Flow` or execution of the suspend function.
