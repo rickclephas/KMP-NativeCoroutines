@@ -5,10 +5,15 @@ import kotlinx.coroutines.flow.flow
 
 class FlowIntegrationTests: IntegrationTests() {
 
+    private var _emittedCount = 0
+    val emittedCount: Int get() = _emittedCount
+
     fun getFlow(count: Int, delay: Long) = flow {
+        _emittedCount = 0
         repeat(count) {
             delay(delay)
             emit(it)
+            _emittedCount++
         }
     }
 

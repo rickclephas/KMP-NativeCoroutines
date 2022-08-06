@@ -33,6 +33,26 @@ class AsyncSequenceIntegrationTests: XCTestCase {
         await assertJobCompleted(integrationTests)
     }
     
+    func testValueBackPressure() async {
+        let integrationTests = FlowIntegrationTests()
+        let sendValueCount: Int32 = 10
+        let sequence = asyncSequence(for: integrationTests.getFlowNative(count: sendValueCount, delay: 100))
+        do {
+            var receivedValueCount: Int32 = 0
+            for try await _ in sequence {
+                let emittedCount = integrationTests.emittedCount
+                // Note the AsyncSequence buffers at most a single item
+                XCTAssert(emittedCount == receivedValueCount || emittedCount == receivedValueCount + 1, "Back pressure isn't applied")
+                delay(0.2)
+                receivedValueCount += 1
+            }
+            XCTAssertEqual(receivedValueCount, sendValueCount, "Should have received all values")
+        } catch {
+            XCTFail("Sequence should complete without an error")
+        }
+        await assertJobCompleted(integrationTests)
+    }
+    
     func testNilValueReceived() async {
         let integrationTests = FlowIntegrationTests()
         let sendValueCount = randomInt(min: 5, max: 20)
