@@ -1,0 +1,83 @@
+package com.rickclephas.kmp.nativecoroutines.ksp
+
+import com.google.devtools.ksp.symbol.*
+import com.rickclephas.kmp.nativecoroutines.ksp.kotlinpoet.*
+import com.squareup.kotlinpoet.*
+import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
+import com.squareup.kotlinpoet.ksp.*
+
+internal fun KSFunctionDeclaration.toNativeCoroutinesFunSpec(nativeSuffix: String): FunSpec? {
+    val typeParameterResolver = getTypeParameterResolver()
+    val classDeclaration = parentDeclaration as? KSClassDeclaration
+
+    val builder = FunSpec.builder("${simpleName.asString()}$nativeSuffix")
+    docString?.trim()?.let(builder::addKdoc)
+    // TODO: Add function annotations
+    // TODO: Add context receivers once supported
+    builder.addModifiers(KModifier.PUBLIC)
+
+    classDeclaration?.typeParameters?.toTypeVariableNames(typeParameterResolver)?.also(builder::addTypeVariables)
+    builder.addTypeVariables(typeParameters.toTypeVariableNames(typeParameterResolver))
+
+    val extensionReceiver = extensionReceiver
+    var receiverParameter: ParameterSpec? = null
+    if (classDeclaration != null) {
+        builder.receiver(classDeclaration.toTypeName(typeParameterResolver))
+        if (extensionReceiver != null) {
+            val type = extensionReceiver.toTypeName(typeParameterResolver)
+            receiverParameter = ParameterSpec.builder("receiver", type).build().also(builder::addParameter)
+        }
+    } else if (extensionReceiver != null) {
+        builder.receiver(extensionReceiver.toTypeName(typeParameterResolver))
+    }
+    val parameters = parameters.toParameterSpecs(typeParameterResolver)
+    builder.addParameters(parameters)
+
+    val originalReturnType = returnType ?: return null
+    val hasFlowReturnType = false // TODO: Check flow return type
+    val isSuspend = modifiers.contains(Modifier.SUSPEND)
+
+    // Convert the return type
+    var returnType = originalReturnType.toTypeName(typeParameterResolver)
+    if (hasFlowReturnType) {
+        returnType = nativeFlowClassName.parameterizedBy(returnType)
+    }
+    if (isSuspend) {
+        returnType = nativeSuspendClassName.parameterizedBy(returnType)
+    }
+    returnType = returnType.copy(annotations = originalReturnType.annotations.toAnnotationSpecs())
+    builder.returns(returnType)
+
+    // Generate the function body
+    val codeArgs = mutableListOf<Any>()
+    var code = when (classDeclaration) {
+        null -> {
+            val isExtension = extensionReceiver != null
+            codeArgs.add(MemberName(packageName.asString(), simpleName.asString(), isExtension))
+            "%M"
+        }
+        else -> {
+            codeArgs.add(simpleName.asString())
+            "%N"
+        }
+    }
+    codeArgs.addAll(parameters)
+    code += "(${parameters.joinToString { "%N" }})"
+    if (receiverParameter != null) {
+        codeArgs.add(0, runMemberName)
+        codeArgs.add(1, receiverParameter)
+        code = "%M { %N.$code }"
+    }
+    if (hasFlowReturnType) {
+        codeArgs.add(asNativeFlowMemberName)
+        code = "$code.%M()"
+    }
+    if (isSuspend) {
+        codeArgs.add(0, nativeSuspendMemberName)
+        code = "%M { $code }"
+    }
+    code = "return $code"
+    builder.addCode(code, *codeArgs.toTypedArray())
+
+    return builder.build()
+}

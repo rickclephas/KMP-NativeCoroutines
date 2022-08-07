@@ -1,15 +1,62 @@
 package com.rickclephas.kmp.nativecoroutines.ksp
 
-import com.google.devtools.ksp.processing.KSPLogger
-import com.google.devtools.ksp.processing.Resolver
-import com.google.devtools.ksp.processing.SymbolProcessor
-import com.google.devtools.ksp.symbol.KSAnnotated
+import com.google.devtools.ksp.processing.*
+import com.google.devtools.ksp.symbol.*
+import com.google.devtools.ksp.validate
+import com.squareup.kotlinpoet.FileSpec
+import com.squareup.kotlinpoet.ksp.writeTo
 
 internal class KmpNativeCoroutinesSymbolProcessor(
-    private val logger: KSPLogger
+    private val codeGenerator: CodeGenerator,
+    private val logger: KSPLogger,
+    private val nativeSuffix: String
 ): SymbolProcessor {
+
+    private val fileSpecBuilders = mutableMapOf<String, FileSpec.Builder>()
+
+    private fun KSFile.getFileSpecBuilder(): FileSpec.Builder = fileSpecBuilders.getOrPut(filePath) {
+        FileSpec.builder(packageName.asString(), "${fileName.removeSuffix(".kt")}$nativeSuffix")
+    }
+
     override fun process(resolver: Resolver): List<KSAnnotated> {
-        logger.info("KmpNativeCoroutinesSymbolProcessor")
-        return emptyList()
+        val deferredSymbols = mutableListOf<KSAnnotated>()
+        resolver.getSymbolsWithAnnotation(nativeCoroutinesAnnotationName).forEach { symbol ->
+            when (symbol) {
+                is KSPropertyDeclaration -> symbol.takeUnless(::process)?.let(deferredSymbols::add)
+                is KSFunctionDeclaration -> symbol.takeUnless(::process)?.let(deferredSymbols::add)
+                else -> logger.warn("Unsupported symbol type", symbol)
+            }
+        }
+        if (deferredSymbols.isEmpty()) {
+            fileSpecBuilders.forEach { (_, fileSpecBuilder) ->
+                fileSpecBuilder.build().writeTo(codeGenerator, true)
+            }
+            fileSpecBuilders.clear()
+        }
+        return deferredSymbols
+    }
+
+    private fun process(property: KSPropertyDeclaration): Boolean {
+        if (!property.validate()) return false
+        val file = property.containingFile
+        if (file == null) {
+            logger.error("Property isn't contained in a source file", property)
+            return true
+        }
+        val fileSpecBuilder = file.getFileSpecBuilder()
+        // TODO: Convert properties
+        return true
+    }
+
+    private fun process(function: KSFunctionDeclaration): Boolean {
+        if (!function.validate()) return false
+        val file = function.containingFile
+        if (file == null) {
+            logger.error("Function isn't contained in a source file", function)
+            return true
+        }
+        val funSpec = function.toNativeCoroutinesFunSpec(nativeSuffix) ?: return false
+        file.getFileSpecBuilder().addFunction(funSpec)
+        return true
     }
 }
