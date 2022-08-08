@@ -17,7 +17,7 @@ internal fun KSFunctionDeclaration.toNativeCoroutinesFunSpec(nativeSuffix: Strin
     builder.addModifiers(KModifier.PUBLIC)
 
     classDeclaration?.typeParameters?.toTypeVariableNames(typeParameterResolver)?.also(builder::addTypeVariables)
-    builder.addTypeVariables(typeParameters.toTypeVariableNames(typeParameterResolver))
+    val typeParameters = typeParameters.toTypeVariableNames(typeParameterResolver).also(builder::addTypeVariables)
 
     val extensionReceiver = extensionReceiver
     var receiverParameter: ParameterSpec? = null
@@ -30,8 +30,7 @@ internal fun KSFunctionDeclaration.toNativeCoroutinesFunSpec(nativeSuffix: Strin
     } else if (extensionReceiver != null) {
         builder.receiver(extensionReceiver.toTypeName(typeParameterResolver))
     }
-    val parameters = parameters.toParameterSpecs(typeParameterResolver)
-    builder.addParameters(parameters)
+    val parameters = parameters.toParameterSpecs(typeParameterResolver).also(builder::addParameters)
 
     val originalReturnType = returnType ?: return null
     val hasFlowReturnType = false // TODO: Check flow return type
@@ -60,6 +59,10 @@ internal fun KSFunctionDeclaration.toNativeCoroutinesFunSpec(nativeSuffix: Strin
             codeArgs.add(simpleName.asString())
             "%N"
         }
+    }
+    if (typeParameters.isNotEmpty()) {
+        codeArgs.addAll(typeParameters.map { it.name })
+        code += "<${typeParameters.joinToString { "%N" }}>"
     }
     codeArgs.addAll(parameters)
     code += "(${parameters.joinToString { "%N" }})"
