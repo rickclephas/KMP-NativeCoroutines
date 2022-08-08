@@ -32,20 +32,19 @@ internal fun KSFunctionDeclaration.toNativeCoroutinesFunSpec(nativeSuffix: Strin
     }
     val parameters = parameters.toParameterSpecs(typeParameterResolver).also(builder::addParameters)
 
-    val originalReturnType = returnType ?: return null
-    val hasFlowReturnType = false // TODO: Check flow return type
+    val returnType = returnType?.getReturnType(typeParameterResolver) ?: return null
     val isSuspend = modifiers.contains(Modifier.SUSPEND)
 
     // Convert the return type
-    var returnType = originalReturnType.toTypeName(typeParameterResolver)
-    if (hasFlowReturnType) {
-        returnType = nativeFlowClassName.parameterizedBy(returnType)
+    var returnTypeName = returnType.typeReference.toTypeName(typeParameterResolver)
+    if (returnType is ReturnType.Flow) {
+        returnTypeName = nativeFlowClassName.parameterizedBy(returnType.valueType)
     }
     if (isSuspend) {
-        returnType = nativeSuspendClassName.parameterizedBy(returnType)
+        returnTypeName = nativeSuspendClassName.parameterizedBy(returnTypeName)
     }
-    returnType = returnType.copy(annotations = originalReturnType.annotations.toAnnotationSpecs())
-    builder.returns(returnType)
+    returnTypeName = returnTypeName.copy(annotations = returnType.typeReference.annotations.toAnnotationSpecs())
+    builder.returns(returnTypeName)
 
     // Generate the function body
     val codeArgs = mutableListOf<Any>()
@@ -71,7 +70,7 @@ internal fun KSFunctionDeclaration.toNativeCoroutinesFunSpec(nativeSuffix: Strin
         codeArgs.add(1, receiverParameter)
         code = "%M { %N.$code }"
     }
-    if (hasFlowReturnType) {
+    if (returnType is ReturnType.Flow) {
         codeArgs.add(asNativeFlowMemberName)
         code = "$code.%M()"
     }
