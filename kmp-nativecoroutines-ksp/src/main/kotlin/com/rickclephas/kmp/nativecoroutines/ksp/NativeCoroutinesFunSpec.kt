@@ -36,9 +36,9 @@ internal fun KSFunctionDeclaration.toNativeCoroutinesFunSpec(nativeSuffix: Strin
     val isSuspend = modifiers.contains(Modifier.SUSPEND)
 
     // Convert the return type
-    var returnTypeName = returnType.typeReference.toTypeName(typeParameterResolver)
-    if (returnType is ReturnType.Flow) {
-        returnTypeName = nativeFlowClassName.parameterizedBy(returnType.valueType)
+    var returnTypeName = when (returnType) {
+        is ReturnType.Flow -> nativeFlowClassName.parameterizedBy(returnType.valueType)
+        else -> returnType.typeReference.toTypeName(typeParameterResolver)
     }
     if (isSuspend) {
         returnTypeName = nativeSuspendClassName.parameterizedBy(returnTypeName)
