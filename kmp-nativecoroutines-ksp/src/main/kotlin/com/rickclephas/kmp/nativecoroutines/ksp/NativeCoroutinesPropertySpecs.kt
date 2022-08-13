@@ -29,12 +29,12 @@ private fun KSPropertyDeclaration.toNativeCoroutinesPropertySpec(
     typeParameterResolver: TypeParameterResolver,
     type: ReturnType.Flow
 ): PropertySpec {
-    var typeName: TypeName = nativeFlowClassName.parameterizedBy(type.valueType)
+    var typeName: TypeName = nativeFlowClassName.parameterizedBy(type.valueType).copy(nullable = type.nullable)
     typeName = typeName.copy(annotations = type.typeReference.annotations.toAnnotationSpecs())
     val name = "${simpleName.asString()}$nativeSuffix"
     return createPropertySpec(typeParameterResolver, name, typeName) { code, codeArgs ->
         codeArgs.add(asNativeFlowMemberName)
-        addCode("return $code.%M()", *codeArgs.toTypedArray())
+        addCode("return $code${if(type.nullable) "?." else "."}%M()", *codeArgs.toTypedArray())
     }
 }
 
@@ -43,10 +43,11 @@ private fun KSPropertyDeclaration.toNativeCoroutinesValuePropertySpec(
     typeParameterResolver: TypeParameterResolver,
     type: ReturnType.Flow.State
 ): PropertySpec {
-    val typeName = type.valueType.copy(annotations = type.typeReference.annotations.toAnnotationSpecs())
+    var typeName = type.valueType.copy(annotations = type.typeReference.annotations.toAnnotationSpecs())
+    if (type.nullable) typeName = typeName.copy(nullable = true)
     val name = "${simpleName.asString()}${nativeSuffix}Value"
     return createPropertySpec(typeParameterResolver, name, typeName) { code, codeArgs ->
-        addCode("return $code.value", *codeArgs.toTypedArray())
+        addCode("return $code${if(type.nullable) "?." else "."}value", *codeArgs.toTypedArray())
     }
 }
 
@@ -55,11 +56,11 @@ private fun KSPropertyDeclaration.toNativeCoroutinesReplayCachePropertySpec(
     typeParameterResolver: TypeParameterResolver,
     type: ReturnType.Flow.Shared
 ): PropertySpec {
-    var typeName: TypeName = LIST.parameterizedBy(type.valueType)
+    var typeName: TypeName = LIST.parameterizedBy(type.valueType).copy(nullable = type.nullable)
     typeName = typeName.copy(annotations = type.typeReference.annotations.toAnnotationSpecs())
     val name = "${simpleName.asString()}${nativeSuffix}ReplayCache"
     return createPropertySpec(typeParameterResolver, name, typeName) { code, codeArgs ->
-        addCode("return $code.replayCache", *codeArgs.toTypedArray())
+        addCode("return $code${if(type.nullable) "?." else "."}replayCache", *codeArgs.toTypedArray())
     }
 }
 

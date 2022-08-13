@@ -21,6 +21,21 @@ class NativeCoroutinesFunSpecTests: CompilationTests() {
         """.trimIndent())
 
     @Test
+    fun nullableSuspendFunction() = runKspTest("""
+            import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
+
+            @NativeCoroutines
+            suspend fun returnNullableSuspendValue(): String? = null
+        """.trimIndent(), """
+            import com.rickclephas.kmp.nativecoroutines.NativeSuspend
+            import com.rickclephas.kmp.nativecoroutines.nativeSuspend
+            import kotlin.String
+
+            public fun returnNullableSuspendValueNative(): NativeSuspend<String?> = nativeSuspend {
+                returnNullableSuspendValue() }
+        """.trimIndent())
+
+    @Test
     fun flowFunction() = runKspTest("""
             import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
             import kotlinx.coroutines.flow.Flow
@@ -33,6 +48,53 @@ class NativeCoroutinesFunSpecTests: CompilationTests() {
             import kotlin.String
 
             public fun returnFlowValueNative(): NativeFlow<String> = returnFlowValue().asNativeFlow()
+        """.trimIndent())
+
+    @Test
+    fun nullableFlowValueFunction() = runKspTest("""
+            import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
+            import kotlinx.coroutines.flow.Flow
+
+            @NativeCoroutines
+            fun returnNullableFlowValue(): Flow<String?> = TODO()
+        """.trimIndent(), """
+            import com.rickclephas.kmp.nativecoroutines.NativeFlow
+            import com.rickclephas.kmp.nativecoroutines.asNativeFlow
+            import kotlin.String
+
+            public fun returnNullableFlowValueNative(): NativeFlow<String?> =
+                returnNullableFlowValue().asNativeFlow()
+        """.trimIndent())
+
+    @Test
+    fun nullableFlowFunction() = runKspTest("""
+            import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
+            import kotlinx.coroutines.flow.Flow
+
+            @NativeCoroutines
+            fun returnNullableFlow(): Flow<String>? = null
+        """.trimIndent(), """
+            import com.rickclephas.kmp.nativecoroutines.NativeFlow
+            import com.rickclephas.kmp.nativecoroutines.asNativeFlow
+            import kotlin.String
+
+            public fun returnNullableFlowNative(): NativeFlow<String>? = returnNullableFlow()?.asNativeFlow()
+        """.trimIndent())
+
+    @Test
+    fun nullableFlowAndValueFunction() = runKspTest("""
+            import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
+            import kotlinx.coroutines.flow.Flow
+
+            @NativeCoroutines
+            fun returnNullableFlowAndValue(): Flow<String?>? = null
+        """.trimIndent(), """
+            import com.rickclephas.kmp.nativecoroutines.NativeFlow
+            import com.rickclephas.kmp.nativecoroutines.asNativeFlow
+            import kotlin.String
+
+            public fun returnNullableFlowAndValueNative(): NativeFlow<String?>? =
+                returnNullableFlowAndValue()?.asNativeFlow()
         """.trimIndent())
 
     @Test
@@ -66,6 +128,24 @@ class NativeCoroutinesFunSpecTests: CompilationTests() {
 
             public fun returnSuspendFlowValueNative(): NativeSuspend<NativeFlow<String>> = nativeSuspend {
                 returnSuspendFlowValue().asNativeFlow() }
+        """.trimIndent())
+
+    @Test
+    fun suspendNullableFlowFunction() = runKspTest("""
+            import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
+            import kotlinx.coroutines.flow.Flow
+
+            @NativeCoroutines
+            suspend fun returnSuspendFlowValue(): Flow<String>? = null
+        """.trimIndent(), """
+            import com.rickclephas.kmp.nativecoroutines.NativeFlow
+            import com.rickclephas.kmp.nativecoroutines.NativeSuspend
+            import com.rickclephas.kmp.nativecoroutines.asNativeFlow
+            import com.rickclephas.kmp.nativecoroutines.nativeSuspend
+            import kotlin.String
+
+            public fun returnSuspendFlowValueNative(): NativeSuspend<NativeFlow<String>?> = nativeSuspend {
+                returnSuspendFlowValue()?.asNativeFlow() }
         """.trimIndent())
 
     @Test

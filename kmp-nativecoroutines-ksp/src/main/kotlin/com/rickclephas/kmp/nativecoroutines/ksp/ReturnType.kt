@@ -10,17 +10,21 @@ internal sealed class ReturnType {
     abstract val typeReference: KSTypeReference
     sealed class Flow: ReturnType() {
         abstract val valueType: TypeName
+        abstract val nullable: Boolean
         class State(
             override val typeReference: KSTypeReference,
-            override val valueType: TypeName
+            override val valueType: TypeName,
+            override val nullable: Boolean
         ): Flow()
         class Shared(
             override val typeReference: KSTypeReference,
-            override val valueType: TypeName
+            override val valueType: TypeName,
+            override val nullable: Boolean
         ): Flow()
         class Generic(
             override val typeReference: KSTypeReference,
-            override val valueType: TypeName
+            override val valueType: TypeName,
+            override val nullable: Boolean
         ): Flow()
     }
     class Other(override val typeReference: KSTypeReference): ReturnType()
@@ -31,11 +35,20 @@ internal fun KSTypeReference.getReturnType(typeParameterResolver: TypeParameterR
     if (type.isError) return null
     val classDeclaration = type.declaration as? KSClassDeclaration ?: return ReturnType.Other(this)
     if (classDeclaration.isStateFlow())
-        return ReturnType.Flow.State(this, type.arguments.first().toTypeName(typeParameterResolver))
+        return ReturnType.Flow.State(
+            this,
+            type.arguments.first().toTypeName(typeParameterResolver),
+            type.isMarkedNullable)
     if (classDeclaration.isSharedFlow())
-        return ReturnType.Flow.Shared(this, type.arguments.first().toTypeName(typeParameterResolver))
+        return ReturnType.Flow.Shared(
+            this,
+            type.arguments.first().toTypeName(typeParameterResolver),
+            type.isMarkedNullable)
     if (classDeclaration.isFlow())
-        return ReturnType.Flow.Generic(this, type.arguments.first().toTypeName(typeParameterResolver))
+        return ReturnType.Flow.Generic(
+            this,
+            type.arguments.first().toTypeName(typeParameterResolver),
+            type.isMarkedNullable)
     // TODO: Support Flow subclasses
     return ReturnType.Other(this)
 }

@@ -36,7 +36,7 @@ internal fun KSFunctionDeclaration.toNativeCoroutinesFunSpec(nativeSuffix: Strin
     val isSuspend = modifiers.contains(Modifier.SUSPEND)
 
     var returnTypeName = when (returnType) {
-        is ReturnType.Flow -> nativeFlowClassName.parameterizedBy(returnType.valueType)
+        is ReturnType.Flow -> nativeFlowClassName.parameterizedBy(returnType.valueType).copy(nullable = returnType.nullable)
         else -> returnType.typeReference.toTypeName(typeParameterResolver)
     }
     if (isSuspend) {
@@ -70,6 +70,7 @@ internal fun KSFunctionDeclaration.toNativeCoroutinesFunSpec(nativeSuffix: Strin
     }
     if (returnType is ReturnType.Flow) {
         codeArgs.add(asNativeFlowMemberName)
+        if (returnType.nullable) code += "?"
         code = "$code.%M()"
     }
     if (isSuspend) {
