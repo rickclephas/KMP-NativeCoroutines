@@ -1,5 +1,6 @@
 package com.rickclephas.kmp.nativecoroutines.ksp
 
+import org.junit.Ignore
 import org.junit.Test
 
 class NativeCoroutinesFunSpecTests: CompilationTests() {
@@ -228,5 +229,51 @@ class NativeCoroutinesFunSpecTests: CompilationTests() {
 
             public fun returnFlowValueNative(`value`: String): NativeFlow<String> =
                 returnFlowValue(`value`).asNativeFlow()
+        """.trimIndent())
+
+    @Test
+    fun annotatedFunction() = runKspTest("""
+            import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
+
+            @Deprecated("it's old")
+            @NativeCoroutines
+            suspend fun returnSuspendValue(): String = TODO()
+        """.trimIndent(), """
+            import com.rickclephas.kmp.nativecoroutines.NativeSuspend
+            import com.rickclephas.kmp.nativecoroutines.nativeSuspend
+            import kotlin.Deprecated
+            import kotlin.DeprecationLevel
+            import kotlin.ReplaceWith
+            import kotlin.String
+
+            @Deprecated(
+              message = "it's old",
+              replaceWith = ReplaceWith(expression = "", imports = arrayOf()),
+              level = DeprecationLevel.WARNING,
+            )
+            public fun returnSuspendValueNative(): NativeSuspend<String> = nativeSuspend { returnSuspendValue()
+                }
+        """.trimIndent())
+
+    /**
+     * We can't test this since [Throws] is a typealias in Kotlin/JVM
+     * which is where our KSP tests are currently running.
+     */
+    @Test
+    @Ignore
+    fun throwsAnnotation() = runKspTest(
+        """
+            import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
+
+            @Throws
+            @NativeCoroutines
+            suspend fun returnSuspendValue(): String = TODO()
+        """.trimIndent(), """
+            import com.rickclephas.kmp.nativecoroutines.NativeSuspend
+            import com.rickclephas.kmp.nativecoroutines.nativeSuspend
+            import kotlin.String
+
+            public fun returnSuspendValueNative(): NativeSuspend<String> = nativeSuspend { returnSuspendValue()
+                }
         """.trimIndent())
 }
