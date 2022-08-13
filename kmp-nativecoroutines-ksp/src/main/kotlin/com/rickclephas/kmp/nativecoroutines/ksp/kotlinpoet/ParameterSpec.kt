@@ -16,5 +16,6 @@ internal fun List<KSValueParameter>.toParameterSpecs(
     if (parameter.isVararg) {
         builder.addModifiers(KModifier.VARARG)
     }
+    // TODO: Add default value once those are exported to ObjC
     builder.build()
 }

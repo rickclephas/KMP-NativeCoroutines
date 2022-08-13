@@ -13,7 +13,7 @@ internal fun KSFunctionDeclaration.toNativeCoroutinesFunSpec(nativeSuffix: Strin
     val builder = FunSpec.builder("${simpleName.asString()}$nativeSuffix")
     docString?.trim()?.let(builder::addKdoc)
     builder.addAnnotations(annotations.toAnnotationSpecs(setOf(nativeCoroutinesAnnotationName, throwsAnnotationName)))
-    // TODO: Add context receivers once supported
+    // TODO: Add context receivers once those are exported to ObjC
     builder.addModifiers(KModifier.PUBLIC)
 
     classDeclaration?.typeParameters?.toTypeVariableNames(typeParameterResolver)?.also(builder::addTypeVariables)
