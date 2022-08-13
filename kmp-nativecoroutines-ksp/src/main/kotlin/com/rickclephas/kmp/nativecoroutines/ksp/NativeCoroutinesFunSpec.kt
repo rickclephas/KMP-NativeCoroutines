@@ -16,7 +16,7 @@ internal fun KSFunctionDeclaration.toNativeCoroutinesFunSpec(nativeSuffix: Strin
     // TODO: Add context receivers once those are exported to ObjC
     builder.addModifiers(KModifier.PUBLIC)
 
-    classDeclaration?.typeParameters?.toTypeVariableNames(typeParameterResolver)?.also(builder::addTypeVariables)
+    classDeclaration?.typeParameters?.toTypeVariableNames(typeParameterResolver)?.let(builder::addTypeVariables)
     val typeParameters = typeParameters.toTypeVariableNames(typeParameterResolver).also(builder::addTypeVariables)
 
     val extensionReceiver = extensionReceiver
@@ -35,7 +35,6 @@ internal fun KSFunctionDeclaration.toNativeCoroutinesFunSpec(nativeSuffix: Strin
     val returnType = returnType?.getReturnType(typeParameterResolver) ?: return null
     val isSuspend = modifiers.contains(Modifier.SUSPEND)
 
-    // Convert the return type
     var returnTypeName = when (returnType) {
         is ReturnType.Flow -> nativeFlowClassName.parameterizedBy(returnType.valueType)
         else -> returnType.typeReference.toTypeName(typeParameterResolver)
@@ -46,7 +45,6 @@ internal fun KSFunctionDeclaration.toNativeCoroutinesFunSpec(nativeSuffix: Strin
     returnTypeName = returnTypeName.copy(annotations = returnType.typeReference.annotations.toAnnotationSpecs())
     builder.returns(returnTypeName)
 
-    // Generate the function body
     val codeArgs = mutableListOf<Any>()
     var code = when (classDeclaration) {
         null -> {

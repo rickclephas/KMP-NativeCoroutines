@@ -43,8 +43,9 @@ internal class KmpNativeCoroutinesSymbolProcessor(
             logger.error("Property isn't contained in a source file", property)
             return true
         }
+        val propertySpecs = property.toNativeCoroutinesPropertySpecs(nativeSuffix) ?: return false
         val fileSpecBuilder = file.getFileSpecBuilder()
-        // TODO: Convert properties
+        propertySpecs.forEach(fileSpecBuilder::addProperty)
         return true
     }
 
