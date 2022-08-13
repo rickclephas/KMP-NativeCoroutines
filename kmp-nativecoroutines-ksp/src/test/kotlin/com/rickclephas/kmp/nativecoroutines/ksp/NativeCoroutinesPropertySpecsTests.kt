@@ -1,5 +1,6 @@
 package com.rickclephas.kmp.nativecoroutines.ksp
 
+import org.junit.Ignore
 import org.junit.Test
 
 class NativeCoroutinesPropertySpecsTests: CompilationTests() {
@@ -8,7 +9,7 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
     fun globalFlowProperty() = runKspTest("""
         import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
         import kotlinx.coroutines.flow.Flow
-
+        
         @NativeCoroutines
         val globalFlow: Flow<String> get() = TODO()
     """.trimIndent(), """
@@ -24,7 +25,7 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
     fun globalSharedFlowProperty() = runKspTest("""
         import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
         import kotlinx.coroutines.flow.SharedFlow
-
+        
         @NativeCoroutines
         val globalSharedFlow: SharedFlow<String> get() = TODO()
     """.trimIndent(), """
@@ -44,7 +45,7 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
     fun globalStateFlowProperty() = runKspTest("""
         import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
         import kotlinx.coroutines.flow.StateFlow
-
+        
         @NativeCoroutines
         val globalStateFlow: StateFlow<String> get() = TODO()
     """.trimIndent(), """
@@ -63,7 +64,7 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
     fun nullableFlowValueProperty() = runKspTest("""
         import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
         import kotlinx.coroutines.flow.Flow
-
+        
         @NativeCoroutines
         val nullableFlowValue: Flow<String?> get() = TODO()
     """.trimIndent(), """
@@ -79,7 +80,7 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
     fun nullableSharedFlowValueProperty() = runKspTest("""
         import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
         import kotlinx.coroutines.flow.SharedFlow
-
+        
         @NativeCoroutines
         val nullableSharedFlowValue: SharedFlow<String?> get() = TODO()
     """.trimIndent(), """
@@ -99,7 +100,7 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
     fun nullableStateFlowValueProperty() = runKspTest("""
         import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
         import kotlinx.coroutines.flow.StateFlow
-
+        
         @NativeCoroutines
         val nullableStateFlowValue: StateFlow<String?> get() = TODO()
     """.trimIndent(), """
@@ -118,7 +119,7 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
     fun nullableFlowProperty() = runKspTest("""
         import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
         import kotlinx.coroutines.flow.Flow
-
+        
         @NativeCoroutines
         val nullableFlow: Flow<String>? get() = null
     """.trimIndent(), """
@@ -134,7 +135,7 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
     fun nullableSharedFlowProperty() = runKspTest("""
         import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
         import kotlinx.coroutines.flow.SharedFlow
-
+        
         @NativeCoroutines
         val nullableSharedFlow: SharedFlow<String>? get() = null
     """.trimIndent(), """
@@ -154,7 +155,7 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
     fun nullableStateFlowProperty() = runKspTest("""
         import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
         import kotlinx.coroutines.flow.StateFlow
-
+        
         @NativeCoroutines
         val nullableStateFlow: StateFlow<String>? get() = null
     """.trimIndent(), """
@@ -173,7 +174,7 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
     fun nullableFlowAndValueProperty() = runKspTest("""
         import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
         import kotlinx.coroutines.flow.Flow
-
+        
         @NativeCoroutines
         val nullableFlowAndValue: Flow<String?>? get() = null
     """.trimIndent(), """
@@ -189,7 +190,7 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
     fun nullableSharedFlowAndValueProperty() = runKspTest("""
         import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
         import kotlinx.coroutines.flow.SharedFlow
-
+        
         @NativeCoroutines
         val nullableSharedFlowAndValue: SharedFlow<String?>? get() = null
     """.trimIndent(), """
@@ -209,7 +210,7 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
     fun nullableStateFlowAndValueProperty() = runKspTest("""
         import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
         import kotlinx.coroutines.flow.StateFlow
-
+        
         @NativeCoroutines
         val nullableStateFlowAndValue: StateFlow<String?>? get() = null
     """.trimIndent(), """
@@ -223,4 +224,368 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         public val nullableStateFlowAndValueNativeValue: String?
           get() = nullableStateFlowAndValue?.value
     """.trimIndent())
+
+    @Test
+    fun genericSharedFlowProperty() = runKspTest("""
+        import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
+        import kotlinx.coroutines.flow.SharedFlow
+        
+        class MyClass<T>
+        
+        @NativeCoroutines
+        val <T> MyClass<T>.genericSharedFlow: SharedFlow<T> get() = TODO()
+    """.trimIndent(), """
+        import com.rickclephas.kmp.nativecoroutines.NativeFlow
+        import com.rickclephas.kmp.nativecoroutines.asNativeFlow
+        import kotlin.collections.List
+        
+        public val <T> MyClass<T>.genericSharedFlowNative: NativeFlow<T>
+          get() = genericSharedFlow.asNativeFlow()
+        
+        public val <T> MyClass<T>.genericSharedFlowNativeReplayCache: List<T>
+          get() = genericSharedFlow.replayCache
+    """.trimIndent())
+
+    @Test
+    fun genericStateFlowProperty() = runKspTest("""
+        import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
+        import kotlinx.coroutines.flow.StateFlow
+        
+        class MyClass<T>
+        
+        @NativeCoroutines
+        val <T> MyClass<T>.genericStateFlow: StateFlow<T> get() = TODO()
+    """.trimIndent(), """
+        import com.rickclephas.kmp.nativecoroutines.NativeFlow
+        import com.rickclephas.kmp.nativecoroutines.asNativeFlow
+        
+        public val <T> MyClass<T>.genericStateFlowNative: NativeFlow<T>
+          get() = genericStateFlow.asNativeFlow()
+        
+        public val <T> MyClass<T>.genericStateFlowNativeValue: T
+          get() = genericStateFlow.value
+    """.trimIndent())
+
+    @Test
+    fun genericClassSharedFlowProperty() = runKspTest("""
+        import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
+        import kotlinx.coroutines.flow.SharedFlow
+        
+        class MyClass<T> {
+            @NativeCoroutines
+            val genericSharedFlow: SharedFlow<T> get() = TODO()
+        }
+    """.trimIndent(), """
+        import com.rickclephas.kmp.nativecoroutines.NativeFlow
+        import com.rickclephas.kmp.nativecoroutines.asNativeFlow
+        import kotlin.collections.List
+        
+        public val <T> MyClass<T>.genericSharedFlowNative: NativeFlow<T>
+          get() = genericSharedFlow.asNativeFlow()
+        
+        public val <T> MyClass<T>.genericSharedFlowNativeReplayCache: List<T>
+          get() = genericSharedFlow.replayCache
+    """.trimIndent())
+
+    @Test
+    fun genericClassStateFlowProperty() = runKspTest("""
+        import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
+        import kotlinx.coroutines.flow.StateFlow
+        
+        class MyClass<T> {
+            @NativeCoroutines
+            val genericStateFlow: StateFlow<T> get() = TODO()
+        }
+    """.trimIndent(), """
+        import com.rickclephas.kmp.nativecoroutines.NativeFlow
+        import com.rickclephas.kmp.nativecoroutines.asNativeFlow
+        
+        public val <T> MyClass<T>.genericStateFlowNative: NativeFlow<T>
+          get() = genericStateFlow.asNativeFlow()
+        
+        public val <T> MyClass<T>.genericStateFlowNativeValue: T
+          get() = genericStateFlow.value
+    """.trimIndent())
+
+    @Test
+    fun kdocSharedFlowProperty() = runKspTest("""
+        import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
+        import kotlinx.coroutines.flow.SharedFlow
+        
+        /**
+         * KDoc for [kdocSharedFlow]
+         */
+        @NativeCoroutines
+        val kdocSharedFlow: SharedFlow<String> get() = TODO()
+    """.trimIndent(), """
+        import com.rickclephas.kmp.nativecoroutines.NativeFlow
+        import com.rickclephas.kmp.nativecoroutines.asNativeFlow
+        import kotlin.String
+        import kotlin.collections.List
+        
+        /**
+         * KDoc for [kdocSharedFlow]
+         */
+        public val kdocSharedFlowNative: NativeFlow<String>
+          get() = kdocSharedFlow.asNativeFlow()
+        
+        /**
+         * KDoc for [kdocSharedFlow]
+         */
+        public val kdocSharedFlowNativeReplayCache: List<String>
+          get() = kdocSharedFlow.replayCache
+    """.trimIndent())
+
+    @Test
+    fun kdocStateFlowProperty() = runKspTest("""
+        import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
+        import kotlinx.coroutines.flow.StateFlow
+        
+        /**
+         * KDoc for [kdocStateFlow]
+         */
+        @NativeCoroutines
+        val kdocStateFlow: StateFlow<String> get() = TODO()
+    """.trimIndent(), """
+        import com.rickclephas.kmp.nativecoroutines.NativeFlow
+        import com.rickclephas.kmp.nativecoroutines.asNativeFlow
+        import kotlin.String
+        
+        /**
+         * KDoc for [kdocStateFlow]
+         */
+        public val kdocStateFlowNative: NativeFlow<String>
+          get() = kdocStateFlow.asNativeFlow()
+        
+        /**
+         * KDoc for [kdocStateFlow]
+         */
+        public val kdocStateFlowNativeValue: String
+          get() = kdocStateFlow.value
+    """.trimIndent())
+
+    @Test
+    fun protectedOpenClassSharedFlowProperty() = runKspTest("""
+        import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
+        import kotlinx.coroutines.flow.SharedFlow
+        
+        open class MyClass {
+            @NativeCoroutines
+            protected val sharedFlow: SharedFlow<String> get() = TODO()
+        }
+    """.trimIndent(), """
+        import com.rickclephas.kmp.nativecoroutines.NativeFlow
+        import com.rickclephas.kmp.nativecoroutines.asNativeFlow
+        import kotlin.String
+        import kotlin.collections.List
+        
+        public val MyClass.sharedFlowNative: NativeFlow<String>
+          get() = sharedFlow.asNativeFlow()
+        
+        public val MyClass.sharedFlowNativeReplayCache: List<String>
+          get() = sharedFlow.replayCache
+    """.trimIndent())
+
+    @Test
+    fun protectedOpenClassStateFlowProperty() = runKspTest("""
+        import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
+        import kotlinx.coroutines.flow.StateFlow
+        
+        open class MyClass {
+            @NativeCoroutines
+            protected val stateFlow: StateFlow<String> get() = TODO()
+        }
+    """.trimIndent(), """
+        import com.rickclephas.kmp.nativecoroutines.NativeFlow
+        import com.rickclephas.kmp.nativecoroutines.asNativeFlow
+        import kotlin.String
+        
+        public val MyClass.stateFlowNative: NativeFlow<String>
+          get() = stateFlow.asNativeFlow()
+        
+        public val MyClass.stateFlowNativeValue: String
+          get() = stateFlow.value
+    """.trimIndent())
+
+    @Test
+    fun extensionSharedFlowProperty() = runKspTest("""
+        import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
+        import kotlinx.coroutines.flow.SharedFlow
+        
+        @NativeCoroutines
+        val String.sharedFlow: SharedFlow<String> get() = TODO()
+    """.trimIndent(), """
+        import com.rickclephas.kmp.nativecoroutines.NativeFlow
+        import com.rickclephas.kmp.nativecoroutines.asNativeFlow
+        import kotlin.String
+        import kotlin.collections.List
+        
+        public val String.sharedFlowNative: NativeFlow<String>
+          get() = sharedFlow.asNativeFlow()
+        
+        public val String.sharedFlowNativeReplayCache: List<String>
+          get() = sharedFlow.replayCache
+    """.trimIndent())
+
+    @Test
+    fun extensionStateFlowProperty() = runKspTest("""
+        import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
+        import kotlinx.coroutines.flow.StateFlow
+        
+        @NativeCoroutines
+        val String.stateFlow: StateFlow<String> get() = TODO()
+    """.trimIndent(), """
+        import com.rickclephas.kmp.nativecoroutines.NativeFlow
+        import com.rickclephas.kmp.nativecoroutines.asNativeFlow
+        import kotlin.String
+        
+        public val String.stateFlowNative: NativeFlow<String>
+          get() = stateFlow.asNativeFlow()
+        
+        public val String.stateFlowNativeValue: String
+          get() = stateFlow.value
+    """.trimIndent())
+
+    @Test
+    fun implicitTypeProperty() = runKspTest("""
+        import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
+        import kotlinx.coroutines.flow.flow
+        
+        @NativeCoroutines
+        val myFlow get() = flow { emit("") }
+    """.trimIndent(), """
+        import com.rickclephas.kmp.nativecoroutines.NativeFlow
+        import com.rickclephas.kmp.nativecoroutines.asNativeFlow
+        import kotlin.String
+        
+        public val myFlowNative: NativeFlow<String>
+          get() = myFlow.asNativeFlow()
+    """.trimIndent())
+
+    @Test
+    fun annotatedSharedFlowProperty() = runKspTest("""
+        import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
+        import kotlinx.coroutines.flow.SharedFlow
+        
+        @Deprecated("it's old")
+        @get:ExperimentalStdlibApi
+        @NativeCoroutines
+        val sharedFlow: SharedFlow<String> get() = TODO()
+    """.trimIndent(), """
+        import com.rickclephas.kmp.nativecoroutines.NativeFlow
+        import com.rickclephas.kmp.nativecoroutines.asNativeFlow
+        import kotlin.Deprecated
+        import kotlin.DeprecationLevel
+        import kotlin.ExperimentalStdlibApi
+        import kotlin.ReplaceWith
+        import kotlin.String
+        import kotlin.collections.List
+        
+        @Deprecated(
+          message = "it's old",
+          replaceWith = ReplaceWith(expression = "", imports = arrayOf()),
+          level = DeprecationLevel.WARNING,
+        )
+        public val sharedFlowNative: NativeFlow<String>
+          @get:ExperimentalStdlibApi
+          get() = sharedFlow.asNativeFlow()
+        
+        @Deprecated(
+          message = "it's old",
+          replaceWith = ReplaceWith(expression = "", imports = arrayOf()),
+          level = DeprecationLevel.WARNING,
+        )
+        public val sharedFlowNativeReplayCache: List<String>
+          @get:ExperimentalStdlibApi
+          get() = sharedFlow.replayCache
+    """.trimIndent())
+
+    @Test
+    fun annotatedStateFlowProperty() = runKspTest("""
+        import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
+        import kotlinx.coroutines.flow.StateFlow
+        
+        @Deprecated("it's old")
+        @get:ExperimentalStdlibApi
+        @NativeCoroutines
+        val stateFlow: StateFlow<String> get() = TODO()
+    """.trimIndent(), """
+        import com.rickclephas.kmp.nativecoroutines.NativeFlow
+        import com.rickclephas.kmp.nativecoroutines.asNativeFlow
+        import kotlin.Deprecated
+        import kotlin.DeprecationLevel
+        import kotlin.ExperimentalStdlibApi
+        import kotlin.ReplaceWith
+        import kotlin.String
+        
+        @Deprecated(
+          message = "it's old",
+          replaceWith = ReplaceWith(expression = "", imports = arrayOf()),
+          level = DeprecationLevel.WARNING,
+        )
+        public val stateFlowNative: NativeFlow<String>
+          @get:ExperimentalStdlibApi
+          get() = stateFlow.asNativeFlow()
+        
+        @Deprecated(
+          message = "it's old",
+          replaceWith = ReplaceWith(expression = "", imports = arrayOf()),
+          level = DeprecationLevel.WARNING,
+        )
+        public val stateFlowNativeValue: String
+          @get:ExperimentalStdlibApi
+          get() = stateFlow.value
+    """.trimIndent())
+
+    /**
+     * We can't test this since [Throws] is a typealias in Kotlin/JVM
+     * which is where our KSP tests are currently running.
+     */
+    @Test
+    @Ignore
+    fun throwsAnnotationSharedFlowProperty() = runKspTest("""
+        import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
+        import kotlinx.coroutines.flow.SharedFlow
+        
+        @get:Throws
+        @NativeCoroutines
+        val sharedFlow: SharedFlow<String> get() = TODO()
+    """.trimIndent(), """
+        import com.rickclephas.kmp.nativecoroutines.NativeFlow
+        import com.rickclephas.kmp.nativecoroutines.asNativeFlow
+        import kotlin.String
+        import kotlin.collections.List
+        
+        public val sharedFlowNative: NativeFlow<String>
+          get() = sharedFlow.asNativeFlow()
+        
+        public val sharedFlowNativeReplayCache: List<String>
+          get() = sharedFlow.replayCache
+    """.trimIndent())
+
+    /**
+     * We can't test this since [Throws] is a typealias in Kotlin/JVM
+     * which is where our KSP tests are currently running.
+     */
+    @Test
+    @Ignore
+    fun throwsAnnotationStateFlowProperty() = runKspTest("""
+        import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
+        import kotlinx.coroutines.flow.StateFlow
+        
+        @get:Throws
+        @NativeCoroutines
+        val stateFlow: StateFlow<String> get() = TODO()
+    """.trimIndent(), """
+        import com.rickclephas.kmp.nativecoroutines.NativeFlow
+        import com.rickclephas.kmp.nativecoroutines.asNativeFlow
+        import kotlin.String
+        
+        public val stateFlowNative: NativeFlow<String>
+          get() = stateFlow.asNativeFlow()
+        
+        public val stateFlowNativeValue: String
+          get() = stateFlow.value
+    """.trimIndent())
+
 }

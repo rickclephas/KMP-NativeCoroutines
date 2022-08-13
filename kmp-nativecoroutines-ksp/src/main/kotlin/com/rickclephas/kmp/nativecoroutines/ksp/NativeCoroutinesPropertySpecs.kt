@@ -74,7 +74,7 @@ private fun KSPropertyDeclaration.createPropertySpec(
 
     val builder = PropertySpec.builder(name, typeName)
     docString?.trim()?.let(builder::addKdoc)
-    builder.addAnnotations(annotations.toAnnotationSpecs(setOf(nativeCoroutinesAnnotationName)))
+    builder.addAnnotations(annotations.toAnnotationSpecs(setOf(nativeCoroutinesAnnotationName, throwsAnnotationName)))
     // TODO: Add context receivers once those are exported to ObjC
     builder.addModifiers(KModifier.PUBLIC)
 
