@@ -5,8 +5,7 @@ import org.junit.Test
 class CoroutineScopeProviderTests: CompilationTests() {
 
     @Test
-    fun fileScopeSuspendFunction() = runKspTest(
-        """
+    fun fileScopeSuspendFunction() = runKspTest("""
         import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
         import com.rickclephas.kmp.nativecoroutines.NativeCoroutineScope
         import kotlinx.coroutines.CoroutineScope
@@ -27,8 +26,7 @@ class CoroutineScopeProviderTests: CompilationTests() {
     """.trimIndent())
 
     @Test
-    fun fileScopeFlowFunction() = runKspTest(
-        """
+    fun fileScopeFlowFunction() = runKspTest("""
         import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
         import com.rickclephas.kmp.nativecoroutines.NativeCoroutineScope
         import kotlinx.coroutines.CoroutineScope
