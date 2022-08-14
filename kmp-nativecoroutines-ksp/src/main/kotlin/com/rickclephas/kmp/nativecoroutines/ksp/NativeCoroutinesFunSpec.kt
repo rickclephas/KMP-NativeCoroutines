@@ -65,7 +65,7 @@ internal fun KSFunctionDeclaration.toNativeCoroutinesFunSpec(
         code += "<${typeParameters.joinToString { "%N" }}>"
     }
     codeArgs.addAll(parameters)
-    code += "(${parameters.joinToString { "%N" }})"
+    code += "(${parameters.joinToString { if (KModifier.VARARG in it.modifiers) "*%N" else "%N" }})"
     if (receiverParameter != null) {
         codeArgs.add(0, runMemberName)
         codeArgs.add(1, receiverParameter)

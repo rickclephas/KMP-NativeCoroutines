@@ -357,4 +357,19 @@ class NativeCoroutinesFunSpecTests: CompilationTests() {
         public fun returnSuspendValueNative(): NativeSuspend<String> = nativeSuspend(null) {
             returnSuspendValue() }
     """.trimIndent())
+
+    @Test
+    fun varargParameterFunction() = runKspTest("""
+        import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
+        
+        @NativeCoroutines
+        suspend fun returnSuspendValue(vararg values: String): String = TODO()
+    """.trimIndent(), """
+        import com.rickclephas.kmp.nativecoroutines.NativeSuspend
+        import com.rickclephas.kmp.nativecoroutines.nativeSuspend
+        import kotlin.String
+        
+        public fun returnSuspendValueNative(vararg values: String): NativeSuspend<String> =
+            nativeSuspend(null) { returnSuspendValue(*values) }
+    """.trimIndent())
 }
