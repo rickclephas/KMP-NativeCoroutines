@@ -59,10 +59,7 @@ kotlin {
             getByName("${it.targetName}Test") {
                 dependsOn(appleTest)
             }
+            dependencies.add("ksp${it.targetName.capitalize()}", "com.rickclephas.kmp:kmp-nativecoroutines-ksp")
         }
     }
-}
-
-dependencies {
-    add("kspIosArm64", "com.rickclephas.kmp:kmp-nativecoroutines-ksp")
 }

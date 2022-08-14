@@ -18,7 +18,7 @@ class CompilerIntegrationTests: XCTestCase {
         let valueExpectation = expectation(description: "Waiting for value")
         let sendValue = NSNumber(value: randomInt())
         _ = integrationTests.returnGenericClassValueNative(value: sendValue)({ value, unit in
-            XCTAssertEqual(value, sendValue, "Received incorrect value")
+            XCTAssertEqual(value as! NSNumber, sendValue, "Received incorrect value")
             valueExpectation.fulfill()
             return unit
         }, { _, unit in unit })
@@ -80,7 +80,10 @@ class CompilerIntegrationTests: XCTestCase {
             NSNumber(value: self.randomInt())
         }
         _ = integrationTests.returnGenericVarargValuesNative(values: sendValues)({ values, unit in
-            XCTAssertEqual(values, sendValues, "Received incorrect values")
+            XCTAssertEqual(values.size, sendValues.size, "Received incorrect number of value")
+            for i in 0..<values.size {
+                XCTAssertEqual(values.get(index: i) as! NSNumber, sendValues.get(index: i) as! NSNumber, "Received incorrect value at index \(i)")
+            }
             valueExpectation.fulfill()
             return unit
         }, { _, unit in unit })
@@ -91,7 +94,7 @@ class CompilerIntegrationTests: XCTestCase {
         let integrationTests = IntegrationTests()
         let valueExpectation = expectation(description: "Waiting for value")
         let sendValue = NSNumber(value: randomInt())
-        _ = integrationTests.returnGenericValueFromExtensionNative([], value: sendValue)({ value, unit in
+        _ = integrationTests.returnGenericValueFromExtensionNative(receiver: [], value: sendValue)({ value, unit in
             XCTAssertEqual(value as! NSNumber, sendValue, "Received incorrect value")
             valueExpectation.fulfill()
             return unit
