@@ -12,6 +12,8 @@ internal class KmpNativeCoroutinesSymbolProcessor(
     private val nativeSuffix: String
 ): SymbolProcessor {
 
+    private val coroutineScopeProvider = CoroutineScopeProvider(logger)
+
     private val fileSpecBuilders = mutableMapOf<String, FileSpec.Builder>()
 
     private fun KSFile.getFileSpecBuilder(): FileSpec.Builder = fileSpecBuilders.getOrPut(filePath) {
@@ -19,6 +21,7 @@ internal class KmpNativeCoroutinesSymbolProcessor(
     }
 
     override fun process(resolver: Resolver): List<KSAnnotated> {
+        coroutineScopeProvider.process(resolver)
         val deferredSymbols = mutableListOf<KSAnnotated>()
         resolver.getSymbolsWithAnnotation(nativeCoroutinesAnnotationName).forEach { symbol ->
             when (symbol) {
@@ -43,7 +46,8 @@ internal class KmpNativeCoroutinesSymbolProcessor(
             logger.error("Property isn't contained in a source file", property)
             return true
         }
-        val propertySpecs = property.toNativeCoroutinesPropertySpecs(nativeSuffix) ?: return false
+        val scopeProperty = coroutineScopeProvider.getScopeProperty(property) ?: return false
+        val propertySpecs = property.toNativeCoroutinesPropertySpecs(scopeProperty, nativeSuffix) ?: return false
         val fileSpecBuilder = file.getFileSpecBuilder()
         propertySpecs.forEach(fileSpecBuilder::addProperty)
         return true
@@ -56,7 +60,8 @@ internal class KmpNativeCoroutinesSymbolProcessor(
             logger.error("Function isn't contained in a source file", function)
             return true
         }
-        val funSpec = function.toNativeCoroutinesFunSpec(nativeSuffix) ?: return false
+        val scopeProperty = coroutineScopeProvider.getScopeProperty(function) ?: return false
+        val funSpec = function.toNativeCoroutinesFunSpec(scopeProperty, nativeSuffix) ?: return false
         file.getFileSpecBuilder().addFunction(funSpec)
         return true
     }

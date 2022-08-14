@@ -6,7 +6,10 @@ import com.squareup.kotlinpoet.*
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import com.squareup.kotlinpoet.ksp.*
 
-internal fun KSFunctionDeclaration.toNativeCoroutinesFunSpec(nativeSuffix: String): FunSpec? {
+internal fun KSFunctionDeclaration.toNativeCoroutinesFunSpec(
+    scopeProperty: CoroutineScopeProvider.ScopeProperty,
+    nativeSuffix: String
+): FunSpec? {
     val typeParameterResolver = getTypeParameterResolver()
     val classDeclaration = parentDeclaration as? KSClassDeclaration
 
@@ -70,16 +73,19 @@ internal fun KSFunctionDeclaration.toNativeCoroutinesFunSpec(nativeSuffix: Strin
     }
     if (returnType is ReturnType.Flow) {
         codeArgs.add(asNativeFlowMemberName)
+        scopeProperty.codeArg?.let(codeArgs::add)
         if (returnType.nullable) code += "?"
-        code = "$code.%M()"
+        code = "$code.%M(${scopeProperty.code})"
     }
     if (isSuspend) {
         codeArgs.add(0, nativeSuspendMemberName)
-        code = "%M { $code }"
+        scopeProperty.codeArg?.let { codeArgs.add(1, it) }
+        code = "%M(${scopeProperty.code}) { $code }"
     }
     code = "return $code"
     builder.addCode(code, *codeArgs.toTypedArray())
 
     containingFile?.let(builder::addOriginatingKSFile)
+    scopeProperty.containingFile?.let(builder::addOriginatingKSFile)
     return builder.build()
 }

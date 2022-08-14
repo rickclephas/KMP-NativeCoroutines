@@ -18,7 +18,7 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         import kotlin.String
         
         public val globalFlowNative: NativeFlow<String>
-          get() = globalFlow.asNativeFlow()
+          get() = globalFlow.asNativeFlow(null)
     """.trimIndent())
 
     @Test
@@ -35,7 +35,7 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         import kotlin.collections.List
         
         public val globalSharedFlowNative: NativeFlow<String>
-          get() = globalSharedFlow.asNativeFlow()
+          get() = globalSharedFlow.asNativeFlow(null)
         
         public val globalSharedFlowNativeReplayCache: List<String>
           get() = globalSharedFlow.replayCache
@@ -54,7 +54,7 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         import kotlin.String
         
         public val globalStateFlowNative: NativeFlow<String>
-          get() = globalStateFlow.asNativeFlow()
+          get() = globalStateFlow.asNativeFlow(null)
         
         public val globalStateFlowNativeValue: String
           get() = globalStateFlow.value
@@ -73,7 +73,7 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         import kotlin.String
         
         public val nullableFlowValueNative: NativeFlow<String?>
-          get() = nullableFlowValue.asNativeFlow()
+          get() = nullableFlowValue.asNativeFlow(null)
     """.trimIndent())
 
     @Test
@@ -90,7 +90,7 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         import kotlin.collections.List
         
         public val nullableSharedFlowValueNative: NativeFlow<String?>
-          get() = nullableSharedFlowValue.asNativeFlow()
+          get() = nullableSharedFlowValue.asNativeFlow(null)
         
         public val nullableSharedFlowValueNativeReplayCache: List<String?>
           get() = nullableSharedFlowValue.replayCache
@@ -109,7 +109,7 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         import kotlin.String
         
         public val nullableStateFlowValueNative: NativeFlow<String?>
-          get() = nullableStateFlowValue.asNativeFlow()
+          get() = nullableStateFlowValue.asNativeFlow(null)
         
         public val nullableStateFlowValueNativeValue: String?
           get() = nullableStateFlowValue.value
@@ -128,7 +128,7 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         import kotlin.String
         
         public val nullableFlowNative: NativeFlow<String>?
-          get() = nullableFlow?.asNativeFlow()
+          get() = nullableFlow?.asNativeFlow(null)
     """.trimIndent())
 
     @Test
@@ -145,7 +145,7 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         import kotlin.collections.List
         
         public val nullableSharedFlowNative: NativeFlow<String>?
-          get() = nullableSharedFlow?.asNativeFlow()
+          get() = nullableSharedFlow?.asNativeFlow(null)
         
         public val nullableSharedFlowNativeReplayCache: List<String>?
           get() = nullableSharedFlow?.replayCache
@@ -164,7 +164,7 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         import kotlin.String
         
         public val nullableStateFlowNative: NativeFlow<String>?
-          get() = nullableStateFlow?.asNativeFlow()
+          get() = nullableStateFlow?.asNativeFlow(null)
         
         public val nullableStateFlowNativeValue: String?
           get() = nullableStateFlow?.value
@@ -183,7 +183,7 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         import kotlin.String
         
         public val nullableFlowAndValueNative: NativeFlow<String?>?
-          get() = nullableFlowAndValue?.asNativeFlow()
+          get() = nullableFlowAndValue?.asNativeFlow(null)
     """.trimIndent())
 
     @Test
@@ -200,7 +200,7 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         import kotlin.collections.List
         
         public val nullableSharedFlowAndValueNative: NativeFlow<String?>?
-          get() = nullableSharedFlowAndValue?.asNativeFlow()
+          get() = nullableSharedFlowAndValue?.asNativeFlow(null)
         
         public val nullableSharedFlowAndValueNativeReplayCache: List<String?>?
           get() = nullableSharedFlowAndValue?.replayCache
@@ -219,7 +219,7 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         import kotlin.String
         
         public val nullableStateFlowAndValueNative: NativeFlow<String?>?
-          get() = nullableStateFlowAndValue?.asNativeFlow()
+          get() = nullableStateFlowAndValue?.asNativeFlow(null)
         
         public val nullableStateFlowAndValueNativeValue: String?
           get() = nullableStateFlowAndValue?.value
@@ -240,7 +240,7 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         import kotlin.collections.List
         
         public val <T> MyClass<T>.genericSharedFlowNative: NativeFlow<T>
-          get() = genericSharedFlow.asNativeFlow()
+          get() = genericSharedFlow.asNativeFlow(null)
         
         public val <T> MyClass<T>.genericSharedFlowNativeReplayCache: List<T>
           get() = genericSharedFlow.replayCache
@@ -260,7 +260,7 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         import com.rickclephas.kmp.nativecoroutines.asNativeFlow
         
         public val <T> MyClass<T>.genericStateFlowNative: NativeFlow<T>
-          get() = genericStateFlow.asNativeFlow()
+          get() = genericStateFlow.asNativeFlow(null)
         
         public val <T> MyClass<T>.genericStateFlowNativeValue: T
           get() = genericStateFlow.value
@@ -281,7 +281,7 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         import kotlin.collections.List
         
         public val <T> MyClass<T>.genericSharedFlowNative: NativeFlow<T>
-          get() = genericSharedFlow.asNativeFlow()
+          get() = genericSharedFlow.asNativeFlow(null)
         
         public val <T> MyClass<T>.genericSharedFlowNativeReplayCache: List<T>
           get() = genericSharedFlow.replayCache
@@ -301,7 +301,7 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         import com.rickclephas.kmp.nativecoroutines.asNativeFlow
         
         public val <T> MyClass<T>.genericStateFlowNative: NativeFlow<T>
-          get() = genericStateFlow.asNativeFlow()
+          get() = genericStateFlow.asNativeFlow(null)
         
         public val <T> MyClass<T>.genericStateFlowNativeValue: T
           get() = genericStateFlow.value
@@ -327,7 +327,7 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
          * KDoc for [kdocSharedFlow]
          */
         public val kdocSharedFlowNative: NativeFlow<String>
-          get() = kdocSharedFlow.asNativeFlow()
+          get() = kdocSharedFlow.asNativeFlow(null)
         
         /**
          * KDoc for [kdocSharedFlow]
@@ -355,7 +355,7 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
          * KDoc for [kdocStateFlow]
          */
         public val kdocStateFlowNative: NativeFlow<String>
-          get() = kdocStateFlow.asNativeFlow()
+          get() = kdocStateFlow.asNativeFlow(null)
         
         /**
          * KDoc for [kdocStateFlow]
@@ -380,7 +380,7 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         import kotlin.collections.List
         
         public val MyClass.sharedFlowNative: NativeFlow<String>
-          get() = sharedFlow.asNativeFlow()
+          get() = sharedFlow.asNativeFlow(null)
         
         public val MyClass.sharedFlowNativeReplayCache: List<String>
           get() = sharedFlow.replayCache
@@ -401,7 +401,7 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         import kotlin.String
         
         public val MyClass.stateFlowNative: NativeFlow<String>
-          get() = stateFlow.asNativeFlow()
+          get() = stateFlow.asNativeFlow(null)
         
         public val MyClass.stateFlowNativeValue: String
           get() = stateFlow.value
@@ -421,7 +421,7 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         import kotlin.collections.List
         
         public val String.sharedFlowNative: NativeFlow<String>
-          get() = sharedFlow.asNativeFlow()
+          get() = sharedFlow.asNativeFlow(null)
         
         public val String.sharedFlowNativeReplayCache: List<String>
           get() = sharedFlow.replayCache
@@ -440,7 +440,7 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         import kotlin.String
         
         public val String.stateFlowNative: NativeFlow<String>
-          get() = stateFlow.asNativeFlow()
+          get() = stateFlow.asNativeFlow(null)
         
         public val String.stateFlowNativeValue: String
           get() = stateFlow.value
@@ -459,7 +459,7 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         import kotlin.String
         
         public val myFlowNative: NativeFlow<String>
-          get() = myFlow.asNativeFlow()
+          get() = myFlow.asNativeFlow(null)
     """.trimIndent())
 
     @Test
@@ -488,7 +488,7 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         )
         public val sharedFlowNative: NativeFlow<String>
           @get:ExperimentalStdlibApi
-          get() = sharedFlow.asNativeFlow()
+          get() = sharedFlow.asNativeFlow(null)
         
         @Deprecated(
           message = "it's old",
@@ -525,7 +525,7 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         )
         public val stateFlowNative: NativeFlow<String>
           @get:ExperimentalStdlibApi
-          get() = stateFlow.asNativeFlow()
+          get() = stateFlow.asNativeFlow(null)
         
         @Deprecated(
           message = "it's old",
@@ -557,7 +557,7 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         import kotlin.collections.List
         
         public val sharedFlowNative: NativeFlow<String>
-          get() = sharedFlow.asNativeFlow()
+          get() = sharedFlow.asNativeFlow(null)
         
         public val sharedFlowNativeReplayCache: List<String>
           get() = sharedFlow.replayCache
@@ -582,7 +582,7 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         import kotlin.String
         
         public val stateFlowNative: NativeFlow<String>
-          get() = stateFlow.asNativeFlow()
+          get() = stateFlow.asNativeFlow(null)
         
         public val stateFlowNativeValue: String
           get() = stateFlow.value

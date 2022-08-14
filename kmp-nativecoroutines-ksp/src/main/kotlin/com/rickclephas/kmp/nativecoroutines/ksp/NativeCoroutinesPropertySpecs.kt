@@ -6,12 +6,15 @@ import com.squareup.kotlinpoet.*
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import com.squareup.kotlinpoet.ksp.*
 
-internal fun KSPropertyDeclaration.toNativeCoroutinesPropertySpecs(nativeSuffix: String): List<PropertySpec>? {
+internal fun KSPropertyDeclaration.toNativeCoroutinesPropertySpecs(
+    scopeProperty: CoroutineScopeProvider.ScopeProperty,
+    nativeSuffix: String
+): List<PropertySpec>? {
     val typeParameterResolver = getTypeParameterResolver()
     val type = type.getReturnType(typeParameterResolver) ?: return null
     if (type !is ReturnType.Flow) error("Only Flow properties are supported")
     return buildList {
-        add(toNativeCoroutinesPropertySpec(nativeSuffix, typeParameterResolver, type))
+        add(toNativeCoroutinesPropertySpec(scopeProperty, nativeSuffix, typeParameterResolver, type))
         if (type is ReturnType.Flow.State)
             add(toNativeCoroutinesValuePropertySpec(nativeSuffix, typeParameterResolver, type))
         else if (type is ReturnType.Flow.Shared)
@@ -20,6 +23,7 @@ internal fun KSPropertyDeclaration.toNativeCoroutinesPropertySpecs(nativeSuffix:
 }
 
 private fun KSPropertyDeclaration.toNativeCoroutinesPropertySpec(
+    scopeProperty: CoroutineScopeProvider.ScopeProperty,
     nativeSuffix: String,
     typeParameterResolver: TypeParameterResolver,
     type: ReturnType.Flow
@@ -29,8 +33,11 @@ private fun KSPropertyDeclaration.toNativeCoroutinesPropertySpec(
     val name = "${simpleName.asString()}$nativeSuffix"
     return createPropertySpec(typeParameterResolver, name, typeName) { code, codeArgs ->
         codeArgs.add(asNativeFlowMemberName)
-        addCode("return $code${if(type.nullable) "?." else "."}%M()", *codeArgs.toTypedArray())
-    }
+        scopeProperty.codeArg?.let(codeArgs::add)
+        addCode("return $code${if(type.nullable) "?." else "."}%M(${scopeProperty.code})", *codeArgs.toTypedArray())
+    }.apply {
+        scopeProperty.containingFile?.let(::addOriginatingKSFile)
+    }.build()
 }
 
 private fun KSPropertyDeclaration.toNativeCoroutinesValuePropertySpec(
@@ -43,7 +50,7 @@ private fun KSPropertyDeclaration.toNativeCoroutinesValuePropertySpec(
     val name = "${simpleName.asString()}${nativeSuffix}Value"
     return createPropertySpec(typeParameterResolver, name, typeName) { code, codeArgs ->
         addCode("return $code${if(type.nullable) "?." else "."}value", *codeArgs.toTypedArray())
-    }
+    }.build()
 }
 
 private fun KSPropertyDeclaration.toNativeCoroutinesReplayCachePropertySpec(
@@ -56,7 +63,7 @@ private fun KSPropertyDeclaration.toNativeCoroutinesReplayCachePropertySpec(
     val name = "${simpleName.asString()}${nativeSuffix}ReplayCache"
     return createPropertySpec(typeParameterResolver, name, typeName) { code, codeArgs ->
         addCode("return $code${if(type.nullable) "?." else "."}replayCache", *codeArgs.toTypedArray())
-    }
+    }.build()
 }
 
 private fun KSPropertyDeclaration.createPropertySpec(
@@ -64,7 +71,7 @@ private fun KSPropertyDeclaration.createPropertySpec(
     name: String,
     typeName: TypeName,
     addCode: FunSpec.Builder.(code: String, codeArgs: MutableList<Any>) -> Unit
-): PropertySpec {
+): PropertySpec.Builder {
     val classDeclaration = parentDeclaration as? KSClassDeclaration
 
     val builder = PropertySpec.builder(name, typeName)
@@ -102,5 +109,5 @@ private fun KSPropertyDeclaration.createPropertySpec(
     builder.getter(getterBuilder.build())
 
     containingFile?.let(builder::addOriginatingKSFile)
-    return builder.build()
+    return builder
 }

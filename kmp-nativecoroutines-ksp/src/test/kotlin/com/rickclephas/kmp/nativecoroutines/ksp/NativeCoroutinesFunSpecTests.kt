@@ -16,8 +16,8 @@ class NativeCoroutinesFunSpecTests: CompilationTests() {
         import com.rickclephas.kmp.nativecoroutines.nativeSuspend
         import kotlin.String
         
-        public fun returnSuspendValueNative(): NativeSuspend<String> = nativeSuspend { returnSuspendValue()
-            }
+        public fun returnSuspendValueNative(): NativeSuspend<String> = nativeSuspend(null) {
+            returnSuspendValue() }
     """.trimIndent())
 
     @Test
@@ -31,7 +31,7 @@ class NativeCoroutinesFunSpecTests: CompilationTests() {
         import com.rickclephas.kmp.nativecoroutines.nativeSuspend
         import kotlin.String
         
-        public fun returnNullableSuspendValueNative(): NativeSuspend<String?> = nativeSuspend {
+        public fun returnNullableSuspendValueNative(): NativeSuspend<String?> = nativeSuspend(null) {
             returnNullableSuspendValue() }
     """.trimIndent())
 
@@ -47,7 +47,7 @@ class NativeCoroutinesFunSpecTests: CompilationTests() {
         import com.rickclephas.kmp.nativecoroutines.asNativeFlow
         import kotlin.String
         
-        public fun returnFlowValueNative(): NativeFlow<String> = returnFlowValue().asNativeFlow()
+        public fun returnFlowValueNative(): NativeFlow<String> = returnFlowValue().asNativeFlow(null)
     """.trimIndent())
 
     @Test
@@ -63,7 +63,7 @@ class NativeCoroutinesFunSpecTests: CompilationTests() {
         import kotlin.String
         
         public fun returnNullableFlowValueNative(): NativeFlow<String?> =
-            returnNullableFlowValue().asNativeFlow()
+            returnNullableFlowValue().asNativeFlow(null)
     """.trimIndent())
 
     @Test
@@ -78,7 +78,8 @@ class NativeCoroutinesFunSpecTests: CompilationTests() {
         import com.rickclephas.kmp.nativecoroutines.asNativeFlow
         import kotlin.String
         
-        public fun returnNullableFlowNative(): NativeFlow<String>? = returnNullableFlow()?.asNativeFlow()
+        public fun returnNullableFlowNative(): NativeFlow<String>? =
+            returnNullableFlow()?.asNativeFlow(null)
     """.trimIndent())
 
     @Test
@@ -94,7 +95,7 @@ class NativeCoroutinesFunSpecTests: CompilationTests() {
         import kotlin.String
         
         public fun returnNullableFlowAndValueNative(): NativeFlow<String?>? =
-            returnNullableFlowAndValue()?.asNativeFlow()
+            returnNullableFlowAndValue()?.asNativeFlow(null)
     """.trimIndent())
 
     @Test
@@ -109,7 +110,8 @@ class NativeCoroutinesFunSpecTests: CompilationTests() {
         import com.rickclephas.kmp.nativecoroutines.asNativeFlow
         import kotlin.String
         
-        public fun returnStateFlowValueNative(): NativeFlow<String> = returnStateFlowValue().asNativeFlow()
+        public fun returnStateFlowValueNative(): NativeFlow<String> =
+            returnStateFlowValue().asNativeFlow(null)
     """.trimIndent())
 
     @Test
@@ -126,8 +128,8 @@ class NativeCoroutinesFunSpecTests: CompilationTests() {
         import com.rickclephas.kmp.nativecoroutines.nativeSuspend
         import kotlin.String
         
-        public fun returnSuspendFlowValueNative(): NativeSuspend<NativeFlow<String>> = nativeSuspend {
-            returnSuspendFlowValue().asNativeFlow() }
+        public fun returnSuspendFlowValueNative(): NativeSuspend<NativeFlow<String>> = nativeSuspend(null) {
+            returnSuspendFlowValue().asNativeFlow(null) }
     """.trimIndent())
 
     @Test
@@ -144,8 +146,8 @@ class NativeCoroutinesFunSpecTests: CompilationTests() {
         import com.rickclephas.kmp.nativecoroutines.nativeSuspend
         import kotlin.String
         
-        public fun returnSuspendFlowValueNative(): NativeSuspend<NativeFlow<String>?> = nativeSuspend {
-            returnSuspendFlowValue()?.asNativeFlow() }
+        public fun returnSuspendFlowValueNative(): NativeSuspend<NativeFlow<String>?> = nativeSuspend(null)
+            { returnSuspendFlowValue()?.asNativeFlow(null) }
     """.trimIndent())
 
     @Test
@@ -158,7 +160,7 @@ class NativeCoroutinesFunSpecTests: CompilationTests() {
         import com.rickclephas.kmp.nativecoroutines.NativeSuspend
         import com.rickclephas.kmp.nativecoroutines.nativeSuspend
         
-        public fun <T> returnGenericSuspendValueNative(): NativeSuspend<T> = nativeSuspend {
+        public fun <T> returnGenericSuspendValueNative(): NativeSuspend<T> = nativeSuspend(null) {
             returnGenericSuspendValue<T>() }
     """.trimIndent())
 
@@ -174,8 +176,8 @@ class NativeCoroutinesFunSpecTests: CompilationTests() {
         import com.rickclephas.kmp.nativecoroutines.NativeSuspend
         import com.rickclephas.kmp.nativecoroutines.nativeSuspend
         
-        public fun <T> MyClass<T>.returnClassGenericSuspendValueNative(): NativeSuspend<T> = nativeSuspend {
-            returnClassGenericSuspendValue() }
+        public fun <T> MyClass<T>.returnClassGenericSuspendValueNative(): NativeSuspend<T> =
+            nativeSuspend(null) { returnClassGenericSuspendValue() }
     """.trimIndent())
 
     @Test
@@ -191,7 +193,7 @@ class NativeCoroutinesFunSpecTests: CompilationTests() {
         import com.rickclephas.kmp.nativecoroutines.nativeSuspend
         
         public fun <T, R> MyClass<T>.returnGenericSuspendValueNative(input: T): NativeSuspend<R> =
-            nativeSuspend { returnGenericSuspendValue<R>(input) }
+            nativeSuspend(null) { returnGenericSuspendValue<R>(input) }
     """.trimIndent())
 
     @Test
@@ -211,8 +213,8 @@ class NativeCoroutinesFunSpecTests: CompilationTests() {
         /**
          * KDoc for [returnSuspendValue]
          */
-        public fun returnSuspendValueNative(): NativeSuspend<String> = nativeSuspend { returnSuspendValue()
-            }
+        public fun returnSuspendValueNative(): NativeSuspend<String> = nativeSuspend(null) {
+            returnSuspendValue() }
     """.trimIndent())
 
     @Test
@@ -228,7 +230,7 @@ class NativeCoroutinesFunSpecTests: CompilationTests() {
         import com.rickclephas.kmp.nativecoroutines.nativeSuspend
         import kotlin.String
         
-        public fun MyClass.returnSuspendValueNative(): NativeSuspend<String> = nativeSuspend {
+        public fun MyClass.returnSuspendValueNative(): NativeSuspend<String> = nativeSuspend(null) {
             returnSuspendValue() }
     """.trimIndent())
 
@@ -243,7 +245,7 @@ class NativeCoroutinesFunSpecTests: CompilationTests() {
         import com.rickclephas.kmp.nativecoroutines.nativeSuspend
         import kotlin.String
         
-        public fun String.returnReceiverValueNative(): NativeSuspend<String> = nativeSuspend {
+        public fun String.returnReceiverValueNative(): NativeSuspend<String> = nativeSuspend(null) {
             returnReceiverValue() }
     """.trimIndent())
 
@@ -262,7 +264,7 @@ class NativeCoroutinesFunSpecTests: CompilationTests() {
         import kotlin.run
         
         public fun MyClass.returnReceiverValueNative(`receiver`: String): NativeSuspend<String> =
-            nativeSuspend { run { `receiver`.returnReceiverValue() } }
+            nativeSuspend(null) { run { `receiver`.returnReceiverValue() } }
     """.trimIndent())
 
     @Test
@@ -276,7 +278,7 @@ class NativeCoroutinesFunSpecTests: CompilationTests() {
         import com.rickclephas.kmp.nativecoroutines.nativeSuspend
         import kotlin.String
         
-        public fun returnSuspendValueNative(`value`: String): NativeSuspend<String> = nativeSuspend {
+        public fun returnSuspendValueNative(`value`: String): NativeSuspend<String> = nativeSuspend(null) {
             returnSuspendValue(`value`) }
     """.trimIndent())
 
@@ -291,7 +293,7 @@ class NativeCoroutinesFunSpecTests: CompilationTests() {
         import com.rickclephas.kmp.nativecoroutines.nativeSuspend
         import kotlin.String
         
-        public fun returnSuspendValueNative(`value`: String): NativeSuspend<String> = nativeSuspend {
+        public fun returnSuspendValueNative(`value`: String): NativeSuspend<String> = nativeSuspend(null) {
             returnSuspendValue(`value`) }
     """.trimIndent())
 
@@ -308,7 +310,7 @@ class NativeCoroutinesFunSpecTests: CompilationTests() {
         import kotlin.String
         
         public fun returnFlowValueNative(`value`: String): NativeFlow<String> =
-            returnFlowValue(`value`).asNativeFlow()
+            returnFlowValue(`value`).asNativeFlow(null)
     """.trimIndent())
 
     @Test
@@ -331,8 +333,8 @@ class NativeCoroutinesFunSpecTests: CompilationTests() {
           replaceWith = ReplaceWith(expression = "", imports = arrayOf()),
           level = DeprecationLevel.WARNING,
         )
-        public fun returnSuspendValueNative(): NativeSuspend<String> = nativeSuspend { returnSuspendValue()
-            }
+        public fun returnSuspendValueNative(): NativeSuspend<String> = nativeSuspend(null) {
+            returnSuspendValue() }
     """.trimIndent())
 
     /**
@@ -352,7 +354,7 @@ class NativeCoroutinesFunSpecTests: CompilationTests() {
         import com.rickclephas.kmp.nativecoroutines.nativeSuspend
         import kotlin.String
         
-        public fun returnSuspendValueNative(): NativeSuspend<String> = nativeSuspend { returnSuspendValue()
-            }
+        public fun returnSuspendValueNative(): NativeSuspend<String> = nativeSuspend(null) {
+            returnSuspendValue() }
     """.trimIndent())
 }
