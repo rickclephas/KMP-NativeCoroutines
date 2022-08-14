@@ -21,7 +21,7 @@ jobs:
       matrix:
         os: [ macos-12 ]
         java: [ 11 ]
-        module: [ core ]
+        module: [ core, ksp ]
     name: ${{ format('{0} ({1}, JDK {2})', matrix.module, matrix.os, matrix.java) }}
     runs-on: ${{ matrix.os }}
     steps:
