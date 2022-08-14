@@ -80,5 +80,6 @@ internal fun KSFunctionDeclaration.toNativeCoroutinesFunSpec(nativeSuffix: Strin
     code = "return $code"
     builder.addCode(code, *codeArgs.toTypedArray())
 
+    containingFile?.let(builder::addOriginatingKSFile)
     return builder.build()
 }

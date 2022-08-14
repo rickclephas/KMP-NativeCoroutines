@@ -1,15 +1,10 @@
 package com.rickclephas.kmp.nativecoroutines.ksp
 
-import com.google.devtools.ksp.symbol.KSClassDeclaration
-import com.google.devtools.ksp.symbol.KSPropertyDeclaration
-import com.rickclephas.kmp.nativecoroutines.ksp.kotlinpoet.getTypeParameterResolver
-import com.rickclephas.kmp.nativecoroutines.ksp.kotlinpoet.toAnnotationSpecs
-import com.rickclephas.kmp.nativecoroutines.ksp.kotlinpoet.toTypeName
-import com.rickclephas.kmp.nativecoroutines.ksp.kotlinpoet.toTypeVariableNames
+import com.google.devtools.ksp.symbol.*
+import com.rickclephas.kmp.nativecoroutines.ksp.kotlinpoet.*
 import com.squareup.kotlinpoet.*
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
-import com.squareup.kotlinpoet.ksp.TypeParameterResolver
-import com.squareup.kotlinpoet.ksp.toTypeName
+import com.squareup.kotlinpoet.ksp.*
 
 internal fun KSPropertyDeclaration.toNativeCoroutinesPropertySpecs(nativeSuffix: String): List<PropertySpec>? {
     val typeParameterResolver = getTypeParameterResolver()
@@ -106,5 +101,6 @@ private fun KSPropertyDeclaration.createPropertySpec(
     addCode(getterBuilder, code, codeArgs)
     builder.getter(getterBuilder.build())
 
+    containingFile?.let(builder::addOriginatingKSFile)
     return builder.build()
 }

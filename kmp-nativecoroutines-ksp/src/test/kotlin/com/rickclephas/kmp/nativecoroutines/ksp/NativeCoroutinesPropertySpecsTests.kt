@@ -587,5 +587,4 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         public val stateFlowNativeValue: String
           get() = stateFlow.value
     """.trimIndent())
-
 }
