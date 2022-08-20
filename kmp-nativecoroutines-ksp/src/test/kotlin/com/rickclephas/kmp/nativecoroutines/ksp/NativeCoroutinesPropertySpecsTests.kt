@@ -61,6 +61,43 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
     """.trimIndent())
 
     @Test
+    fun globalMutableStateFlowProperty() = runKspTest("""
+        import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
+        import kotlinx.coroutines.flow.MutableStateFlow
+        
+        @NativeCoroutines
+        val globalMutableStateFlow: MutableStateFlow<String> get() = TODO()
+    """.trimIndent(), """
+        import com.rickclephas.kmp.nativecoroutines.NativeFlow
+        import com.rickclephas.kmp.nativecoroutines.asNativeFlow
+        import kotlin.String
+        
+        public val globalMutableStateFlowNative: NativeFlow<String>
+          get() = globalMutableStateFlow.asNativeFlow(null)
+        
+        public val globalMutableStateFlowNativeValue: String
+          get() = globalMutableStateFlow.value
+    """.trimIndent())
+
+    @Test
+    fun globalCustomFlowProperty() = runKspTest("""
+        import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
+        import kotlinx.coroutines.flow.AbstractFlow
+        
+        abstract class CustomFlow<T1, T2>: AbstractFlow<T2>
+        
+        @NativeCoroutines
+        val globalCustomFlow: CustomFlow<Int, String> get() = TODO()
+    """.trimIndent(), """
+        import com.rickclephas.kmp.nativecoroutines.NativeFlow
+        import com.rickclephas.kmp.nativecoroutines.asNativeFlow
+        import kotlin.String
+        
+        public val globalCustomFlowNative: NativeFlow<String>
+          get() = globalCustomFlow.asNativeFlow(null)
+    """.trimIndent())
+
+    @Test
     fun nullableFlowValueProperty() = runKspTest("""
         import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
         import kotlinx.coroutines.flow.Flow

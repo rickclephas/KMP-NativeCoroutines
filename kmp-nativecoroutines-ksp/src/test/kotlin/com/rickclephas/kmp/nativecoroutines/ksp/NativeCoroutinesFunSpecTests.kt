@@ -51,6 +51,23 @@ class NativeCoroutinesFunSpecTests: CompilationTests() {
     """.trimIndent())
 
     @Test
+    fun customFlowFunction() = runKspTest("""
+        import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
+        import kotlinx.coroutines.flow.AbstractFlow
+        
+        abstract class CustomFlow<T1, T2>: AbstractFlow<T2>
+        
+        @NativeCoroutines
+        fun <R> returnCustomFlowValue(): CustomFlow<String, R> = TODO()
+    """.trimIndent(), """
+        import com.rickclephas.kmp.nativecoroutines.NativeFlow
+        import com.rickclephas.kmp.nativecoroutines.asNativeFlow
+        
+        public fun <R> returnCustomFlowValueNative(): NativeFlow<R> =
+            returnCustomFlowValue<R>().asNativeFlow(null)
+    """.trimIndent())
+
+    @Test
     fun nullableFlowValueFunction() = runKspTest("""
         import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
         import kotlinx.coroutines.flow.Flow
