@@ -84,7 +84,7 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
         import kotlinx.coroutines.flow.AbstractFlow
         
-        abstract class CustomFlow<T1, T2>: AbstractFlow<T2>
+        abstract class CustomFlow<T1, T2>: AbstractFlow<T2>()
         
         @NativeCoroutines
         val globalCustomFlow: CustomFlow<Int, String> get() = TODO()
@@ -95,6 +95,42 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         
         public val globalCustomFlowNative: NativeFlow<String>
           get() = globalCustomFlow.asNativeFlow(null)
+    """.trimIndent())
+
+    @Test
+    fun nullableCustomFlowProperty() = runKspTest("""
+        import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
+        import kotlinx.coroutines.flow.AbstractFlow
+        
+        abstract class CustomFlow<T1, T2>: AbstractFlow<T2>()
+        
+        @NativeCoroutines
+        val nullableCustomFlow: CustomFlow<Int, String>? get() = null
+    """.trimIndent(), """
+        import com.rickclephas.kmp.nativecoroutines.NativeFlow
+        import com.rickclephas.kmp.nativecoroutines.asNativeFlow
+        import kotlin.String
+        
+        public val nullableCustomFlowNative: NativeFlow<String>?
+          get() = nullableCustomFlow?.asNativeFlow(null)
+    """.trimIndent())
+
+    @Test
+    fun nullableCustomFlowValueProperty() = runKspTest("""
+        import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
+        import kotlinx.coroutines.flow.AbstractFlow
+        
+        abstract class CustomFlow<T1, T2>: AbstractFlow<T2?>()
+        
+        @NativeCoroutines
+        val nullableCustomFlowValue: CustomFlow<Int, String> get() = null
+    """.trimIndent(), """
+        import com.rickclephas.kmp.nativecoroutines.NativeFlow
+        import com.rickclephas.kmp.nativecoroutines.asNativeFlow
+        import kotlin.String
+        
+        public val nullableCustomFlowValueNative: NativeFlow<String?>
+          get() = nullableCustomFlowValue.asNativeFlow(null)
     """.trimIndent())
 
     @Test

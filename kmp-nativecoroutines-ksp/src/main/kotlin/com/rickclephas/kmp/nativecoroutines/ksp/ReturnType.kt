@@ -1,7 +1,6 @@
 package com.rickclephas.kmp.nativecoroutines.ksp
 
 import com.google.devtools.ksp.symbol.KSClassDeclaration
-import com.google.devtools.ksp.symbol.KSTypeArgument
 import com.google.devtools.ksp.symbol.KSTypeParameter
 import com.google.devtools.ksp.symbol.KSTypeReference
 import com.squareup.kotlinpoet.TypeName
@@ -34,34 +33,39 @@ internal sealed class ReturnType {
 
 internal fun KSTypeReference.getReturnType(
     typeParameterResolver: TypeParameterResolver,
-    typeParameterArguments: Map<String, KSTypeArgument> = emptyMap()
+    typeParameterArguments: Map<String, TypeName> = emptyMap(),
+    typeIsMarkedNullable: Boolean? = null
 ): ReturnType? {
     val type = resolve()
     if (type.isError) return null
     val classDeclaration = type.declaration as? KSClassDeclaration ?: return ReturnType.Other(this)
     val typeArguments = type.arguments.map { typeArgument ->
-        val declaration = typeArgument.type?.resolve()?.takeUnless { it.isError }?.declaration ?: return null
-        if (declaration !is KSTypeParameter) return@map typeArgument
-        typeParameterArguments[declaration.name.getShortName()] ?: typeArgument
+        val typeArgumentType = typeArgument.type?.resolve()?.takeUnless { it.isError } ?: return null
+        val typeArgumentDeclaration = typeArgumentType.declaration
+        if (typeArgumentDeclaration !is KSTypeParameter) return@map typeArgument.toTypeName(typeParameterResolver)
+        typeParameterArguments[typeArgumentDeclaration.name.getShortName()]?.let {
+            it.copy(nullable = it.isNullable || typeArgumentType.isMarkedNullable)
+        } ?: typeArgument.toTypeName(typeParameterResolver)
     }
+    val isMarkedNullable = typeIsMarkedNullable ?: type.isMarkedNullable
     if (classDeclaration.isStateFlow())
         return ReturnType.Flow.State(
             this,
-            typeArguments.first().toTypeName(typeParameterResolver),
-            type.isMarkedNullable)
+            typeArguments.first(),
+            isMarkedNullable)
     if (classDeclaration.isSharedFlow())
         return ReturnType.Flow.Shared(
             this,
-            typeArguments.first().toTypeName(typeParameterResolver),
-            type.isMarkedNullable)
+            typeArguments.first(),
+            isMarkedNullable)
     if (classDeclaration.isFlow())
         return ReturnType.Flow.Generic(
             this,
-            typeArguments.first().toTypeName(typeParameterResolver),
-            type.isMarkedNullable)
+            typeArguments.first(),
+            isMarkedNullable)
     val arguments = classDeclaration.typeParameters.map { it.name.getShortName() }.zip(typeArguments).toMap()
     for (superType in classDeclaration.superTypes) {
-        val returnType = superType.getReturnType(typeParameterResolver, arguments)
+        val returnType = superType.getReturnType(typeParameterResolver, arguments, isMarkedNullable)
         if (returnType == null || returnType is ReturnType.Flow) return returnType
     }
     return ReturnType.Other(this)

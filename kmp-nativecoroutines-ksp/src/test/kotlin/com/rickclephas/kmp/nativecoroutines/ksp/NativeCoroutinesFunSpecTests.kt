@@ -55,7 +55,7 @@ class NativeCoroutinesFunSpecTests: CompilationTests() {
         import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
         import kotlinx.coroutines.flow.AbstractFlow
         
-        abstract class CustomFlow<T1, T2>: AbstractFlow<T2>
+        abstract class CustomFlow<T1, T2>: AbstractFlow<T2>()
         
         @NativeCoroutines
         fun <R> returnCustomFlowValue(): CustomFlow<String, R> = TODO()
