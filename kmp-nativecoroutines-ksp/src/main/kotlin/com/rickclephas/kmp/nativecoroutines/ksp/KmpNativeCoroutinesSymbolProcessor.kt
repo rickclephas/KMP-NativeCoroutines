@@ -9,7 +9,7 @@ import com.squareup.kotlinpoet.ksp.writeTo
 internal class KmpNativeCoroutinesSymbolProcessor(
     private val codeGenerator: CodeGenerator,
     private val logger: KSPLogger,
-    private val nativeSuffix: String
+    private val options: KmpNativeCoroutinesOptions
 ): SymbolProcessor {
 
     private val coroutineScopeProvider = CoroutineScopeProvider(logger)
@@ -17,7 +17,7 @@ internal class KmpNativeCoroutinesSymbolProcessor(
     private val fileSpecBuilders = mutableMapOf<String, FileSpec.Builder>()
 
     private fun KSFile.getFileSpecBuilder(): FileSpec.Builder = fileSpecBuilders.getOrPut(filePath) {
-        FileSpec.builder(packageName.asString(), "${fileName.removeSuffix(".kt")}$nativeSuffix")
+        FileSpec.builder(packageName.asString(), "${fileName.removeSuffix(".kt")}${options.fileSuffix}")
     }
 
     override fun process(resolver: Resolver): List<KSAnnotated> {
@@ -47,7 +47,7 @@ internal class KmpNativeCoroutinesSymbolProcessor(
             return true
         }
         val scopeProperty = coroutineScopeProvider.getScopeProperty(property) ?: return false
-        val propertySpecs = property.toNativeCoroutinesPropertySpecs(scopeProperty, nativeSuffix) ?: return false
+        val propertySpecs = property.toNativeCoroutinesPropertySpecs(scopeProperty, options.suffix) ?: return false
         val fileSpecBuilder = file.getFileSpecBuilder()
         propertySpecs.forEach(fileSpecBuilder::addProperty)
         return true
@@ -61,7 +61,7 @@ internal class KmpNativeCoroutinesSymbolProcessor(
             return true
         }
         val scopeProperty = coroutineScopeProvider.getScopeProperty(function) ?: return false
-        val funSpec = function.toNativeCoroutinesFunSpec(scopeProperty, nativeSuffix) ?: return false
+        val funSpec = function.toNativeCoroutinesFunSpec(scopeProperty, options.suffix) ?: return false
         file.getFileSpecBuilder().addFunction(funSpec)
         return true
     }

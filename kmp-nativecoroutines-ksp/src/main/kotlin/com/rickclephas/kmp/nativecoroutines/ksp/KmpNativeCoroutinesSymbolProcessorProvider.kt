@@ -6,7 +6,7 @@ import com.google.devtools.ksp.processing.SymbolProcessorProvider
 
 class KmpNativeCoroutinesSymbolProcessorProvider: SymbolProcessorProvider {
     override fun create(environment: SymbolProcessorEnvironment): SymbolProcessor {
-        // TODO: Use config values
-        return KmpNativeCoroutinesSymbolProcessor(environment.codeGenerator, environment.logger, "Native")
+        val options = KmpNativeCoroutinesOptions(environment.options)
+        return KmpNativeCoroutinesSymbolProcessor(environment.codeGenerator, environment.logger, options)
     }
 }

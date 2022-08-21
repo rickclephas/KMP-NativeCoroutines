@@ -11,6 +11,13 @@ class KmpNativeCoroutinesPlugin: KotlinCompilerPluginSupportPlugin {
     companion object {
         private val KotlinTarget.isKmpNativeCoroutinesTarget: Boolean
             get() = this is KotlinNativeTarget && konanTarget.family.isAppleFamily
+
+        private fun Project.setKSPArguments(block: ((String, String) -> Unit) -> Unit) {
+            val ksp = extensions.getByName("ksp")
+            val argMethod = Class.forName("com.google.devtools.ksp.gradle.KspExtension")
+                .getDeclaredMethod("arg", String::class.java, String::class.java)
+            block { key, value -> argMethod.invoke(ksp, key, value) }
+        }
     }
 
     override fun apply(target: Project) {
@@ -26,6 +33,11 @@ class KmpNativeCoroutinesPlugin: KotlinCompilerPluginSupportPlugin {
                 "ksp${target.targetName.replaceFirstChar { it.uppercaseChar() }}"
             }.forEach {
                 project.dependencies.add(it, "com.rickclephas.kmp:kmp-nativecoroutines-ksp:$VERSION")
+            }
+            val nativeCoroutines = project.extensions.getByType(KmpNativeCoroutinesExtension::class.java)
+            project.setKSPArguments { arg ->
+                arg("nativeCoroutines.suffix", nativeCoroutines.suffix)
+                nativeCoroutines.fileSuffix?.let { arg("nativeCoroutines.fileSuffix", it) }
             }
         }
     }
