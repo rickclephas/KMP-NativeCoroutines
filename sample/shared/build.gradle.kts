@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.kotlin.plugin.serialization)
     @Suppress("DSL_SCOPE_VIOLATION")
     alias(libs.plugins.ksp)
+    id("com.rickclephas.kmp.nativecoroutines")
 }
 
 version = "1.0"
@@ -29,8 +30,6 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(libs.kotlinx.serialization.json)
-                implementation("com.rickclephas.kmp:kmp-nativecoroutines-annotations")
-                implementation("com.rickclephas.kmp:kmp-nativecoroutines-core")
             }
         }
         val commonTest by getting {
@@ -59,7 +58,12 @@ kotlin {
             getByName("${it.targetName}Test") {
                 dependsOn(appleTest)
             }
-            dependencies.add("ksp${it.targetName.capitalize()}", "com.rickclephas.kmp:kmp-nativecoroutines-ksp")
         }
     }
+}
+
+// TODO: remove workaround for https://github.com/google/ksp/issues/897
+tasks.withType<com.google.devtools.ksp.gradle.KspTaskNative>().configureEach {
+    val compileKotlinTask = tasks.named<org.jetbrains.kotlin.gradle.tasks.KotlinNativeCompile>(compilation.compileKotlinTaskName).get()
+    compilerPluginOptions.addPluginArgument(compileKotlinTask.compilerPluginOptions)
 }
