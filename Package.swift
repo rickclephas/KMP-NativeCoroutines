@@ -20,6 +20,10 @@ let package = Package(
         .library(
             name: "KMPNativeCoroutinesRxSwift",
             targets: ["KMPNativeCoroutinesRxSwift"]
+        ),
+        .library(
+            name: "KMPNativeCoroutinesSwiftUI",
+            targets: ["KMPNativeCoroutinesSwiftUI"]
         )
     ],
     dependencies: [
@@ -62,6 +66,11 @@ let package = Package(
             name: "KMPNativeCoroutinesRxSwiftTests",
             dependencies: ["KMPNativeCoroutinesRxSwift"],
             path: "KMPNativeCoroutinesRxSwiftTests"
+        ),
+        .target(
+            name: "KMPNativeCoroutinesSwiftUI",
+            dependencies: ["KMPNativeCoroutinesCombine"],
+            path: "KMPNativeCoroutinesSwiftUI"
         )
     ],
     swiftLanguageVersions: [.v5]

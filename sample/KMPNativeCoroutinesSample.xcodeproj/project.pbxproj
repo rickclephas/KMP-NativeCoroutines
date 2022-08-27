@@ -11,6 +11,14 @@
 		1D02C12426C82EE800E2FF60 /* CompilerIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D02C12126C82EE800E2FF60 /* CompilerIntegrationTests.swift */; };
 		1D02C12526C82EE800E2FF60 /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D02C12226C82EE800E2FF60 /* TestUtils.swift */; };
 		1D02C12626C82EE800E2FF60 /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D02C12226C82EE800E2FF60 /* TestUtils.swift */; };
+		1D0376B428BA78C90013FDEF /* KMPNativeCoroutinesSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 1D0376B328BA78C90013FDEF /* KMPNativeCoroutinesSwiftUI */; };
+		1D0376B628BA78D00013FDEF /* KMPNativeCoroutinesSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 1D0376B528BA78D00013FDEF /* KMPNativeCoroutinesSwiftUI */; };
+		1D0376B828BA78D90013FDEF /* KMPNativeCoroutinesSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 1D0376B728BA78D90013FDEF /* KMPNativeCoroutinesSwiftUI */; };
+		1D0376BA28BA78E30013FDEF /* KMPNativeCoroutinesSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 1D0376B928BA78E30013FDEF /* KMPNativeCoroutinesSwiftUI */; };
+		1D0376BD28BA7E9D0013FDEF /* StateFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0376BC28BA7E9D0013FDEF /* StateFlowView.swift */; };
+		1D0376BE28BA7E9D0013FDEF /* StateFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0376BC28BA7E9D0013FDEF /* StateFlowView.swift */; };
+		1D0376BF28BA7E9D0013FDEF /* StateFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0376BC28BA7E9D0013FDEF /* StateFlowView.swift */; };
+		1D0376C028BA7E9D0013FDEF /* StateFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0376BC28BA7E9D0013FDEF /* StateFlowView.swift */; };
 		1D0CA84D2677F6DB0000D612 /* AsyncFunctionIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0CA84C2677F6DB0000D612 /* AsyncFunctionIntegrationTests.swift */; };
 		1D0CA84E2677F6DB0000D612 /* AsyncFunctionIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0CA84C2677F6DB0000D612 /* AsyncFunctionIntegrationTests.swift */; };
 		1D103F132747FFBB001567CA /* AsyncTestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D103F122747FFBB001567CA /* AsyncTestUtils.swift */; };
@@ -236,6 +244,7 @@
 /* Begin PBXFileReference section */
 		1D02C12126C82EE800E2FF60 /* CompilerIntegrationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompilerIntegrationTests.swift; sourceTree = "<group>"; };
 		1D02C12226C82EE800E2FF60 /* TestUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUtils.swift; sourceTree = "<group>"; };
+		1D0376BC28BA7E9D0013FDEF /* StateFlowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateFlowView.swift; sourceTree = "<group>"; };
 		1D04AEFF266E9C0700920D20 /* KMPNativeCoroutinesCombine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KMPNativeCoroutinesCombine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D04AF3C266EB02000920D20 /* KMPNativeCoroutinesCombine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KMPNativeCoroutinesCombine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D0CA84C2677F6DB0000D612 /* AsyncFunctionIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncFunctionIntegrationTests.swift; sourceTree = "<group>"; };
@@ -309,6 +318,7 @@
 				1D75A341272C85EB00CFF795 /* KMPNativeCoroutinesCore in Frameworks */,
 				1D7134F0272EBA6B00D4A256 /* KMPNativeCoroutinesAsync in Frameworks */,
 				1D75A343272C85EB00CFF795 /* KMPNativeCoroutinesRxSwift in Frameworks */,
+				1D0376B828BA78D90013FDEF /* KMPNativeCoroutinesSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -331,6 +341,7 @@
 				1D75A347272C85F600CFF795 /* KMPNativeCoroutinesCore in Frameworks */,
 				1D7134F4272EBA7600D4A256 /* KMPNativeCoroutinesAsync in Frameworks */,
 				1D75A349272C85F600CFF795 /* KMPNativeCoroutinesRxSwift in Frameworks */,
+				1D0376BA28BA78E30013FDEF /* KMPNativeCoroutinesSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -353,6 +364,7 @@
 				1D75A335272C85CC00CFF795 /* KMPNativeCoroutinesCore in Frameworks */,
 				1D7134E8272EBA5700D4A256 /* KMPNativeCoroutinesAsync in Frameworks */,
 				1D75A337272C85CC00CFF795 /* KMPNativeCoroutinesRxSwift in Frameworks */,
+				1D0376B428BA78C90013FDEF /* KMPNativeCoroutinesSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -364,6 +376,7 @@
 				1D75A33B272C85E300CFF795 /* KMPNativeCoroutinesCore in Frameworks */,
 				1D7134EA272EBA5D00D4A256 /* KMPNativeCoroutinesAsync in Frameworks */,
 				1D75A33D272C85E300CFF795 /* KMPNativeCoroutinesRxSwift in Frameworks */,
+				1D0376B628BA78D00013FDEF /* KMPNativeCoroutinesSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -417,10 +430,19 @@
 			path = IntegrationTests;
 			sourceTree = "<group>";
 		};
+		1D0376BB28BA7E550013FDEF /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				1D0376BC28BA7E9D0013FDEF /* StateFlowView.swift */,
+			);
+			path = SwiftUI;
+			sourceTree = "<group>";
+		};
 		1D04AED6266E966900920D20 = {
 			isa = PBXGroup;
 			children = (
 				1D75A330272C85BA00CFF795 /* Packages */,
+				1D0376BB28BA7E550013FDEF /* SwiftUI */,
 				1DA5DD04267647F6002448E3 /* Async */,
 				1D02C12026C82EE800E2FF60 /* IntegrationTests */,
 				1D71762826700A4400846F75 /* Combine */,
@@ -634,6 +656,7 @@
 				1D75A340272C85EB00CFF795 /* KMPNativeCoroutinesCore */,
 				1D75A342272C85EB00CFF795 /* KMPNativeCoroutinesRxSwift */,
 				1D7134EF272EBA6B00D4A256 /* KMPNativeCoroutinesAsync */,
+				1D0376B728BA78D90013FDEF /* KMPNativeCoroutinesSwiftUI */,
 			);
 			productName = "tvOS App";
 			productReference = 1D63BF3326E3E1DB003363BE /* tvOS App.app */;
@@ -719,6 +742,7 @@
 				1D75A346272C85F600CFF795 /* KMPNativeCoroutinesCore */,
 				1D75A348272C85F600CFF795 /* KMPNativeCoroutinesRxSwift */,
 				1D7134F3272EBA7600D4A256 /* KMPNativeCoroutinesAsync */,
+				1D0376B928BA78E30013FDEF /* KMPNativeCoroutinesSwiftUI */,
 			);
 			productName = "watchOS App WatchKit Extension";
 			productReference = 1D63BF8526E4F009003363BE /* watchOS App WatchKit Extension.appex */;
@@ -768,6 +792,7 @@
 				1D75A334272C85CC00CFF795 /* KMPNativeCoroutinesCore */,
 				1D75A336272C85CC00CFF795 /* KMPNativeCoroutinesRxSwift */,
 				1D7134E7272EBA5700D4A256 /* KMPNativeCoroutinesAsync */,
+				1D0376B328BA78C90013FDEF /* KMPNativeCoroutinesSwiftUI */,
 			);
 			productName = "macOS App";
 			productReference = 1D7175FC267009C500846F75 /* macOS App.app */;
@@ -792,6 +817,7 @@
 				1D75A33A272C85E300CFF795 /* KMPNativeCoroutinesCore */,
 				1D75A33C272C85E300CFF795 /* KMPNativeCoroutinesRxSwift */,
 				1D7134E9272EBA5D00D4A256 /* KMPNativeCoroutinesAsync */,
+				1D0376B528BA78D00013FDEF /* KMPNativeCoroutinesSwiftUI */,
 			);
 			productName = "iOS App";
 			productReference = 1D717613267009E700846F75 /* iOS App.app */;
@@ -1147,6 +1173,7 @@
 			files = (
 				1D63BF6626E3E24D003363BE /* RandomLettersRxSwiftViewModel.swift in Sources */,
 				1D63BF3626E3E1DB003363BE /* AppDelegate.swift in Sources */,
+				1D0376BF28BA7E9D0013FDEF /* StateFlowView.swift in Sources */,
 				1D4F36C026E5030E00F7C772 /* RandomLettersAsyncViewModel.swift in Sources */,
 				1D63BF6126E3E23E003363BE /* ClockCombineViewModel.swift in Sources */,
 				1D63BF6926E3E258003363BE /* ClockView.swift in Sources */,
@@ -1189,6 +1216,7 @@
 				1D63BF9126E4F009003363BE /* ComplicationController.swift in Sources */,
 				1D63BFCC26E4F0F1003363BE /* NavigationBarTitle.swift in Sources */,
 				1D63BF8B26E4F009003363BE /* HostingController.swift in Sources */,
+				1D0376C028BA7E9D0013FDEF /* StateFlowView.swift in Sources */,
 				1D63BFC526E4F0DB003363BE /* ClockRxSwiftViewModel.swift in Sources */,
 				1D63BFC226E4F0D1003363BE /* RandomLettersCombineViewModel.swift in Sources */,
 				1D63BFC626E4F0DE003363BE /* RandomLettersRxSwiftViewModel.swift in Sources */,
@@ -1229,6 +1257,7 @@
 			files = (
 				1D71763026700A6E00846F75 /* ClockView.swift in Sources */,
 				1D7175FF267009C500846F75 /* AppDelegate.swift in Sources */,
+				1D0376BD28BA7E9D0013FDEF /* StateFlowView.swift in Sources */,
 				1DA5DD0626764810002448E3 /* RandomLettersAsyncViewModel.swift in Sources */,
 				1DF1A66F2671494800945FF9 /* NavigationBarTitle.swift in Sources */,
 				1D71762A26700A6000846F75 /* ClockCombineViewModel.swift in Sources */,
@@ -1251,6 +1280,7 @@
 				1D5DAF7E2698B5EB0059D4B8 /* ClockRxSwiftViewModel.swift in Sources */,
 				1D810BC326A20FD30065C740 /* ClockAsyncViewModel.swift in Sources */,
 				1D5DAF812698C3C30059D4B8 /* RandomLettersRxSwiftViewModel.swift in Sources */,
+				1D0376BE28BA7E9D0013FDEF /* StateFlowView.swift in Sources */,
 				1D717616267009E700846F75 /* AppDelegate.swift in Sources */,
 				1DF1A6702671494800945FF9 /* NavigationBarTitle.swift in Sources */,
 				1DF1A67626714FBD00945FF9 /* RandomLettersView.swift in Sources */,
@@ -2986,6 +3016,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		1D0376B328BA78C90013FDEF /* KMPNativeCoroutinesSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = KMPNativeCoroutinesSwiftUI;
+		};
+		1D0376B528BA78D00013FDEF /* KMPNativeCoroutinesSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = KMPNativeCoroutinesSwiftUI;
+		};
+		1D0376B728BA78D90013FDEF /* KMPNativeCoroutinesSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = KMPNativeCoroutinesSwiftUI;
+		};
+		1D0376B928BA78E30013FDEF /* KMPNativeCoroutinesSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = KMPNativeCoroutinesSwiftUI;
+		};
 		1D7134E7272EBA5700D4A256 /* KMPNativeCoroutinesAsync */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = KMPNativeCoroutinesAsync;

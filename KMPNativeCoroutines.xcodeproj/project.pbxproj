@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1D0376A828BA75150013FDEF /* KMPNativeCoroutinesCombine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D71759F266FE9B700846F75 /* KMPNativeCoroutinesCombine.framework */; };
+		1D0376AE28BA75A90013FDEF /* StateFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0376AD28BA75A90013FDEF /* StateFlow.swift */; };
+		1D0376B028BA767D0013FDEF /* ObservablePublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0376AF28BA767D0013FDEF /* ObservablePublisher.swift */; };
+		1D0376B228BA77350013FDEF /* StateFlowInits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0376B128BA77350013FDEF /* StateFlowInits.swift */; };
 		1D4E296A268A26B000C0D4EF /* FuturePublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4E2969268A26B000C0D4EF /* FuturePublisher.swift */; };
 		1D7175B7266FE9F800846F75 /* KMPNativeCoroutinesCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D717583266FE90400846F75 /* KMPNativeCoroutinesCore.framework */; };
 		1D7175BC266FF03200846F75 /* NativeCallback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2EC83C266D209600B118B0 /* NativeCallback.swift */; };
@@ -17,7 +21,6 @@
 		1D7175C1266FF04200846F75 /* Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2EC86A266D290000B118B0 /* Publisher.swift */; };
 		1D75A367272D4B3800CFF795 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1D75A366272D4B3800CFF795 /* RxSwift */; };
 		1D75A369272D4B4900CFF795 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1D75A368272D4B4900CFF795 /* RxSwift */; };
-		1D75A36A272D4BC200CFF795 /* KMPNativeCoroutinesCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D717583266FE90400846F75 /* KMPNativeCoroutinesCore.framework */; };
 		1DA5DCEF267613BB002448E3 /* KMPNativeCoroutinesAsync.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DA5DCE5267613BB002448E3 /* KMPNativeCoroutinesAsync.framework */; platformFilter = ios; };
 		1DA5DCF4267613BB002448E3 /* AsyncFunctionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA5DCF3267613BB002448E3 /* AsyncFunctionTests.swift */; };
 		1DA5DCFD26761404002448E3 /* AsyncFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA5DCFC26761404002448E3 /* AsyncFunction.swift */; };
@@ -39,7 +42,21 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		1D0376AA28BA75150013FDEF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1DF8833F266D1BC10058B6F9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1D71759E266FE9B700846F75;
+			remoteInfo = KMPNativeCoroutinesCombine;
+		};
 		1D7175B9266FE9F800846F75 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1DF8833F266D1BC10058B6F9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1D717582266FE90400846F75;
+			remoteInfo = KMPNativeCoroutinesCore;
+		};
+		1D75A36C272D4BC200CFF795 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1DF8833F266D1BC10058B6F9 /* Project object */;
 			proxyType = 1;
@@ -53,26 +70,12 @@
 			remoteGlobalIDString = 1DA5DCE4267613BB002448E3;
 			remoteInfo = KMPNativeCoroutinesAsync;
 		};
-		1D75A36C272D4BC200CFF795 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1DF8833F266D1BC10058B6F9 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 1D717582266FE90400846F75;
-			remoteInfo = KMPNativeCoroutinesCore;
-		};
 		1DCA41AB26753C640036C1A3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1DF8833F266D1BC10058B6F9 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 1D71759E266FE9B700846F75;
 			remoteInfo = KMPNativeCoroutinesCombine;
-		};
-		1DF053072698D5E100A16325 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1DF8833F266D1BC10058B6F9 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 1D717582266FE90400846F75;
-			remoteInfo = KMPNativeCoroutinesCore;
 		};
 		1DF3F9D226936935004C21F2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -84,6 +87,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1D0376A728BA74FD0013FDEF /* KMPNativeCoroutinesSwiftUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KMPNativeCoroutinesSwiftUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D0376AD28BA75A90013FDEF /* StateFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateFlow.swift; sourceTree = "<group>"; };
+		1D0376AF28BA767D0013FDEF /* ObservablePublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservablePublisher.swift; sourceTree = "<group>"; };
+		1D0376B128BA77350013FDEF /* StateFlowInits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateFlowInits.swift; sourceTree = "<group>"; };
 		1D2EC83A266D206700B118B0 /* NativeFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeFlow.swift; sourceTree = "<group>"; };
 		1D2EC83C266D209600B118B0 /* NativeCallback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeCallback.swift; sourceTree = "<group>"; };
 		1D2EC83E266D212F00B118B0 /* NativeCancellable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeCancellable.swift; sourceTree = "<group>"; };
@@ -114,6 +121,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		1D0376A128BA74FD0013FDEF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D0376A828BA75150013FDEF /* KMPNativeCoroutinesCombine.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1D717580266FE90400846F75 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -174,6 +189,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1D03769828BA74D20013FDEF /* KMPNativeCoroutinesSwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				1D0376AD28BA75A90013FDEF /* StateFlow.swift */,
+				1D0376AF28BA767D0013FDEF /* ObservablePublisher.swift */,
+				1D0376B128BA77350013FDEF /* StateFlowInits.swift */,
+			);
+			path = KMPNativeCoroutinesSwiftUI;
+			sourceTree = "<group>";
+		};
 		1D717584266FE90400846F75 /* KMPNativeCoroutinesCore */ = {
 			isa = PBXGroup;
 			children = (
@@ -256,6 +281,7 @@
 				1D717584266FE90400846F75 /* KMPNativeCoroutinesCore */,
 				1D7175A0266FE9B700846F75 /* KMPNativeCoroutinesCombine */,
 				1DCA41A626753C640036C1A3 /* KMPNativeCoroutinesCombineTests */,
+				1D03769828BA74D20013FDEF /* KMPNativeCoroutinesSwiftUI */,
 				1DA5DCE6267613BB002448E3 /* KMPNativeCoroutinesAsync */,
 				1DA5DCF2267613BB002448E3 /* KMPNativeCoroutinesAsyncTests */,
 				1DF3F936269357FA004C21F2 /* KMPNativeCoroutinesRxSwift */,
@@ -275,6 +301,7 @@
 				1DA5DCEE267613BB002448E3 /* KMPNativeCoroutinesAsyncTests.xctest */,
 				1DF3F9C826936935004C21F2 /* KMPNativeCoroutinesRxSwift.framework */,
 				1DF3F9D026936935004C21F2 /* KMPNativeCoroutinesRxSwiftTests.xctest */,
+				1D0376A728BA74FD0013FDEF /* KMPNativeCoroutinesSwiftUI.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -282,6 +309,13 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		1D03769C28BA74FD0013FDEF /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1D71757E266FE90400846F75 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -306,6 +340,25 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		1D03769928BA74FD0013FDEF /* KMPNativeCoroutinesSwiftUI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1D0376A428BA74FD0013FDEF /* Build configuration list for PBXNativeTarget "KMPNativeCoroutinesSwiftUI" */;
+			buildPhases = (
+				1D03769C28BA74FD0013FDEF /* Headers */,
+				1D03769D28BA74FD0013FDEF /* Sources */,
+				1D0376A128BA74FD0013FDEF /* Frameworks */,
+				1D0376A328BA74FD0013FDEF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1D0376AB28BA75150013FDEF /* PBXTargetDependency */,
+			);
+			name = KMPNativeCoroutinesSwiftUI;
+			productName = KMPNativeCoroutinesCombine;
+			productReference = 1D0376A728BA74FD0013FDEF /* KMPNativeCoroutinesSwiftUI.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		1D717582266FE90400846F75 /* KMPNativeCoroutinesCore */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1D717594266FE90400846F75 /* Build configuration list for PBXNativeTarget "KMPNativeCoroutinesCore" */;
@@ -357,7 +410,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				1DA5DD022676192F002448E3 /* PBXTargetDependency */,
 			);
 			name = KMPNativeCoroutinesAsync;
 			productName = KMPNativeCoroutinesAsync;
@@ -404,7 +456,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1DF3F9D926936935004C21F2 /* Build configuration list for PBXNativeTarget "KMPNativeCoroutinesRxSwift" */;
 			buildPhases = (
-				1DF3F9C326936935004C21F2 /* Headers */,
 				1DF3F9C426936935004C21F2 /* Sources */,
 				1DF3F9C526936935004C21F2 /* Frameworks */,
 				1DF3F9C626936935004C21F2 /* Resources */,
@@ -452,6 +503,9 @@
 				LastSwiftUpdateCheck = 1300;
 				LastUpgradeCheck = 1250;
 				TargetAttributes = {
+					1D03769928BA74FD0013FDEF = {
+						LastSwiftMigration = 1340;
+					};
 					1D717582266FE90400846F75 = {
 						CreatedOnToolsVersion = 12.5;
 					};
@@ -499,11 +553,19 @@
 				1DA5DCED267613BB002448E3 /* KMPNativeCoroutinesAsyncTests */,
 				1DF3F9C726936935004C21F2 /* KMPNativeCoroutinesRxSwift */,
 				1DF3F9CF26936935004C21F2 /* KMPNativeCoroutinesRxSwiftTests */,
+				1D03769928BA74FD0013FDEF /* KMPNativeCoroutinesSwiftUI */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		1D0376A328BA74FD0013FDEF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1D717581266FE90400846F75 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -556,6 +618,16 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		1D03769D28BA74FD0013FDEF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D0376AE28BA75A90013FDEF /* StateFlow.swift in Sources */,
+				1D0376B028BA767D0013FDEF /* ObservablePublisher.swift in Sources */,
+				1D0376B228BA77350013FDEF /* StateFlowInits.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1D71757F266FE90400846F75 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -628,10 +700,20 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		1D0376AB28BA75150013FDEF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1D71759E266FE9B700846F75 /* KMPNativeCoroutinesCombine */;
+			targetProxy = 1D0376AA28BA75150013FDEF /* PBXContainerItemProxy */;
+		};
 		1D7175BA266FE9F800846F75 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 1D717582266FE90400846F75 /* KMPNativeCoroutinesCore */;
 			targetProxy = 1D7175B9266FE9F800846F75 /* PBXContainerItemProxy */;
+		};
+		1D75A36D272D4BC200CFF795 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1D717582266FE90400846F75 /* KMPNativeCoroutinesCore */;
+			targetProxy = 1D75A36C272D4BC200CFF795 /* PBXContainerItemProxy */;
 		};
 		1DA5DCF1267613BB002448E3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -639,20 +721,10 @@
 			target = 1DA5DCE4267613BB002448E3 /* KMPNativeCoroutinesAsync */;
 			targetProxy = 1DA5DCF0267613BB002448E3 /* PBXContainerItemProxy */;
 		};
-		1D75A36D272D4BC200CFF795 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 1D717582266FE90400846F75 /* KMPNativeCoroutinesCore */;
-			targetProxy = 1D75A36C272D4BC200CFF795 /* PBXContainerItemProxy */;
-		};
 		1DCA41AC26753C640036C1A3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 1D71759E266FE9B700846F75 /* KMPNativeCoroutinesCombine */;
 			targetProxy = 1DCA41AB26753C640036C1A3 /* PBXContainerItemProxy */;
-		};
-		1DF053082698D5E100A16325 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 1D717582266FE90400846F75 /* KMPNativeCoroutinesCore */;
-			targetProxy = 1DF053072698D5E100A16325 /* PBXContainerItemProxy */;
 		};
 		1DF3F9D326936935004C21F2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -662,6 +734,63 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		1D0376A528BA74FD0013FDEF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rickclephas.kmp.KMPNativeCoroutinesSwiftUI;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TVOS_DEPLOYMENT_TARGET = 13.0;
+				WATCHOS_DEPLOYMENT_TARGET = 6.0;
+			};
+			name = Debug;
+		};
+		1D0376A628BA74FD0013FDEF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rickclephas.kmp.KMPNativeCoroutinesSwiftUI;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TVOS_DEPLOYMENT_TARGET = 13.0;
+				WATCHOS_DEPLOYMENT_TARGET = 6.0;
+			};
+			name = Release;
+		};
 		1D717595266FE90400846F75 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1158,6 +1287,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		1D0376A428BA74FD0013FDEF /* Build configuration list for PBXNativeTarget "KMPNativeCoroutinesSwiftUI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1D0376A528BA74FD0013FDEF /* Debug */,
+				1D0376A628BA74FD0013FDEF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		1D717594266FE90400846F75 /* Build configuration list for PBXNativeTarget "KMPNativeCoroutinesCore" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
