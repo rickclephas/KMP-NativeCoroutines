@@ -8,8 +8,10 @@ import org.jetbrains.kotlin.ir.symbols.IrSimpleFunctionSymbol
 import org.jetbrains.kotlin.ir.types.IrSimpleType
 import org.jetbrains.kotlin.ir.types.IrType
 import org.jetbrains.kotlin.ir.util.kotlinFqName
+import org.jetbrains.kotlin.name.CallableId
 import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.FqName
+import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.types.KotlinType
 import org.jetbrains.kotlin.types.KotlinTypeFactory.computeExpandedType
 import org.jetbrains.kotlin.types.typeUtil.asTypeProjection
@@ -27,7 +29,10 @@ internal fun ModuleDescriptor.findNativeSuspendTypeAlias(): TypeAliasDescriptor 
 internal fun ModuleDescriptor.getExpandedNativeSuspendType(valueType: KotlinType): KotlinType =
     findNativeSuspendTypeAlias().computeExpandedType(listOf(valueType.asTypeProjection()))
 
-private val functionFqName = FqName("com.rickclephas.kmp.nativecoroutines.nativeSuspend")
+private val functionCallableId = CallableId(
+    FqName("com.rickclephas.kmp.nativecoroutines"),
+    Name.identifier("nativeSuspend")
+)
 
 internal fun IrPluginContext.referenceNativeSuspendFunction(): IrSimpleFunctionSymbol =
-    referenceFunctions(functionFqName).single()
+    referenceFunctions(functionCallableId).single()
