@@ -15,7 +15,7 @@ class GH51Tests: XCTestCase {
         let interfaceC = InterfaceCImpl()
         let valueExpectation = expectation(description: "Waiting for value")
         let sendValue = randomInt()
-        _ = interfaceC.fooNative(value: sendValue)({ value, unit in
+        _ = GH51NativeKt.fooNative(interfaceC, value: sendValue)({ value, unit in
             XCTAssertEqual(value.int32Value, sendValue, "Received incorrect value")
             valueExpectation.fulfill()
             return unit
@@ -26,7 +26,7 @@ class GH51Tests: XCTestCase {
     func testInterfaceCImplBar() {
         let interfaceC = InterfaceCImpl()
         let valueExpectation = expectation(description: "Waiting for value")
-        _ = interfaceC.barNative({ value, unit in
+        _ = GH51NativeKt.barNative(interfaceC)({ value, unit in
             XCTAssertEqual(value, 1, "Received incorrect value")
             valueExpectation.fulfill()
             return unit

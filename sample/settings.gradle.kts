@@ -13,7 +13,7 @@ include(":shared")
 
 includeBuild("..") {
     dependencySubstitution {
-        listOf("annotations", "compiler", "compiler-embeddable", "core").forEach {
+        listOf("annotations", "compiler", "compiler-embeddable", "core", "ksp").forEach {
             substitute(module("com.rickclephas.kmp:kmp-nativecoroutines-$it"))
                 .using(project(":kmp-nativecoroutines-$it"))
         }

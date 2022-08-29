@@ -1,5 +1,6 @@
 package com.rickclephas.kmp.nativecoroutines.sample
 
+import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.DelicateCoroutinesApi
@@ -13,6 +14,7 @@ object Clock {
 
     @Suppress("ObjectPropertyName")
     private val _time = MutableStateFlow(0L)
+    @NativeCoroutines
     val time = _time.asStateFlow()
 
     init {
