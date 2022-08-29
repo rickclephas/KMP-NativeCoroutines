@@ -8,8 +8,10 @@ import org.jetbrains.kotlin.descriptors.findClassifierAcrossModuleDependencies
 import org.jetbrains.kotlin.ir.symbols.IrPropertySymbol
 import org.jetbrains.kotlin.ir.types.IrType
 import org.jetbrains.kotlin.ir.types.IrTypeArgument
+import org.jetbrains.kotlin.name.CallableId
 import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.FqName
+import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.resolve.descriptorUtil.module
 import org.jetbrains.kotlin.types.TypeProjection
 
@@ -29,7 +31,7 @@ internal fun PropertyDescriptor.getSharedFlowValueTypeOrNull(): TypeProjection? 
 internal fun IrType.getSharedFlowValueTypeOrNull(): IrTypeArgument? =
     getFlowValueTypeOrNull(sharedFlowFqName)
 
-private val sharedFlowReplayCacheFqName = FqName("kotlinx.coroutines.flow.SharedFlow.replayCache")
+private val sharedFlowReplayCacheCallableId = CallableId(sharedFlowClassId, Name.identifier("replayCache"))
 
 internal fun IrPluginContext.referenceSharedFlowReplayCacheProperty(): IrPropertySymbol =
-    referenceProperties(sharedFlowReplayCacheFqName).single()
+    referenceProperties(sharedFlowReplayCacheCallableId).single()
