@@ -4,9 +4,11 @@ import com.intellij.mock.MockProject
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NameGenerator
 import org.jetbrains.kotlin.backend.common.extensions.IrGenerationExtension
 import org.jetbrains.kotlin.compiler.plugin.ComponentRegistrar
+import org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi
 import org.jetbrains.kotlin.config.CompilerConfiguration
 import org.jetbrains.kotlin.resolve.extensions.SyntheticResolveExtension
 
+@OptIn(ExperimentalCompilerApi::class)
 class KmpNativeCoroutinesComponentRegistrar: ComponentRegistrar {
 
     override fun registerProjectComponents(project: MockProject, configuration: CompilerConfiguration) {
