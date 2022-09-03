@@ -1,9 +1,6 @@
 package com.rickclephas.kmp.nativecoroutines.ksp
 
-import com.tschuchort.compiletesting.KotlinCompilation
-import com.tschuchort.compiletesting.SourceFile
-import com.tschuchort.compiletesting.kspSourcesDir
-import com.tschuchort.compiletesting.symbolProcessorProviders
+import com.tschuchort.compiletesting.*
 import org.intellij.lang.annotations.Language
 import org.junit.Rule
 import org.junit.rules.TemporaryFolder
@@ -16,13 +13,15 @@ open class CompilationTests {
 
     protected fun runKspTest(
         @Language("kotlin") inputContent: String,
-        @Language("kotlin") outputContent: String
+        @Language("kotlin") outputContent: String,
+        kspArgs: Map<String, String> = mapOf("nativeCoroutines.suffix" to "Native")
     ) {
         KotlinCompilation().apply {
             workingDir = temporaryFolder.root
             sources = listOf(SourceFile.new("Source.kt", "package test\n\n$inputContent"))
             inheritClassPath = true
             symbolProcessorProviders = listOf(KmpNativeCoroutinesSymbolProcessorProvider())
+            this.kspArgs += kspArgs
             assertCompile()
             assertKspSourceFile("test/SourceNative.kt", "package test\n\n$outputContent")
         }
