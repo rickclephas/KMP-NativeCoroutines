@@ -16,7 +16,9 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         import com.rickclephas.kmp.nativecoroutines.NativeFlow
         import com.rickclephas.kmp.nativecoroutines.asNativeFlow
         import kotlin.String
+        import kotlin.native.ObjCName
         
+        @ObjCName(name = "globalFlow")
         public val globalFlowNative: NativeFlow<String>
           get() = globalFlow.asNativeFlow(null)
     """.trimIndent())
@@ -33,11 +35,13 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         import com.rickclephas.kmp.nativecoroutines.asNativeFlow
         import kotlin.String
         import kotlin.collections.List
+        import kotlin.native.ObjCName
         
+        @ObjCName(name = "globalSharedFlow")
         public val globalSharedFlowNative: NativeFlow<String>
           get() = globalSharedFlow.asNativeFlow(null)
         
-        public val globalSharedFlowNativeReplayCache: List<String>
+        public val globalSharedFlowReplayCache: List<String>
           get() = globalSharedFlow.replayCache
     """.trimIndent())
 
@@ -52,11 +56,13 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         import com.rickclephas.kmp.nativecoroutines.NativeFlow
         import com.rickclephas.kmp.nativecoroutines.asNativeFlow
         import kotlin.String
+        import kotlin.native.ObjCName
         
+        @ObjCName(name = "globalStateFlow")
         public val globalStateFlowNative: NativeFlow<String>
           get() = globalStateFlow.asNativeFlow(null)
         
-        public val globalStateFlowNativeValue: String
+        public val globalStateFlowValue: String
           get() = globalStateFlow.value
     """.trimIndent())
 
@@ -71,11 +77,13 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         import com.rickclephas.kmp.nativecoroutines.NativeFlow
         import com.rickclephas.kmp.nativecoroutines.asNativeFlow
         import kotlin.String
+        import kotlin.native.ObjCName
         
+        @ObjCName(name = "globalMutableStateFlow")
         public val globalMutableStateFlowNative: NativeFlow<String>
           get() = globalMutableStateFlow.asNativeFlow(null)
         
-        public val globalMutableStateFlowNativeValue: String
+        public val globalMutableStateFlowValue: String
           get() = globalMutableStateFlow.value
     """.trimIndent())
 
@@ -92,7 +100,9 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         import com.rickclephas.kmp.nativecoroutines.NativeFlow
         import com.rickclephas.kmp.nativecoroutines.asNativeFlow
         import kotlin.String
+        import kotlin.native.ObjCName
         
+        @ObjCName(name = "globalCustomFlow")
         public val globalCustomFlowNative: NativeFlow<String>
           get() = globalCustomFlow.asNativeFlow(null)
     """.trimIndent())
@@ -110,7 +120,9 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         import com.rickclephas.kmp.nativecoroutines.NativeFlow
         import com.rickclephas.kmp.nativecoroutines.asNativeFlow
         import kotlin.String
+        import kotlin.native.ObjCName
         
+        @ObjCName(name = "nullableCustomFlow")
         public val nullableCustomFlowNative: NativeFlow<String>?
           get() = nullableCustomFlow?.asNativeFlow(null)
     """.trimIndent())
@@ -128,7 +140,9 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         import com.rickclephas.kmp.nativecoroutines.NativeFlow
         import com.rickclephas.kmp.nativecoroutines.asNativeFlow
         import kotlin.String
+        import kotlin.native.ObjCName
         
+        @ObjCName(name = "nullableCustomFlowValue")
         public val nullableCustomFlowValueNative: NativeFlow<String?>
           get() = nullableCustomFlowValue.asNativeFlow(null)
     """.trimIndent())
@@ -144,7 +158,9 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         import com.rickclephas.kmp.nativecoroutines.NativeFlow
         import com.rickclephas.kmp.nativecoroutines.asNativeFlow
         import kotlin.String
+        import kotlin.native.ObjCName
         
+        @ObjCName(name = "nullableFlowValue")
         public val nullableFlowValueNative: NativeFlow<String?>
           get() = nullableFlowValue.asNativeFlow(null)
     """.trimIndent())
@@ -161,11 +177,13 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         import com.rickclephas.kmp.nativecoroutines.asNativeFlow
         import kotlin.String
         import kotlin.collections.List
+        import kotlin.native.ObjCName
         
+        @ObjCName(name = "nullableSharedFlowValue")
         public val nullableSharedFlowValueNative: NativeFlow<String?>
           get() = nullableSharedFlowValue.asNativeFlow(null)
         
-        public val nullableSharedFlowValueNativeReplayCache: List<String?>
+        public val nullableSharedFlowValueReplayCache: List<String?>
           get() = nullableSharedFlowValue.replayCache
     """.trimIndent())
 
@@ -180,11 +198,13 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         import com.rickclephas.kmp.nativecoroutines.NativeFlow
         import com.rickclephas.kmp.nativecoroutines.asNativeFlow
         import kotlin.String
+        import kotlin.native.ObjCName
         
+        @ObjCName(name = "nullableStateFlowValue")
         public val nullableStateFlowValueNative: NativeFlow<String?>
           get() = nullableStateFlowValue.asNativeFlow(null)
         
-        public val nullableStateFlowValueNativeValue: String?
+        public val nullableStateFlowValueValue: String?
           get() = nullableStateFlowValue.value
     """.trimIndent())
 
@@ -199,7 +219,9 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         import com.rickclephas.kmp.nativecoroutines.NativeFlow
         import com.rickclephas.kmp.nativecoroutines.asNativeFlow
         import kotlin.String
+        import kotlin.native.ObjCName
         
+        @ObjCName(name = "nullableFlow")
         public val nullableFlowNative: NativeFlow<String>?
           get() = nullableFlow?.asNativeFlow(null)
     """.trimIndent())
@@ -216,11 +238,13 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         import com.rickclephas.kmp.nativecoroutines.asNativeFlow
         import kotlin.String
         import kotlin.collections.List
+        import kotlin.native.ObjCName
         
+        @ObjCName(name = "nullableSharedFlow")
         public val nullableSharedFlowNative: NativeFlow<String>?
           get() = nullableSharedFlow?.asNativeFlow(null)
         
-        public val nullableSharedFlowNativeReplayCache: List<String>?
+        public val nullableSharedFlowReplayCache: List<String>?
           get() = nullableSharedFlow?.replayCache
     """.trimIndent())
 
@@ -235,11 +259,13 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         import com.rickclephas.kmp.nativecoroutines.NativeFlow
         import com.rickclephas.kmp.nativecoroutines.asNativeFlow
         import kotlin.String
+        import kotlin.native.ObjCName
         
+        @ObjCName(name = "nullableStateFlow")
         public val nullableStateFlowNative: NativeFlow<String>?
           get() = nullableStateFlow?.asNativeFlow(null)
         
-        public val nullableStateFlowNativeValue: String?
+        public val nullableStateFlowValue: String?
           get() = nullableStateFlow?.value
     """.trimIndent())
 
@@ -254,7 +280,9 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         import com.rickclephas.kmp.nativecoroutines.NativeFlow
         import com.rickclephas.kmp.nativecoroutines.asNativeFlow
         import kotlin.String
+        import kotlin.native.ObjCName
         
+        @ObjCName(name = "nullableFlowAndValue")
         public val nullableFlowAndValueNative: NativeFlow<String?>?
           get() = nullableFlowAndValue?.asNativeFlow(null)
     """.trimIndent())
@@ -271,11 +299,13 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         import com.rickclephas.kmp.nativecoroutines.asNativeFlow
         import kotlin.String
         import kotlin.collections.List
+        import kotlin.native.ObjCName
         
+        @ObjCName(name = "nullableSharedFlowAndValue")
         public val nullableSharedFlowAndValueNative: NativeFlow<String?>?
           get() = nullableSharedFlowAndValue?.asNativeFlow(null)
         
-        public val nullableSharedFlowAndValueNativeReplayCache: List<String?>?
+        public val nullableSharedFlowAndValueReplayCache: List<String?>?
           get() = nullableSharedFlowAndValue?.replayCache
     """.trimIndent())
 
@@ -290,11 +320,13 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         import com.rickclephas.kmp.nativecoroutines.NativeFlow
         import com.rickclephas.kmp.nativecoroutines.asNativeFlow
         import kotlin.String
+        import kotlin.native.ObjCName
         
+        @ObjCName(name = "nullableStateFlowAndValue")
         public val nullableStateFlowAndValueNative: NativeFlow<String?>?
           get() = nullableStateFlowAndValue?.asNativeFlow(null)
         
-        public val nullableStateFlowAndValueNativeValue: String?
+        public val nullableStateFlowAndValueValue: String?
           get() = nullableStateFlowAndValue?.value
     """.trimIndent())
 
@@ -311,11 +343,13 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         import com.rickclephas.kmp.nativecoroutines.NativeFlow
         import com.rickclephas.kmp.nativecoroutines.asNativeFlow
         import kotlin.collections.List
+        import kotlin.native.ObjCName
         
+        @ObjCName(name = "genericSharedFlow")
         public val <T> MyClass<T>.genericSharedFlowNative: NativeFlow<T>
           get() = genericSharedFlow.asNativeFlow(null)
         
-        public val <T> MyClass<T>.genericSharedFlowNativeReplayCache: List<T>
+        public val <T> MyClass<T>.genericSharedFlowReplayCache: List<T>
           get() = genericSharedFlow.replayCache
     """.trimIndent())
 
@@ -331,11 +365,13 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
     """.trimIndent(), """
         import com.rickclephas.kmp.nativecoroutines.NativeFlow
         import com.rickclephas.kmp.nativecoroutines.asNativeFlow
+        import kotlin.native.ObjCName
         
+        @ObjCName(name = "genericStateFlow")
         public val <T> MyClass<T>.genericStateFlowNative: NativeFlow<T>
           get() = genericStateFlow.asNativeFlow(null)
         
-        public val <T> MyClass<T>.genericStateFlowNativeValue: T
+        public val <T> MyClass<T>.genericStateFlowValue: T
           get() = genericStateFlow.value
     """.trimIndent())
 
@@ -352,11 +388,13 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         import com.rickclephas.kmp.nativecoroutines.NativeFlow
         import com.rickclephas.kmp.nativecoroutines.asNativeFlow
         import kotlin.collections.List
+        import kotlin.native.ObjCName
         
+        @ObjCName(name = "genericSharedFlow")
         public val <T> MyClass<T>.genericSharedFlowNative: NativeFlow<T>
           get() = genericSharedFlow.asNativeFlow(null)
         
-        public val <T> MyClass<T>.genericSharedFlowNativeReplayCache: List<T>
+        public val <T> MyClass<T>.genericSharedFlowReplayCache: List<T>
           get() = genericSharedFlow.replayCache
     """.trimIndent())
 
@@ -372,11 +410,13 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
     """.trimIndent(), """
         import com.rickclephas.kmp.nativecoroutines.NativeFlow
         import com.rickclephas.kmp.nativecoroutines.asNativeFlow
+        import kotlin.native.ObjCName
         
+        @ObjCName(name = "genericStateFlow")
         public val <T> MyClass<T>.genericStateFlowNative: NativeFlow<T>
           get() = genericStateFlow.asNativeFlow(null)
         
-        public val <T> MyClass<T>.genericStateFlowNativeValue: T
+        public val <T> MyClass<T>.genericStateFlowValue: T
           get() = genericStateFlow.value
     """.trimIndent())
 
@@ -395,17 +435,19 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         import com.rickclephas.kmp.nativecoroutines.asNativeFlow
         import kotlin.String
         import kotlin.collections.List
+        import kotlin.native.ObjCName
         
         /**
          * KDoc for [kdocSharedFlow]
          */
+        @ObjCName(name = "kdocSharedFlow")
         public val kdocSharedFlowNative: NativeFlow<String>
           get() = kdocSharedFlow.asNativeFlow(null)
         
         /**
          * KDoc for [kdocSharedFlow]
          */
-        public val kdocSharedFlowNativeReplayCache: List<String>
+        public val kdocSharedFlowReplayCache: List<String>
           get() = kdocSharedFlow.replayCache
     """.trimIndent())
 
@@ -423,17 +465,19 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         import com.rickclephas.kmp.nativecoroutines.NativeFlow
         import com.rickclephas.kmp.nativecoroutines.asNativeFlow
         import kotlin.String
+        import kotlin.native.ObjCName
         
         /**
          * KDoc for [kdocStateFlow]
          */
+        @ObjCName(name = "kdocStateFlow")
         public val kdocStateFlowNative: NativeFlow<String>
           get() = kdocStateFlow.asNativeFlow(null)
         
         /**
          * KDoc for [kdocStateFlow]
          */
-        public val kdocStateFlowNativeValue: String
+        public val kdocStateFlowValue: String
           get() = kdocStateFlow.value
     """.trimIndent())
 
@@ -451,11 +495,13 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         import com.rickclephas.kmp.nativecoroutines.asNativeFlow
         import kotlin.String
         import kotlin.collections.List
+        import kotlin.native.ObjCName
         
+        @ObjCName(name = "sharedFlow")
         public val MyClass.sharedFlowNative: NativeFlow<String>
           get() = sharedFlow.asNativeFlow(null)
         
-        public val MyClass.sharedFlowNativeReplayCache: List<String>
+        public val MyClass.sharedFlowReplayCache: List<String>
           get() = sharedFlow.replayCache
     """.trimIndent())
 
@@ -472,11 +518,13 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         import com.rickclephas.kmp.nativecoroutines.NativeFlow
         import com.rickclephas.kmp.nativecoroutines.asNativeFlow
         import kotlin.String
+        import kotlin.native.ObjCName
         
+        @ObjCName(name = "stateFlow")
         public val MyClass.stateFlowNative: NativeFlow<String>
           get() = stateFlow.asNativeFlow(null)
         
-        public val MyClass.stateFlowNativeValue: String
+        public val MyClass.stateFlowValue: String
           get() = stateFlow.value
     """.trimIndent())
 
@@ -492,11 +540,13 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         import com.rickclephas.kmp.nativecoroutines.asNativeFlow
         import kotlin.String
         import kotlin.collections.List
+        import kotlin.native.ObjCName
         
+        @ObjCName(name = "sharedFlow")
         public val String.sharedFlowNative: NativeFlow<String>
           get() = sharedFlow.asNativeFlow(null)
         
-        public val String.sharedFlowNativeReplayCache: List<String>
+        public val String.sharedFlowReplayCache: List<String>
           get() = sharedFlow.replayCache
     """.trimIndent())
 
@@ -511,11 +561,13 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         import com.rickclephas.kmp.nativecoroutines.NativeFlow
         import com.rickclephas.kmp.nativecoroutines.asNativeFlow
         import kotlin.String
+        import kotlin.native.ObjCName
         
+        @ObjCName(name = "stateFlow")
         public val String.stateFlowNative: NativeFlow<String>
           get() = stateFlow.asNativeFlow(null)
         
-        public val String.stateFlowNativeValue: String
+        public val String.stateFlowValue: String
           get() = stateFlow.value
     """.trimIndent())
 
@@ -530,7 +582,9 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         import com.rickclephas.kmp.nativecoroutines.NativeFlow
         import com.rickclephas.kmp.nativecoroutines.asNativeFlow
         import kotlin.String
+        import kotlin.native.ObjCName
         
+        @ObjCName(name = "myFlow")
         public val myFlowNative: NativeFlow<String>
           get() = myFlow.asNativeFlow(null)
     """.trimIndent())
@@ -553,12 +607,14 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         import kotlin.ReplaceWith
         import kotlin.String
         import kotlin.collections.List
+        import kotlin.native.ObjCName
         
         @Deprecated(
           message = "it's old",
           replaceWith = ReplaceWith(expression = "", imports = arrayOf()),
           level = DeprecationLevel.WARNING,
         )
+        @ObjCName(name = "sharedFlow")
         public val sharedFlowNative: NativeFlow<String>
           @get:ExperimentalStdlibApi
           get() = sharedFlow.asNativeFlow(null)
@@ -568,7 +624,7 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
           replaceWith = ReplaceWith(expression = "", imports = arrayOf()),
           level = DeprecationLevel.WARNING,
         )
-        public val sharedFlowNativeReplayCache: List<String>
+        public val sharedFlowReplayCache: List<String>
           @get:ExperimentalStdlibApi
           get() = sharedFlow.replayCache
     """.trimIndent())
@@ -590,12 +646,14 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         import kotlin.ExperimentalStdlibApi
         import kotlin.ReplaceWith
         import kotlin.String
+        import kotlin.native.ObjCName
         
         @Deprecated(
           message = "it's old",
           replaceWith = ReplaceWith(expression = "", imports = arrayOf()),
           level = DeprecationLevel.WARNING,
         )
+        @ObjCName(name = "stateFlow")
         public val stateFlowNative: NativeFlow<String>
           @get:ExperimentalStdlibApi
           get() = stateFlow.asNativeFlow(null)
@@ -605,7 +663,7 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
           replaceWith = ReplaceWith(expression = "", imports = arrayOf()),
           level = DeprecationLevel.WARNING,
         )
-        public val stateFlowNativeValue: String
+        public val stateFlowValue: String
           @get:ExperimentalStdlibApi
           get() = stateFlow.value
     """.trimIndent())
@@ -628,11 +686,13 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         import com.rickclephas.kmp.nativecoroutines.asNativeFlow
         import kotlin.String
         import kotlin.collections.List
+        import kotlin.native.ObjCName
         
+        @ObjCName(name = "sharedFlow")
         public val sharedFlowNative: NativeFlow<String>
           get() = sharedFlow.asNativeFlow(null)
         
-        public val sharedFlowNativeReplayCache: List<String>
+        public val sharedFlowReplayCache: List<String>
           get() = sharedFlow.replayCache
     """.trimIndent())
 
@@ -653,11 +713,13 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         import com.rickclephas.kmp.nativecoroutines.NativeFlow
         import com.rickclephas.kmp.nativecoroutines.asNativeFlow
         import kotlin.String
+        import kotlin.native.ObjCName
         
+        @ObjCName(name = "stateFlow")
         public val stateFlowNative: NativeFlow<String>
           get() = stateFlow.asNativeFlow(null)
         
-        public val stateFlowNativeValue: String
+        public val stateFlowValue: String
           get() = stateFlow.value
     """.trimIndent())
 }

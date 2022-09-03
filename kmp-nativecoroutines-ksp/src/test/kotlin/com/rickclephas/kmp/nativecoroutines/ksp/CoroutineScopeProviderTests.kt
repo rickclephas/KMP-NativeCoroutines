@@ -20,7 +20,9 @@ class CoroutineScopeProviderTests: CompilationTests() {
         import com.rickclephas.kmp.nativecoroutines.NativeSuspend
         import com.rickclephas.kmp.nativecoroutines.nativeSuspend
         import kotlin.String
+        import kotlin.native.ObjCName
         
+        @ObjCName(name = "returnSuspendValue")
         public fun returnSuspendValueNative(): NativeSuspend<String> = nativeSuspend(coroutineScope) {
             returnSuspendValue() }
     """.trimIndent())
@@ -42,7 +44,9 @@ class CoroutineScopeProviderTests: CompilationTests() {
         import com.rickclephas.kmp.nativecoroutines.NativeFlow
         import com.rickclephas.kmp.nativecoroutines.asNativeFlow
         import kotlin.String
+        import kotlin.native.ObjCName
         
+        @ObjCName(name = "returnFlowValue")
         public fun returnFlowValueNative(): NativeFlow<String> =
             returnFlowValue().asNativeFlow(coroutineScope)
     """.trimIndent())
@@ -66,7 +70,9 @@ class CoroutineScopeProviderTests: CompilationTests() {
         import com.rickclephas.kmp.nativecoroutines.asNativeFlow
         import com.rickclephas.kmp.nativecoroutines.nativeSuspend
         import kotlin.String
+        import kotlin.native.ObjCName
         
+        @ObjCName(name = "returnSuspendFlowValue")
         public fun returnSuspendFlowValueNative(): NativeSuspend<NativeFlow<String>> =
             nativeSuspend(coroutineScope) { returnSuspendFlowValue().asNativeFlow(coroutineScope) }
     """.trimIndent())
@@ -88,7 +94,9 @@ class CoroutineScopeProviderTests: CompilationTests() {
         import com.rickclephas.kmp.nativecoroutines.NativeFlow
         import com.rickclephas.kmp.nativecoroutines.asNativeFlow
         import kotlin.String
+        import kotlin.native.ObjCName
         
+        @ObjCName(name = "globalFlow")
         public val globalFlowNative: NativeFlow<String>
           get() = globalFlow.asNativeFlow(coroutineScope)
     """.trimIndent())
@@ -111,7 +119,9 @@ class CoroutineScopeProviderTests: CompilationTests() {
         import com.rickclephas.kmp.nativecoroutines.NativeSuspend
         import com.rickclephas.kmp.nativecoroutines.nativeSuspend
         import kotlin.String
+        import kotlin.native.ObjCName
         
+        @ObjCName(name = "returnSuspendValue")
         public fun MyClass.returnSuspendValueNative(): NativeSuspend<String> = nativeSuspend(coroutineScope)
             { returnSuspendValue() }
     """.trimIndent())
@@ -136,7 +146,9 @@ class CoroutineScopeProviderTests: CompilationTests() {
         import com.rickclephas.kmp.nativecoroutines.NativeSuspend
         import com.rickclephas.kmp.nativecoroutines.nativeSuspend
         import kotlin.String
+        import kotlin.native.ObjCName
         
+        @ObjCName(name = "returnSuspendValue")
         public fun MyClass.returnSuspendValueNative(): NativeSuspend<String> = nativeSuspend(coroutineScope)
             { returnSuspendValue() }
     """.trimIndent())
@@ -163,7 +175,9 @@ class CoroutineScopeProviderTests: CompilationTests() {
         import com.rickclephas.kmp.nativecoroutines.NativeSuspend
         import com.rickclephas.kmp.nativecoroutines.nativeSuspend
         import kotlin.String
+        import kotlin.native.ObjCName
         
+        @ObjCName(name = "returnSuspendValue")
         public fun MyClass.returnSuspendValueNative(): NativeSuspend<String> =
             nativeSuspend(myCoroutineScope) { returnSuspendValue() }
     """.trimIndent())
@@ -186,7 +200,9 @@ class CoroutineScopeProviderTests: CompilationTests() {
         import com.rickclephas.kmp.nativecoroutines.NativeSuspend
         import com.rickclephas.kmp.nativecoroutines.nativeSuspend
         import kotlin.String
+        import kotlin.native.ObjCName
         
+        @ObjCName(name = "returnSuspendValue")
         public fun MyClass.returnSuspendValueNative(): NativeSuspend<String> = nativeSuspend(coroutineScope)
             { returnSuspendValue() }
     """.trimIndent())
@@ -211,8 +227,10 @@ class CoroutineScopeProviderTests: CompilationTests() {
         import com.rickclephas.kmp.nativecoroutines.NativeSuspend
         import com.rickclephas.kmp.nativecoroutines.nativeSuspend
         import kotlin.String
+        import kotlin.native.ObjCName
         import kotlin.run
         
+        @ObjCName(name = "returnSuspendValue")
         public fun MyClass.returnSuspendValueNative(`receiver`: MyOtherClass): NativeSuspend<String> =
             nativeSuspend(null) { run { `receiver`.returnSuspendValue() } }
     """.trimIndent())

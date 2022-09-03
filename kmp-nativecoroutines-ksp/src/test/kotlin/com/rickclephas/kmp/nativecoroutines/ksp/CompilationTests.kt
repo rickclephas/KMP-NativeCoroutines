@@ -14,7 +14,11 @@ open class CompilationTests {
     protected fun runKspTest(
         @Language("kotlin") inputContent: String,
         @Language("kotlin") outputContent: String,
-        kspArgs: Map<String, String> = mapOf("nativeCoroutines.suffix" to "Native")
+        kspArgs: Map<String, String> = mapOf(
+            "nativeCoroutines.suffix" to "Native",
+            "nativeCoroutines.flowValueSuffix" to "Value",
+            "nativeCoroutines.flowReplayCacheSuffix" to "ReplayCache"
+        )
     ) {
         KotlinCompilation().apply {
             workingDir = temporaryFolder.root
