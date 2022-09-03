@@ -14,7 +14,7 @@ class RxSwiftObservableIntegrationTests: XCTestCase {
     func testValuesReceived() {
         let integrationTests = FlowIntegrationTests()
         let sendValueCount = randomInt(min: 5, max: 20)
-        let observable = createObservable(for: integrationTests.getFlowNative(count: sendValueCount, delay: 100))
+        let observable = createObservable(for: integrationTests.getFlow(count: sendValueCount, delay: 100))
         let valuesExpectation = expectation(description: "Waiting for values")
         valuesExpectation.expectedFulfillmentCount = Int(sendValueCount)
         let completionExpectation = expectation(description: "Waiting for completion")
@@ -42,7 +42,7 @@ class RxSwiftObservableIntegrationTests: XCTestCase {
         let integrationTests = FlowIntegrationTests()
         let sendValueCount = randomInt(min: 5, max: 20)
         let nullValueIndex = randomInt(min: 0, max: sendValueCount - 1)
-        let observable = createObservable(for: integrationTests.getFlowWithNullNative(count: sendValueCount, nullIndex: nullValueIndex, delay: 100))
+        let observable = createObservable(for: integrationTests.getFlowWithNull(count: sendValueCount, nullIndex: nullValueIndex, delay: 100))
         let valuesExpectation = expectation(description: "Waiting for values")
         valuesExpectation.expectedFulfillmentCount = Int(sendValueCount)
         let completionExpectation = expectation(description: "Waiting for completion")
@@ -75,7 +75,7 @@ class RxSwiftObservableIntegrationTests: XCTestCase {
         let sendValueCount = randomInt(min: 5, max: 20)
         let exceptionIndex = randomInt(min: 1, max: sendValueCount - 1)
         let sendMessage = randomString()
-        let observable = createObservable(for: integrationTests.getFlowWithExceptionNative(count: sendValueCount, exceptionIndex: exceptionIndex, message: sendMessage, delay: 100))
+        let observable = createObservable(for: integrationTests.getFlowWithException(count: sendValueCount, exceptionIndex: exceptionIndex, message: sendMessage, delay: 100))
         let valuesExpectation = expectation(description: "Waiting for values")
         valuesExpectation.expectedFulfillmentCount = Int(exceptionIndex)
         let errorExpectation = expectation(description: "Waiting for error")
@@ -106,7 +106,7 @@ class RxSwiftObservableIntegrationTests: XCTestCase {
         let sendValueCount = randomInt(min: 5, max: 20)
         let errorIndex = randomInt(min: 1, max: sendValueCount - 1)
         let sendMessage = randomString()
-        let observable = createObservable(for: integrationTests.getFlowWithErrorNative(count: sendValueCount, errorIndex: errorIndex, message: sendMessage, delay: 100))
+        let observable = createObservable(for: integrationTests.getFlowWithError(count: sendValueCount, errorIndex: errorIndex, message: sendMessage, delay: 100))
         let valuesExpectation = expectation(description: "Waiting for values")
         valuesExpectation.expectedFulfillmentCount = Int(errorIndex)
         let errorExpectation = expectation(description: "Waiting for error")
@@ -134,7 +134,7 @@ class RxSwiftObservableIntegrationTests: XCTestCase {
     
     func testNotOnMainThread() {
         let integrationTests = FlowIntegrationTests()
-        let observable = createObservable(for: integrationTests.getFlowNative(count: 1, delay: 1000))
+        let observable = createObservable(for: integrationTests.getFlow(count: 1, delay: 1000))
         let valueExpectation = expectation(description: "Waiting for value")
         let completionExpectation = expectation(description: "Waiting for completion")
         let disposedExpectation = expectation(description: "Waiting for dispose")
@@ -157,7 +157,7 @@ class RxSwiftObservableIntegrationTests: XCTestCase {
         let integrationTests = FlowIntegrationTests()
         let callbackExpectation = expectation(description: "Waiting for callback not to get called")
         callbackExpectation.isInverted = true
-        let observable = createObservable(for: integrationTests.getFlowWithCallbackNative(count: 5, callbackIndex: 2, delay: 1000) {
+        let observable = createObservable(for: integrationTests.getFlowWithCallback(count: 5, callbackIndex: 2, delay: 1000) {
             callbackExpectation.fulfill()
         })
         let valuesExpectation = expectation(description: "Waiting for values")

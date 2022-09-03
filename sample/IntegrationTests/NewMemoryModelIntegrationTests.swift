@@ -16,7 +16,7 @@ class NewMemoryModelIntegrationTests: XCTestCase {
     func testReturnMutableData() {
         let integrationTests = IntegrationTests()
         let valueExpectation = expectation(description: "Waiting for value")
-        _ = integrationTests.generateRandomMutableDataNative()({ value, unit in
+        _ = integrationTests.generateRandomMutableData()({ value, unit in
             let dataFromBackground = value.dataFromBackground
             let dataFromMain = value.dataFromMain
             XCTAssertNotNil(dataFromBackground, "Data from background should be set")

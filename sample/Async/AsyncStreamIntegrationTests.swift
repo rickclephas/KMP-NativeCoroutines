@@ -14,7 +14,7 @@ class AsyncStreamIntegrationTests: XCTestCase {
     func testValuesReceived() async {
         let integrationTests = FlowIntegrationTests()
         let sendValueCount = randomInt(min: 5, max: 20)
-        let stream = asyncStream(for: integrationTests.getFlowNative(count: sendValueCount, delay: 100))
+        let stream = asyncStream(for: integrationTests.getFlow(count: sendValueCount, delay: 100))
         do {
             var receivedValueCount: Int32 = 0
             for try await value in stream {
@@ -37,7 +37,7 @@ class AsyncStreamIntegrationTests: XCTestCase {
         let integrationTests = FlowIntegrationTests()
         let sendValueCount = randomInt(min: 5, max: 20)
         let nullValueIndex = randomInt(min: 0, max: sendValueCount - 1)
-        let stream = asyncStream(for: integrationTests.getFlowWithNullNative(count: sendValueCount, nullIndex: nullValueIndex, delay: 100))
+        let stream = asyncStream(for: integrationTests.getFlowWithNull(count: sendValueCount, nullIndex: nullValueIndex, delay: 100))
         do {
             var receivedValueCount: Int32 = 0
             for try await value in stream {
@@ -65,7 +65,7 @@ class AsyncStreamIntegrationTests: XCTestCase {
         let sendValueCount = randomInt(min: 5, max: 20)
         let exceptionIndex = randomInt(min: 1, max: sendValueCount - 1)
         let sendMessage = randomString()
-        let stream = asyncStream(for: integrationTests.getFlowWithExceptionNative(count: sendValueCount, exceptionIndex: exceptionIndex, message: sendMessage, delay: 100))
+        let stream = asyncStream(for: integrationTests.getFlowWithException(count: sendValueCount, exceptionIndex: exceptionIndex, message: sendMessage, delay: 100))
         var receivedValueCount: Int32 = 0
         do {
             for try await _ in stream {
@@ -88,7 +88,7 @@ class AsyncStreamIntegrationTests: XCTestCase {
         let sendValueCount = randomInt(min: 5, max: 20)
         let errorIndex = randomInt(min: 1, max: sendValueCount - 1)
         let sendMessage = randomString()
-        let stream = asyncStream(for: integrationTests.getFlowWithErrorNative(count: sendValueCount, errorIndex: errorIndex, message: sendMessage, delay: 100))
+        let stream = asyncStream(for: integrationTests.getFlowWithError(count: sendValueCount, errorIndex: errorIndex, message: sendMessage, delay: 100))
         var receivedValueCount: Int32 = 0
         do {
             for try await _ in stream {
@@ -109,7 +109,7 @@ class AsyncStreamIntegrationTests: XCTestCase {
     func testCancellation() async {
         let integrationTests = FlowIntegrationTests()
         var callbackCount = 0
-        let stream = asyncStream(for: integrationTests.getFlowWithCallbackNative(count: 5, callbackIndex: 2, delay: 1000) {
+        let stream = asyncStream(for: integrationTests.getFlowWithCallback(count: 5, callbackIndex: 2, delay: 1000) {
             callbackCount += 1
         })
         let handle = Task<Int32, Never> {
