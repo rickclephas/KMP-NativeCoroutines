@@ -3,7 +3,7 @@ import PackageDescription
 
 let package = Package(
     name: "KMPNativeCoroutines",
-    platforms: [.iOS(.v9), .macOS(.v10_10), .tvOS(.3), .watchOS(.v9)],
+    platforms: [.iOS(.v9), .macOS(.v10_10), .tvOS(.v9), .watchOS(.v3)],
     products: [
         .library(
             name: "KMPNativeCoroutinesCore",
