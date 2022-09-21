@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
    LastUpgradeVersion = "1250"
-   version = "1.3">
+   version = "2.0">
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES">
@@ -17,7 +17,7 @@
                BlueprintIdentifier = "1D63BF7526E4F006003363BE"
                BuildableName = "watchOS App WatchKit App.app"
                BlueprintName = "watchOS App WatchKit App"
-               ReferencedContainer = "container:Sample.xcodeproj">
+               ReferencedContainer = "container:KMPNativeCoroutinesSample.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -31,7 +31,7 @@
                BlueprintIdentifier = "1D63BF7226E4F006003363BE"
                BuildableName = "watchOS App.app"
                BlueprintName = "watchOS App"
-               ReferencedContainer = "container:Sample.xcodeproj">
+               ReferencedContainer = "container:KMPNativeCoroutinesSample.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -53,47 +53,36 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
-      allowLocationSimulation = "YES">
-      <RemoteRunnable
-         runnableDebuggingMode = "2"
-         BundleIdentifier = "com.apple.Carousel"
-         RemotePath = "/watchOS App WatchKit App">
+      allowLocationSimulation = "YES"
+      launchAutomaticallySubstyle = "32">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1D63BF7526E4F006003363BE"
             BuildableName = "watchOS App WatchKit App.app"
             BlueprintName = "watchOS App WatchKit App"
-            ReferencedContainer = "container:Sample.xcodeproj">
+            ReferencedContainer = "container:KMPNativeCoroutinesSample.xcodeproj">
          </BuildableReference>
-      </RemoteRunnable>
+      </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
-      debugDocumentVersioning = "YES">
-      <RemoteRunnable
-         runnableDebuggingMode = "2"
-         BundleIdentifier = "com.apple.Carousel"
-         RemotePath = "/watchOS App WatchKit App">
+      debugDocumentVersioning = "YES"
+      launchAutomaticallySubstyle = "32">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1D63BF7526E4F006003363BE"
             BuildableName = "watchOS App WatchKit App.app"
             BlueprintName = "watchOS App WatchKit App"
-            ReferencedContainer = "container:Sample.xcodeproj">
+            ReferencedContainer = "container:KMPNativeCoroutinesSample.xcodeproj">
          </BuildableReference>
-      </RemoteRunnable>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "1D63BF7526E4F006003363BE"
-            BuildableName = "watchOS App WatchKit App.app"
-            BlueprintName = "watchOS App WatchKit App"
-            ReferencedContainer = "container:Sample.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

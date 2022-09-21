@@ -17,7 +17,7 @@
                BlueprintIdentifier = "1D717612267009E700846F75"
                BuildableName = "iOS App.app"
                BlueprintName = "iOS App"
-               ReferencedContainer = "container:Sample.xcodeproj">
+               ReferencedContainer = "container:KMPNativeCoroutinesSample.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,7 +35,7 @@
                BlueprintIdentifier = "1D81B1482677B7C000EEC34D"
                BuildableName = "iOS Tests.xctest"
                BlueprintName = "iOS Tests"
-               ReferencedContainer = "container:Sample.xcodeproj">
+               ReferencedContainer = "container:KMPNativeCoroutinesSample.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -57,7 +57,7 @@
             BlueprintIdentifier = "1D717612267009E700846F75"
             BuildableName = "iOS App.app"
             BlueprintName = "iOS App"
-            ReferencedContainer = "container:Sample.xcodeproj">
+            ReferencedContainer = "container:KMPNativeCoroutinesSample.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -74,7 +74,7 @@
             BlueprintIdentifier = "1D717612267009E700846F75"
             BuildableName = "iOS App.app"
             BlueprintName = "iOS App"
-            ReferencedContainer = "container:Sample.xcodeproj">
+            ReferencedContainer = "container:KMPNativeCoroutinesSample.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
