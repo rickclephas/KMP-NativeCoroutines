@@ -17,7 +17,7 @@
                BlueprintIdentifier = "1D7175FB267009C500846F75"
                BuildableName = "macOS App.app"
                BlueprintName = "macOS App"
-               ReferencedContainer = "container:Sample.xcodeproj">
+               ReferencedContainer = "container:KMPNativeCoroutinesSample.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,7 +35,7 @@
                BlueprintIdentifier = "1D81B13A2677B72200EEC34D"
                BuildableName = "macOS Tests.xctest"
                BlueprintName = "macOS Tests"
-               ReferencedContainer = "container:Sample.xcodeproj">
+               ReferencedContainer = "container:KMPNativeCoroutinesSample.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -57,7 +57,7 @@
             BlueprintIdentifier = "1D7175FB267009C500846F75"
             BuildableName = "macOS App.app"
             BlueprintName = "macOS App"
-            ReferencedContainer = "container:Sample.xcodeproj">
+            ReferencedContainer = "container:KMPNativeCoroutinesSample.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -74,7 +74,7 @@
             BlueprintIdentifier = "1D7175FB267009C500846F75"
             BuildableName = "macOS App.app"
             BlueprintName = "macOS App"
-            ReferencedContainer = "container:Sample.xcodeproj">
+            ReferencedContainer = "container:KMPNativeCoroutinesSample.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

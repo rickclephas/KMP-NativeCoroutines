@@ -19,7 +19,7 @@
                BlueprintIdentifier = "1D63BF9B26E4F00A003363BE"
                BuildableName = "watchOS Tests.xctest"
                BlueprintName = "watchOS Tests"
-               ReferencedContainer = "container:Sample.xcodeproj">
+               ReferencedContainer = "container:KMPNativeCoroutinesSample.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
