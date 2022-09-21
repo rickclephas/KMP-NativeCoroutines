@@ -11,10 +11,6 @@ import NativeCoroutinesSampleShared
 
 class AsyncStreamIntegrationTests: XCTestCase {
     
-    override func setUp() {
-        CoroutinesAppleKt.doInitCoroutinesFromMainThread()
-    }
-    
     func testValuesReceived() async {
         let integrationTests = FlowIntegrationTests()
         let sendValueCount = randomInt(min: 5, max: 20)
