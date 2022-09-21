@@ -22,10 +22,9 @@ This library solves both of these limitations 😄.
 
 ## Compatibility
 
-> **Note**: at the moment the [new Kotlin Native memory model][new-mm] is still experimental.  
-> The regular versions of this library are therefore currently using the [`-native-mt`][native-mt] versions 
-> of the kotlinx.coroutines library.  
-> If you would like to try the new memory model, please use the `-new-mm` versions instead.
+> **Note**: version `0.13` and above only support the [new Kotlin Native memory model][new-mm].  
+> Previous versions were using the [`-native-mt`][native-mt] versions of the kotlinx.coroutines library.  
+> To use the new memory model with older versions you should use the `-new-mm` variant.
 
 [new-mm]: https://github.com/JetBrains/kotlin/blob/0b871d7534a9c8e90fb9ad61cd5345716448d08c/kotlin-native/NEW_MM.md
 [native-mt]: https://github.com/kotlin/kotlinx.coroutines/issues/462
@@ -33,14 +32,15 @@ This library solves both of these limitations 😄.
 The latest version of the library uses Kotlin version `1.7.10`.  
 Compatibility versions for older Kotlin versions are also available:
 
-| Version      | Version suffix  |   Kotlin   |     Coroutines      |
-|--------------|-----------------|:----------:|:-------------------:|
-| _latest_     | -new-mm         |   1.7.10   |        1.6.3        |
-| **_latest_** | **_no suffix_** | **1.7.10** | **1.6.3-native-mt** |
-| 0.12.5       | -new-mm         |   1.7.0    |        1.6.3        |
-| 0.12.5       | _no suffix_     |   1.7.0    |   1.6.3-native-mt   |
-| 0.12.2       | -new-mm         |   1.6.21   |        1.6.1        |
-| 0.12.2       | _no suffix_     |   1.6.21   |   1.6.1-native-mt   |
+| Version      | Version suffix    |   Kotlin   |   Coroutines    |
+|--------------|-------------------|:----------:|:---------------:|
+| _latest_     | -kotlin-1.7.20-RC | 1.7.20-RC  |      1.6.4      |
+| **_latest_** | **_no suffix_**   | **1.7.10** |    **1.6.4**    |
+| 0.12.6       | -kotlin-1.7.20-RC | 1.7.20-RC  |      1.6.4      |
+| 0.12.6       | -new-mm           |   1.7.10   |      1.6.3      |
+| 0.12.6       | _no suffix_       |   1.7.10   | 1.6.3-native-mt |
+| 0.12.5       | -new-mm           |   1.7.0    |      1.6.3      |
+| 0.12.5       | _no suffix_       |   1.7.0    | 1.6.3-native-mt |
 
 You can choose from a couple of Swift implementations.  
 Depending on the implementation you can support as low as iOS 9, macOS 10.9, tvOS 9 and watchOS 3:
