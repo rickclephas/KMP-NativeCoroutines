@@ -5,7 +5,6 @@ import com.rickclephas.kmp.nativecoroutines.compiler.utils.isNativeCoroutinesFun
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.referenceNativeSuspendFunction
 import org.jetbrains.kotlin.backend.common.IrElementTransformerVoidWithContext
 import org.jetbrains.kotlin.backend.common.extensions.IrPluginContext
-import org.jetbrains.kotlin.backend.common.ir.passTypeArgumentsFrom
 import org.jetbrains.kotlin.backend.common.lower.DeclarationIrBuilder
 import org.jetbrains.kotlin.ir.IrStatement
 import org.jetbrains.kotlin.ir.builders.*
