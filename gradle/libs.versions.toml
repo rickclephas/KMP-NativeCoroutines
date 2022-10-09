@@ -1,6 +1,6 @@
 [versions]
-kotlin = "1.7.10"
-kotlinx-coroutines = "1.6.3"
+kotlin = "1.7.20"
+kotlinx-coroutines = "1.6.4"
 ksp = "1.7.10-1.0.6"
 kotlinpoet = "1.12.0"
 
@@ -8,7 +8,6 @@ kotlinpoet = "1.12.0"
 kotlin-compiler = { module = "org.jetbrains.kotlin:kotlin-compiler", version.ref = "kotlin" }
 kotlin-compiler-embeddable = { module = "org.jetbrains.kotlin:kotlin-compiler-embeddable", version.ref = "kotlin" }
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
-kotlinx-atomicfu = { module = "org.jetbrains.kotlinx:atomicfu", version = "0.17.1" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
 ksp-api = { module = "com.google.devtools.ksp:symbol-processing-api", version.ref = "ksp" }
 kotlinpoet = { module = "com.squareup:kotlinpoet", version.ref = "kotlinpoet" }
