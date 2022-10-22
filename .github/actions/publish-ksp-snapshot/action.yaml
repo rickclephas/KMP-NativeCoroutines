@@ -17,6 +17,7 @@ runs:
         mkdir -p ${{ inputs.checkout-dir }}
         cd ${{ inputs.checkout-dir }}
         git clone --depth 1 -b ${{ inputs.branch }} https://github.com/google/ksp.git .
+        rm -r examples
     - name: Gradle Wrapper Validation
       uses: gradle/wrapper-validation-action@v1
     - shell: bash
