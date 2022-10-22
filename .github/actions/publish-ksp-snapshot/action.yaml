@@ -8,7 +8,7 @@ inputs:
   checkout-dir:
     description: The directory used to clone the KSP repository
     required: true
-    default: '.ksp'
+    default: '.snapshotBuilds/ksp'
 runs:
   using: composite
   steps:
