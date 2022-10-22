@@ -43,6 +43,10 @@ jobs:
         uses: ./.github/actions/cache-gradle
       - name: Cache Konan
         uses: ./.github/actions/cache-konan
+      - name: Publish KSP SNAPSHOT
+        uses: ./.github/actions/publish-ksp-snapshot
+        with:
+          branch: 1.0.8-release
       - name: Run tests
         env:
           GRADLE_MODULE: ${{ format(':kmp-nativecoroutines-{0}', matrix.module) }}
@@ -119,6 +123,10 @@ jobs:
         env:
           KOTLIN_NATIVE_EMBEDDABLE_COMPILER: ${{ matrix.embeddable-compiler }}
         run: echo "kotlin.native.useEmbeddableCompilerJar=$KOTLIN_NATIVE_EMBEDDABLE_COMPILER" >> gradle.properties
+      - name: Publish KSP SNAPSHOT
+        uses: ./.github/actions/publish-ksp-snapshot
+        with:
+          branch: 1.0.8-release
       - name: Run tests
         env:
           XCODEBUILD_SCHEME: ${{ env[format('XCODEBUILD_SCHEME_{0}', matrix.platform)] }}

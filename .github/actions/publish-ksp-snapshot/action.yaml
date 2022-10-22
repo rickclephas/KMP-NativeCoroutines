@@ -1,0 +1,23 @@
+name: Publish KSP SNAPSHOT
+description: Publishes a KSP SNAPSHOT version to mavenLocal
+inputs:
+  branch:
+    description: The name of the KSP branch
+    required: true
+    default: 'main'
+  checkout-dir:
+    description: The directory used to clone the KSP repository
+    required: true
+    default: '.ksp'
+runs:
+  using: composite
+  steps:
+    - shell: bash
+      run: |
+        mkdir -p ${{ inputs.checkout-dir }}
+        cd ${{ inputs.checkout-dir }}
+        git clone --depth 1 -b ${{ inputs.branch }} https://github.com/google/ksp.git .
+    - name: Gradle Wrapper Validation
+      uses: gradle/wrapper-validation-action@v1
+    - shell: bash
+      run: ./gradlew publishToMavenLocal
