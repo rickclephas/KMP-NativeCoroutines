@@ -21,4 +21,6 @@ runs:
     - name: Gradle Wrapper Validation
       uses: gradle/wrapper-validation-action@v1
     - shell: bash
-      run: ./gradlew publishToMavenLocal
+      run: |
+        cd ${{ inputs.checkout-dir }}
+        ./gradlew publishToMavenLocal
