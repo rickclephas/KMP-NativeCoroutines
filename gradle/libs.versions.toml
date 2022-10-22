@@ -1,5 +1,5 @@
 [versions]
-kotlin = "1.8.0-dev-2466"
+kotlin = "1.8.0-Beta-161"
 kotlinx-coroutines = "1.6.4"
 ksp = "2.0.255-SNAPSHOT"
 kotlinpoet = "1.12.0"
