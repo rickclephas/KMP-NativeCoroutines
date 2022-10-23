@@ -22,25 +22,13 @@ This library solves both of these limitations 😄.
 
 ## Compatibility
 
-> **Note**: version `0.13` and above only support the [new Kotlin Native memory model][new-mm].  
-> Previous versions were using the [`-native-mt`][native-mt] versions of the kotlinx.coroutines library.  
-> To use the new memory model with older versions you should use the `-new-mm` variant.
-
-[new-mm]: https://github.com/JetBrains/kotlin/blob/0b871d7534a9c8e90fb9ad61cd5345716448d08c/kotlin-native/NEW_MM.md
-[native-mt]: https://github.com/kotlin/kotlinx.coroutines/issues/462
-
 The latest version of the library uses Kotlin version `1.7.20`.  
 Compatibility versions for older Kotlin versions are also available:
 
-| Version      | Version suffix    |   Kotlin   |   Coroutines    |
-|--------------|-------------------|:----------:|:---------------:|
-| **_latest_** | **_no suffix_**   | **1.7.20** |    **1.6.4**    |
-| 0.13.0       | _no suffix_       |   1.7.10   |      1.6.4      |
-| 0.12.6       | -kotlin-1.7.20-RC | 1.7.20-RC  |      1.6.4      |
-| 0.12.6       | -new-mm           |   1.7.10   |      1.6.3      |
-| 0.12.6       | _no suffix_       |   1.7.10   | 1.6.3-native-mt |
-| 0.12.5       | -new-mm           |   1.7.0    |      1.6.3      |
-| 0.12.5       | _no suffix_       |   1.7.0    | 1.6.3-native-mt |
+| Version      | Version suffix    |   Kotlin   |  KSP  |   Coroutines    |
+|--------------|-------------------|:----------:|:-----:|:---------------:|
+| **_latest_** | **_no suffix_**   | **1.7.20** | 1.0.6 |    **1.6.4**    |
+| 0.13.1       | _no suffix_       |   1.7.20   | _N/A_ |      1.6.4      |
 
 You can choose from a couple of Swift implementations.  
 Depending on the implementation you can support as low as iOS 9, macOS 10.9, tvOS 9 and watchOS 3:
@@ -66,6 +54,7 @@ Make sure to always use the same versions for all the libraries!
 For Kotlin just add the plugin to your `build.gradle.kts`:
 ```kotlin
 plugins {
+    id("com.google.devtools.ksp") version "<ksp-version>"
     id("com.rickclephas.kmp.nativecoroutines") version "<version>"
 }
 ```
@@ -106,59 +95,49 @@ Just use the wrapper functions in Swift to get async functions, AsyncStreams, Pu
 
 ### Kotlin
 
-> **Warning**: the Kotlin part of this library consists of helper functions and a Kotlin compiler plugin.  
-> Using the plugin removes the boilerplate code from your project, however **Kotlin compiler plugins aren't stable**!
-> 
-> The plugin is known to cause recursion errors in some scenarios such as in [#4][GH-4] and [#23][GH-23].  
-> To prevent such recursion errors it's best to explicitly define the (return) types of public 
-> properties and functions.
-
-[GH-4]: https://github.com/rickclephas/KMP-NativeCoroutines/issues/4
-[GH-23]: https://github.com/rickclephas/KMP-NativeCoroutines/issues/23
-
-The plugin will automagically generate the necessary code for you! 🔮
+The plugin will automagically generate the necessary code for you! 🔮  
+Just annotate your coroutines declarations with `@NativeCoroutines`.
 
 Your `Flow` properties/functions get a `Native` version:
 ```kotlin
 class Clock {
     // Somewhere in your Kotlin code you define a Flow property
+    // and annotate it with @NativeCoroutines
+    @NativeCoroutines
     val time: StateFlow<Long> // This can be any kind of Flow
-
-    // The plugin will generate this native property for you
-    val timeNative
-        get() = time.asNativeFlow()
 }
+
+// The plugin will generate this native property for you
+val Clock.timeNative
+    get() = time.asNativeFlow()
 ```
 
 In case of a `StateFlow` or `SharedFlow` property you also get a `NativeValue` or `NativeReplayCache` property:
 ```kotlin
 // For the StateFlow defined above the plugin will generate this native value property
-val timeNativeValue
+val Clock.timeNativeValue
     get() = time.value
 
 // In case of a SharedFlow the plugin would generate this native replay cache property
-val timeNativeReplayCache
+val Clock.timeNativeReplayCache
     get() = time.replayCache
 ```
 
-The plugin also generates `Native` versions for all your suspend functions:
+The plugin also generates `Native` versions for your annotated suspend functions:
 ```kotlin
 class RandomLettersGenerator {
     // Somewhere in your Kotlin code you define a suspend function
+    // and annotate it with @NativeCoroutines
+    @NativeCoroutines
     suspend fun getRandomLetters(): String { 
         // Code to generate some random letters
     }
-
-    // The plugin will generate this native function for you
-    fun getRandomLettersNative() = 
-        nativeSuspend { getRandomLetters() }
 }
+
+// The plugin will generate this native function for you
+fun RandomLettersGenerator.getRandomLettersNative() =
+    nativeSuspend { getRandomLetters() }
 ```
-
-#### Global properties and functions
-
-The plugin is currently unable to generate native versions for global properties and functions.  
-In such cases you have to manually create the native versions in your Kotlin native code.
 
 #### Custom suffix
 
