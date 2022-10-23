@@ -24,7 +24,7 @@ class NativeSuspendTests {
         val nativeSuspend = nativeSuspend(this) { delayAndReturn(100, value) }
         var receivedResultCount = 0
         var receivedErrorCount = 0
-        val receivedCancellationCount = 0
+        var receivedCancellationCount = 0
         nativeSuspend({ receivedValue, _ ->
             assertSame(value, receivedValue, "Received incorrect value")
             receivedResultCount++
@@ -45,11 +45,10 @@ class NativeSuspendTests {
         val nativeSuspend = nativeSuspend(this) { delayAndThrow(100, exception) }
         var receivedResultCount = 0
         var receivedErrorCount = 0
-        val receivedCancellationCount = 0
+        var receivedCancellationCount = 0
         nativeSuspend({ _, _ ->
             receivedResultCount++
         }, { error, _ ->
-            assertNotNull(error, "Function should complete with an error")
             val kotlinException = error.kotlinCause
             assertSame(exception, kotlinException, "Kotlin exception should be the same exception")
             receivedErrorCount++
@@ -67,13 +66,12 @@ class NativeSuspendTests {
         val nativeSuspend = nativeSuspend(this) { delayAndReturn(5_000, RandomValue()) }
         var receivedResultCount = 0
         var receivedErrorCount = 0
-        val receivedCancellationCount = 0
+        var receivedCancellationCount = 0
         val cancel = nativeSuspend({ _, _ ->
             receivedResultCount++
         }, { _, _ ->
             receivedErrorCount++
         }, { error, _ ->
-            assertNotNull(error, "Function should complete with a cancellation error")
             val exception = error.kotlinCause
             assertIs<CancellationException>(exception, "Error should contain CancellationException")
             receivedCancellationCount++

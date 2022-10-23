@@ -14,7 +14,7 @@ class NativeFlowTests {
         val flow = flow<RandomValue> { }
         val nativeFlow = flow.asNativeFlow(this)
         var completionCount = 0
-        val cancellationCount = 0
+        var cancellationCount = 0
         nativeFlow({ _, _, _ -> }, { error, _ ->
             assertNull(error, "Flow should complete without an error")
             completionCount++
@@ -32,7 +32,7 @@ class NativeFlowTests {
         val flow = flow<RandomValue> { throw exception }
         val nativeFlow = flow.asNativeFlow(this)
         var completionCount = 0
-        val cancellationCount = 0
+        var cancellationCount = 0
         nativeFlow({ _, _, _ -> }, { error, _ ->
             assertNotNull(error, "Flow should complete with an error")
             val kotlinException = error.kotlinCause
@@ -70,7 +70,7 @@ class NativeFlowTests {
         val flow = MutableSharedFlow<RandomValue>()
         val nativeFlow = flow.asNativeFlow(this)
         var completionCount = 0
-        val cancellationCount = 0
+        var cancellationCount = 0
         val cancel = nativeFlow({ _, _, _ -> }, { _, _ ->
             completionCount++
         }, { error, _ ->
