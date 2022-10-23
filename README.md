@@ -202,12 +202,12 @@ if case let .success(letters) = result {
 }
 ```
 
-For `Flow`s there is the `asyncStream(for:)` function to get an `AsyncStream`:
+For `Flow`s there is the `asyncSequence(for:)` function to get an `AsyncSequence`:
 ```swift
 let handle = Task {
     do {
-        let stream = asyncStream(for: randomLettersGenerator.getRandomLettersFlowNative())
-        for try await letters in stream {
+        let sequence = asyncSequence(for: randomLettersGenerator.getRandomLettersFlowNative())
+        for try await letters in sequence {
             print("Got random letters: \(letters)")
         }
     } catch {

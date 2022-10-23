@@ -28,7 +28,7 @@ class NewMemoryModelIntegrationTests: XCTestCase {
             XCTAssertEqual(value.dataFromMain, dataFromBackground, "Data from main should now be data from background")
             valueExpectation.fulfill()
             return unit
-        }, { _, unit in unit })
+        }, { _, unit in unit }, { _, unit in unit })
         wait(for: [valueExpectation], timeout: 1)
     }
 }

@@ -16,15 +16,18 @@ public func createObservable<Output, Failure: Error, Unit>(
 ) -> Observable<Output> {
     return Observable.deferred {
         return Observable.create { observer in
-            let nativeCancellable = nativeFlow({ item, unit in
+            let nativeCancellable = nativeFlow({ item, next, _ in
                 observer.onNext(item)
-                return unit
+                return next()
             }, { error, unit in
                 if let error = error {
                     observer.onError(error)
                 } else {
                     observer.onCompleted()
                 }
+                return unit
+            }, { cancellationError, unit in
+                observer.onError(cancellationError)
                 return unit
             })
             return Disposables.create { _ = nativeCancellable() }
