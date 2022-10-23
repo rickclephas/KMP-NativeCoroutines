@@ -20,13 +20,18 @@ jobs:
       fail-fast: false
       matrix:
         os: [ macos-12 ]
+        xcode: [ 13.4.1 ]
         java: [ 11 ]
-        module: [ core ]
-    name: ${{ format('{0} ({1}, JDK {2})', matrix.module, matrix.os, matrix.java) }}
+        module: [ core, ksp ]
+    name: ${{ format('{0} ({1}, Xcode {2}, JDK {3})', matrix.module, matrix.os, matrix.xcode, matrix.java) }}
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Setup Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: ${{ matrix.xcode }}
       - name: Gradle Wrapper Validation
         uses: gradle/wrapper-validation-action@v1
       - name: Setup JDK
@@ -41,7 +46,7 @@ jobs:
       - name: Run tests
         env:
           GRADLE_MODULE: ${{ format(':kmp-nativecoroutines-{0}', matrix.module) }}
-        run: ./gradlew $GRADLE_MODULE:allTests
+        run: ./gradlew $GRADLE_MODULE:check
   run-swift-tests:
     if: github.event_name != 'pull_request' || github.event.pull_request.draft == false
     strategy:

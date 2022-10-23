@@ -1,5 +1,6 @@
 package com.rickclephas.kmp.nativecoroutines.sample.tests
 
+import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlin.random.Random
@@ -19,6 +20,7 @@ class NewMemoryModelIntegrationTests: IntegrationTests() {
         return chars.joinToString("")
     }
 
+    @NativeCoroutines
     suspend fun generateRandomMutableData(): MutableData {
         val data = MutableData()
         withContext(Dispatchers.Main) {

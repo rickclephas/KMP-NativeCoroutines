@@ -2,19 +2,9 @@ package com.rickclephas.kmp.nativecoroutines
 
 import kotlinx.cinterop.UnsafeNumber
 import kotlinx.cinterop.convert
-import kotlin.native.concurrent.isFrozen
 import kotlin.test.*
 
 class NativeErrorAppleTests {
-
-    @Test
-    fun ensureNotFrozen() {
-        val exception = RandomException()
-        assertFalse(exception.isFrozen, "Exception shouldn't be frozen yet")
-        val nsError = exception.asNativeError()
-        assertFalse(nsError.isFrozen, "NSError should be frozen")
-        assertFalse(exception.isFrozen, "Exception shouldn't be frozen")
-    }
 
     @Test
     @OptIn(UnsafeNumber::class)
