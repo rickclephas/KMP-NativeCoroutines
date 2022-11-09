@@ -1,4 +1,5 @@
 name: Cache Gradle
+description: Caches Gradle files
 runs:
   using: composite
   steps:
