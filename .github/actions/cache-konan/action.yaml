@@ -1,4 +1,5 @@
 name: Cache Konan
+description: Caches Konan files
 runs:
   using: composite
   steps:
