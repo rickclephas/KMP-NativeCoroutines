@@ -32,16 +32,17 @@ This library solves both of these limitations 😄.
 The latest version of the library uses Kotlin version `1.7.21`.  
 Compatibility versions for older Kotlin versions are also available:
 
-| Version      | Version suffix    |   Kotlin   |   Coroutines    |
-|--------------|-------------------|:----------:|:---------------:|
-| **_latest_** | **_no suffix_**   | **1.7.21** |    **1.6.4**    |
-| 0.13.1       | **_no suffix_**   | **1.7.20** |    **1.6.4**    |
-| 0.13.0       | _no suffix_       |   1.7.10   |      1.6.4      |
-| 0.12.6       | -kotlin-1.7.20-RC | 1.7.20-RC  |      1.6.4      |
-| 0.12.6       | -new-mm           |   1.7.10   |      1.6.3      |
-| 0.12.6       | _no suffix_       |   1.7.10   | 1.6.3-native-mt |
-| 0.12.5       | -new-mm           |   1.7.0    |      1.6.3      |
-| 0.12.5       | _no suffix_       |   1.7.0    | 1.6.3-native-mt |
+| Version      | Version suffix     |   Kotlin   |   Coroutines    |
+|--------------|--------------------|:----------:|:---------------:|
+| _latest_     | -kotlin-1.8.0-Beta | 1.8.0-Beta |      1.6.4      |
+| **_latest_** | **_no suffix_**    | **1.7.21** |    **1.6.4**    |
+| 0.13.1       | **_no suffix_**    | **1.7.20** |    **1.6.4**    |
+| 0.13.0       | _no suffix_        |   1.7.10   |      1.6.4      |
+| 0.12.6       | -kotlin-1.7.20-RC  | 1.7.20-RC  |      1.6.4      |
+| 0.12.6       | -new-mm            |   1.7.10   |      1.6.3      |
+| 0.12.6       | _no suffix_        |   1.7.10   | 1.6.3-native-mt |
+| 0.12.5       | -new-mm            |   1.7.0    |      1.6.3      |
+| 0.12.5       | _no suffix_        |   1.7.0    | 1.6.3-native-mt |
 
 You can choose from a couple of Swift implementations.  
 Depending on the implementation you can support as low as iOS 9, macOS 10.9, tvOS 9 and watchOS 3:
