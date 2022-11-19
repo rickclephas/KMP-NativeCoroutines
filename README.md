@@ -112,6 +112,7 @@ class Clock {
 ```
 
 <details><summary>Generated code</summary>
+<p>
 
 The plugin will generate this native property for you:
 ```kotlin
@@ -130,6 +131,7 @@ In case of a `SharedFlow` the plugin would generate a native replay cache proper
 val Clock.timeNativeReplayCache
     get() = time.replayCache
 ```
+</p>
 </details>
 
 #### Suspend functions
@@ -147,12 +149,14 @@ class RandomLettersGenerator {
 ```
 
 <details><summary>Generated code</summary>
+<p>
 
 The plugin will generate this native function for you:
 ```kotlin
 fun RandomLettersGenerator.getRandomLettersNative() =
     nativeSuspend { getRandomLetters() }
 ```
+</p>
 </details>
 
 #### Custom suffix
