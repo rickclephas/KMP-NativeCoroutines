@@ -22,7 +22,7 @@ jobs:
         os: [ macos-12 ]
         xcode: [ 13.4.1 ]
         java: [ 11 ]
-        module: [ core ]
+        module: [ core, ksp ]
     name: ${{ format('{0} ({1}, Xcode {2}, JDK {3})', matrix.module, matrix.os, matrix.xcode, matrix.java) }}
     runs-on: ${{ matrix.os }}
     steps:
@@ -46,7 +46,7 @@ jobs:
       - name: Run tests
         env:
           GRADLE_MODULE: ${{ format(':kmp-nativecoroutines-{0}', matrix.module) }}
-        run: ./gradlew $GRADLE_MODULE:allTests
+        run: ./gradlew $GRADLE_MODULE:check
   run-swift-tests:
     if: github.event_name != 'pull_request' || github.event.pull_request.draft == false
     strategy:

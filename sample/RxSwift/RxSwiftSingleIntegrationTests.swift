@@ -14,7 +14,7 @@ class RxSwiftSingleIntegrationTests: XCTestCase {
     func testValueReceived() {
         let integrationTests = SuspendIntegrationTests()
         let sendValue = randomInt()
-        let single = createSingle(for: integrationTests.returnValueNative(value: sendValue, delay: 1000))
+        let single = createSingle(for: integrationTests.returnValue(value: sendValue, delay: 1000))
         let valueExpectation = expectation(description: "Waiting for value")
         let disposedExpectation = expectation(description: "Waiting for dispose")
         let disposable = single.subscribe(onSuccess: { value in
@@ -34,7 +34,7 @@ class RxSwiftSingleIntegrationTests: XCTestCase {
     
     func testNilValueReceived() {
         let integrationTests = SuspendIntegrationTests()
-        let single = createSingle(for: integrationTests.returnNullNative(delay: 1000))
+        let single = createSingle(for: integrationTests.returnNull(delay: 1000))
         let valueExpectation = expectation(description: "Waiting for value")
         let disposedExpectation = expectation(description: "Waiting for dispose")
         let disposable = single.subscribe(onSuccess: { value in
@@ -55,7 +55,7 @@ class RxSwiftSingleIntegrationTests: XCTestCase {
     func testExceptionReceived() {
         let integrationTests = SuspendIntegrationTests()
         let sendMessage = randomString()
-        let single = createSingle(for: integrationTests.throwExceptionNative(message: sendMessage, delay: 1000))
+        let single = createSingle(for: integrationTests.throwException(message: sendMessage, delay: 1000))
         let valueExpectation = expectation(description: "Waiting for no value")
         valueExpectation.isInverted = true
         let errorExpectation = expectation(description: "Waiting for error")
@@ -80,7 +80,7 @@ class RxSwiftSingleIntegrationTests: XCTestCase {
     func testErrorReceived() {
         let integrationTests = SuspendIntegrationTests()
         let sendMessage = randomString()
-        let single = createSingle(for: integrationTests.throwErrorNative(message: sendMessage, delay: 1000))
+        let single = createSingle(for: integrationTests.throwError(message: sendMessage, delay: 1000))
         let valueExpectation = expectation(description: "Waiting for no value")
         valueExpectation.isInverted = true
         let errorExpectation = expectation(description: "Waiting for error")
@@ -104,7 +104,7 @@ class RxSwiftSingleIntegrationTests: XCTestCase {
     
     func testNotOnMainThread() {
         let integrationTests = SuspendIntegrationTests()
-        let single = createSingle(for: integrationTests.returnValueNative(value: 1, delay: 1000))
+        let single = createSingle(for: integrationTests.returnValue(value: 1, delay: 1000))
         let valueExpectation = expectation(description: "Waiting for value")
         let disposedExpectation = expectation(description: "Waiting for dispose")
         XCTAssertTrue(Thread.isMainThread, "Test should run on the main thread")
@@ -123,7 +123,7 @@ class RxSwiftSingleIntegrationTests: XCTestCase {
         let integrationTests = SuspendIntegrationTests()
         let callbackExpectation = expectation(description: "Waiting for callback not to get called")
         callbackExpectation.isInverted = true
-        let single = createSingle(for: integrationTests.returnFromCallbackNative(delay: 3000) {
+        let single = createSingle(for: integrationTests.returnFromCallback(delay: 3000) {
             callbackExpectation.fulfill()
             return KotlinInt(int: 1)
         })
@@ -151,7 +151,7 @@ class RxSwiftSingleIntegrationTests: XCTestCase {
     func testValuesReceived() {
         let integrationTests = SuspendIntegrationTests()
         let sendValueCount = randomInt(min: 5, max: 20)
-        let observable = createObservable(for: integrationTests.getFlowNative(count: sendValueCount, delay: 100))
+        let observable = createObservable(for: integrationTests.getFlow(count: sendValueCount, delay: 100))
         let valuesExpectation = expectation(description: "Waiting for values")
         valuesExpectation.expectedFulfillmentCount = Int(sendValueCount)
         let completionExpectation = expectation(description: "Waiting for completion")
