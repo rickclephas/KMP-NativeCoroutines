@@ -36,7 +36,7 @@ class AsyncSequenceIntegrationTests: XCTestCase {
     func testValueBackPressure() async {
         let integrationTests = FlowIntegrationTests()
         let sendValueCount: Int32 = 10
-        let sequence = asyncSequence(for: integrationTests.getFlowNative(count: sendValueCount, delay: 100))
+        let sequence = asyncSequence(for: integrationTests.getFlow(count: sendValueCount, delay: 100))
         do {
             var receivedValueCount: Int32 = 0
             for try await _ in sequence {
