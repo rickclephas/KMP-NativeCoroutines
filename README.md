@@ -2,6 +2,10 @@
 
 A library to use Kotlin Coroutines from Swift code in KMP apps.
 
+> **Note**: checkout the updated [README](https://github.com/rickclephas/KMP-NativeCoroutines/blob/dev-1.0/README.md)
+> and [migration steps](https://github.com/rickclephas/KMP-NativeCoroutines/blob/dev-1.0/MIGRATING_TO_V1.md)
+> for the 1.0 pre-release versions.
+
 ## Why this library?
 
 Both KMP and Kotlin Coroutines are amazing but together they have some limitations.
