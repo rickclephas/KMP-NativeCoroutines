@@ -58,6 +58,12 @@ plugins {
     id("com.rickclephas.kmp.nativecoroutines") version "<version>"
 }
 ```
+and make sure to opt in to the experimental `@ObjCName` annotation:
+```kotlin
+kotlin.sourceSets.all {
+    languageSettings.optIn("kotlin.experimental.ExperimentalObjCName")
+}
+```
 
 ### Swift (Swift Package Manager)
 
