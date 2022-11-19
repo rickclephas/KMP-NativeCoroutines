@@ -38,6 +38,8 @@ class KmpNativeCoroutinesPlugin: KotlinCompilerPluginSupportPlugin {
             project.setKSPArguments { arg ->
                 arg("nativeCoroutines.suffix", nativeCoroutines.suffix)
                 nativeCoroutines.fileSuffix?.let { arg("nativeCoroutines.fileSuffix", it) }
+                nativeCoroutines.flowValueSuffix?.let { arg("nativeCoroutines.flowValueSuffix", it) }
+                nativeCoroutines.flowReplayCacheSuffix?.let { arg("nativeCoroutines.flowReplayCacheSuffix", it) }
             }
         }
     }

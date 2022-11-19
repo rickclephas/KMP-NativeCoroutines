@@ -47,7 +47,7 @@ internal class KmpNativeCoroutinesSymbolProcessor(
             return true
         }
         val scopeProperty = coroutineScopeProvider.getScopeProperty(property) ?: return false
-        val propertySpecs = property.toNativeCoroutinesPropertySpecs(scopeProperty, options.suffix) ?: return false
+        val propertySpecs = property.toNativeCoroutinesPropertySpecs(scopeProperty, options) ?: return false
         val fileSpecBuilder = file.getFileSpecBuilder()
         propertySpecs.forEach(fileSpecBuilder::addProperty)
         return true
@@ -61,7 +61,7 @@ internal class KmpNativeCoroutinesSymbolProcessor(
             return true
         }
         val scopeProperty = coroutineScopeProvider.getScopeProperty(function) ?: return false
-        val funSpec = function.toNativeCoroutinesFunSpec(scopeProperty, options.suffix) ?: return false
+        val funSpec = function.toNativeCoroutinesFunSpec(scopeProperty, options) ?: return false
         file.getFileSpecBuilder().addFunction(funSpec)
         return true
     }

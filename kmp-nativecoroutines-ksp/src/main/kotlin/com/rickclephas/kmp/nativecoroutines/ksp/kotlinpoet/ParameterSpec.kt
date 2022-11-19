@@ -1,6 +1,7 @@
 package com.rickclephas.kmp.nativecoroutines.ksp.kotlinpoet
 
 import com.google.devtools.ksp.symbol.KSValueParameter
+import com.rickclephas.kmp.nativecoroutines.ksp.toAnnotationSpecs
 import com.squareup.kotlinpoet.KModifier
 import com.squareup.kotlinpoet.ParameterSpec
 import com.squareup.kotlinpoet.ksp.TypeParameterResolver

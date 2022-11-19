@@ -26,6 +26,7 @@ kotlin {
     sourceSets {
         all {
             languageSettings.optIn("kotlin.RequiresOptIn")
+            languageSettings.optIn("kotlin.experimental.ExperimentalObjCName")
         }
         val commonMain by getting {
             dependencies {

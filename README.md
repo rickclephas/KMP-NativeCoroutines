@@ -59,6 +59,12 @@ plugins {
     id("com.rickclephas.kmp.nativecoroutines") version "<version>"
 }
 ```
+and make sure to opt in to the experimental `@ObjCName` annotation:
+```kotlin
+kotlin.sourceSets.all {
+    languageSettings.optIn("kotlin.experimental.ExperimentalObjCName")
+}
+```
 
 ### Swift (Swift Package Manager)
 
@@ -101,7 +107,7 @@ Just annotate your coroutines declarations with `@NativeCoroutines`.
 
 #### Flows
 
-Your `Flow` properties/functions get a `Native` version:
+Your `Flow` properties/functions get a native version:
 ```kotlin
 class Clock {
     // Somewhere in your Kotlin code you define a Flow property
@@ -116,19 +122,20 @@ class Clock {
 
 The plugin will generate this native property for you:
 ```kotlin
+@ObjCName(name = "time")
 val Clock.timeNative
     get() = time.asNativeFlow()
 ```
 
-For the `StateFlow` defined above the plugin will also generate this native value property:
+For the `StateFlow` defined above the plugin will also generate this value property:
 ```kotlin
-val Clock.timeNativeValue
+val Clock.timeValue
     get() = time.value
 ```
 
-In case of a `SharedFlow` the plugin would generate a native replay cache property:
+In case of a `SharedFlow` the plugin would generate a replay cache property:
 ```kotlin
-val Clock.timeNativeReplayCache
+val Clock.timeReplayCache
     get() = time.replayCache
 ```
 </p>
@@ -136,7 +143,7 @@ val Clock.timeNativeReplayCache
 
 #### Suspend functions
 
-The plugin also generates `Native` versions for your annotated suspend functions:
+The plugin also generates native versions for your annotated suspend functions:
 ```kotlin
 class RandomLettersGenerator {
     // Somewhere in your Kotlin code you define a suspend function
@@ -153,6 +160,7 @@ class RandomLettersGenerator {
 
 The plugin will generate this native function for you:
 ```kotlin
+@ObjCName(name = "getRandomLetters")
 fun RandomLettersGenerator.getRandomLettersNative() =
     nativeSuspend { getRandomLetters() }
 ```
@@ -169,7 +177,7 @@ Use the `asyncFunction(for:)` function to get an async function that can be awai
 ```swift
 let handle = Task {
     do {
-        let letters = try await asyncFunction(for: randomLettersGenerator.getRandomLettersNative())
+        let letters = try await asyncFunction(for: randomLettersGenerator.getRandomLetters())
         print("Got random letters: \(letters)")
     } catch {
         print("Failed with error: \(error)")
@@ -182,7 +190,7 @@ handle.cancel()
 
 or if you don't like these do-catches you can use the `asyncResult(for:)` function:
 ```swift
-let result = await asyncResult(for: randomLettersGenerator.getRandomLettersNative())
+let result = await asyncResult(for: randomLettersGenerator.getRandomLetters())
 if case let .success(letters) = result {
     print("Got random letters: \(letters)")
 }
@@ -194,7 +202,7 @@ For `Flow`s there is the `asyncSequence(for:)` function to get an `AsyncSequence
 ```swift
 let handle = Task {
     do {
-        let sequence = asyncSequence(for: randomLettersGenerator.getRandomLettersFlowNative())
+        let sequence = asyncSequence(for: randomLettersGenerator.getRandomLettersFlow())
         for try await letters in sequence {
             print("Got random letters: \(letters)")
         }
@@ -219,7 +227,7 @@ The Combine implementation provides a couple functions to get an `AnyPublisher` 
 For your `Flow`s use the `createPublisher(for:)` function:
 ```swift
 // Create an AnyPublisher for your flow
-let publisher = createPublisher(for: clock.timeNative)
+let publisher = createPublisher(for: clock.time)
 
 // Now use this publisher as you would any other
 let cancellable = publisher.sink { completion in
@@ -234,7 +242,7 @@ cancellable.cancel()
 
 You can also use the `createPublisher(for:)` function for suspend functions that return a `Flow`:
 ```swift
-let publisher = createPublisher(for: randomLettersGenerator.getRandomLettersFlowNative())
+let publisher = createPublisher(for: randomLettersGenerator.getRandomLettersFlow())
 ```
 
 #### Future
@@ -242,7 +250,7 @@ let publisher = createPublisher(for: randomLettersGenerator.getRandomLettersFlow
 For the suspend functions you should use the `createFuture(for:)` function:
 ```swift
 // Create a Future/AnyPublisher for the suspend function
-let future = createFuture(for: randomLettersGenerator.getRandomLettersNative())
+let future = createFuture(for: randomLettersGenerator.getRandomLetters())
 
 // Now use this future as you would any other
 let cancellable = future.sink { completion in
@@ -267,7 +275,7 @@ The RxSwift implementation provides a couple functions to get an `Observable` or
 For your `Flow`s use the `createObservable(for:)` function:
 ```swift
 // Create an observable for your flow
-let observable = createObservable(for: clock.timeNative)
+let observable = createObservable(for: clock.time)
 
 // Now use this observable as you would any other
 let disposable = observable.subscribe(onNext: { value in
@@ -286,7 +294,7 @@ disposable.dispose()
 
 You can also use the `createObservable(for:)` function for suspend functions that return a `Flow`:
 ```swift
-let observable = createObservable(for: randomLettersGenerator.getRandomLettersFlowNative())
+let observable = createObservable(for: randomLettersGenerator.getRandomLettersFlow())
 ```
 
 #### Single
@@ -294,7 +302,7 @@ let observable = createObservable(for: randomLettersGenerator.getRandomLettersFl
 For the suspend functions you should use the `createSingle(for:)` function:
 ```swift
 // Create a single for the suspend function
-let single = createSingle(for: randomLettersGenerator.getRandomLettersNative())
+let single = createSingle(for: randomLettersGenerator.getRandomLetters())
 
 // Now use this single as you would any other
 let disposable = single.subscribe(onSuccess: { value in
@@ -324,6 +332,12 @@ nativeCoroutines {
     // The suffix used to generate the native coroutine file names.
     // Note: defaults to the suffix value when `null`.
     fileSuffix = null
+    // The suffix used to generate the StateFlow value property names,
+    // or `null` to remove the value properties.
+    flowValueSuffix = "Value"
+    // The suffix used to generate the SharedFlow replayCache property names,
+    // or `null` to remove the replayCache properties.
+    flowReplayCacheSuffix = "ReplayCache"
 }
 ```
 
