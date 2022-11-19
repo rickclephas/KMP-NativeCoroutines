@@ -83,7 +83,7 @@ Or add it in Xcode by going to `File` > `Add Packages...` and providing the URL:
 
 If you use CocoaPods add one or more of the following libraries to your `Podfile`:
 ```ruby
-pod 'KMPNativeCoroutinesAsync', '<version>'    # Swift 5.5 Async/Await implementation
+pod 'KMPNativeCoroutinesAsync', '<version>'    # Swift Concurrency implementation
 pod 'KMPNativeCoroutinesCombine', '<version>'  # Combine implementation
 pod 'KMPNativeCoroutinesRxSwift', '<version>'  # RxSwift implementation
 ```
@@ -159,45 +159,11 @@ fun RandomLettersGenerator.getRandomLettersNative() =
 </p>
 </details>
 
-#### Custom suffix
-
-If you don't like the naming of these generated properties/functions, you can easily change the suffix.  
-For example add the following to your `build.gradle.kts` to use the suffix `Apple`:
-```kotlin
-nativeCoroutines {
-    suffix = "Apple"
-}
-```
-
-#### Custom CoroutineScope
-
-For more control you can provide a custom `CoroutineScope` with the `NativeCoroutineScope` annotation:
-```kotlin
-class Clock {
-    @NativeCoroutineScope
-    internal val coroutineScope = CoroutineScope(job + Dispatchers.Default)
-}
-```
-
-If you don't provide a `CoroutineScope` the default scope will be used which is defined as:
-```kotlin
-internal val defaultCoroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
-```
-
-#### Ignoring declarations
-
-Use the `NativeCoroutinesIgnore` annotation to tell the plugin to ignore a property or function:
-```kotlin
-@NativeCoroutinesIgnore
-val ignoredFlowProperty: Flow<Int>
-
-@NativeCoroutinesIgnore
-suspend fun ignoredSuspendFunction() { }
-```
-
-### Swift 5.5 Async/Await
+### Swift Concurrency
 
 The Async implementation provides some functions to get async Swift functions and `AsyncSequence`s.
+
+#### Async functions
 
 Use the `asyncFunction(for:)` function to get an async function that can be awaited:
 ```swift
@@ -222,6 +188,8 @@ if case let .success(letters) = result {
 }
 ```
 
+#### AsyncSequence
+
 For `Flow`s there is the `asyncSequence(for:)` function to get an `AsyncSequence`:
 ```swift
 let handle = Task {
@@ -243,6 +211,11 @@ handle.cancel()
 
 The Combine implementation provides a couple functions to get an `AnyPublisher` for your Coroutines code.
 
+> **Note**: these functions create deferred `AnyPublisher`s.  
+> Meaning every subscription will trigger the collection of the `Flow` or execution of the suspend function.
+
+#### Publisher
+
 For your `Flow`s use the `createPublisher(for:)` function:
 ```swift
 // Create an AnyPublisher for your flow
@@ -258,6 +231,13 @@ let cancellable = publisher.sink { completion in
 // To cancel the flow (collection) just cancel the publisher
 cancellable.cancel()
 ```
+
+You can also use the `createPublisher(for:)` function for suspend functions that return a `Flow`:
+```swift
+let publisher = createPublisher(for: randomLettersGenerator.getRandomLettersFlowNative())
+```
+
+#### Future
 
 For the suspend functions you should use the `createFuture(for:)` function:
 ```swift
@@ -275,17 +255,14 @@ let cancellable = future.sink { completion in
 cancellable.cancel()
 ```
 
-You can also use the `createPublisher(for:)` function for suspend functions that return a `Flow`:
-```swift
-let publisher = createPublisher(for: randomLettersGenerator.getRandomLettersFlowNative())
-```
-
-> **Note**: these functions create deferred `AnyPublisher`s.  
-> Meaning every subscription will trigger the collection of the `Flow` or execution of the suspend function.
-
 ### RxSwift
 
 The RxSwift implementation provides a couple functions to get an `Observable` or `Single` for your Coroutines code.
+
+> **Note**: these functions create deferred `Observable`s and `Single`s.  
+> Meaning every subscription will trigger the collection of the `Flow` or execution of the suspend function.
+
+#### Observable
 
 For your `Flow`s use the `createObservable(for:)` function:
 ```swift
@@ -307,6 +284,13 @@ let disposable = observable.subscribe(onNext: { value in
 disposable.dispose()
 ```
 
+You can also use the `createObservable(for:)` function for suspend functions that return a `Flow`:
+```swift
+let observable = createObservable(for: randomLettersGenerator.getRandomLettersFlowNative())
+```
+
+#### Single
+
 For the suspend functions you should use the `createSingle(for:)` function:
 ```swift
 // Create a single for the suspend function
@@ -325,10 +309,46 @@ let disposable = single.subscribe(onSuccess: { value in
 disposable.dispose()
 ```
 
-You can also use the `createObservable(for:)` function for suspend functions that return a `Flow`:
-```swift
-let observable = createObservable(for: randomLettersGenerator.getRandomLettersFlowNative())
+## Customize
+
+There are a number of ways you can customize the generated Kotlin code.
+
+### Name suffix
+
+Don't like the naming of the generated properties/functions?  
+Specify your own custom suffixes in your `build.gradle.kts` file:
+```kotlin
+nativeCoroutines {
+    // The suffix used to generate the native coroutine function and property names.
+    suffix = "Native"
+    // The suffix used to generate the native coroutine file names.
+    // Note: defaults to the suffix value when `null`.
+    fileSuffix = null
+}
 ```
 
-> **Note**: these functions create deferred `Observable`s and `Single`s.  
-> Meaning every subscription will trigger the collection of the `Flow` or execution of the suspend function.
+### CoroutineScope
+
+For more control you can provide a custom `CoroutineScope` with the `NativeCoroutineScope` annotation:
+```kotlin
+class Clock {
+    @NativeCoroutineScope
+    internal val coroutineScope = CoroutineScope(job + Dispatchers.Default)
+}
+```
+
+If you don't provide a `CoroutineScope` the default scope will be used which is defined as:
+```kotlin
+internal val defaultCoroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
+```
+
+### Ignoring declarations
+
+Use the `NativeCoroutinesIgnore` annotation to tell the plugin to ignore a property or function:
+```kotlin
+@NativeCoroutinesIgnore
+val ignoredFlowProperty: Flow<Int>
+
+@NativeCoroutinesIgnore
+suspend fun ignoredSuspendFunction() { }
+```
