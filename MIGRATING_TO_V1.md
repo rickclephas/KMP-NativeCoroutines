@@ -7,6 +7,10 @@ The 1.0 release will bring some improvements that require some changes in your c
 
 > **Note**: make sure to use the same library versions for your Kotlin and Swift code!
 
+Known issues:
+* [#83](https://github.com/rickclephas/KMP-NativeCoroutines/issues/83) 
+Non-embeddable compiler JAR compilations are broken in v1.0
+
 ## KSP
 
 Starting with v1.0 the plugin is using [KSP](https://github.com/google/ksp) to generate the required Kotlin code.  
@@ -28,6 +32,10 @@ To tell the plugin what declarations should be refined for ObjC/Swift you'll nee
 + @NativeCoroutines
   suspend fun getRandomLetters(): String = ""
 ```
+
+> **Note**: error messages and IDE support are currently limited. 
+> Please track [#81](https://github.com/rickclephas/KMP-NativeCoroutines/issues/81) and
+> [#82](https://github.com/rickclephas/KMP-NativeCoroutines/issues/82) for improved error messages.
 
 ### Extension properties/functions
 
