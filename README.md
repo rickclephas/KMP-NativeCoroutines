@@ -22,13 +22,14 @@ This library solves both of these limitations 😄.
 
 ## Compatibility
 
-The latest version of the library uses Kotlin version `1.7.20`.  
+The latest version of the library uses Kotlin version `1.8.0-Beta`.  
 Compatibility versions for older Kotlin versions are also available:
 
-| Version      | Version suffix    |   Kotlin   |  KSP  |   Coroutines    |
-|--------------|-------------------|:----------:|:-----:|:---------------:|
-| **_latest_** | **_no suffix_**   | **1.7.20** | 1.0.6 |    **1.6.4**    |
-| 0.13.1       | _no suffix_       |   1.7.20   | _N/A_ |      1.6.4      |
+| Version      | Version suffix    |     Kotlin     |    KSP    |   Coroutines    |
+|--------------|-------------------|:--------------:|:---------:|:---------------:|
+| **_latest_** | **_no suffix_**   | **1.8.0-Beta** | **1.0.8** |    **1.6.4**    |
+| 0.13.2       | _no suffix_       |     1.7.21     |   _N/A_   |      1.6.4      |
+| 0.13.1       | _no suffix_       |     1.7.20     |   _N/A_   |      1.6.4      |
 
 You can choose from a couple of Swift implementations.  
 Depending on the implementation you can support as low as iOS 9, macOS 10.9, tvOS 9 and watchOS 3:
@@ -98,6 +99,8 @@ Just use the wrapper functions in Swift to get async functions, AsyncStreams, Pu
 The plugin will automagically generate the necessary code for you! 🔮  
 Just annotate your coroutines declarations with `@NativeCoroutines`.
 
+#### Flows
+
 Your `Flow` properties/functions get a `Native` version:
 ```kotlin
 class Clock {
@@ -106,22 +109,30 @@ class Clock {
     @NativeCoroutines
     val time: StateFlow<Long> // This can be any kind of Flow
 }
+```
 
-// The plugin will generate this native property for you
+<details><summary>Generated code</summary>
+
+The plugin will generate this native property for you:
+```kotlin
 val Clock.timeNative
     get() = time.asNativeFlow()
 ```
 
-In case of a `StateFlow` or `SharedFlow` property you also get a `NativeValue` or `NativeReplayCache` property:
+For the `StateFlow` defined above the plugin will also generate this native value property:
 ```kotlin
-// For the StateFlow defined above the plugin will generate this native value property
 val Clock.timeNativeValue
     get() = time.value
+```
 
-// In case of a SharedFlow the plugin would generate this native replay cache property
+In case of a `SharedFlow` the plugin would generate a native replay cache property:
+```kotlin
 val Clock.timeNativeReplayCache
     get() = time.replayCache
 ```
+</details>
+
+#### Suspend functions
 
 The plugin also generates `Native` versions for your annotated suspend functions:
 ```kotlin
@@ -133,11 +144,16 @@ class RandomLettersGenerator {
         // Code to generate some random letters
     }
 }
+```
 
-// The plugin will generate this native function for you
+<details><summary>Generated code</summary>
+
+The plugin will generate this native function for you:
+```kotlin
 fun RandomLettersGenerator.getRandomLettersNative() =
     nativeSuspend { getRandomLetters() }
 ```
+</details>
 
 #### Custom suffix
 
@@ -177,7 +193,7 @@ suspend fun ignoredSuspendFunction() { }
 
 ### Swift 5.5 Async/Await
 
-The Async implementation provides some functions to get async Swift functions and `AsyncStream`s.
+The Async implementation provides some functions to get async Swift functions and `AsyncSequence`s.
 
 Use the `asyncFunction(for:)` function to get an async function that can be awaited:
 ```swift
