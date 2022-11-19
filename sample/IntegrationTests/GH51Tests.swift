@@ -15,22 +15,22 @@ class GH51Tests: XCTestCase {
         let interfaceC = InterfaceCImpl()
         let valueExpectation = expectation(description: "Waiting for value")
         let sendValue = randomInt()
-        _ = GH51NativeKt.foo(interfaceC, value: sendValue)({ value, unit in
+        _ = GH51NativeKt.foo(interfaceC, value: sendValue)({ value, next, _ in
             XCTAssertEqual(value.int32Value, sendValue, "Received incorrect value")
             valueExpectation.fulfill()
-            return unit
-        }, { _, unit in unit })
+            return next()
+        }, { _, unit in unit }, { _, unit in unit })
         wait(for: [valueExpectation], timeout: 2)
     }
     
     func testInterfaceCImplBar() {
         let interfaceC = InterfaceCImpl()
         let valueExpectation = expectation(description: "Waiting for value")
-        _ = GH51NativeKt.bar(interfaceC)({ value, unit in
+        _ = GH51NativeKt.bar(interfaceC)({ value, next, _ in
             XCTAssertEqual(value, 1, "Received incorrect value")
             valueExpectation.fulfill()
-            return unit
-        }, { _, unit in unit })
+            return next()
+        }, { _, unit in unit }, { _, unit in unit })
         wait(for: [valueExpectation], timeout: 2)
     }
     
@@ -38,22 +38,22 @@ class GH51Tests: XCTestCase {
         let classC = ClassCImpl()
         let valueExpectation = expectation(description: "Waiting for value")
         let sendValue = randomInt()
-        _ = classC.foo(value: sendValue)({ value, unit in
+        _ = classC.foo(value: sendValue)({ value, next, _ in
             XCTAssertEqual(value.int32Value, sendValue, "Received incorrect value")
             valueExpectation.fulfill()
-            return unit
-        }, { _, unit in unit })
+            return next()
+        }, { _, unit in unit }, { _, unit in unit })
         wait(for: [valueExpectation], timeout: 2)
     }
     
     func testClassCImplBar() {
         let classC = ClassCImpl()
         let valueExpectation = expectation(description: "Waiting for value")
-        _ = classC.bar({ value, unit in
+        _ = classC.bar({ value, next, _ in
             XCTAssertEqual(value, 1, "Received incorrect value")
             valueExpectation.fulfill()
-            return unit
-        }, { _, unit in unit })
+            return next()
+        }, { _, unit in unit }, { _, unit in unit })
         wait(for: [valueExpectation], timeout: 2)
     }
 }

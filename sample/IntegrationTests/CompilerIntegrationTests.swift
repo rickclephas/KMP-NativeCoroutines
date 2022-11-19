@@ -21,7 +21,7 @@ class CompilerIntegrationTests: XCTestCase {
             XCTAssertEqual(value as! NSNumber, sendValue, "Received incorrect value")
             valueExpectation.fulfill()
             return unit
-        }, { _, unit in unit })
+        }, { _, unit in unit }, { _, unit in unit })
         wait(for: [valueExpectation], timeout: 2)
     }
     
@@ -33,7 +33,7 @@ class CompilerIntegrationTests: XCTestCase {
             XCTAssertEqual(value.int32Value, sendValue, "Received incorrect value")
             valueExpectation.fulfill()
             return unit
-        }, { _, unit in unit })
+        }, { _, unit in unit }, { _, unit in unit })
         wait(for: [valueExpectation], timeout: 2)
     }
     
@@ -45,7 +45,7 @@ class CompilerIntegrationTests: XCTestCase {
             XCTAssertEqual(value as! NSNumber, sendValue, "Received incorrect value")
             valueExpectation.fulfill()
             return unit
-        }, { _, unit in unit })
+        }, { _, unit in unit }, { _, unit in unit })
         wait(for: [valueExpectation], timeout: 2)
     }
     
@@ -57,7 +57,7 @@ class CompilerIntegrationTests: XCTestCase {
             XCTAssertIdentical(value, sendValue, "Received incorrect value")
             valueExpectation.fulfill()
             return unit
-        }, { _, unit in unit })
+        }, { _, unit in unit }, { _, unit in unit })
         wait(for: [valueExpectation], timeout: 2)
     }
     
@@ -69,7 +69,7 @@ class CompilerIntegrationTests: XCTestCase {
             XCTAssertEqual(values as! [NSNumber], sendValues, "Received incorrect values")
             valueExpectation.fulfill()
             return unit
-        }, { _, unit in unit })
+        }, { _, unit in unit }, { _, unit in unit })
         wait(for: [valueExpectation], timeout: 2)
     }
     
@@ -86,7 +86,7 @@ class CompilerIntegrationTests: XCTestCase {
             }
             valueExpectation.fulfill()
             return unit
-        }, { _, unit in unit })
+        }, { _, unit in unit }, { _, unit in unit })
         wait(for: [valueExpectation], timeout: 2)
     }
     
@@ -98,7 +98,7 @@ class CompilerIntegrationTests: XCTestCase {
             XCTAssertEqual(value as! NSNumber, sendValue, "Received incorrect value")
             valueExpectation.fulfill()
             return unit
-        }, { _, unit in unit })
+        }, { _, unit in unit }, { _, unit in unit })
         wait(for: [valueExpectation], timeout: 2)
     }
     
@@ -106,11 +106,11 @@ class CompilerIntegrationTests: XCTestCase {
         let integrationTests = IntegrationTests()
         let valueExpectation = expectation(description: "Waiting for value")
         let sendValue = NSNumber(value: randomInt())
-        _ = integrationTests.returnGenericFlow(value: sendValue)({ value, unit in
+        _ = integrationTests.returnGenericFlow(value: sendValue)({ value, next, _ in
             XCTAssertEqual(value as! NSNumber, sendValue, "Received incorrect value")
             valueExpectation.fulfill()
-            return unit
-        }, { _, unit in unit })
+            return next()
+        }, { _, unit in unit }, { _, unit in unit })
         wait(for: [valueExpectation], timeout: 2)
     }
 }

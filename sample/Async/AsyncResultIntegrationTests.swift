@@ -83,9 +83,7 @@ class AsyncResultIntegrationTests: XCTestCase {
             return
         }
         if case let .failure(error) = result {
-            let error = error as NSError
-            let exception = error.userInfo["KotlinException"]
-            XCTAssertTrue(exception is KotlinCancellationException, "Error should be a KotlinCancellationException")
+            XCTAssertTrue(error is CancellationError, "Error should be a CancellationError")
         } else {
             XCTFail("Function should fail with an error")
         }

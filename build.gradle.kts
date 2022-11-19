@@ -2,20 +2,14 @@ buildscript {
     repositories {
         gradlePluginPortal()
         mavenCentral()
-        maven("https://maven.pkg.jetbrains.space/kotlin/p/kotlin/dev")
-        maven("https://maven.pkg.jetbrains.space/kotlin/p/kotlin/bootstrap")
-        mavenLocal()
     }
 }
 
 allprojects {
     group = "com.rickclephas.kmp"
-    version = "0.13.1"
+    version = "0.13.2-kotlin-1.8.0-Beta"
 
     repositories {
         mavenCentral()
-        maven("https://maven.pkg.jetbrains.space/kotlin/p/kotlin/dev")
-        maven("https://maven.pkg.jetbrains.space/kotlin/p/kotlin/bootstrap")
-        mavenLocal()
     }
 }

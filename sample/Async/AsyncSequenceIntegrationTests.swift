@@ -1,23 +1,23 @@
 //
-//  AsyncStreamIntegrationTests.swift
-//  AsyncStreamIntegrationTests
+//  AsyncSequenceIntegrationTests.swift
+//  AsyncSequenceIntegrationTests
 //
-//  Created by Rick Clephas on 16/07/2021.
+//  Created by Rick Clephas on 06/03/2022.
 //
 
 import XCTest
 import KMPNativeCoroutinesAsync
 import NativeCoroutinesSampleShared
 
-class AsyncStreamIntegrationTests: XCTestCase {
+class AsyncSequenceIntegrationTests: XCTestCase {
     
     func testValuesReceived() async {
         let integrationTests = FlowIntegrationTests()
         let sendValueCount = randomInt(min: 5, max: 20)
-        let stream = asyncStream(for: integrationTests.getFlow(count: sendValueCount, delay: 100))
+        let sequence = asyncSequence(for: integrationTests.getFlow(count: sendValueCount, delay: 100))
         do {
             var receivedValueCount: Int32 = 0
-            for try await value in stream {
+            for try await value in sequence {
                 if receivedValueCount + 1 < sendValueCount {
                     // Depending on the timing the job might already have completed for the last value,
                     // so we won't check this for the last value but only for earlier values
@@ -28,7 +28,27 @@ class AsyncStreamIntegrationTests: XCTestCase {
             }
             XCTAssertEqual(receivedValueCount, sendValueCount, "Should have received all values")
         } catch {
-            XCTFail("Stream should complete without an error")
+            XCTFail("Sequence should complete without an error")
+        }
+        await assertJobCompleted(integrationTests)
+    }
+    
+    func testValueBackPressure() async {
+        let integrationTests = FlowIntegrationTests()
+        let sendValueCount: Int32 = 10
+        let sequence = asyncSequence(for: integrationTests.getFlowNative(count: sendValueCount, delay: 100))
+        do {
+            var receivedValueCount: Int32 = 0
+            for try await _ in sequence {
+                let emittedCount = integrationTests.emittedCount
+                // Note the AsyncSequence buffers at most a single item
+                XCTAssert(emittedCount == receivedValueCount || emittedCount == receivedValueCount + 1, "Back pressure isn't applied")
+                delay(0.2)
+                receivedValueCount += 1
+            }
+            XCTAssertEqual(receivedValueCount, sendValueCount, "Should have received all values")
+        } catch {
+            XCTFail("Sequence should complete without an error")
         }
         await assertJobCompleted(integrationTests)
     }
@@ -37,10 +57,10 @@ class AsyncStreamIntegrationTests: XCTestCase {
         let integrationTests = FlowIntegrationTests()
         let sendValueCount = randomInt(min: 5, max: 20)
         let nullValueIndex = randomInt(min: 0, max: sendValueCount - 1)
-        let stream = asyncStream(for: integrationTests.getFlowWithNull(count: sendValueCount, nullIndex: nullValueIndex, delay: 100))
+        let sequence = asyncSequence(for: integrationTests.getFlowWithNull(count: sendValueCount, nullIndex: nullValueIndex, delay: 100))
         do {
             var receivedValueCount: Int32 = 0
-            for try await value in stream {
+            for try await value in sequence {
                 if receivedValueCount + 1 < sendValueCount {
                     // Depending on the timing the job might already have completed for the last value,
                     // so we won't check this for the last value but only for earlier values
@@ -55,7 +75,7 @@ class AsyncStreamIntegrationTests: XCTestCase {
             }
             XCTAssertEqual(receivedValueCount, sendValueCount, "Should have received all values")
         } catch {
-            XCTFail("Stream should complete without an error")
+            XCTFail("Sequence should complete without an error")
         }
         await assertJobCompleted(integrationTests)
     }
@@ -65,14 +85,14 @@ class AsyncStreamIntegrationTests: XCTestCase {
         let sendValueCount = randomInt(min: 5, max: 20)
         let exceptionIndex = randomInt(min: 1, max: sendValueCount - 1)
         let sendMessage = randomString()
-        let stream = asyncStream(for: integrationTests.getFlowWithException(count: sendValueCount, exceptionIndex: exceptionIndex, message: sendMessage, delay: 100))
+        let sequence = asyncSequence(for: integrationTests.getFlowWithException(count: sendValueCount, exceptionIndex: exceptionIndex, message: sendMessage, delay: 100))
         var receivedValueCount: Int32 = 0
         do {
-            for try await _ in stream {
+            for try await _ in sequence {
                 XCTAssertEqual(integrationTests.uncompletedJobCount, 1, "There should be 1 uncompleted job")
                 receivedValueCount += 1
             }
-            XCTFail("Stream should fail with an error")
+            XCTFail("Sequence should fail with an error")
         } catch {
             let error = error as NSError
             XCTAssertEqual(error.localizedDescription, sendMessage, "Error has incorrect localizedDescription")
@@ -88,14 +108,14 @@ class AsyncStreamIntegrationTests: XCTestCase {
         let sendValueCount = randomInt(min: 5, max: 20)
         let errorIndex = randomInt(min: 1, max: sendValueCount - 1)
         let sendMessage = randomString()
-        let stream = asyncStream(for: integrationTests.getFlowWithError(count: sendValueCount, errorIndex: errorIndex, message: sendMessage, delay: 100))
+        let sequence = asyncSequence(for: integrationTests.getFlowWithError(count: sendValueCount, errorIndex: errorIndex, message: sendMessage, delay: 100))
         var receivedValueCount: Int32 = 0
         do {
-            for try await _ in stream {
+            for try await _ in sequence {
                 XCTAssertEqual(integrationTests.uncompletedJobCount, 1, "There should be 1 uncompleted job")
                 receivedValueCount += 1
             }
-            XCTFail("Stream should fail with an error")
+            XCTFail("Sequence should fail with an error")
         } catch {
             let error = error as NSError
             XCTAssertEqual(error.localizedDescription, sendMessage, "Error has incorrect localizedDescription")
@@ -108,29 +128,23 @@ class AsyncStreamIntegrationTests: XCTestCase {
     
     func testCancellation() async {
         let integrationTests = FlowIntegrationTests()
-        var callbackCount = 0
-        let stream = asyncStream(for: integrationTests.getFlowWithCallback(count: 5, callbackIndex: 2, delay: 1000) {
-            callbackCount += 1
-        })
-        let handle = Task<Int32, Never> {
+        let handle = Task<Void, Never> {
             do {
-                var receivedValueCount: Int32 = 0
-                for try await _ in stream {
+                let sequence = asyncSequence(for: integrationTests.getFlowWithCallback(count: 5, callbackIndex: 2, delay: 1000) {
+                    XCTFail("The callback shouldn't be called")
+                })
+                for try await _ in sequence {
                     XCTAssertEqual(integrationTests.uncompletedJobCount, 1, "There should be 1 uncompleted job")
-                    receivedValueCount += 1
                 }
-                return receivedValueCount
             } catch {
-                XCTFail("Stream should be cancelled without an error")
-                return -1
+                XCTFail("Sequence should be cancelled without an error")
             }
         }
         DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
             XCTAssertEqual(integrationTests.activeJobCount, 1, "There should be 1 active job")
             handle.cancel()
         }
-        _ = await handle.result
+        await handle.value
         await assertJobCompleted(integrationTests)
-        XCTAssertEqual(callbackCount, 0, "The callback shouldn't be called")
     }
 }

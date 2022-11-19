@@ -27,14 +27,14 @@ class ClockAsyncViewModel: ClockViewModel {
     
     func startMonitoring() {
         task = Task { [weak self] in
-            let timeStream = asyncStream(for: clock.time)
+            let timeSequence = asyncSequence(for: clock.time)
                 .map { [weak self] time -> String in
                     guard let self = self else { return "" }
                     let date = Date(timeIntervalSince1970: time.doubleValue)
                     return self.formatter.string(from: date)
                 }
             do {
-                for try await time in timeStream {
+                for try await time in timeSequence {
                     self?.time = time
                 }
             } catch {
