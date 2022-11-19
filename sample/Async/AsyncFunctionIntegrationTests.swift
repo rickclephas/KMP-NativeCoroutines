@@ -14,14 +14,14 @@ class AsyncFunctionIntegrationTests: XCTestCase {
     func testValueReceived() async throws {
         let integrationTests = SuspendIntegrationTests()
         let sendValue = randomInt()
-        let value = try await asyncFunction(for: integrationTests.returnValueNative(value: sendValue, delay: 1000))
+        let value = try await asyncFunction(for: integrationTests.returnValue(value: sendValue, delay: 1000))
         XCTAssertEqual(value.int32Value, sendValue, "Received incorrect value")
         await assertJobCompleted(integrationTests)
     }
     
     func testNilValueReceived() async throws {
         let integrationTests = SuspendIntegrationTests()
-        let value = try await asyncFunction(for: integrationTests.returnNullNative(delay: 1000))
+        let value = try await asyncFunction(for: integrationTests.returnNull(delay: 1000))
         XCTAssertNil(value, "Value should be nil")
         await assertJobCompleted(integrationTests)
     }
@@ -30,7 +30,7 @@ class AsyncFunctionIntegrationTests: XCTestCase {
         let integrationTests = SuspendIntegrationTests()
         let sendMessage = randomString()
         do {
-            _ = try await asyncFunction(for: integrationTests.throwExceptionNative(message: sendMessage, delay: 1000))
+            _ = try await asyncFunction(for: integrationTests.throwException(message: sendMessage, delay: 1000))
             XCTFail("Function should complete with an error")
         } catch {
             let error = error as NSError
@@ -45,7 +45,7 @@ class AsyncFunctionIntegrationTests: XCTestCase {
         let integrationTests = SuspendIntegrationTests()
         let sendMessage = randomString()
         do {
-            _ = try await asyncFunction(for: integrationTests.throwErrorNative(message: sendMessage, delay: 1000))
+            _ = try await asyncFunction(for: integrationTests.throwError(message: sendMessage, delay: 1000))
             XCTFail("Function should complete with an error")
         } catch {
             let error = error as NSError
@@ -59,7 +59,7 @@ class AsyncFunctionIntegrationTests: XCTestCase {
     func testCancellation() async {
         let integrationTests = SuspendIntegrationTests()
         let handle = Task {
-            return try await asyncFunction(for: integrationTests.returnFromCallbackNative(delay: 3000) {
+            return try await asyncFunction(for: integrationTests.returnFromCallback(delay: 3000) {
                 XCTFail("Callback shouldn't be invoked")
                 return KotlinInt(int: 1)
             })
@@ -71,9 +71,7 @@ class AsyncFunctionIntegrationTests: XCTestCase {
         let result = await handle.result
         await assertJobCompleted(integrationTests)
         if case let .failure(error) = result {
-            let error = error as NSError
-            let exception = error.userInfo["KotlinException"]
-            XCTAssertTrue(exception is KotlinCancellationException, "Error should be a KotlinCancellationException")
+            XCTAssertTrue(error is CancellationError, "Error should be a CancellationError")
         } else {
             XCTFail("Function should fail with an error")
         }

@@ -21,7 +21,7 @@ class RandomLettersRxSwiftViewModel: RandomLettersViewModel {
     func loadRandomLetters(throwException: Bool) {
         isLoading = true
         result = nil
-        _ = createSingle(for: randomLettersGenerator.getRandomLettersNative(throwException: throwException))
+        _ = createSingle(for: randomLettersGenerator.getRandomLetters(throwException: throwException))
             // Update the UI on the main thread
             .observe(on: MainScheduler.instance)
             .subscribe(onSuccess: { [weak self] word in

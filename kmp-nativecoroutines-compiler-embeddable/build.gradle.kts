@@ -11,12 +11,6 @@ dependencies {
 val syncSources by tasks.registering(Sync::class) {
     from(project(":kmp-nativecoroutines-compiler").files("src/main"))
     into("src/main")
-    filter {
-        when (it) {
-            "import com.intellij.mock.MockProject" -> "import org.jetbrains.kotlin.com.intellij.mock.MockProject"
-            else -> it
-        }
-    }
 }
 
 tasks.compileKotlin.configure {

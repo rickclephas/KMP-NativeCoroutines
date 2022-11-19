@@ -14,7 +14,7 @@ class CombinePublisherIntegrationTests: XCTestCase {
     func testValuesReceived() {
         let integrationTests = FlowIntegrationTests()
         let sendValueCount = randomInt(min: 5, max: 20)
-        let publisher = createPublisher(for: integrationTests.getFlowNative(count: sendValueCount, delay: 100))
+        let publisher = createPublisher(for: integrationTests.getFlow(count: sendValueCount, delay: 100))
         let valuesExpectation = expectation(description: "Waiting for values")
         valuesExpectation.expectedFulfillmentCount = Int(sendValueCount)
         let completionExpectation = expectation(description: "Waiting for completion")
@@ -40,7 +40,7 @@ class CombinePublisherIntegrationTests: XCTestCase {
         let integrationTests = FlowIntegrationTests()
         let sendValueCount = randomInt(min: 5, max: 20)
         let nullValueIndex = randomInt(min: 0, max: sendValueCount - 1)
-        let publisher = createPublisher(for: integrationTests.getFlowWithNullNative(count: sendValueCount, nullIndex: nullValueIndex, delay: 100))
+        let publisher = createPublisher(for: integrationTests.getFlowWithNull(count: sendValueCount, nullIndex: nullValueIndex, delay: 100))
         let valuesExpectation = expectation(description: "Waiting for values")
         valuesExpectation.expectedFulfillmentCount = Int(sendValueCount)
         let completionExpectation = expectation(description: "Waiting for completion")
@@ -71,7 +71,7 @@ class CombinePublisherIntegrationTests: XCTestCase {
         let sendValueCount = randomInt(min: 5, max: 20)
         let exceptionIndex = randomInt(min: 1, max: sendValueCount - 1)
         let sendMessage = randomString()
-        let publisher = createPublisher(for: integrationTests.getFlowWithExceptionNative(count: sendValueCount, exceptionIndex: exceptionIndex, message: sendMessage, delay: 100))
+        let publisher = createPublisher(for: integrationTests.getFlowWithException(count: sendValueCount, exceptionIndex: exceptionIndex, message: sendMessage, delay: 100))
         let valuesExpectation = expectation(description: "Waiting for values")
         valuesExpectation.expectedFulfillmentCount = Int(exceptionIndex)
         let completionExpectation = expectation(description: "Waiting for completion")
@@ -100,7 +100,7 @@ class CombinePublisherIntegrationTests: XCTestCase {
         let sendValueCount = randomInt(min: 5, max: 20)
         let errorIndex = randomInt(min: 1, max: sendValueCount - 1)
         let sendMessage = randomString()
-        let publisher = createPublisher(for: integrationTests.getFlowWithErrorNative(count: sendValueCount, errorIndex: errorIndex, message: sendMessage, delay: 100))
+        let publisher = createPublisher(for: integrationTests.getFlowWithError(count: sendValueCount, errorIndex: errorIndex, message: sendMessage, delay: 100))
         let valuesExpectation = expectation(description: "Waiting for values")
         valuesExpectation.expectedFulfillmentCount = Int(errorIndex)
         let completionExpectation = expectation(description: "Waiting for completion")
@@ -126,7 +126,7 @@ class CombinePublisherIntegrationTests: XCTestCase {
     
     func testNotOnMainThread() {
         let integrationTests = FlowIntegrationTests()
-        let publisher = createPublisher(for: integrationTests.getFlowNative(count: 1, delay: 1000))
+        let publisher = createPublisher(for: integrationTests.getFlow(count: 1, delay: 1000))
         let valueExpectation = expectation(description: "Waiting for value")
         let completionExpectation = expectation(description: "Waiting for completion")
         XCTAssertTrue(Thread.isMainThread, "Test should run on the main thread")
@@ -145,7 +145,7 @@ class CombinePublisherIntegrationTests: XCTestCase {
         let integrationTests = FlowIntegrationTests()
         let callbackExpectation = expectation(description: "Waiting for callback not to get called")
         callbackExpectation.isInverted = true
-        let publisher = createPublisher(for: integrationTests.getFlowWithCallbackNative(count: 5, callbackIndex: 2, delay: 1000) {
+        let publisher = createPublisher(for: integrationTests.getFlowWithCallback(count: 5, callbackIndex: 2, delay: 1000) {
             callbackExpectation.fulfill()
         })
         let valuesExpectation = expectation(description: "Waiting for values")
