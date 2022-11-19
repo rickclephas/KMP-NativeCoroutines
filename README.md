@@ -36,7 +36,7 @@ Compatibility versions for older Kotlin versions are also available:
 |--------------|--------------------|:----------:|:---------------:|
 | _latest_     | -kotlin-1.8.0-Beta | 1.8.0-Beta |      1.6.4      |
 | **_latest_** | **_no suffix_**    | **1.7.21** |    **1.6.4**    |
-| 0.13.1       | **_no suffix_**    | **1.7.20** |    **1.6.4**    |
+| 0.13.1       | _no suffix_        |   1.7.20   |      1.6.4      |
 | 0.13.0       | _no suffix_        |   1.7.10   |      1.6.4      |
 | 0.12.6       | -kotlin-1.7.20-RC  | 1.7.20-RC  |      1.6.4      |
 | 0.12.6       | -new-mm            |   1.7.10   |      1.6.3      |
