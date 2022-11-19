@@ -27,14 +27,14 @@ class ClockAsyncViewModel: ClockViewModel {
     
     func startMonitoring() {
         task = Task { [weak self] in
-            let timeStream = asyncStream(for: clock.timeNative)
+            let timeSequence = asyncSequence(for: clock.time)
                 .map { [weak self] time -> String in
                     guard let self = self else { return "" }
                     let date = Date(timeIntervalSince1970: time.doubleValue)
                     return self.formatter.string(from: date)
                 }
             do {
-                for try await time in timeStream {
+                for try await time in timeSequence {
                     self?.time = time
                 }
             } catch {
@@ -53,7 +53,7 @@ class ClockAsyncViewModel: ClockViewModel {
     func updateTime() {
         // Convert the seconds since EPOCH to a string
         // in the format "HH:mm:ss" and update the UI
-        let date = Date(timeIntervalSince1970: TimeInterval(clock.timeNativeValue))
+        let date = Date(timeIntervalSince1970: TimeInterval(clock.timeValue))
         time = formatter.string(from: date)
     }
 }

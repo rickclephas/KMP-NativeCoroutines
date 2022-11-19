@@ -14,7 +14,7 @@ class AsyncResultIntegrationTests: XCTestCase {
     func testValueReceived() async {
         let integrationTests = SuspendIntegrationTests()
         let sendValue = randomInt()
-        let result = await asyncResult(for: integrationTests.returnValueNative(value: sendValue, delay: 1000))
+        let result = await asyncResult(for: integrationTests.returnValue(value: sendValue, delay: 1000))
         guard case let .success(value) = result else {
             XCTFail("Function should complete without an error")
             return
@@ -25,7 +25,7 @@ class AsyncResultIntegrationTests: XCTestCase {
     
     func testNilValueReceived() async {
         let integrationTests = SuspendIntegrationTests()
-        let result = await asyncResult(for: integrationTests.returnNullNative(delay: 1000))
+        let result = await asyncResult(for: integrationTests.returnNull(delay: 1000))
         guard case let .success(value) = result else {
             XCTFail("Function should complete without an error")
             return
@@ -37,7 +37,7 @@ class AsyncResultIntegrationTests: XCTestCase {
     func testExceptionReceived() async {
         let integrationTests = SuspendIntegrationTests()
         let sendMessage = randomString()
-        let result = await asyncResult(for: integrationTests.throwExceptionNative(message: sendMessage, delay: 1000))
+        let result = await asyncResult(for: integrationTests.throwException(message: sendMessage, delay: 1000))
         guard case let .failure(error) = result else {
             XCTFail("Function should complete with an error")
             return
@@ -52,7 +52,7 @@ class AsyncResultIntegrationTests: XCTestCase {
     func testErrorReceived() async {
         let integrationTests = SuspendIntegrationTests()
         let sendMessage = randomString()
-        let result = await asyncResult(for: integrationTests.throwErrorNative(message: sendMessage, delay: 1000))
+        let result = await asyncResult(for: integrationTests.throwError(message: sendMessage, delay: 1000))
         guard case let .failure(error) = result else {
             XCTFail("Function should complete with an error")
             return
@@ -67,7 +67,7 @@ class AsyncResultIntegrationTests: XCTestCase {
     func testCancellation() async {
         let integrationTests = SuspendIntegrationTests()
         let handle = Task {
-            return await asyncResult(for: integrationTests.returnFromCallbackNative(delay: 3000) {
+            return await asyncResult(for: integrationTests.returnFromCallback(delay: 3000) {
                 XCTFail("Callback shouldn't be invoked")
                 return KotlinInt(int: 1)
             })
@@ -83,9 +83,7 @@ class AsyncResultIntegrationTests: XCTestCase {
             return
         }
         if case let .failure(error) = result {
-            let error = error as NSError
-            let exception = error.userInfo["KotlinException"]
-            XCTAssertTrue(exception is KotlinCancellationException, "Error should be a KotlinCancellationException")
+            XCTAssertTrue(error is CancellationError, "Error should be a CancellationError")
         } else {
             XCTFail("Function should fail with an error")
         }
