@@ -7,7 +7,7 @@ buildscript {
 
 allprojects {
     group = "com.rickclephas.kmp"
-    version = "0.13.2-kotlin-1.8.0-Beta"
+    version = "1.0.0-ALPHA-1"
 
     repositories {
         mavenCentral()
