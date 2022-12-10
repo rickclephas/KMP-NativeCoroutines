@@ -8,15 +8,19 @@ import com.squareup.kotlinpoet.ksp.*
 
 internal fun KSPropertyDeclaration.toNativeCoroutinesPropertySpecs(
     scopeProperty: CoroutineScopeProvider.ScopeProperty,
-    options: KmpNativeCoroutinesOptions
+    options: KmpNativeCoroutinesOptions,
+    asState: Boolean = false
 ): List<PropertySpec>? {
     val typeParameterResolver = getTypeParameterResolver()
     val type = type.getReturnType(typeParameterResolver) ?: return null
     if (type !is ReturnType.Flow) error("Only Flow properties are supported")
     return buildList {
-        add(toNativeCoroutinesPropertySpec(scopeProperty, options.suffix, typeParameterResolver, type))
-        if (type is ReturnType.Flow.State && options.flowValueSuffix != null)
-            add(toNativeCoroutinesValuePropertySpec(options.flowValueSuffix, typeParameterResolver, type))
+        val flowSuffix = if (asState) options.stateFlowSuffix else options.suffix
+        if (flowSuffix != null)
+            add(toNativeCoroutinesPropertySpec(scopeProperty, flowSuffix, !asState, typeParameterResolver, type))
+        val valueSuffix = if (asState) options.stateSuffix else options.flowValueSuffix
+        if (type is ReturnType.Flow.State && valueSuffix != null)
+            add(toNativeCoroutinesValuePropertySpec(valueSuffix, asState, typeParameterResolver, type))
         if (type is ReturnType.Flow.Shared && options.flowReplayCacheSuffix != null)
             add(toNativeCoroutinesReplayCachePropertySpec(options.flowReplayCacheSuffix, typeParameterResolver, type))
     }
@@ -25,6 +29,7 @@ internal fun KSPropertyDeclaration.toNativeCoroutinesPropertySpecs(
 private fun KSPropertyDeclaration.toNativeCoroutinesPropertySpec(
     scopeProperty: CoroutineScopeProvider.ScopeProperty,
     nameSuffix: String,
+    setObjCName: Boolean,
     typeParameterResolver: TypeParameterResolver,
     type: ReturnType.Flow
 ): PropertySpec {
@@ -32,7 +37,8 @@ private fun KSPropertyDeclaration.toNativeCoroutinesPropertySpec(
     typeName = typeName.copy(annotations = type.typeReference.annotations.toAnnotationSpecs())
     val simpleName = simpleName.asString()
     val name = "$simpleName$nameSuffix"
-    return createPropertySpec(typeParameterResolver, name, simpleName, typeName) { code, codeArgs ->
+    val objCName = if (setObjCName) simpleName else null
+    return createPropertySpec(typeParameterResolver, name, objCName, typeName) { code, codeArgs ->
         codeArgs.add(asNativeFlowMemberName)
         scopeProperty.codeArg?.let(codeArgs::add)
         addCode("return $code${if(type.nullable) "?." else "."}%M(${scopeProperty.code})", *codeArgs.toTypedArray())
@@ -43,6 +49,7 @@ private fun KSPropertyDeclaration.toNativeCoroutinesPropertySpec(
 
 private fun KSPropertyDeclaration.toNativeCoroutinesValuePropertySpec(
     nameSuffix: String,
+    setObjCName: Boolean,
     typeParameterResolver: TypeParameterResolver,
     type: ReturnType.Flow.State
 ): PropertySpec {
@@ -50,7 +57,8 @@ private fun KSPropertyDeclaration.toNativeCoroutinesValuePropertySpec(
     if (type.nullable) typeName = typeName.copy(nullable = true)
     val simpleName = simpleName.asString()
     val name = "$simpleName$nameSuffix"
-    return createPropertySpec(typeParameterResolver, name, null, typeName) { code, codeArgs ->
+    val objCName = if (setObjCName) simpleName else null
+    return createPropertySpec(typeParameterResolver, name, objCName, typeName) { code, codeArgs ->
         addCode("return $code${if(type.nullable) "?." else "."}value", *codeArgs.toTypedArray())
     }.build()
 }
@@ -82,8 +90,12 @@ private fun KSPropertyDeclaration.createPropertySpec(
     docString?.trim()?.let(builder::addKdoc)
     builder.addAnnotations(annotations.toAnnotationSpecs(
         objCName = objCName,
-        ignoredAnnotationNames = setOf(nativeCoroutinesAnnotationName, throwsAnnotationName))
-    )
+        ignoredAnnotationNames = setOf(
+            nativeCoroutinesAnnotationName,
+            nativeCoroutinesStateAnnotationName,
+            throwsAnnotationName
+        )
+    ))
     // TODO: Add context receivers once those are exported to ObjC
     builder.addModifiers(KModifier.PUBLIC)
 

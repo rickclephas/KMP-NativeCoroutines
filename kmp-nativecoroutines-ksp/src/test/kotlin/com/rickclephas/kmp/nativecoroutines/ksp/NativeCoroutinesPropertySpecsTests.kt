@@ -722,4 +722,25 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         public val stateFlowValue: String
           get() = stateFlow.value
     """.trimIndent())
+
+    @Test
+    fun globalStateProperty() = runKspTest("""
+        import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState
+        import kotlinx.coroutines.flow.StateFlow
+        
+        @NativeCoroutinesState
+        val globalState: StateFlow<String> get() = TODO()
+    """.trimIndent(), """
+        import com.rickclephas.kmp.nativecoroutines.NativeFlow
+        import com.rickclephas.kmp.nativecoroutines.asNativeFlow
+        import kotlin.String
+        import kotlin.native.ObjCName
+        
+        public val globalStateFlow: NativeFlow<String>
+          get() = globalState.asNativeFlow(null)
+        
+        @ObjCName(name = "globalState")
+        public val globalStateValue: String
+          get() = globalState.value
+    """.trimIndent())
 }

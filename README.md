@@ -106,7 +106,7 @@ Just use the wrapper functions in Swift to get async functions, AsyncStreams, Pu
 ### Kotlin
 
 The plugin will automagically generate the necessary code for you! 🔮  
-Just annotate your coroutines declarations with `@NativeCoroutines`.
+Just annotate your coroutines declarations with `@NativeCoroutines` (or `@NativeCoroutinesState`).
 
 #### Flows
 
@@ -140,6 +140,34 @@ In case of a `SharedFlow` the plugin would generate a replay cache property:
 ```kotlin
 val Clock.timeReplayCache
     get() = time.replayCache
+```
+</p>
+</details>
+
+#### StateFlows
+
+Using `StateFlow` properties to track state (like in a view model)?  
+Use the `@NativeCoroutinesState` annotation instead:
+```kotlin
+class Clock {
+    // Somewhere in your Kotlin code you define a StateFlow property
+    // and annotate it with @NativeCoroutinesState
+    @NativeCoroutinesState
+    val time: StateFlow<Long> // This must be a StateFlow
+}
+```
+
+<details><summary>Generated code</summary>
+<p>
+
+The plugin will generate these native properties for you:
+```kotlin
+@ObjCName(name = "time")
+val Clock.timeValue
+    get() = time.value
+
+val Clock.timeFlow
+    get() = time.asNativeFlow()
 ```
 </p>
 </details>
@@ -341,6 +369,11 @@ nativeCoroutines {
     // The suffix used to generate the SharedFlow replayCache property names,
     // or `null` to remove the replayCache properties.
     flowReplayCacheSuffix = "ReplayCache"
+    // The suffix used to generate the native state property names.
+    stateSuffix = "Value"
+    // The suffix used to generate the `StateFlow` flow property names,
+    // or `null` to remove the flow properties.
+    stateFlowSuffix = "Flow"
 }
 ```
 
