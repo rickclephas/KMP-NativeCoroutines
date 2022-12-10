@@ -17,7 +17,9 @@ open class CompilationTests {
         kspArgs: Map<String, String> = mapOf(
             "nativeCoroutines.suffix" to "Native",
             "nativeCoroutines.flowValueSuffix" to "Value",
-            "nativeCoroutines.flowReplayCacheSuffix" to "ReplayCache"
+            "nativeCoroutines.flowReplayCacheSuffix" to "ReplayCache",
+            "nativeCoroutines.stateSuffix" to "Value",
+            "nativeCoroutines.stateFlowSuffix" to "Flow"
         )
     ) {
         KotlinCompilation().apply {

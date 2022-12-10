@@ -40,6 +40,8 @@ class KmpNativeCoroutinesPlugin: KotlinCompilerPluginSupportPlugin {
                 nativeCoroutines.fileSuffix?.let { arg("nativeCoroutines.fileSuffix", it) }
                 nativeCoroutines.flowValueSuffix?.let { arg("nativeCoroutines.flowValueSuffix", it) }
                 nativeCoroutines.flowReplayCacheSuffix?.let { arg("nativeCoroutines.flowReplayCacheSuffix", it) }
+                arg("nativeCoroutines.stateSuffix", nativeCoroutines.stateSuffix)
+                nativeCoroutines.stateFlowSuffix?.let { arg("nativeCoroutines.stateFlowSuffix", it) }
             }
         }
     }
