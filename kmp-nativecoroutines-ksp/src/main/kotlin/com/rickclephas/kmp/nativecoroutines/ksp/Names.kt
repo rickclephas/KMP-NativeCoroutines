@@ -6,6 +6,7 @@ import com.squareup.kotlinpoet.MemberName
 private const val packageName = "com.rickclephas.kmp.nativecoroutines"
 
 internal const val nativeCoroutinesAnnotationName = "$packageName.NativeCoroutines"
+internal const val nativeCoroutinesStateAnnotationName = "$packageName.NativeCoroutinesState"
 internal const val nativeCoroutineScopeAnnotationName = "$packageName.NativeCoroutineScope"
 
 internal val nativeSuspendMemberName = MemberName(packageName, "nativeSuspend")

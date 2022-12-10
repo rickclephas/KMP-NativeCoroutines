@@ -18,8 +18,8 @@ internal fun KSFunctionDeclaration.toNativeCoroutinesFunSpec(
     docString?.trim()?.let(builder::addKdoc)
     builder.addAnnotations(annotations.toAnnotationSpecs(
         objCName = simpleName,
-        ignoredAnnotationNames = setOf(nativeCoroutinesAnnotationName, throwsAnnotationName))
-    )
+        ignoredAnnotationNames = setOf(nativeCoroutinesAnnotationName, throwsAnnotationName)
+    ))
     // TODO: Add context receivers once those are exported to ObjC
     builder.addModifiers(KModifier.PUBLIC)
 

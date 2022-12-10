@@ -25,8 +25,14 @@ internal class KmpNativeCoroutinesSymbolProcessor(
         val deferredSymbols = mutableListOf<KSAnnotated>()
         resolver.getSymbolsWithAnnotation(nativeCoroutinesAnnotationName).forEach { symbol ->
             when (symbol) {
-                is KSPropertyDeclaration -> symbol.takeUnless(::process)?.let(deferredSymbols::add)
-                is KSFunctionDeclaration -> symbol.takeUnless(::process)?.let(deferredSymbols::add)
+                is KSPropertyDeclaration -> symbol.takeUnless(::processProperty)?.let(deferredSymbols::add)
+                is KSFunctionDeclaration -> symbol.takeUnless(::processFunction)?.let(deferredSymbols::add)
+                else -> logger.warn("Unsupported symbol type", symbol)
+            }
+        }
+        resolver.getSymbolsWithAnnotation(nativeCoroutinesStateAnnotationName).forEach { symbol ->
+            when (symbol) {
+                is KSPropertyDeclaration -> symbol.takeUnless(::processStateProperty)?.let(deferredSymbols::add)
                 else -> logger.warn("Unsupported symbol type", symbol)
             }
         }
@@ -39,7 +45,7 @@ internal class KmpNativeCoroutinesSymbolProcessor(
         return deferredSymbols
     }
 
-    private fun process(property: KSPropertyDeclaration): Boolean {
+    private fun processProperty(property: KSPropertyDeclaration, asState: Boolean = false): Boolean {
         if (!property.validate()) return false
         val file = property.containingFile
         if (file == null) {
@@ -47,13 +53,16 @@ internal class KmpNativeCoroutinesSymbolProcessor(
             return true
         }
         val scopeProperty = coroutineScopeProvider.getScopeProperty(property) ?: return false
-        val propertySpecs = property.toNativeCoroutinesPropertySpecs(scopeProperty, options) ?: return false
+        val propertySpecs = property.toNativeCoroutinesPropertySpecs(scopeProperty, options, asState) ?: return false
         val fileSpecBuilder = file.getFileSpecBuilder()
         propertySpecs.forEach(fileSpecBuilder::addProperty)
         return true
     }
 
-    private fun process(function: KSFunctionDeclaration): Boolean {
+    private fun processStateProperty(property: KSPropertyDeclaration): Boolean =
+        processProperty(property, true)
+
+    private fun processFunction(function: KSFunctionDeclaration): Boolean {
         if (!function.validate()) return false
         val file = function.containingFile
         if (file == null) {

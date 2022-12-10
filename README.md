@@ -27,12 +27,13 @@ This library solves both of these limitations 😄.
 
 ## Compatibility
 
-The latest version of the library uses Kotlin version `1.8.0-Beta`.  
+The latest version of the library uses Kotlin version `1.8.0-RC`.  
 Compatibility versions for older Kotlin versions are also available:
 
-| Version      | Version suffix    |     Kotlin     |    KSP    |   Coroutines    |
-|--------------|-------------------|:--------------:|:---------:|:---------------:|
-| **_latest_** | **_no suffix_**   | **1.8.0-Beta** | **1.0.8** |    **1.6.4**    |
+| Version       | Version suffix  |    Kotlin    |    KSP    | Coroutines |
+|---------------|-----------------|:------------:|:---------:|:----------:|
+| **_latest_**  | **_no suffix_** | **1.8.0-RC** | **1.0.8** | **1.6.4**  |
+| 1.0.0-ALPHA-1 | _no suffix_     |  1.8.0-Beta  |   1.0.8   |   1.6.4    |
 
 You can choose from a couple of Swift implementations.  
 Depending on the implementation you can support as low as iOS 9, macOS 10.9, tvOS 9 and watchOS 3:
@@ -106,7 +107,7 @@ Just use the wrapper functions in Swift to get async functions, AsyncStreams, Pu
 ### Kotlin
 
 The plugin will automagically generate the necessary code for you! 🔮  
-Just annotate your coroutines declarations with `@NativeCoroutines`.
+Just annotate your coroutines declarations with `@NativeCoroutines` (or `@NativeCoroutinesState`).
 
 #### Flows
 
@@ -140,6 +141,34 @@ In case of a `SharedFlow` the plugin would generate a replay cache property:
 ```kotlin
 val Clock.timeReplayCache
     get() = time.replayCache
+```
+</p>
+</details>
+
+#### StateFlows
+
+Using `StateFlow` properties to track state (like in a view model)?  
+Use the `@NativeCoroutinesState` annotation instead:
+```kotlin
+class Clock {
+    // Somewhere in your Kotlin code you define a StateFlow property
+    // and annotate it with @NativeCoroutinesState
+    @NativeCoroutinesState
+    val time: StateFlow<Long> // This must be a StateFlow
+}
+```
+
+<details><summary>Generated code</summary>
+<p>
+
+The plugin will generate these native properties for you:
+```kotlin
+@ObjCName(name = "time")
+val Clock.timeValue
+    get() = time.value
+
+val Clock.timeFlow
+    get() = time.asNativeFlow()
 ```
 </p>
 </details>
@@ -341,6 +370,11 @@ nativeCoroutines {
     // The suffix used to generate the SharedFlow replayCache property names,
     // or `null` to remove the replayCache properties.
     flowReplayCacheSuffix = "ReplayCache"
+    // The suffix used to generate the native state property names.
+    stateSuffix = "Value"
+    // The suffix used to generate the `StateFlow` flow property names,
+    // or `null` to remove the flow properties.
+    stateFlowSuffix = "Flow"
 }
 ```
 
