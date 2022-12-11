@@ -388,6 +388,8 @@ class Clock {
 }
 ```
 
+> **Note**: your custom coroutine scope must be either `internal` or `public`.
+
 If you don't provide a `CoroutineScope` the default scope will be used which is defined as:
 ```kotlin
 internal val defaultCoroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
