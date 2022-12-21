@@ -37,6 +37,10 @@ To tell the plugin what declarations should be refined for ObjC/Swift you'll nee
 > Please track [#81](https://github.com/rickclephas/KMP-NativeCoroutines/issues/81) and
 > [#82](https://github.com/rickclephas/KMP-NativeCoroutines/issues/82) for improved error messages.
 
+### Custom CoroutineScope
+
+Custom `CoroutineScope`s are still supported, just make sure they are either `internal` or `public`.
+
 ### Extension properties/functions
 
 The plugin is now generating extension properties/functions and no longer modifies the original class.  
