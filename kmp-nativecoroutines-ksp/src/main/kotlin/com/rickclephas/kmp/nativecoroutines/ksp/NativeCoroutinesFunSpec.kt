@@ -8,14 +8,18 @@ import com.squareup.kotlinpoet.ksp.*
 
 internal fun KSFunctionDeclaration.toNativeCoroutinesFunSpec(
     scopeProperty: CoroutineScopeProvider.ScopeProperty,
-    nativeSuffix: String
+    options: KmpNativeCoroutinesOptions
 ): FunSpec? {
     val typeParameterResolver = getTypeParameterResolver()
     val classDeclaration = parentDeclaration as? KSClassDeclaration
 
-    val builder = FunSpec.builder("${simpleName.asString()}$nativeSuffix")
+    val simpleName = simpleName.asString()
+    val builder = FunSpec.builder("$simpleName${options.suffix}")
     docString?.trim()?.let(builder::addKdoc)
-    builder.addAnnotations(annotations.toAnnotationSpecs(setOf(nativeCoroutinesAnnotationName, throwsAnnotationName)))
+    builder.addAnnotations(annotations.toAnnotationSpecs(
+        objCName = simpleName,
+        ignoredAnnotationNames = setOf(nativeCoroutinesAnnotationName, throwsAnnotationName)
+    ))
     // TODO: Add context receivers once those are exported to ObjC
     builder.addModifiers(KModifier.PUBLIC)
 
@@ -52,11 +56,11 @@ internal fun KSFunctionDeclaration.toNativeCoroutinesFunSpec(
     var code = when (classDeclaration) {
         null -> {
             val isExtension = extensionReceiver != null
-            codeArgs.add(MemberName(packageName.asString(), simpleName.asString(), isExtension))
+            codeArgs.add(MemberName(packageName.asString(), simpleName, isExtension))
             "%M"
         }
         else -> {
-            codeArgs.add(simpleName.asString())
+            codeArgs.add(simpleName)
             "%N"
         }
     }

@@ -1,7 +1,7 @@
 [versions]
-kotlin = "1.7.20"
+kotlin = "1.8.0-RC2"
 kotlinx-coroutines = "1.6.4"
-ksp = "1.7.20-1.0.6"
+ksp = "1.8.0-RC2-1.0.8"
 kotlinpoet = "1.12.0"
 
 [libraries]

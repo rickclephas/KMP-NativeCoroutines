@@ -26,6 +26,7 @@ kotlin {
     sourceSets {
         all {
             languageSettings.optIn("kotlin.RequiresOptIn")
+            languageSettings.optIn("kotlin.experimental.ExperimentalObjCName")
         }
         val commonMain by getting {
             dependencies {
@@ -60,10 +61,4 @@ kotlin {
             }
         }
     }
-}
-
-// TODO: remove workaround for https://github.com/google/ksp/issues/897
-tasks.withType<com.google.devtools.ksp.gradle.KspTaskNative>().configureEach {
-    val compileKotlinTask = tasks.named<org.jetbrains.kotlin.gradle.tasks.KotlinNativeCompile>(compilation.compileKotlinTaskName).get()
-    compilerPluginOptions.addPluginArgument(compileKotlinTask.compilerPluginOptions)
 }

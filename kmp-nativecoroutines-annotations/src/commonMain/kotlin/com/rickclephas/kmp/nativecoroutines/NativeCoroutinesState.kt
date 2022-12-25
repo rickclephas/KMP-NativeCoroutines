@@ -4,11 +4,11 @@ import kotlin.experimental.ExperimentalObjCRefinement
 import kotlin.native.HidesFromObjC
 
 /**
- * Identifies properties and functions that require a native coroutines version.
+ * Identifies `StateFlow` properties that require a native state version.
  */
-@Target(AnnotationTarget.PROPERTY, AnnotationTarget.FUNCTION)
+@Target(AnnotationTarget.PROPERTY)
 @Retention(AnnotationRetention.BINARY)
 @MustBeDocumented
 @OptIn(ExperimentalObjCRefinement::class)
 @HidesFromObjC
-annotation class NativeCoroutines
+annotation class NativeCoroutinesState
