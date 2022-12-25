@@ -31,4 +31,12 @@ open class KmpNativeCoroutinesExtension {
      * @see com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState
      */
     var stateFlowSuffix: String? = "Flow"
+    /**
+     * The severity of the exposed coroutines check.
+     */
+    var exposedSeverity: ExposedSeverity = ExposedSeverity.WARNING
+}
+
+enum class ExposedSeverity {
+    NONE, WARNING, ERROR
 }

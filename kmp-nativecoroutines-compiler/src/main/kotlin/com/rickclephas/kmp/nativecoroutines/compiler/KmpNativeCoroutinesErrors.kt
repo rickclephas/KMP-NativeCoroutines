@@ -11,7 +11,11 @@ internal object KmpNativeCoroutinesErrors {
     @JvmField
     val EXPOSED_FLOW_TYPE = DiagnosticFactory0.create<KtElement>(Severity.WARNING)
     @JvmField
+    val EXPOSED_FLOW_TYPE_ERROR = DiagnosticFactory0.create<KtElement>(Severity.ERROR)
+    @JvmField
     val EXPOSED_SUSPEND_FUNCTION = DiagnosticFactory0.create<KtElement>(Severity.WARNING)
+    @JvmField
+    val EXPOSED_SUSPEND_FUNCTION_ERROR = DiagnosticFactory0.create<KtElement>(Severity.ERROR)
     @JvmField
     val IGNORED_COROUTINES = DiagnosticFactory0.create<KtElement>(Severity.ERROR)
     @JvmField

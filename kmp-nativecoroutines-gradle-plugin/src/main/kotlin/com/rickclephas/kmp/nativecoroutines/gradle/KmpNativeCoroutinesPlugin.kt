@@ -53,7 +53,7 @@ class KmpNativeCoroutinesPlugin: KotlinCompilerPluginSupportPlugin {
         val project = kotlinCompilation.target.project
         val extension = project.extensions.getByType(KmpNativeCoroutinesExtension::class.java)
         return project.provider {
-            listOf(SubpluginOption("suffix", extension.suffix))
+            listOf(SubpluginOption("exposedSeverity", extension.exposedSeverity.name))
         }
     }
 

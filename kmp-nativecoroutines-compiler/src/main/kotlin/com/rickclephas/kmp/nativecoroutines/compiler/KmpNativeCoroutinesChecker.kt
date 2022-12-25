@@ -2,7 +2,9 @@ package com.rickclephas.kmp.nativecoroutines.compiler
 
 import com.rickclephas.kmp.nativecoroutines.compiler.KmpNativeCoroutinesErrors.CONFLICT_COROUTINES_STATE
 import com.rickclephas.kmp.nativecoroutines.compiler.KmpNativeCoroutinesErrors.EXPOSED_FLOW_TYPE
+import com.rickclephas.kmp.nativecoroutines.compiler.KmpNativeCoroutinesErrors.EXPOSED_FLOW_TYPE_ERROR
 import com.rickclephas.kmp.nativecoroutines.compiler.KmpNativeCoroutinesErrors.EXPOSED_SUSPEND_FUNCTION
+import com.rickclephas.kmp.nativecoroutines.compiler.KmpNativeCoroutinesErrors.EXPOSED_SUSPEND_FUNCTION_ERROR
 import com.rickclephas.kmp.nativecoroutines.compiler.KmpNativeCoroutinesErrors.IGNORED_COROUTINES
 import com.rickclephas.kmp.nativecoroutines.compiler.KmpNativeCoroutinesErrors.IGNORED_COROUTINES_STATE
 import com.rickclephas.kmp.nativecoroutines.compiler.KmpNativeCoroutinesErrors.INVALID_COROUTINES
@@ -33,7 +35,9 @@ import org.jetbrains.kotlin.resolve.checkers.DeclarationChecker
 import org.jetbrains.kotlin.resolve.checkers.DeclarationCheckerContext
 import org.jetbrains.kotlin.resolve.descriptorUtil.isEffectivelyPublicApi
 
-internal object KmpNativeCoroutinesChecker: DeclarationChecker {
+internal class KmpNativeCoroutinesChecker(
+    private val exposedSeverity: ExposedSeverity
+): DeclarationChecker {
 
     override fun check(
         declaration: KtDeclaration,
@@ -51,16 +55,35 @@ internal object KmpNativeCoroutinesChecker: DeclarationChecker {
         if (annotations.nativeCoroutines != null && annotations.nativeCoroutinesState != null) {
             context.trace.report(CONFLICT_COROUTINES_STATE, annotations.nativeCoroutinesState, declaration)
         }
+
+        val exposedSuspendFunction: DiagnosticFactory0<KtElement>?
+        val exposedFlowType: DiagnosticFactory0<KtElement>?
+        when (exposedSeverity) {
+            ExposedSeverity.NONE -> {
+                exposedSuspendFunction = null
+                exposedFlowType = null
+            }
+            ExposedSeverity.WARNING -> {
+                exposedSuspendFunction = EXPOSED_SUSPEND_FUNCTION
+                exposedFlowType = EXPOSED_FLOW_TYPE
+            }
+            ExposedSeverity.ERROR -> {
+                exposedSuspendFunction = EXPOSED_SUSPEND_FUNCTION_ERROR
+                exposedFlowType = EXPOSED_FLOW_TYPE_ERROR
+            }
+        }
         if (isPublic && !isOverride && annotations.nativeCoroutines == null &&
             annotations.nativeCoroutinesIgnore == null && annotations.nativeCoroutinesState == null
         ) {
-            if (isSuspend) context.trace.report(EXPOSED_SUSPEND_FUNCTION.on(declaration))
-            if (returnType is CoroutinesReturnType.Flow) context.trace.report(EXPOSED_FLOW_TYPE.on(declaration))
+            if (isSuspend) exposedSuspendFunction?.on(declaration)?.let(context.trace::report)
+            if (returnType is CoroutinesReturnType.Flow) exposedFlowType?.on(declaration)?.let(context.trace::report)
         }
+
         if (annotations.nativeCoroutinesIgnore != null) {
             context.trace.report(IGNORED_COROUTINES, annotations.nativeCoroutines, declaration)
             context.trace.report(IGNORED_COROUTINES_STATE, annotations.nativeCoroutinesState, declaration)
         }
+
         if (returnType != CoroutinesReturnType.CoroutineScope) {
             context.trace.report(INVALID_COROUTINE_SCOPE, annotations.nativeCoroutineScope, declaration)
         }
@@ -71,6 +94,7 @@ internal object KmpNativeCoroutinesChecker: DeclarationChecker {
         if (descriptor !is PropertyDescriptor || returnType !is CoroutinesReturnType.Flow.State) {
             context.trace.report(INVALID_COROUTINES_STATE, annotations.nativeCoroutinesState, declaration)
         }
+
         if (isOverride) {
             context.trace.report(REDUNDANT_OVERRIDE_COROUTINES, annotations.nativeCoroutines, declaration)
             context.trace.report(REDUNDANT_OVERRIDE_COROUTINES_IGNORE, annotations.nativeCoroutinesIgnore, declaration)

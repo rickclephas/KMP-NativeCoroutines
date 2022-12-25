@@ -12,7 +12,11 @@ class KmpNativeCoroutinesCommandLineProcessor: CommandLineProcessor {
     override val pluginId: String = "com.rickclephas.kmp.nativecoroutines"
 
     override val pluginOptions: Collection<AbstractCliOption> = listOf(
-        CliOption(SUFFIX_OPTION_NAME, "string", "suffix used for the generated functions", true)
+        CliOption(
+            optionName = EXPOSED_SEVERITY_OPTION_NAME,
+            valueDescription = "NONE/WARNING/ERROR",
+            description = "Specifies the severity of the exposed coroutines check"
+        )
     )
 
     override fun processOption(
@@ -20,7 +24,7 @@ class KmpNativeCoroutinesCommandLineProcessor: CommandLineProcessor {
         value: String,
         configuration: CompilerConfiguration
     ) = when (option.optionName) {
-        SUFFIX_OPTION_NAME -> configuration.put(SUFFIX_KEY, value)
+        EXPOSED_SEVERITY_OPTION_NAME -> configuration.put(EXPOSED_SEVERITY_KEY, ExposedSeverity.valueOf(value))
         else -> error("Unexpected config option ${option.optionName}")
     }
 }
