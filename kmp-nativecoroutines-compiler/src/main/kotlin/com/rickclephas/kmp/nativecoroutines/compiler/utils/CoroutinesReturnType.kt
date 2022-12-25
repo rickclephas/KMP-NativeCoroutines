@@ -15,9 +15,9 @@ internal sealed class CoroutinesReturnType private constructor() {
 
 internal val CallableDescriptor.coroutinesReturnType: CoroutinesReturnType? get() {
     val returnType = returnTypeOrNothing
-    val flowConstructor = module.findFlowConstructor()
     val stateFlowConstructor = module.findStateFlowConstructor()
     if (returnType.constructor == stateFlowConstructor) return CoroutinesReturnType.Flow.State
+    val flowConstructor = module.findFlowConstructor()
     if (returnType.constructor == flowConstructor) return CoroutinesReturnType.Flow.Generic
     val coroutineScopeConstructor = module.findCoroutineScopeConstructor()
     if (returnType.constructor == coroutineScopeConstructor) return CoroutinesReturnType.CoroutineScope
