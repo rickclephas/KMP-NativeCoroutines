@@ -12,3 +12,11 @@ private val flowClassId = ClassId.topLevel(flowFqName)
 internal fun ModuleDescriptor.findFlowConstructor(): TypeConstructor =
     findClassifierAcrossModuleDependencies(flowClassId)?.typeConstructor
         ?: throw NoSuchElementException("Couldn't find Flow constructor")
+
+
+private val stateFlowFqName = FqName("kotlinx.coroutines.flow.StateFlow")
+private val stateFlowClassId = ClassId.topLevel(stateFlowFqName)
+
+internal fun ModuleDescriptor.findStateFlowConstructor(): TypeConstructor =
+    findClassifierAcrossModuleDependencies(stateFlowClassId)?.typeConstructor
+        ?: throw NoSuchElementException("Couldn't find StateFlow constructor")

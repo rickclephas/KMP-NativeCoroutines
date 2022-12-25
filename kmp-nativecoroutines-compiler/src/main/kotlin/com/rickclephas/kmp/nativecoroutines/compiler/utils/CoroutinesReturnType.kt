@@ -5,20 +5,26 @@ import org.jetbrains.kotlin.resolve.calls.inference.returnTypeOrNothing
 import org.jetbrains.kotlin.resolve.descriptorUtil.module
 import org.jetbrains.kotlin.types.typeUtil.supertypes
 
-internal enum class CoroutinesReturnType {
-    COROUTINE_SCOPE,
-    FLOW
+internal sealed class CoroutinesReturnType private constructor() {
+    object CoroutineScope: CoroutinesReturnType()
+    sealed class Flow private constructor(): CoroutinesReturnType() {
+        object Generic: Flow()
+        object State: Flow()
+    }
 }
 
 internal val CallableDescriptor.coroutinesReturnType: CoroutinesReturnType? get() {
     val returnType = returnTypeOrNothing
     val flowConstructor = module.findFlowConstructor()
-    if (returnType.constructor == flowConstructor) return CoroutinesReturnType.FLOW
+    val stateFlowConstructor = module.findStateFlowConstructor()
+    if (returnType.constructor == stateFlowConstructor) return CoroutinesReturnType.Flow.State
+    if (returnType.constructor == flowConstructor) return CoroutinesReturnType.Flow.Generic
     val coroutineScopeConstructor = module.findCoroutineScopeConstructor()
-    if (returnType.constructor == coroutineScopeConstructor) return CoroutinesReturnType.COROUTINE_SCOPE
+    if (returnType.constructor == coroutineScopeConstructor) return CoroutinesReturnType.CoroutineScope
     returnType.supertypes().forEach {
-        if (it.constructor == flowConstructor) return CoroutinesReturnType.FLOW
-        if (it.constructor == coroutineScopeConstructor) return CoroutinesReturnType.COROUTINE_SCOPE
+        if (it.constructor == stateFlowConstructor) return CoroutinesReturnType.Flow.State
+        if (it.constructor == flowConstructor) return CoroutinesReturnType.Flow.Generic
+        if (it.constructor == coroutineScopeConstructor) return CoroutinesReturnType.CoroutineScope
     }
     return null
 }
