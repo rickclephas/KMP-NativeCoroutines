@@ -40,7 +40,7 @@ private fun KSPropertyDeclaration.toNativeCoroutinesPropertySpec(
     val objCName = if (setObjCName) simpleName else null
     return createPropertySpec(typeParameterResolver, name, objCName, typeName) { code, codeArgs ->
         codeArgs.add(asNativeFlowMemberName)
-        scopeProperty.codeArg?.let(codeArgs::add)
+        scopeProperty.codeArg.let(codeArgs::addAll)
         addCode("return $code${if(type.nullable) "?." else "."}%M(${scopeProperty.code})", *codeArgs.toTypedArray())
     }.apply {
         scopeProperty.containingFile?.let(::addOriginatingKSFile)
