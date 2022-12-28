@@ -396,6 +396,9 @@ If you don't provide a `CoroutineScope` the default scope will be used which is 
 internal val defaultCoroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
 ```
 
+> **Note**: KMP-NativeCoroutines has built-in support for [KMM-ViewModel](https://github.com/rickclephas/KMM-ViewModel).  
+> Coroutines inside your `KMMViewModel` will (by default) use the `CoroutineScope` from the `ViewModelScope`. 
+
 ### Ignoring declarations
 
 Use the `NativeCoroutinesIgnore` annotation to tell the plugin to ignore a property or function:
