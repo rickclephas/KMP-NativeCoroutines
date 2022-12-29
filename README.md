@@ -27,14 +27,15 @@ This library solves both of these limitations 😄.
 
 ## Compatibility
 
-The latest version of the library uses Kotlin version `1.8.0-RC2`.  
+The latest version of the library uses Kotlin version `1.8.0`.  
 Compatibility versions for older Kotlin versions are also available:
 
-| Version       | Version suffix  |    Kotlin     |    KSP    | Coroutines |
-|---------------|-----------------|:-------------:|:---------:|:----------:|
-| **_latest_**  | **_no suffix_** | **1.8.0-RC2** | **1.0.8** | **1.6.4**  |
-| 1.0.0-ALPHA-2 | _no suffix_     |   1.8.0-RC    |   1.0.8   |   1.6.4    |
-| 1.0.0-ALPHA-1 | _no suffix_     |  1.8.0-Beta   |   1.0.8   |   1.6.4    |
+| Version       | Version suffix  |   Kotlin   |    KSP    | Coroutines |
+|---------------|-----------------|:----------:|:---------:|:----------:|
+| **_latest_**  | **_no suffix_** | **1.8.0**  | **1.0.8** | **1.6.4**  |
+| 1.0.0-ALPHA-3 | _no suffix_     | 1.8.0-RC-2 |   1.0.8   |   1.6.4    |
+| 1.0.0-ALPHA-2 | _no suffix_     |  1.8.0-RC  |   1.0.8   |   1.6.4    |
+| 1.0.0-ALPHA-1 | _no suffix_     | 1.8.0-Beta |   1.0.8   |   1.6.4    |
 
 You can choose from a couple of Swift implementations.  
 Depending on the implementation you can support as low as iOS 9, macOS 10.9, tvOS 9 and watchOS 3:
@@ -395,6 +396,9 @@ If you don't provide a `CoroutineScope` the default scope will be used which is 
 ```kotlin
 internal val defaultCoroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
 ```
+
+> **Note**: KMP-NativeCoroutines has built-in support for [KMM-ViewModel](https://github.com/rickclephas/KMM-ViewModel).  
+> Coroutines inside your `KMMViewModel` will (by default) use the `CoroutineScope` from the `ViewModelScope`. 
 
 ### Ignoring declarations
 

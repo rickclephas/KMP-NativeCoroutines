@@ -77,13 +77,13 @@ internal fun KSFunctionDeclaration.toNativeCoroutinesFunSpec(
     }
     if (returnType is ReturnType.Flow) {
         codeArgs.add(asNativeFlowMemberName)
-        scopeProperty.codeArg?.let(codeArgs::add)
+        scopeProperty.codeArg.let(codeArgs::addAll)
         if (returnType.nullable) code += "?"
         code = "$code.%M(${scopeProperty.code})"
     }
     if (isSuspend) {
         codeArgs.add(0, nativeSuspendMemberName)
-        scopeProperty.codeArg?.let { codeArgs.add(1, it) }
+        scopeProperty.codeArg.let { codeArgs.addAll(1, it) }
         code = "%M(${scopeProperty.code}) { $code }"
     }
     code = "return $code"
