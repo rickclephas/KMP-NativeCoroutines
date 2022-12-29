@@ -21,11 +21,16 @@ internal class CoroutineScopeProvider(
 
     data class ScopeProperty(
         val code: String,
-        val codeArg: Any?,
+        val codeArg: List<Any>,
         val containingFile: KSFile?
     ) {
         companion object {
-            val DEFAULT = ScopeProperty("null", null, null)
+            val DEFAULT = ScopeProperty("null", emptyList(), null)
+
+            fun viewModelScope(containingFile: KSFile): ScopeProperty = ScopeProperty("%N.%M", listOf(
+                "viewModelScope",
+                MemberName("com.rickclephas.kmm.viewmodel", "coroutineScope", true)
+            ), containingFile)
         }
     }
 
@@ -57,7 +62,7 @@ internal class CoroutineScopeProvider(
             codeArg = property.simpleName.asString()
             code = "%N"
         }
-        val scopeProperty = ScopeProperty(code, codeArg, file)
+        val scopeProperty = ScopeProperty(code, listOf(codeArg), file)
         if (classDeclaration == null) {
             if (scopeProperties.putIfAbsent(file.scopePropertyKey, scopeProperty) != null) {
                 logger.warn("Ignoring duplicate scope property", property)
@@ -98,12 +103,19 @@ internal class CoroutineScopeProvider(
     }
 
     private fun getScopeProperty(classDeclaration: KSClassDeclaration): ScopeProperty? {
+        var containingFile: KSFile = classDeclaration.containingFile ?: return ScopeProperty.DEFAULT
         scopeProperties[classDeclaration.scopePropertyKey]?.let { return it }
         classDeclaration.getAllSuperTypes().forEach { superType ->
             if (superType.isError) return null
             val superClassDeclaration = superType.declaration as? KSClassDeclaration ?: return@forEach
             scopeProperties[superClassDeclaration.scopePropertyKey]?.let { return it }
+            // If this class is a KMMViewModel, use the ViewModelScope
+            if (superClassDeclaration.isKMMViewModel()) return ScopeProperty.viewModelScope(containingFile)
+            containingFile = superClassDeclaration.containingFile ?: containingFile
         }
         return ScopeProperty.DEFAULT
     }
+
+    private fun KSClassDeclaration.isKMMViewModel(): Boolean =
+        packageName.asString() == "com.rickclephas.kmm.viewmodel" && simpleName.asString() == "KMMViewModel"
 }
