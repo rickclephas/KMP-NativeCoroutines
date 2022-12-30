@@ -1,89 +1,64 @@
 // EXPOSED_SEVERITY: WARNING
 
-import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
+// FILE: customFlow.kt
+
+import kotlinx.coroutines.flow.Flow
+
+interface CustomFlow<out T>: Flow<T>
+
+// FILE: test.kt
+
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 
 <!EXPOSED_SUSPEND_FUNCTION!>suspend<!> fun topLevelSuspendFunction(): Int = 0
 
-@NativeCoroutines
-suspend fun topLevelAnnotatedSuspendFunction() { }
-
 fun topLevelFlowFunction(): <!EXPOSED_FLOW_TYPE!>Flow<Int><!> = throw Throwable()
-
-@NativeCoroutines
-fun topLevelAnnotatedFlowFunction(): Flow<Int> = throw Throwable()
 
 fun topLevelSharedFlowFunction(): <!EXPOSED_FLOW_TYPE!>SharedFlow<Int><!> = throw Throwable()
 
-@NativeCoroutines
-fun topLevelAnnotatedSharedFlowFunction(): SharedFlow<Int> = throw Throwable()
-
 fun topLevelStateFlowFunction(): <!EXPOSED_FLOW_TYPE!>StateFlow<Int><!> = throw Throwable()
 
-@NativeCoroutines
-fun topLevelAnnotatedStateFlowFunction(): StateFlow<Int> = throw Throwable()
+fun topLevelCustomFlowFunction(): <!EXPOSED_FLOW_TYPE!>CustomFlow<Int><!> = throw Throwable()
 
 <!EXPOSED_SUSPEND_FUNCTION!>suspend<!> fun topLevelSuspendFlowFunction(): <!EXPOSED_FLOW_TYPE!>Flow<Int><!> = throw Throwable()
 
-@NativeCoroutines
-suspend fun topLevelAnnotatedSuspendFlowFunction(): Flow<Int> = throw Throwable()
-
 val topLevelFlowProperty: <!EXPOSED_FLOW_TYPE!>Flow<Int><!> get() = throw Throwable()
-
-@NativeCoroutines
-val topLevelAnnotatedFlowProperty: Flow<Int> get() = throw Throwable()
 
 val topLevelSharedFlowProperty: <!EXPOSED_FLOW_TYPE!>SharedFlow<Int><!> get() = throw Throwable()
 
-@NativeCoroutines
-val topLevelAnnotatedSharedFlowProperty: SharedFlow<Int> get() = throw Throwable()
-
 val topLevelStateFlowProperty: <!EXPOSED_FLOW_TYPE!>StateFlow<Int><!> get() = throw Throwable()
 
-@NativeCoroutines
-val topLevelAnnotatedStateFlowProperty: StateFlow<Int> get() = throw Throwable()
+val topLevelCustomFlowProperty: <!EXPOSED_FLOW_TYPE!>CustomFlow<Int><!> get() = throw Throwable()
 
-class TestClass {
+interface TestInterface {
 
-    <!EXPOSED_SUSPEND_FUNCTION!>suspend<!> fun suspendFunction(): Int = 0
+    <!EXPOSED_SUSPEND_FUNCTION!>suspend<!> fun suspendInterfaceFunction(): Int
 
-    @NativeCoroutines
-    suspend fun annotatedSuspendFunction() { }
+    val flowInterfaceProperty: <!EXPOSED_FLOW_TYPE!>Flow<Int><!>
+}
 
-    fun flowFunction(): <!EXPOSED_FLOW_TYPE!>Flow<Int><!> = throw Throwable()
+class TestClassA: TestInterface {
 
-    @NativeCoroutines
-    fun annotatedFlowFunction(): Flow<Int> = throw Throwable()
+    override suspend fun suspendInterfaceFunction(): Int = 0
 
-    fun sharedFlowFunction(): <!EXPOSED_FLOW_TYPE!>SharedFlow<Int><!> = throw Throwable()
+    override val flowInterfaceProperty: Flow<Int> get() = throw Throwable()
 
-    @NativeCoroutines
-    fun annotatedSharedFlowFunction(): SharedFlow<Int> = throw Throwable()
+    protected <!EXPOSED_SUSPEND_FUNCTION!>suspend<!> fun protectedSuspendFunction(): Int = 0
 
-    fun stateFlowFunction(): <!EXPOSED_FLOW_TYPE!>StateFlow<Int><!> = throw Throwable()
+    protected val protectedFlowProperty: <!EXPOSED_FLOW_TYPE!>Flow<Int><!> get() = throw Throwable()
 
-    @NativeCoroutines
-    fun annotatedStateFlowFunction(): StateFlow<Int> = throw Throwable()
+    fun <!EXPOSED_FLOW_TYPE!>implicitFlowFunction<!>() = flowInterfaceProperty
 
-    <!EXPOSED_SUSPEND_FUNCTION!>suspend<!> fun suspendFlowFunction(): <!EXPOSED_FLOW_TYPE!>Flow<Int><!> = throw Throwable()
+    private suspend fun privateSuspendFunction(): Int = 0
 
-    @NativeCoroutines
-    suspend fun annotatedSuspendFlowFunction(): Flow<Int> = throw Throwable()
+    private val privateFlowProperty: Flow<Int> get() = throw Throwable()
+}
 
-    val flowProperty: <!EXPOSED_FLOW_TYPE!>Flow<Int><!> get() = throw Throwable()
+internal class TestClassB {
 
-    @NativeCoroutines
-    val annotatedFlowProperty: Flow<Int> get() = throw Throwable()
+    suspend fun suspendFunction(): Int = 0
 
-    val sharedFlowProperty: <!EXPOSED_FLOW_TYPE!>SharedFlow<Int><!> get() = throw Throwable()
-
-    @NativeCoroutines
-    val annotatedSharedFlowProperty: SharedFlow<Int> get() = throw Throwable()
-
-    val stateFlowProperty: <!EXPOSED_FLOW_TYPE!>StateFlow<Int><!> get() = throw Throwable()
-
-    @NativeCoroutines
-    val annotatedStateFlowProperty: StateFlow<Int> get() = throw Throwable()
+    val flowProperty: Flow<Int> get() = throw Throwable()
 }

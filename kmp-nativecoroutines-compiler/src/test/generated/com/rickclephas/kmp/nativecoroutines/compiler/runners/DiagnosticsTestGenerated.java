@@ -22,6 +22,12 @@ public class DiagnosticsTestGenerated extends AbstractDiagnosticsTest {
     }
 
     @Test
+    @TestMetadata("exposedAnnotated.kt")
+    public void testExposedAnnotated() throws Exception {
+        runTest("src/testData/diagnostics/exposedAnnotated.kt");
+    }
+
+    @Test
     @TestMetadata("exposedError.kt")
     public void testExposedError() throws Exception {
         runTest("src/testData/diagnostics/exposedError.kt");

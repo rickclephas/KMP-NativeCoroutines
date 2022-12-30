@@ -1,4 +1,4 @@
-// EXPOSED_SEVERITY: NONE
+// EXPOSED_SEVERITY: WARNING
 
 // FILE: customFlow.kt
 
@@ -8,34 +8,49 @@ interface CustomFlow<out T>: Flow<T>
 
 // FILE: test.kt
 
+import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
+import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesIgnore
+import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 
+@NativeCoroutines
 suspend fun topLevelSuspendFunction(): Int = 0
 
+@NativeCoroutines
 fun topLevelFlowFunction(): Flow<Int> = throw Throwable()
 
+@NativeCoroutines
 fun topLevelSharedFlowFunction(): SharedFlow<Int> = throw Throwable()
 
+@NativeCoroutines
 fun topLevelStateFlowFunction(): StateFlow<Int> = throw Throwable()
 
+@NativeCoroutines
 fun topLevelCustomFlowFunction(): CustomFlow<Int> = throw Throwable()
 
+@NativeCoroutinesIgnore
 suspend fun topLevelSuspendFlowFunction(): Flow<Int> = throw Throwable()
 
+@NativeCoroutines
 val topLevelFlowProperty: Flow<Int> get() = throw Throwable()
 
+@NativeCoroutines
 val topLevelSharedFlowProperty: SharedFlow<Int> get() = throw Throwable()
 
+@NativeCoroutinesState
 val topLevelStateFlowProperty: StateFlow<Int> get() = throw Throwable()
 
+@NativeCoroutinesIgnore
 val topLevelCustomFlowProperty: CustomFlow<Int> get() = throw Throwable()
 
 interface TestInterface {
 
+    @NativeCoroutines
     suspend fun suspendInterfaceFunction(): Int
 
+    @NativeCoroutines
     val flowInterfaceProperty: Flow<Int>
 }
 
@@ -45,10 +60,13 @@ class TestClassA: TestInterface {
 
     override val flowInterfaceProperty: Flow<Int> get() = throw Throwable()
 
+    @NativeCoroutines
     protected suspend fun protectedSuspendFunction(): Int = 0
 
+    @NativeCoroutines
     protected val protectedFlowProperty: Flow<Int> get() = throw Throwable()
 
+    @NativeCoroutinesIgnore
     fun implicitFlowFunction() = flowInterfaceProperty
 
     private suspend fun privateSuspendFunction(): Int = 0
