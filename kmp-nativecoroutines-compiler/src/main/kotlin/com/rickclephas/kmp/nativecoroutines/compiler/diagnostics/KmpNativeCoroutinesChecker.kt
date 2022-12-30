@@ -101,7 +101,7 @@ internal class KmpNativeCoroutinesChecker(
             context.trace.report(IGNORED_COROUTINES_STATE, annotations.nativeCoroutinesState, declaration)
         }
 
-        if (returnType != CoroutinesReturnType.CoroutineScope) {
+        if (descriptor !is PropertyDescriptor || returnType != CoroutinesReturnType.CoroutineScope) {
             context.trace.report(INVALID_COROUTINE_SCOPE, annotations.nativeCoroutineScope, declaration)
         }
         if (!isSuspend && returnType !is CoroutinesReturnType.Flow) {

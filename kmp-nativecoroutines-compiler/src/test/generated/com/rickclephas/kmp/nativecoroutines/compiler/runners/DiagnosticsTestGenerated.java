@@ -22,6 +22,12 @@ public class DiagnosticsTestGenerated extends AbstractDiagnosticsTest {
     }
 
     @Test
+    @TestMetadata("conflict.kt")
+    public void testConflict() throws Exception {
+        runTest("src/testData/diagnostics/conflict.kt");
+    }
+
+    @Test
     @TestMetadata("exposedAnnotated.kt")
     public void testExposedAnnotated() throws Exception {
         runTest("src/testData/diagnostics/exposedAnnotated.kt");
@@ -43,5 +49,23 @@ public class DiagnosticsTestGenerated extends AbstractDiagnosticsTest {
     @TestMetadata("exposedWarning.kt")
     public void testExposedWarning() throws Exception {
         runTest("src/testData/diagnostics/exposedWarning.kt");
+    }
+
+    @Test
+    @TestMetadata("ignored.kt")
+    public void testIgnored() throws Exception {
+        runTest("src/testData/diagnostics/ignored.kt");
+    }
+
+    @Test
+    @TestMetadata("invalid.kt")
+    public void testInvalid() throws Exception {
+        runTest("src/testData/diagnostics/invalid.kt");
+    }
+
+    @Test
+    @TestMetadata("redundant.kt")
+    public void testRedundant() throws Exception {
+        runTest("src/testData/diagnostics/redundant.kt");
     }
 }
