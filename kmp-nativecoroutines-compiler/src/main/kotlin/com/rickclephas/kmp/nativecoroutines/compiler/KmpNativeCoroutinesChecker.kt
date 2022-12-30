@@ -1,5 +1,6 @@
 package com.rickclephas.kmp.nativecoroutines.compiler
 
+import com.intellij.psi.PsiElement
 import com.rickclephas.kmp.nativecoroutines.compiler.KmpNativeCoroutinesErrors.CONFLICT_COROUTINES_STATE
 import com.rickclephas.kmp.nativecoroutines.compiler.KmpNativeCoroutinesErrors.EXPOSED_FLOW_TYPE
 import com.rickclephas.kmp.nativecoroutines.compiler.KmpNativeCoroutinesErrors.EXPOSED_FLOW_TYPE_ERROR
@@ -30,6 +31,8 @@ import org.jetbrains.kotlin.descriptors.PropertyDescriptor
 import org.jetbrains.kotlin.descriptors.SimpleFunctionDescriptor
 import org.jetbrains.kotlin.descriptors.annotations.AnnotationDescriptor
 import org.jetbrains.kotlin.diagnostics.DiagnosticFactory0
+import org.jetbrains.kotlin.lexer.KtTokens
+import org.jetbrains.kotlin.psi.KtCallableDeclaration
 import org.jetbrains.kotlin.psi.KtDeclaration
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.resolve.BindingTrace
@@ -62,8 +65,8 @@ internal class KmpNativeCoroutinesChecker(
             context.trace.report(CONFLICT_COROUTINES_STATE, annotations.nativeCoroutinesState, declaration)
         }
 
-        val exposedSuspendFunction: DiagnosticFactory0<KtElement>?
-        val exposedFlowType: DiagnosticFactory0<KtElement>?
+        val exposedSuspendFunction: DiagnosticFactory0<PsiElement>?
+        val exposedFlowType: DiagnosticFactory0<PsiElement>?
         when (exposedSeverity) {
             ExposedSeverity.NONE -> {
                 exposedSuspendFunction = null
@@ -81,8 +84,16 @@ internal class KmpNativeCoroutinesChecker(
         if (isPublic && !isOverride && annotations.nativeCoroutines == null &&
             annotations.nativeCoroutinesIgnore == null && annotations.nativeCoroutinesState == null
         ) {
-            if (isSuspend) exposedSuspendFunction?.on(declaration)?.let(context.trace::report)
-            if (returnType is CoroutinesReturnType.Flow) exposedFlowType?.on(declaration)?.let(context.trace::report)
+            if (isSuspend) {
+                val element = declaration.modifierList?.getModifier(KtTokens.SUSPEND_KEYWORD) ?: declaration
+                exposedSuspendFunction?.on(element)?.let(context.trace::report)
+            }
+            if (returnType is CoroutinesReturnType.Flow) {
+                val element = declaration.safeAs<KtCallableDeclaration>()?.let {
+                    it.typeReference ?: it.nameIdentifier
+                } ?: declaration
+                exposedFlowType?.on(element)?.let(context.trace::report)
+            }
         }
 
         if (annotations.nativeCoroutinesIgnore != null) {

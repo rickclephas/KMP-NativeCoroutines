@@ -1,5 +1,6 @@
 package com.rickclephas.kmp.nativecoroutines.compiler
 
+import com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.diagnostics.DiagnosticFactory0
 import org.jetbrains.kotlin.diagnostics.Errors
 import org.jetbrains.kotlin.diagnostics.Severity
@@ -9,13 +10,13 @@ internal object KmpNativeCoroutinesErrors {
     @JvmField
     val CONFLICT_COROUTINES_STATE = DiagnosticFactory0.create<KtElement>(Severity.ERROR)
     @JvmField
-    val EXPOSED_FLOW_TYPE = DiagnosticFactory0.create<KtElement>(Severity.WARNING)
+    val EXPOSED_FLOW_TYPE = DiagnosticFactory0.create<PsiElement>(Severity.WARNING)
     @JvmField
-    val EXPOSED_FLOW_TYPE_ERROR = DiagnosticFactory0.create<KtElement>(Severity.ERROR)
+    val EXPOSED_FLOW_TYPE_ERROR = DiagnosticFactory0.create<PsiElement>(Severity.ERROR)
     @JvmField
-    val EXPOSED_SUSPEND_FUNCTION = DiagnosticFactory0.create<KtElement>(Severity.WARNING)
+    val EXPOSED_SUSPEND_FUNCTION = DiagnosticFactory0.create<PsiElement>(Severity.WARNING)
     @JvmField
-    val EXPOSED_SUSPEND_FUNCTION_ERROR = DiagnosticFactory0.create<KtElement>(Severity.ERROR)
+    val EXPOSED_SUSPEND_FUNCTION_ERROR = DiagnosticFactory0.create<PsiElement>(Severity.ERROR)
     @JvmField
     val IGNORED_COROUTINES = DiagnosticFactory0.create<KtElement>(Severity.ERROR)
     @JvmField
