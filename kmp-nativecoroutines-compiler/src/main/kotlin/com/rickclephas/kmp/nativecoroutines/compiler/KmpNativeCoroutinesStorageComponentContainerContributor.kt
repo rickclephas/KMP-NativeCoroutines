@@ -8,16 +8,14 @@ import org.jetbrains.kotlin.extensions.StorageComponentContainerContributor
 import org.jetbrains.kotlin.platform.TargetPlatform
 
 internal class KmpNativeCoroutinesStorageComponentContainerContributor(
-    configuration: CompilerConfiguration
+    private val configuration: CompilerConfiguration
 ): StorageComponentContainerContributor {
-
-    private val exposedSeverity = configuration.get(EXPOSED_SEVERITY_KEY, ExposedSeverity.WARNING)
 
     override fun registerModuleComponents(
         container: StorageComponentContainer,
         platform: TargetPlatform,
         moduleDescriptor: ModuleDescriptor
     ) {
-        container.useInstance(KmpNativeCoroutinesChecker(exposedSeverity))
+        container.useInstance(KmpNativeCoroutinesChecker(configuration))
     }
 }
