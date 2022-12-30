@@ -4,6 +4,12 @@ import kotlinx.coroutines.flow.StateFlow
 
 interface CustomStateFlow<out T>: StateFlow<T>
 
+// FILE: customCoroutineScope.kt
+
+import kotlinx.coroutines.CoroutineScope
+
+interface CustomCoroutineScope: CoroutineScope
+
 // FILE: test.kt
 
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
@@ -17,8 +23,11 @@ import kotlinx.coroutines.flow.StateFlow
 @NativeCoroutineScope
 val propertyA: CoroutineScope get() = throw Throwable()
 
+@NativeCoroutineScope
+val propertyB: CustomCoroutineScope get() = throw Throwable()
+
 <!INVALID_COROUTINE_SCOPE!>@NativeCoroutineScope<!>
-val propertyB: Int = 0
+val propertyC: Int = 0
 
 @NativeCoroutines
 suspend fun functionA(): Int = 0
