@@ -1,4 +1,4 @@
-package com.rickclephas.kmp.nativecoroutines.compiler
+package com.rickclephas.kmp.nativecoroutines.compiler.diagnostics
 
 import com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.diagnostics.DiagnosticFactory0
