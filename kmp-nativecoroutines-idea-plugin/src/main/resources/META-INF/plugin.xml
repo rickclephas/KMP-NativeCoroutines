@@ -11,6 +11,7 @@
     <depends>org.jetbrains.kotlin</depends>
 
     <extensions defaultExtensionNs="org.jetbrains.kotlin">
-        <storageComponentContainerContributor implementation="com.rickclephas.kmp.nativecoroutines.idea.KmpNativeCoroutinesStorageComponentContainerContributor"/>
+        <storageComponentContainerContributor implementation="com.rickclephas.kmp.nativecoroutines.idea.compiler.extensions.KmpNativeCoroutinesStorageComponentContainerContributor"/>
+        <quickFixContributor implementation="com.rickclephas.kmp.nativecoroutines.idea.quickfixes.KmpNativeCoroutinesQuickFixContributor"/>
     </extensions>
 </idea-plugin>

@@ -1,4 +1,4 @@
-package com.rickclephas.kmp.nativecoroutines.idea
+package com.rickclephas.kmp.nativecoroutines.idea.compiler.extensions
 
 import com.intellij.openapi.project.Project
 import com.rickclephas.kmp.nativecoroutines.compiler.config.ExposedSeverity

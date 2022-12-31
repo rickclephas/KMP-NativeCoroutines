@@ -1,13 +1,8 @@
 package com.rickclephas.kmp.nativecoroutines.compiler.utils
 
+import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesFqNames as FqNames
 import org.jetbrains.kotlin.descriptors.CallableDescriptor
 import org.jetbrains.kotlin.descriptors.annotations.AnnotationDescriptor
-import org.jetbrains.kotlin.name.FqName
-
-private val nativeCoroutinesFqName = FqName("com.rickclephas.kmp.nativecoroutines.NativeCoroutines")
-private val nativeCoroutinesIgnoreFqName = FqName("com.rickclephas.kmp.nativecoroutines.NativeCoroutinesIgnore")
-private val nativeCoroutinesStateFqName = FqName("com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState")
-private val nativeCoroutineScopeFqName = FqName("com.rickclephas.kmp.nativecoroutines.NativeCoroutineScope")
 
 internal class NativeCoroutinesAnnotations(descriptor: CallableDescriptor) {
 
@@ -23,10 +18,10 @@ internal class NativeCoroutinesAnnotations(descriptor: CallableDescriptor) {
         var nativeCoroutineScope: AnnotationDescriptor? = null
         descriptor.annotations.forEach {
             when (it.fqName) {
-                nativeCoroutinesFqName -> nativeCoroutines = it
-                nativeCoroutinesIgnoreFqName -> nativeCoroutinesIgnore = it
-                nativeCoroutinesStateFqName -> nativeCoroutinesState = it
-                nativeCoroutineScopeFqName -> nativeCoroutineScope = it
+                FqNames.nativeCoroutines -> nativeCoroutines = it
+                FqNames.nativeCoroutinesIgnore -> nativeCoroutinesIgnore = it
+                FqNames.nativeCoroutinesState -> nativeCoroutinesState = it
+                FqNames.nativeCoroutineScope -> nativeCoroutineScope = it
             }
         }
         this.nativeCoroutines = nativeCoroutines
