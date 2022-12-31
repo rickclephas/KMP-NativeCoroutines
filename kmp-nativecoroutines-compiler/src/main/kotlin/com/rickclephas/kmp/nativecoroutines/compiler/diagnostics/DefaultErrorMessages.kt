@@ -4,6 +4,8 @@ import com.rickclephas.kmp.nativecoroutines.compiler.diagnostics.KmpNativeCorout
 import com.rickclephas.kmp.nativecoroutines.compiler.diagnostics.KmpNativeCoroutinesErrors.EXPOSED_FLOW_TYPE
 import com.rickclephas.kmp.nativecoroutines.compiler.diagnostics.KmpNativeCoroutinesErrors.EXPOSED_SUSPEND_FUNCTION
 import com.rickclephas.kmp.nativecoroutines.compiler.diagnostics.KmpNativeCoroutinesErrors.EXPOSED_FLOW_TYPE_ERROR
+import com.rickclephas.kmp.nativecoroutines.compiler.diagnostics.KmpNativeCoroutinesErrors.EXPOSED_STATE_FLOW_PROPERTY
+import com.rickclephas.kmp.nativecoroutines.compiler.diagnostics.KmpNativeCoroutinesErrors.EXPOSED_STATE_FLOW_PROPERTY_ERROR
 import com.rickclephas.kmp.nativecoroutines.compiler.diagnostics.KmpNativeCoroutinesErrors.EXPOSED_SUSPEND_FUNCTION_ERROR
 import com.rickclephas.kmp.nativecoroutines.compiler.diagnostics.KmpNativeCoroutinesErrors.IGNORED_COROUTINES
 import com.rickclephas.kmp.nativecoroutines.compiler.diagnostics.KmpNativeCoroutinesErrors.IGNORED_COROUTINES_STATE
@@ -25,6 +27,8 @@ internal object DefaultErrorMessages : DefaultErrorMessages.Extension {
         put(CONFLICT_COROUTINES_STATE, "NativeCoroutinesState can't be combined with NativeCoroutines")
         put(EXPOSED_FLOW_TYPE, "Flow type is exposed to ObjC")
         put(EXPOSED_FLOW_TYPE_ERROR, "Flow type is exposed to ObjC")
+        put(EXPOSED_STATE_FLOW_PROPERTY, "StateFlow property is exposed to ObjC")
+        put(EXPOSED_STATE_FLOW_PROPERTY_ERROR, "StateFlow property is exposed to ObjC")
         put(EXPOSED_SUSPEND_FUNCTION, "suspend function is exposed to ObjC")
         put(EXPOSED_SUSPEND_FUNCTION_ERROR, "suspend function is exposed to ObjC")
         put(IGNORED_COROUTINES, "NativeCoroutinesIgnore overrides NativeCoroutines")

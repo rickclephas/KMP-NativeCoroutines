@@ -1,6 +1,8 @@
 package com.rickclephas.kmp.nativecoroutines.compiler.diagnostics
 
 import com.intellij.psi.PsiElement
+import com.rickclephas.kmp.nativecoroutines.compiler.config.ExposedSeverity
+import com.rickclephas.kmp.nativecoroutines.compiler.config.exposedSeverity
 import com.rickclephas.kmp.nativecoroutines.compiler.diagnostics.KmpNativeCoroutinesErrors.CONFLICT_COROUTINES_STATE
 import com.rickclephas.kmp.nativecoroutines.compiler.diagnostics.KmpNativeCoroutinesErrors.EXPOSED_FLOW_TYPE
 import com.rickclephas.kmp.nativecoroutines.compiler.diagnostics.KmpNativeCoroutinesErrors.EXPOSED_FLOW_TYPE_ERROR
@@ -18,8 +20,8 @@ import com.rickclephas.kmp.nativecoroutines.compiler.diagnostics.KmpNativeCorout
 import com.rickclephas.kmp.nativecoroutines.compiler.diagnostics.KmpNativeCoroutinesErrors.REDUNDANT_PRIVATE_COROUTINES
 import com.rickclephas.kmp.nativecoroutines.compiler.diagnostics.KmpNativeCoroutinesErrors.REDUNDANT_PRIVATE_COROUTINES_IGNORE
 import com.rickclephas.kmp.nativecoroutines.compiler.diagnostics.KmpNativeCoroutinesErrors.REDUNDANT_PRIVATE_COROUTINES_STATE
-import com.rickclephas.kmp.nativecoroutines.compiler.config.ExposedSeverity
-import com.rickclephas.kmp.nativecoroutines.compiler.config.exposedSeverity
+import com.rickclephas.kmp.nativecoroutines.compiler.diagnostics.KmpNativeCoroutinesErrors.EXPOSED_STATE_FLOW_PROPERTY
+import com.rickclephas.kmp.nativecoroutines.compiler.diagnostics.KmpNativeCoroutinesErrors.EXPOSED_STATE_FLOW_PROPERTY_ERROR
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotations
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.CoroutinesReturnType
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.coroutinesReturnType
@@ -67,18 +69,22 @@ internal class KmpNativeCoroutinesChecker(
 
         val exposedSuspendFunction: DiagnosticFactory0<PsiElement>?
         val exposedFlowType: DiagnosticFactory0<PsiElement>?
+        val exposedStateFlowProperty: DiagnosticFactory0<PsiElement>?
         when (exposedSeverity) {
             ExposedSeverity.NONE -> {
                 exposedSuspendFunction = null
                 exposedFlowType = null
+                exposedStateFlowProperty = null
             }
             ExposedSeverity.WARNING -> {
                 exposedSuspendFunction = EXPOSED_SUSPEND_FUNCTION
                 exposedFlowType = EXPOSED_FLOW_TYPE
+                exposedStateFlowProperty = EXPOSED_STATE_FLOW_PROPERTY
             }
             ExposedSeverity.ERROR -> {
                 exposedSuspendFunction = EXPOSED_SUSPEND_FUNCTION_ERROR
                 exposedFlowType = EXPOSED_FLOW_TYPE_ERROR
+                exposedStateFlowProperty = EXPOSED_STATE_FLOW_PROPERTY_ERROR
             }
         }
         if (isPublic && !isOverride && annotations.nativeCoroutines == null &&
@@ -89,10 +95,15 @@ internal class KmpNativeCoroutinesChecker(
                 exposedSuspendFunction?.on(element)?.let(context.trace::report)
             }
             if (returnType is CoroutinesReturnType.Flow) {
+                val diagnosticFactory = when {
+                    descriptor !is PropertyDescriptor -> exposedFlowType
+                    returnType != CoroutinesReturnType.Flow.State -> exposedFlowType
+                    else -> exposedStateFlowProperty
+                }
                 val element = declaration.safeAs<KtCallableDeclaration>()?.let {
                     it.typeReference ?: it.nameIdentifier
                 } ?: declaration
-                exposedFlowType?.on(element)?.let(context.trace::report)
+                diagnosticFactory?.on(element)?.let(context.trace::report)
             }
         }
 

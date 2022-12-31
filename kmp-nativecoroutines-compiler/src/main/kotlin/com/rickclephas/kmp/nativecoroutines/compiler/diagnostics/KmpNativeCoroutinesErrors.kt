@@ -14,6 +14,10 @@ internal object KmpNativeCoroutinesErrors {
     @JvmField
     val EXPOSED_FLOW_TYPE_ERROR = DiagnosticFactory0.create<PsiElement>(Severity.ERROR)
     @JvmField
+    val EXPOSED_STATE_FLOW_PROPERTY = DiagnosticFactory0.create<PsiElement>(Severity.WARNING)
+    @JvmField
+    val EXPOSED_STATE_FLOW_PROPERTY_ERROR = DiagnosticFactory0.create<PsiElement>(Severity.ERROR)
+    @JvmField
     val EXPOSED_SUSPEND_FUNCTION = DiagnosticFactory0.create<PsiElement>(Severity.WARNING)
     @JvmField
     val EXPOSED_SUSPEND_FUNCTION_ERROR = DiagnosticFactory0.create<PsiElement>(Severity.ERROR)
