@@ -1,10 +1,13 @@
 // EXPOSED_SEVERITY: WARNING
 
-// FILE: customFlow.kt
+// FILE: customFlows.kt
 
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.StateFlow
 
 interface CustomFlow<out T>: Flow<T>
+
+interface CustomStateFlow<out T>: StateFlow<T>
 
 // FILE: test.kt
 
@@ -28,9 +31,11 @@ val topLevelFlowProperty: <!EXPOSED_FLOW_TYPE!>Flow<Int><!> get() = throw Throwa
 
 val topLevelSharedFlowProperty: <!EXPOSED_FLOW_TYPE!>SharedFlow<Int><!> get() = throw Throwable()
 
-val topLevelStateFlowProperty: <!EXPOSED_FLOW_TYPE!>StateFlow<Int><!> get() = throw Throwable()
+val topLevelStateFlowProperty: <!EXPOSED_STATE_FLOW_PROPERTY!>StateFlow<Int><!> get() = throw Throwable()
 
 val topLevelCustomFlowProperty: <!EXPOSED_FLOW_TYPE!>CustomFlow<Int><!> get() = throw Throwable()
+
+val topLevelCustomStateFlowProperty: <!EXPOSED_STATE_FLOW_PROPERTY!>CustomStateFlow<Int><!> get() = throw Throwable()
 
 interface TestInterface {
 
