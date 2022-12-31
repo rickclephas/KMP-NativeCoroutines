@@ -1,0 +1,16 @@
+<idea-plugin url="https://github.com/rickclephas/KMP-NativeCoroutines">
+    <id>com.rickclephas.kmp.nativecoroutines</id>
+    <name>KMP-NativeCoroutines</name>
+    <vendor email="rclephas@gmail.com">Rick Clephas</vendor>
+
+    <description><![CDATA[
+    Use Kotlin Coroutines from Swift code in KMP apps.
+  ]]></description>
+
+    <depends>com.intellij.modules.platform</depends>
+    <depends>org.jetbrains.kotlin</depends>
+
+    <extensions defaultExtensionNs="org.jetbrains.kotlin">
+        <storageComponentContainerContributor implementation="com.rickclephas.kmp.nativecoroutines.idea.KmpNativeCoroutinesStorageComponentContainerContributor"/>
+    </extensions>
+</idea-plugin>

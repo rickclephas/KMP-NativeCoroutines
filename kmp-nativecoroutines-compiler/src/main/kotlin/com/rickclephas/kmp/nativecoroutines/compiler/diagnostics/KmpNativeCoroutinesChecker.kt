@@ -19,11 +19,9 @@ import com.rickclephas.kmp.nativecoroutines.compiler.diagnostics.KmpNativeCorout
 import com.rickclephas.kmp.nativecoroutines.compiler.diagnostics.KmpNativeCoroutinesErrors.REDUNDANT_PRIVATE_COROUTINES_IGNORE
 import com.rickclephas.kmp.nativecoroutines.compiler.diagnostics.KmpNativeCoroutinesErrors.REDUNDANT_PRIVATE_COROUTINES_STATE
 import com.rickclephas.kmp.nativecoroutines.compiler.config.ExposedSeverity
-import com.rickclephas.kmp.nativecoroutines.compiler.config.exposedSeverity
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotations
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.CoroutinesReturnType
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.coroutinesReturnType
-import org.jetbrains.kotlin.config.CompilerConfiguration
 import org.jetbrains.kotlin.descriptors.CallableDescriptor
 import org.jetbrains.kotlin.descriptors.DeclarationDescriptor
 import org.jetbrains.kotlin.descriptors.FunctionDescriptor
@@ -42,11 +40,9 @@ import org.jetbrains.kotlin.resolve.checkers.DeclarationCheckerContext
 import org.jetbrains.kotlin.resolve.descriptorUtil.isEffectivelyPublicApi
 import org.jetbrains.kotlin.utils.addToStdlib.safeAs
 
-internal class KmpNativeCoroutinesChecker(
-    compilerConfiguration: CompilerConfiguration
+class KmpNativeCoroutinesChecker(
+    private val exposedSeverity: ExposedSeverity
 ): DeclarationChecker {
-
-    private val exposedSeverity: ExposedSeverity = compilerConfiguration.exposedSeverity
 
     override fun check(
         declaration: KtDeclaration,

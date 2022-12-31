@@ -6,7 +6,7 @@ import org.jetbrains.kotlin.diagnostics.Errors
 import org.jetbrains.kotlin.diagnostics.Severity
 import org.jetbrains.kotlin.psi.KtElement
 
-internal object KmpNativeCoroutinesErrors {
+object KmpNativeCoroutinesErrors {
     @JvmField
     val CONFLICT_COROUTINES_STATE = DiagnosticFactory0.create<KtElement>(Severity.ERROR)
     @JvmField
