@@ -83,8 +83,11 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         public val globalMutableStateFlowNative: NativeFlow<String>
           get() = globalMutableStateFlow.asNativeFlow(null)
         
-        public val globalMutableStateFlowValue: String
+        public var globalMutableStateFlowValue: String
           get() = globalMutableStateFlow.value
+          set(`value`) {
+            globalMutableStateFlow.value = value
+          }
     """.trimIndent())
 
     @Test
@@ -742,5 +745,29 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         @ObjCName(name = "globalState")
         public val globalStateValue: String
           get() = globalState.value
+    """.trimIndent())
+
+    @Test
+    fun globalMutableStateProperty() = runKspTest("""
+        import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState
+        import kotlinx.coroutines.flow.MutableStateFlow
+        
+        @NativeCoroutinesState
+        val globalMutableState: MutableStateFlow<String> get() = TODO()
+    """.trimIndent(), """
+        import com.rickclephas.kmp.nativecoroutines.NativeFlow
+        import com.rickclephas.kmp.nativecoroutines.asNativeFlow
+        import kotlin.String
+        import kotlin.native.ObjCName
+        
+        public val globalMutableStateFlow: NativeFlow<String>
+          get() = globalMutableState.asNativeFlow(null)
+        
+        @ObjCName(name = "globalMutableState")
+        public var globalMutableStateValue: String
+          get() = globalMutableState.value
+          set(`value`) {
+            globalMutableState.value = value
+          }
     """.trimIndent())
 }
