@@ -38,11 +38,11 @@ private fun KSPropertyDeclaration.toNativeCoroutinesPropertySpec(
     val simpleName = simpleName.asString()
     val name = "$simpleName$nameSuffix"
     val objCName = if (setObjCName) simpleName else null
-    return createPropertySpec(typeParameterResolver, name, objCName, typeName) { code, codeArgs ->
+    return createPropertySpec(typeParameterResolver, name, objCName, typeName, { code, codeArgs ->
         codeArgs.add(asNativeFlowMemberName)
         scopeProperty.codeArg.let(codeArgs::addAll)
         addCode("return $code${if(type.nullable) "?." else "."}%M(${scopeProperty.code})", *codeArgs.toTypedArray())
-    }.apply {
+    }).apply {
         scopeProperty.containingFile?.let(::addOriginatingKSFile)
     }.build()
 }
@@ -58,9 +58,14 @@ private fun KSPropertyDeclaration.toNativeCoroutinesValuePropertySpec(
     val simpleName = simpleName.asString()
     val name = "$simpleName$nameSuffix"
     val objCName = if (setObjCName) simpleName else null
-    return createPropertySpec(typeParameterResolver, name, objCName, typeName) { code, codeArgs ->
+    return createPropertySpec(typeParameterResolver, name, objCName, typeName, { code, codeArgs ->
         addCode("return $code${if(type.nullable) "?." else "."}value", *codeArgs.toTypedArray())
-    }.build()
+    }, when (type.mutable) {
+        false -> null
+        else -> { code, codeArgs ->
+            addCode("$code${if(type.nullable) "?." else "."}value = value", *codeArgs.toTypedArray())
+        }
+    }).build()
 }
 
 private fun KSPropertyDeclaration.toNativeCoroutinesReplayCachePropertySpec(
@@ -72,9 +77,9 @@ private fun KSPropertyDeclaration.toNativeCoroutinesReplayCachePropertySpec(
     typeName = typeName.copy(annotations = type.typeReference.annotations.toAnnotationSpecs())
     val simpleName = simpleName.asString()
     val name = "$simpleName$nameSuffix"
-    return createPropertySpec(typeParameterResolver, name, null, typeName) { code, codeArgs ->
+    return createPropertySpec(typeParameterResolver, name, null, typeName, { code, codeArgs ->
         addCode("return $code${if(type.nullable) "?." else "."}replayCache", *codeArgs.toTypedArray())
-    }.build()
+    }).build()
 }
 
 private fun KSPropertyDeclaration.createPropertySpec(
@@ -82,7 +87,8 @@ private fun KSPropertyDeclaration.createPropertySpec(
     name: String,
     objCName: String?,
     typeName: TypeName,
-    addCode: FunSpec.Builder.(code: String, codeArgs: MutableList<Any>) -> Unit
+    addGetterCode: FunSpec.Builder.(code: String, codeArgs: MutableList<Any>) -> Unit,
+    addSetterCode: (FunSpec.Builder.(code: String, codeArgs: MutableList<Any>) -> Unit)? = null
 ): PropertySpec.Builder {
     val classDeclaration = parentDeclaration as? KSClassDeclaration
 
@@ -110,10 +116,6 @@ private fun KSPropertyDeclaration.createPropertySpec(
         builder.receiver(extensionReceiver.toTypeName(typeParameterResolver))
     }
 
-    val getterBuilder = FunSpec.getterBuilder()
-    getter?.annotations?.toAnnotationSpecs(
-        ignoredAnnotationNames = setOf(throwsAnnotationName)
-    )?.let(getterBuilder::addAnnotations)
     val codeArgs = mutableListOf<Any>()
     val code = when (classDeclaration) {
         null -> {
@@ -126,8 +128,24 @@ private fun KSPropertyDeclaration.createPropertySpec(
             "%N"
         }
     }
-    addCode(getterBuilder, code, codeArgs)
+
+    val getterBuilder = FunSpec.getterBuilder()
+    getter?.annotations?.toAnnotationSpecs(
+        ignoredAnnotationNames = setOf(throwsAnnotationName)
+    )?.let(getterBuilder::addAnnotations)
+    addGetterCode(getterBuilder, code, codeArgs)
     builder.getter(getterBuilder.build())
+
+    if (addSetterCode != null) {
+        builder.mutable()
+        val setterBuilder = FunSpec.setterBuilder()
+        setter?.annotations?.toAnnotationSpecs(
+            ignoredAnnotationNames = setOf(throwsAnnotationName)
+        )?.let(setterBuilder::addAnnotations)
+        setterBuilder.addParameter("value", typeName)
+        addSetterCode(setterBuilder, code, codeArgs)
+        builder.setter(setterBuilder.build())
+    }
 
     containingFile?.let(builder::addOriginatingKSFile)
     return builder
