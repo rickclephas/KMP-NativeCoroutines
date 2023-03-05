@@ -137,7 +137,6 @@ class Clock {
 In case of a `StateFlow` or `SharedFlow` property you also get a `NativeValue` or `NativeReplayCache` property:
 ```kotlin
 // For the StateFlow defined above the plugin will generate this native value property
-@NativeCoroutinesState
 val timeNativeValue
     get() = time.value
 
