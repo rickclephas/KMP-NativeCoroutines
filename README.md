@@ -125,6 +125,7 @@ Your `Flow` properties/functions get a `Native` version:
 ```kotlin
 class Clock {
     // Somewhere in your Kotlin code you define a Flow property
+    @NativeCoroutinesState
     val time: StateFlow<Long> // This can be any kind of Flow
 
     // The plugin will generate this native property for you
@@ -136,6 +137,7 @@ class Clock {
 In case of a `StateFlow` or `SharedFlow` property you also get a `NativeValue` or `NativeReplayCache` property:
 ```kotlin
 // For the StateFlow defined above the plugin will generate this native value property
+@NativeCoroutinesState
 val timeNativeValue
     get() = time.value
 
@@ -148,6 +150,7 @@ The plugin also generates `Native` versions for all your suspend functions:
 ```kotlin
 class RandomLettersGenerator {
     // Somewhere in your Kotlin code you define a suspend function
+    @NativeCoroutines
     suspend fun getRandomLetters(): String { 
         // Code to generate some random letters
     }
