@@ -14,6 +14,7 @@ kotlin {
     val watchosArm64 = watchosArm64()
     val watchosX64 = watchosX64()
     val watchosSimulatorArm64 = watchosSimulatorArm64()
+    val watchosDeviceArm64 = watchosDeviceArm64()
     val tvosArm64 = tvosArm64()
     val tvosX64 = tvosX64()
     val tvosSimulatorArm64 = tvosSimulatorArm64()
@@ -54,7 +55,7 @@ kotlin {
         listOf(
             macosX64, macosArm64,
             iosArm64, iosX64, iosSimulatorArm64,
-            watchosArm32, watchosArm64, watchosX64, watchosSimulatorArm64,
+            watchosArm32, watchosArm64, watchosX64, watchosSimulatorArm64, watchosDeviceArm64,
             tvosArm64, tvosX64, tvosSimulatorArm64
         ).forEach {
             getByName("${it.targetName}Main") {
