@@ -50,7 +50,7 @@ or the Swift Package Manager.
 
 Make sure to always use the same versions for all the libraries!
 
-[![latest release](https://img.shields.io/github/v/release/rickclephas/KMP-NativeCoroutines?label=latest%20release&sort=semver)](https://github.com/rickclephas/KMP-NativeCoroutines/releases)
+[![latest release](https://img.shields.io/github/v/release/rickclephas/KMP-NativeCoroutines?label=latest%20release&sort=semver&include_prereleases)](https://github.com/rickclephas/KMP-NativeCoroutines/releases)
 
 ### Kotlin
 
