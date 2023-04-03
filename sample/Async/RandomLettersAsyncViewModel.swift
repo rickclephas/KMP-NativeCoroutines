@@ -22,7 +22,7 @@ class RandomLettersAsyncViewModel: RandomLettersViewModel {
             isLoading = true
             result = nil
             do {
-                let letters = try await asyncFunction(for: randomLettersGenerator.getRandomLettersNative(throwException: throwException))
+                let letters = try await asyncFunction(for: randomLettersGenerator.getRandomLetters(throwException: throwException))
                 result = .success(letters)
             } catch {
                 result = .failure(error)

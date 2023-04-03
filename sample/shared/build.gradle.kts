@@ -3,6 +3,8 @@ plugins {
     alias(libs.plugins.kotlin.multiplatform)
     @Suppress("DSL_SCOPE_VIOLATION")
     alias(libs.plugins.kotlin.plugin.serialization)
+    @Suppress("DSL_SCOPE_VIOLATION")
+    alias(libs.plugins.ksp)
     id("com.rickclephas.kmp.nativecoroutines")
 }
 
@@ -24,6 +26,7 @@ kotlin {
     sourceSets {
         all {
             languageSettings.optIn("kotlin.RequiresOptIn")
+            languageSettings.optIn("kotlin.experimental.ExperimentalObjCName")
         }
         val commonMain by getting {
             dependencies {

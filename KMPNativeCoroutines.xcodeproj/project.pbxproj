@@ -17,7 +17,6 @@
 		1D7175C1266FF04200846F75 /* Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2EC86A266D290000B118B0 /* Publisher.swift */; };
 		1D75A367272D4B3800CFF795 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1D75A366272D4B3800CFF795 /* RxSwift */; };
 		1D75A369272D4B4900CFF795 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1D75A368272D4B4900CFF795 /* RxSwift */; };
-		1D75A36A272D4BC200CFF795 /* KMPNativeCoroutinesCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D717583266FE90400846F75 /* KMPNativeCoroutinesCore.framework */; };
 		1DA5DCEF267613BB002448E3 /* KMPNativeCoroutinesAsync.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DA5DCE5267613BB002448E3 /* KMPNativeCoroutinesAsync.framework */; platformFilter = ios; };
 		1DA5DCF4267613BB002448E3 /* AsyncFunctionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA5DCF3267613BB002448E3 /* AsyncFunctionTests.swift */; };
 		1DA5DCFD26761404002448E3 /* AsyncFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA5DCFC26761404002448E3 /* AsyncFunction.swift */; };
@@ -32,14 +31,21 @@
 		1DF3F9E1269369AD004C21F2 /* SingleObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF3F95726935E2A004C21F2 /* SingleObservable.swift */; };
 		1DF3F9E2269369B5004C21F2 /* ObservableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF3F94E2693590D004C21F2 /* ObservableTests.swift */; };
 		1DF3F9E3269369BA004C21F2 /* SingleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF3F959269362D0004C21F2 /* SingleTests.swift */; };
-		1DFB127A26A09796001BE321 /* AsyncStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFB127926A09796001BE321 /* AsyncStream.swift */; };
-		1DFB127C26A0A446001BE321 /* AsyncStreamTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFB127B26A0A446001BE321 /* AsyncStreamTests.swift */; };
+		1DFB127A26A09796001BE321 /* AsyncSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFB127926A09796001BE321 /* AsyncSequence.swift */; };
+		1DFB127C26A0A446001BE321 /* AsyncSequenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFB127B26A0A446001BE321 /* AsyncSequenceTests.swift */; };
 		1DFC35FC268A2DE3008393FA /* AsyncResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFC35FB268A2DE3008393FA /* AsyncResult.swift */; };
 		1DFC35FE268A2FFE008393FA /* AsyncResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFC35FD268A2FFE008393FA /* AsyncResultTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		1D7175B9266FE9F800846F75 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1DF8833F266D1BC10058B6F9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1D717582266FE90400846F75;
+			remoteInfo = KMPNativeCoroutinesCore;
+		};
+		1D75A36C272D4BC200CFF795 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1DF8833F266D1BC10058B6F9 /* Project object */;
 			proxyType = 1;
@@ -53,26 +59,12 @@
 			remoteGlobalIDString = 1DA5DCE4267613BB002448E3;
 			remoteInfo = KMPNativeCoroutinesAsync;
 		};
-		1D75A36C272D4BC200CFF795 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1DF8833F266D1BC10058B6F9 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 1D717582266FE90400846F75;
-			remoteInfo = KMPNativeCoroutinesCore;
-		};
 		1DCA41AB26753C640036C1A3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1DF8833F266D1BC10058B6F9 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 1D71759E266FE9B700846F75;
 			remoteInfo = KMPNativeCoroutinesCombine;
-		};
-		1DF053072698D5E100A16325 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1DF8833F266D1BC10058B6F9 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 1D717582266FE90400846F75;
-			remoteInfo = KMPNativeCoroutinesCore;
 		};
 		1DF3F9D226936935004C21F2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -107,8 +99,8 @@
 		1DF3F959269362D0004C21F2 /* SingleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleTests.swift; sourceTree = "<group>"; };
 		1DF3F9C826936935004C21F2 /* KMPNativeCoroutinesRxSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KMPNativeCoroutinesRxSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF3F9D026936935004C21F2 /* KMPNativeCoroutinesRxSwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KMPNativeCoroutinesRxSwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		1DFB127926A09796001BE321 /* AsyncStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncStream.swift; sourceTree = "<group>"; };
-		1DFB127B26A0A446001BE321 /* AsyncStreamTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncStreamTests.swift; sourceTree = "<group>"; };
+		1DFB127926A09796001BE321 /* AsyncSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncSequence.swift; sourceTree = "<group>"; };
+		1DFB127B26A0A446001BE321 /* AsyncSequenceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncSequenceTests.swift; sourceTree = "<group>"; };
 		1DFC35FB268A2DE3008393FA /* AsyncResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncResult.swift; sourceTree = "<group>"; };
 		1DFC35FD268A2FFE008393FA /* AsyncResultTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncResultTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -207,7 +199,7 @@
 			children = (
 				1DA5DCFC26761404002448E3 /* AsyncFunction.swift */,
 				1DFC35FB268A2DE3008393FA /* AsyncResult.swift */,
-				1DFB127926A09796001BE321 /* AsyncStream.swift */,
+				1DFB127926A09796001BE321 /* AsyncSequence.swift */,
 			);
 			path = KMPNativeCoroutinesAsync;
 			sourceTree = "<group>";
@@ -217,7 +209,7 @@
 			children = (
 				1DA5DCF3267613BB002448E3 /* AsyncFunctionTests.swift */,
 				1DFC35FD268A2FFE008393FA /* AsyncResultTests.swift */,
-				1DFB127B26A0A446001BE321 /* AsyncStreamTests.swift */,
+				1DFB127B26A0A446001BE321 /* AsyncSequenceTests.swift */,
 			);
 			path = KMPNativeCoroutinesAsyncTests;
 			sourceTree = "<group>";
@@ -357,7 +349,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				1DA5DD022676192F002448E3 /* PBXTargetDependency */,
 			);
 			name = KMPNativeCoroutinesAsync;
 			productName = KMPNativeCoroutinesAsync;
@@ -404,7 +395,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1DF3F9D926936935004C21F2 /* Build configuration list for PBXNativeTarget "KMPNativeCoroutinesRxSwift" */;
 			buildPhases = (
-				1DF3F9C326936935004C21F2 /* Headers */,
 				1DF3F9C426936935004C21F2 /* Sources */,
 				1DF3F9C526936935004C21F2 /* Frameworks */,
 				1DF3F9C626936935004C21F2 /* Resources */,
@@ -583,7 +573,7 @@
 			files = (
 				1DA5DCFD26761404002448E3 /* AsyncFunction.swift in Sources */,
 				1DFC35FC268A2DE3008393FA /* AsyncResult.swift in Sources */,
-				1DFB127A26A09796001BE321 /* AsyncStream.swift in Sources */,
+				1DFB127A26A09796001BE321 /* AsyncSequence.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -592,7 +582,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1DA5DCF4267613BB002448E3 /* AsyncFunctionTests.swift in Sources */,
-				1DFB127C26A0A446001BE321 /* AsyncStreamTests.swift in Sources */,
+				1DFB127C26A0A446001BE321 /* AsyncSequenceTests.swift in Sources */,
 				1DFC35FE268A2FFE008393FA /* AsyncResultTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -633,26 +623,21 @@
 			target = 1D717582266FE90400846F75 /* KMPNativeCoroutinesCore */;
 			targetProxy = 1D7175B9266FE9F800846F75 /* PBXContainerItemProxy */;
 		};
+		1D75A36D272D4BC200CFF795 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1D717582266FE90400846F75 /* KMPNativeCoroutinesCore */;
+			targetProxy = 1D75A36C272D4BC200CFF795 /* PBXContainerItemProxy */;
+		};
 		1DA5DCF1267613BB002448E3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			platformFilter = ios;
 			target = 1DA5DCE4267613BB002448E3 /* KMPNativeCoroutinesAsync */;
 			targetProxy = 1DA5DCF0267613BB002448E3 /* PBXContainerItemProxy */;
 		};
-		1D75A36D272D4BC200CFF795 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 1D717582266FE90400846F75 /* KMPNativeCoroutinesCore */;
-			targetProxy = 1D75A36C272D4BC200CFF795 /* PBXContainerItemProxy */;
-		};
 		1DCA41AC26753C640036C1A3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 1D71759E266FE9B700846F75 /* KMPNativeCoroutinesCombine */;
 			targetProxy = 1DCA41AB26753C640036C1A3 /* PBXContainerItemProxy */;
-		};
-		1DF053082698D5E100A16325 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 1D717582266FE90400846F75 /* KMPNativeCoroutinesCore */;
-			targetProxy = 1DF053072698D5E100A16325 /* PBXContainerItemProxy */;
 		};
 		1DF3F9D326936935004C21F2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
