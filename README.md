@@ -2,10 +2,7 @@
 
 A library to use Kotlin Coroutines from Swift code in KMP apps.
 
-> **Warning**: you are viewing the documentation for the 1.0 pre-release version which is still a WIP.   
-> The documentation for the 0.x releases can be found
-> [here](https://github.com/rickclephas/KMP-NativeCoroutines/blob/master/README.md).  
-> Looking to upgrade? Checkout the [migration steps](MIGRATING_TO_V1.md).
+> Looking to upgrade from the 0.x releases? Checkout the [migration steps](MIGRATING_TO_V1.md).
 
 ## Why this library?
 
@@ -27,13 +24,14 @@ This library solves both of these limitations 😄.
 
 ## Compatibility
 
-The latest version of the library uses Kotlin version `1.8.10`.  
+The latest version of the library uses Kotlin version `1.8.20`.  
 Compatibility versions for older Kotlin versions are also available:
 
-| Version       | Version suffix  |   Kotlin   |    KSP    | Coroutines |
-|---------------|-----------------|:----------:|:---------:|:----------:|
-| **_latest_**  | **_no suffix_** | **1.8.10** | **1.0.9** | **1.6.4**  |
-| 1.0.0-ALPHA-4 | _no suffix_     |   1.8.0    |   1.0.8   |   1.6.4    |
+| Version       | Version suffix  |   Kotlin   |    KSP     | Coroutines |
+|---------------|-----------------|:----------:|:----------:|:----------:|
+| **_latest_**  | **_no suffix_** | **1.8.20** | **1.0.10** | **1.6.4**  |
+| 1.0.0-ALPHA-5 | _no suffix_     |   1.8.10   |   1.0.9    |   1.6.4    |
+| 1.0.0-ALPHA-4 | _no suffix_     |   1.8.0    |   1.0.8    |   1.6.4    |
 
 You can choose from a couple of Swift implementations.  
 Depending on the implementation you can support as low as iOS 9, macOS 10.9, tvOS 9 and watchOS 3:
