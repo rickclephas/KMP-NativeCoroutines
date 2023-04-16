@@ -11,7 +11,6 @@ import org.jetbrains.kotlin.idea.compiler.configuration.KotlinCommonCompilerArgu
 import org.jetbrains.kotlin.platform.TargetPlatform
 import org.jetbrains.kotlin.platform.konan.NativePlatformUnspecifiedTarget
 import org.jetbrains.kotlin.platform.konan.NativePlatformWithTarget
-import org.jetbrains.kotlin.utils.addToStdlib.safeAs
 
 class KmpNativeCoroutinesStorageComponentContainerContributor(
     private val project: Project
@@ -21,7 +20,7 @@ class KmpNativeCoroutinesStorageComponentContainerContributor(
         private fun TargetPlatform.hasApple(): Boolean = isNotEmpty() && any {
             // TODO: Is this really the best way to filter the platforms?
             it is NativePlatformUnspecifiedTarget ||
-            it.safeAs<NativePlatformWithTarget>()?.target?.family?.isAppleFamily == true
+            (it as? NativePlatformWithTarget)?.target?.family?.isAppleFamily == true
         }
     }
 
