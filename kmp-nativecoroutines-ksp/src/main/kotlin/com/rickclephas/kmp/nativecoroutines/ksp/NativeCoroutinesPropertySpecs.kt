@@ -105,8 +105,8 @@ private fun KSPropertyDeclaration.createPropertySpec(
     // TODO: Add context receivers once those are exported to ObjC
     builder.addModifiers(KModifier.PUBLIC)
 
-    classDeclaration?.typeParameters?.toTypeVariableNames(typeParameterResolver)?.let(builder::addTypeVariables)
-    typeParameters.toTypeVariableNames(typeParameterResolver).let(builder::addTypeVariables)
+    classDeclaration?.typeParameters?.toTypeVariableNames(typeParameterResolver, true)?.let(builder::addTypeVariables)
+    typeParameters.toTypeVariableNames(typeParameterResolver, true).let(builder::addTypeVariables)
 
     val extensionReceiver = extensionReceiver
     if (classDeclaration != null) {

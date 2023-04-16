@@ -435,4 +435,22 @@ class NativeCoroutinesFunSpecTests: CompilationTests() {
         public fun returnSuspendValueNative(vararg values: String): NativeSuspend<String> =
             nativeSuspend(null) { returnSuspendValue(*values) }
     """.trimIndent())
+
+    @Test
+    fun genericClassWithVariance() = runKspTest("""
+        import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
+        
+        class GenericClass<out T> {
+            @NativeCoroutines
+            suspend fun returnGenericSuspendValue(): T = TODO()
+        }
+    """.trimIndent(), """
+        import com.rickclephas.kmp.nativecoroutines.NativeSuspend
+        import com.rickclephas.kmp.nativecoroutines.nativeSuspend
+        import kotlin.native.ObjCName
+        
+        @ObjCName(name = "returnGenericSuspendValue")
+        public fun <T> GenericClass<T>.returnGenericSuspendValueNative(): NativeSuspend<T> =
+            nativeSuspend(null) { returnGenericSuspendValue() }
+    """.trimIndent())
 }
