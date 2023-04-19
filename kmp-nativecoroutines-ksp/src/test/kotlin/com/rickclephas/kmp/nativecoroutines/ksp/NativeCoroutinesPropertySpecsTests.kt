@@ -770,4 +770,23 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
             globalMutableState.value = value
           }
     """.trimIndent())
+
+    @Test
+    fun genericClassWithVariance() = runKspTest("""
+        import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
+        import kotlinx.coroutines.flow.Flow
+        
+        class GenericClass<out T> {
+            @NativeCoroutines
+            val flow: Flow<T> get() = TODO()
+        }
+    """.trimIndent(), """
+        import com.rickclephas.kmp.nativecoroutines.NativeFlow
+        import com.rickclephas.kmp.nativecoroutines.asNativeFlow
+        import kotlin.native.ObjCName
+        
+        @ObjCName(name = "flow")
+        public val <T> GenericClass<T>.flowNative: NativeFlow<T>
+          get() = flow.asNativeFlow(null)
+    """.trimIndent())
 }

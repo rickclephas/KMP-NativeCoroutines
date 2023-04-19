@@ -23,8 +23,8 @@ internal fun KSFunctionDeclaration.toNativeCoroutinesFunSpec(
     // TODO: Add context receivers once those are exported to ObjC
     builder.addModifiers(KModifier.PUBLIC)
 
-    classDeclaration?.typeParameters?.toTypeVariableNames(typeParameterResolver)?.let(builder::addTypeVariables)
-    val typeParameters = typeParameters.toTypeVariableNames(typeParameterResolver).also(builder::addTypeVariables)
+    classDeclaration?.typeParameters?.toTypeVariableNames(typeParameterResolver, true)?.let(builder::addTypeVariables)
+    val typeParameters = typeParameters.toTypeVariableNames(typeParameterResolver, true).also(builder::addTypeVariables)
 
     val extensionReceiver = extensionReceiver
     var receiverParameter: ParameterSpec? = null
