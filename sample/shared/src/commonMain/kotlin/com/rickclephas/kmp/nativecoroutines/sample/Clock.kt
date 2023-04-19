@@ -15,6 +15,7 @@ object Clock {
     @Suppress("ObjectPropertyName")
     private val _time = MutableStateFlow(0L)
     @NativeCoroutines
+    @Deprecated("deprecated")
     val time = _time.asStateFlow()
 
     init {
