@@ -17,7 +17,7 @@
 		1D7175C1266FF04200846F75 /* Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2EC86A266D290000B118B0 /* Publisher.swift */; };
 		1D75A367272D4B3800CFF795 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1D75A366272D4B3800CFF795 /* RxSwift */; };
 		1D75A369272D4B4900CFF795 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1D75A368272D4B4900CFF795 /* RxSwift */; };
-		1DA5DCEF267613BB002448E3 /* KMPNativeCoroutinesAsync.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DA5DCE5267613BB002448E3 /* KMPNativeCoroutinesAsync.framework */; platformFilter = ios; };
+		1DA5DCEF267613BB002448E3 /* KMPNativeCoroutinesAsync.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DA5DCE5267613BB002448E3 /* KMPNativeCoroutinesAsync.framework */; };
 		1DA5DCF4267613BB002448E3 /* AsyncFunctionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA5DCF3267613BB002448E3 /* AsyncFunctionTests.swift */; };
 		1DA5DCFD26761404002448E3 /* AsyncFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA5DCFC26761404002448E3 /* AsyncFunction.swift */; };
 		1DA5DCFF2676192F002448E3 /* KMPNativeCoroutinesCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D717583266FE90400846F75 /* KMPNativeCoroutinesCore.framework */; };
@@ -630,7 +630,6 @@
 		};
 		1DA5DCF1267613BB002448E3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			platformFilter = ios;
 			target = 1DA5DCE4267613BB002448E3 /* KMPNativeCoroutinesAsync */;
 			targetProxy = 1DA5DCF0267613BB002448E3 /* PBXContainerItemProxy */;
 		};
