@@ -10,10 +10,10 @@ on:
       - kotlin/**
 env:
   GRADLE_OPTS: -Dorg.gradle.parallel=true -Dorg.gradle.caching=true
-  XCODEBUILD_DESTINATION_iOS: platform=iOS Simulator,name=iPhone 12 Pro Max
+  XCODEBUILD_DESTINATION_iOS: platform=iOS Simulator,name=iPhone 14 Pro
   XCODEBUILD_DESTINATION_macOS: platform=OS X
-  XCODEBUILD_DESTINATION_tvOS: platform=tvOS Simulator,name=Apple TV
-  XCODEBUILD_DESTINATION_watchOS: platform=watchOS Simulator,name=Apple Watch Series 7 - 45mm
+  XCODEBUILD_DESTINATION_tvOS: platform=tvOS Simulator,name=Apple TV 4K (3rd generation)
+  XCODEBUILD_DESTINATION_watchOS: platform=watchOS Simulator,name=Apple Watch Series 8 (45mm)
 jobs:
   run-kotlin-tests:
     if: github.event_name != 'pull_request' || github.event.pull_request.draft == false
