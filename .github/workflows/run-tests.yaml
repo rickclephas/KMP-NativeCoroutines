@@ -9,6 +9,7 @@ on:
       - master
       - kotlin/**
 env:
+  GRADLE_OPTS: -Dorg.gradle.parallel=true -Dorg.gradle.caching=true
   XCODEBUILD_DESTINATION_iOS: platform=iOS Simulator,name=iPhone 12 Pro Max
   XCODEBUILD_DESTINATION_macOS: platform=OS X
   XCODEBUILD_DESTINATION_tvOS: platform=tvOS Simulator,name=Apple TV
