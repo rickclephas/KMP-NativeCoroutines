@@ -19,8 +19,8 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: '11'
-      - name: Cache Gradle
-        uses: ./.github/actions/cache-gradle
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
       - name: Cache Konan
         uses: ./.github/actions/cache-konan
       - name: Publish to Sonatype

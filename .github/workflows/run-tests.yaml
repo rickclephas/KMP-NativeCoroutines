@@ -39,8 +39,8 @@ jobs:
         with:
           distribution: zulu
           java-version: ${{ matrix.java }}
-      - name: Cache Gradle
-        uses: ./.github/actions/cache-gradle
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
       - name: Cache Konan
         uses: ./.github/actions/cache-konan
       - name: Run tests
@@ -111,8 +111,8 @@ jobs:
         with:
           distribution: zulu
           java-version: ${{ matrix.java }}
-      - name: Cache Gradle
-        uses: ./.github/actions/cache-gradle
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
       - name: Cache Konan
         uses: ./.github/actions/cache-konan
       - name: Set kotlin.native.useEmbeddableCompilerJar
