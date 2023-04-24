@@ -40,6 +40,6 @@ struct ClockView<ViewModel: ClockViewModel>: View {
 struct ClockView_Previews: PreviewProvider {
     static var previews: some View {
         ClockView(viewModel: ClockPreviewViewModel())
-            .previewDevice("iPhone 12 Pro Max")
+            .previewDevice("iPhone 14 Pro")
     }
 }

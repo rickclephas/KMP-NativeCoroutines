@@ -63,9 +63,6 @@ private class AsyncFunctionTask<Result, Failure: Error, Unit>: @unchecked Sendab
     
     func awaitResult() async throws -> Result {
         try await withTaskCancellationHandler {
-            _ = nativeCancellable?()
-            nativeCancellable = nil
-        } operation: {
             try await withUnsafeThrowingContinuation { continuation in
                 self.semaphore.wait()
                 defer { self.semaphore.signal() }
@@ -82,6 +79,9 @@ private class AsyncFunctionTask<Result, Failure: Error, Unit>: @unchecked Sendab
                     self.continuation = continuation
                 }
             }
+        } onCancel: {
+            _ = nativeCancellable?()
+            nativeCancellable = nil
         }
     }
 }
