@@ -44,6 +44,7 @@ gradlePlugin {
 
 dependencies {
     implementation(libs.kotlin.gradle.plugin)
+    implementation(libs.ksp.gradle.plugin)
 }
 
 val sourcesJar by tasks.registering(Jar::class) {
