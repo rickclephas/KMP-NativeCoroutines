@@ -39,6 +39,6 @@ struct RandomLettersView<ViewModel: RandomLettersViewModel>: View {
 struct RandomLettersView_Previews: PreviewProvider {
     static var previews: some View {
         RandomLettersView(viewModel: RandomLettersPreviewViewModel(isLoading: true))
-            .previewDevice("iPhone 12 Pro Max")
+            .previewDevice("iPhone 14 Pro")
     }
 }
