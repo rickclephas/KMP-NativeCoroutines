@@ -46,6 +46,6 @@ struct RootView: View {
 
 struct RootView_Previews: PreviewProvider {
     static var previews: some View {
-        RootView().previewDevice("iPhone 12 Pro Max")
+        RootView().previewDevice("iPhone 14 Pro")
     }
 }
