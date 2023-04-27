@@ -72,9 +72,6 @@ public struct NativeFlowAsyncSequence<Output, Failure: Error, Unit>: AsyncSequen
         
         public func next() async throws -> Output? {
             return try await withTaskCancellationHandler {
-                _ = nativeCancellable?()
-                nativeCancellable = nil
-            } operation: {
                 try await withUnsafeThrowingContinuation { continuation in
                     self.semaphore.wait()
                     defer { self.semaphore.signal() }
@@ -97,6 +94,9 @@ public struct NativeFlowAsyncSequence<Output, Failure: Error, Unit>: AsyncSequen
                         self.continuation = continuation
                     }
                 }
+            } onCancel: {
+                _ = nativeCancellable?()
+                nativeCancellable = nil
             }
         }
     }

@@ -19,3 +19,4 @@ runs:
         git tag ${{ inputs.version-name }}-spm-${{ inputs.package-name }}
         git push origin spm/${{ inputs.package-name }}:spm/${{ inputs.package-name }}
         git push origin ${{ inputs.version-name }}-spm-${{ inputs.package-name }}
+        git checkout -
