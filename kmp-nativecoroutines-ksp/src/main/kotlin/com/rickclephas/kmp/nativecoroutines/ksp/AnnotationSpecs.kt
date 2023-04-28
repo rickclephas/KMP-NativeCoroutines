@@ -2,10 +2,9 @@ package com.rickclephas.kmp.nativecoroutines.ksp
 
 import com.google.devtools.ksp.symbol.KSAnnotation
 import com.google.devtools.ksp.symbol.KSClassDeclaration
-import com.google.devtools.ksp.symbol.KSValueArgument
 import com.rickclephas.kmp.nativecoroutines.ksp.kotlinpoet.canonicalClassName
 import com.squareup.kotlinpoet.AnnotationSpec
-import com.squareup.kotlinpoet.ksp.toAnnotationSpec as toAnnotationSpecImpl
+import com.squareup.kotlinpoet.ksp.toAnnotationSpec
 
 internal fun Sequence<KSAnnotation>.toAnnotationSpecs(
     objCName: String? = null,
@@ -57,12 +56,3 @@ private fun ObjCNameAnnotationSpec(name: String?, swiftName: String?): Annotatio
         if (swiftName != null)
             addMember("%N = %S", "swiftName", swiftName)
     }.build()
-
-// TODO: Remove workaround for https://github.com/square/kotlinpoet/issues/1357
-private fun KSAnnotation.toAnnotationSpec(): AnnotationSpec =
-    KSAnnotationImpl(this).toAnnotationSpecImpl()
-
-private class KSAnnotationImpl(private val annotation: KSAnnotation): KSAnnotation by annotation {
-    override val arguments: List<KSValueArgument>
-        get() = annotation.arguments.filter { it.value != null }
-}
