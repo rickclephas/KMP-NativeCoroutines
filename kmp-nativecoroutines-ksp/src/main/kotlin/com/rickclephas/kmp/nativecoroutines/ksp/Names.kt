@@ -17,4 +17,5 @@ internal val nativeFlowClassName = ClassName(packageName, "NativeFlow")
 
 internal val runMemberName = MemberName("kotlin", "run")
 internal val objCNameAnnotationClassName = ClassName("kotlin.native", "ObjCName")
+internal val optInAnnotationClassName = ClassName("kotlin", "OptIn")
 internal const val throwsAnnotationName = "kotlin.Throws"

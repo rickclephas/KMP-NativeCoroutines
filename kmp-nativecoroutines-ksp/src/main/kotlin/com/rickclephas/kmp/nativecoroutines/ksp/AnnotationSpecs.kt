@@ -1,10 +1,13 @@
 package com.rickclephas.kmp.nativecoroutines.ksp
 
 import com.google.devtools.ksp.symbol.KSAnnotation
-import com.google.devtools.ksp.symbol.KSClassDeclaration
+import com.google.devtools.ksp.symbol.KSType
+import com.google.devtools.ksp.symbol.KSTypeAlias
 import com.rickclephas.kmp.nativecoroutines.ksp.kotlinpoet.canonicalClassName
 import com.squareup.kotlinpoet.AnnotationSpec
-import com.squareup.kotlinpoet.ksp.toAnnotationSpec
+import com.squareup.kotlinpoet.ClassName
+import com.squareup.kotlinpoet.ksp.toClassName
+import com.squareup.kotlinpoet.ksp.toAnnotationSpec as toAnnotationSpecImpl
 
 internal fun Sequence<KSAnnotation>.toAnnotationSpecs(
     objCName: String? = null,
@@ -13,7 +16,7 @@ internal fun Sequence<KSAnnotation>.toAnnotationSpecs(
     val annotationSpecs = mutableListOf<AnnotationSpec>()
     var objCNameAnnotation: AnnotationSpec? = null
     for (annotation in this) {
-        if (annotation.isObjCName) {
+        if (annotation.isAnnotationClass(objCNameAnnotationClassName)) {
             objCNameAnnotation = annotation.toObjCNameAnnotationSpec(objCName ?: "")
             continue
         }
@@ -28,11 +31,8 @@ internal fun Sequence<KSAnnotation>.toAnnotationSpecs(
     return annotationSpecs
 }
 
-private val KSAnnotation.isObjCName: Boolean get() {
-    val classDeclaration = annotationType.resolve() as? KSClassDeclaration ?: return false
-    return classDeclaration.packageName.asString() == objCNameAnnotationClassName.packageName &&
-            classDeclaration.simpleName.asString() == objCNameAnnotationClassName.simpleName
-}
+private fun KSAnnotation.isAnnotationClass(className: ClassName): Boolean =
+    annotationType.resolve().toClassName() == className
 
 private fun KSAnnotation.toObjCNameAnnotationSpec(objCName: String): AnnotationSpec {
     var name: String? = null
@@ -56,3 +56,34 @@ private fun ObjCNameAnnotationSpec(name: String?, swiftName: String?): Annotatio
         if (swiftName != null)
             addMember("%N = %S", "swiftName", swiftName)
     }.build()
+
+private fun KSAnnotation.toAnnotationSpec(): AnnotationSpec = when {
+    isAnnotationClass(optInAnnotationClassName) -> toOptInAnnotationSpec()
+    else -> toAnnotationSpecImpl()
+}
+
+/**
+ * The following is prohibited by the Kotlin compiler:
+ * ```
+ * @OptIn(markerClass = arrayOf(A::class, B::class))
+ * ```
+ * instead we'll use the supported format:
+ * ```
+ * @OptIn(A::class, B::class)
+ * ```
+ */
+private fun KSAnnotation.toOptInAnnotationSpec(): AnnotationSpec {
+    val builder = toAnnotationSpecImpl().toBuilder()
+    builder.members.clear()
+    if (arguments.size != 1) error("Unsupported OptIn argument count")
+    val markerClass = arguments[0].value as List<*>
+    markerClass.forEach {
+        val type = when (it) {
+            is KSTypeAlias -> it.type.resolve()
+            is KSType -> it
+            else -> error("Unsupported OptIn argument type")
+        }
+        builder.addMember("%T::class", type.toClassName())
+    }
+    return builder.build()
+}
