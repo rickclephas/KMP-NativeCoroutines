@@ -2,14 +2,7 @@
 
 The 1.0 release will bring some improvements that require some changes in your code 😅.  
 
-> **Warning**: the 1.0 release requires Kotlin 1.8.0-Beta or above.  
-> Checkout the [README](README.md) for Kotlin compatibility info.
-
 > **Note**: make sure to use the same library versions for your Kotlin and Swift code!
-
-Known issues:
-* [#83](https://github.com/rickclephas/KMP-NativeCoroutines/issues/83) 
-Non-embeddable compiler JAR compilations are broken in v1.0
 
 ## KSP
 
