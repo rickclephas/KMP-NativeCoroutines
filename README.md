@@ -209,8 +209,8 @@ However this limitation can be "overcome" with some Swift magic.
 Assuming `RandomLettersGenerator` is an `interface` instead of a `class` we can do the following:
 ```swift
 extension RandomLettersGenerator {
-    func getRandomLetters(): NativeSuspend<String, Error, KotlinUnit> {
-        return RandomLettersGeneratorNativeKt.getRandomLetters(self)
+    func getRandomLetters() -> NativeSuspend<String, Error, KotlinUnit> {
+        RandomLettersGeneratorNativeKt.getRandomLetters(self)
     }
 }
 ```
