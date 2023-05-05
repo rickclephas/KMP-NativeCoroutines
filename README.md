@@ -29,7 +29,8 @@ Compatibility versions for older Kotlin versions are also available:
 
 | Version       | Version suffix  |   Kotlin   |    KSP     | Coroutines |
 |---------------|-----------------|:----------:|:----------:|:----------:|
-| **_latest_**  | **_no suffix_** | **1.8.21** | **1.0.11** | **1.6.4**  |
+| **_latest_**  | **_no suffix_** | **1.8.21** | **1.0.11** | **1.7.0**  |
+| 1.0.0-ALPHA-8 | _no suffix_     |   1.8.21   |   1.0.11   |   1.6.4    |
 | 1.0.0-ALPHA-7 | _no suffix_     |   1.8.20   |   1.0.10   |   1.6.4    |
 | 1.0.0-ALPHA-5 | _no suffix_     |   1.8.10   |   1.0.9    |   1.6.4    |
 | 1.0.0-ALPHA-4 | _no suffix_     |   1.8.0    |   1.0.8    |   1.6.4    |
@@ -197,6 +198,22 @@ fun RandomLettersGenerator.getRandomLettersNative() =
 ```
 </p>
 </details>
+
+#### Interface limitations
+
+Unfortunately extension functions/properties aren't 
+[supported](https://kotlinlang.org/docs/native-objc-interop.html#extensions-and-category-members)
+on Objective-C protocols.  
+
+However this limitation can be "overcome" with some Swift magic.  
+Assuming `RandomLettersGenerator` is an `interface` instead of a `class` we can do the following:
+```swift
+extension RandomLettersGenerator {
+    func getRandomLetters(): NativeSuspend<String, Error, KotlinUnit> {
+        return RandomLettersGeneratorNativeKt.getRandomLetters(self)
+    }
+}
+```
 
 ### Swift Concurrency
 
