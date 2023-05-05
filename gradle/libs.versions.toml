@@ -2,7 +2,7 @@
 kotlin = "1.8.21"
 kotlinx-coroutines = "1.7.0"
 ksp = "1.8.21-1.0.11"
-kotlinpoet = "1.13.1"
+kotlinpoet = "1.13.2"
 
 [libraries]
 kotlin-compiler = { module = "org.jetbrains.kotlin:kotlin-compiler", version.ref = "kotlin" }
