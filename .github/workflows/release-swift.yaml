@@ -52,3 +52,8 @@ jobs:
         with:
           package-name: rxswift
           version-name: ${{ github.ref_name }}
+      - name: Publish no-deps SPM tag
+        uses: ./.github/actions/publish-spm-tag
+        with:
+          package-name: no-deps
+          version-name: ${{ github.ref_name }
