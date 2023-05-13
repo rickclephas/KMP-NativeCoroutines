@@ -56,4 +56,4 @@ jobs:
         uses: ./.github/actions/publish-spm-tag
         with:
           package-name: no-deps
-          version-name: ${{ github.ref_name }
+          version-name: ${{ github.ref_name }}
