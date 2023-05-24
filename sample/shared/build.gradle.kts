@@ -25,7 +25,6 @@ kotlin {
     val tvosSimulatorArm64 = tvosSimulatorArm64()
     sourceSets {
         all {
-            languageSettings.optIn("kotlin.RequiresOptIn")
             languageSettings.optIn("kotlin.experimental.ExperimentalObjCName")
         }
         val commonMain by getting {
