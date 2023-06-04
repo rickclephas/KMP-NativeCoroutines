@@ -1,5 +1,4 @@
 plugins {
-    @Suppress("DSL_SCOPE_VIOLATION")
     alias(libs.plugins.kotlin.jvm)
     `kmp-nativecoroutines-publish`
 }
@@ -14,9 +13,12 @@ dependencies {
     testImplementation(project(":kmp-nativecoroutines-annotations"))
 }
 
+kotlin {
+    jvmToolchain(11)
+}
+
 tasks.compileKotlin.configure {
     kotlinOptions {
-        jvmTarget = "11"
         freeCompilerArgs = listOf("-Xjvm-default=all")
     }
 }
