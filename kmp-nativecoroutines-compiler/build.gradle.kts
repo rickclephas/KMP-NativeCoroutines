@@ -7,9 +7,12 @@ dependencies {
     compileOnly(libs.kotlin.compiler)
 }
 
+kotlin {
+    jvmToolchain(11)
+}
+
 tasks.compileKotlin.configure {
     kotlinOptions {
-        jvmTarget = "11"
         freeCompilerArgs = listOf("-Xjvm-default=all")
     }
 }

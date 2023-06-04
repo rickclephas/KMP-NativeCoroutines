@@ -13,9 +13,12 @@ dependencies {
     testImplementation(project(":kmp-nativecoroutines-annotations"))
 }
 
+kotlin {
+    jvmToolchain(11)
+}
+
 tasks.compileKotlin.configure {
     kotlinOptions {
-        jvmTarget = "11"
         freeCompilerArgs = listOf("-Xjvm-default=all")
     }
 }

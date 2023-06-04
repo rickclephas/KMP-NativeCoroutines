@@ -12,10 +12,13 @@ val syncSources by tasks.registering(Sync::class) {
     into("src/main")
 }
 
+kotlin {
+    jvmToolchain(11)
+}
+
 tasks.compileKotlin.configure {
     dependsOn(syncSources)
     kotlinOptions {
-        jvmTarget = "11"
         freeCompilerArgs = listOf("-Xjvm-default=all")
     }
 }
