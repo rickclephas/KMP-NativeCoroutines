@@ -23,6 +23,10 @@ tasks.compileKotlin.configure {
     }
 }
 
+tasks.processResources.configure {
+    dependsOn(syncSources)
+}
+
 tasks.clean.configure {
     delete("src")
 }
