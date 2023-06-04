@@ -5,6 +5,7 @@ import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesIgnore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
+@Suppress("RedundantSuspendModifier")
 public class CompilerIntegrationTests<V>: IntegrationTests() {
 
     @NativeCoroutines
@@ -40,6 +41,7 @@ public class CompilerIntegrationTests<V>: IntegrationTests() {
     }
 
     @NativeCoroutines
+    @Suppress("UnusedReceiverParameter")
     public suspend fun <T> List<T>.returnGenericValueFromExtension(value: T): T {
         return value
     }
