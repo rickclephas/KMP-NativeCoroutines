@@ -1,3 +1,5 @@
+@file:Suppress("UnstableApiUsage")
+
 plugins {
     `java-gradle-plugin`
     alias(libs.plugins.kotlin.jvm)
@@ -23,19 +25,16 @@ sourceSets {
     }
 }
 
-pluginBundle {
+gradlePlugin {
     website = "https://github.com/rickclephas/KMP-NativeCoroutines"
     vcsUrl = "https://github.com/rickclephas/KMP-NativeCoroutines"
-    tags = listOf("kotlin", "swift", "native", "coroutines")
-}
-
-gradlePlugin {
     plugins {
         create("kmpNativeCoroutines") {
             id = "com.rickclephas.kmp.nativecoroutines"
             displayName = "KMP-NativeCoroutines"
             description = "Swift library for Kotlin Coroutines"
             implementationClass = "com.rickclephas.kmp.nativecoroutines.gradle.KmpNativeCoroutinesPlugin"
+            tags = listOf("kotlin", "swift", "native", "coroutines")
         }
     }
 }
