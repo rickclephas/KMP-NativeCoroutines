@@ -19,7 +19,13 @@ kotlin {
     val tvosSimulatorArm64 = tvosSimulatorArm64()
     jvm()
     js {
-        browser()
+        browser {
+            testTask {
+                // TODO: Remove workaround for https://youtrack.jetbrains.com/issue/KT-58970
+                // We don't have any JS tests, so this isn't an issue for now
+                enabled = false
+            }
+        }
         nodejs()
     }
     linuxX64()
