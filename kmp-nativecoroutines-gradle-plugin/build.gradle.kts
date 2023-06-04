@@ -1,9 +1,7 @@
 plugins {
     `java-gradle-plugin`
-    @Suppress("DSL_SCOPE_VIOLATION")
     alias(libs.plugins.kotlin.jvm)
     `kmp-nativecoroutines-publish`
-    @Suppress("DSL_SCOPE_VIOLATION")
     alias(libs.plugins.gradle.plugin.publish)
 }
 
