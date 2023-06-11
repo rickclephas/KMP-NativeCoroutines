@@ -24,17 +24,19 @@ This library solves both of these limitations 😄.
 
 ## Compatibility
 
-The latest version of the library uses Kotlin version `1.8.21`.  
-Compatibility versions for older Kotlin versions are also available:
+The latest version of the library uses Kotlin version `1.8.22`.  
+Compatibility versions for older and/or preview Kotlin versions are also available:
 
-| Version       | Version suffix  |   Kotlin   |    KSP     | Coroutines |
-|---------------|-----------------|:----------:|:----------:|:----------:|
-| **_latest_**  | **_no suffix_** | **1.8.21** | **1.0.11** | **1.7.1**  |
-| 1.0.0-ALPHA-9 | _no suffix_     |   1.8.21   |   1.0.11   |   1.7.0    |
-| 1.0.0-ALPHA-8 | _no suffix_     |   1.8.21   |   1.0.11   |   1.6.4    |
-| 1.0.0-ALPHA-7 | _no suffix_     |   1.8.20   |   1.0.10   |   1.6.4    |
-| 1.0.0-ALPHA-5 | _no suffix_     |   1.8.10   |   1.0.9    |   1.6.4    |
-| 1.0.0-ALPHA-4 | _no suffix_     |   1.8.0    |   1.0.8    |   1.6.4    |
+| Version        | Version suffix     |   Kotlin   |    KSP     | Coroutines |
+|----------------|--------------------|:----------:|:----------:|:----------:|
+| **_latest_**   | **_no suffix_**    | **1.8.22** | **1.0.11** | **1.7.1**  |
+| 1.0.0-ALPHA-10 | -kotlin-1.9.0-Beta | 1.9.0-Beta |   1.0.11   |   1.7.1    |
+| 1.0.0-ALPHA-10 | _no suffix_        |   1.8.21   |   1.0.11   |   1.7.1    |
+| 1.0.0-ALPHA-9  | _no suffix_        |   1.8.21   |   1.0.11   |   1.7.0    |
+| 1.0.0-ALPHA-8  | _no suffix_        |   1.8.21   |   1.0.11   |   1.6.4    |
+| 1.0.0-ALPHA-7  | _no suffix_        |   1.8.20   |   1.0.10   |   1.6.4    |
+| 1.0.0-ALPHA-5  | _no suffix_        |   1.8.10   |   1.0.9    |   1.6.4    |
+| 1.0.0-ALPHA-4  | _no suffix_        |   1.8.0    |   1.0.8    |   1.6.4    |
 
 You can choose from a couple of Swift implementations.  
 Depending on the implementation you can support as low as iOS 9, macOS 10.9, tvOS 9 and watchOS 3:
