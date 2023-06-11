@@ -32,6 +32,7 @@ tasks.clean.configure {
 }
 
 val sourcesJar by tasks.registering(Jar::class) {
+    dependsOn(syncSources)
     archiveClassifier.set("sources")
     from(sourceSets.main.get().allSource)
 }
