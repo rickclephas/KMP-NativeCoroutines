@@ -45,6 +45,7 @@ dependencies {
 }
 
 val sourcesJar by tasks.registering(Jar::class) {
+    dependsOn(copyVersionTemplate)
     archiveClassifier.set("sources")
     from(sourceSets.main.get().allSource)
 }
