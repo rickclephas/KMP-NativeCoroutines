@@ -7,6 +7,11 @@ plugins {
     alias(libs.plugins.gradle.plugin.publish)
 }
 
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
 val copyVersionTemplate by tasks.registering(Copy::class) {
     inputs.property("version", version)
     from(layout.projectDirectory.file("Version.kt"))
@@ -16,6 +21,10 @@ val copyVersionTemplate by tasks.registering(Copy::class) {
 }
 
 tasks.compileKotlin {
+    dependsOn(copyVersionTemplate)
+}
+
+val sourcesJar by tasks.getting {
     dependsOn(copyVersionTemplate)
 }
 
@@ -42,16 +51,4 @@ gradlePlugin {
 dependencies {
     implementation(libs.kotlin.gradle.plugin)
     implementation(libs.ksp.gradle.plugin)
-}
-
-val sourcesJar by tasks.registering(Jar::class) {
-    dependsOn(copyVersionTemplate)
-    archiveClassifier.set("sources")
-    from(sourceSets.main.get().allSource)
-}
-
-publishing {
-    publications.withType<MavenPublication> {
-        artifact(sourcesJar)
-    }
 }
