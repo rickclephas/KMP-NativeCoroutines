@@ -5,11 +5,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlin.random.Random
 
-class NewMemoryModelIntegrationTests: IntegrationTests() {
+public class NewMemoryModelIntegrationTests: IntegrationTests() {
 
-    class MutableData {
-        var dataFromBackground: String? = null
-        var dataFromMain: String? = null
+    public class MutableData {
+        public var dataFromBackground: String? = null
+        public var dataFromMain: String? = null
     }
 
     private fun randomString(): String {
@@ -21,7 +21,7 @@ class NewMemoryModelIntegrationTests: IntegrationTests() {
     }
 
     @NativeCoroutines
-    suspend fun generateRandomMutableData(): MutableData {
+    public suspend fun generateRandomMutableData(): MutableData {
         val data = MutableData()
         withContext(Dispatchers.Main) {
             data.dataFromMain = randomString()
