@@ -24,7 +24,7 @@ tasks.compileKotlin {
     dependsOn(copyVersionTemplate)
 }
 
-val sourcesJar by tasks.getting {
+val sourcesJar by tasks.getting(Jar::class) {
     dependsOn(copyVersionTemplate)
 }
 

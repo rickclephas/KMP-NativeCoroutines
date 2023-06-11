@@ -21,6 +21,10 @@ java {
     withSourcesJar()
 }
 
+val sourcesJar by tasks.getting(Jar::class) {
+    dependsOn(syncSources)
+}
+
 tasks.compileKotlin.configure {
     dependsOn(syncSources)
     kotlinOptions {
