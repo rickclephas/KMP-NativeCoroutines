@@ -1,5 +1,4 @@
 plugins {
-    @Suppress("DSL_SCOPE_VIOLATION")
     alias(libs.plugins.kotlin.multiplatform)
     `kmp-nativecoroutines-publish`
 }
@@ -26,9 +25,6 @@ kotlin {
     linuxX64()
     mingwX64()
     sourceSets {
-        all {
-            languageSettings.optIn("kotlin.RequiresOptIn")
-        }
         val commonMain by getting {
             dependencies {
                 api(libs.kotlinx.coroutines.core)

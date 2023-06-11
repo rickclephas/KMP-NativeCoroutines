@@ -1,5 +1,4 @@
 plugins {
-    @Suppress("DSL_SCOPE_VIOLATION")
     alias(libs.plugins.kotlin.jvm)
     `kmp-nativecoroutines-publish`
 }
@@ -13,12 +12,19 @@ val syncSources by tasks.registering(Sync::class) {
     into("src/main")
 }
 
+kotlin {
+    jvmToolchain(11)
+}
+
 tasks.compileKotlin.configure {
     dependsOn(syncSources)
     kotlinOptions {
-        jvmTarget = "11"
         freeCompilerArgs = listOf("-Xjvm-default=all")
     }
+}
+
+tasks.processResources.configure {
+    dependsOn(syncSources)
 }
 
 tasks.clean.configure {

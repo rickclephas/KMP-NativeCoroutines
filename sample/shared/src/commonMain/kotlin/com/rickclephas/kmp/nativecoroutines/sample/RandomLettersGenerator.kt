@@ -5,10 +5,10 @@ import kotlinx.coroutines.delay
 import kotlin.random.Random
 import kotlin.time.Duration.Companion.seconds
 
-object RandomLettersGenerator {
+public object RandomLettersGenerator {
 
     @NativeCoroutines
-    suspend fun getRandomLetters(throwException: Boolean): String {
+    public suspend fun getRandomLetters(throwException: Boolean): String {
         delay(2.seconds)
         if (throwException) {
             throw RuntimeException("the best exception ever")
