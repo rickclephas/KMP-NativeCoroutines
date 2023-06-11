@@ -1,9 +1,6 @@
 plugins {
-    @Suppress("DSL_SCOPE_VIOLATION")
     alias(libs.plugins.kotlin.multiplatform)
-    @Suppress("DSL_SCOPE_VIOLATION")
     alias(libs.plugins.kotlin.plugin.serialization)
-    @Suppress("DSL_SCOPE_VIOLATION")
     alias(libs.plugins.ksp)
     id("com.rickclephas.kmp.nativecoroutines")
 }
@@ -11,6 +8,7 @@ plugins {
 version = "1.0"
 
 kotlin {
+    explicitApi()
     val macosX64 = macosX64()
     val macosArm64 = macosArm64()
     val iosArm64 = iosArm64()
@@ -25,7 +23,6 @@ kotlin {
     val tvosSimulatorArm64 = tvosSimulatorArm64()
     sourceSets {
         all {
-            languageSettings.optIn("kotlin.RequiresOptIn")
             languageSettings.optIn("kotlin.experimental.ExperimentalObjCName")
         }
         val commonMain by getting {
