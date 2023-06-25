@@ -42,7 +42,6 @@ import org.jetbrains.kotlin.resolve.DescriptorToSourceUtils.getSourceFromAnnotat
 import org.jetbrains.kotlin.resolve.checkers.DeclarationChecker
 import org.jetbrains.kotlin.resolve.checkers.DeclarationCheckerContext
 import org.jetbrains.kotlin.resolve.descriptorUtil.isEffectivelyPublicApi
-import org.jetbrains.kotlin.utils.addToStdlib.safeAs
 
 internal class KmpNativeCoroutinesChecker(
     compilerConfiguration: CompilerConfiguration
@@ -100,7 +99,7 @@ internal class KmpNativeCoroutinesChecker(
                     returnType != CoroutinesReturnType.Flow.State -> exposedFlowType
                     else -> exposedStateFlowProperty
                 }
-                val element = declaration.safeAs<KtCallableDeclaration>()?.let {
+                val element = (declaration as? KtCallableDeclaration)?.let {
                     it.typeReference ?: it.nameIdentifier
                 } ?: declaration
                 diagnosticFactory?.on(element)?.let(context.trace::report)
