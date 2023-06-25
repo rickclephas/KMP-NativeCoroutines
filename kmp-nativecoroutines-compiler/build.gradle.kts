@@ -1,5 +1,4 @@
 plugins {
-    @Suppress("DSL_SCOPE_VIOLATION")
     alias(libs.plugins.kotlin.jvm)
     `kmp-nativecoroutines-publish`
 }
@@ -22,16 +21,18 @@ dependencies {
     testRuntimeOnly(libs.junit)
 }
 
-tasks.compileKotlin.configure {
-    kotlinOptions {
-        jvmTarget = "11"
-        freeCompilerArgs = listOf("-Xjvm-default=all")
-    }
+kotlin {
+    jvmToolchain(11)
 }
 
-tasks.compileTestKotlin.configure {
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
+tasks.compileKotlin.configure {
     kotlinOptions {
-        jvmTarget = "11"
+        freeCompilerArgs = listOf("-Xjvm-default=all")
     }
 }
 
@@ -46,16 +47,10 @@ val generateTests by tasks.registering(JavaExec::class) {
     mainClass.set("com.rickclephas.kmp.nativecoroutines.compiler.GenerateTestsKt")
 }
 
-val sourcesJar by tasks.registering(Jar::class) {
-    archiveClassifier.set("sources")
-    from(sourceSets.main.get().allSource)
-}
-
 publishing {
     publications {
         create<MavenPublication>("maven") {
-            from(components["kotlin"])
-            artifact(sourcesJar)
+            from(components["java"])
         }
     }
 }

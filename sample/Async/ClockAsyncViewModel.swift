@@ -26,6 +26,7 @@ class ClockAsyncViewModel: ClockViewModel {
     }
     
     func startMonitoring() {
+        let clock = clock
         task = Task { [weak self] in
             let timeSequence = asyncSequence(for: clock.time)
                 .map { [weak self] time -> String in

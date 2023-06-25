@@ -83,8 +83,11 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         public val globalMutableStateFlowNative: NativeFlow<String>
           get() = globalMutableStateFlow.asNativeFlow(null)
         
-        public val globalMutableStateFlowValue: String
+        public var globalMutableStateFlowValue: String
           get() = globalMutableStateFlow.value
+          set(`value`) {
+            globalMutableStateFlow.value = value
+          }
     """.trimIndent())
 
     @Test
@@ -742,5 +745,100 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         @ObjCName(name = "globalState")
         public val globalStateValue: String
           get() = globalState.value
+    """.trimIndent())
+
+    @Test
+    fun globalMutableStateProperty() = runKspTest("""
+        import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState
+        import kotlinx.coroutines.flow.MutableStateFlow
+        
+        @NativeCoroutinesState
+        val globalMutableState: MutableStateFlow<String> get() = TODO()
+    """.trimIndent(), """
+        import com.rickclephas.kmp.nativecoroutines.NativeFlow
+        import com.rickclephas.kmp.nativecoroutines.asNativeFlow
+        import kotlin.String
+        import kotlin.native.ObjCName
+        
+        public val globalMutableStateFlow: NativeFlow<String>
+          get() = globalMutableState.asNativeFlow(null)
+        
+        @ObjCName(name = "globalMutableState")
+        public var globalMutableStateValue: String
+          get() = globalMutableState.value
+          set(`value`) {
+            globalMutableState.value = value
+          }
+    """.trimIndent())
+
+    @Test
+    fun genericClassWithVariance() = runKspTest("""
+        import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
+        import kotlinx.coroutines.flow.Flow
+        
+        class GenericClass<out T> {
+            @NativeCoroutines
+            val flow: Flow<T> get() = TODO()
+        }
+    """.trimIndent(), """
+        import com.rickclephas.kmp.nativecoroutines.NativeFlow
+        import com.rickclephas.kmp.nativecoroutines.asNativeFlow
+        import kotlin.native.ObjCName
+        
+        @ObjCName(name = "flow")
+        public val <T> GenericClass<T>.flowNative: NativeFlow<T>
+          get() = flow.asNativeFlow(null)
+    """.trimIndent())
+
+    @Test
+    fun optInAnnotatedProperty() = runKspTest("""
+        import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
+        import kotlinx.coroutines.flow.Flow
+        
+        @OptIn(ExperimentalStdlibApi::class)
+        @NativeCoroutines
+        val flow: Flow<String> get() = TODO()
+    """.trimIndent(), """
+        import com.rickclephas.kmp.nativecoroutines.NativeFlow
+        import com.rickclephas.kmp.nativecoroutines.asNativeFlow
+        import kotlin.ExperimentalStdlibApi
+        import kotlin.OptIn
+        import kotlin.String
+        import kotlin.native.ObjCName
+        
+        @OptIn(ExperimentalStdlibApi::class)
+        @ObjCName(name = "flow")
+        public val flowNative: NativeFlow<String>
+          get() = flow.asNativeFlow(null)
+    """.trimIndent())
+
+    @Test
+    fun multiOptInAnnotatedProperty() = runKspTest("""
+        import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
+        import kotlinx.coroutines.flow.Flow
+        
+        @RequiresOptIn
+        annotation class A
+        
+        @RequiresOptIn
+        annotation class B
+        
+        @OptIn(A::class, B::class)
+        @NativeCoroutines
+        val flow: Flow<String> get() = TODO()
+    """.trimIndent(), """
+        import com.rickclephas.kmp.nativecoroutines.NativeFlow
+        import com.rickclephas.kmp.nativecoroutines.asNativeFlow
+        import kotlin.OptIn
+        import kotlin.String
+        import kotlin.native.ObjCName
+        
+        @OptIn(
+          A::class,
+          B::class,
+        )
+        @ObjCName(name = "flow")
+        public val flowNative: NativeFlow<String>
+          get() = flow.asNativeFlow(null)
     """.trimIndent())
 }

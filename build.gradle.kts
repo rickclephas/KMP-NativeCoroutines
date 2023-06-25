@@ -1,3 +1,8 @@
+plugins {
+    alias(libs.plugins.kotlin.multiplatform) apply false
+    alias(libs.plugins.kotlin.jvm) apply false
+}
+
 buildscript {
     repositories {
         gradlePluginPortal()
@@ -7,7 +12,7 @@ buildscript {
 
 allprojects {
     group = "com.rickclephas.kmp"
-    version = "1.0.0-ALPHA-3"
+    version = "1.0.0-ALPHA-11"
 
     repositories {
         mavenCentral()

@@ -15,7 +15,8 @@ internal sealed class ReturnType {
         class State(
             override val typeReference: KSTypeReference,
             override val valueType: TypeName,
-            override val nullable: Boolean
+            override val nullable: Boolean,
+            val mutable: Boolean
         ): Flow()
         class Shared(
             override val typeReference: KSTypeReference,
@@ -48,11 +49,18 @@ internal fun KSTypeReference.getReturnType(
         } ?: typeArgument.toTypeName(typeParameterResolver)
     }
     val isMarkedNullable = typeIsMarkedNullable ?: type.isMarkedNullable
+    if (classDeclaration.isMutableStateFlow())
+        return ReturnType.Flow.State(
+            this,
+            typeArguments.first(),
+            isMarkedNullable,
+            true)
     if (classDeclaration.isStateFlow())
         return ReturnType.Flow.State(
             this,
             typeArguments.first(),
-            isMarkedNullable)
+            isMarkedNullable,
+            false)
     if (classDeclaration.isSharedFlow())
         return ReturnType.Flow.Shared(
             this,
@@ -73,11 +81,11 @@ internal fun KSTypeReference.getReturnType(
 
 private const val coroutinesPackageName = "kotlinx.coroutines.flow"
 
-private fun KSClassDeclaration.isStateFlow(): Boolean {
-    if (packageName.asString() != coroutinesPackageName) return false
-    val simpleName = simpleName.asString()
-    return simpleName == "StateFlow" || simpleName == "MutableStateFlow"
-}
+private fun KSClassDeclaration.isMutableStateFlow(): Boolean =
+    packageName.asString() == coroutinesPackageName && simpleName.asString() == "MutableStateFlow"
+
+private fun KSClassDeclaration.isStateFlow(): Boolean =
+    packageName.asString() == coroutinesPackageName && simpleName.asString() == "StateFlow"
 
 private fun KSClassDeclaration.isSharedFlow(): Boolean {
     if (packageName.asString() != coroutinesPackageName) return false
