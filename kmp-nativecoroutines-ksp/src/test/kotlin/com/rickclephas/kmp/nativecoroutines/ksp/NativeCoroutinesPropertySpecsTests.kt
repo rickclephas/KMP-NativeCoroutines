@@ -841,4 +841,48 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         public val flowNative: NativeFlow<String>
           get() = flow.asNativeFlow(null)
     """.trimIndent())
+
+    @Test
+    fun refinedProperty() = runKspTest("""
+        import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesRefined
+        import kotlinx.coroutines.flow.Flow
+        
+        @NativeCoroutinesRefined
+        val flow: Flow<String> get() = TODO()
+    """.trimIndent(), """
+        import com.rickclephas.kmp.nativecoroutines.NativeFlow
+        import com.rickclephas.kmp.nativecoroutines.asNativeFlow
+        import kotlin.String
+        import kotlin.native.ObjCName
+        import kotlin.native.ShouldRefineInSwift
+        
+        @ObjCName(name = "flow")
+        @ShouldRefineInSwift
+        public val flowNative: NativeFlow<String>
+          get() = flow.asNativeFlow(null)
+    """.trimIndent())
+
+    @Test
+    fun refinedStateProperty() = runKspTest("""
+        import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesRefinedState
+        import kotlinx.coroutines.flow.StateFlow
+        
+        @NativeCoroutinesRefinedState
+        val globalState: StateFlow<String> get() = TODO()
+    """.trimIndent(), """
+        import com.rickclephas.kmp.nativecoroutines.NativeFlow
+        import com.rickclephas.kmp.nativecoroutines.asNativeFlow
+        import kotlin.String
+        import kotlin.native.ObjCName
+        import kotlin.native.ShouldRefineInSwift
+        
+        @ShouldRefineInSwift
+        public val globalStateFlow: NativeFlow<String>
+          get() = globalState.asNativeFlow(null)
+        
+        @ObjCName(name = "globalState")
+        @ShouldRefineInSwift
+        public val globalStateValue: String
+          get() = globalState.value
+    """.trimIndent())
 }
