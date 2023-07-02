@@ -9,7 +9,8 @@ import com.squareup.kotlinpoet.ksp.*
 internal fun KSPropertyDeclaration.toNativeCoroutinesPropertySpecs(
     scopeProperty: CoroutineScopeProvider.ScopeProperty,
     options: KmpNativeCoroutinesOptions,
-    asState: Boolean = false
+    asState: Boolean,
+    shouldRefine: Boolean
 ): List<PropertySpec>? {
     val typeParameterResolver = getTypeParameterResolver()
     val type = type.getReturnType(typeParameterResolver) ?: return null
@@ -17,12 +18,12 @@ internal fun KSPropertyDeclaration.toNativeCoroutinesPropertySpecs(
     return buildList {
         val flowSuffix = if (asState) options.stateFlowSuffix else options.suffix
         if (flowSuffix != null)
-            add(toNativeCoroutinesPropertySpec(scopeProperty, flowSuffix, !asState, typeParameterResolver, type))
+            add(toNativeCoroutinesPropertySpec(scopeProperty, flowSuffix, !asState, typeParameterResolver, type, shouldRefine))
         val valueSuffix = if (asState) options.stateSuffix else options.flowValueSuffix
         if (type is ReturnType.Flow.State && valueSuffix != null)
-            add(toNativeCoroutinesValuePropertySpec(valueSuffix, asState, typeParameterResolver, type))
+            add(toNativeCoroutinesValuePropertySpec(valueSuffix, asState, typeParameterResolver, type, shouldRefine))
         if (type is ReturnType.Flow.Shared && options.flowReplayCacheSuffix != null)
-            add(toNativeCoroutinesReplayCachePropertySpec(options.flowReplayCacheSuffix, typeParameterResolver, type))
+            add(toNativeCoroutinesReplayCachePropertySpec(options.flowReplayCacheSuffix, typeParameterResolver, type, shouldRefine))
     }
 }
 
@@ -31,14 +32,15 @@ private fun KSPropertyDeclaration.toNativeCoroutinesPropertySpec(
     nameSuffix: String,
     setObjCName: Boolean,
     typeParameterResolver: TypeParameterResolver,
-    type: ReturnType.Flow
+    type: ReturnType.Flow,
+    shouldRefine: Boolean
 ): PropertySpec {
     var typeName: TypeName = nativeFlowClassName.parameterizedBy(type.valueType).copy(nullable = type.nullable)
     typeName = typeName.copy(annotations = type.typeReference.annotations.toAnnotationSpecs())
     val simpleName = simpleName.asString()
     val name = "$simpleName$nameSuffix"
     val objCName = if (setObjCName) simpleName else null
-    return createPropertySpec(typeParameterResolver, name, objCName, typeName, { code, codeArgs ->
+    return createPropertySpec(typeParameterResolver, name, objCName, typeName, shouldRefine, { code, codeArgs ->
         codeArgs.add(asNativeFlowMemberName)
         scopeProperty.codeArg.let(codeArgs::addAll)
         addCode("return $code${if(type.nullable) "?." else "."}%M(${scopeProperty.code})", *codeArgs.toTypedArray())
@@ -51,14 +53,15 @@ private fun KSPropertyDeclaration.toNativeCoroutinesValuePropertySpec(
     nameSuffix: String,
     setObjCName: Boolean,
     typeParameterResolver: TypeParameterResolver,
-    type: ReturnType.Flow.State
+    type: ReturnType.Flow.State,
+    shouldRefine: Boolean
 ): PropertySpec {
     var typeName = type.valueType.copy(annotations = type.typeReference.annotations.toAnnotationSpecs())
     if (type.nullable) typeName = typeName.copy(nullable = true)
     val simpleName = simpleName.asString()
     val name = "$simpleName$nameSuffix"
     val objCName = if (setObjCName) simpleName else null
-    return createPropertySpec(typeParameterResolver, name, objCName, typeName, { code, codeArgs ->
+    return createPropertySpec(typeParameterResolver, name, objCName, typeName, shouldRefine, { code, codeArgs ->
         addCode("return $code${if(type.nullable) "?." else "."}value", *codeArgs.toTypedArray())
     }, when (type.mutable) {
         false -> null
@@ -71,13 +74,14 @@ private fun KSPropertyDeclaration.toNativeCoroutinesValuePropertySpec(
 private fun KSPropertyDeclaration.toNativeCoroutinesReplayCachePropertySpec(
     nameSuffix: String,
     typeParameterResolver: TypeParameterResolver,
-    type: ReturnType.Flow.Shared
+    type: ReturnType.Flow.Shared,
+    shouldRefine: Boolean
 ): PropertySpec {
     var typeName: TypeName = LIST.parameterizedBy(type.valueType).copy(nullable = type.nullable)
     typeName = typeName.copy(annotations = type.typeReference.annotations.toAnnotationSpecs())
     val simpleName = simpleName.asString()
     val name = "$simpleName$nameSuffix"
-    return createPropertySpec(typeParameterResolver, name, null, typeName, { code, codeArgs ->
+    return createPropertySpec(typeParameterResolver, name, null, typeName, shouldRefine, { code, codeArgs ->
         addCode("return $code${if(type.nullable) "?." else "."}replayCache", *codeArgs.toTypedArray())
     }).build()
 }
@@ -87,6 +91,7 @@ private fun KSPropertyDeclaration.createPropertySpec(
     name: String,
     objCName: String?,
     typeName: TypeName,
+    shouldRefine: Boolean,
     addGetterCode: FunSpec.Builder.(code: String, codeArgs: MutableList<Any>) -> Unit,
     addSetterCode: (FunSpec.Builder.(code: String, codeArgs: MutableList<Any>) -> Unit)? = null
 ): PropertySpec.Builder {
@@ -99,9 +104,12 @@ private fun KSPropertyDeclaration.createPropertySpec(
         ignoredAnnotationNames = setOf(
             nativeCoroutinesAnnotationName,
             nativeCoroutinesStateAnnotationName,
+            nativeCoroutinesRefinedAnnotationName,
+            nativeCoroutinesRefinedStateAnnotationName,
             throwsAnnotationName
         )
     ))
+    if (shouldRefine) builder.addAnnotation(shouldRefineInSwiftAnnotationClassName)
     // TODO: Add context receivers once those are exported to ObjC
     builder.addModifiers(KModifier.PUBLIC)
 

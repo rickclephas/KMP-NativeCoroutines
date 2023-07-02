@@ -44,10 +44,12 @@ publishing {
     }
 
     publications.withType<MavenPublication> {
-        artifact(tasks.register("${name}JavadocJar", Jar::class) {
-            archiveClassifier.set("javadoc")
-            archiveAppendix.set(this@withType.name)
-        })
+        if (plugins.hasPlugin("org.jetbrains.kotlin.multiplatform")) {
+            artifact(tasks.register("${name}JavadocJar", Jar::class) {
+                archiveClassifier.set("javadoc")
+                archiveAppendix.set(this@withType.name)
+            })
+        }
         if (signPublications) signing.sign(this)
 
         pom {
