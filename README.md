@@ -29,7 +29,9 @@ Compatibility versions for older and/or preview Kotlin versions are also availab
 
 | Version        | Version suffix     |   Kotlin   |    KSP     | Coroutines |
 |----------------|--------------------|:----------:|:----------:|:----------:|
-| **_latest_**   | **_no suffix_**    | **1.8.22** | **1.0.11** | **1.7.1**  |
+| _latest_       | -kotlin-1.9.0-RC   |  1.9.0-RC  |   1.0.11   |   1.7.2    |
+| **_latest_**   | **_no suffix_**    | **1.8.22** | **1.0.11** | **1.7.2**  |
+| 1.0.0-ALPHA-11 | _no suffix_        |   1.8.22   |   1.0.11   |   1.7.1    |
 | 1.0.0-ALPHA-10 | -kotlin-1.9.0-Beta | 1.9.0-Beta |   1.0.11   |   1.7.1    |
 | 1.0.0-ALPHA-10 | _no suffix_        |   1.8.21   |   1.0.11   |   1.7.1    |
 | 1.0.0-ALPHA-9  | _no suffix_        |   1.8.21   |   1.0.11   |   1.7.0    |
@@ -426,4 +428,29 @@ val ignoredFlowProperty: Flow<Int>
 
 @NativeCoroutinesIgnore
 suspend fun ignoredSuspendFunction() { }
+```
+
+### Refining declarations in Swift
+
+If for some reason you would like to further refine your Kotlin declarations in Swift, you can use the
+`NativeCoroutinesRefined` and `NativeCoroutinesRefinedState` annotations.  
+These will tell the plugin to add the [`ShouldRefineInSwift`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.native/-should-refine-in-swift/)
+annotation to the generated properties/function.
+
+> **Note**: this currently requires a module-wide opt-in to `kotlin.experimental.ExperimentalObjCRefinement`.
+
+You could for example refine your `Flow` property to an `AnyPublisher` property:
+```kotlin
+class Clock {
+    @NativeCoroutinesRefined
+    val time: StateFlow<Long>
+}
+```
+
+```swift
+extension Clock {
+    var time: AnyPublisher<KotlinLong, Error> {
+        createPublisher(for: __time)
+    }
+}
 ```
