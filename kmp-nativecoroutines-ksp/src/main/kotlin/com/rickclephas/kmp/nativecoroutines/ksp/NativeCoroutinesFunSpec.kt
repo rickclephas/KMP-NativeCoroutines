@@ -8,7 +8,8 @@ import com.squareup.kotlinpoet.ksp.*
 
 internal fun KSFunctionDeclaration.toNativeCoroutinesFunSpec(
     scopeProperty: CoroutineScopeProvider.ScopeProperty,
-    options: KmpNativeCoroutinesOptions
+    options: KmpNativeCoroutinesOptions,
+    shouldRefine: Boolean
 ): FunSpec? {
     val typeParameterResolver = getTypeParameterResolver()
     val classDeclaration = parentDeclaration as? KSClassDeclaration
@@ -18,8 +19,13 @@ internal fun KSFunctionDeclaration.toNativeCoroutinesFunSpec(
     docString?.trim()?.let(builder::addKdoc)
     builder.addAnnotations(annotations.toAnnotationSpecs(
         objCName = simpleName,
-        ignoredAnnotationNames = setOf(nativeCoroutinesAnnotationName, throwsAnnotationName)
+        ignoredAnnotationNames = setOf(
+            nativeCoroutinesAnnotationName,
+            nativeCoroutinesRefinedAnnotationName,
+            throwsAnnotationName
+        )
     ))
+    if (shouldRefine) builder.addAnnotation(shouldRefineInSwiftAnnotationClassName)
     // TODO: Add context receivers once those are exported to ObjC
     builder.addModifiers(KModifier.PUBLIC)
 
