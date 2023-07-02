@@ -16,6 +16,15 @@ kotlin {
     jvmToolchain(11)
 }
 
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
+val sourcesJar by tasks.getting(Jar::class) {
+    dependsOn(syncSources)
+}
+
 tasks.compileKotlin.configure {
     dependsOn(syncSources)
     kotlinOptions {
@@ -31,16 +40,10 @@ tasks.clean.configure {
     delete("src")
 }
 
-val sourcesJar by tasks.registering(Jar::class) {
-    archiveClassifier.set("sources")
-    from(sourceSets.main.get().allSource)
-}
-
 publishing {
     publications {
         create<MavenPublication>("maven") {
-            from(components["kotlin"])
-            artifact(sourcesJar)
+            from(components["java"])
         }
     }
 }
