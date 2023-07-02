@@ -428,3 +428,28 @@ val ignoredFlowProperty: Flow<Int>
 @NativeCoroutinesIgnore
 suspend fun ignoredSuspendFunction() { }
 ```
+
+### Refining declarations in Swift
+
+If for some reason you would like to further refine your Kotlin declarations in Swift, you can use the
+`NativeCoroutinesRefined` and `NativeCoroutinesRefinedState` annotations.  
+These will tell the plugin to add the [`ShouldRefineInSwift`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.native/-should-refine-in-swift/)
+annotation to the generated properties/function.
+
+> **Note**: this currently requires a module-wide opt-in to `kotlin.experimental.ExperimentalObjCRefinement`.
+
+You could for example refine your `Flow` property to an `AnyPublisher` property:
+```kotlin
+class Clock {
+    @NativeCoroutinesRefined
+    val time: StateFlow<Long>
+}
+```
+
+```swift
+extension Clock {
+    var time: AnyPublisher<KotlinLong, Error> {
+        createPublisher(for: __time)
+    }
+}
+```
