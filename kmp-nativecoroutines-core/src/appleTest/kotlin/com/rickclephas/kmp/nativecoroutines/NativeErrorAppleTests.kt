@@ -1,5 +1,6 @@
 package com.rickclephas.kmp.nativecoroutines
 
+import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.cinterop.UnsafeNumber
 import kotlinx.cinterop.convert
 import kotlin.test.*
@@ -7,7 +8,7 @@ import kotlin.test.*
 class NativeErrorAppleTests {
 
     @Test
-    @OptIn(UnsafeNumber::class)
+    @OptIn(ExperimentalForeignApi::class, UnsafeNumber::class)
     fun ensureNSErrorDomainAndCodeAreCorrect() {
         val exception = RandomException()
         val nsError = exception.asNativeError()
