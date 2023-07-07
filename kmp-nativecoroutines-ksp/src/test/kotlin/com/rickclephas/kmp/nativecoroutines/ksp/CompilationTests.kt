@@ -39,7 +39,7 @@ private fun KotlinCompilation.assertKspSourceFile(path: String, @Language("kotli
     assert(file.exists()) { "KSP source file <$path> doesn't exist." }
     val expectedLines = contents.lines()
     val actualLines = file.readLines()
-    for (i in 0 until max(expectedLines.size, actualLines.size)) {
+    for (i in 0 ..< max(expectedLines.size, actualLines.size)) {
         assertEquals(expectedLines.getOrNull(i), actualLines.getOrNull(i),
             "File: <$path> doesn't have equal contents on line: <${i + 1}>")
     }
