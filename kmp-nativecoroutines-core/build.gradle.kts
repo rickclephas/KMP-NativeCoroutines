@@ -18,7 +18,7 @@ kotlin {
     val tvosX64 = tvosX64()
     val tvosSimulatorArm64 = tvosSimulatorArm64()
     jvm()
-    js(BOTH) {
+    js {
         browser()
         nodejs()
     }
