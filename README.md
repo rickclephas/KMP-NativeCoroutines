@@ -113,6 +113,8 @@ Just annotate your coroutines declarations with `@NativeCoroutines` (or `@Native
 
 Your `Flow` properties/functions get a native version:
 ```kotlin
+import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
+
 class Clock {
     // Somewhere in your Kotlin code you define a Flow property
     // and annotate it with @NativeCoroutines
@@ -126,6 +128,9 @@ class Clock {
 
 The plugin will generate this native property for you:
 ```kotlin
+import com.rickclephas.kmp.nativecoroutines.asNativeFlow
+import kotlin.native.ObjCName
+
 @ObjCName(name = "time")
 val Clock.timeNative
     get() = time.asNativeFlow()
@@ -150,6 +155,8 @@ val Clock.timeReplayCache
 Using `StateFlow` properties to track state (like in a view model)?  
 Use the `@NativeCoroutinesState` annotation instead:
 ```kotlin
+import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState
+
 class Clock {
     // Somewhere in your Kotlin code you define a StateFlow property
     // and annotate it with @NativeCoroutinesState
@@ -163,6 +170,9 @@ class Clock {
 
 The plugin will generate these native properties for you:
 ```kotlin
+import com.rickclephas.kmp.nativecoroutines.asNativeFlow
+import kotlin.native.ObjCName
+
 @ObjCName(name = "time")
 val Clock.timeValue
     get() = time.value
@@ -177,6 +187,8 @@ val Clock.timeFlow
 
 The plugin also generates native versions for your annotated suspend functions:
 ```kotlin
+import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
+
 class RandomLettersGenerator {
     // Somewhere in your Kotlin code you define a suspend function
     // and annotate it with @NativeCoroutines
@@ -192,6 +204,9 @@ class RandomLettersGenerator {
 
 The plugin will generate this native function for you:
 ```kotlin
+import com.rickclephas.kmp.nativecoroutines.nativeSuspend
+import kotlin.native.ObjCName
+
 @ObjCName(name = "getRandomLetters")
 fun RandomLettersGenerator.getRandomLettersNative() =
     nativeSuspend { getRandomLetters() }
@@ -208,6 +223,8 @@ on Objective-C protocols.
 However this limitation can be "overcome" with some Swift magic.  
 Assuming `RandomLettersGenerator` is an `interface` instead of a `class` we can do the following:
 ```swift
+import KMPNativeCoroutinesCore
+
 extension RandomLettersGenerator {
     func getRandomLetters() -> NativeSuspend<String, Error, KotlinUnit> {
         RandomLettersGeneratorNativeKt.getRandomLetters(self)
@@ -223,6 +240,8 @@ The Async implementation provides some functions to get async Swift functions an
 
 Use the `asyncFunction(for:)` function to get an async function that can be awaited:
 ```swift
+import KMPNativeCoroutinesAsync
+
 let handle = Task {
     do {
         let letters = try await asyncFunction(for: randomLettersGenerator.getRandomLetters())
@@ -238,6 +257,8 @@ handle.cancel()
 
 or if you don't like these do-catches you can use the `asyncResult(for:)` function:
 ```swift
+import KMPNativeCoroutinesAsync
+
 let result = await asyncResult(for: randomLettersGenerator.getRandomLetters())
 if case let .success(letters) = result {
     print("Got random letters: \(letters)")
@@ -248,6 +269,8 @@ if case let .success(letters) = result {
 
 For `Flow`s there is the `asyncSequence(for:)` function to get an `AsyncSequence`:
 ```swift
+import KMPNativeCoroutinesAsync
+
 let handle = Task {
     do {
         let sequence = asyncSequence(for: randomLettersGenerator.getRandomLettersFlow())
@@ -274,6 +297,8 @@ The Combine implementation provides a couple functions to get an `AnyPublisher` 
 
 For your `Flow`s use the `createPublisher(for:)` function:
 ```swift
+import KMPNativeCoroutinesCombine
+
 // Create an AnyPublisher for your flow
 let publisher = createPublisher(for: clock.time)
 
@@ -297,6 +322,8 @@ let publisher = createPublisher(for: randomLettersGenerator.getRandomLettersFlow
 
 For the suspend functions you should use the `createFuture(for:)` function:
 ```swift
+import KMPNativeCoroutinesCombine
+
 // Create a Future/AnyPublisher for the suspend function
 let future = createFuture(for: randomLettersGenerator.getRandomLetters())
 
@@ -322,6 +349,8 @@ The RxSwift implementation provides a couple functions to get an `Observable` or
 
 For your `Flow`s use the `createObservable(for:)` function:
 ```swift
+import KMPNativeCoroutinesRxSwift
+
 // Create an observable for your flow
 let observable = createObservable(for: clock.time)
 
@@ -349,6 +378,8 @@ let observable = createObservable(for: randomLettersGenerator.getRandomLettersFl
 
 For the suspend functions you should use the `createSingle(for:)` function:
 ```swift
+import KMPNativeCoroutinesRxSwift
+
 // Create a single for the suspend function
 let single = createSingle(for: randomLettersGenerator.getRandomLetters())
 
@@ -398,6 +429,8 @@ nativeCoroutines {
 
 For more control you can provide a custom `CoroutineScope` with the `NativeCoroutineScope` annotation:
 ```kotlin
+import com.rickclephas.kmp.nativecoroutines.NativeCoroutineScope
+
 class Clock {
     @NativeCoroutineScope
     internal val coroutineScope = CoroutineScope(job + Dispatchers.Default)
@@ -418,6 +451,8 @@ internal val defaultCoroutineScope = CoroutineScope(SupervisorJob() + Dispatcher
 
 Use the `NativeCoroutinesIgnore` annotation to tell the plugin to ignore a property or function:
 ```kotlin
+import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesIgnore
+
 @NativeCoroutinesIgnore
 val ignoredFlowProperty: Flow<Int>
 
@@ -436,6 +471,8 @@ annotation to the generated properties/function.
 
 You could for example refine your `Flow` property to an `AnyPublisher` property:
 ```kotlin
+import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesRefined
+
 class Clock {
     @NativeCoroutinesRefined
     val time: StateFlow<Long>
@@ -443,6 +480,8 @@ class Clock {
 ```
 
 ```swift
+import KMPNativeCoroutinesCombine
+
 extension Clock {
     var time: AnyPublisher<KotlinLong, Error> {
         createPublisher(for: __time)
