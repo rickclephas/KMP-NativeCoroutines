@@ -22,7 +22,7 @@ jobs:
       matrix:
         os: [ macos-12 ]
         xcode: [ 14.2 ]
-        java: [ 11 ]
+        java: [ 17 ]
         module: [ core, ksp ]
     name: ${{ format('{0} ({1}, Xcode {2}, JDK {3})', matrix.module, matrix.os, matrix.xcode, matrix.java) }}
     runs-on: ${{ matrix.os }}
@@ -85,7 +85,7 @@ jobs:
       matrix:
         os: [ macos-12 ]
         xcode: [ 14.2 ]
-        java: [ 11 ]
+        java: [ 17 ]
         platform: [ iOS, macOS, tvOS, watchOS ]
         embeddable-compiler: [ true, false ]
     name: ${{ format('{0} (embeddable {1}) ({2}, Xcode {3}, JDK {4})', matrix.platform, matrix.embeddable-compiler, matrix.os, matrix.xcode, matrix.java) }}
