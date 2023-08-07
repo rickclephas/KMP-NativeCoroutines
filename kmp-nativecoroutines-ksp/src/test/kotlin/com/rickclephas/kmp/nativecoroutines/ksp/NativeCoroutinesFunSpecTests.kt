@@ -472,4 +472,23 @@ class NativeCoroutinesFunSpecTests: CompilationTests() {
         public fun returnSuspendValueNative(): NativeSuspend<String> = nativeSuspend(null) {
             returnSuspendValue() }
     """.trimIndent())
+
+    @Test
+    fun gh124() = runKspTest("""
+        import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
+        import kotlin.native.ObjCName
+        
+        @NativeCoroutines
+        suspend fun getString(@ObjCName(swiftName = "_") index: Int): String = TODO()
+    """.trimIndent(), """
+        import com.rickclephas.kmp.nativecoroutines.NativeSuspend
+        import com.rickclephas.kmp.nativecoroutines.nativeSuspend
+        import kotlin.Int
+        import kotlin.String
+        import kotlin.native.ObjCName
+        
+        @ObjCName(name = "getString")
+        public fun getStringNative(@ObjCName(swiftName = "_") index: Int): NativeSuspend<String> =
+            nativeSuspend(null) { getString(index) }
+    """.trimIndent())
 }
