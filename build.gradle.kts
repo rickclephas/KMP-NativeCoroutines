@@ -12,7 +12,7 @@ buildscript {
 
 allprojects {
     group = "com.rickclephas.kmp"
-    version = "1.0.0-ALPHA-13"
+    version = "1.0.0-ALPHA-14"
 
     repositories {
         mavenCentral()
