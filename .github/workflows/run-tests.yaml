@@ -23,7 +23,7 @@ jobs:
         os: [ macos-12 ]
         xcode: [ 14.2 ]
         java: [ 17 ]
-        module: [ core, ksp ]
+        module: [ core, ksp, compiler ]
     name: ${{ format('{0} ({1}, Xcode {2}, JDK {3})', matrix.module, matrix.os, matrix.xcode, matrix.java) }}
     runs-on: ${{ matrix.os }}
     steps:
