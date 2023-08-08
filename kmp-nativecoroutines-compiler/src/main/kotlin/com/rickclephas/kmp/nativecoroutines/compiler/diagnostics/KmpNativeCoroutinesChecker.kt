@@ -3,7 +3,7 @@ package com.rickclephas.kmp.nativecoroutines.compiler.diagnostics
 import com.intellij.psi.PsiElement
 import com.rickclephas.kmp.nativecoroutines.compiler.config.ExposedSeverity
 import com.rickclephas.kmp.nativecoroutines.compiler.config.exposedSeverity
-import com.rickclephas.kmp.nativecoroutines.compiler.diagnostics.KmpNativeCoroutinesErrors.CONFLICT_COROUTINES_STATE
+import com.rickclephas.kmp.nativecoroutines.compiler.diagnostics.KmpNativeCoroutinesErrors.CONFLICT_COROUTINES
 import com.rickclephas.kmp.nativecoroutines.compiler.diagnostics.KmpNativeCoroutinesErrors.EXPOSED_FLOW_TYPE
 import com.rickclephas.kmp.nativecoroutines.compiler.diagnostics.KmpNativeCoroutinesErrors.EXPOSED_FLOW_TYPE_ERROR
 import com.rickclephas.kmp.nativecoroutines.compiler.diagnostics.KmpNativeCoroutinesErrors.EXPOSED_SUSPEND_FUNCTION
@@ -22,6 +22,14 @@ import com.rickclephas.kmp.nativecoroutines.compiler.diagnostics.KmpNativeCorout
 import com.rickclephas.kmp.nativecoroutines.compiler.diagnostics.KmpNativeCoroutinesErrors.REDUNDANT_PRIVATE_COROUTINES_STATE
 import com.rickclephas.kmp.nativecoroutines.compiler.diagnostics.KmpNativeCoroutinesErrors.EXPOSED_STATE_FLOW_PROPERTY
 import com.rickclephas.kmp.nativecoroutines.compiler.diagnostics.KmpNativeCoroutinesErrors.EXPOSED_STATE_FLOW_PROPERTY_ERROR
+import com.rickclephas.kmp.nativecoroutines.compiler.diagnostics.KmpNativeCoroutinesErrors.IGNORED_COROUTINES_REFINED
+import com.rickclephas.kmp.nativecoroutines.compiler.diagnostics.KmpNativeCoroutinesErrors.IGNORED_COROUTINES_REFINED_STATE
+import com.rickclephas.kmp.nativecoroutines.compiler.diagnostics.KmpNativeCoroutinesErrors.INVALID_COROUTINES_REFINED
+import com.rickclephas.kmp.nativecoroutines.compiler.diagnostics.KmpNativeCoroutinesErrors.INVALID_COROUTINES_REFINED_STATE
+import com.rickclephas.kmp.nativecoroutines.compiler.diagnostics.KmpNativeCoroutinesErrors.REDUNDANT_OVERRIDE_COROUTINES_REFINED
+import com.rickclephas.kmp.nativecoroutines.compiler.diagnostics.KmpNativeCoroutinesErrors.REDUNDANT_OVERRIDE_COROUTINES_REFINED_STATE
+import com.rickclephas.kmp.nativecoroutines.compiler.diagnostics.KmpNativeCoroutinesErrors.REDUNDANT_PRIVATE_COROUTINES_REFINED
+import com.rickclephas.kmp.nativecoroutines.compiler.diagnostics.KmpNativeCoroutinesErrors.REDUNDANT_PRIVATE_COROUTINES_REFINED_STATE
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotations
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.CoroutinesReturnType
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.coroutinesReturnType
@@ -62,8 +70,16 @@ internal class KmpNativeCoroutinesChecker(
         val isSuspend = descriptor is FunctionDescriptor && descriptor.isSuspend
         val returnType = descriptor.coroutinesReturnType
 
-        if (annotations.nativeCoroutines != null && annotations.nativeCoroutinesState != null) {
-            context.trace.report(CONFLICT_COROUTINES_STATE, annotations.nativeCoroutinesState, declaration)
+        var annotationCount = 0
+        if (annotations.nativeCoroutines != null) annotationCount++
+        if (annotations.nativeCoroutinesRefined != null) annotationCount++
+        if (annotations.nativeCoroutinesRefinedState != null) annotationCount++
+        if (annotations.nativeCoroutinesState != null) annotationCount++
+        if (annotationCount > 1) {
+            context.trace.report(CONFLICT_COROUTINES, annotations.nativeCoroutines, declaration)
+            context.trace.report(CONFLICT_COROUTINES, annotations.nativeCoroutinesRefined, declaration)
+            context.trace.report(CONFLICT_COROUTINES, annotations.nativeCoroutinesRefinedState, declaration)
+            context.trace.report(CONFLICT_COROUTINES, annotations.nativeCoroutinesState, declaration)
         }
 
         val exposedSuspendFunction: DiagnosticFactory0<PsiElement>?
@@ -86,9 +102,7 @@ internal class KmpNativeCoroutinesChecker(
                 exposedStateFlowProperty = EXPOSED_STATE_FLOW_PROPERTY_ERROR
             }
         }
-        if (isPublic && !isOverride && annotations.nativeCoroutines == null &&
-            annotations.nativeCoroutinesIgnore == null && annotations.nativeCoroutinesState == null
-        ) {
+        if (isPublic && !isOverride && annotationCount == 0 && annotations.nativeCoroutinesIgnore == null) {
             if (isSuspend) {
                 val element = declaration.modifierList?.getModifier(KtTokens.SUSPEND_KEYWORD) ?: declaration
                 exposedSuspendFunction?.on(element)?.let(context.trace::report)
@@ -108,6 +122,8 @@ internal class KmpNativeCoroutinesChecker(
 
         if (annotations.nativeCoroutinesIgnore != null) {
             context.trace.report(IGNORED_COROUTINES, annotations.nativeCoroutines, declaration)
+            context.trace.report(IGNORED_COROUTINES_REFINED, annotations.nativeCoroutinesRefined, declaration)
+            context.trace.report(IGNORED_COROUTINES_REFINED_STATE, annotations.nativeCoroutinesRefinedState, declaration)
             context.trace.report(IGNORED_COROUTINES_STATE, annotations.nativeCoroutinesState, declaration)
         }
 
@@ -117,19 +133,25 @@ internal class KmpNativeCoroutinesChecker(
         if (!isSuspend && returnType !is CoroutinesReturnType.Flow) {
             context.trace.report(INVALID_COROUTINES, annotations.nativeCoroutines, declaration)
             context.trace.report(INVALID_COROUTINES_IGNORE, annotations.nativeCoroutinesIgnore, declaration)
+            context.trace.report(INVALID_COROUTINES_REFINED, annotations.nativeCoroutinesRefined, declaration)
         }
         if (descriptor !is PropertyDescriptor || returnType !is CoroutinesReturnType.Flow.State) {
+            context.trace.report(INVALID_COROUTINES_REFINED_STATE, annotations.nativeCoroutinesRefinedState, declaration)
             context.trace.report(INVALID_COROUTINES_STATE, annotations.nativeCoroutinesState, declaration)
         }
 
         if (isOverride) {
             context.trace.report(REDUNDANT_OVERRIDE_COROUTINES, annotations.nativeCoroutines, declaration)
             context.trace.report(REDUNDANT_OVERRIDE_COROUTINES_IGNORE, annotations.nativeCoroutinesIgnore, declaration)
+            context.trace.report(REDUNDANT_OVERRIDE_COROUTINES_REFINED, annotations.nativeCoroutinesRefined, declaration)
+            context.trace.report(REDUNDANT_OVERRIDE_COROUTINES_REFINED_STATE, annotations.nativeCoroutinesRefinedState, declaration)
             context.trace.report(REDUNDANT_OVERRIDE_COROUTINES_STATE, annotations.nativeCoroutinesState, declaration)
         }
         if (!isPublic) {
             context.trace.report(REDUNDANT_PRIVATE_COROUTINES, annotations.nativeCoroutines, declaration)
             context.trace.report(REDUNDANT_PRIVATE_COROUTINES_IGNORE, annotations.nativeCoroutinesIgnore, declaration)
+            context.trace.report(REDUNDANT_PRIVATE_COROUTINES_REFINED, annotations.nativeCoroutinesRefined, declaration)
+            context.trace.report(REDUNDANT_PRIVATE_COROUTINES_REFINED_STATE, annotations.nativeCoroutinesRefinedState, declaration)
             context.trace.report(REDUNDANT_PRIVATE_COROUTINES_STATE, annotations.nativeCoroutinesState, declaration)
         }
     }

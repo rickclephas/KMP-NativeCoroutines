@@ -54,6 +54,8 @@ class TestClassA: TestInterface {
 
     protected val protectedFlowProperty: <!EXPOSED_FLOW_TYPE!>Flow<Int><!> get() = throw Throwable()
 
+    protected val protectedStateFlowProperty: <!EXPOSED_STATE_FLOW_PROPERTY!>StateFlow<Int><!> get() = throw Throwable()
+
     fun <!EXPOSED_FLOW_TYPE!>implicitFlowFunction<!>() = flowInterfaceProperty
 
     private suspend fun privateSuspendFunction(): Int = 0

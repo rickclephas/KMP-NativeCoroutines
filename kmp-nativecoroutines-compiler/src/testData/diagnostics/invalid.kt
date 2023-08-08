@@ -15,6 +15,8 @@ interface CustomCoroutineScope: CoroutineScope
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutineScope
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesIgnore
+import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesRefined
+import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesRefinedState
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
@@ -53,6 +55,18 @@ fun functionG(): CustomStateFlow<Int> = throw Throwable()
 <!INVALID_COROUTINES_IGNORE!>@NativeCoroutinesIgnore<!>
 fun functionH(): Int = 0
 
+@NativeCoroutinesRefined
+suspend fun functionI(): Int = 0
+
+@NativeCoroutinesRefined
+fun functionJ(): Flow<Int> = throw Throwable()
+
+@NativeCoroutinesRefined
+fun functionK(): CustomStateFlow<Int> = throw Throwable()
+
+<!INVALID_COROUTINES_REFINED!>@NativeCoroutinesRefined<!>
+fun functionL(): Int = 0
+
 @NativeCoroutines
 val flowPropertyA: Flow<Int> get() = throw Throwable()
 
@@ -79,3 +93,21 @@ val flowPropertyH: CustomStateFlow<Int> get() = throw Throwable()
 
 <!INVALID_COROUTINES_STATE!>@NativeCoroutinesState<!>
 val flowPropertyI: Flow<Int> get() = throw Throwable()
+
+@NativeCoroutinesRefined
+val flowPropertyJ: Flow<Int> get() = throw Throwable()
+
+@NativeCoroutinesRefined
+val flowPropertyK: CustomStateFlow<Int> get() = throw Throwable()
+
+<!INVALID_COROUTINES_REFINED!>@NativeCoroutinesRefined<!>
+val flowPropertyL: Int = 0
+
+@NativeCoroutinesRefinedState
+val flowPropertyM: StateFlow<Int> get() = throw Throwable()
+
+@NativeCoroutinesRefinedState
+val flowPropertyN: CustomStateFlow<Int> get() = throw Throwable()
+
+<!INVALID_COROUTINES_REFINED_STATE!>@NativeCoroutinesRefinedState<!>
+val flowPropertyO: Flow<Int> get() = throw Throwable()
