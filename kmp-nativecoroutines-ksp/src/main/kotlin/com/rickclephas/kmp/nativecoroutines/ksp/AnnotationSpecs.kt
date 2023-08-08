@@ -17,7 +17,7 @@ internal fun Sequence<KSAnnotation>.toAnnotationSpecs(
     var objCNameAnnotation: AnnotationSpec? = null
     for (annotation in this) {
         if (annotation.isAnnotationClass(objCNameAnnotationClassName)) {
-            objCNameAnnotation = annotation.toObjCNameAnnotationSpec(objCName ?: "")
+            objCNameAnnotation = annotation.toObjCNameAnnotationSpec(objCName)
             continue
         }
         annotation.toAnnotationSpec()
@@ -34,7 +34,7 @@ internal fun Sequence<KSAnnotation>.toAnnotationSpecs(
 private fun KSAnnotation.isAnnotationClass(className: ClassName): Boolean =
     annotationType.resolve().toClassName() == className
 
-private fun KSAnnotation.toObjCNameAnnotationSpec(objCName: String): AnnotationSpec {
+private fun KSAnnotation.toObjCNameAnnotationSpec(objCName: String?): AnnotationSpec {
     var name: String? = null
     var swiftName: String? = null
     for (argument in arguments) {
