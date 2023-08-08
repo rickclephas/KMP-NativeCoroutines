@@ -453,4 +453,42 @@ class NativeCoroutinesFunSpecTests: CompilationTests() {
         public fun <T> GenericClass<T>.returnGenericSuspendValueNative(): NativeSuspend<T> =
             nativeSuspend(null) { returnGenericSuspendValue() }
     """.trimIndent())
+
+    @Test
+    fun refinedFunction() = runKspTest("""
+        import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesRefined
+        
+        @NativeCoroutinesRefined
+        suspend fun returnSuspendValue(): String = TODO()
+    """.trimIndent(), """
+        import com.rickclephas.kmp.nativecoroutines.NativeSuspend
+        import com.rickclephas.kmp.nativecoroutines.nativeSuspend
+        import kotlin.String
+        import kotlin.native.ObjCName
+        import kotlin.native.ShouldRefineInSwift
+        
+        @ObjCName(name = "returnSuspendValue")
+        @ShouldRefineInSwift
+        public fun returnSuspendValueNative(): NativeSuspend<String> = nativeSuspend(null) {
+            returnSuspendValue() }
+    """.trimIndent())
+
+    @Test
+    fun gh124() = runKspTest("""
+        import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
+        import kotlin.native.ObjCName
+        
+        @NativeCoroutines
+        suspend fun getString(@ObjCName(swiftName = "_") index: Int): String = TODO()
+    """.trimIndent(), """
+        import com.rickclephas.kmp.nativecoroutines.NativeSuspend
+        import com.rickclephas.kmp.nativecoroutines.nativeSuspend
+        import kotlin.Int
+        import kotlin.String
+        import kotlin.native.ObjCName
+        
+        @ObjCName(name = "getString")
+        public fun getStringNative(@ObjCName(swiftName = "_") index: Int): NativeSuspend<String> =
+            nativeSuspend(null) { getString(index) }
+    """.trimIndent())
 }

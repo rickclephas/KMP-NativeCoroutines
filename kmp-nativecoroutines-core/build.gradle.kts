@@ -18,10 +18,11 @@ kotlin {
     val tvosX64 = tvosX64()
     val tvosSimulatorArm64 = tvosSimulatorArm64()
     jvm()
-    js(BOTH) {
+    js {
         browser()
         nodejs()
     }
+    linuxArm64()
     linuxX64()
     mingwX64()
     sourceSets {

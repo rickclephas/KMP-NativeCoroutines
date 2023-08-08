@@ -30,9 +30,22 @@ internal class KmpNativeCoroutinesSymbolProcessor(
                 else -> logger.warn("Unsupported symbol type", symbol)
             }
         }
+        resolver.getSymbolsWithAnnotation(nativeCoroutinesRefinedAnnotationName).forEach { symbol ->
+            when (symbol) {
+                is KSPropertyDeclaration -> symbol.takeUnless(::processRefinedProperty)?.let(deferredSymbols::add)
+                is KSFunctionDeclaration -> symbol.takeUnless(::processRefinedFunction)?.let(deferredSymbols::add)
+                else -> logger.warn("Unsupported symbol type", symbol)
+            }
+        }
         resolver.getSymbolsWithAnnotation(nativeCoroutinesStateAnnotationName).forEach { symbol ->
             when (symbol) {
                 is KSPropertyDeclaration -> symbol.takeUnless(::processStateProperty)?.let(deferredSymbols::add)
+                else -> logger.warn("Unsupported symbol type", symbol)
+            }
+        }
+        resolver.getSymbolsWithAnnotation(nativeCoroutinesRefinedStateAnnotationName).forEach { symbol ->
+            when (symbol) {
+                is KSPropertyDeclaration -> symbol.takeUnless(::processRefinedStateProperty)?.let(deferredSymbols::add)
                 else -> logger.warn("Unsupported symbol type", symbol)
             }
         }
@@ -45,7 +58,11 @@ internal class KmpNativeCoroutinesSymbolProcessor(
         return deferredSymbols
     }
 
-    private fun processProperty(property: KSPropertyDeclaration, asState: Boolean = false): Boolean {
+    private fun processProperty(
+        property: KSPropertyDeclaration,
+        asState: Boolean = false,
+        shouldRefine: Boolean = false
+    ): Boolean {
         if (!property.validate()) return false
         val file = property.containingFile
         if (file == null) {
@@ -53,16 +70,22 @@ internal class KmpNativeCoroutinesSymbolProcessor(
             return true
         }
         val scopeProperty = coroutineScopeProvider.getScopeProperty(property) ?: return false
-        val propertySpecs = property.toNativeCoroutinesPropertySpecs(scopeProperty, options, asState) ?: return false
+        val propertySpecs = property.toNativeCoroutinesPropertySpecs(scopeProperty, options, asState, shouldRefine) ?: return false
         val fileSpecBuilder = file.getFileSpecBuilder()
         propertySpecs.forEach(fileSpecBuilder::addProperty)
         return true
     }
 
     private fun processStateProperty(property: KSPropertyDeclaration): Boolean =
-        processProperty(property, true)
+        processProperty(property, asState = true)
 
-    private fun processFunction(function: KSFunctionDeclaration): Boolean {
+    private fun processRefinedProperty(property: KSPropertyDeclaration): Boolean =
+        processProperty(property, shouldRefine = true)
+
+    private fun processRefinedStateProperty(property: KSPropertyDeclaration): Boolean =
+        processProperty(property, asState = true, shouldRefine = true)
+
+    private fun processFunction(function: KSFunctionDeclaration, shouldRefine: Boolean = false): Boolean {
         if (!function.validate()) return false
         val file = function.containingFile
         if (file == null) {
@@ -70,8 +93,11 @@ internal class KmpNativeCoroutinesSymbolProcessor(
             return true
         }
         val scopeProperty = coroutineScopeProvider.getScopeProperty(function) ?: return false
-        val funSpec = function.toNativeCoroutinesFunSpec(scopeProperty, options) ?: return false
+        val funSpec = function.toNativeCoroutinesFunSpec(scopeProperty, options, shouldRefine) ?: return false
         file.getFileSpecBuilder().addFunction(funSpec)
         return true
     }
+
+    private fun processRefinedFunction(function: KSFunctionDeclaration): Boolean =
+        processFunction(function, shouldRefine = true)
 }
