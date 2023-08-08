@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name       = 'KMPNativeCoroutinesRxSwift'
-  s.version    = '1.0.0-ALPHA-13'
+  s.version    = '1.0.0-ALPHA-14'
   s.summary    = 'Swift library for Kotlin Coroutines with RxSwift'
 
   s.homepage   = 'https://github.com/rickclephas/KMP-NativeCoroutines'
