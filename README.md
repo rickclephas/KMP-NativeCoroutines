@@ -24,14 +24,19 @@ This library solves both of these limitations 😄.
 
 ## Compatibility
 
-The latest version of the library uses Kotlin version `1.8.20`.  
-Compatibility versions for older Kotlin versions are also available:
+The latest version of the library uses Kotlin version `1.9.0`.  
+Compatibility versions for older and/or preview Kotlin versions are also available:
 
-| Version       | Version suffix  |   Kotlin   |    KSP     | Coroutines |
-|---------------|-----------------|:----------:|:----------:|:----------:|
-| **_latest_**  | **_no suffix_** | **1.8.20** | **1.0.10** | **1.6.4**  |
-| 1.0.0-ALPHA-5 | _no suffix_     |   1.8.10   |   1.0.9    |   1.6.4    |
-| 1.0.0-ALPHA-4 | _no suffix_     |   1.8.0    |   1.0.8    |   1.6.4    |
+| Version        | Version suffix     |  Kotlin   |    KSP     | Coroutines |
+|----------------|--------------------|:---------:|:----------:|:----------:|
+| **_latest_**   | **_no suffix_**    | **1.9.0** | **1.0.12** | **1.7.3**  |
+| 1.0.0-ALPHA-13 | _no suffix_        |   1.9.0   |   1.0.11   |   1.7.2    |
+| 1.0.0-ALPHA-12 | _no suffix_        |  1.8.22   |   1.0.11   |   1.7.2    |
+| 1.0.0-ALPHA-10 | _no suffix_        |  1.8.21   |   1.0.11   |   1.7.1    |
+| 1.0.0-ALPHA-8  | _no suffix_        |  1.8.21   |   1.0.11   |   1.6.4    |
+| 1.0.0-ALPHA-7  | _no suffix_        |  1.8.20   |   1.0.10   |   1.6.4    |
+| 1.0.0-ALPHA-5  | _no suffix_        |  1.8.10   |   1.0.9    |   1.6.4    |
+| 1.0.0-ALPHA-4  | _no suffix_        |   1.8.0   |   1.0.8    |   1.6.4    |
 
 You can choose from a couple of Swift implementations.  
 Depending on the implementation you can support as low as iOS 9, macOS 10.9, tvOS 9 and watchOS 3:
@@ -50,15 +55,13 @@ or the Swift Package Manager.
 
 Make sure to always use the same versions for all the libraries!
 
-[![latest release](https://img.shields.io/github/v/release/rickclephas/KMP-NativeCoroutines?label=latest%20release&sort=semver&include_prereleases)](https://github.com/rickclephas/KMP-NativeCoroutines/releases)
-
 ### Kotlin
 
 For Kotlin just add the plugin to your `build.gradle.kts`:
 ```kotlin
 plugins {
-    id("com.google.devtools.ksp") version "<ksp-version>"
-    id("com.rickclephas.kmp.nativecoroutines") version "<version>"
+    id("com.google.devtools.ksp") version "1.9.0-1.0.12"
+    id("com.rickclephas.kmp.nativecoroutines") version "1.0.0-ALPHA-14"
 }
 ```
 and make sure to opt in to the experimental `@ObjCName` annotation:
@@ -74,7 +77,7 @@ The Swift implementations are available via the Swift Package Manager.
 Just add it to your `Package.swift` file:
 ```swift
 dependencies: [
-    .package(url: "https://github.com/rickclephas/KMP-NativeCoroutines.git", from: "<version>")
+    .package(url: "https://github.com/rickclephas/KMP-NativeCoroutines.git", from: "1.0.0-ALPHA-14")
 ]
 ```
 
@@ -91,9 +94,9 @@ Or add it in Xcode by going to `File` > `Add Packages...` and providing the URL:
 
 If you use CocoaPods add one or more of the following libraries to your `Podfile`:
 ```ruby
-pod 'KMPNativeCoroutinesAsync', '<version>'    # Swift Concurrency implementation
-pod 'KMPNativeCoroutinesCombine', '<version>'  # Combine implementation
-pod 'KMPNativeCoroutinesRxSwift', '<version>'  # RxSwift implementation
+pod 'KMPNativeCoroutinesAsync', '1.0.0-ALPHA-14'    # Swift Concurrency implementation
+pod 'KMPNativeCoroutinesCombine', '1.0.0-ALPHA-14'  # Combine implementation
+pod 'KMPNativeCoroutinesRxSwift', '1.0.0-ALPHA-14'  # RxSwift implementation
 ```
 > **Note**: the version for CocoaPods should not contain the Kotlin version suffix (e.g. `-new-mm` or `-kotlin-1.6.0`).
 
@@ -111,6 +114,8 @@ Just annotate your coroutines declarations with `@NativeCoroutines` (or `@Native
 
 Your `Flow` properties/functions get a native version:
 ```kotlin
+import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
+
 class Clock {
     // Somewhere in your Kotlin code you define a Flow property
     // and annotate it with @NativeCoroutines
@@ -124,6 +129,9 @@ class Clock {
 
 The plugin will generate this native property for you:
 ```kotlin
+import com.rickclephas.kmp.nativecoroutines.asNativeFlow
+import kotlin.native.ObjCName
+
 @ObjCName(name = "time")
 val Clock.timeNative
     get() = time.asNativeFlow()
@@ -148,6 +156,8 @@ val Clock.timeReplayCache
 Using `StateFlow` properties to track state (like in a view model)?  
 Use the `@NativeCoroutinesState` annotation instead:
 ```kotlin
+import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState
+
 class Clock {
     // Somewhere in your Kotlin code you define a StateFlow property
     // and annotate it with @NativeCoroutinesState
@@ -161,6 +171,9 @@ class Clock {
 
 The plugin will generate these native properties for you:
 ```kotlin
+import com.rickclephas.kmp.nativecoroutines.asNativeFlow
+import kotlin.native.ObjCName
+
 @ObjCName(name = "time")
 val Clock.timeValue
     get() = time.value
@@ -175,6 +188,8 @@ val Clock.timeFlow
 
 The plugin also generates native versions for your annotated suspend functions:
 ```kotlin
+import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
+
 class RandomLettersGenerator {
     // Somewhere in your Kotlin code you define a suspend function
     // and annotate it with @NativeCoroutines
@@ -190,12 +205,33 @@ class RandomLettersGenerator {
 
 The plugin will generate this native function for you:
 ```kotlin
+import com.rickclephas.kmp.nativecoroutines.nativeSuspend
+import kotlin.native.ObjCName
+
 @ObjCName(name = "getRandomLetters")
 fun RandomLettersGenerator.getRandomLettersNative() =
     nativeSuspend { getRandomLetters() }
 ```
 </p>
 </details>
+
+#### Interface limitations
+
+Unfortunately extension functions/properties aren't 
+[supported](https://kotlinlang.org/docs/native-objc-interop.html#extensions-and-category-members)
+on Objective-C protocols.  
+
+However this limitation can be "overcome" with some Swift magic.  
+Assuming `RandomLettersGenerator` is an `interface` instead of a `class` we can do the following:
+```swift
+import KMPNativeCoroutinesCore
+
+extension RandomLettersGenerator {
+    func getRandomLetters() -> NativeSuspend<String, Error, KotlinUnit> {
+        RandomLettersGeneratorNativeKt.getRandomLetters(self)
+    }
+}
+```
 
 ### Swift Concurrency
 
@@ -205,6 +241,8 @@ The Async implementation provides some functions to get async Swift functions an
 
 Use the `asyncFunction(for:)` function to get an async function that can be awaited:
 ```swift
+import KMPNativeCoroutinesAsync
+
 let handle = Task {
     do {
         let letters = try await asyncFunction(for: randomLettersGenerator.getRandomLetters())
@@ -220,6 +258,8 @@ handle.cancel()
 
 or if you don't like these do-catches you can use the `asyncResult(for:)` function:
 ```swift
+import KMPNativeCoroutinesAsync
+
 let result = await asyncResult(for: randomLettersGenerator.getRandomLetters())
 if case let .success(letters) = result {
     print("Got random letters: \(letters)")
@@ -230,6 +270,8 @@ if case let .success(letters) = result {
 
 For `Flow`s there is the `asyncSequence(for:)` function to get an `AsyncSequence`:
 ```swift
+import KMPNativeCoroutinesAsync
+
 let handle = Task {
     do {
         let sequence = asyncSequence(for: randomLettersGenerator.getRandomLettersFlow())
@@ -256,6 +298,8 @@ The Combine implementation provides a couple functions to get an `AnyPublisher` 
 
 For your `Flow`s use the `createPublisher(for:)` function:
 ```swift
+import KMPNativeCoroutinesCombine
+
 // Create an AnyPublisher for your flow
 let publisher = createPublisher(for: clock.time)
 
@@ -279,6 +323,8 @@ let publisher = createPublisher(for: randomLettersGenerator.getRandomLettersFlow
 
 For the suspend functions you should use the `createFuture(for:)` function:
 ```swift
+import KMPNativeCoroutinesCombine
+
 // Create a Future/AnyPublisher for the suspend function
 let future = createFuture(for: randomLettersGenerator.getRandomLetters())
 
@@ -304,6 +350,8 @@ The RxSwift implementation provides a couple functions to get an `Observable` or
 
 For your `Flow`s use the `createObservable(for:)` function:
 ```swift
+import KMPNativeCoroutinesRxSwift
+
 // Create an observable for your flow
 let observable = createObservable(for: clock.time)
 
@@ -331,6 +379,8 @@ let observable = createObservable(for: randomLettersGenerator.getRandomLettersFl
 
 For the suspend functions you should use the `createSingle(for:)` function:
 ```swift
+import KMPNativeCoroutinesRxSwift
+
 // Create a single for the suspend function
 let single = createSingle(for: randomLettersGenerator.getRandomLetters())
 
@@ -380,6 +430,8 @@ nativeCoroutines {
 
 For more control you can provide a custom `CoroutineScope` with the `NativeCoroutineScope` annotation:
 ```kotlin
+import com.rickclephas.kmp.nativecoroutines.NativeCoroutineScope
+
 class Clock {
     @NativeCoroutineScope
     internal val coroutineScope = CoroutineScope(job + Dispatchers.Default)
@@ -400,9 +452,40 @@ internal val defaultCoroutineScope = CoroutineScope(SupervisorJob() + Dispatcher
 
 Use the `NativeCoroutinesIgnore` annotation to tell the plugin to ignore a property or function:
 ```kotlin
+import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesIgnore
+
 @NativeCoroutinesIgnore
 val ignoredFlowProperty: Flow<Int>
 
 @NativeCoroutinesIgnore
 suspend fun ignoredSuspendFunction() { }
+```
+
+### Refining declarations in Swift
+
+If for some reason you would like to further refine your Kotlin declarations in Swift, you can use the
+`NativeCoroutinesRefined` and `NativeCoroutinesRefinedState` annotations.  
+These will tell the plugin to add the [`ShouldRefineInSwift`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.native/-should-refine-in-swift/)
+annotation to the generated properties/function.
+
+> **Note**: this currently requires a module-wide opt-in to `kotlin.experimental.ExperimentalObjCRefinement`.
+
+You could for example refine your `Flow` property to an `AnyPublisher` property:
+```kotlin
+import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesRefined
+
+class Clock {
+    @NativeCoroutinesRefined
+    val time: StateFlow<Long>
+}
+```
+
+```swift
+import KMPNativeCoroutinesCombine
+
+extension Clock {
+    var time: AnyPublisher<KotlinLong, Error> {
+        createPublisher(for: __time)
+    }
+}
 ```

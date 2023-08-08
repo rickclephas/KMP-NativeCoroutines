@@ -1,5 +1,4 @@
 plugins {
-    @Suppress("DSL_SCOPE_VIOLATION")
     alias(libs.plugins.kotlin.jvm)
     `kmp-nativecoroutines-publish`
 }
@@ -11,30 +10,46 @@ dependencies {
 val syncSources by tasks.registering(Sync::class) {
     from(project(":kmp-nativecoroutines-compiler").files("src/main"))
     into("src/main")
+    filter {
+        when (it) {
+            "import com.intellij.psi.PsiElement" -> "import org.jetbrains.kotlin.com.intellij.psi.PsiElement"
+            else -> it
+        }
+    }
+}
+
+kotlin {
+    jvmToolchain(11)
+}
+
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
+val sourcesJar by tasks.getting(Jar::class) {
+    dependsOn(syncSources)
 }
 
 tasks.compileKotlin.configure {
     dependsOn(syncSources)
     kotlinOptions {
-        jvmTarget = "11"
         freeCompilerArgs = listOf("-Xjvm-default=all")
     }
+}
+
+tasks.processResources.configure {
+    dependsOn(syncSources)
 }
 
 tasks.clean.configure {
     delete("src")
 }
 
-val sourcesJar by tasks.registering(Jar::class) {
-    archiveClassifier.set("sources")
-    from(sourceSets.main.get().allSource)
-}
-
 publishing {
     publications {
         create<MavenPublication>("maven") {
-            from(components["kotlin"])
-            artifact(sourcesJar)
+            from(components["java"])
         }
     }
 }

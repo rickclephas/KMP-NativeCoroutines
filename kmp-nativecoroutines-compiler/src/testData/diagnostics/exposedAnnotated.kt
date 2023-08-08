@@ -10,6 +10,8 @@ interface CustomFlow<out T>: Flow<T>
 
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesIgnore
+import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesRefined
+import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesRefinedState
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharedFlow
@@ -18,7 +20,7 @@ import kotlinx.coroutines.flow.StateFlow
 @NativeCoroutines
 suspend fun topLevelSuspendFunction(): Int = 0
 
-@NativeCoroutines
+@NativeCoroutinesRefined
 fun topLevelFlowFunction(): Flow<Int> = throw Throwable()
 
 @NativeCoroutines
@@ -65,6 +67,9 @@ class TestClassA: TestInterface {
 
     @NativeCoroutines
     protected val protectedFlowProperty: Flow<Int> get() = throw Throwable()
+
+    @NativeCoroutinesRefinedState
+    protected val protectedStateFlowProperty: StateFlow<Int> get() = throw Throwable()
 
     @NativeCoroutinesIgnore
     fun implicitFlowFunction() = flowInterfaceProperty

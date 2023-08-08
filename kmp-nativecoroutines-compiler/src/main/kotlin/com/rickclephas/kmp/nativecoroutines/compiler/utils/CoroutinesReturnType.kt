@@ -6,10 +6,10 @@ import org.jetbrains.kotlin.resolve.descriptorUtil.module
 import org.jetbrains.kotlin.types.typeUtil.supertypes
 
 internal sealed class CoroutinesReturnType private constructor() {
-    object CoroutineScope: CoroutinesReturnType()
+    data object CoroutineScope: CoroutinesReturnType()
     sealed class Flow private constructor(): CoroutinesReturnType() {
-        object Generic: Flow()
-        object State: Flow()
+        data object Generic: Flow()
+        data object State: Flow()
     }
 }
 

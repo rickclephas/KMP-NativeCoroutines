@@ -5,38 +5,36 @@ on:
       - 'v[0-9]+.[0-9]+.[0-9]+'
       - 'v[0-9]+.[0-9]+.[0-9]+-ALPHA-[0-9]+'
 jobs:
-  publish-cocoapods-core:
+  publish-cocoapods-libraries:
     runs-on: macos-12
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Setup Xcode
         uses: maxim-lobanov/setup-xcode@v1
         with:
-          xcode-version: '13.4.1'
+          xcode-version: '14.1'
       - name: Publish KMPNativeCoroutinesCore
         run: pod trunk push KMPNativeCoroutinesCore.podspec --synchronous
         env:
           COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
-  publish-cocoapods-async:
-    needs: publish-cocoapods-core
-    runs-on: macos-12
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Setup Xcode
-        uses: maxim-lobanov/setup-xcode@v1
-        with:
-          xcode-version: '13.4.1'
       - name: Publish KMPNativeCoroutinesAsync
         run: pod trunk push KMPNativeCoroutinesAsync.podspec --synchronous
         env:
           COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
-  publish-spm-async:
+      - name: Publish KMPNativeCoroutinesCombine
+        run: pod trunk push KMPNativeCoroutinesCombine.podspec --synchronous
+        env:
+          COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
+      - name: Publish KMPNativeCoroutinesRxSwift
+        run: pod trunk push KMPNativeCoroutinesRxSwift.podspec --synchronous
+        env:
+          COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
+  publish-spm-tags:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
       - name: Publish Async SPM tag
@@ -44,55 +42,18 @@ jobs:
         with:
           package-name: async
           version-name: ${{ github.ref_name }}
-  publish-cocoapods-combine:
-    needs: publish-cocoapods-core
-    runs-on: macos-12
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Setup Xcode
-        uses: maxim-lobanov/setup-xcode@v1
-        with:
-          xcode-version: '13.4.1'
-      - name: Publish KMPNativeCoroutinesCombine
-        run: pod trunk push KMPNativeCoroutinesCombine.podspec --synchronous
-        env:
-          COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
-  publish-spm-combine:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
       - name: Publish Combine SPM tag
         uses: ./.github/actions/publish-spm-tag
         with:
           package-name: combine
           version-name: ${{ github.ref_name }}
-  publish-cocoapods-rxswift:
-    needs: publish-cocoapods-core
-    runs-on: macos-12
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Setup Xcode
-        uses: maxim-lobanov/setup-xcode@v1
-        with:
-          xcode-version: '13.4.1'
-      - name: Publish KMPNativeCoroutinesRxSwift
-        run: pod trunk push KMPNativeCoroutinesRxSwift.podspec --synchronous
-        env:
-          COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
-  publish-spm-rxswift:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
       - name: Publish RxSwift SPM tag
         uses: ./.github/actions/publish-spm-tag
         with:
           package-name: rxswift
+          version-name: ${{ github.ref_name }}
+      - name: Publish no-deps SPM tag
+        uses: ./.github/actions/publish-spm-tag
+        with:
+          package-name: no-deps
           version-name: ${{ github.ref_name }}
