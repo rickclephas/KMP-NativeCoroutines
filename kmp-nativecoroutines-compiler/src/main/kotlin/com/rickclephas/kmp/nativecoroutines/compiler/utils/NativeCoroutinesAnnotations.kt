@@ -3,9 +3,6 @@ package com.rickclephas.kmp.nativecoroutines.compiler.utils
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesFqNames as FqNames
 import org.jetbrains.kotlin.descriptors.CallableDescriptor
 import org.jetbrains.kotlin.descriptors.annotations.AnnotationDescriptor
-import org.jetbrains.kotlin.name.FqName
-private val nativeCoroutinesRefinedFqName = FqName("com.rickclephas.kmp.nativecoroutines.NativeCoroutinesRefined")
-private val nativeCoroutinesRefinedStateFqName = FqName("com.rickclephas.kmp.nativecoroutines.NativeCoroutinesRefinedState")
 
 internal class NativeCoroutinesAnnotations(descriptor: CallableDescriptor) {
 
@@ -28,8 +25,8 @@ internal class NativeCoroutinesAnnotations(descriptor: CallableDescriptor) {
                 FqNames.nativeCoroutines -> nativeCoroutines = it
                 FqNames.nativeCoroutineScope -> nativeCoroutineScope = it
                 FqNames.nativeCoroutinesIgnore -> nativeCoroutinesIgnore = it
-                nativeCoroutinesRefinedFqName -> nativeCoroutinesRefined = it
-                nativeCoroutinesRefinedStateFqName -> nativeCoroutinesRefinedState = it
+                FqNames.nativeCoroutinesRefined -> nativeCoroutinesRefined = it
+                FqNames.nativeCoroutinesRefinedState -> nativeCoroutinesRefinedState = it
                 FqNames.nativeCoroutinesState -> nativeCoroutinesState = it
             }
         }
