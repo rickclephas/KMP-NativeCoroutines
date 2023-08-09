@@ -40,7 +40,6 @@ internal class NativeFlowSubscription<Output, Failure, Unit, S: Subscriber>: Sub
     private var subscriber: S?
     private var demand: Subscribers.Demand = .none
     private var hasDemand: Bool { demand >= 1 }
-    private var item: Output? = nil
     private var next: (() -> Unit)? = nil
     
     init(nativeFlow: @escaping NativeFlow<Output, Failure, Unit>, subscriber: S) {
@@ -49,17 +48,12 @@ internal class NativeFlowSubscription<Output, Failure, Unit, S: Subscriber>: Sub
     }
     
     func request(_ demand: Subscribers.Demand) {
-        guard let subscriber = subscriber else { return }
         semaphore.wait()
         defer { semaphore.signal() }
-        self.demand = demand
+        self.demand += demand
         guard hasDemand else { return }
         guard let nativeFlow = nativeFlow else {
-            if let item = self.item {
-                self.demand = subscriber.receive(item)
-                self.item = nil
-            }
-            if hasDemand, let next = self.next {
+            if let next = self.next {
                 _ = next()
                 self.next = nil
             }
@@ -70,12 +64,8 @@ internal class NativeFlowSubscription<Output, Failure, Unit, S: Subscriber>: Sub
             guard let subscriber = self.subscriber else { return unit }
             self.semaphore.wait()
             defer { self.semaphore.signal() }
-            guard self.hasDemand else {
-                self.item = item
-                self.next = next
-                return unit
-            }
-            self.demand = subscriber.receive(item)
+            self.demand -= 1
+            self.demand += subscriber.receive(item)
             if (self.hasDemand) {
                 return next()
             } else {
