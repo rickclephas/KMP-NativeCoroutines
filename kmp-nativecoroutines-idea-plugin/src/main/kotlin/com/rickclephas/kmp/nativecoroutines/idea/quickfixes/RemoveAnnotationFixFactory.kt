@@ -10,7 +10,7 @@ import org.jetbrains.kotlin.psi.KtAnnotationEntry
 import org.jetbrains.kotlin.psi.KtElement
 
 internal class RemoveAnnotationFixFactory(
-    private val text: String,
+    private val annotationName: String,
     private val diagnosticFactories: Array<out DiagnosticFactory0<KtElement>>
 ): KotlinSingleIntentionActionFactory() {
 
@@ -19,7 +19,7 @@ internal class RemoveAnnotationFixFactory(
             annotationName: String,
             vararg diagnosticFactories: DiagnosticFactory0<KtElement>
         ) {
-            val factory = RemoveAnnotationFixFactory("Remove @$annotationName annotation", diagnosticFactories)
+            val factory = RemoveAnnotationFixFactory(annotationName, diagnosticFactories)
             diagnosticFactories.forEach { register(it, factory) }
         }
     }
@@ -27,6 +27,7 @@ internal class RemoveAnnotationFixFactory(
     override fun createAction(diagnostic: Diagnostic): IntentionAction? {
         val diagnosticFactory = diagnosticFactories.firstOrNull { it == diagnostic.factory } ?: return null
         val annotationEntry = diagnosticFactory.cast(diagnostic).psiElement as? KtAnnotationEntry ?: return null
-        return RemoveAnnotationFix(text, annotationEntry)
+        if (annotationEntry.shortName?.identifierOrNullIfSpecial != annotationName) return null
+        return RemoveAnnotationFix("Remove @$annotationName annotation", annotationEntry)
     }
 }
