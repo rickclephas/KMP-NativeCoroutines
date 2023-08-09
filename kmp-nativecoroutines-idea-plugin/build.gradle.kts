@@ -10,7 +10,7 @@ dependencies {
 }
 
 intellij {
-    version.set("2022.1.4")
+    version.set("2022.2")
     type.set("IC")
     plugins.set(listOf("org.jetbrains.kotlin", "com.intellij.gradle"))
 }
@@ -25,8 +25,8 @@ tasks {
     }
 
     patchPluginXml {
-        sinceBuild.set("221")
-        untilBuild.set("231.*")
+        sinceBuild.set("222")
+        untilBuild.set("232.*")
     }
 
     signPlugin {

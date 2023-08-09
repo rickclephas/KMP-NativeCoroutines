@@ -8,9 +8,8 @@ import org.jetbrains.kotlin.container.StorageComponentContainer
 import org.jetbrains.kotlin.container.useInstance
 import org.jetbrains.kotlin.descriptors.ModuleDescriptor
 import org.jetbrains.kotlin.extensions.StorageComponentContainerContributor
-import org.jetbrains.kotlin.idea.base.projectStructure.moduleInfo.ModuleSourceInfo
-import org.jetbrains.kotlin.idea.compiler.configuration.KotlinCommonCompilerArgumentsHolder
-import org.jetbrains.kotlin.idea.facet.getInstance
+import org.jetbrains.kotlin.idea.caches.project.ModuleSourceInfo
+import org.jetbrains.kotlin.idea.facet.KotlinFacet
 import org.jetbrains.kotlin.platform.TargetPlatform
 import org.jetbrains.kotlin.platform.konan.NativePlatformUnspecifiedTarget
 import org.jetbrains.kotlin.platform.konan.NativePlatformWithTarget
@@ -25,7 +24,8 @@ class KmpNativeCoroutinesStorageComponentContainerContributor: StorageComponentC
         if (!platform.hasApple()) return
 
         val moduleInfo = moduleDescriptor.moduleInfo as? ModuleSourceInfo ?: return
-        val pluginOptions = KotlinCommonCompilerArgumentsHolder.getInstance(moduleInfo.module).pluginOptions ?: emptyArray()
+        val kotlinFacet = KotlinFacet.get(moduleInfo.module) ?: return
+        val pluginOptions = kotlinFacet.configuration.settings.compilerArguments?.pluginOptions ?: emptyArray()
         val exposedSeverity = pluginOptions.getPluginOption(KmpNativeCoroutinesOptionNames.EXPOSED_SEVERITY) ?: return
 
         container.useInstance(KmpNativeCoroutinesChecker(ExposedSeverity.valueOf(exposedSeverity)))
