@@ -12,7 +12,7 @@ dependencies {
 intellij {
     version.set("2022.1.4")
     type.set("IC")
-    plugins.set(listOf("org.jetbrains.kotlin"))
+    plugins.set(listOf("org.jetbrains.kotlin", "com.intellij.gradle"))
 }
 
 tasks {
