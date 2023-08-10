@@ -10,7 +10,7 @@ import org.jetbrains.kotlin.idea.gradleJava.compilerPlugin.AbstractCompilerPlugi
 class KmpNativeCoroutinesGradleProjectImportHandler: AbstractCompilerPluginGradleImportHandler<KmpNativeCoroutinesModel>() {
 
     override val compilerPluginId = "com.rickclephas.kmp.nativecoroutines"
-    override val modelKey = KmpNativeCoroutinesModelImpl.KEY
+    override val modelKey = KmpNativeCoroutinesModelKey
     override val pluginJarFileFromIdea
         get() = PathManager.getJarPathForClass(KmpNativeCoroutinesCommandLineProcessor::class.java)!!
     override val pluginName = "KMP-NativeCoroutines"

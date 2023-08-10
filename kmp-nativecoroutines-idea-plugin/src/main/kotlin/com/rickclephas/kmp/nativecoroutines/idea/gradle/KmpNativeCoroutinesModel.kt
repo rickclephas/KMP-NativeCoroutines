@@ -9,8 +9,6 @@ interface KmpNativeCoroutinesModel: Serializable {
 
 internal class KmpNativeCoroutinesModelImpl(
     override val exposedSeverity: String
-): KmpNativeCoroutinesModel {
-    companion object {
-        val KEY = Key<KmpNativeCoroutinesModel>(KmpNativeCoroutinesModel::class.java.name)
-    }
-}
+): KmpNativeCoroutinesModel
+
+internal val KmpNativeCoroutinesModelKey = Key<KmpNativeCoroutinesModel>(KmpNativeCoroutinesModel::class.java.name)
