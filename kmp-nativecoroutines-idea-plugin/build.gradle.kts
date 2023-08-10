@@ -1,3 +1,5 @@
+@file:Suppress("UnstableApiUsage")
+
 plugins {
     id("java")
     @Suppress("DSL_SCOPE_VIOLATION")
@@ -14,15 +16,15 @@ dependencies {
 }
 
 intellij {
-    version.set("2022.2")
-    type.set("IC")
-    plugins.set(listOf("org.jetbrains.kotlin", "com.intellij.gradle"))
+    version = "2022.2"
+    type = "IC"
+    plugins = listOf("org.jetbrains.kotlin", "com.intellij.gradle")
 }
 
 tasks {
     patchPluginXml {
-        sinceBuild.set("222")
-        untilBuild.set("232.*")
+        sinceBuild = "222"
+        untilBuild = "232.*"
     }
 
     buildSearchableOptions {
@@ -30,13 +32,13 @@ tasks {
     }
 
     signPlugin {
-        certificateChain.set(System.getenv("CERTIFICATE_CHAIN"))
-        privateKey.set(System.getenv("PRIVATE_KEY"))
-        password.set(System.getenv("PRIVATE_KEY_PASSWORD"))
+        certificateChain = System.getenv("CERTIFICATE_CHAIN")
+        privateKey = System.getenv("PRIVATE_KEY")
+        password = System.getenv("PRIVATE_KEY_PASSWORD")
     }
 
     publishPlugin {
-        token.set(System.getenv("PUBLISH_TOKEN"))
+        token = System.getenv("PUBLISH_TOKEN")
     }
 
     runIde {
