@@ -4,6 +4,8 @@ plugins {
 }
 
 kotlin {
+    jvmToolchain(11)
+
     val macosX64 = macosX64()
     val macosArm64 = macosArm64()
     val iosArm64 = iosArm64()
