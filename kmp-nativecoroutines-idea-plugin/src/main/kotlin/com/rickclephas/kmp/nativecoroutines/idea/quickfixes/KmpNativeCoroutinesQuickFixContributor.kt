@@ -28,7 +28,7 @@ import com.rickclephas.kmp.nativecoroutines.compiler.diagnostics.KmpNativeCorout
 import com.rickclephas.kmp.nativecoroutines.compiler.diagnostics.KmpNativeCoroutinesErrors.REDUNDANT_PRIVATE_COROUTINES_REFINED_STATE
 import com.rickclephas.kmp.nativecoroutines.compiler.diagnostics.KmpNativeCoroutinesErrors.REDUNDANT_PRIVATE_COROUTINES_STATE
 import com.rickclephas.kmp.nativecoroutines.idea.quickfixes.AddAnnotationFixFactory.Companion.registerAddAnnotationFix
-import org.jetbrains.kotlin.idea.inspections.RemoveAnnotationFix
+import com.rickclephas.kmp.nativecoroutines.idea.quickfixes.RemoveAnnotationFixFactory.Companion.registerRemoveAnnotationFix
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesFqNames as FqNames
 import org.jetbrains.kotlin.idea.quickfix.QuickFixContributor
 import org.jetbrains.kotlin.idea.quickfix.QuickFixes
@@ -44,7 +44,7 @@ class KmpNativeCoroutinesQuickFixContributor: QuickFixContributor {
             FqNames.nativeCoroutinesState,
             FqNames.nativeCoroutines,
         )
-        listOf(
+        quickFixes.registerRemoveAnnotationFix(
             CONFLICT_COROUTINES,
             IGNORED_COROUTINES,
             IGNORED_COROUTINES_REFINED,
@@ -66,8 +66,6 @@ class KmpNativeCoroutinesQuickFixContributor: QuickFixContributor {
             REDUNDANT_PRIVATE_COROUTINES_REFINED,
             REDUNDANT_PRIVATE_COROUTINES_REFINED_STATE,
             REDUNDANT_PRIVATE_COROUTINES_STATE,
-        ).forEach {
-            quickFixes.register(it, RemoveAnnotationFix)
-        }
+        )
     }
 }
