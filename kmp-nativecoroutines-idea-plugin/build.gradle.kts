@@ -32,13 +32,13 @@ tasks {
     }
 
     signPlugin {
-        certificateChain = System.getenv("CERTIFICATE_CHAIN")
-        privateKey = System.getenv("PRIVATE_KEY")
-        password = System.getenv("PRIVATE_KEY_PASSWORD")
+        certificateChain = System.getenv("IDEA_CERTIFICATE_CHAIN")
+        privateKey = System.getenv("IDEA_PRIVATE_KEY")
+        password = System.getenv("IDEA_PRIVATE_KEY_PASSWORD")
     }
 
     publishPlugin {
-        token = System.getenv("PUBLISH_TOKEN")
+        token = System.getenv("IDEA_PUBLISH_TOKEN")
     }
 
     runIde {
