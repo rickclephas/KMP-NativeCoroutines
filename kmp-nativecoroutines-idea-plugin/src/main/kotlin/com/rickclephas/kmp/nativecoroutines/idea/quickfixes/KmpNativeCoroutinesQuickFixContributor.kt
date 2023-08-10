@@ -28,7 +28,7 @@ import com.rickclephas.kmp.nativecoroutines.compiler.diagnostics.KmpNativeCorout
 import com.rickclephas.kmp.nativecoroutines.compiler.diagnostics.KmpNativeCoroutinesErrors.REDUNDANT_PRIVATE_COROUTINES_REFINED_STATE
 import com.rickclephas.kmp.nativecoroutines.compiler.diagnostics.KmpNativeCoroutinesErrors.REDUNDANT_PRIVATE_COROUTINES_STATE
 import com.rickclephas.kmp.nativecoroutines.idea.quickfixes.AddAnnotationFixFactory.Companion.registerAddAnnotationFix
-import com.rickclephas.kmp.nativecoroutines.idea.quickfixes.RemoveAnnotationFixFactory.Companion.registerRemoveAnnotationFix
+import org.jetbrains.kotlin.idea.inspections.RemoveAnnotationFix
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesFqNames as FqNames
 import org.jetbrains.kotlin.idea.quickfix.QuickFixContributor
 import org.jetbrains.kotlin.idea.quickfix.QuickFixes
@@ -36,83 +36,43 @@ import org.jetbrains.kotlin.idea.quickfix.QuickFixes
 class KmpNativeCoroutinesQuickFixContributor: QuickFixContributor {
     override fun registerQuickFixes(quickFixes: QuickFixes) {
         quickFixes.registerAddAnnotationFix(
-            FqNames.nativeCoroutines,
-            EXPOSED_FLOW_TYPE,
-            EXPOSED_FLOW_TYPE_ERROR,
-            EXPOSED_STATE_FLOW_PROPERTY,
-            EXPOSED_STATE_FLOW_PROPERTY_ERROR,
-            EXPOSED_SUSPEND_FUNCTION,
-            EXPOSED_SUSPEND_FUNCTION_ERROR
+            listOf(EXPOSED_FLOW_TYPE, EXPOSED_FLOW_TYPE_ERROR, EXPOSED_SUSPEND_FUNCTION, EXPOSED_SUSPEND_FUNCTION_ERROR),
+            listOf(FqNames.nativeCoroutines, FqNames.nativeCoroutinesRefined, FqNames.nativeCoroutinesIgnore)
         )
         quickFixes.registerAddAnnotationFix(
-            FqNames.nativeCoroutinesIgnore,
-            EXPOSED_FLOW_TYPE,
-            EXPOSED_FLOW_TYPE_ERROR,
-            EXPOSED_STATE_FLOW_PROPERTY,
-            EXPOSED_STATE_FLOW_PROPERTY_ERROR,
-            EXPOSED_SUSPEND_FUNCTION,
-            EXPOSED_SUSPEND_FUNCTION_ERROR
+            listOf(EXPOSED_STATE_FLOW_PROPERTY, EXPOSED_STATE_FLOW_PROPERTY_ERROR),
+            listOf(
+                FqNames.nativeCoroutinesState,
+                FqNames.nativeCoroutines,
+                FqNames.nativeCoroutinesRefinedState,
+                FqNames.nativeCoroutinesRefined,
+                FqNames.nativeCoroutinesIgnore,
+            )
         )
-        quickFixes.registerAddAnnotationFix(
-            FqNames.nativeCoroutinesRefined,
-            EXPOSED_FLOW_TYPE,
-            EXPOSED_FLOW_TYPE_ERROR,
-            EXPOSED_STATE_FLOW_PROPERTY,
-            EXPOSED_STATE_FLOW_PROPERTY_ERROR,
-            EXPOSED_SUSPEND_FUNCTION,
-            EXPOSED_SUSPEND_FUNCTION_ERROR
-        )
-        quickFixes.registerAddAnnotationFix(
-            FqNames.nativeCoroutinesRefinedState,
-            EXPOSED_STATE_FLOW_PROPERTY,
-            EXPOSED_STATE_FLOW_PROPERTY_ERROR
-        )
-        quickFixes.registerAddAnnotationFix(
-            FqNames.nativeCoroutinesState,
-            EXPOSED_STATE_FLOW_PROPERTY,
-            EXPOSED_STATE_FLOW_PROPERTY_ERROR
-        )
-        quickFixes.registerRemoveAnnotationFix(
-            "NativeCoroutinesState",
-            CONFLICT_COROUTINES,
-            IGNORED_COROUTINES_STATE,
-            INVALID_COROUTINES_STATE,
-            REDUNDANT_OVERRIDE_COROUTINES_STATE,
-            REDUNDANT_PRIVATE_COROUTINES_STATE
-        )
-        quickFixes.registerRemoveAnnotationFix(
-            "NativeCoroutinesRefinedState",
-            CONFLICT_COROUTINES,
-            IGNORED_COROUTINES_REFINED_STATE,
-            INVALID_COROUTINES_REFINED_STATE,
-            REDUNDANT_OVERRIDE_COROUTINES_REFINED_STATE,
-            REDUNDANT_PRIVATE_COROUTINES_REFINED_STATE
-        )
-        quickFixes.registerRemoveAnnotationFix(
-            "NativeCoroutinesRefined",
-            CONFLICT_COROUTINES,
-            IGNORED_COROUTINES_REFINED,
-            INVALID_COROUTINES_REFINED,
-            REDUNDANT_OVERRIDE_COROUTINES_REFINED,
-            REDUNDANT_PRIVATE_COROUTINES_REFINED
-        )
-        quickFixes.registerRemoveAnnotationFix(
-            "NativeCoroutines",
+        listOf(
             CONFLICT_COROUTINES,
             IGNORED_COROUTINES,
+            IGNORED_COROUTINES_REFINED,
+            IGNORED_COROUTINES_REFINED_STATE,
+            IGNORED_COROUTINES_STATE,
             INVALID_COROUTINES,
-            REDUNDANT_OVERRIDE_COROUTINES,
-            REDUNDANT_PRIVATE_COROUTINES
-        )
-        quickFixes.registerRemoveAnnotationFix(
-            "NativeCoroutinesIgnore",
+            INVALID_COROUTINE_SCOPE,
             INVALID_COROUTINES_IGNORE,
+            INVALID_COROUTINES_REFINED,
+            INVALID_COROUTINES_REFINED_STATE,
+            INVALID_COROUTINES_STATE,
+            REDUNDANT_OVERRIDE_COROUTINES,
             REDUNDANT_OVERRIDE_COROUTINES_IGNORE,
-            REDUNDANT_PRIVATE_COROUTINES_IGNORE
-        )
-        quickFixes.registerRemoveAnnotationFix(
-            "NativeCoroutineScope",
-            INVALID_COROUTINE_SCOPE
-        )
+            REDUNDANT_OVERRIDE_COROUTINES_REFINED,
+            REDUNDANT_OVERRIDE_COROUTINES_REFINED_STATE,
+            REDUNDANT_OVERRIDE_COROUTINES_STATE,
+            REDUNDANT_PRIVATE_COROUTINES,
+            REDUNDANT_PRIVATE_COROUTINES_IGNORE,
+            REDUNDANT_PRIVATE_COROUTINES_REFINED,
+            REDUNDANT_PRIVATE_COROUTINES_REFINED_STATE,
+            REDUNDANT_PRIVATE_COROUTINES_STATE,
+        ).forEach {
+            quickFixes.register(it, RemoveAnnotationFix)
+        }
     }
 }
