@@ -37,17 +37,12 @@ class KmpNativeCoroutinesQuickFixContributor: QuickFixContributor {
     override fun registerQuickFixes(quickFixes: QuickFixes) {
         quickFixes.registerAddAnnotationFix(
             listOf(EXPOSED_FLOW_TYPE, EXPOSED_FLOW_TYPE_ERROR, EXPOSED_SUSPEND_FUNCTION, EXPOSED_SUSPEND_FUNCTION_ERROR),
-            listOf(FqNames.nativeCoroutines, FqNames.nativeCoroutinesRefined, FqNames.nativeCoroutinesIgnore)
+            FqNames.nativeCoroutines,
         )
         quickFixes.registerAddAnnotationFix(
             listOf(EXPOSED_STATE_FLOW_PROPERTY, EXPOSED_STATE_FLOW_PROPERTY_ERROR),
-            listOf(
-                FqNames.nativeCoroutinesState,
-                FqNames.nativeCoroutines,
-                FqNames.nativeCoroutinesRefinedState,
-                FqNames.nativeCoroutinesRefined,
-                FqNames.nativeCoroutinesIgnore,
-            )
+            FqNames.nativeCoroutinesState,
+            FqNames.nativeCoroutines,
         )
         listOf(
             CONFLICT_COROUTINES,
