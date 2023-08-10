@@ -4,7 +4,13 @@
     <vendor email="rclephas@gmail.com">Rick Clephas</vendor>
 
     <description><![CDATA[
-    Use Kotlin Coroutines from Swift code in KMP apps.
+    Provides IDE support for <a href="https://github.com/rickclephas/KMP-NativeCoroutines">KMP-NativeCoroutines</a>:
+    <ul>
+        <li>Annotation usage validation</li>
+        <li>Exposed coroutines warnings</li>
+        <li>Quick fixes to add annotations</li>
+    </ul>
+    Read the <a href="https://github.com/rickclephas/KMP-NativeCoroutines">documentation</a> to get started.
   ]]></description>
 
     <depends>com.intellij.modules.platform</depends>
