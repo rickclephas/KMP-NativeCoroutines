@@ -2,9 +2,8 @@
 
 plugins {
     id("java")
-    @Suppress("DSL_SCOPE_VIOLATION")
     alias(libs.plugins.kotlin.jvm)
-    id("org.jetbrains.intellij") version "1.15.0"
+    alias(libs.plugins.intellij)
 }
 
 kotlin {
