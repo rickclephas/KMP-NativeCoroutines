@@ -1,7 +1,7 @@
 package com.rickclephas.kmp.nativecoroutines.idea.compiler.extensions
 
-import com.rickclephas.kmp.nativecoroutines.compiler.config.ExposedSeverity
-import com.rickclephas.kmp.nativecoroutines.compiler.config.KmpNativeCoroutinesOptionNames
+import com.rickclephas.kmp.nativecoroutines.compiler.config.ConfigOption
+import com.rickclephas.kmp.nativecoroutines.compiler.config.EXPOSED_SEVERITY
 import com.rickclephas.kmp.nativecoroutines.compiler.diagnostics.KmpNativeCoroutinesChecker
 import org.jetbrains.kotlin.analyzer.moduleInfo
 import org.jetbrains.kotlin.container.StorageComponentContainer
@@ -26,9 +26,9 @@ class KmpNativeCoroutinesStorageComponentContainerContributor: StorageComponentC
         val moduleInfo = moduleDescriptor.moduleInfo as? ModuleSourceInfo ?: return
         val kotlinFacet = KotlinFacet.get(moduleInfo.module) ?: return
         val pluginOptions = kotlinFacet.configuration.settings.compilerArguments?.pluginOptions ?: emptyArray()
-        val exposedSeverity = pluginOptions.getPluginOption(KmpNativeCoroutinesOptionNames.EXPOSED_SEVERITY) ?: return
+        val exposedSeverity = pluginOptions.getPluginOption(EXPOSED_SEVERITY) ?: return
 
-        container.useInstance(KmpNativeCoroutinesChecker(ExposedSeverity.valueOf(exposedSeverity)))
+        container.useInstance(KmpNativeCoroutinesChecker(exposedSeverity))
     }
 
     private fun TargetPlatform.hasApple(): Boolean = isNotEmpty() && any {
@@ -39,9 +39,10 @@ class KmpNativeCoroutinesStorageComponentContainerContributor: StorageComponentC
         }
     }
 
-    private fun Array<String>.getPluginOption(optionName: String): String? {
+    private fun <T: Any> Array<String>.getPluginOption(option: ConfigOption<T>): T? {
         val pluginId = "com.rickclephas.kmp.nativecoroutines"
-        val prefix = "plugin:$pluginId:$optionName="
-        return firstOrNull { it.startsWith(prefix) }?.substring(prefix.length)
+        val prefix = "plugin:$pluginId:${option.optionName}="
+        val value = firstOrNull { it.startsWith(prefix) }?.substring(prefix.length)
+        return value?.let(option::parse)
     }
 }

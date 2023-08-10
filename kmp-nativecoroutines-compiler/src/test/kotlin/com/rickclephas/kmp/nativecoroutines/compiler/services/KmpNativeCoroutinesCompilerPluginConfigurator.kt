@@ -1,7 +1,7 @@
 package com.rickclephas.kmp.nativecoroutines.compiler.services
 
 import com.rickclephas.kmp.nativecoroutines.compiler.KmpNativeCoroutinesCompilerPluginRegistrar
-import com.rickclephas.kmp.nativecoroutines.compiler.config.KmpNativeCoroutinesConfigurationKeys as ConfigurationKeys
+import com.rickclephas.kmp.nativecoroutines.compiler.config.EXPOSED_SEVERITY
 import com.rickclephas.kmp.nativecoroutines.compiler.directives.KmpNativeCoroutinesDirectives as Directives
 import org.jetbrains.kotlin.compiler.plugin.CompilerPluginRegistrar
 import org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi
@@ -20,7 +20,7 @@ internal class KmpNativeCoroutinesCompilerPluginConfigurator(
     override val directiveContainers: List<DirectivesContainer> = listOf(Directives)
 
     override fun DirectiveToConfigurationKeyExtractor.provideConfigurationKeys() {
-        register(Directives.EXPOSED_SEVERITY, ConfigurationKeys.EXPOSED_SEVERITY)
+        register(Directives.EXPOSED_SEVERITY, EXPOSED_SEVERITY.configKey)
     }
 
     override fun CompilerPluginRegistrar.ExtensionStorage.registerCompilerExtensions(

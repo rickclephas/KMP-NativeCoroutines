@@ -1,6 +1,7 @@
 package com.rickclephas.kmp.nativecoroutines.compiler
 
-import com.rickclephas.kmp.nativecoroutines.compiler.config.exposedSeverity
+import com.rickclephas.kmp.nativecoroutines.compiler.config.EXPOSED_SEVERITY
+import com.rickclephas.kmp.nativecoroutines.compiler.config.get
 import com.rickclephas.kmp.nativecoroutines.compiler.diagnostics.KmpNativeCoroutinesChecker
 import org.jetbrains.kotlin.config.CompilerConfiguration
 import org.jetbrains.kotlin.container.StorageComponentContainer
@@ -18,6 +19,6 @@ internal class KmpNativeCoroutinesStorageComponentContainerContributor(
         platform: TargetPlatform,
         moduleDescriptor: ModuleDescriptor
     ) {
-        container.useInstance(KmpNativeCoroutinesChecker(configuration.exposedSeverity))
+        container.useInstance(KmpNativeCoroutinesChecker(configuration[EXPOSED_SEVERITY]))
     }
 }
