@@ -1,6 +1,5 @@
 package com.rickclephas.kmp.nativecoroutines.idea.gradle
 
-import com.rickclephas.kmp.nativecoroutines.compiler.config.EXPOSED_SEVERITY
 import org.gradle.api.Project
 import org.jetbrains.plugins.gradle.tooling.AbstractModelBuilderService
 import org.jetbrains.plugins.gradle.tooling.ErrorMessageBuilder
@@ -15,7 +14,7 @@ class KmpNativeCoroutinesModelBuilderService: AbstractModelBuilderService() {
         if (project.plugins.findPlugin("com.rickclephas.kmp.nativecoroutines") == null) return null
         val extension = project.extensions.findByName("nativeCoroutines") ?: return null
         return KmpNativeCoroutinesModelImpl(
-            exposedSeverity = extension.get<Enum<*>>("exposedSeverity")?.name ?: EXPOSED_SEVERITY.defaultValue.name
+            exposedSeverity = extension.get<Enum<*>>("exposedSeverity")?.name ?: "WARNING"
         )
     }
 
