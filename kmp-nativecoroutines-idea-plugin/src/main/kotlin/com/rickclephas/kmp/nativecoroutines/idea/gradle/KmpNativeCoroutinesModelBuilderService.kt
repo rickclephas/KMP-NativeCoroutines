@@ -6,7 +6,7 @@ import org.jetbrains.plugins.gradle.tooling.ErrorMessageBuilder
 import org.jetbrains.plugins.gradle.tooling.ModelBuilderContext
 import java.lang.Exception
 
-class KmpNativeCoroutinesModelBuilderService: AbstractModelBuilderService() {
+public class KmpNativeCoroutinesModelBuilderService: AbstractModelBuilderService() {
 
     override fun canBuild(modelName: String?): Boolean = modelName == KmpNativeCoroutinesModel::class.java.name
 

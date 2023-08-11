@@ -33,7 +33,7 @@ import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesFqNam
 import org.jetbrains.kotlin.idea.quickfix.QuickFixContributor
 import org.jetbrains.kotlin.idea.quickfix.QuickFixes
 
-class KmpNativeCoroutinesQuickFixContributor: QuickFixContributor {
+public class KmpNativeCoroutinesQuickFixContributor: QuickFixContributor {
     override fun registerQuickFixes(quickFixes: QuickFixes) {
         quickFixes.registerAddAnnotationFix(
             listOf(EXPOSED_FLOW_TYPE, EXPOSED_FLOW_TYPE_ERROR, EXPOSED_SUSPEND_FUNCTION, EXPOSED_SUSPEND_FUNCTION_ERROR),

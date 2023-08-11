@@ -7,7 +7,7 @@ import org.jetbrains.kotlin.compiler.plugin.*
 import org.jetbrains.kotlin.config.CompilerConfiguration
 
 @OptIn(ExperimentalCompilerApi::class)
-class KmpNativeCoroutinesCommandLineProcessor: CommandLineProcessor {
+public class KmpNativeCoroutinesCommandLineProcessor: CommandLineProcessor {
 
     override val pluginId: String = "com.rickclephas.kmp.nativecoroutines"
     override val pluginOptions: Collection<AbstractCliOption> = listOf(EXPOSED_SEVERITY)
@@ -16,7 +16,7 @@ class KmpNativeCoroutinesCommandLineProcessor: CommandLineProcessor {
         option: AbstractCliOption,
         value: String,
         configuration: CompilerConfiguration
-    ) = when (option) {
+    ): Unit = when (option) {
         is ConfigOption<*> -> configuration[option] = value
         else -> throw CliOptionProcessingException("Unknown option: ${option.optionName}")
     }

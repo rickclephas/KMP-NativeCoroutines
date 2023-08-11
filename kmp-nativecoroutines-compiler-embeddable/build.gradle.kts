@@ -19,6 +19,7 @@ val syncSources by tasks.registering(Sync::class) {
 }
 
 kotlin {
+    explicitApi()
     jvmToolchain(11)
 }
 

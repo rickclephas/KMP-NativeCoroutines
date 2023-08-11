@@ -1,19 +1,20 @@
 package com.rickclephas.kmp.nativecoroutines.idea.gradle
 
 import com.intellij.openapi.application.PathManager
+import com.intellij.openapi.util.Key
 import com.rickclephas.kmp.nativecoroutines.compiler.KmpNativeCoroutinesCommandLineProcessor
 import com.rickclephas.kmp.nativecoroutines.compiler.config.ConfigOption
 import com.rickclephas.kmp.nativecoroutines.compiler.config.EXPOSED_SEVERITY
 import org.jetbrains.kotlin.idea.compilerPlugin.CompilerPluginSetup.PluginOption
 import org.jetbrains.kotlin.idea.gradleJava.compilerPlugin.AbstractCompilerPluginGradleImportHandler
 
-class KmpNativeCoroutinesGradleProjectImportHandler: AbstractCompilerPluginGradleImportHandler<KmpNativeCoroutinesModel>() {
+public class KmpNativeCoroutinesGradleProjectImportHandler: AbstractCompilerPluginGradleImportHandler<KmpNativeCoroutinesModel>() {
 
-    override val compilerPluginId = "com.rickclephas.kmp.nativecoroutines"
-    override val modelKey = KmpNativeCoroutinesModelKey
-    override val pluginJarFileFromIdea
+    override val compilerPluginId: String = "com.rickclephas.kmp.nativecoroutines"
+    override val modelKey: Key<KmpNativeCoroutinesModel> = KmpNativeCoroutinesModelKey
+    override val pluginJarFileFromIdea: String
         get() = PathManager.getJarPathForClass(KmpNativeCoroutinesCommandLineProcessor::class.java)!!
-    override val pluginName = "KMP-NativeCoroutines"
+    override val pluginName: String = "KMP-NativeCoroutines"
 
     private infix fun <T: Any> ConfigOption<T>.to(value: String): PluginOption = PluginOption(optionName, value)
 

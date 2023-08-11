@@ -49,7 +49,7 @@ import org.jetbrains.kotlin.resolve.checkers.DeclarationChecker
 import org.jetbrains.kotlin.resolve.checkers.DeclarationCheckerContext
 import org.jetbrains.kotlin.resolve.descriptorUtil.isEffectivelyPublicApi
 
-class KmpNativeCoroutinesChecker(
+public class KmpNativeCoroutinesChecker(
     private val exposedSeverity: ExposedSeverity
 ): DeclarationChecker {
 
