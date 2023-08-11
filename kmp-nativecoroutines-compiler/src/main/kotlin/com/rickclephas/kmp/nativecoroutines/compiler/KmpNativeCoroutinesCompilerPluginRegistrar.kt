@@ -7,7 +7,7 @@ import org.jetbrains.kotlin.config.CompilerConfiguration
 import org.jetbrains.kotlin.extensions.StorageComponentContainerContributor
 
 @OptIn(ExperimentalCompilerApi::class)
-class KmpNativeCoroutinesCompilerPluginRegistrar: CompilerPluginRegistrar() {
+public class KmpNativeCoroutinesCompilerPluginRegistrar: CompilerPluginRegistrar() {
 
     override val supportsK2: Boolean = false // TODO: Add K2 support
 

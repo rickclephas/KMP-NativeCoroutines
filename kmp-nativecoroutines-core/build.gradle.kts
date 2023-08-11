@@ -4,6 +4,7 @@ plugins {
 }
 
 kotlin {
+    explicitApi()
     jvmToolchain(11)
 
     val macosX64 = macosX64()

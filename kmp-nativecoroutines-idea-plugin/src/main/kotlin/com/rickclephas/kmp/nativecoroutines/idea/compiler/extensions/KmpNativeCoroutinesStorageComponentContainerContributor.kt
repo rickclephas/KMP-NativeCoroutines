@@ -14,7 +14,7 @@ import org.jetbrains.kotlin.platform.TargetPlatform
 import org.jetbrains.kotlin.platform.konan.NativePlatformUnspecifiedTarget
 import org.jetbrains.kotlin.platform.konan.NativePlatformWithTarget
 
-class KmpNativeCoroutinesStorageComponentContainerContributor: StorageComponentContainerContributor {
+public class KmpNativeCoroutinesStorageComponentContainerContributor: StorageComponentContainerContributor {
 
     override fun registerModuleComponents(
         container: StorageComponentContainer,

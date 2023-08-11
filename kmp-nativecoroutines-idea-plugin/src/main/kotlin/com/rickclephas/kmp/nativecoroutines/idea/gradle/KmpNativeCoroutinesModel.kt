@@ -3,8 +3,8 @@ package com.rickclephas.kmp.nativecoroutines.idea.gradle
 import com.intellij.openapi.util.Key
 import java.io.Serializable
 
-interface KmpNativeCoroutinesModel: Serializable {
-    val exposedSeverity: String
+public interface KmpNativeCoroutinesModel: Serializable {
+    public val exposedSeverity: String
 }
 
 internal class KmpNativeCoroutinesModelImpl(

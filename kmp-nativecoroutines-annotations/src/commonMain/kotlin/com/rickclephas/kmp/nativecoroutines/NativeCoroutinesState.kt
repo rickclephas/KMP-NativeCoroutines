@@ -11,4 +11,4 @@ import kotlin.native.HidesFromObjC
 @MustBeDocumented
 @OptIn(ExperimentalObjCRefinement::class)
 @HidesFromObjC
-annotation class NativeCoroutinesState
+public annotation class NativeCoroutinesState
