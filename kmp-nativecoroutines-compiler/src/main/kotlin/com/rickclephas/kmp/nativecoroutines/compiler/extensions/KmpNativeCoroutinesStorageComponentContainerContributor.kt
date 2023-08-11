@@ -1,4 +1,4 @@
-package com.rickclephas.kmp.nativecoroutines.compiler
+package com.rickclephas.kmp.nativecoroutines.compiler.extensions
 
 import com.rickclephas.kmp.nativecoroutines.compiler.config.EXPOSED_SEVERITY
 import com.rickclephas.kmp.nativecoroutines.compiler.config.get
