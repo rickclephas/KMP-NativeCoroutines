@@ -36,6 +36,27 @@ class CombinePublisherIntegrationTests: XCTestCase {
         XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
     }
     
+    @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+    func testValueBackPressure() async {
+        let integrationTests = FlowIntegrationTests()
+        let sendValueCount: Int32 = 10
+        let publisher = createPublisher(for: integrationTests.getFlow(count: sendValueCount, delay: 100))
+        do {
+            var receivedValueCount: Int32 = 0
+            // .values requests a single value at a time with a demand of 1
+            for try await _ in publisher.values {
+                let emittedCount = integrationTests.emittedCount
+                XCTAssert(emittedCount == receivedValueCount, "Back pressure isn't applied")
+                delay(0.2)
+                receivedValueCount += 1
+            }
+            XCTAssertEqual(receivedValueCount, sendValueCount, "Should have received all values")
+        } catch {
+            XCTFail("Publisher should complete without an error")
+        }
+        await assertJobCompleted(integrationTests)
+    }
+    
     func testNilValueReceived() {
         let integrationTests = FlowIntegrationTests()
         let sendValueCount = randomInt(min: 5, max: 20)
