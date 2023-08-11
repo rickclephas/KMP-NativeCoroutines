@@ -28,13 +28,15 @@ class PublisherTests: XCTestCase {
     func testCompletionWithCorrectValues() {
         let values = [TestValue(), TestValue(), TestValue(), TestValue(), TestValue()]
         let nativeFlow: NativeFlow<TestValue, NSError, Void> = { itemCallback, completionCallback, _ in
-            for value in values {
-                itemCallback(value, {}, ())
+            DispatchQueue.main.async {
+                for value in values {
+                    itemCallback(value, {}, ())
+                }
+                completionCallback(nil, ())
             }
-            completionCallback(nil, ())
             return { }
         }
-        var completionCount = 0
+        let completionExpectation = expectation(description: "Waiting for completion")
         var valueCount = 0
         let cancellable = createPublisher(for: nativeFlow)
             .sink { completion in
@@ -42,13 +44,13 @@ class PublisherTests: XCTestCase {
                     XCTFail("Publisher should complete without error")
                     return
                 }
-                completionCount += 1
+                completionExpectation.fulfill()
             } receiveValue: { receivedValue in
                 XCTAssertIdentical(receivedValue, values[valueCount], "Received incorrect value")
                 valueCount += 1
             }
         _ = cancellable // This is just to remove the unused variable warning
-        XCTAssertEqual(completionCount, 1, "Completion closure should be called once")
+        wait(for: [completionExpectation], timeout: 4)
         XCTAssertEqual(valueCount, values.count, "Value closure should be called for every value")
     }
     
