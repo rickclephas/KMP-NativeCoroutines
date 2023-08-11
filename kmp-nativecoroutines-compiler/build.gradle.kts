@@ -3,8 +3,22 @@ plugins {
     `kmp-nativecoroutines-publish`
 }
 
+sourceSets {
+    test {
+        java.srcDir("src/test/generated")
+    }
+}
+
 dependencies {
     compileOnly(libs.kotlin.compiler)
+    testImplementation(libs.kotlin.compiler)
+    testImplementation(libs.kotlin.compiler.internalTestFramework)
+    testImplementation(libs.kotlin.reflect)
+    testImplementation(platform(libs.junit.bom))
+    testImplementation(libs.junit.jupiter)
+    testImplementation(libs.junit.platform.commons)
+    testImplementation(libs.junit.platform.launcher)
+    testRuntimeOnly(libs.junit)
 }
 
 kotlin {
@@ -20,6 +34,17 @@ tasks.compileKotlin.configure {
     kotlinOptions {
         freeCompilerArgs = listOf("-Xjvm-default=all")
     }
+}
+
+tasks.test {
+    inputs.dir("src/testData")
+    useJUnitPlatform()
+}
+
+val generateTests by tasks.registering(JavaExec::class) {
+    doFirst { delete("src/test/generated") }
+    classpath = sourceSets.test.get().runtimeClasspath
+    mainClass.set("com.rickclephas.kmp.nativecoroutines.compiler.GenerateTestsKt")
 }
 
 publishing {
