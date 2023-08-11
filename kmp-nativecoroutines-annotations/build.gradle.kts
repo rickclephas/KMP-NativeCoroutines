@@ -4,6 +4,8 @@ plugins {
 }
 
 kotlin {
+    jvmToolchain(11)
+
     macosX64()
     macosArm64()
     iosArm64()

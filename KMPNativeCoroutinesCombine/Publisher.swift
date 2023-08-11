@@ -6,6 +6,7 @@
 //
 
 import Combine
+import Dispatch
 import KMPNativeCoroutinesCore
 
 /// Creates an `AnyPublisher` for the provided `NativeFlow`.
@@ -33,9 +34,13 @@ internal struct NativeFlowPublisher<Output, Failure: Error, Unit>: Publisher {
 
 internal class NativeFlowSubscription<Output, Failure, Unit, S: Subscriber>: Subscription where S.Input == Output, S.Failure == Failure {
     
+    private let semaphore = DispatchSemaphore(value: 1)
     private var nativeFlow: NativeFlow<Output, Failure, Unit>?
     private var nativeCancellable: NativeCancellable<Unit>? = nil
     private var subscriber: S?
+    private var demand: Subscribers.Demand = .none
+    private var hasDemand: Bool { demand >= 1 }
+    private var next: (() -> Unit)? = nil
     
     init(nativeFlow: @escaping NativeFlow<Output, Failure, Unit>, subscriber: S) {
         self.nativeFlow = nativeFlow
@@ -43,11 +48,30 @@ internal class NativeFlowSubscription<Output, Failure, Unit, S: Subscriber>: Sub
     }
     
     func request(_ demand: Subscribers.Demand) {
-        guard let nativeFlow = nativeFlow, demand >= 1 else { return }
+        semaphore.wait()
+        defer { semaphore.signal() }
+        self.demand += demand
+        guard hasDemand else { return }
+        guard let nativeFlow = nativeFlow else {
+            if let next = self.next {
+                _ = next()
+                self.next = nil
+            }
+            return
+        }
         self.nativeFlow = nil
-        nativeCancellable = nativeFlow({ item, next, _ in
-            _ = self.subscriber?.receive(item) // TODO: Correctly handle demands
-            return next()
+        nativeCancellable = nativeFlow({ item, next, unit in
+            guard let subscriber = self.subscriber else { return unit }
+            self.semaphore.wait()
+            defer { self.semaphore.signal() }
+            self.demand -= 1
+            self.demand += subscriber.receive(item)
+            if (self.hasDemand) {
+                return next()
+            } else {
+                self.next = next
+                return unit
+            }
         }, { error, unit in
             if let error = error {
                 self.subscriber?.receive(completion: .failure(error))

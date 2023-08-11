@@ -7,6 +7,10 @@ plugins {
     alias(libs.plugins.gradle.plugin.publish)
 }
 
+kotlin {
+    jvmToolchain(11)
+}
+
 java {
     withJavadocJar()
     withSourcesJar()
