@@ -1,15 +1,8 @@
 package com.rickclephas.kmp.nativecoroutines.compiler.utils
 
+import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesFqNames as FqNames
 import org.jetbrains.kotlin.descriptors.CallableDescriptor
 import org.jetbrains.kotlin.descriptors.annotations.AnnotationDescriptor
-import org.jetbrains.kotlin.name.FqName
-
-private val nativeCoroutinesFqName = FqName("com.rickclephas.kmp.nativecoroutines.NativeCoroutines")
-private val nativeCoroutineScopeFqName = FqName("com.rickclephas.kmp.nativecoroutines.NativeCoroutineScope")
-private val nativeCoroutinesIgnoreFqName = FqName("com.rickclephas.kmp.nativecoroutines.NativeCoroutinesIgnore")
-private val nativeCoroutinesRefinedFqName = FqName("com.rickclephas.kmp.nativecoroutines.NativeCoroutinesRefined")
-private val nativeCoroutinesRefinedStateFqName = FqName("com.rickclephas.kmp.nativecoroutines.NativeCoroutinesRefinedState")
-private val nativeCoroutinesStateFqName = FqName("com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState")
 
 internal class NativeCoroutinesAnnotations(descriptor: CallableDescriptor) {
 
@@ -29,12 +22,12 @@ internal class NativeCoroutinesAnnotations(descriptor: CallableDescriptor) {
         var nativeCoroutinesState: AnnotationDescriptor? = null
         descriptor.annotations.forEach {
             when (it.fqName) {
-                nativeCoroutinesFqName -> nativeCoroutines = it
-                nativeCoroutineScopeFqName -> nativeCoroutineScope = it
-                nativeCoroutinesIgnoreFqName -> nativeCoroutinesIgnore = it
-                nativeCoroutinesRefinedFqName -> nativeCoroutinesRefined = it
-                nativeCoroutinesRefinedStateFqName -> nativeCoroutinesRefinedState = it
-                nativeCoroutinesStateFqName -> nativeCoroutinesState = it
+                FqNames.nativeCoroutines -> nativeCoroutines = it
+                FqNames.nativeCoroutineScope -> nativeCoroutineScope = it
+                FqNames.nativeCoroutinesIgnore -> nativeCoroutinesIgnore = it
+                FqNames.nativeCoroutinesRefined -> nativeCoroutinesRefined = it
+                FqNames.nativeCoroutinesRefinedState -> nativeCoroutinesRefinedState = it
+                FqNames.nativeCoroutinesState -> nativeCoroutinesState = it
             }
         }
         this.nativeCoroutines = nativeCoroutines

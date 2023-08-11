@@ -2,7 +2,6 @@ package com.rickclephas.kmp.nativecoroutines.compiler.diagnostics
 
 import com.intellij.psi.PsiElement
 import com.rickclephas.kmp.nativecoroutines.compiler.config.ExposedSeverity
-import com.rickclephas.kmp.nativecoroutines.compiler.config.exposedSeverity
 import com.rickclephas.kmp.nativecoroutines.compiler.diagnostics.KmpNativeCoroutinesErrors.CONFLICT_COROUTINES
 import com.rickclephas.kmp.nativecoroutines.compiler.diagnostics.KmpNativeCoroutinesErrors.EXPOSED_FLOW_TYPE
 import com.rickclephas.kmp.nativecoroutines.compiler.diagnostics.KmpNativeCoroutinesErrors.EXPOSED_FLOW_TYPE_ERROR
@@ -33,7 +32,6 @@ import com.rickclephas.kmp.nativecoroutines.compiler.diagnostics.KmpNativeCorout
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotations
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.CoroutinesReturnType
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.coroutinesReturnType
-import org.jetbrains.kotlin.config.CompilerConfiguration
 import org.jetbrains.kotlin.descriptors.CallableDescriptor
 import org.jetbrains.kotlin.descriptors.DeclarationDescriptor
 import org.jetbrains.kotlin.descriptors.FunctionDescriptor
@@ -51,11 +49,9 @@ import org.jetbrains.kotlin.resolve.checkers.DeclarationChecker
 import org.jetbrains.kotlin.resolve.checkers.DeclarationCheckerContext
 import org.jetbrains.kotlin.resolve.descriptorUtil.isEffectivelyPublicApi
 
-internal class KmpNativeCoroutinesChecker(
-    compilerConfiguration: CompilerConfiguration
+class KmpNativeCoroutinesChecker(
+    private val exposedSeverity: ExposedSeverity
 ): DeclarationChecker {
-
-    private val exposedSeverity: ExposedSeverity = compilerConfiguration.exposedSeverity
 
     override fun check(
         declaration: KtDeclaration,
