@@ -42,15 +42,15 @@ object KmpNativeCoroutinesErrors {
     @JvmField
     val INVALID_COROUTINE_SCOPE = DiagnosticFactory0.create<KtElement>(Severity.ERROR)
     @JvmField
-    val REDUNDANT_OVERRIDE_COROUTINES = DiagnosticFactory0.create<KtElement>(Severity.ERROR)
+    val REDUNDANT_OVERRIDE_COROUTINES = DiagnosticFactory0.create<KtElement>(Severity.WARNING)
     @JvmField
     val REDUNDANT_OVERRIDE_COROUTINES_IGNORE = DiagnosticFactory0.create<KtElement>(Severity.ERROR)
     @JvmField
-    val REDUNDANT_OVERRIDE_COROUTINES_REFINED = DiagnosticFactory0.create<KtElement>(Severity.ERROR)
+    val REDUNDANT_OVERRIDE_COROUTINES_REFINED = DiagnosticFactory0.create<KtElement>(Severity.WARNING)
     @JvmField
-    val REDUNDANT_OVERRIDE_COROUTINES_REFINED_STATE = DiagnosticFactory0.create<KtElement>(Severity.ERROR)
+    val REDUNDANT_OVERRIDE_COROUTINES_REFINED_STATE = DiagnosticFactory0.create<KtElement>(Severity.WARNING)
     @JvmField
-    val REDUNDANT_OVERRIDE_COROUTINES_STATE = DiagnosticFactory0.create<KtElement>(Severity.ERROR)
+    val REDUNDANT_OVERRIDE_COROUTINES_STATE = DiagnosticFactory0.create<KtElement>(Severity.WARNING)
     @JvmField
     val REDUNDANT_PRIVATE_COROUTINES = DiagnosticFactory0.create<KtElement>(Severity.ERROR)
     @JvmField

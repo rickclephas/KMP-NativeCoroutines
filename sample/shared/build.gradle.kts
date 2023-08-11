@@ -8,6 +8,8 @@ plugins {
 version = "1.0"
 
 kotlin {
+    jvmToolchain(11)
+
     explicitApi()
     val macosX64 = macosX64()
     val macosArm64 = macosArm64()
