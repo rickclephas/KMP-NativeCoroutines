@@ -100,6 +100,13 @@ pod 'KMPNativeCoroutinesRxSwift', '1.0.0-ALPHA-15'  # RxSwift implementation
 ```
 > **Note**: the version for CocoaPods should not contain the Kotlin version suffix (e.g. `-new-mm` or `-kotlin-1.6.0`).
 
+### IntelliJ / Android Studio
+
+Install the [IDE plugin](https://plugins.jetbrains.com/plugin/22481) from the JetBrains Marketplace to get:
+* Annotation usage validation
+* Exposed coroutines warnings
+* Quick fixes to add annotations
+
 ## Usage
 
 Using your Kotlin Coroutines code from Swift is almost as easy as calling the Kotlin code.   
@@ -230,6 +237,25 @@ extension RandomLettersGenerator {
     func getRandomLetters() -> NativeSuspend<String, Error, KotlinUnit> {
         RandomLettersGeneratorNativeKt.getRandomLetters(self)
     }
+}
+```
+
+#### Exposed coroutines checks
+
+When suspend functions and/or `Flow` declarations are exposed to ObjC/Swift,
+the compiler and IDE plugin will produce a warning, reminding you to add one of the KMP-NativeCoroutines annotations.
+
+You can customise the severity of these checks in your `build.gradle.kts` file:
+```kotlin
+nativeCoroutines {
+    exposedSeverity = ExposedSeverity.ERROR
+}
+```
+
+Or, if you are not interested in these checks, disable them:
+```kotlin
+nativeCoroutines {
+    exposedSeverity = ExposedSeverity.NONE
 }
 ```
 
