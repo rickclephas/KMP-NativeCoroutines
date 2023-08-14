@@ -1,26 +1,23 @@
 package com.rickclephas.kmp.nativecoroutines.compiler
 
-import org.jetbrains.kotlin.compiler.plugin.AbstractCliOption
-import org.jetbrains.kotlin.compiler.plugin.CliOption
-import org.jetbrains.kotlin.compiler.plugin.CommandLineProcessor
-import org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi
+import com.rickclephas.kmp.nativecoroutines.compiler.config.ConfigOption
+import com.rickclephas.kmp.nativecoroutines.compiler.config.EXPOSED_SEVERITY
+import com.rickclephas.kmp.nativecoroutines.compiler.config.set
+import org.jetbrains.kotlin.compiler.plugin.*
 import org.jetbrains.kotlin.config.CompilerConfiguration
 
 @OptIn(ExperimentalCompilerApi::class)
-class KmpNativeCoroutinesCommandLineProcessor: CommandLineProcessor {
+public class KmpNativeCoroutinesCommandLineProcessor: CommandLineProcessor {
 
     override val pluginId: String = "com.rickclephas.kmp.nativecoroutines"
-
-    override val pluginOptions: Collection<AbstractCliOption> = listOf(
-        CliOption(SUFFIX_OPTION_NAME, "string", "suffix used for the generated functions", true)
-    )
+    override val pluginOptions: Collection<AbstractCliOption> = listOf(EXPOSED_SEVERITY)
 
     override fun processOption(
         option: AbstractCliOption,
         value: String,
         configuration: CompilerConfiguration
-    ) = when (option.optionName) {
-        SUFFIX_OPTION_NAME -> configuration.put(SUFFIX_KEY, value)
-        else -> error("Unexpected config option ${option.optionName}")
+    ): Unit = when (option) {
+        is ConfigOption<*> -> configuration[option] = value
+        else -> throw CliOptionProcessingException("Unknown option: ${option.optionName}")
     }
 }
