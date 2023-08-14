@@ -6,7 +6,7 @@ import kotlinx.cinterop.convert
 import platform.Foundation.NSError
 import platform.Foundation.NSLocalizedDescriptionKey
 
-actual typealias NativeError = NSError
+public actual typealias NativeError = NSError
 
 /**
  * Converts a [Throwable] to a [NSError].

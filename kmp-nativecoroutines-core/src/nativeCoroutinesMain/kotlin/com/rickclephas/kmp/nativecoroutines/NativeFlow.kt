@@ -14,7 +14,7 @@ import kotlin.coroutines.suspendCoroutine
  * The function takes an `onItem`, `onComplete` and `onCancelled` callback
  * and returns a cancellable that can be used to cancel the collection.
  */
-typealias NativeFlow<T> = (
+public typealias NativeFlow<T> = (
     onItem: NativeCallback2<T, () -> Unit>,
     onComplete: NativeCallback<NativeError?>,
     onCancelled: NativeCallback<NativeError>
@@ -27,7 +27,7 @@ typealias NativeFlow<T> = (
  * @receiver the [Flow] to collect.
  * @see Flow.collect
  */
-fun <T> Flow<T>.asNativeFlow(scope: CoroutineScope? = null): NativeFlow<T> {
+public fun <T> Flow<T>.asNativeFlow(scope: CoroutineScope? = null): NativeFlow<T> {
     val coroutineScope = scope ?: defaultCoroutineScope
     return (collect@{ onItem: NativeCallback2<T, () -> Unit>,
                       onComplete: NativeCallback<NativeError?>,

@@ -11,11 +11,11 @@ internal class CoroutineScopeProvider(
     private val logger: KSPLogger
 ) {
 
-    companion object {
-        private val KSClassDeclaration.scopePropertyKey: String
+    private companion object {
+        val KSClassDeclaration.scopePropertyKey: String
             get() = "class://${toClassName().canonicalName}"
 
-        private val KSFile.scopePropertyKey: String
+        val KSFile.scopePropertyKey: String
             get() = "file://${filePath}"
     }
 
