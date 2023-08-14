@@ -61,7 +61,7 @@ For Kotlin just add the plugin to your `build.gradle.kts`:
 ```kotlin
 plugins {
     id("com.google.devtools.ksp") version "1.9.0-1.0.12"
-    id("com.rickclephas.kmp.nativecoroutines") version "1.0.0-ALPHA-15"
+    id("com.rickclephas.kmp.nativecoroutines") version "1.0.0-ALPHA-16"
 }
 ```
 and make sure to opt in to the experimental `@ObjCName` annotation:
@@ -77,7 +77,7 @@ The Swift implementations are available via the Swift Package Manager.
 Just add it to your `Package.swift` file:
 ```swift
 dependencies: [
-    .package(url: "https://github.com/rickclephas/KMP-NativeCoroutines.git", from: "1.0.0-ALPHA-15")
+    .package(url: "https://github.com/rickclephas/KMP-NativeCoroutines.git", from: "1.0.0-ALPHA-16")
 ]
 ```
 
@@ -94,11 +94,18 @@ Or add it in Xcode by going to `File` > `Add Packages...` and providing the URL:
 
 If you use CocoaPods add one or more of the following libraries to your `Podfile`:
 ```ruby
-pod 'KMPNativeCoroutinesAsync', '1.0.0-ALPHA-15'    # Swift Concurrency implementation
-pod 'KMPNativeCoroutinesCombine', '1.0.0-ALPHA-15'  # Combine implementation
-pod 'KMPNativeCoroutinesRxSwift', '1.0.0-ALPHA-15'  # RxSwift implementation
+pod 'KMPNativeCoroutinesAsync', '1.0.0-ALPHA-16'    # Swift Concurrency implementation
+pod 'KMPNativeCoroutinesCombine', '1.0.0-ALPHA-16'  # Combine implementation
+pod 'KMPNativeCoroutinesRxSwift', '1.0.0-ALPHA-16'  # RxSwift implementation
 ```
 > **Note**: the version for CocoaPods should not contain the Kotlin version suffix (e.g. `-new-mm` or `-kotlin-1.6.0`).
+
+### IntelliJ / Android Studio
+
+Install the [IDE plugin](https://plugins.jetbrains.com/plugin/22481) from the JetBrains Marketplace to get:
+* Annotation usage validation
+* Exposed coroutines warnings
+* Quick fixes to add annotations
 
 ## Usage
 
@@ -230,6 +237,25 @@ extension RandomLettersGenerator {
     func getRandomLetters() -> NativeSuspend<String, Error, KotlinUnit> {
         RandomLettersGeneratorNativeKt.getRandomLetters(self)
     }
+}
+```
+
+#### Exposed coroutines checks
+
+When suspend functions and/or `Flow` declarations are exposed to ObjC/Swift,
+the compiler and IDE plugin will produce a warning, reminding you to add one of the KMP-NativeCoroutines annotations.
+
+You can customise the severity of these checks in your `build.gradle.kts` file:
+```kotlin
+nativeCoroutines {
+    exposedSeverity = ExposedSeverity.ERROR
+}
+```
+
+Or, if you are not interested in these checks, disable them:
+```kotlin
+nativeCoroutines {
+    exposedSeverity = ExposedSeverity.NONE
 }
 ```
 

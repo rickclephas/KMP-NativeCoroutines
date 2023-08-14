@@ -23,7 +23,7 @@ jobs:
         os: [ macos-12 ]
         xcode: [ 14.2 ]
         java: [ 17 ]
-        module: [ core, ksp ]
+        module: [ core, ksp, compiler ]
     name: ${{ format('{0} ({1}, Xcode {2}, JDK {3})', matrix.module, matrix.os, matrix.xcode, matrix.java) }}
     runs-on: ${{ matrix.os }}
     steps:
@@ -48,6 +48,25 @@ jobs:
         env:
           GRADLE_MODULE: ${{ format(':kmp-nativecoroutines-{0}', matrix.module) }}
         run: ./gradlew $GRADLE_MODULE:check
+  run-idea-tests:
+    if: github.event_name != 'pull_request' || github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Gradle Wrapper Validation
+        uses: gradle/wrapper-validation-action@v1
+      - name: Setup JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: zulu
+          java-version: 17
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+      - name: Verify plugin
+        run: ./gradlew :kmp-nativecoroutines-idea-plugin:verifyPlugin
+      - name: Run plugin verifier
+        run: ./gradlew :kmp-nativecoroutines-idea-plugin:runPluginVerifier
   run-swift-tests:
     if: github.event_name != 'pull_request' || github.event.pull_request.draft == false
     strategy:

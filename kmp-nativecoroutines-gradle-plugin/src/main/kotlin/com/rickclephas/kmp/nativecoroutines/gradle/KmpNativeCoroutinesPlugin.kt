@@ -8,13 +8,13 @@ import org.jetbrains.kotlin.gradle.plugin.*
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 @Suppress("unused")
-class KmpNativeCoroutinesPlugin: KotlinCompilerPluginSupportPlugin {
-    companion object {
+public class KmpNativeCoroutinesPlugin: KotlinCompilerPluginSupportPlugin {
+    private companion object {
 
-        private const val kotlinPluginId = "org.jetbrains.kotlin.multiplatform"
-        private const val kspPluginId = "com.google.devtools.ksp"
+        const val kotlinPluginId = "org.jetbrains.kotlin.multiplatform"
+        const val kspPluginId = "com.google.devtools.ksp"
 
-        private val KotlinTarget.isKmpNativeCoroutinesTarget: Boolean
+        val KotlinTarget.isKmpNativeCoroutinesTarget: Boolean
             get() = this is KotlinNativeTarget && konanTarget.family.isAppleFamily
     }
 
@@ -47,7 +47,7 @@ class KmpNativeCoroutinesPlugin: KotlinCompilerPluginSupportPlugin {
         val project = kotlinCompilation.target.project
         val extension = project.extensions.getByType(KmpNativeCoroutinesExtension::class.java)
         return project.provider {
-            listOf(SubpluginOption("suffix", extension.suffix))
+            listOf(SubpluginOption("exposedSeverity", extension.exposedSeverity.name))
         }
     }
 
