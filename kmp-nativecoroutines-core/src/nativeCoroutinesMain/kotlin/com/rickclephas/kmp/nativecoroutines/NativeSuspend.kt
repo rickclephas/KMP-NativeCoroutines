@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
  * The function takes an `onResult`, `onError` and `onCancelled` callback
  * and returns a cancellable that can be used to cancel the suspend function.
  */
-typealias NativeSuspend<T> = (
+public typealias NativeSuspend<T> = (
     onResult: NativeCallback<T>,
     onError: NativeCallback<NativeError>,
     onCancelled: NativeCallback<NativeError>
@@ -22,7 +22,7 @@ typealias NativeSuspend<T> = (
  * @param scope the [CoroutineScope] to run the [block] in, or `null` to use the [defaultCoroutineScope].
  * @param block the suspend-block to await.
  */
-fun <T> nativeSuspend(scope: CoroutineScope? = null, block: suspend () -> T): NativeSuspend<T> {
+public fun <T> nativeSuspend(scope: CoroutineScope? = null, block: suspend () -> T): NativeSuspend<T> {
     val coroutineScope = scope ?: defaultCoroutineScope
     return (collect@{ onResult: NativeCallback<T>,
                       onError: NativeCallback<NativeError>,

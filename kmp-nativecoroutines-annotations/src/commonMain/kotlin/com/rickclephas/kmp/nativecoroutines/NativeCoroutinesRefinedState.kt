@@ -12,4 +12,4 @@ import kotlin.native.ShouldRefineInSwift
 @MustBeDocumented
 @OptIn(ExperimentalObjCRefinement::class)
 @HidesFromObjC
-annotation class NativeCoroutinesRefinedState
+public annotation class NativeCoroutinesRefinedState

@@ -5,7 +5,7 @@ import kotlinx.coroutines.Job
 /**
  * A function that cancels the coroutines [Job].
  */
-typealias NativeCancellable = () -> Unit
+public typealias NativeCancellable = () -> Unit
 
 /**
  * Creates a [NativeCancellable] for this [Job].
