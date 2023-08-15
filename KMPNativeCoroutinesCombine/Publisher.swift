@@ -49,16 +49,20 @@ internal class NativeFlowSubscription<Output, Failure, Unit, S: Subscriber>: Sub
     
     func request(_ demand: Subscribers.Demand) {
         semaphore.wait()
-        defer { semaphore.signal() }
         self.demand += demand
-        guard hasDemand else { return }
+        guard hasDemand else {
+            semaphore.signal()
+            return
+        }
         guard let nativeFlow = nativeFlow else {
             if let next = self.next {
                 _ = next()
                 self.next = nil
             }
+            semaphore.signal()
             return
         }
+        semaphore.signal()
         self.nativeFlow = nil
         nativeCancellable = nativeFlow({ item, next, unit in
             guard let subscriber = self.subscriber else { return unit }
