@@ -66,10 +66,11 @@ internal class NativeFlowSubscription<Output, Failure, Unit, S: Subscriber>: Sub
         self.nativeFlow = nil
         nativeCancellable = nativeFlow({ item, next, unit in
             guard let subscriber = self.subscriber else { return unit }
+            let demand = subscriber.receive(item)
             self.semaphore.wait()
             defer { self.semaphore.signal() }
             self.demand -= 1
-            self.demand += subscriber.receive(item)
+            self.demand += demand
             if (self.hasDemand) {
                 return next()
             } else {
