@@ -186,4 +186,16 @@ class CombinePublisherIntegrationTests: XCTestCase {
         wait(for: [callbackExpectation, completionExpectation], timeout: 2)
         XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
     }
+    
+    func testThreadLock() {
+        let integrationTests = ThreadLockIntegrationTests()
+        let publisher = createPublisher(for: integrationTests.stateFlow)
+        let valuesExpectation = expectation(description: "Waiting for values")
+        valuesExpectation.expectedFulfillmentCount = 3
+        let cancellable = publisher.sink { _ in } receiveValue: { _ in
+            valuesExpectation.fulfill()
+        }
+        wait(for: [valuesExpectation], timeout: 6)
+        cancellable.cancel()
+    }
 }
