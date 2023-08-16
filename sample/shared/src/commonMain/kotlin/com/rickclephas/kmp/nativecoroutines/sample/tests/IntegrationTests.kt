@@ -9,7 +9,7 @@ public abstract class IntegrationTests {
 
     private val job = SupervisorJob()
     @NativeCoroutineScope
-    internal val coroutineScope = CoroutineScope(job + Dispatchers.Default)
+    internal open val coroutineScope = CoroutineScope(job + Dispatchers.Default)
 
     public val activeJobCount: Int
         get() = job.children.count { it.isActive }
