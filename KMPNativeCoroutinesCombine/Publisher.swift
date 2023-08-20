@@ -22,7 +22,7 @@ public func createPublisher<Output, Failure: Error, Unit>(
 extension Publisher {
     /// Creates a `NativeFlow` for this `Publisher`.
     func asNativeFlow() -> NativeFlow<Output, Error, Void> {
-        return { onItem, onComplete in
+        return { onItem, onComplete, onCancelled in // TODO: Use onCancelled
             let cancellable = sink { completion in
                 if case let .failure(error) = completion {
                     onComplete(error, ())
@@ -30,7 +30,7 @@ extension Publisher {
                     onComplete(nil, ())
                 }
             } receiveValue: { value in
-                onItem(value, ())
+                onItem(value, {},  ()) // TODO: Implement back pressure
             }
             return { cancellable.cancel() }
         }

@@ -21,7 +21,7 @@ public func createFuture<Result, Failure: Error, Unit>(
 extension Publisher {
     /// Creates a `NativeSuspend` for this `Publisher`.
     func asNativeSuspend() -> NativeSuspend<Output, Error, Void> {
-        return { onResult, onError in
+        return { onResult, onError, onCancelled in // TODO: Use onCancelled
             let cancellable = first().sink { completion in
                 guard case let .failure(error) = completion else { return }
                 onError(error, ())
