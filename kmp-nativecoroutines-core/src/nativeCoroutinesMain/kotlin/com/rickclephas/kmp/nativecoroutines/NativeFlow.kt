@@ -2,6 +2,7 @@ package com.rickclephas.kmp.nativecoroutines
 
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.channels.trySendBlocking
 import kotlinx.coroutines.flow.Flow
@@ -65,10 +66,11 @@ public fun <T> Flow<T>.asNativeFlow(scope: CoroutineScope? = null): NativeFlow<T
  *
  * @see callbackFlow
  */
-fun <T, Unit> NativeFlow<T, Unit>.asFlow(): Flow<T> = callbackFlow {
+public fun <T, Unit> NativeFlow<T, Unit>.asFlow(): Flow<T> = callbackFlow {
     val cancellable = invoke(
-        { value, _ -> trySendBlocking(value) },
-        { error, _ -> close(error?.let { RuntimeException("NSError: $it") }) } // TODO: Convert NSError
+        { value, _, _ -> trySendBlocking(value) },
+        { error, _ -> close(error?.let { RuntimeException("NSError: $it") }) }, // TODO: Convert native error
+        { _, _ -> cancel() } // TODO: Convert native error
     )
     awaitClose { cancellable() }
 }

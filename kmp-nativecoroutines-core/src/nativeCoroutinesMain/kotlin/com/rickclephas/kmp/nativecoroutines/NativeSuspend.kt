@@ -56,10 +56,11 @@ public fun <T> nativeSuspend(scope: CoroutineScope? = null, block: suspend () ->
  *
  * @see suspendCancellableCoroutine
  */
-suspend fun <T, Unit> NativeSuspend<T, Unit>.await(): T = suspendCancellableCoroutine { cont ->
+public suspend fun <T, Unit> NativeSuspend<T, Unit>.await(): T = suspendCancellableCoroutine { cont ->
     val cancellable = invoke(
         { result, _ -> cont.resume(result) },
-        { error, _ -> cont.resumeWithException(RuntimeException("NSError: $error")) } // TODO: Convert NSError
+        { error, _ -> cont.resumeWithException(RuntimeException("NSError: $error")) }, // TODO: Convert native error
+        { _, _ -> cont.cancel() } // TODO: Convert native error
     )
     cont.invokeOnCancellation { cancellable() }
 }
