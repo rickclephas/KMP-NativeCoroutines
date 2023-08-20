@@ -1,4 +1,5 @@
-name: Publish a SPM tag
+name: Publish SPM tag
+description: Publishes a SPM tag
 inputs:
   package-name:
     description: The name of the SPM package branch
@@ -18,3 +19,4 @@ runs:
         git tag ${{ inputs.version-name }}-spm-${{ inputs.package-name }}
         git push origin spm/${{ inputs.package-name }}:spm/${{ inputs.package-name }}
         git push origin ${{ inputs.version-name }}-spm-${{ inputs.package-name }}
+        git checkout -

@@ -1,24 +1,19 @@
 package com.rickclephas.kmp.nativecoroutines.sample.tests
 
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutineScope
-import com.rickclephas.kmp.nativecoroutines.sample.utils.freeze
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 
-abstract class IntegrationTests {
+public abstract class IntegrationTests {
 
     private val job = SupervisorJob()
     @NativeCoroutineScope
-    internal val coroutineScope = CoroutineScope(job + Dispatchers.Default)
+    internal open val coroutineScope = CoroutineScope(job + Dispatchers.Default)
 
-    val activeJobCount: Int
+    public val activeJobCount: Int
         get() = job.children.count { it.isActive }
 
-    val uncompletedJobCount: Int
+    public val uncompletedJobCount: Int
         get() = job.children.count { !it.isCompleted }
-
-    init {
-        freeze()
-    }
 }

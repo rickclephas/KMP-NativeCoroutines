@@ -1,47 +1,58 @@
 package com.rickclephas.kmp.nativecoroutines.sample.tests
 
+import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesIgnore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-class CompilerIntegrationTests<V>: IntegrationTests() {
+@Suppress("RedundantSuspendModifier")
+public class CompilerIntegrationTests<V>: IntegrationTests() {
 
-    suspend fun returnGenericClassValue(value: V): V {
+    @NativeCoroutines
+    public suspend fun returnGenericClassValue(value: V): V {
         return value
     }
 
-    suspend fun returnDefaultValue(value: Int = 1): Int {
+    @NativeCoroutines
+    public suspend fun returnDefaultValue(value: Int = 1): Int {
         return value
     }
 
-    suspend fun <T> returnGenericValue(value: T): T {
+    @NativeCoroutines
+    public suspend fun <T> returnGenericValue(value: T): T {
         return value
     }
 
-    fun returnAppendable(value: String): Appendable = StringBuilder(value)
+    public fun returnAppendable(value: String): Appendable = StringBuilder(value)
 
-    suspend fun <T: Appendable> returnConstrainedGenericValue(value: T): T {
+    @NativeCoroutines
+    public suspend fun <T: Appendable> returnConstrainedGenericValue(value: T): T {
         return value
     }
 
-    suspend fun <T> returnGenericValues(values: List<T>): List<T> {
+    @NativeCoroutines
+    public suspend fun <T> returnGenericValues(values: List<T>): List<T> {
         return values
     }
 
-    suspend fun <T> returnGenericVarargValues(vararg values: T): Array<out T> {
+    @NativeCoroutines
+    public suspend fun <T> returnGenericVarargValues(vararg values: T): Array<out T> {
         return values
     }
 
-    suspend fun <T> List<T>.returnGenericValueFromExtension(value: T): T {
+    @NativeCoroutines
+    @Suppress("UnusedReceiverParameter")
+    public suspend fun <T> List<T>.returnGenericValueFromExtension(value: T): T {
         return value
     }
 
-    fun <T> returnGenericFlow(value: T): Flow<T> = flow {
+    @NativeCoroutines
+    public fun <T> returnGenericFlow(value: T): Flow<T> = flow {
         emit(value)
     }
 
     @NativeCoroutinesIgnore
-    suspend fun returnIgnoredValue(value: Int): Int {
+    public suspend fun returnIgnoredValue(value: Int): Int {
         return value
     }
 }

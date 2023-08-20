@@ -1,63 +1,22 @@
 package com.rickclephas.kmp.nativecoroutines.compiler.utils
 
-import org.jetbrains.kotlin.descriptors.*
-import org.jetbrains.kotlin.ir.types.*
-import org.jetbrains.kotlin.ir.util.getAllSubstitutedSupertypes
-import org.jetbrains.kotlin.ir.util.substitute
-import org.jetbrains.kotlin.ir.util.superTypes
+import org.jetbrains.kotlin.descriptors.ModuleDescriptor
+import org.jetbrains.kotlin.descriptors.findClassifierAcrossModuleDependencies
 import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.FqName
-import org.jetbrains.kotlin.resolve.descriptorUtil.module
-import org.jetbrains.kotlin.types.KotlinType
 import org.jetbrains.kotlin.types.TypeConstructor
-import org.jetbrains.kotlin.types.TypeProjection
-import org.jetbrains.kotlin.types.typeUtil.supertypes
 
 private val flowFqName = FqName("kotlinx.coroutines.flow.Flow")
 private val flowClassId = ClassId.topLevel(flowFqName)
 
-private fun ModuleDescriptor.findFlowClassifier(): ClassifierDescriptor =
-    findClassifierAcrossModuleDependencies(flowClassId)
-        ?: throw NoSuchElementException("Couldn't find Flow classifier")
+internal fun ModuleDescriptor.findFlowConstructor(): TypeConstructor =
+    findClassifierAcrossModuleDependencies(flowClassId)?.typeConstructor
+        ?: throw NoSuchElementException("Couldn't find Flow constructor")
 
-internal fun KotlinType.isFlowType(typeConstructor: TypeConstructor): Boolean =
-    constructor == typeConstructor || supertypes().any {
-        it.constructor == typeConstructor
-    }
 
-internal val SimpleFunctionDescriptor.hasFlowReturnType: Boolean
-    get() = returnType?.isFlowType(module.findFlowClassifier().typeConstructor) ?: false
+private val stateFlowFqName = FqName("kotlinx.coroutines.flow.StateFlow")
+private val stateFlowClassId = ClassId.topLevel(stateFlowFqName)
 
-internal val PropertyDescriptor.hasFlowType: Boolean
-    get() = type.isFlowType(module.findFlowClassifier().typeConstructor)
-
-private fun KotlinType.getFlowValueTypeOrNull(typeConstructor: TypeConstructor): TypeProjection? {
-    if (constructor == typeConstructor) {
-        return arguments.first()
-    }
-    return supertypes().firstOrNull {
-        it.constructor == typeConstructor
-    }?.arguments?.first()
-}
-
-internal fun SimpleFunctionDescriptor.getFlowValueTypeOrNull(
-    typeConstructor: TypeConstructor = module.findFlowClassifier().typeConstructor
-) = returnType?.getFlowValueTypeOrNull(typeConstructor)
-
-internal fun PropertyDescriptor.getFlowValueTypeOrNull(
-    typeConstructor: TypeConstructor = module.findFlowClassifier().typeConstructor
-) = type.getFlowValueTypeOrNull(typeConstructor)
-
-internal val IrType.isFlowType: Boolean
-    get() = classFqName == flowFqName || superTypes().any { it.isFlowType }
-
-internal fun IrType.getFlowValueTypeOrNull(fqName: FqName = flowFqName): IrTypeArgument? {
-    if (this !is IrSimpleType) return null
-    if (classFqName == fqName) return arguments.first()
-    val irClass = getClass() ?: return null
-    val superTypes = getAllSubstitutedSupertypes(irClass)
-    return superTypes.firstOrNull { it.classFqName == fqName }
-        ?.substitute(irClass.typeParameters, arguments.map { it.typeOrNull!! })
-        ?.let { it as? IrSimpleType }
-        ?.arguments?.first()
-}
+internal fun ModuleDescriptor.findStateFlowConstructor(): TypeConstructor =
+    findClassifierAcrossModuleDependencies(stateFlowClassId)?.typeConstructor
+        ?: throw NoSuchElementException("Couldn't find StateFlow constructor")

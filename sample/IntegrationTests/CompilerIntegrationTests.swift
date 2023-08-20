@@ -17,11 +17,11 @@ class CompilerIntegrationTests: XCTestCase {
         let integrationTests = IntegrationTests()
         let valueExpectation = expectation(description: "Waiting for value")
         let sendValue = NSNumber(value: randomInt())
-        _ = integrationTests.returnGenericClassValueNative(value: sendValue)({ value, unit in
-            XCTAssertEqual(value, sendValue, "Received incorrect value")
+        _ = integrationTests.returnGenericClassValue(value: sendValue)({ value, unit in
+            XCTAssertEqual(value as! NSNumber, sendValue, "Received incorrect value")
             valueExpectation.fulfill()
             return unit
-        }, { _, unit in unit })
+        }, { _, unit in unit }, { _, unit in unit })
         wait(for: [valueExpectation], timeout: 2)
     }
     
@@ -29,11 +29,11 @@ class CompilerIntegrationTests: XCTestCase {
         let integrationTests = IntegrationTests()
         let valueExpectation = expectation(description: "Waiting for value")
         let sendValue = randomInt()
-        _ = integrationTests.returnDefaultValueNative(value: sendValue)({ value, unit in
+        _ = integrationTests.returnDefaultValue(value: sendValue)({ value, unit in
             XCTAssertEqual(value.int32Value, sendValue, "Received incorrect value")
             valueExpectation.fulfill()
             return unit
-        }, { _, unit in unit })
+        }, { _, unit in unit }, { _, unit in unit })
         wait(for: [valueExpectation], timeout: 2)
     }
     
@@ -41,11 +41,11 @@ class CompilerIntegrationTests: XCTestCase {
         let integrationTests = IntegrationTests()
         let valueExpectation = expectation(description: "Waiting for value")
         let sendValue = NSNumber(value: randomInt())
-        _ = integrationTests.returnGenericValueNative(value: sendValue)({ value, unit in
+        _ = integrationTests.returnGenericValue(value: sendValue)({ value, unit in
             XCTAssertEqual(value as! NSNumber, sendValue, "Received incorrect value")
             valueExpectation.fulfill()
             return unit
-        }, { _, unit in unit })
+        }, { _, unit in unit }, { _, unit in unit })
         wait(for: [valueExpectation], timeout: 2)
     }
     
@@ -53,11 +53,11 @@ class CompilerIntegrationTests: XCTestCase {
         let integrationTests = IntegrationTests()
         let valueExpectation = expectation(description: "Waiting for value")
         let sendValue = integrationTests.returnAppendable(value: randomString())
-        _ = integrationTests.returnConstrainedGenericValueNative(value: sendValue)({ value, unit in
+        _ = integrationTests.returnConstrainedGenericValue(value: sendValue)({ value, unit in
             XCTAssertIdentical(value, sendValue, "Received incorrect value")
             valueExpectation.fulfill()
             return unit
-        }, { _, unit in unit })
+        }, { _, unit in unit }, { _, unit in unit })
         wait(for: [valueExpectation], timeout: 2)
     }
     
@@ -65,11 +65,11 @@ class CompilerIntegrationTests: XCTestCase {
         let integrationTests = IntegrationTests()
         let valueExpectation = expectation(description: "Waiting for values")
         let sendValues = [NSNumber(value: randomInt()), NSNumber(value: randomInt())]
-        _ = integrationTests.returnGenericValuesNative(values: sendValues)({ values, unit in
+        _ = integrationTests.returnGenericValues(values: sendValues)({ values, unit in
             XCTAssertEqual(values as! [NSNumber], sendValues, "Received incorrect values")
             valueExpectation.fulfill()
             return unit
-        }, { _, unit in unit })
+        }, { _, unit in unit }, { _, unit in unit })
         wait(for: [valueExpectation], timeout: 2)
     }
     
@@ -79,11 +79,14 @@ class CompilerIntegrationTests: XCTestCase {
         let sendValues = KotlinArray<AnyObject>(size: 2) { _ in
             NSNumber(value: self.randomInt())
         }
-        _ = integrationTests.returnGenericVarargValuesNative(values: sendValues)({ values, unit in
-            XCTAssertEqual(values, sendValues, "Received incorrect values")
+        _ = integrationTests.returnGenericVarargValues(values: sendValues)({ values, unit in
+            XCTAssertEqual(values.size, sendValues.size, "Received incorrect number of value")
+            for i in 0..<values.size {
+                XCTAssertEqual(values.get(index: i) as! NSNumber, sendValues.get(index: i) as! NSNumber, "Received incorrect value at index \(i)")
+            }
             valueExpectation.fulfill()
             return unit
-        }, { _, unit in unit })
+        }, { _, unit in unit }, { _, unit in unit })
         wait(for: [valueExpectation], timeout: 2)
     }
     
@@ -91,11 +94,11 @@ class CompilerIntegrationTests: XCTestCase {
         let integrationTests = IntegrationTests()
         let valueExpectation = expectation(description: "Waiting for value")
         let sendValue = NSNumber(value: randomInt())
-        _ = integrationTests.returnGenericValueFromExtensionNative([], value: sendValue)({ value, unit in
+        _ = integrationTests.returnGenericValueFromExtension(receiver: [], value: sendValue)({ value, unit in
             XCTAssertEqual(value as! NSNumber, sendValue, "Received incorrect value")
             valueExpectation.fulfill()
             return unit
-        }, { _, unit in unit })
+        }, { _, unit in unit }, { _, unit in unit })
         wait(for: [valueExpectation], timeout: 2)
     }
     
@@ -103,11 +106,11 @@ class CompilerIntegrationTests: XCTestCase {
         let integrationTests = IntegrationTests()
         let valueExpectation = expectation(description: "Waiting for value")
         let sendValue = NSNumber(value: randomInt())
-        _ = integrationTests.returnGenericFlowNative(value: sendValue)({ value, unit in
+        _ = integrationTests.returnGenericFlow(value: sendValue)({ value, next, _ in
             XCTAssertEqual(value as! NSNumber, sendValue, "Received incorrect value")
             valueExpectation.fulfill()
-            return unit
-        }, { _, unit in unit })
+            return next()
+        }, { _, unit in unit }, { _, unit in unit })
         wait(for: [valueExpectation], timeout: 2)
     }
 }

@@ -27,11 +27,9 @@ if (localPropsFile.exists()) {
     ext["gradle.publish.secret"] = System.getenv("GRADLE_PUBLISH_SECRET")
 }
 
-val emptyJavadocJar by tasks.registering(Jar::class) {
-    archiveClassifier.set("javadoc")
-}
-
 fun getExtraString(name: String) = ext[name]?.toString()
+
+val signPublications = getExtraString("signing.keyId") != null
 
 publishing {
     repositories {
@@ -46,7 +44,13 @@ publishing {
     }
 
     publications.withType<MavenPublication> {
-        artifact(emptyJavadocJar.get())
+        if (plugins.hasPlugin("org.jetbrains.kotlin.multiplatform")) {
+            artifact(tasks.register("${name}JavadocJar", Jar::class) {
+                archiveClassifier.set("javadoc")
+                archiveAppendix.set(this@withType.name)
+            })
+        }
+        if (signPublications) signing.sign(this)
 
         pom {
             name.set("KMP-NativeCoroutines")
@@ -72,9 +76,10 @@ publishing {
     }
 }
 
-signing {
-    getExtraString("signing.secretKey")?.let { secretKey ->
-        useInMemoryPgpKeys(getExtraString("signing.keyId"), secretKey, getExtraString("signing.password"))
+if (signPublications) {
+    signing {
+        getExtraString("signing.secretKey")?.let { secretKey ->
+            useInMemoryPgpKeys(getExtraString("signing.keyId"), secretKey, getExtraString("signing.password"))
+        }
     }
-    sign(publishing.publications)
 }

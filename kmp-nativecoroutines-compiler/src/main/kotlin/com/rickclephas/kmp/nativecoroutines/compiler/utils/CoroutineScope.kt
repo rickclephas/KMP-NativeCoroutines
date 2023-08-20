@@ -1,11 +1,14 @@
 package com.rickclephas.kmp.nativecoroutines.compiler.utils
 
-import org.jetbrains.kotlin.ir.types.IrType
-import org.jetbrains.kotlin.ir.types.classFqName
-import org.jetbrains.kotlin.ir.util.superTypes
+import org.jetbrains.kotlin.descriptors.ModuleDescriptor
+import org.jetbrains.kotlin.descriptors.findClassifierAcrossModuleDependencies
+import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.FqName
+import org.jetbrains.kotlin.types.TypeConstructor
 
 private val coroutineScopeFqName = FqName("kotlinx.coroutines.CoroutineScope")
+private val coroutineScopeClassId = ClassId.topLevel(coroutineScopeFqName)
 
-internal val IrType.isCoroutineScopeType: Boolean
-    get() = classFqName == coroutineScopeFqName || superTypes().any { it.isCoroutineScopeType }
+internal fun ModuleDescriptor.findCoroutineScopeConstructor(): TypeConstructor =
+    findClassifierAcrossModuleDependencies(coroutineScopeClassId)?.typeConstructor
+        ?: throw NoSuchElementException("Couldn't find CoroutineScope constructor")

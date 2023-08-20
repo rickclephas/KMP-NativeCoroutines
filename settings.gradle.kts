@@ -1,7 +1,7 @@
 pluginManagement {
     repositories {
-        gradlePluginPortal()
         mavenCentral()
+        gradlePluginPortal()
     }
 }
 
@@ -12,3 +12,5 @@ include(":kmp-nativecoroutines-annotations")
 include(":kmp-nativecoroutines-compiler")
 include(":kmp-nativecoroutines-compiler-embeddable")
 include(":kmp-nativecoroutines-gradle-plugin")
+include(":kmp-nativecoroutines-idea-plugin")
+include(":kmp-nativecoroutines-ksp")
