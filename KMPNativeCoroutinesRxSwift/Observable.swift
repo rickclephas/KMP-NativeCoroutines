@@ -8,7 +8,7 @@
 import RxSwift
 import KMPNativeCoroutinesCore
 
-private let RETURN_TYPE_RXSWIFT_OBSERVABLE = "rxswift-observable"
+internal let RETURN_TYPE_RXSWIFT_OBSERVABLE = "rxswift-observable"
 
 /// Creates an `Observable` for the provided `NativeFlow`.
 /// - Parameter nativeFlow: The native flow to collect.

@@ -7,7 +7,7 @@ import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 
-private const val RETURN_TYPE_KOTLIN_SUSPEND = "kotlin-suspend"
+internal const val RETURN_TYPE_KOTLIN_SUSPEND = "kotlin-suspend"
 
 /**
  * A function that awaits a suspend function via callbacks.

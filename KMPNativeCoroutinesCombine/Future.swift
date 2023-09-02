@@ -8,7 +8,7 @@
 import Combine
 import KMPNativeCoroutinesCore
 
-private let RETURN_TYPE_COMBINE_FUTURE = "combine-future"
+internal let RETURN_TYPE_COMBINE_FUTURE = "combine-future"
 
 /// Creates an `AnyPublisher` for the provided `NativeSuspend`.
 /// - Parameter nativeSuspend: The native suspend function to await.

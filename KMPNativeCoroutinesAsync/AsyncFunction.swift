@@ -8,7 +8,7 @@
 import Dispatch
 import KMPNativeCoroutinesCore
 
-private let RETURN_TYPE_SWIFT_ASYNC = "swift-async"
+internal let RETURN_TYPE_SWIFT_ASYNC = "swift-async"
 
 /// Wraps the `NativeSuspend` in an async function.
 /// - Parameter nativeSuspend: The native suspend function to await.

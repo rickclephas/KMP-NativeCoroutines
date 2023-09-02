@@ -8,7 +8,7 @@
 import Dispatch
 import KMPNativeCoroutinesCore
 
-private let RETURN_TYPE_SWIFT_ASYNC_SEQUENCE = "swift-async-sequence"
+internal let RETURN_TYPE_SWIFT_ASYNC_SEQUENCE = "swift-async-sequence"
 
 /// Wraps the `NativeFlow` in an `AsyncSequence`.
 /// - Parameter nativeFlow: The native flow to collect.

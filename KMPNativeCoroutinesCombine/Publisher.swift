@@ -9,7 +9,7 @@ import Combine
 import Dispatch
 import KMPNativeCoroutinesCore
 
-private let RETURN_TYPE_COMBINE_PUBLISHER = "combine-publisher"
+internal let RETURN_TYPE_COMBINE_PUBLISHER = "combine-publisher"
 
 /// Creates an `AnyPublisher` for the provided `NativeFlow`.
 /// - Parameter nativeFlow: The native flow to collect.

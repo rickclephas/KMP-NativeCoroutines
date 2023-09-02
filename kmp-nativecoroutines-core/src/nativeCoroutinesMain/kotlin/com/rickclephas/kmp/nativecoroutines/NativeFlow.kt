@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
-private const val RETURN_TYPE_KOTLIN_FLOW = "kotlin-flow"
+internal const val RETURN_TYPE_KOTLIN_FLOW = "kotlin-flow"
 
 /**
  * A function that collects a [Flow] via callbacks.

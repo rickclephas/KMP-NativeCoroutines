@@ -8,7 +8,7 @@
 import RxSwift
 import KMPNativeCoroutinesCore
 
-private let RETURN_TYPE_RXSWIFT_SINGLE = "rxswift-single"
+internal let RETURN_TYPE_RXSWIFT_SINGLE = "rxswift-single"
 
 /// Creates a `Single` for the provided `NativeSuspend`.
 /// - Parameter nativeSuspend: The native suspend function to await.
