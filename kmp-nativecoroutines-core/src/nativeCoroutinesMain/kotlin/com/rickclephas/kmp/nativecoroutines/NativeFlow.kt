@@ -12,17 +12,20 @@ import kotlinx.coroutines.launch
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
+private const val RETURN_TYPE_KOTLIN_FLOW = "kotlin-flow"
+
 /**
  * A function that collects a [Flow] via callbacks.
  *
  * The function takes an `onItem`, `onComplete` and `onCancelled` callback
  * and returns a cancellable that can be used to cancel the collection.
  */
-public typealias NativeFlow<T, Unit> = (
-    onItem: NativeCallback2<T, () -> Unit>,
+public typealias NativeFlow<T> = (
+    returnType: String?,
+    onItem: NativeCallback2<T, () -> NativeUnit>,
     onComplete: NativeCallback<NativeError?>,
     onCancelled: NativeCallback<NativeError>
-) -> NativeCancellable<Unit>
+) -> NativeCancellable
 
 /**
  * Creates a [NativeFlow] for this [Flow].
@@ -31,11 +34,17 @@ public typealias NativeFlow<T, Unit> = (
  * @receiver the [Flow] to collect.
  * @see Flow.collect
  */
-public fun <T> Flow<T>.asNativeFlow(scope: CoroutineScope? = null): NativeFlow<T, Unit> {
+public fun <T> Flow<T>.asNativeFlow(scope: CoroutineScope? = null): NativeFlow<T> {
     val coroutineScope = scope ?: defaultCoroutineScope
-    return (collect@{ onItem: NativeCallback2<T, () -> Unit>,
+    return (collect@{ returnType: String?,
+                      onItem: NativeCallback2<T, () -> NativeUnit>,
                       onComplete: NativeCallback<NativeError?>,
                       onCancelled: NativeCallback<NativeError> ->
+        if (returnType == RETURN_TYPE_KOTLIN_FLOW) {
+            return@collect { this }
+        } else if (returnType != null) {
+            return@collect { null }
+        }
         val job = coroutineScope.launch {
             try {
                 collect {
@@ -66,11 +75,28 @@ public fun <T> Flow<T>.asNativeFlow(scope: CoroutineScope? = null): NativeFlow<T
  *
  * @see callbackFlow
  */
-public fun <T, Unit> NativeFlow<T, Unit>.asFlow(): Flow<T> = callbackFlow {
-    val cancellable = invoke(
-        { value, _, _ -> trySendBlocking(value) },
-        { error, _ -> close(error?.let { RuntimeException("NSError: $it") }) }, // TODO: Convert native error
-        { _, _ -> cancel() } // TODO: Convert native error
-    )
-    awaitClose { cancellable() }
+public fun <T> NativeFlow<T>.asFlow(): Flow<T> {
+    val flow = invoke(RETURN_TYPE_KOTLIN_FLOW, ::EmptyNativeCallback2, ::EmptyNativeCallback, ::EmptyNativeCallback)()
+    if (flow != null) {
+        @Suppress("UNCHECKED_CAST")
+        return (flow as Flow<T>)
+    }
+    return callbackFlow {
+        val cancellable = invoke(
+            null,
+            { value, _, unit ->
+                trySendBlocking(value)
+                unit
+            },
+            { error, unit ->  // TODO: Convert native error
+                close(error?.let { RuntimeException("NSError: $it") })
+                unit
+            },
+            { _, unit -> // TODO: Convert native error
+                cancel()
+                unit
+            }
+        )
+        awaitClose { cancellable() }
+    }
 }

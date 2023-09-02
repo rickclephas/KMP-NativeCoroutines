@@ -15,7 +15,7 @@ class NativeFlowTests {
         val nativeFlow = flow.asNativeFlow(this)
         var completionCount = 0
         var cancellationCount = 0
-        nativeFlow({ _, _, _ -> }, { error, _ ->
+        nativeFlow(null, { _, _, _ -> }, { error, _ ->
             assertNull(error, "Flow should complete without an error")
             completionCount++
         }, { _, _ ->
@@ -33,7 +33,7 @@ class NativeFlowTests {
         val nativeFlow = flow.asNativeFlow(this)
         var completionCount = 0
         var cancellationCount = 0
-        nativeFlow({ _, _, _ -> }, { error, _ ->
+        nativeFlow(null,  { _, _, _ -> }, { error, _ ->
             assertNotNull(error, "Flow should complete with an error")
             val kotlinException = error.kotlinCause
             assertSame(exception, kotlinException, "Kotlin exception should be the same exception")
@@ -52,7 +52,7 @@ class NativeFlowTests {
         val flow = flow { values.forEach { emit(it) } }
         val nativeFlow = flow.asNativeFlow(this)
         var receivedValueCount = 0
-        nativeFlow({ value, next, _ ->
+        nativeFlow(null, { value, next, _ ->
             assertSame(values[receivedValueCount], value, "Received incorrect value")
             receivedValueCount++
             next()
@@ -71,7 +71,7 @@ class NativeFlowTests {
         val nativeFlow = flow.asNativeFlow(this)
         var completionCount = 0
         var cancellationCount = 0
-        val cancel = nativeFlow({ _, _, _ -> }, { _, _ ->
+        val cancel = nativeFlow(null, { _, _, _ -> }, { _, _ ->
             completionCount++
         }, { error, _ ->
             assertNotNull(error, "Flow should complete with a cancellation error")

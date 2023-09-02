@@ -25,7 +25,7 @@ class NativeSuspendTests {
         var receivedResultCount = 0
         var receivedErrorCount = 0
         var receivedCancellationCount = 0
-        nativeSuspend({ receivedValue, _ ->
+        nativeSuspend(null, { receivedValue, _ ->
             assertSame(value, receivedValue, "Received incorrect value")
             receivedResultCount++
         }, { _, _ ->
@@ -46,7 +46,7 @@ class NativeSuspendTests {
         var receivedResultCount = 0
         var receivedErrorCount = 0
         var receivedCancellationCount = 0
-        nativeSuspend({ _, _ ->
+        nativeSuspend(null, { _, _ ->
             receivedResultCount++
         }, { error, _ ->
             val kotlinException = error.kotlinCause
@@ -67,7 +67,7 @@ class NativeSuspendTests {
         var receivedResultCount = 0
         var receivedErrorCount = 0
         var receivedCancellationCount = 0
-        val cancel = nativeSuspend({ _, _ ->
+        val cancel = nativeSuspend(null, { _, _ ->
             receivedResultCount++
         }, { _, _ ->
             receivedErrorCount++

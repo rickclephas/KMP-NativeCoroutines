@@ -15,8 +15,12 @@ class FutureTests: XCTestCase {
 
     func testCancellableInvoked() {
         var cancelCount = 0
-        let nativeSuspend: NativeSuspend<TestValue, NSError, Void> = { _, _, _ in
-            return { cancelCount += 1 }
+        let nativeSuspend: NativeSuspend<TestValue, NSError> = { returnType, _, _, _ in
+            guard returnType == nil else { return { nil } }
+            return {
+                cancelCount += 1
+                return nil
+            }
         }
         let cancellable = createFuture(for: nativeSuspend)
             .sink { _ in } receiveValue: { _ in }
@@ -27,9 +31,10 @@ class FutureTests: XCTestCase {
     
     func testCompletionWithValue() {
         let value = TestValue()
-        let nativeSuspend: NativeSuspend<TestValue, NSError, Void> = { resultCallback, _, _ in
-            resultCallback(value, ())
-            return { }
+        let nativeSuspend: NativeSuspend<TestValue, NSError> = { returnType, resultCallback, _, _ in
+            guard returnType == nil else { return { nil } }
+            _ = resultCallback(value, ())
+            return { nil }
         }
         var completionCount = 0
         var valueCount = 0
@@ -51,9 +56,10 @@ class FutureTests: XCTestCase {
     
     func testCompletionWithError() {
         let error = NSError(domain: "Test", code: 0)
-        let nativeSuspend: NativeSuspend<TestValue, NSError, Void> = { _, errorCallback, _ in
-            errorCallback(error, ())
-            return { }
+        let nativeSuspend: NativeSuspend<TestValue, NSError> = { returnType, _, errorCallback, _ in
+            guard returnType == nil else { return { nil } }
+            _ = errorCallback(error, ())
+            return { nil }
         }
         var completionCount = 0
         var valueCount = 0

@@ -15,10 +15,12 @@ class AsyncSequenceTests: XCTestCase {
 
     func testCancellableInvoked() async {
         var cancelCount = 0
-        let nativeFlow: NativeFlow<TestValue, Error, Void> = { _, _, cancelCallback in
+        let nativeFlow: NativeFlow<TestValue, Error> = { returnType, _, _, cancelCallback in
+            guard returnType == nil else { return { nil } }
             return {
                 cancelCount += 1
-                cancelCallback(NSError(domain: "Ignored", code: 0), ())
+                _ = cancelCallback(NSError(domain: "Ignored", code: 0), ())
+                return nil
             }
         }
         let handle = Task {
@@ -37,18 +39,22 @@ class AsyncSequenceTests: XCTestCase {
     
     func testCompletionWithCorrectValues() async {
         let values = [TestValue(), TestValue(), TestValue(), TestValue(), TestValue()]
-        let nativeFlow: NativeFlow<TestValue, NSError, Void> = { itemCallback, completionCallback, _ in
+        let nativeFlow: NativeFlow<TestValue, NSError> = { returnType, itemCallback, completionCallback, _ in
+            guard returnType == nil else { return { nil } }
             let handle = Task {
                 for value in values {
                     await withCheckedContinuation { continuation in
-                        itemCallback(value, {
+                        _ = itemCallback(value, {
                             continuation.resume()
                         }, ())
                     }
                 }
-                completionCallback(nil, ())
+                _ = completionCallback(nil, ())
             }
-            return { handle.cancel() }
+            return {
+                handle.cancel()
+                return nil
+            }
         }
         var valueCount = 0
         do {
@@ -64,9 +70,10 @@ class AsyncSequenceTests: XCTestCase {
     
     func testCompletionWithError() async {
         let sendError = NSError(domain: "Test", code: 0)
-        let nativeFlow: NativeFlow<TestValue, NSError, Void> = { _, completionCallback, _ in
-            completionCallback(sendError, ())
-            return { }
+        let nativeFlow: NativeFlow<TestValue, NSError> = { returnType, _, completionCallback, _ in
+            guard returnType == nil else { return { nil } }
+            _ = completionCallback(sendError, ())
+            return { nil }
         }
         var valueCount = 0
         do {

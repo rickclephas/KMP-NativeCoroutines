@@ -8,27 +8,59 @@
 import Dispatch
 import KMPNativeCoroutinesCore
 
+private let RETURN_TYPE_SWIFT_ASYNC = "swift-async"
+
 /// Wraps the `NativeSuspend` in an async function.
 /// - Parameter nativeSuspend: The native suspend function to await.
 /// - Returns: The result from the `nativeSuspend`.
 /// - Throws: Errors thrown by the `nativeSuspend`.
-public func asyncFunction<Result, Failure: Error, Unit>(
-    for nativeSuspend: @escaping NativeSuspend<Result, Failure, Unit>
+public func asyncFunction<Result, Failure: Error>(
+    for nativeSuspend: @escaping NativeSuspend<Result, Failure>
 ) async throws -> Result {
-    try await AsyncFunctionTask(nativeSuspend: nativeSuspend).awaitResult()
+    if let function = nativeSuspend(RETURN_TYPE_SWIFT_ASYNC, EmptyNativeCallback, EmptyNativeCallback, EmptyNativeCallback)() {
+        return try await (function as! (@Sendable () async throws -> Result))()
+    }
+    return try await AsyncFunctionTask(nativeSuspend: nativeSuspend).awaitResult()
 }
 
-private class AsyncFunctionTask<Result, Failure: Error, Unit>: @unchecked Sendable {
+/// Creates a `NativeSuspend` for the provided async operation.
+public func nativeSuspend<Result>(
+    priority: TaskPriority? = nil,
+    operation: @escaping @Sendable () async throws -> Result
+) -> NativeSuspend<Result, Error> {
+    return { returnType, onResult, onError, onCancelled in
+        if returnType == RETURN_TYPE_SWIFT_ASYNC {
+            return { operation }
+        } else if returnType != nil {
+            return { nil }
+        }
+        let task = Task(priority: priority) {
+            do {
+                let result = try await operation()
+                _ = onResult(result, ())
+            } catch {
+                if error is CancellationError {
+                    _ = onCancelled(error, ())
+                } else {
+                    _ = onError(error, ())
+                }
+            }
+        }
+        return task.asNativeCancellable()
+    }
+}
+
+private class AsyncFunctionTask<Result, Failure: Error>: @unchecked Sendable {
     
     private let semaphore = DispatchSemaphore(value: 1)
-    private var nativeCancellable: NativeCancellable<Unit>?
+    private var nativeCancellable: NativeCancellable?
     private var result: Result? = nil
     private var error: Failure? = nil
     private var cancellationError: Failure? = nil
     private var continuation: UnsafeContinuation<Result, Error>? = nil
     
-    init(nativeSuspend: NativeSuspend<Result, Failure, Unit>) {
-        nativeCancellable = nativeSuspend({ result, unit in
+    init(nativeSuspend: NativeSuspend<Result, Failure>) {
+        nativeCancellable = nativeSuspend(nil, { result, unit in
             self.semaphore.wait()
             defer { self.semaphore.signal() }
             self.result = result

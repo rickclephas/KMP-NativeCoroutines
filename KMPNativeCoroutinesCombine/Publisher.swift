@@ -9,40 +9,49 @@ import Combine
 import Dispatch
 import KMPNativeCoroutinesCore
 
+private let RETURN_TYPE_COMBINE_PUBLISHER = "combine-publisher"
+
 /// Creates an `AnyPublisher` for the provided `NativeFlow`.
 /// - Parameter nativeFlow: The native flow to collect.
 /// - Returns: A publisher that publishes the collected values.
-public func createPublisher<Output, Failure: Error, Unit>(
-    for nativeFlow: @escaping NativeFlow<Output, Failure, Unit>
+public func createPublisher<Output, Failure: Error>(
+    for nativeFlow: @escaping NativeFlow<Output, Failure>
 ) -> AnyPublisher<Output, Failure> {
-    return NativeFlowPublisher(nativeFlow: nativeFlow)
-        .eraseToAnyPublisher()
+    if let publisher = nativeFlow(RETURN_TYPE_COMBINE_PUBLISHER, EmptyNativeCallback2, EmptyNativeCallback, EmptyNativeCallback)() {
+        return publisher as! AnyPublisher<Output, Failure>
+    }
+    return NativeFlowPublisher(nativeFlow: nativeFlow).eraseToAnyPublisher()
 }
 
-extension Publisher {
+public extension Publisher {
     /// Creates a `NativeFlow` for this `Publisher`.
-    func asNativeFlow() -> NativeFlow<Output, Error, Void> {
-        return { onItem, onComplete, onCancelled in // TODO: Use onCancelled
+    func asNativeFlow() -> NativeFlow<Output, Error> {
+        return { returnType, onItem, onComplete, onCancelled in // TODO: Use onCancelled
+            if returnType == RETURN_TYPE_COMBINE_PUBLISHER {
+                return { self.eraseToAnyPublisher() }
+            } else if returnType != nil {
+                return { nil }
+            }
             let cancellable = sink { completion in
                 if case let .failure(error) = completion {
-                    onComplete(error, ())
+                    _ = onComplete(error, ())
                 } else {
-                    onComplete(nil, ())
+                    _ = onComplete(nil, ())
                 }
             } receiveValue: { value in
-                onItem(value, {},  ()) // TODO: Implement back pressure
+                _ = onItem(value, {},  ()) // TODO: Implement back pressure
             }
-            return { cancellable.cancel() }
+            return cancellable.asNativeCancellable()
         }
     }
 }
 
-internal struct NativeFlowPublisher<Output, Failure: Error, Unit>: Publisher {
+internal struct NativeFlowPublisher<Output, Failure: Error>: Publisher {
     
     typealias Output = Output
     typealias Failure = Failure
     
-    let nativeFlow: NativeFlow<Output, Failure, Unit>
+    let nativeFlow: NativeFlow<Output, Failure>
     
     func receive<S>(subscriber: S) where S : Subscriber, Failure == S.Failure, Output == S.Input {
         let subscription = NativeFlowSubscription(nativeFlow: nativeFlow, subscriber: subscriber)
@@ -50,17 +59,17 @@ internal struct NativeFlowPublisher<Output, Failure: Error, Unit>: Publisher {
     }
 }
 
-internal class NativeFlowSubscription<Output, Failure, Unit, S: Subscriber>: Subscription where S.Input == Output, S.Failure == Failure {
+internal class NativeFlowSubscription<Output, Failure, S: Subscriber>: Subscription where S.Input == Output, S.Failure == Failure {
     
     private let semaphore = DispatchSemaphore(value: 1)
-    private var nativeFlow: NativeFlow<Output, Failure, Unit>?
-    private var nativeCancellable: NativeCancellable<Unit>? = nil
+    private var nativeFlow: NativeFlow<Output, Failure>?
+    private var nativeCancellable: NativeCancellable? = nil
     private var subscriber: S?
     private var demand: Subscribers.Demand = .none
     private var hasDemand: Bool { demand >= 1 }
-    private var next: (() -> Unit)? = nil
+    private var next: (() -> NativeUnit)? = nil
     
-    init(nativeFlow: @escaping NativeFlow<Output, Failure, Unit>, subscriber: S) {
+    init(nativeFlow: @escaping NativeFlow<Output, Failure>, subscriber: S) {
         self.nativeFlow = nativeFlow
         self.subscriber = subscriber
     }
@@ -82,7 +91,7 @@ internal class NativeFlowSubscription<Output, Failure, Unit, S: Subscriber>: Sub
         }
         semaphore.signal()
         self.nativeFlow = nil
-        nativeCancellable = nativeFlow({ item, next, unit in
+        nativeCancellable = nativeFlow(nil, { item, next, unit in
             guard let subscriber = self.subscriber else { return unit }
             let demand = subscriber.receive(item)
             self.semaphore.wait()

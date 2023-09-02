@@ -8,37 +8,46 @@
 import Combine
 import KMPNativeCoroutinesCore
 
+private let RETURN_TYPE_COMBINE_FUTURE = "combine-future"
+
 /// Creates an `AnyPublisher` for the provided `NativeSuspend`.
 /// - Parameter nativeSuspend: The native suspend function to await.
 /// - Returns: A publisher that either finishes with a single value or fails with an error.
-public func createFuture<Result, Failure: Error, Unit>(
-    for nativeSuspend: @escaping NativeSuspend<Result, Failure, Unit>
+public func createFuture<Result, Failure: Error>(
+    for nativeSuspend: @escaping NativeSuspend<Result, Failure>
 ) -> AnyPublisher<Result, Failure> {
-    return NativeSuspendFuture(nativeSuspend: nativeSuspend)
-        .eraseToAnyPublisher()
+    if let publisher = nativeSuspend(RETURN_TYPE_COMBINE_FUTURE, EmptyNativeCallback, EmptyNativeCallback, EmptyNativeCallback)() {
+        return publisher as! AnyPublisher<Result, Failure>
+    }
+    return NativeSuspendFuture(nativeSuspend: nativeSuspend).eraseToAnyPublisher()
 }
 
-extension Publisher {
+public extension Publisher {
     /// Creates a `NativeSuspend` for this `Publisher`.
-    func asNativeSuspend() -> NativeSuspend<Output, Error, Void> {
-        return { onResult, onError, onCancelled in // TODO: Use onCancelled
+    func asNativeSuspend() -> NativeSuspend<Output, Error> {
+        return { returnType, onResult, onError, onCancelled in // TODO: Use onCancelled
+            if returnType == RETURN_TYPE_COMBINE_FUTURE {
+                return { self.eraseToAnyPublisher() }
+            } else if returnType != nil {
+                return { nil }
+            }
             let cancellable = first().sink { completion in
                 guard case let .failure(error) = completion else { return }
-                onError(error, ())
+                _ = onError(error, ())
             } receiveValue: { value in
-                onResult(value, ())
+                _ = onResult(value, ())
             }
-            return { cancellable.cancel() }
+            return cancellable.asNativeCancellable()
         }
     }
 }
 
-internal struct NativeSuspendFuture<Result, Failure: Error, Unit>: Publisher {
+internal struct NativeSuspendFuture<Result, Failure: Error>: Publisher {
     
     typealias Output = Result
     typealias Failure = Failure
     
-    let nativeSuspend: NativeSuspend<Result, Failure, Unit>
+    let nativeSuspend: NativeSuspend<Result, Failure>
     
     func receive<S>(subscriber: S) where S : Subscriber, Failure == S.Failure, Result == S.Input {
         let subscription = NativeSuspendSubscription(nativeSuspend: nativeSuspend, subscriber: subscriber)
@@ -46,13 +55,13 @@ internal struct NativeSuspendFuture<Result, Failure: Error, Unit>: Publisher {
     }
 }
 
-internal class NativeSuspendSubscription<Result, Failure, Unit, S: Subscriber>: Subscription where S.Input == Result, S.Failure == Failure {
+internal class NativeSuspendSubscription<Result, Failure, S: Subscriber>: Subscription where S.Input == Result, S.Failure == Failure {
     
-    private var nativeSuspend: NativeSuspend<Result, Failure, Unit>?
-    private var nativeCancellable: NativeCancellable<Unit>? = nil
+    private var nativeSuspend: NativeSuspend<Result, Failure>?
+    private var nativeCancellable: NativeCancellable? = nil
     private var subscriber: S?
     
-    init(nativeSuspend: @escaping NativeSuspend<Result, Failure, Unit>, subscriber: S) {
+    init(nativeSuspend: @escaping NativeSuspend<Result, Failure>, subscriber: S) {
         self.nativeSuspend = nativeSuspend
         self.subscriber = subscriber
     }
@@ -60,7 +69,7 @@ internal class NativeSuspendSubscription<Result, Failure, Unit, S: Subscriber>: 
     func request(_ demand: Subscribers.Demand) {
         guard let nativeSuspend = nativeSuspend, demand >= 1 else { return }
         self.nativeSuspend = nil
-        nativeCancellable = nativeSuspend({ output, unit in
+        nativeCancellable = nativeSuspend(nil, { output, unit in
             if let subscriber = self.subscriber {
                 _ = subscriber.receive(output)
                 subscriber.receive(completion: .finished)

@@ -15,8 +15,12 @@ class PublisherTests: XCTestCase {
 
     func testCancellableInvoked() {
         var cancelCount = 0
-        let nativeFlow: NativeFlow<TestValue, NSError, Void> = { _, _, _ in
-            return { cancelCount += 1 }
+        let nativeFlow: NativeFlow<TestValue, NSError> = { returnType, _, _, _ in
+            guard returnType == nil else { return { nil } }
+            return {
+                cancelCount += 1
+                return nil
+            }
         }
         let cancellable = createPublisher(for: nativeFlow)
             .sink { _ in } receiveValue: { _ in }
@@ -27,14 +31,15 @@ class PublisherTests: XCTestCase {
     
     func testCompletionWithCorrectValues() {
         let values = [TestValue(), TestValue(), TestValue(), TestValue(), TestValue()]
-        let nativeFlow: NativeFlow<TestValue, NSError, Void> = { itemCallback, completionCallback, _ in
+        let nativeFlow: NativeFlow<TestValue, NSError> = { returnType, itemCallback, completionCallback, _ in
+            guard returnType == nil else { return { nil } }
             DispatchQueue.main.async {
                 for value in values {
-                    itemCallback(value, {}, ())
+                    _ = itemCallback(value, {}, ())
                 }
-                completionCallback(nil, ())
+                _ = completionCallback(nil, ())
             }
-            return { }
+            return { nil }
         }
         let completionExpectation = expectation(description: "Waiting for completion")
         var valueCount = 0
@@ -56,9 +61,10 @@ class PublisherTests: XCTestCase {
     
     func testCompletionWithError() {
         let error = NSError(domain: "Test", code: 0)
-        let nativeFlow: NativeFlow<TestValue, NSError, Void> = { _, completionCallback, _ in
-            completionCallback(error, ())
-            return { }
+        let nativeFlow: NativeFlow<TestValue, NSError> = { returnType, _, completionCallback, _ in
+            guard returnType == nil else { return { nil } }
+            _ = completionCallback(error, ())
+            return { nil }
         }
         var completionCount = 0
         var valueCount = 0

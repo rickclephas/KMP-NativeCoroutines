@@ -8,31 +8,68 @@
 import Dispatch
 import KMPNativeCoroutinesCore
 
-/// Wraps the `NativeFlow` in a `NativeFlowAsyncSequence`.
+private let RETURN_TYPE_SWIFT_ASYNC_SEQUENCE = "swift-async-sequence"
+
+/// Wraps the `NativeFlow` in an `AsyncSequence`.
 /// - Parameter nativeFlow: The native flow to collect.
-/// - Returns: A `NativeFlowAsyncSequence` that yields the collected values.
-public func asyncSequence<Output, Failure: Error, Unit>(
-    for nativeFlow: @escaping NativeFlow<Output, Failure, Unit>
-) -> NativeFlowAsyncSequence<Output, Error, Unit> {
-    return NativeFlowAsyncSequence(nativeFlow: nativeFlow)
+/// - Returns: An `AsyncSequence` that yields the collected values.
+public func asyncSequence<Output, Failure: Error>(
+    for nativeFlow: @escaping NativeFlow<Output, Failure>
+) -> AnyAsyncSequence<Output> {
+    if let sequence = nativeFlow(RETURN_TYPE_SWIFT_ASYNC_SEQUENCE, EmptyNativeCallback2, EmptyNativeCallback, EmptyNativeCallback)() {
+        return sequence as! AnyAsyncSequence<Output>
+    }
+    return AnyAsyncSequence(NativeFlowAsyncSequence(nativeFlow: nativeFlow))
 }
 
-public struct NativeFlowAsyncSequence<Output, Failure: Error, Unit>: AsyncSequence {
+public extension AsyncSequence {
+    /// Creates a `NativeFlow` for this `AsyncSequence`.
+    func asNativeFlow(priority: TaskPriority? = nil) -> NativeFlow<Element, Error> {
+        return { returnType, onItem, onComplete, onCancelled in
+            if returnType == RETURN_TYPE_SWIFT_ASYNC_SEQUENCE {
+                return { AnyAsyncSequence(self) }
+            } else if returnType != nil {
+                return { nil }
+            }
+            let task = Task(priority: priority) {
+                do {
+                    for try await value in self {
+                        await withUnsafeContinuation { continuation in
+                            _ = onItem(value, { continuation.resume() }, ())
+                        }
+                    }
+                    _ = onComplete(nil, ())
+                } catch {
+                    if error is CancellationError {
+                        _ = onCancelled(error, ())
+                    } else {
+                        _ = onComplete(error, ())
+                    }
+                }
+            }
+            return task.asNativeCancellable()
+        }
+    }
+}
+
+private struct NativeFlowAsyncSequence<Output, Failure: Error>: AsyncSequence {
+    typealias AsyncIterator = Iterator
+    
     public typealias Element = Output
     
-    var nativeFlow: NativeFlow<Output, Failure, Unit>
+    var nativeFlow: NativeFlow<Output, Failure>
     
     public class Iterator: AsyncIteratorProtocol, @unchecked Sendable {
         
         private let semaphore = DispatchSemaphore(value: 1)
-        private var nativeCancellable: NativeCancellable<Unit>?
-        private var item: (Output, () -> Unit)? = nil
+        private var nativeCancellable: NativeCancellable?
+        private var item: (Output, () -> NativeUnit)? = nil
         private var result: Failure?? = Optional.none
         private var cancellationError: Failure? = nil
         private var continuation: UnsafeContinuation<Output?, Error>? = nil
         
-        init(nativeFlow: NativeFlow<Output, Failure, Unit>) {
-            nativeCancellable = nativeFlow({ item, next, unit in
+        init(nativeFlow: NativeFlow<Output, Failure>) {
+            nativeCancellable = nativeFlow(nil, { item, next, unit in
                 self.semaphore.wait()
                 defer { self.semaphore.signal() }
                 if let continuation = self.continuation {

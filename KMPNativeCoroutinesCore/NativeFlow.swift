@@ -9,8 +9,9 @@
 ///
 /// The function takes an `onItem`, `onComplete` and `onCancelled` callback
 /// and returns a cancellable that can be used to cancel the collection.
-public typealias NativeFlow<Output, Failure: Error, Unit> = (
-    _ onItem: @escaping NativeCallback2<Output, () -> Unit, Unit>,
-    _ onComplete: @escaping NativeCallback<Failure?, Unit>,
-    _ onCancelled: @escaping NativeCallback<Failure, Unit>
-) -> NativeCancellable<Unit>
+public typealias NativeFlow<Output, Failure: Error> = (
+    _ returnType: String?,
+    _ onItem: @escaping NativeCallback2<Output, () -> NativeUnit>,
+    _ onComplete: @escaping NativeCallback<Failure?>,
+    _ onCancelled: @escaping NativeCallback<Failure>
+) -> NativeCancellable
