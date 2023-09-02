@@ -19,6 +19,9 @@ internal const val RETURN_TYPE_KOTLIN_FLOW = "kotlin-flow"
  *
  * The function takes an `onItem`, `onComplete` and `onCancelled` callback
  * and returns a cancellable that can be used to cancel the collection.
+ *
+ * When `returnType` isn't `null` the returned cancellable will return the requested type,
+ * or `null` if the requested type isn't supported by this [NativeFlow].
  */
 public typealias NativeFlow<T> = (
     returnType: String?,

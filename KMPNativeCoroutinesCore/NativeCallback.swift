@@ -11,7 +11,7 @@
 /// This way Swift doesn't known what it is/how to get it.
 public typealias NativeCallback<T> = (T, NativeUnit) -> NativeUnit
 
-/// A no-op functions that has the signature of a `NativeCallback`.
+/// A no-op function that has the signature of a `NativeCallback`.
 public func EmptyNativeCallback<T>(value: T, unit: NativeUnit) -> NativeUnit { unit }
 
 /// A callback with two arguments.
@@ -20,5 +20,5 @@ public func EmptyNativeCallback<T>(value: T, unit: NativeUnit) -> NativeUnit { u
 /// This way Swift doesn't known what it is/how to get it.
 public typealias NativeCallback2<T1, T2> = (T1, T2, NativeUnit) -> NativeUnit
 
-/// A no-op functions that has the signature of a `NativeCallback2`.
+/// A no-op function that has the signature of a `NativeCallback2`.
 public func EmptyNativeCallback2<T1, T2>(value1: T1, value2: T2, unit: NativeUnit) -> NativeUnit { unit }

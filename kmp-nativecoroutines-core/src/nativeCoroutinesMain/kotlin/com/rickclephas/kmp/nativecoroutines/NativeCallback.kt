@@ -14,6 +14,9 @@ public typealias NativeCallback<T> = (T, NativeUnit) -> NativeUnit
 internal inline operator fun <T> NativeCallback<T>.invoke(value: T) =
     invoke(value, Unit)
 
+/**
+ * A no-op function that has the signature of a [NativeCallback].
+ */
 @Suppress("UNUSED_PARAMETER", "FunctionName")
 internal fun <T> EmptyNativeCallback(value: T, unit: NativeUnit): NativeUnit = unit
 
@@ -31,5 +34,8 @@ public typealias NativeCallback2<T1, T2> = (T1, T2, NativeUnit) -> NativeUnit
 internal inline operator fun <T1, T2> NativeCallback2<T1, T2>.invoke(value1: T1, value2: T2) =
     invoke(value1, value2, Unit)
 
+/**
+ * A no-op function that has the signature of a [NativeCallback2].
+ */
 @Suppress("UNUSED_PARAMETER", "FunctionName")
 internal fun <T1, T2> EmptyNativeCallback2(value1: T1, value2: T2, unit: NativeUnit): NativeUnit = unit

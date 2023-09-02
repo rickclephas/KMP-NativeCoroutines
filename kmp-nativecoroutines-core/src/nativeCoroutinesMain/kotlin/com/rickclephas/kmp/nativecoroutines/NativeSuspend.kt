@@ -14,6 +14,9 @@ internal const val RETURN_TYPE_KOTLIN_SUSPEND = "kotlin-suspend"
  *
  * The function takes an `onResult`, `onError` and `onCancelled` callback
  * and returns a cancellable that can be used to cancel the suspend function.
+ *
+ * When `returnType` isn't `null` the returned cancellable will return the requested type,
+ * or `null` if the requested type isn't supported by this [NativeSuspend].
  */
 public typealias NativeSuspend<T> = (
     returnType: String?,
