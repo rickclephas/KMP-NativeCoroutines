@@ -1,14 +1,11 @@
 package com.rickclephas.kmp.nativecoroutines
 
-import kotlinx.coroutines.CancellationException
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.cancel
+import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.channels.trySendBlocking
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
@@ -85,10 +82,20 @@ public fun <T> NativeFlow<T>.asFlow(): Flow<T> {
         return (flow as Flow<T>)
     }
     return callbackFlow {
+        fun send(value: T, next: () -> NativeUnit) {
+            launch(start = CoroutineStart.UNDISPATCHED) {
+                try {
+                    send(value)
+                    next()
+                } catch (e: Throwable) {
+                    close(e)
+                }
+            }
+        }
         val cancellable = invoke(
             null,
-            { value, _, unit ->
-                trySendBlocking(value)
+            { value, next, unit ->
+                send(value, next)
                 unit
             },
             { error, unit ->  // TODO: Convert native error
