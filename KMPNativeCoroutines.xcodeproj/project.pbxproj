@@ -10,6 +10,8 @@
 		1D2583082AA6427C0053360E /* NativeFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2583072AA6427C0053360E /* NativeFlow.swift */; };
 		1D25830A2AA643130053360E /* NativeSuspend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2583092AA643130053360E /* NativeSuspend.swift */; };
 		1D25830C2AA647D40053360E /* DisposedError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D25830B2AA647D40053360E /* DisposedError.swift */; };
+		1D25830E2AA6498C0053360E /* NativeSuspend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D25830D2AA6498C0053360E /* NativeSuspend.swift */; };
+		1D2583102AA649B00053360E /* NativeFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D25830F2AA649B00053360E /* NativeFlow.swift */; };
 		1D2583122AA64A230053360E /* NativeFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2583112AA64A230053360E /* NativeFlow.swift */; };
 		1D2583142AA64A4A0053360E /* NativeSuspend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2583132AA64A4A0053360E /* NativeSuspend.swift */; };
 		1D4E296A268A26B000C0D4EF /* FuturePublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4E2969268A26B000C0D4EF /* FuturePublisher.swift */; };
@@ -88,6 +90,8 @@
 		1D2583072AA6427C0053360E /* NativeFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeFlow.swift; sourceTree = "<group>"; };
 		1D2583092AA643130053360E /* NativeSuspend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeSuspend.swift; sourceTree = "<group>"; };
 		1D25830B2AA647D40053360E /* DisposedError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisposedError.swift; sourceTree = "<group>"; };
+		1D25830D2AA6498C0053360E /* NativeSuspend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeSuspend.swift; sourceTree = "<group>"; };
+		1D25830F2AA649B00053360E /* NativeFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeFlow.swift; sourceTree = "<group>"; };
 		1D2583112AA64A230053360E /* NativeFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeFlow.swift; sourceTree = "<group>"; };
 		1D2583132AA64A4A0053360E /* NativeSuspend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeSuspend.swift; sourceTree = "<group>"; };
 		1D2EC83A266D206700B118B0 /* NativeFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeFlow.swift; sourceTree = "<group>"; };
@@ -223,6 +227,8 @@
 				1DA5DCFC26761404002448E3 /* AsyncFunction.swift */,
 				1DFC35FB268A2DE3008393FA /* AsyncResult.swift */,
 				1DFB127926A09796001BE321 /* AsyncSequence.swift */,
+				1D25830D2AA6498C0053360E /* NativeSuspend.swift */,
+				1D25830F2AA649B00053360E /* NativeFlow.swift */,
 				1D64DC232AA339B2006CC547 /* Task.swift */,
 			);
 			path = KMPNativeCoroutinesAsync;
@@ -603,7 +609,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				1D64DC202AA333FB006CC547 /* AnyAsyncSequence.swift in Sources */,
+				1D25830E2AA6498C0053360E /* NativeSuspend.swift in Sources */,
 				1DA5DCFD26761404002448E3 /* AsyncFunction.swift in Sources */,
+				1D2583102AA649B00053360E /* NativeFlow.swift in Sources */,
 				1DFC35FC268A2DE3008393FA /* AsyncResult.swift in Sources */,
 				1DFB127A26A09796001BE321 /* AsyncSequence.swift in Sources */,
 				1D64DC242AA339B2006CC547 /* Task.swift in Sources */,

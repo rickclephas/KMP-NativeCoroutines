@@ -23,33 +23,6 @@ public func asyncFunction<Result, Failure: Error>(
     return try await AsyncFunctionTask(nativeSuspend: nativeSuspend).awaitResult()
 }
 
-/// Creates a `NativeSuspend` for the provided async operation.
-public func nativeSuspend<Result>(
-    priority: TaskPriority? = nil,
-    operation: @escaping @Sendable () async throws -> Result
-) -> NativeSuspend<Result, Error> {
-    return { returnType, onResult, onError, onCancelled in
-        if returnType == RETURN_TYPE_SWIFT_ASYNC {
-            return { operation }
-        } else if returnType != nil {
-            return { nil }
-        }
-        let task = Task(priority: priority) {
-            do {
-                let result = try await operation()
-                _ = onResult(result, ())
-            } catch {
-                if error is CancellationError {
-                    _ = onCancelled(error, ())
-                } else {
-                    _ = onError(error, ())
-                }
-            }
-        }
-        return task.asNativeCancellable()
-    }
-}
-
 private class AsyncFunctionTask<Result, Failure: Error>: @unchecked Sendable {
     
     private let semaphore = DispatchSemaphore(value: 1)

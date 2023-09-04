@@ -22,36 +22,6 @@ public func asyncSequence<Output, Failure: Error>(
     return AnyAsyncSequence(NativeFlowAsyncSequence(nativeFlow: nativeFlow))
 }
 
-public extension AsyncSequence {
-    /// Creates a `NativeFlow` for this `AsyncSequence`.
-    func asNativeFlow(priority: TaskPriority? = nil) -> NativeFlow<Element, Error> {
-        return { returnType, onItem, onComplete, onCancelled in
-            if returnType == RETURN_TYPE_SWIFT_ASYNC_SEQUENCE {
-                return { AnyAsyncSequence(self) }
-            } else if returnType != nil {
-                return { nil }
-            }
-            let task = Task(priority: priority) {
-                do {
-                    for try await value in self {
-                        await withUnsafeContinuation { continuation in
-                            _ = onItem(value, { continuation.resume() }, ())
-                        }
-                    }
-                    _ = onComplete(nil, ())
-                } catch {
-                    if error is CancellationError {
-                        _ = onCancelled(error, ())
-                    } else {
-                        _ = onComplete(error, ())
-                    }
-                }
-            }
-            return task.asNativeCancellable()
-        }
-    }
-}
-
 private struct NativeFlowAsyncSequence<Output, Failure: Error>: AsyncSequence {
     typealias AsyncIterator = Iterator
     
@@ -142,4 +112,3 @@ private struct NativeFlowAsyncSequence<Output, Failure: Error>: AsyncSequence {
         return Iterator(nativeFlow: nativeFlow)
     }
 }
-
