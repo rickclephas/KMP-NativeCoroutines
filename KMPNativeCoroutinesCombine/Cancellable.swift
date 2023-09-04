@@ -1,5 +1,5 @@
 //
-//  AnyCancellable.swift
+//  Cancellable.swift
 //  KMPNativeCoroutinesCombine
 //
 //  Created by Rick Clephas on 02/09/2023.
@@ -8,8 +8,8 @@
 import Combine
 import KMPNativeCoroutinesCore
 
-internal extension AnyCancellable {
-    /// Creates a `NativeCancellable` for this `AnyCancellable`.
+internal extension Cancellable {
+    /// Creates a `NativeCancellable` for this `Cancellable`.
     func asNativeCancellable() -> NativeCancellable {
         return {
             self.cancel()

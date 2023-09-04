@@ -7,9 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1D2583082AA6427C0053360E /* NativeFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2583072AA6427C0053360E /* NativeFlow.swift */; };
+		1D25830A2AA643130053360E /* NativeSuspend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2583092AA643130053360E /* NativeSuspend.swift */; };
 		1D4E296A268A26B000C0D4EF /* FuturePublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4E2969268A26B000C0D4EF /* FuturePublisher.swift */; };
 		1D64DC202AA333FB006CC547 /* AnyAsyncSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D64DC1F2AA333FB006CC547 /* AnyAsyncSequence.swift */; };
-		1D64DC222AA338F4006CC547 /* AnyCancellable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D64DC212AA338F4006CC547 /* AnyCancellable.swift */; };
+		1D64DC222AA338F4006CC547 /* Cancellable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D64DC212AA338F4006CC547 /* Cancellable.swift */; };
 		1D64DC242AA339B2006CC547 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D64DC232AA339B2006CC547 /* Task.swift */; };
 		1D64DC262AA33A18006CC547 /* Disposable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D64DC252AA33A18006CC547 /* Disposable.swift */; };
 		1D7175B7266FE9F800846F75 /* KMPNativeCoroutinesCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D717583266FE90400846F75 /* KMPNativeCoroutinesCore.framework */; };
@@ -81,6 +83,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1D2583072AA6427C0053360E /* NativeFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeFlow.swift; sourceTree = "<group>"; };
+		1D2583092AA643130053360E /* NativeSuspend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeSuspend.swift; sourceTree = "<group>"; };
 		1D2EC83A266D206700B118B0 /* NativeFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeFlow.swift; sourceTree = "<group>"; };
 		1D2EC83C266D209600B118B0 /* NativeCallback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeCallback.swift; sourceTree = "<group>"; };
 		1D2EC83E266D212F00B118B0 /* NativeCancellable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeCancellable.swift; sourceTree = "<group>"; };
@@ -89,7 +93,7 @@
 		1D2EC86C266D29E800B118B0 /* Future.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Future.swift; sourceTree = "<group>"; };
 		1D4E2969268A26B000C0D4EF /* FuturePublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuturePublisher.swift; sourceTree = "<group>"; };
 		1D64DC1F2AA333FB006CC547 /* AnyAsyncSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyAsyncSequence.swift; sourceTree = "<group>"; };
-		1D64DC212AA338F4006CC547 /* AnyCancellable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyCancellable.swift; sourceTree = "<group>"; };
+		1D64DC212AA338F4006CC547 /* Cancellable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cancellable.swift; sourceTree = "<group>"; };
 		1D64DC232AA339B2006CC547 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		1D64DC252AA33A18006CC547 /* Disposable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Disposable.swift; sourceTree = "<group>"; };
 		1D717583266FE90400846F75 /* KMPNativeCoroutinesCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KMPNativeCoroutinesCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -191,10 +195,12 @@
 		1D7175A0266FE9B700846F75 /* KMPNativeCoroutinesCombine */ = {
 			isa = PBXGroup;
 			children = (
-				1D64DC212AA338F4006CC547 /* AnyCancellable.swift */,
+				1D64DC212AA338F4006CC547 /* Cancellable.swift */,
 				1D2EC86C266D29E800B118B0 /* Future.swift */,
 				1D4E2969268A26B000C0D4EF /* FuturePublisher.swift */,
 				1D2EC86A266D290000B118B0 /* Publisher.swift */,
+				1D2583072AA6427C0053360E /* NativeFlow.swift */,
+				1D2583092AA643130053360E /* NativeSuspend.swift */,
 			);
 			path = KMPNativeCoroutinesCombine;
 			sourceTree = "<group>";
@@ -578,9 +584,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				1D7175C1266FF04200846F75 /* Publisher.swift in Sources */,
+				1D25830A2AA643130053360E /* NativeSuspend.swift in Sources */,
 				1D7175C0266FF03F00846F75 /* Future.swift in Sources */,
 				1D4E296A268A26B000C0D4EF /* FuturePublisher.swift in Sources */,
-				1D64DC222AA338F4006CC547 /* AnyCancellable.swift in Sources */,
+				1D64DC222AA338F4006CC547 /* Cancellable.swift in Sources */,
+				1D2583082AA6427C0053360E /* NativeFlow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

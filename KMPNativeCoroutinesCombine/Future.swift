@@ -22,26 +22,6 @@ public func createFuture<Result, Failure: Error>(
     return NativeSuspendFuture(nativeSuspend: nativeSuspend).eraseToAnyPublisher()
 }
 
-public extension Publisher {
-    /// Creates a `NativeSuspend` for this `Publisher`.
-    func asNativeSuspend() -> NativeSuspend<Output, Error> {
-        return { returnType, onResult, onError, onCancelled in // TODO: Use onCancelled
-            if returnType == RETURN_TYPE_COMBINE_FUTURE {
-                return { self.eraseToAnyPublisher() }
-            } else if returnType != nil {
-                return { nil }
-            }
-            let cancellable = first().sink { completion in
-                guard case let .failure(error) = completion else { return }
-                _ = onError(error, ())
-            } receiveValue: { value in
-                _ = onResult(value, ())
-            }
-            return cancellable.asNativeCancellable()
-        }
-    }
-}
-
 internal struct NativeSuspendFuture<Result, Failure: Error>: Publisher {
     
     typealias Output = Result

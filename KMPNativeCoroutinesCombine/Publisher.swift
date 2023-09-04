@@ -23,29 +23,6 @@ public func createPublisher<Output, Failure: Error>(
     return NativeFlowPublisher(nativeFlow: nativeFlow).eraseToAnyPublisher()
 }
 
-public extension Publisher {
-    /// Creates a `NativeFlow` for this `Publisher`.
-    func asNativeFlow() -> NativeFlow<Output, Error> {
-        return { returnType, onItem, onComplete, onCancelled in // TODO: Use onCancelled
-            if returnType == RETURN_TYPE_COMBINE_PUBLISHER {
-                return { self.eraseToAnyPublisher() }
-            } else if returnType != nil {
-                return { nil }
-            }
-            let cancellable = sink { completion in
-                if case let .failure(error) = completion {
-                    _ = onComplete(error, ())
-                } else {
-                    _ = onComplete(nil, ())
-                }
-            } receiveValue: { value in
-                _ = onItem(value, {},  ()) // TODO: Implement back pressure
-            }
-            return cancellable.asNativeCancellable()
-        }
-    }
-}
-
 internal struct NativeFlowPublisher<Output, Failure: Error>: Publisher {
     
     typealias Output = Output
