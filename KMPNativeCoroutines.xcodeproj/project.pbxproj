@@ -206,9 +206,9 @@
 				1D64DC212AA338F4006CC547 /* Cancellable.swift */,
 				1D2EC86C266D29E800B118B0 /* Future.swift */,
 				1D4E2969268A26B000C0D4EF /* FuturePublisher.swift */,
-				1D2EC86A266D290000B118B0 /* Publisher.swift */,
 				1D2583072AA6427C0053360E /* NativeFlow.swift */,
 				1D2583092AA643130053360E /* NativeSuspend.swift */,
+				1D2EC86A266D290000B118B0 /* Publisher.swift */,
 			);
 			path = KMPNativeCoroutinesCombine;
 			sourceTree = "<group>";
@@ -227,8 +227,8 @@
 				1DA5DCFC26761404002448E3 /* AsyncFunction.swift */,
 				1DFC35FB268A2DE3008393FA /* AsyncResult.swift */,
 				1DFB127926A09796001BE321 /* AsyncSequence.swift */,
-				1D25830D2AA6498C0053360E /* NativeSuspend.swift */,
 				1D25830F2AA649B00053360E /* NativeFlow.swift */,
+				1D25830D2AA6498C0053360E /* NativeSuspend.swift */,
 				1D64DC232AA339B2006CC547 /* Task.swift */,
 			);
 			path = KMPNativeCoroutinesAsync;
@@ -257,11 +257,11 @@
 			isa = PBXGroup;
 			children = (
 				1D25830B2AA647D40053360E /* DisposedError.swift */,
+				1D2583112AA64A230053360E /* NativeFlow.swift */,
+				1D2583132AA64A4A0053360E /* NativeSuspend.swift */,
 				1DF3F94C2693586C004C21F2 /* Observable.swift */,
 				1DF3F95526935C7D004C21F2 /* Single.swift */,
 				1DF3F95726935E2A004C21F2 /* SingleObservable.swift */,
-				1D2583112AA64A230053360E /* NativeFlow.swift */,
-				1D2583132AA64A4A0053360E /* NativeSuspend.swift */,
 			);
 			path = KMPNativeCoroutinesRxSwift;
 			sourceTree = "<group>";
