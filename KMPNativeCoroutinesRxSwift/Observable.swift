@@ -39,25 +39,3 @@ public func createObservable<Output, Failure: Error>(
         }
     }
 }
-
-public extension Observable {
-    /// Creates a `NativeFlow` for this `Observable`.
-    func asNativeFlow() -> NativeFlow<Element, Error> {
-        return { returnType, onItem, onComplete, onCancelled in // TODO: Use onCancelled
-            if returnType == RETURN_TYPE_RXSWIFT_OBSERVABLE {
-                return { self }
-            } else if returnType != nil {
-                return { nil }
-            }
-            let disposable = self.subscribe(onNext: { value in
-                _ = onItem(value, {}, ())
-            }, onError: { error in
-                _ = onComplete(error, ())
-            }, onCompleted: {
-                _ = onComplete(nil, ())
-            })
-            return disposable.asNativeCancellable()
-        }
-    }
-}
-
