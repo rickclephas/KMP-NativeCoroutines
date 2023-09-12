@@ -29,6 +29,11 @@ kotlin {
     linuxX64()
     mingwX64()
     sourceSets {
+        all {
+            languageSettings {
+                compilerOptions.freeCompilerArgs.add("-Xexpect-actual-classes")
+            }
+        }
         val commonMain by getting {
             dependencies {
                 api(libs.kotlinx.coroutines.core)
