@@ -8,6 +8,7 @@ plugins {
 version = "1.0"
 
 kotlin {
+    // TODO: Remove workaround for https://github.com/google/ksp/issues/1569
     applyDefaultHierarchyTemplate()
 
     jvmToolchain(11)
