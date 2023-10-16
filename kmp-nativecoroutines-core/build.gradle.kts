@@ -30,12 +30,15 @@ kotlin {
     linuxX64()
     mingwX64()
 
-    sourceSets {
-        all {
-            languageSettings {
-                compilerOptions.freeCompilerArgs.add("-Xexpect-actual-classes")
+    targets.all {
+        compilations.all {
+            compilerOptions.configure {
+                freeCompilerArgs.add("-Xexpect-actual-classes")
             }
         }
+    }
+
+    sourceSets {
         commonMain {
             dependencies {
                 api(libs.kotlinx.coroutines.core)
