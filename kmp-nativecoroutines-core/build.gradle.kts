@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     `kmp-nativecoroutines-publish`
@@ -6,7 +8,15 @@ plugins {
 kotlin {
     explicitApi()
     jvmToolchain(11)
-    applyDefaultHierarchyTemplate()
+
+    @OptIn(ExperimentalKotlinGradlePluginApi::class)
+    applyDefaultHierarchyTemplate {
+        common {
+            group("nativeCoroutines") {
+                withApple()
+            }
+        }
+    }
 
     macosX64()
     macosArm64()
@@ -49,18 +59,6 @@ kotlin {
                 implementation(libs.kotlin.test)
                 implementation(libs.kotlinx.coroutines.test)
             }
-        }
-        val nativeCoroutinesMain by creating {
-            dependsOn(commonMain.get())
-        }
-        val nativeCoroutinesTest by creating {
-            dependsOn(commonTest.get())
-        }
-        appleMain {
-            dependsOn(nativeCoroutinesMain)
-        }
-        appleTest {
-            dependsOn(nativeCoroutinesTest)
         }
     }
 }
