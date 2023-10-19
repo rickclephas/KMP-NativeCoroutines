@@ -2,6 +2,7 @@
 
 A library to use Kotlin Coroutines from Swift code in KMP apps.
 
+> [!IMPORTANT]
 > Looking to upgrade from the 0.x releases? Checkout the [migration steps](MIGRATING_TO_V1.md).
 
 ## Why this library?
@@ -12,7 +13,8 @@ The most important limitation is cancellation support.
 Kotlin suspend functions are exposed to Swift as functions with a completion handler.  
 This allows you to easily use them from your Swift code, but it doesn't support cancellation.
 
-> **Note**: while Swift 5.5 brings async functions to Swift, it doesn't solve this issue.  
+> [!NOTE]
+> While Swift 5.5 brings async functions to Swift, it doesn't solve this issue.  
 > For interoperability with ObjC all functions with a completion handler can be called like an async function.  
 > This means starting with Swift 5.5 your Kotlin suspend functions will look like Swift async functions.  
 > But that's just syntactic sugar, so there's still no cancellation support.
@@ -88,10 +90,12 @@ dependencies: [
 Or add it in Xcode by going to `File` > `Add Packages...` and providing the URL:
 `https://github.com/rickclephas/KMP-NativeCoroutines.git`.
 
-> **Note**: the version for the Swift package should not contain the Kotlin version suffix
+> [!NOTE]
+> The version for the Swift package should not contain the Kotlin version suffix
 > (e.g. `-new-mm` or `-kotlin-1.6.0`).
 
-> **Note**: if you only need a single implementation you can also use the SPM specific versions with suffixes
+> [!NOTE]
+> If you only need a single implementation you can also use the SPM specific versions with suffixes
 > `-spm-async`, `-spm-combine` and `-spm-rxswift`.
 
 ### Swift (CocoaPods)
@@ -102,7 +106,8 @@ pod 'KMPNativeCoroutinesAsync', '1.0.0-ALPHA-18'    # Swift Concurrency implemen
 pod 'KMPNativeCoroutinesCombine', '1.0.0-ALPHA-18'  # Combine implementation
 pod 'KMPNativeCoroutinesRxSwift', '1.0.0-ALPHA-18'  # RxSwift implementation
 ```
-> **Note**: the version for CocoaPods should not contain the Kotlin version suffix (e.g. `-new-mm` or `-kotlin-1.6.0`).
+> [!NOTE]
+> The version for CocoaPods should not contain the Kotlin version suffix (e.g. `-new-mm` or `-kotlin-1.6.0`).
 
 ### IntelliJ / Android Studio
 
@@ -321,7 +326,8 @@ handle.cancel()
 
 The Combine implementation provides a couple functions to get an `AnyPublisher` for your Coroutines code.
 
-> **Note**: these functions create deferred `AnyPublisher`s.  
+> [!NOTE]
+> These functions create deferred `AnyPublisher`s.  
 > Meaning every subscription will trigger the collection of the `Flow` or execution of the suspend function.
 
 #### Publisher
@@ -373,7 +379,8 @@ cancellable.cancel()
 
 The RxSwift implementation provides a couple functions to get an `Observable` or `Single` for your Coroutines code.
 
-> **Note**: these functions create deferred `Observable`s and `Single`s.  
+> [!NOTE]
+> These functions create deferred `Observable`s and `Single`s.  
 > Meaning every subscription will trigger the collection of the `Flow` or execution of the suspend function.
 
 #### Observable
@@ -468,14 +475,16 @@ class Clock {
 }
 ```
 
-> **Note**: your custom coroutine scope must be either `internal` or `public`.
+> [!NOTE]
+> Your custom coroutine scope must be either `internal` or `public`.
 
 If you don't provide a `CoroutineScope` the default scope will be used which is defined as:
 ```kotlin
 internal val defaultCoroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
 ```
 
-> **Note**: KMP-NativeCoroutines has built-in support for [KMM-ViewModel](https://github.com/rickclephas/KMM-ViewModel).  
+> [!NOTE]
+> KMP-NativeCoroutines has built-in support for [KMM-ViewModel](https://github.com/rickclephas/KMM-ViewModel).  
 > Coroutines inside your `KMMViewModel` will (by default) use the `CoroutineScope` from the `ViewModelScope`. 
 
 ### Ignoring declarations
@@ -498,7 +507,8 @@ If for some reason you would like to further refine your Kotlin declarations in 
 These will tell the plugin to add the [`ShouldRefineInSwift`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.native/-should-refine-in-swift/)
 annotation to the generated properties/function.
 
-> **Note**: this currently requires a module-wide opt-in to `kotlin.experimental.ExperimentalObjCRefinement`.
+> [!NOTE]
+> This currently requires a module-wide opt-in to `kotlin.experimental.ExperimentalObjCRefinement`.
 
 You could for example refine your `Flow` property to an `AnyPublisher` property:
 ```kotlin
