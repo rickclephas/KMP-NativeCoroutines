@@ -16,15 +16,15 @@ dependencies {
 }
 
 intellij {
-    version = "2022.2"
+    version = "233-EAP-SNAPSHOT"
     type = "IC"
     plugins = listOf("org.jetbrains.kotlin", "com.intellij.gradle")
 }
 
 tasks {
     patchPluginXml {
-        sinceBuild = "222"
-        untilBuild = "232.*"
+        sinceBuild = "233"
+        untilBuild = "233.*"
     }
 
     buildSearchableOptions {
