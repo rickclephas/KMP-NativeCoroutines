@@ -13,7 +13,7 @@ kotlin {
     applyDefaultHierarchyTemplate {
         common {
             group("nativeCoroutines") {
-                withApple()
+                group("apple")
             }
         }
     }
