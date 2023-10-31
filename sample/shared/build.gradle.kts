@@ -27,21 +27,15 @@ kotlin {
         all {
             languageSettings.optIn("kotlin.experimental.ExperimentalObjCName")
         }
-        val commonMain by getting {
+        commonMain {
             dependencies {
                 implementation(libs.kotlinx.serialization.json)
             }
         }
-        val commonTest by getting {
+        commonTest {
             dependencies {
                 implementation(libs.kotlin.test)
             }
-        }
-        val appleMain by creating {
-            dependsOn(commonMain)
-        }
-        val appleTest by creating {
-            dependsOn(commonTest)
         }
         listOf(
             macosX64, macosArm64,
@@ -51,12 +45,6 @@ kotlin {
         ).forEach {
             it.binaries.framework {
                 baseName = "NativeCoroutinesSampleShared"
-            }
-            getByName("${it.targetName}Main") {
-                dependsOn(appleMain)
-            }
-            getByName("${it.targetName}Test") {
-                dependsOn(appleTest)
             }
         }
     }

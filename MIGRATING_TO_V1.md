@@ -2,7 +2,8 @@
 
 The 1.0 release will bring some improvements that require some changes in your code 😅.  
 
-> **Note**: make sure to use the same library versions for your Kotlin and Swift code!
+> [!NOTE]
+> Make sure to use the same library versions for your Kotlin and Swift code!
 
 ## KSP
 
@@ -26,7 +27,8 @@ To tell the plugin what declarations should be refined for ObjC/Swift you'll nee
   suspend fun getRandomLetters(): String = ""
 ```
 
-> **Note**: error messages and IDE support are currently limited. 
+> [!NOTE]
+> Error messages and IDE support are currently limited. 
 > Please track [#81](https://github.com/rickclephas/KMP-NativeCoroutines/issues/81) and
 > [#82](https://github.com/rickclephas/KMP-NativeCoroutines/issues/82) for improved error messages.
 
@@ -62,7 +64,8 @@ The value and replay cache property names also drop the `Native` suffix:
 + let replayCache = clock.timeReplayCache
 ```
 
-> **Note**: you can now customize the value and replay cache suffixes,  
+> [!NOTE]
+> You can now customize the value and replay cache suffixes,  
 > or if desired completely remove those properties from the generated code.  
 > Checkout the [README](README.md#name-suffix) for more info.
 
