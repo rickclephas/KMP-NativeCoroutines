@@ -39,6 +39,9 @@ tasks {
 
     publishPlugin {
         token = System.getenv("IDEA_PUBLISH_TOKEN")
+        if ((version as String).contains("-kotlin-")) {
+            channels = listOf("eap")
+        }
     }
 
     runIde {
