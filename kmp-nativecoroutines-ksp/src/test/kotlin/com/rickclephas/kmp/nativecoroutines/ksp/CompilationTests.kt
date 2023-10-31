@@ -2,6 +2,7 @@ package com.rickclephas.kmp.nativecoroutines.ksp
 
 import com.tschuchort.compiletesting.*
 import org.intellij.lang.annotations.Language
+import org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi
 import org.junit.Rule
 import org.junit.rules.TemporaryFolder
 import java.lang.Integer.max
@@ -11,6 +12,7 @@ open class CompilationTests {
 
     @Rule @JvmField val temporaryFolder: TemporaryFolder = TemporaryFolder()
 
+    @OptIn(ExperimentalCompilerApi::class)
     protected fun runKspTest(
         @Language("kotlin") inputContent: String,
         @Language("kotlin") outputContent: String,
@@ -34,6 +36,7 @@ open class CompilationTests {
     }
 }
 
+@OptIn(ExperimentalCompilerApi::class)
 private fun KotlinCompilation.assertKspSourceFile(path: String, @Language("kotlin") contents: String) {
     val file = kspSourcesDir.resolve("kotlin/$path")
     assert(file.exists()) { "KSP source file <$path> doesn't exist." }
@@ -45,8 +48,9 @@ private fun KotlinCompilation.assertKspSourceFile(path: String, @Language("kotli
     }
 }
 
+@OptIn(ExperimentalCompilerApi::class)
 private fun KotlinCompilation.assertCompile(
     exitCode: KotlinCompilation.ExitCode = KotlinCompilation.ExitCode.OK
-): KotlinCompilation.Result = compile().also {
+): CompilationResult = compile().also {
     assertEquals(exitCode, it.exitCode)
 }
