@@ -16,7 +16,7 @@ dependencies {
 }
 
 intellij {
-    version = "233-EAP-SNAPSHOT"
+    version = "233.11555.11-EAP-SNAPSHOT"
     type = "IC"
     plugins = listOf("org.jetbrains.kotlin", "com.intellij.gradle")
 }
