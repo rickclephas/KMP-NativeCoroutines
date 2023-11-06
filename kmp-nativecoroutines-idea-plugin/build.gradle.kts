@@ -39,7 +39,7 @@ tasks {
 
     publishPlugin {
         token = System.getenv("IDEA_PUBLISH_TOKEN")
-        if ((version as String).contains("-kotlin-")) {
+        if (listOf("-kotlin-", "-EAP-").any { (version as String).contains(it) }) {
             channels = listOf("eap")
         }
     }
