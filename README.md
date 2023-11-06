@@ -63,8 +63,8 @@ Make sure to always use the same versions for all the libraries!
 For Kotlin just add the plugin to your `build.gradle.kts`:
 ```kotlin
 plugins {
-    id("com.google.devtools.ksp") version "1.9.20-1.0.13"
-    id("com.rickclephas.kmp.nativecoroutines") version "1.0.0-ALPHA-19"
+    id("com.google.devtools.ksp") version "1.9.20-1.0.14"
+    id("com.rickclephas.kmp.nativecoroutines") version "1.0.0-ALPHA-20"
 }
 ```
 and make sure to opt in to the experimental `@ObjCName` annotation:
@@ -80,7 +80,7 @@ The Swift implementations are available via the Swift Package Manager.
 Just add it to your `Package.swift` file:
 ```swift
 dependencies: [
-    .package(url: "https://github.com/rickclephas/KMP-NativeCoroutines.git", from: "1.0.0-ALPHA-19")
+    .package(url: "https://github.com/rickclephas/KMP-NativeCoroutines.git", from: "1.0.0-ALPHA-20")
 ]
 ```
 
@@ -99,9 +99,9 @@ Or add it in Xcode by going to `File` > `Add Packages...` and providing the URL:
 
 If you use CocoaPods add one or more of the following libraries to your `Podfile`:
 ```ruby
-pod 'KMPNativeCoroutinesAsync', '1.0.0-ALPHA-19'    # Swift Concurrency implementation
-pod 'KMPNativeCoroutinesCombine', '1.0.0-ALPHA-19'  # Combine implementation
-pod 'KMPNativeCoroutinesRxSwift', '1.0.0-ALPHA-19'  # RxSwift implementation
+pod 'KMPNativeCoroutinesAsync', '1.0.0-ALPHA-20'    # Swift Concurrency implementation
+pod 'KMPNativeCoroutinesCombine', '1.0.0-ALPHA-20'  # Combine implementation
+pod 'KMPNativeCoroutinesRxSwift', '1.0.0-ALPHA-20'  # RxSwift implementation
 ```
 > [!NOTE]
 > The version for CocoaPods should not contain the Kotlin version suffix (e.g. `-new-mm` or `-kotlin-1.6.0`).
