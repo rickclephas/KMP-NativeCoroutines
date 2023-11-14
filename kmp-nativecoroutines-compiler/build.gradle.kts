@@ -42,8 +42,12 @@ tasks.test {
     useJUnitPlatform()
 }
 
+val deleteGeneratedTests by tasks.registering(Delete::class) {
+    delete("src/test/generated")
+}
+
 val generateTests by tasks.registering(JavaExec::class) {
-    doFirst { delete("src/test/generated") }
+    dependsOn(deleteGeneratedTests)
     classpath = sourceSets.test.get().runtimeClasspath
     mainClass.set("com.rickclephas.kmp.nativecoroutines.compiler.GenerateTestsKt")
 }
