@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.utils.NativeCompilerDownloader
+
 plugins {
     alias(libs.plugins.kotlin.jvm)
     `kmp-nativecoroutines-publish`
@@ -38,6 +40,7 @@ tasks.compileKotlin.configure {
 }
 
 tasks.test {
+    systemProperty("kotlin.internal.native.test.nativeHome", NativeCompilerDownloader(project).compilerDirectory.absolutePath)
     inputs.dir("src/testData")
     useJUnitPlatform()
 }
