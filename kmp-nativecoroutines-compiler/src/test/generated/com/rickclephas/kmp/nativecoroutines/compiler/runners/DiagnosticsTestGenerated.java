@@ -68,4 +68,10 @@ public class DiagnosticsTestGenerated extends AbstractDiagnosticsTest {
     public void testRedundant() throws Exception {
         runTest("src/testData/diagnostics/redundant.kt");
     }
+
+    @Test
+    @TestMetadata("unsupported.kt")
+    public void testUnsupported() throws Exception {
+        runTest("src/testData/diagnostics/unsupported.kt");
+    }
 }

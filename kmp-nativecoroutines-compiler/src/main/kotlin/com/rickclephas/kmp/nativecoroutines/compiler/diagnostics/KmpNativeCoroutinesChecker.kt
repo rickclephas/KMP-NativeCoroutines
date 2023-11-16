@@ -29,6 +29,7 @@ import com.rickclephas.kmp.nativecoroutines.compiler.diagnostics.KmpNativeCorout
 import com.rickclephas.kmp.nativecoroutines.compiler.diagnostics.KmpNativeCoroutinesErrors.REDUNDANT_OVERRIDE_COROUTINES_REFINED_STATE
 import com.rickclephas.kmp.nativecoroutines.compiler.diagnostics.KmpNativeCoroutinesErrors.REDUNDANT_PRIVATE_COROUTINES_REFINED
 import com.rickclephas.kmp.nativecoroutines.compiler.diagnostics.KmpNativeCoroutinesErrors.REDUNDANT_PRIVATE_COROUTINES_REFINED_STATE
+import com.rickclephas.kmp.nativecoroutines.compiler.diagnostics.KmpNativeCoroutinesErrors.UNSUPPORTED_CLASS_EXTENSION_PROPERTY
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotations
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.CoroutinesReturnType
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.coroutinesReturnType
@@ -149,6 +150,13 @@ public class KmpNativeCoroutinesChecker(
             context.trace.report(REDUNDANT_PRIVATE_COROUTINES_REFINED, annotations.nativeCoroutinesRefined, declaration)
             context.trace.report(REDUNDANT_PRIVATE_COROUTINES_REFINED_STATE, annotations.nativeCoroutinesRefinedState, declaration)
             context.trace.report(REDUNDANT_PRIVATE_COROUTINES_STATE, annotations.nativeCoroutinesState, declaration)
+        }
+
+        if (descriptor is PropertyDescriptor && descriptor.dispatchReceiverParameter != null && descriptor.extensionReceiverParameter != null) {
+            context.trace.report(UNSUPPORTED_CLASS_EXTENSION_PROPERTY, annotations.nativeCoroutines, declaration)
+            context.trace.report(UNSUPPORTED_CLASS_EXTENSION_PROPERTY, annotations.nativeCoroutinesRefined, declaration)
+            context.trace.report(UNSUPPORTED_CLASS_EXTENSION_PROPERTY, annotations.nativeCoroutinesRefinedState, declaration)
+            context.trace.report(UNSUPPORTED_CLASS_EXTENSION_PROPERTY, annotations.nativeCoroutinesState, declaration)
         }
     }
 
