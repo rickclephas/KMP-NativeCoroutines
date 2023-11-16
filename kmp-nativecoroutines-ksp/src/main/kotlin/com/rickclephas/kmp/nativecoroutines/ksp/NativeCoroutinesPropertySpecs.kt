@@ -14,27 +14,27 @@ internal fun KSPropertyDeclaration.toNativeCoroutinesPropertySpecs(
 ): List<PropertySpec>? {
     val typeParameterResolver = getTypeParameterResolver()
     val type = type.getReturnType(typeParameterResolver) ?: return null
-    if (type !is ReturnType.Flow) error("Only Flow properties are supported")
+    if (type !is ReturnType.Flow) return emptyList() // Only Flow properties are supported
     return buildList {
         val flowSuffix = if (asState) options.stateFlowSuffix else options.suffix
         if (flowSuffix != null)
-            add(toNativeCoroutinesPropertySpec(scopeProperty, flowSuffix, !asState, typeParameterResolver, type, shouldRefine))
+            toPropertySpec(scopeProperty, flowSuffix, !asState, typeParameterResolver, type, shouldRefine)?.let(::add)
         val valueSuffix = if (asState) options.stateSuffix else options.flowValueSuffix
         if (type is ReturnType.Flow.State && valueSuffix != null)
-            add(toNativeCoroutinesValuePropertySpec(valueSuffix, asState, typeParameterResolver, type, shouldRefine))
+            toValuePropertySpec(valueSuffix, asState, typeParameterResolver, type, shouldRefine)?.let(::add)
         if (type is ReturnType.Flow.Shared && options.flowReplayCacheSuffix != null)
-            add(toNativeCoroutinesReplayCachePropertySpec(options.flowReplayCacheSuffix, typeParameterResolver, type, shouldRefine))
+            toReplayCachePropertySpec(options.flowReplayCacheSuffix, typeParameterResolver, type, shouldRefine)?.let(::add)
     }
 }
 
-private fun KSPropertyDeclaration.toNativeCoroutinesPropertySpec(
+private fun KSPropertyDeclaration.toPropertySpec(
     scopeProperty: CoroutineScopeProvider.ScopeProperty,
     nameSuffix: String,
     setObjCName: Boolean,
     typeParameterResolver: TypeParameterResolver,
     type: ReturnType.Flow,
     shouldRefine: Boolean
-): PropertySpec {
+): PropertySpec? {
     var typeName: TypeName = nativeFlowClassName.parameterizedBy(type.valueType).copy(nullable = type.nullable)
     typeName = typeName.copy(annotations = type.typeReference.annotations.toAnnotationSpecs())
     val simpleName = simpleName.asString()
@@ -44,18 +44,18 @@ private fun KSPropertyDeclaration.toNativeCoroutinesPropertySpec(
         codeArgs.add(asNativeFlowMemberName)
         scopeProperty.codeArg.let(codeArgs::addAll)
         addCode("return $code${if(type.nullable) "?." else "."}%M(${scopeProperty.code})", *codeArgs.toTypedArray())
-    }).apply {
+    })?.apply {
         scopeProperty.containingFile?.let(::addOriginatingKSFile)
-    }.build()
+    }?.build()
 }
 
-private fun KSPropertyDeclaration.toNativeCoroutinesValuePropertySpec(
+private fun KSPropertyDeclaration.toValuePropertySpec(
     nameSuffix: String,
     setObjCName: Boolean,
     typeParameterResolver: TypeParameterResolver,
     type: ReturnType.Flow.State,
     shouldRefine: Boolean
-): PropertySpec {
+): PropertySpec? {
     var typeName = type.valueType.copy(annotations = type.typeReference.annotations.toAnnotationSpecs())
     if (type.nullable) typeName = typeName.copy(nullable = true)
     val simpleName = simpleName.asString()
@@ -68,22 +68,22 @@ private fun KSPropertyDeclaration.toNativeCoroutinesValuePropertySpec(
         else -> { code, codeArgs ->
             addCode("$code${if(type.nullable) "?." else "."}value = value", *codeArgs.toTypedArray())
         }
-    }).build()
+    })?.build()
 }
 
-private fun KSPropertyDeclaration.toNativeCoroutinesReplayCachePropertySpec(
+private fun KSPropertyDeclaration.toReplayCachePropertySpec(
     nameSuffix: String,
     typeParameterResolver: TypeParameterResolver,
     type: ReturnType.Flow.Shared,
     shouldRefine: Boolean
-): PropertySpec {
+): PropertySpec? {
     var typeName: TypeName = LIST.parameterizedBy(type.valueType).copy(nullable = type.nullable)
     typeName = typeName.copy(annotations = type.typeReference.annotations.toAnnotationSpecs())
     val simpleName = simpleName.asString()
     val name = "$simpleName$nameSuffix"
     return createPropertySpec(typeParameterResolver, name, null, typeName, shouldRefine, { code, codeArgs ->
         addCode("return $code${if(type.nullable) "?." else "."}replayCache", *codeArgs.toTypedArray())
-    }).build()
+    })?.build()
 }
 
 private fun KSPropertyDeclaration.createPropertySpec(
@@ -94,7 +94,7 @@ private fun KSPropertyDeclaration.createPropertySpec(
     shouldRefine: Boolean,
     addGetterCode: FunSpec.Builder.(code: String, codeArgs: MutableList<Any>) -> Unit,
     addSetterCode: (FunSpec.Builder.(code: String, codeArgs: MutableList<Any>) -> Unit)? = null
-): PropertySpec.Builder {
+): PropertySpec.Builder? {
     val classDeclaration = parentDeclaration as? KSClassDeclaration
 
     val builder = PropertySpec.builder(name, typeName)
@@ -119,7 +119,7 @@ private fun KSPropertyDeclaration.createPropertySpec(
     val extensionReceiver = extensionReceiver
     if (classDeclaration != null) {
         builder.receiver(classDeclaration.toTypeName(typeParameterResolver))
-        if (extensionReceiver != null) error("Class extension properties aren't supported")
+        if (extensionReceiver != null) return null // Class extension properties aren't supported
     } else if (extensionReceiver != null) {
         builder.receiver(extensionReceiver.toTypeName(typeParameterResolver))
     }
