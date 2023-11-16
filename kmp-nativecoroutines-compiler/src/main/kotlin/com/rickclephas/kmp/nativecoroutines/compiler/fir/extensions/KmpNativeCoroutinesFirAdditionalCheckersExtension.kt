@@ -11,13 +11,6 @@ internal class KmpNativeCoroutinesFirAdditionalCheckersExtension(
     exposedSeverity: ExposedSeverity
 ): FirAdditionalCheckersExtension(session) {
 
-    internal class Factory(
-        private val exposedSeverity: ExposedSeverity
-    ): FirAdditionalCheckersExtension.Factory {
-        override fun create(session: FirSession): KmpNativeCoroutinesFirAdditionalCheckersExtension =
-            KmpNativeCoroutinesFirAdditionalCheckersExtension(session, exposedSeverity)
-    }
-
     override val declarationCheckers: DeclarationCheckers = object : DeclarationCheckers() {
         override val callableDeclarationCheckers = setOf(FirKmpNativeCoroutinesDeclarationChecker(exposedSeverity))
     }

@@ -9,6 +9,6 @@ internal class KmpNativeCoroutinesFirExtensionRegistrar(
     private val configuration: CompilerConfiguration
 ): FirExtensionRegistrar() {
     override fun ExtensionRegistrarContext.configurePlugin() {
-        +KmpNativeCoroutinesFirAdditionalCheckersExtension.Factory(configuration[EXPOSED_SEVERITY])
+        +::KmpNativeCoroutinesFirAdditionalCheckersExtension.bind(configuration[EXPOSED_SEVERITY])
     }
 }
