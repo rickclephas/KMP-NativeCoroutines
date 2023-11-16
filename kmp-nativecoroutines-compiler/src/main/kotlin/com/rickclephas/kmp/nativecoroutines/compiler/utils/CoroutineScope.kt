@@ -7,7 +7,7 @@ import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.types.TypeConstructor
 
 private val coroutineScopeFqName = FqName("kotlinx.coroutines.CoroutineScope")
-private val coroutineScopeClassId = ClassId.topLevel(coroutineScopeFqName)
+internal val coroutineScopeClassId = ClassId.topLevel(coroutineScopeFqName)
 
 internal fun ModuleDescriptor.findCoroutineScopeConstructor(): TypeConstructor =
     findClassifierAcrossModuleDependencies(coroutineScopeClassId)?.typeConstructor

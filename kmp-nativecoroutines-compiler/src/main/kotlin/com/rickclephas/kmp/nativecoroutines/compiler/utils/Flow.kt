@@ -7,7 +7,7 @@ import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.types.TypeConstructor
 
 private val flowFqName = FqName("kotlinx.coroutines.flow.Flow")
-private val flowClassId = ClassId.topLevel(flowFqName)
+internal val flowClassId = ClassId.topLevel(flowFqName)
 
 internal fun ModuleDescriptor.findFlowConstructor(): TypeConstructor =
     findClassifierAcrossModuleDependencies(flowClassId)?.typeConstructor
@@ -15,7 +15,7 @@ internal fun ModuleDescriptor.findFlowConstructor(): TypeConstructor =
 
 
 private val stateFlowFqName = FqName("kotlinx.coroutines.flow.StateFlow")
-private val stateFlowClassId = ClassId.topLevel(stateFlowFqName)
+internal val stateFlowClassId = ClassId.topLevel(stateFlowFqName)
 
 internal fun ModuleDescriptor.findStateFlowConstructor(): TypeConstructor =
     findClassifierAcrossModuleDependencies(stateFlowClassId)?.typeConstructor
