@@ -1,4 +1,4 @@
-package com.rickclephas.kmp.nativecoroutines.compiler.fir.checkers
+package com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics
 
 import org.jetbrains.kotlin.diagnostics.KtDiagnosticFactory0
 import org.jetbrains.kotlin.diagnostics.SourceElementPositioningStrategies
