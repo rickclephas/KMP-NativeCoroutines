@@ -30,6 +30,7 @@ import com.rickclephas.kmp.nativecoroutines.compiler.diagnostics.KmpNativeCorout
 import org.jetbrains.kotlin.diagnostics.rendering.DefaultErrorMessages
 import org.jetbrains.kotlin.diagnostics.rendering.DiagnosticFactoryToRendererMap
 
+@Suppress("DuplicatedCode")
 internal object DefaultErrorMessages : DefaultErrorMessages.Extension {
     override fun getMap(): DiagnosticFactoryToRendererMap = DiagnosticFactoryToRendererMap("KmpNativeCoroutines").apply {
         put(CONFLICT_COROUTINES, "NativeCoroutines, NativeCoroutinesRefined, NativeCoroutinesRefinedState and NativeCoroutinesState can't be combined")
