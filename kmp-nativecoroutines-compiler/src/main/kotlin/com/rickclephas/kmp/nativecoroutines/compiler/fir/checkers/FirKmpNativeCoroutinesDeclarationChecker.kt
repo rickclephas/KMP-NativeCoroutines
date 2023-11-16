@@ -28,6 +28,7 @@ import com.rickclephas.kmp.nativecoroutines.compiler.fir.checkers.FirKmpNativeCo
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.checkers.FirKmpNativeCoroutinesErrors.REDUNDANT_PRIVATE_COROUTINES_REFINED
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.checkers.FirKmpNativeCoroutinesErrors.REDUNDANT_PRIVATE_COROUTINES_REFINED_STATE
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.checkers.FirKmpNativeCoroutinesErrors.REDUNDANT_PRIVATE_COROUTINES_STATE
+import com.rickclephas.kmp.nativecoroutines.compiler.fir.checkers.FirKmpNativeCoroutinesErrors.UNSUPPORTED_CLASS_EXTENSION_PROPERTY
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesAnnotations
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.getCoroutinesReturnType
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.CoroutinesReturnType
@@ -41,6 +42,7 @@ import org.jetbrains.kotlin.fir.declarations.FirCallableDeclaration
 import org.jetbrains.kotlin.fir.declarations.FirProperty
 import org.jetbrains.kotlin.fir.declarations.FirSimpleFunction
 import org.jetbrains.kotlin.fir.declarations.utils.effectiveVisibility
+import org.jetbrains.kotlin.fir.declarations.utils.isExtension
 import org.jetbrains.kotlin.fir.declarations.utils.isOverride
 import org.jetbrains.kotlin.fir.declarations.utils.isSuspend
 import org.jetbrains.kotlin.fir.expressions.FirAnnotation
@@ -152,6 +154,12 @@ internal class FirKmpNativeCoroutinesDeclarationChecker(
             REDUNDANT_PRIVATE_COROUTINES_REFINED.reportOn(annotations.nativeCoroutinesRefined)
             REDUNDANT_PRIVATE_COROUTINES_REFINED_STATE.reportOn(annotations.nativeCoroutinesRefinedState)
             REDUNDANT_PRIVATE_COROUTINES_STATE.reportOn(annotations.nativeCoroutinesState)
+        }
+        //endregion
+
+        //region UNSUPPORTED_*
+        if (declaration is FirProperty && declaration.dispatchReceiverType != null && declaration.isExtension) {
+            coroutinesAnnotations.forEach { UNSUPPORTED_CLASS_EXTENSION_PROPERTY.reportOn(it) }
         }
         //endregion
     }

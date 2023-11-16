@@ -35,6 +35,7 @@ public object FirKmpNativeCoroutinesErrors {
     public val REDUNDANT_PRIVATE_COROUTINES_REFINED: KtDiagnosticFactory0 by error0<KtElement>()
     public val REDUNDANT_PRIVATE_COROUTINES_REFINED_STATE: KtDiagnosticFactory0 by error0<KtElement>()
     public val REDUNDANT_PRIVATE_COROUTINES_STATE: KtDiagnosticFactory0 by error0<KtElement>()
+    public val UNSUPPORTED_CLASS_EXTENSION_PROPERTY: KtDiagnosticFactory0 by error0<KtElement>()
 
     init {
         RootDiagnosticRendererFactory.registerFactory(FirDefaultErrorMessages)

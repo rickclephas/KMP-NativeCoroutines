@@ -46,6 +46,7 @@ import org.jetbrains.kotlin.resolve.DescriptorToSourceUtils.getSourceFromAnnotat
 import org.jetbrains.kotlin.resolve.checkers.DeclarationChecker
 import org.jetbrains.kotlin.resolve.checkers.DeclarationCheckerContext
 import org.jetbrains.kotlin.resolve.descriptorUtil.isEffectivelyPublicApi
+import org.jetbrains.kotlin.resolve.descriptorUtil.isExtension
 
 public class KmpNativeCoroutinesChecker(
     exposedSeverity: ExposedSeverity
@@ -154,12 +155,13 @@ public class KmpNativeCoroutinesChecker(
         }
         //endregion
 
-        if (descriptor is PropertyDescriptor && descriptor.dispatchReceiverParameter != null && descriptor.extensionReceiverParameter != null) {
-            context.trace.report(UNSUPPORTED_CLASS_EXTENSION_PROPERTY, annotations.nativeCoroutines, declaration)
-            context.trace.report(UNSUPPORTED_CLASS_EXTENSION_PROPERTY, annotations.nativeCoroutinesRefined, declaration)
-            context.trace.report(UNSUPPORTED_CLASS_EXTENSION_PROPERTY, annotations.nativeCoroutinesRefinedState, declaration)
-            context.trace.report(UNSUPPORTED_CLASS_EXTENSION_PROPERTY, annotations.nativeCoroutinesState, declaration)
+        //region UNSUPPORTED_*
+        if (descriptor is PropertyDescriptor && descriptor.dispatchReceiverParameter != null && descriptor.isExtension) {
+            coroutinesAnnotations.forEach {
+                context.trace.report(UNSUPPORTED_CLASS_EXTENSION_PROPERTY, it, declaration)
+            }
         }
+        //endregion
     }
 
     private fun BindingTrace.report(
