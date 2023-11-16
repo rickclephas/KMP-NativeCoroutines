@@ -1,4 +1,4 @@
-package com.rickclephas.kmp.nativecoroutines.compiler.diagnostics
+package com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics
 
 import org.jetbrains.kotlin.diagnostics.DiagnosticFactory0
 import org.jetbrains.kotlin.diagnostics.Errors

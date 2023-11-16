@@ -1,6 +1,6 @@
 package com.rickclephas.kmp.nativecoroutines.compiler
 
-import com.rickclephas.kmp.nativecoroutines.compiler.extensions.KmpNativeCoroutinesStorageComponentContainerContributor
+import com.rickclephas.kmp.nativecoroutines.compiler.classic.extensions.KmpNativeCoroutinesStorageComponentContainerContributor
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.extensions.KmpNativeCoroutinesFirExtensionRegistrar
 import org.jetbrains.kotlin.compiler.plugin.CompilerPluginRegistrar
 import org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi

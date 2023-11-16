@@ -1,4 +1,4 @@
-package com.rickclephas.kmp.nativecoroutines.compiler.utils
+package com.rickclephas.kmp.nativecoroutines.compiler.classic.utils
 
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesFqNames as FqNames
 import org.jetbrains.kotlin.descriptors.CallableDescriptor
