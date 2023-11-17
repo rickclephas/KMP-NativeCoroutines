@@ -2,7 +2,7 @@ package com.rickclephas.kmp.nativecoroutines.idea.compiler.extensions
 
 import com.rickclephas.kmp.nativecoroutines.compiler.config.ConfigOption
 import com.rickclephas.kmp.nativecoroutines.compiler.config.EXPOSED_SEVERITY
-import com.rickclephas.kmp.nativecoroutines.compiler.diagnostics.KmpNativeCoroutinesChecker
+import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesChecker
 import org.jetbrains.kotlin.analyzer.moduleInfo
 import org.jetbrains.kotlin.container.StorageComponentContainer
 import org.jetbrains.kotlin.container.useInstance
