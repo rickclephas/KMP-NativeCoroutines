@@ -1,3 +1,4 @@
+// FIR_IDENTICAL
 // EXPOSED_SEVERITY: ERROR
 
 // FILE: customFlows.kt
