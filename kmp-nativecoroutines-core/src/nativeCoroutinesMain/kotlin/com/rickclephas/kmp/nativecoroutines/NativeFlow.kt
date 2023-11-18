@@ -2,7 +2,6 @@ package com.rickclephas.kmp.nativecoroutines
 
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.awaitClose
-import kotlinx.coroutines.channels.trySendBlocking
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.collect
@@ -82,28 +81,25 @@ public fun <T> NativeFlow<T>.asFlow(): Flow<T> {
         return (flow as Flow<T>)
     }
     return callbackFlow {
-        fun send(value: T, next: () -> NativeUnit) {
-            launch(start = CoroutineStart.UNDISPATCHED) {
-                try {
-                    send(value)
-                    next()
-                } catch (e: Throwable) {
-                    close(e)
-                }
-            }
-        }
         val cancellable = invoke(
             null,
             { value, next, unit ->
-                send(value, next)
+                launch(start = CoroutineStart.UNDISPATCHED) {
+                    try {
+                        send(value)
+                        next()
+                    } catch (e: Throwable) {
+                        close(e)
+                    }
+                }
                 unit
             },
-            { error, unit ->  // TODO: Convert native error
-                close(error?.let { RuntimeException("NSError: $it") })
+            { error, unit ->
+                close(error?.asThrowable())
                 unit
             },
-            { _, unit -> // TODO: Convert native error
-                cancel()
+            { error, unit ->
+                cancel(error.asCancellationException())
                 unit
             }
         )

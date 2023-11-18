@@ -80,12 +80,12 @@ public suspend fun <T> NativeSuspend<T>.await(): T {
                 cont.resume(result)
                 unit
             },
-            { error, unit -> // TODO: Convert native error
-                cont.resumeWithException(RuntimeException("NSError: $error"))
+            { error, unit ->
+                cont.resumeWithException(error.asThrowable())
                 unit
             },
-            { _, unit ->  // TODO: Convert native error
-                cont.cancel()
+            { error, unit ->
+                cont.cancel(error.asCancellationException())
                 unit
             }
         )
