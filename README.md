@@ -80,7 +80,20 @@ The Swift implementations are available via the Swift Package Manager.
 Just add it to your `Package.swift` file:
 ```swift
 dependencies: [
-    .package(url: "https://github.com/rickclephas/KMP-NativeCoroutines.git", from: "1.0.0-ALPHA-21")
+    .package(url: "https://github.com/rickclephas/KMP-NativeCoroutines.git", exact: "1.0.0-ALPHA-21")
+],
+targets: [
+    .target(
+        name: "MyTargetName",
+        dependencies: [
+            // Swift Concurrency implementation
+            .product(name: "KMPNativeCoroutinesAsync", package: "KMP-NativeCoroutines"),
+            // Combine implementation
+            .product(name: "KMPNativeCoroutinesCombine", package: "KMP-NativeCoroutines"),
+            // RxSwift implementation
+            .product(name: "KMPNativeCoroutinesRxSwift", package: "KMP-NativeCoroutines")
+        ]
+    )
 ]
 ```
 
