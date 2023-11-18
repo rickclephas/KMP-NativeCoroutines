@@ -1,4 +1,4 @@
-name: Publish a Kotlin preview release
+name: Publish a IDEA plugin release
 on:
   push:
     tags:
