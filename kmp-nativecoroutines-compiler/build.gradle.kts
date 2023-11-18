@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.utils.NativeCompilerDownloader
+
 plugins {
     alias(libs.plugins.kotlin.jvm)
     `kmp-nativecoroutines-publish`
@@ -38,12 +40,17 @@ tasks.compileKotlin.configure {
 }
 
 tasks.test {
+    systemProperty("kotlin.internal.native.test.nativeHome", NativeCompilerDownloader(project).compilerDirectory.absolutePath)
     inputs.dir("src/testData")
     useJUnitPlatform()
 }
 
+val deleteGeneratedTests by tasks.registering(Delete::class) {
+    delete("src/test/generated")
+}
+
 val generateTests by tasks.registering(JavaExec::class) {
-    doFirst { delete("src/test/generated") }
+    dependsOn(deleteGeneratedTests)
     classpath = sourceSets.test.get().runtimeClasspath
     mainClass.set("com.rickclephas.kmp.nativecoroutines.compiler.GenerateTestsKt")
 }

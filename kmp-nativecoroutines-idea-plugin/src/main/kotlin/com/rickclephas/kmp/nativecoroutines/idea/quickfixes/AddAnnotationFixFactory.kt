@@ -3,7 +3,6 @@ package com.rickclephas.kmp.nativecoroutines.idea.quickfixes
 import com.intellij.codeInsight.intention.HighPriorityAction
 import com.intellij.codeInsight.intention.IntentionAction
 import com.intellij.codeInsight.intention.LowPriorityAction
-import com.intellij.psi.PsiElement
 import com.intellij.psi.util.findParentOfType
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesFqNames
 import org.jetbrains.kotlin.diagnostics.Diagnostic
@@ -13,17 +12,18 @@ import org.jetbrains.kotlin.idea.quickfix.KotlinIntentionActionsFactory
 import org.jetbrains.kotlin.idea.quickfix.QuickFixes
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.psi.KtCallableDeclaration
+import org.jetbrains.kotlin.psi.KtDeclaration
 import org.jetbrains.kotlin.psi.KtModifierListOwner
 
 internal class AddAnnotationFixFactory(
-    private val diagnosticFactories: List<DiagnosticFactory0<PsiElement>>,
+    private val diagnosticFactories: List<DiagnosticFactory0<KtDeclaration>>,
     private val preferredFqName: FqName,
     private val alternativeFqName: FqName?
 ): KotlinIntentionActionsFactory() {
 
     internal companion object {
         fun QuickFixes.registerAddAnnotationFix(
-            diagnosticFactories: List<DiagnosticFactory0<PsiElement>>,
+            diagnosticFactories: List<DiagnosticFactory0<KtDeclaration>>,
             preferredFqName: FqName,
             alternativeFqName: FqName? = null
         ) {
