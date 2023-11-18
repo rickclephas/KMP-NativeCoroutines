@@ -1,3 +1,4 @@
+// FIR_IDENTICAL
 // EXPOSED_SEVERITY: NONE
 
 // FILE: customFlows.kt
