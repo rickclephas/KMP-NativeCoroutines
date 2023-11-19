@@ -85,4 +85,20 @@ class NativeFlowTests {
         assertEquals(1, cancellationCount, "Cancellation callback should be called once")
         assertEquals(0, completionCount, "Completion callback shouldn't be called")
     }
+
+    @Test
+    fun ensureFlowReturnTypeReturnsFlow() {
+        val flow = MutableSharedFlow<RandomValue>()
+        val nativeFlow = flow.asNativeFlow(UnsupportedCoroutineScope)
+        val cancellable = nativeFlow(RETURN_TYPE_KOTLIN_FLOW, ::EmptyNativeCallback2, ::EmptyNativeCallback, ::EmptyNativeCallback)
+        assertSame(flow, cancellable())
+    }
+
+    @Test
+    fun ensureUnknownReturnTypeReturnsNull() {
+        val flow = MutableSharedFlow<RandomValue>()
+        val nativeFlow = flow.asNativeFlow(UnsupportedCoroutineScope)
+        val cancellable = nativeFlow("unknown", ::EmptyNativeCallback2, ::EmptyNativeCallback, ::EmptyNativeCallback)
+        assertNull(cancellable())
+    }
 }
