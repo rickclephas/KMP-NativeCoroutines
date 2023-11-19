@@ -83,4 +83,20 @@ class NativeSuspendTests {
         assertEquals(0, receivedErrorCount, "Error callback shouldn't be called")
         assertEquals(0, receivedResultCount, "Result callback shouldn't be called")
     }
+
+    @Test
+    fun ensureSuspendReturnTypeReturnsBlock() = runTest {
+        val value = RandomValue()
+        val block: (suspend () -> RandomValue) = { value }
+        val nativeSuspend = nativeSuspend(UnsupportedCoroutineScope, block)
+        val cancellable = nativeSuspend(RETURN_TYPE_KOTLIN_SUSPEND, ::EmptyNativeCallback, ::EmptyNativeCallback, ::EmptyNativeCallback)
+        assertSame(block, cancellable())
+    }
+
+    @Test
+    fun ensureUnknownReturnTypeReturnsNull() = runTest {
+        val nativeSuspend = nativeSuspend(UnsupportedCoroutineScope) { RandomValue() }
+        val cancellable = nativeSuspend("unknown", ::EmptyNativeCallback, ::EmptyNativeCallback, ::EmptyNativeCallback)
+        assertNull(cancellable())
+    }
 }
