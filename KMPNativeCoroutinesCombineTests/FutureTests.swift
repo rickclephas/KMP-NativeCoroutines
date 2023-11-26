@@ -6,6 +6,7 @@
 //
 
 import XCTest
+import Combine
 import KMPNativeCoroutinesCore
 import KMPNativeCoroutinesCombine
 
@@ -77,5 +78,16 @@ class FutureTests: XCTestCase {
         _ = cancellable // This is just to remove the unused variable warning
         XCTAssertEqual(completionCount, 1, "Completion closure should be called once")
         XCTAssertEqual(valueCount, 0, "Value closure shouldn't be called")
+    }
+    
+    func testFutureIsOriginal() {
+        let nativeSuspend = Just(TestValue()).asNativeSuspend()
+        _ = createFuture { returnType, onResult, onError, onCancelled in
+            if let returnType {
+                return nativeSuspend(returnType, onResult, onError, onCancelled)
+            }
+            XCTFail("Future should be returned")
+            return { nil }
+        }
     }
 }

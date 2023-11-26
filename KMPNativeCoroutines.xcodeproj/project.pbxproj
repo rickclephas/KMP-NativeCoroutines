@@ -15,6 +15,8 @@
 		1D2583122AA64A230053360E /* NativeFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2583112AA64A230053360E /* NativeFlow.swift */; };
 		1D2583142AA64A4A0053360E /* NativeSuspend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2583132AA64A4A0053360E /* NativeSuspend.swift */; };
 		1D3A4B5C2B134FE700D7FBE2 /* NativeSuspendTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3A4B5B2B134FE700D7FBE2 /* NativeSuspendTests.swift */; };
+		1D3A4B5E2B13823F00D7FBE2 /* NativeFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3A4B5D2B13823F00D7FBE2 /* NativeFlowTests.swift */; };
+		1D3A4B602B138CB000D7FBE2 /* NativeSuspendTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3A4B5F2B138CB000D7FBE2 /* NativeSuspendTests.swift */; };
 		1D4E296A268A26B000C0D4EF /* FuturePublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4E2969268A26B000C0D4EF /* FuturePublisher.swift */; };
 		1D64DC202AA333FB006CC547 /* AnyAsyncSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D64DC1F2AA333FB006CC547 /* AnyAsyncSequence.swift */; };
 		1D64DC222AA338F4006CC547 /* Cancellable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D64DC212AA338F4006CC547 /* Cancellable.swift */; };
@@ -103,6 +105,8 @@
 		1D2EC86A266D290000B118B0 /* Publisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Publisher.swift; sourceTree = "<group>"; };
 		1D2EC86C266D29E800B118B0 /* Future.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Future.swift; sourceTree = "<group>"; };
 		1D3A4B5B2B134FE700D7FBE2 /* NativeSuspendTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeSuspendTests.swift; sourceTree = "<group>"; };
+		1D3A4B5D2B13823F00D7FBE2 /* NativeFlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeFlowTests.swift; sourceTree = "<group>"; };
+		1D3A4B5F2B138CB000D7FBE2 /* NativeSuspendTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeSuspendTests.swift; sourceTree = "<group>"; };
 		1D4E2969268A26B000C0D4EF /* FuturePublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuturePublisher.swift; sourceTree = "<group>"; };
 		1D64DC1F2AA333FB006CC547 /* AnyAsyncSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyAsyncSequence.swift; sourceTree = "<group>"; };
 		1D64DC212AA338F4006CC547 /* Cancellable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cancellable.swift; sourceTree = "<group>"; };
@@ -254,6 +258,8 @@
 			isa = PBXGroup;
 			children = (
 				1DCA41A726753C640036C1A3 /* FutureTests.swift */,
+				1D3A4B5D2B13823F00D7FBE2 /* NativeFlowTests.swift */,
+				1D3A4B5F2B138CB000D7FBE2 /* NativeSuspendTests.swift */,
 				1DCA41B2267545600036C1A3 /* PublisherTests.swift */,
 			);
 			path = KMPNativeCoroutinesCombineTests;
@@ -641,7 +647,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				1DCA41A826753C640036C1A3 /* FutureTests.swift in Sources */,
+				1D3A4B5E2B13823F00D7FBE2 /* NativeFlowTests.swift in Sources */,
 				1DCA41B3267545600036C1A3 /* PublisherTests.swift in Sources */,
+				1D3A4B602B138CB000D7FBE2 /* NativeSuspendTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

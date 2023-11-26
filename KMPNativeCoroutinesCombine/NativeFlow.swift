@@ -13,7 +13,7 @@ public extension Publisher {
     func asNativeFlow() -> NativeFlow<Output, Error> {
         return { returnType, onItem, onComplete, onCancelled in
             if returnType == RETURN_TYPE_COMBINE_PUBLISHER {
-                return { self.eraseToAnyPublisher() }
+                return { self.mapError({ error -> Error in error }).eraseToAnyPublisher() }
             } else if returnType != nil {
                 return { nil }
             }
@@ -51,6 +51,7 @@ internal class NativeFlowSubsriber<Output, Failure: Error>: Subscriber, Cancella
     }
     
     func receive(_ input: Output) -> Subscribers.Demand {
+        guard subscription != nil else { return .none }
         _ = onItem(input, {
             self.subscription?.request(.max(1))
             return ()
@@ -59,6 +60,7 @@ internal class NativeFlowSubsriber<Output, Failure: Error>: Subscriber, Cancella
     }
     
     func receive(completion: Subscribers.Completion<Failure>) {
+        guard subscription != nil else { return }
         switch completion {
         case .finished:
             _ = onComplete(nil, ())
@@ -70,8 +72,9 @@ internal class NativeFlowSubsriber<Output, Failure: Error>: Subscriber, Cancella
     }
     
     func cancel() {
-        subscription?.cancel()
-        subscription = nil
+        guard let subscription else { return }
+        self.subscription = nil
+        subscription.cancel()
         _ = onCancelled(CancellationError(), ())
     }
 }

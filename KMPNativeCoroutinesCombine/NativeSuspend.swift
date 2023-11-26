@@ -13,7 +13,7 @@ public extension Publisher {
     func asNativeSuspend() -> NativeSuspend<Output, Error> {
         return { returnType, onResult, onError, onCancelled in
             if returnType == RETURN_TYPE_COMBINE_FUTURE {
-                return { self.eraseToAnyPublisher() }
+                return { self.mapError({ error -> Error in error }).eraseToAnyPublisher() }
             } else if returnType != nil {
                 return { nil }
             }
@@ -61,6 +61,7 @@ internal class NativeSuspendSubsriber<Output, Failure: Error>: Subscriber, Cance
     }
     
     func receive(completion: Subscribers.Completion<Failure>) {
+        guard subscription != nil else { return }
         switch completion {
         case .finished:
             guard let result else {
@@ -75,8 +76,9 @@ internal class NativeSuspendSubsriber<Output, Failure: Error>: Subscriber, Cance
     }
     
     func cancel() {
-        subscription?.cancel()
-        subscription = nil
+        guard let subscription else { return }
+        self.subscription = nil
+        subscription.cancel()
         _ = onCancelled(CancellationError(), ())
     }
 }

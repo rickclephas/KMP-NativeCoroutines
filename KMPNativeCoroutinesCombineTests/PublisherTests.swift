@@ -6,6 +6,7 @@
 //
 
 import XCTest
+import Combine
 import KMPNativeCoroutinesCore
 import KMPNativeCoroutinesCombine
 
@@ -83,5 +84,15 @@ class PublisherTests: XCTestCase {
         XCTAssertEqual(completionCount, 1, "Completion closure should be called once")
         XCTAssertEqual(valueCount, 0, "Value closure shouldn't be called")
     }
+    
+    func testPublisherIsOriginal() {
+        let nativeFlow = Just(TestValue()).asNativeFlow()
+        _ = createPublisher { returnType, onItem, onComplete, onCancelled in
+            if let returnType {
+                return nativeFlow(returnType, onItem, onComplete, onCancelled)
+            }
+            XCTFail("Publisher should be returned")
+            return { nil }
+        }
+    }
 }
-
