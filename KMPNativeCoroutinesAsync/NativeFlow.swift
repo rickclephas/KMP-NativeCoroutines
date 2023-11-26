@@ -9,6 +9,7 @@ import KMPNativeCoroutinesCore
 
 public extension AsyncSequence {
     /// Creates a `NativeFlow` for this `AsyncSequence`.
+    /// - Parameter priority: The priority of the task collecting this `AsyncSequence`.
     func asNativeFlow(priority: TaskPriority? = nil) -> NativeFlow<Element, Error> {
         return { returnType, onItem, onComplete, onCancelled in
             if returnType == RETURN_TYPE_SWIFT_ASYNC_SEQUENCE {
@@ -23,6 +24,7 @@ public extension AsyncSequence {
                             _ = onItem(value, { continuation.resume() }, ())
                         }
                     }
+                    try Task.checkCancellation()
                     _ = onComplete(nil, ())
                 } catch {
                     if error is CancellationError {

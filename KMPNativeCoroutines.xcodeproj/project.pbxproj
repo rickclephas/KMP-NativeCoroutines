@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,6 +14,7 @@
 		1D2583102AA649B00053360E /* NativeFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D25830F2AA649B00053360E /* NativeFlow.swift */; };
 		1D2583122AA64A230053360E /* NativeFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2583112AA64A230053360E /* NativeFlow.swift */; };
 		1D2583142AA64A4A0053360E /* NativeSuspend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2583132AA64A4A0053360E /* NativeSuspend.swift */; };
+		1D3A4B5C2B134FE700D7FBE2 /* NativeSuspendTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3A4B5B2B134FE700D7FBE2 /* NativeSuspendTests.swift */; };
 		1D4E296A268A26B000C0D4EF /* FuturePublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4E2969268A26B000C0D4EF /* FuturePublisher.swift */; };
 		1D64DC202AA333FB006CC547 /* AnyAsyncSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D64DC1F2AA333FB006CC547 /* AnyAsyncSequence.swift */; };
 		1D64DC222AA338F4006CC547 /* Cancellable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D64DC212AA338F4006CC547 /* Cancellable.swift */; };
@@ -25,6 +26,7 @@
 		1D7175BF266FF03A00846F75 /* NativeSuspend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2EC840266D220900B118B0 /* NativeSuspend.swift */; };
 		1D7175C0266FF03F00846F75 /* Future.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2EC86C266D29E800B118B0 /* Future.swift */; };
 		1D7175C1266FF04200846F75 /* Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2EC86A266D290000B118B0 /* Publisher.swift */; };
+		1D74C6FA2B124DAB001CA21F /* NativeFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D74C6F92B124DAB001CA21F /* NativeFlowTests.swift */; };
 		1D74CCAF2A923D2B00FB4622 /* NativeUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D74CCAE2A923D2B00FB4622 /* NativeUnit.swift */; };
 		1D75A367272D4B3800CFF795 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1D75A366272D4B3800CFF795 /* RxSwift */; };
 		1D75A369272D4B4900CFF795 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1D75A368272D4B4900CFF795 /* RxSwift */; };
@@ -100,12 +102,14 @@
 		1D2EC840266D220900B118B0 /* NativeSuspend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeSuspend.swift; sourceTree = "<group>"; };
 		1D2EC86A266D290000B118B0 /* Publisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Publisher.swift; sourceTree = "<group>"; };
 		1D2EC86C266D29E800B118B0 /* Future.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Future.swift; sourceTree = "<group>"; };
+		1D3A4B5B2B134FE700D7FBE2 /* NativeSuspendTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeSuspendTests.swift; sourceTree = "<group>"; };
 		1D4E2969268A26B000C0D4EF /* FuturePublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuturePublisher.swift; sourceTree = "<group>"; };
 		1D64DC1F2AA333FB006CC547 /* AnyAsyncSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyAsyncSequence.swift; sourceTree = "<group>"; };
 		1D64DC212AA338F4006CC547 /* Cancellable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cancellable.swift; sourceTree = "<group>"; };
 		1D64DC232AA339B2006CC547 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		1D717583266FE90400846F75 /* KMPNativeCoroutinesCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KMPNativeCoroutinesCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D71759F266FE9B700846F75 /* KMPNativeCoroutinesCombine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KMPNativeCoroutinesCombine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D74C6F92B124DAB001CA21F /* NativeFlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeFlowTests.swift; sourceTree = "<group>"; };
 		1D74CCAE2A923D2B00FB4622 /* NativeUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeUnit.swift; sourceTree = "<group>"; };
 		1DA5DCE5267613BB002448E3 /* KMPNativeCoroutinesAsync.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KMPNativeCoroutinesAsync.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DA5DCEE267613BB002448E3 /* KMPNativeCoroutinesAsyncTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KMPNativeCoroutinesAsyncTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -240,6 +244,8 @@
 				1DA5DCF3267613BB002448E3 /* AsyncFunctionTests.swift */,
 				1DFC35FD268A2FFE008393FA /* AsyncResultTests.swift */,
 				1DFB127B26A0A446001BE321 /* AsyncSequenceTests.swift */,
+				1D74C6F92B124DAB001CA21F /* NativeFlowTests.swift */,
+				1D3A4B5B2B134FE700D7FBE2 /* NativeSuspendTests.swift */,
 			);
 			path = KMPNativeCoroutinesAsyncTests;
 			sourceTree = "<group>";
@@ -624,6 +630,8 @@
 			files = (
 				1DA5DCF4267613BB002448E3 /* AsyncFunctionTests.swift in Sources */,
 				1DFB127C26A0A446001BE321 /* AsyncSequenceTests.swift in Sources */,
+				1D3A4B5C2B134FE700D7FBE2 /* NativeSuspendTests.swift in Sources */,
+				1D74C6FA2B124DAB001CA21F /* NativeFlowTests.swift in Sources */,
 				1DFC35FE268A2FFE008393FA /* AsyncResultTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

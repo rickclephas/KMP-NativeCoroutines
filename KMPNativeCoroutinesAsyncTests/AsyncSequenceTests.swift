@@ -86,4 +86,15 @@ class AsyncSequenceTests: XCTestCase {
         }
         XCTAssertEqual(valueCount, 0, "No values should be received")
     }
+    
+    func testAsyncSequenceIsOriginal() {
+        let nativeFlow = AsyncStream<TestValue> { _ in }.asNativeFlow()
+        _ = asyncSequence { returnType, onItem, onComplete, onCancelled in
+            if let returnType {
+                return nativeFlow(returnType, onItem, onComplete, onCancelled)
+            }
+            XCTFail("AsyncSequence should be returned")
+            return { nil }
+        }
+    }
 }

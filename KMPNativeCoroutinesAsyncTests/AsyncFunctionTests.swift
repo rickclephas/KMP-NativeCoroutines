@@ -66,4 +66,19 @@ class AsyncFunctionTests: XCTestCase {
             XCTAssertEqual(error as NSError, sendError, "Received incorrect error")
         }
     }
+    
+    func testAsyncFunctionIsOriginal() async {
+        let nativeSuspend = nativeSuspend { TestValue() }
+        do {
+            _ = try await asyncFunction { returnType, onResult, onError, onCancelled in
+                if let returnType {
+                    return nativeSuspend(returnType, onResult, onError, onCancelled)
+                }
+                XCTFail("Async function should be returned")
+                return { nil }
+            }
+        } catch {
+            XCTFail("Function shouldn't throw an error")
+        }
+    }
 }
