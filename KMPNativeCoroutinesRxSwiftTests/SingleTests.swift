@@ -6,6 +6,7 @@
 //
 
 import XCTest
+import RxSwift
 import KMPNativeCoroutinesCore
 import KMPNativeCoroutinesRxSwift
 
@@ -64,5 +65,16 @@ class SingleTests: XCTestCase {
             })
         _ = disposable // This is just to remove the unused variable warning
         XCTAssertEqual(failureCount, 1, "Failure closure should be called once")
+    }
+    
+    func testSingleIsOriginal() {
+        let nativeSuspend = Single.just(TestValue()).asNativeSuspend()
+        _ = createSingle { returnType, onResult, onError, onCancelled in
+            if let returnType {
+                return nativeSuspend(returnType, onResult, onError, onCancelled)
+            }
+            XCTFail("Single should be returned")
+            return { nil }
+        }
     }
 }

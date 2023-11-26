@@ -6,6 +6,7 @@
 //
 
 import XCTest
+import RxSwift
 import KMPNativeCoroutinesCore
 import KMPNativeCoroutinesRxSwift
 
@@ -75,5 +76,16 @@ class ObservableTests: XCTestCase {
         _ = disposable // This is just to remove the unused variable warning
         XCTAssertEqual(errorCount, 1, "Error closure should be called once")
         XCTAssertEqual(valueCount, 0, "Value closure shouldn't be called")
+    }
+    
+    func testObservableIsOriginal() {
+        let nativeFlow = Observable.just(TestValue()).asNativeFlow()
+        _ = createObservable { returnType, onItem, onComplete, onCancelled in
+            if let returnType {
+                return nativeFlow(returnType, onItem, onComplete, onCancelled)
+            }
+            XCTFail("Observable should be returned")
+            return { nil }
+        }
     }
 }
