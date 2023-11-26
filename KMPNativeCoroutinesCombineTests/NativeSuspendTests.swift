@@ -72,11 +72,16 @@ class NativeSuspendTests: XCTestCase {
     
     func testFutureIsCancelled() {
         let nativeSuspend = Just(TestValue()).delay(for: .seconds(5), scheduler: RunLoop.main).asNativeSuspend()
-        let completionExpectation = expectation(description: "Waiting for no completion")
-        completionExpectation.isInverted = true
+        let resultExpectation = expectation(description: "Waiting for no result")
+        resultExpectation.isInverted = true
+        let errorExpectation = expectation(description: "Waiting for no error")
+        errorExpectation.isInverted = true
         let cancellationExpectation = expectation(description: "Waiting for cancellation")
-        let cancel = nativeSuspend(nil, { _, _ in }, { _, unit in
-            completionExpectation.fulfill()
+        let cancel = nativeSuspend(nil, { _, unit in
+            resultExpectation.fulfill()
+            return unit
+        }, { _, unit in
+            errorExpectation.fulfill()
             return unit
         }, { error, unit in
             XCTAssert(error is CancellationError, "Error should be a CancellationError")
@@ -84,6 +89,6 @@ class NativeSuspendTests: XCTestCase {
             return unit
         })
         _ = cancel()
-        wait(for: [completionExpectation, cancellationExpectation], timeout: 4)
+        wait(for: [resultExpectation, errorExpectation, cancellationExpectation], timeout: 4)
     }
 }
