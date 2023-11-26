@@ -31,7 +31,7 @@ class NativeFlowTests: XCTestCase {
         let completionExpectation = expectation(description: "Waiting for completion")
         let cancellationExpectation = expectation(description: "Waiting for no cancellation")
         cancellationExpectation.isInverted = true
-        _ = nativeFlow(nil, { _, _, _ in }, { error, unit in
+        _ = nativeFlow(nil, { _, next, _ in next() }, { error, unit in
             XCTAssertNil(error)
             completionExpectation.fulfill()
             return unit

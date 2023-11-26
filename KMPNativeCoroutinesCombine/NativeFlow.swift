@@ -6,6 +6,7 @@
 //
 
 import Combine
+import Dispatch
 import KMPNativeCoroutinesCore
 
 public extension Publisher {
@@ -29,6 +30,15 @@ internal class NativeFlowSubsriber<Output, Failure: Error>: Subscriber, Cancella
     typealias Input = Output
     typealias Failure = Failure
     
+    enum State {
+        case onItem
+        case onComplete(completion: Subscribers.Completion<Failure>)
+        case onCancelled
+    }
+    
+    private var state: State? = nil
+    private let semaphore = DispatchSemaphore(value: 1)
+    
     private let onItem: NativeCallback2<Output, () -> NativeUnit>
     private let onComplete: NativeCallback<Error?>
     private let onCancelled: NativeCallback<Error>
@@ -51,8 +61,32 @@ internal class NativeFlowSubsriber<Output, Failure: Error>: Subscriber, Cancella
     }
     
     func receive(_ input: Output) -> Subscribers.Demand {
-        guard subscription != nil else { return .none }
+        semaphore.wait()
+        switch state {
+        case .onItem:
+            fatalError("NativeFlow can only process a single value at a time")
+        case .onComplete, .onCancelled:
+            semaphore.signal()
+            return .none
+        case nil:
+            state = .onItem
+        }
+        semaphore.signal()
         _ = onItem(input, {
+            self.semaphore.wait()
+            switch self.state {
+            case nil:
+                fatalError("NativeFlow isn't in the expected onItem state")
+            case .onItem:
+                self.state = nil
+                self.semaphore.signal()
+            case .onComplete(let completion):
+                self.semaphore.signal()
+                self.sendCompletion(completion)
+            case .onCancelled:
+                self.semaphore.signal()
+                self.sendCancellation()
+            }
             self.subscription?.request(.max(1))
             return ()
         }, ())
@@ -60,7 +94,24 @@ internal class NativeFlowSubsriber<Output, Failure: Error>: Subscriber, Cancella
     }
     
     func receive(completion: Subscribers.Completion<Failure>) {
-        guard subscription != nil else { return }
+        semaphore.wait()
+        subscription = nil
+        guard let state else {
+            self.state = .onComplete(completion: completion)
+            semaphore.signal()
+            sendCompletion(completion)
+            return
+        }
+        switch state {
+        case .onItem, .onComplete:
+            self.state = .onComplete(completion: completion)
+        case .onCancelled:
+            break
+        }
+        semaphore.signal()
+    }
+    
+    private func sendCompletion(_ completion: Subscribers.Completion<Failure>) {
         switch completion {
         case .finished:
             _ = onComplete(nil, ())
@@ -72,9 +123,25 @@ internal class NativeFlowSubsriber<Output, Failure: Error>: Subscriber, Cancella
     }
     
     func cancel() {
-        guard let subscription else { return }
-        self.subscription = nil
-        subscription.cancel()
+        semaphore.wait()
+        subscription?.cancel()
+        subscription = nil
+        guard let state else {
+            self.state = .onCancelled
+            semaphore.signal()
+            sendCancellation()
+            return
+        }
+        switch state {
+        case .onItem:
+            self.state = .onCancelled
+        case .onComplete, .onCancelled:
+            break
+        }
+        semaphore.signal()
+    }
+    
+    private func sendCancellation() {
         _ = onCancelled(CancellationError(), ())
     }
 }

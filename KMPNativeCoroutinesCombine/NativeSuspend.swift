@@ -6,6 +6,7 @@
 //
 
 import Combine
+import Dispatch
 import KMPNativeCoroutinesCore
 
 public extension Publisher {
@@ -28,6 +29,8 @@ internal class NativeSuspendSubsriber<Output, Failure: Error>: Subscriber, Cance
     
     typealias Input = Output
     typealias Failure = Failure
+    
+    private let semaphore = DispatchSemaphore(value: 1)
     
     private let onResult: NativeCallback<Output>
     private let onError: NativeCallback<Error>
@@ -61,7 +64,13 @@ internal class NativeSuspendSubsriber<Output, Failure: Error>: Subscriber, Cance
     }
     
     func receive(completion: Subscribers.Completion<Failure>) {
-        guard subscription != nil else { return }
+        semaphore.wait()
+        guard subscription != nil else {
+            semaphore.signal()
+            return
+        }
+        self.subscription = nil
+        semaphore.signal()
         switch completion {
         case .finished:
             guard let result else {
@@ -76,8 +85,13 @@ internal class NativeSuspendSubsriber<Output, Failure: Error>: Subscriber, Cance
     }
     
     func cancel() {
-        guard let subscription else { return }
+        semaphore.wait()
+        guard let subscription else {
+            semaphore.signal()
+            return
+        }
         self.subscription = nil
+        semaphore.signal()
         subscription.cancel()
         _ = onCancelled(CancellationError(), ())
     }
