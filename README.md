@@ -26,20 +26,22 @@ This library solves both of these limitations 😄.
 
 ## Compatibility
 
-The latest version of the library uses Kotlin version `1.9.20`.  
+The latest version of the library uses Kotlin version `1.9.21`.  
 Compatibility versions for older and/or preview Kotlin versions are also available:
 
-| Version        | Version suffix       |   Kotlin   |    KSP     | Coroutines |
-|----------------|----------------------|:----------:|:----------:|:----------:|
-| **_latest_**   | **_no suffix_**      | **1.9.20** | **1.0.14** | **1.7.3**  |
-| 1.0.0-ALPHA-19 | _no suffix_          |   1.9.20   |   1.0.13   |   1.7.3    |
-| 1.0.0-ALPHA-18 | _no suffix_          |   1.9.10   |   1.0.13   |   1.7.3    |
-| 1.0.0-ALPHA-17 | _no suffix_          |   1.9.0    |   1.0.12   |   1.7.3    |
-| 1.0.0-ALPHA-13 | _no suffix_          |   1.9.0    |   1.0.11   |   1.7.2    |
-| 1.0.0-ALPHA-12 | _no suffix_          |   1.8.22   |   1.0.11   |   1.7.2    |
-| 1.0.0-ALPHA-10 | _no suffix_          |   1.8.21   |   1.0.11   |   1.7.1    |
-| 1.0.0-ALPHA-8  | _no suffix_          |   1.8.21   |   1.0.11   |   1.6.4    |
-| 1.0.0-ALPHA-7  | _no suffix_          |   1.8.20   |   1.0.10   |   1.6.4    |
+| Version        | Version suffix      |   Kotlin    |    KSP     | Coroutines |
+|----------------|---------------------|:-----------:|:----------:|:----------:|
+| _latest_       | -kotlin-2.0.0-Beta1 | 2.0.0-Beta1 |   1.0.14   |   1.7.3    |
+| **_latest_**   | **_no suffix_**     | **1.9.21**  | **1.0.15** | **1.7.3**  |
+| 1.0.0-ALPHA-21 | _no suffix_         |   1.9.20    |   1.0.14   |   1.7.3    |
+| 1.0.0-ALPHA-19 | _no suffix_         |   1.9.20    |   1.0.13   |   1.7.3    |
+| 1.0.0-ALPHA-18 | _no suffix_         |   1.9.10    |   1.0.13   |   1.7.3    |
+| 1.0.0-ALPHA-17 | _no suffix_         |    1.9.0    |   1.0.12   |   1.7.3    |
+| 1.0.0-ALPHA-13 | _no suffix_         |    1.9.0    |   1.0.11   |   1.7.2    |
+| 1.0.0-ALPHA-12 | _no suffix_         |   1.8.22    |   1.0.11   |   1.7.2    |
+| 1.0.0-ALPHA-10 | _no suffix_         |   1.8.21    |   1.0.11   |   1.7.1    |
+| 1.0.0-ALPHA-8  | _no suffix_         |   1.8.21    |   1.0.11   |   1.6.4    |
+| 1.0.0-ALPHA-7  | _no suffix_         |   1.8.20    |   1.0.10   |   1.6.4    |
 
 You can choose from a couple of Swift implementations.  
 Depending on the implementation you can support as low as iOS 9, macOS 10.9, tvOS 9 and watchOS 3:
@@ -63,8 +65,8 @@ Make sure to always use the same versions for all the libraries!
 For Kotlin just add the plugin to your `build.gradle.kts`:
 ```kotlin
 plugins {
-    id("com.google.devtools.ksp") version "1.9.20-1.0.14"
-    id("com.rickclephas.kmp.nativecoroutines") version "1.0.0-ALPHA-21"
+    id("com.google.devtools.ksp") version "1.9.21-1.0.15"
+    id("com.rickclephas.kmp.nativecoroutines") version "1.0.0-ALPHA-22"
 }
 ```
 and make sure to opt in to the experimental `@ObjCName` annotation:
@@ -80,7 +82,20 @@ The Swift implementations are available via the Swift Package Manager.
 Just add it to your `Package.swift` file:
 ```swift
 dependencies: [
-    .package(url: "https://github.com/rickclephas/KMP-NativeCoroutines.git", from: "1.0.0-ALPHA-21")
+    .package(url: "https://github.com/rickclephas/KMP-NativeCoroutines.git", exact: "1.0.0-ALPHA-22")
+],
+targets: [
+    .target(
+        name: "MyTargetName",
+        dependencies: [
+            // Swift Concurrency implementation
+            .product(name: "KMPNativeCoroutinesAsync", package: "KMP-NativeCoroutines"),
+            // Combine implementation
+            .product(name: "KMPNativeCoroutinesCombine", package: "KMP-NativeCoroutines"),
+            // RxSwift implementation
+            .product(name: "KMPNativeCoroutinesRxSwift", package: "KMP-NativeCoroutines")
+        ]
+    )
 ]
 ```
 
@@ -99,9 +114,9 @@ Or add it in Xcode by going to `File` > `Add Packages...` and providing the URL:
 
 If you use CocoaPods add one or more of the following libraries to your `Podfile`:
 ```ruby
-pod 'KMPNativeCoroutinesAsync', '1.0.0-ALPHA-21'    # Swift Concurrency implementation
-pod 'KMPNativeCoroutinesCombine', '1.0.0-ALPHA-21'  # Combine implementation
-pod 'KMPNativeCoroutinesRxSwift', '1.0.0-ALPHA-21'  # RxSwift implementation
+pod 'KMPNativeCoroutinesAsync', '1.0.0-ALPHA-22'    # Swift Concurrency implementation
+pod 'KMPNativeCoroutinesCombine', '1.0.0-ALPHA-22'  # Combine implementation
+pod 'KMPNativeCoroutinesRxSwift', '1.0.0-ALPHA-22'  # RxSwift implementation
 ```
 > [!NOTE]
 > The version for CocoaPods should not contain the Kotlin version suffix (e.g. `-new-mm` or `-kotlin-1.6.0`).
