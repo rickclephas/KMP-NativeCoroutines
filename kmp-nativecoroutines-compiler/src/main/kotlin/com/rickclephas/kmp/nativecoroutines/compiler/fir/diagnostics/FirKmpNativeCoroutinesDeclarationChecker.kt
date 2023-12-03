@@ -31,12 +31,14 @@ import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativ
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.REDUNDANT_PRIVATE_COROUTINES_REFINED_STATE
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.REDUNDANT_PRIVATE_COROUTINES_STATE
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.UNSUPPORTED_CLASS_EXTENSION_PROPERTY
+import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.UNSUPPORTED_INPUT_FLOW
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesAnnotations
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.getCoroutinesReturnType
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.isCoroutineScopeProperty
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.CoroutinesReturnType
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.hasFlow
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.hasSuspend
+import com.rickclephas.kmp.nativecoroutines.compiler.utils.hasUnsupportedInputFlow
 import org.jetbrains.kotlin.AbstractKtSourceElement
 import org.jetbrains.kotlin.diagnostics.DiagnosticReporter
 import org.jetbrains.kotlin.diagnostics.KtDiagnosticFactory0
@@ -183,6 +185,13 @@ internal class FirKmpNativeCoroutinesDeclarationChecker(
         //region UNSUPPORTED_*
         if (declaration is FirProperty && declaration.dispatchReceiverType != null && declaration.isExtension) {
             coroutinesAnnotations.forEach { UNSUPPORTED_CLASS_EXTENSION_PROPERTY.reportOn(it) }
+        }
+        if (
+            coroutineReceiverParameter?.second.hasUnsupportedInputFlow(true) ||
+            coroutineValueParameters.any { it.second.hasUnsupportedInputFlow(true) } ||
+            returnType.hasUnsupportedInputFlow(false)
+        ) {
+            coroutinesAnnotations.forEach { UNSUPPORTED_INPUT_FLOW.reportOn(it) }
         }
         //endregion
     }

@@ -68,6 +68,8 @@ public object KmpNativeCoroutinesErrors {
     public val REDUNDANT_PRIVATE_COROUTINES_STATE: DiagnosticFactory0<KtElement> = DiagnosticFactory0.create(Severity.ERROR)
     @JvmField
     public val UNSUPPORTED_CLASS_EXTENSION_PROPERTY: DiagnosticFactory0<KtElement> = DiagnosticFactory0.create(Severity.ERROR)
+    @JvmField
+    public val UNSUPPORTED_INPUT_FLOW: DiagnosticFactory0<KtElement> = DiagnosticFactory0.create(Severity.ERROR)
 
     init {
         Errors.Initializer.initializeFactoryNamesAndDefaultErrorMessages(KmpNativeCoroutinesErrors::class.java, DefaultErrorMessages)

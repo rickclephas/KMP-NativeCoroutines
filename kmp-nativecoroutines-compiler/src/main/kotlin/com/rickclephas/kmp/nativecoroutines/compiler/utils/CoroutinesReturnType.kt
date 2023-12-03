@@ -28,3 +28,12 @@ internal val CoroutinesReturnType?.hasFlow: Boolean get() {
     if (returnType.hasFlow) return true
     return valueTypes.any { it.hasFlow }
 }
+
+internal fun CoroutinesReturnType?.hasUnsupportedInputFlow(isInput: Boolean): Boolean {
+    if (this is CoroutinesReturnType.Flow.Generic) return false
+    if (this is CoroutinesReturnType.Flow) return isInput
+    if (this !is CoroutinesReturnType.Function) return false
+    if (receiverType.hasUnsupportedInputFlow(!isInput)) return true
+    if (returnType.hasUnsupportedInputFlow(isInput)) return true
+    return valueTypes.any { it.hasUnsupportedInputFlow(!isInput) }
+}

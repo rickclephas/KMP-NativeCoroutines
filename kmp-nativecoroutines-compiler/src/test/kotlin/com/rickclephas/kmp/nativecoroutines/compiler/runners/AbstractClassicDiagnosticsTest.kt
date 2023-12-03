@@ -3,6 +3,7 @@ package com.rickclephas.kmp.nativecoroutines.compiler.runners
 import org.jetbrains.kotlin.test.Constructor
 import org.jetbrains.kotlin.test.builders.TestConfigurationBuilder
 import org.jetbrains.kotlin.test.builders.classicFrontendHandlersStep
+import org.jetbrains.kotlin.test.directives.DiagnosticsDirectives
 import org.jetbrains.kotlin.test.frontend.classic.ClassicFrontendFacade
 import org.jetbrains.kotlin.test.frontend.classic.ClassicFrontendOutputArtifact
 import org.jetbrains.kotlin.test.frontend.classic.handlers.ClassicDiagnosticsHandler
@@ -14,6 +15,9 @@ abstract class AbstractClassicDiagnosticsTest: AbstractBaseDiagnosticsTest<Class
     final override val frontend: Constructor<FrontendFacade<ClassicFrontendOutputArtifact>>
         get() = ::ClassicFrontendFacade
     final override fun TestConfigurationBuilder.handlersSetup() = classicFrontendHandlersStep {
-         useHandlers(::ClassicDiagnosticsHandler)
+        useHandlers(::ClassicDiagnosticsHandler)
+        defaultDirectives {
+            DiagnosticsDirectives.DIAGNOSTICS with "-UNUSED_PARAMETER"
+        }
     }
 }

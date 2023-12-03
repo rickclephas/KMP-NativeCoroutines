@@ -31,12 +31,14 @@ import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNati
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.REDUNDANT_PRIVATE_COROUTINES_REFINED
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.REDUNDANT_PRIVATE_COROUTINES_REFINED_STATE
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.UNSUPPORTED_CLASS_EXTENSION_PROPERTY
+import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.UNSUPPORTED_INPUT_FLOW
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.utils.NativeCoroutinesAnnotations
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.utils.coroutinesReturnType
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.utils.isCoroutineScopeProperty
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.CoroutinesReturnType
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.hasFlow
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.hasSuspend
+import com.rickclephas.kmp.nativecoroutines.compiler.utils.hasUnsupportedInputFlow
 import org.jetbrains.kotlin.descriptors.CallableDescriptor
 import org.jetbrains.kotlin.descriptors.DeclarationDescriptor
 import org.jetbrains.kotlin.descriptors.FunctionDescriptor
@@ -184,6 +186,15 @@ public class KmpNativeCoroutinesChecker(
         if (descriptor is PropertyDescriptor && descriptor.dispatchReceiverParameter != null && descriptor.isExtension) {
             coroutinesAnnotations.forEach {
                 context.trace.report(UNSUPPORTED_CLASS_EXTENSION_PROPERTY, it, declaration)
+            }
+        }
+        if (
+            coroutineExtensionParameter?.second.hasUnsupportedInputFlow(true) ||
+            coroutinesValueParameters.any { it.second.hasUnsupportedInputFlow(true) } ||
+            returnType.hasUnsupportedInputFlow(false)
+        ) {
+            coroutinesAnnotations.forEach {
+                context.trace.report(UNSUPPORTED_INPUT_FLOW, it, declaration)
             }
         }
         //endregion
