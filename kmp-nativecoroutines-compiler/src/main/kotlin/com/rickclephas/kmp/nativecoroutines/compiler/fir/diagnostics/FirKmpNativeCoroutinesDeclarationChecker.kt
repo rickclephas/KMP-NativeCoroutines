@@ -31,6 +31,7 @@ import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativ
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.UNSUPPORTED_CLASS_EXTENSION_PROPERTY
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesAnnotations
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.getCoroutinesReturnType
+import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.isCoroutineScopeProperty
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.CoroutinesReturnType
 import org.jetbrains.kotlin.AbstractKtSourceElement
 import org.jetbrains.kotlin.diagnostics.DiagnosticReporter
@@ -126,7 +127,7 @@ internal class FirKmpNativeCoroutinesDeclarationChecker(
         //endregion
 
         //region INVALID_*
-        if (declaration !is FirProperty || returnType != CoroutinesReturnType.CoroutineScope) {
+        if (!declaration.isCoroutineScopeProperty(context.session)) {
             INVALID_COROUTINE_SCOPE.reportOn(annotations.nativeCoroutineScope)
         }
         if (!isSuspend && returnType !is CoroutinesReturnType.Flow) {

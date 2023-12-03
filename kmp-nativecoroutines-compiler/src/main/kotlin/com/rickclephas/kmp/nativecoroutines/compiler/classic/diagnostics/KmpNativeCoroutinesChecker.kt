@@ -31,6 +31,7 @@ import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNati
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.UNSUPPORTED_CLASS_EXTENSION_PROPERTY
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.utils.NativeCoroutinesAnnotations
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.utils.coroutinesReturnType
+import com.rickclephas.kmp.nativecoroutines.compiler.classic.utils.isCoroutineScopeProperty
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.CoroutinesReturnType
 import org.jetbrains.kotlin.descriptors.CallableDescriptor
 import org.jetbrains.kotlin.descriptors.DeclarationDescriptor
@@ -124,7 +125,7 @@ public class KmpNativeCoroutinesChecker(
         //endregion
 
         //region INVALID_*
-        if (descriptor !is PropertyDescriptor || returnType != CoroutinesReturnType.CoroutineScope) {
+        if (!descriptor.isCoroutineScopeProperty) {
             context.trace.report(INVALID_COROUTINE_SCOPE, annotations.nativeCoroutineScope, declaration)
         }
         if (!isSuspend && returnType !is CoroutinesReturnType.Flow) {
