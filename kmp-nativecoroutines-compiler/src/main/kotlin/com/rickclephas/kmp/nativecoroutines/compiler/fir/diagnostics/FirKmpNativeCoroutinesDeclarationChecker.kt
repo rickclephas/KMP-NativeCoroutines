@@ -33,9 +33,9 @@ import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativ
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.UNSUPPORTED_CLASS_EXTENSION_PROPERTY
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.UNSUPPORTED_INPUT_FLOW
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesAnnotations
-import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.getCoroutinesReturnType
+import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.getCoroutinesType
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.isCoroutineScopeProperty
-import com.rickclephas.kmp.nativecoroutines.compiler.utils.CoroutinesReturnType
+import com.rickclephas.kmp.nativecoroutines.compiler.utils.CoroutinesType
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.hasFlow
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.hasSuspend
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.hasUnsupportedInputFlow
@@ -101,12 +101,12 @@ internal class FirKmpNativeCoroutinesDeclarationChecker(
         val isOverride = declaration.isOverride
         val isSuspend = declaration.isSuspend
         val coroutineReceiverParameter = declaration.receiverParameter?.let { parameter ->
-            parameter.typeRef.getCoroutinesReturnType(context.session)?.let { parameter to it }
+            parameter.typeRef.getCoroutinesType(context.session)?.let { parameter to it }
         }
         val coroutineValueParameters = (declaration as? FirFunction)?.valueParameters?.mapNotNull { parameter ->
-            parameter.returnTypeRef.getCoroutinesReturnType(context.session)?.let { parameter to it }
+            parameter.returnTypeRef.getCoroutinesType(context.session)?.let { parameter to it }
         } ?: emptyList()
-        val returnType = declaration.returnTypeRef.getCoroutinesReturnType(context.session)
+        val returnType = declaration.returnTypeRef.getCoroutinesType(context.session)
 
         //region CONFLICT_COROUTINES
         val coroutinesAnnotations = listOf(
@@ -132,7 +132,7 @@ internal class FirKmpNativeCoroutinesDeclarationChecker(
                 if (type.hasSuspend) exposedSuspendType.reportOn(param.source)
                 if (type.hasFlow) exposedFlowType.reportOn(param.source)
             }
-            if (declaration is FirProperty && returnType == CoroutinesReturnType.Flow.State) {
+            if (declaration is FirProperty && returnType == CoroutinesType.Flow.State) {
                 exposedStateFlowProperty.reportOn(declaration.source)
             } else if (returnType != null) {
                 if (returnType.hasSuspend) exposedSuspendType.reportOn(declaration.source)
@@ -159,7 +159,7 @@ internal class FirKmpNativeCoroutinesDeclarationChecker(
             INVALID_COROUTINES_IGNORE.reportOn(annotations.nativeCoroutinesIgnore)
             INVALID_COROUTINES_REFINED.reportOn(annotations.nativeCoroutinesRefined)
         }
-        if (declaration !is FirProperty || returnType !is CoroutinesReturnType.Flow.State) {
+        if (declaration !is FirProperty || returnType !is CoroutinesType.Flow.State) {
             INVALID_COROUTINES_REFINED_STATE.reportOn(annotations.nativeCoroutinesRefinedState)
             INVALID_COROUTINES_STATE.reportOn(annotations.nativeCoroutinesState)
         }

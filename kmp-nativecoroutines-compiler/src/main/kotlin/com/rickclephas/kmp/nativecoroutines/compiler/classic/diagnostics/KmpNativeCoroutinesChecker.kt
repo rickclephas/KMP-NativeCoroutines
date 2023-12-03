@@ -33,9 +33,9 @@ import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNati
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.UNSUPPORTED_CLASS_EXTENSION_PROPERTY
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.UNSUPPORTED_INPUT_FLOW
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.utils.NativeCoroutinesAnnotations
-import com.rickclephas.kmp.nativecoroutines.compiler.classic.utils.coroutinesReturnType
+import com.rickclephas.kmp.nativecoroutines.compiler.classic.utils.coroutinesType
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.utils.isCoroutineScopeProperty
-import com.rickclephas.kmp.nativecoroutines.compiler.utils.CoroutinesReturnType
+import com.rickclephas.kmp.nativecoroutines.compiler.utils.CoroutinesType
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.hasFlow
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.hasSuspend
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.hasUnsupportedInputFlow
@@ -97,12 +97,12 @@ public class KmpNativeCoroutinesChecker(
         val isOverride = descriptor.overriddenDescriptors.isNotEmpty()
         val isSuspend = descriptor is FunctionDescriptor && descriptor.isSuspend
         val coroutineExtensionParameter = descriptor.extensionReceiverParameter?.let { parameter ->
-            parameter.coroutinesReturnType?.let { parameter to it }
+            parameter.coroutinesType?.let { parameter to it }
         }
         val coroutinesValueParameters = descriptor.valueParameters.mapNotNull { parameter ->
-            parameter.coroutinesReturnType?.let { parameter to it }
+            parameter.coroutinesType?.let { parameter to it }
         }
-        val returnType = descriptor.coroutinesReturnType
+        val returnType = descriptor.coroutinesType
 
         //region CONFLICT_COROUTINES
         val coroutinesAnnotations = listOf(
@@ -132,7 +132,7 @@ public class KmpNativeCoroutinesChecker(
                 if (type.hasSuspend) exposedSuspendType?.on(element)?.let(context.trace::report)
                 if (type.hasFlow) exposedFlowType?.on(element)?.let(context.trace::report)
             }
-            if (descriptor is PropertyDescriptor && returnType == CoroutinesReturnType.Flow.State) {
+            if (descriptor is PropertyDescriptor && returnType == CoroutinesType.Flow.State) {
                 exposedStateFlowProperty?.on(declaration)?.let(context.trace::report)
             } else if (returnType != null) {
                 if (returnType.hasSuspend) exposedSuspendType?.on(declaration)?.let(context.trace::report)
@@ -159,7 +159,7 @@ public class KmpNativeCoroutinesChecker(
             context.trace.report(INVALID_COROUTINES_IGNORE, annotations.nativeCoroutinesIgnore, declaration)
             context.trace.report(INVALID_COROUTINES_REFINED, annotations.nativeCoroutinesRefined, declaration)
         }
-        if (descriptor !is PropertyDescriptor || returnType !is CoroutinesReturnType.Flow.State) {
+        if (descriptor !is PropertyDescriptor || returnType !is CoroutinesType.Flow.State) {
             context.trace.report(INVALID_COROUTINES_REFINED_STATE, annotations.nativeCoroutinesRefinedState, declaration)
             context.trace.report(INVALID_COROUTINES_STATE, annotations.nativeCoroutinesState, declaration)
         }

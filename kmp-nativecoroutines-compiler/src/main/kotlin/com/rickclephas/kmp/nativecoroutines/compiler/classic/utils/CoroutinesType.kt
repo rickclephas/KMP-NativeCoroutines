@@ -1,7 +1,7 @@
 package com.rickclephas.kmp.nativecoroutines.compiler.classic.utils
 
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.CoroutinesClassIds
-import com.rickclephas.kmp.nativecoroutines.compiler.utils.CoroutinesReturnType
+import com.rickclephas.kmp.nativecoroutines.compiler.utils.CoroutinesType
 import org.jetbrains.kotlin.builtins.*
 import org.jetbrains.kotlin.descriptors.CallableDescriptor
 import org.jetbrains.kotlin.descriptors.ModuleDescriptor
@@ -14,12 +14,12 @@ import org.jetbrains.kotlin.types.KotlinType
 import org.jetbrains.kotlin.types.TypeConstructor
 import org.jetbrains.kotlin.types.typeUtil.supertypes
 
-internal val CallableDescriptor.coroutinesReturnType: CoroutinesReturnType?
+internal val CallableDescriptor.coroutinesType: CoroutinesType?
     get() = returnTypeOrNothing.getCoroutinesType(CoroutinesTypeConstructors(module))
 
 private fun KotlinType.getCoroutinesType(
     typeConstructors: CoroutinesTypeConstructors
-): CoroutinesReturnType? {
+): CoroutinesType? {
     val isFunctionType = isFunctionType
     val isSuspendFunctionType = isSuspendFunctionType
     if (isFunctionType || isSuspendFunctionType) {
@@ -27,13 +27,13 @@ private fun KotlinType.getCoroutinesType(
         val valueTypes = getValueParameterTypesFromFunctionType().map { it.type.getCoroutinesType(typeConstructors) }
         val returnType = getReturnTypeFromFunctionType().getCoroutinesType(typeConstructors)
         if (!isSuspendFunctionType && receiverType == null && valueTypes.all { it == null } && returnType == null) return null
-        return CoroutinesReturnType.Function(isSuspendFunctionType, receiverType, valueTypes, returnType)
+        return CoroutinesType.Function(isSuspendFunctionType, receiverType, valueTypes, returnType)
     }
-    if (constructor == typeConstructors.stateFlow) return CoroutinesReturnType.Flow.State
-    if (constructor == typeConstructors.flow) return CoroutinesReturnType.Flow.Generic
+    if (constructor == typeConstructors.stateFlow) return CoroutinesType.Flow.State
+    if (constructor == typeConstructors.flow) return CoroutinesType.Flow.Generic
     supertypes().forEach {
-        if (it.constructor == typeConstructors.stateFlow) return CoroutinesReturnType.Flow.State
-        if (it.constructor == typeConstructors.flow) return CoroutinesReturnType.Flow.Generic
+        if (it.constructor == typeConstructors.stateFlow) return CoroutinesType.Flow.State
+        if (it.constructor == typeConstructors.flow) return CoroutinesType.Flow.Generic
     }
     return null
 }
