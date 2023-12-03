@@ -20,6 +20,8 @@ import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNati
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.REDUNDANT_PRIVATE_COROUTINES_STATE
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.EXPOSED_STATE_FLOW_PROPERTY
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.EXPOSED_STATE_FLOW_PROPERTY_ERROR
+import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.EXPOSED_SUSPEND_TYPE
+import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.EXPOSED_SUSPEND_TYPE_ERROR
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.IGNORED_COROUTINES_REFINED
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.IGNORED_COROUTINES_REFINED_STATE
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.INVALID_COROUTINES_REFINED
@@ -33,6 +35,8 @@ import com.rickclephas.kmp.nativecoroutines.compiler.classic.utils.NativeCorouti
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.utils.coroutinesReturnType
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.utils.isCoroutineScopeProperty
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.CoroutinesReturnType
+import com.rickclephas.kmp.nativecoroutines.compiler.utils.hasFlow
+import com.rickclephas.kmp.nativecoroutines.compiler.utils.hasSuspend
 import org.jetbrains.kotlin.descriptors.CallableDescriptor
 import org.jetbrains.kotlin.descriptors.DeclarationDescriptor
 import org.jetbrains.kotlin.descriptors.FunctionDescriptor
@@ -42,8 +46,10 @@ import org.jetbrains.kotlin.descriptors.annotations.AnnotationDescriptor
 import org.jetbrains.kotlin.diagnostics.DiagnosticFactory0
 import org.jetbrains.kotlin.psi.KtDeclaration
 import org.jetbrains.kotlin.psi.KtElement
+import org.jetbrains.kotlin.psi.KtParameter
 import org.jetbrains.kotlin.resolve.BindingTrace
 import org.jetbrains.kotlin.resolve.DescriptorToSourceUtils.getSourceFromAnnotation
+import org.jetbrains.kotlin.resolve.DescriptorToSourceUtils.getSourceFromDescriptor
 import org.jetbrains.kotlin.resolve.checkers.DeclarationChecker
 import org.jetbrains.kotlin.resolve.checkers.DeclarationCheckerContext
 import org.jetbrains.kotlin.resolve.descriptorUtil.isEffectivelyPublicApi
@@ -57,6 +63,12 @@ public class KmpNativeCoroutinesChecker(
         ExposedSeverity.NONE -> null
         ExposedSeverity.WARNING -> EXPOSED_SUSPEND_FUNCTION
         ExposedSeverity.ERROR -> EXPOSED_SUSPEND_FUNCTION_ERROR
+    }
+
+    private val exposedSuspendType = when (exposedSeverity) {
+        ExposedSeverity.NONE -> null
+        ExposedSeverity.WARNING -> EXPOSED_SUSPEND_TYPE
+        ExposedSeverity.ERROR -> EXPOSED_SUSPEND_TYPE_ERROR
     }
 
     private val exposedFlowType = when (exposedSeverity) {
@@ -82,6 +94,12 @@ public class KmpNativeCoroutinesChecker(
         val isPublic = descriptor.isEffectivelyPublicApi
         val isOverride = descriptor.overriddenDescriptors.isNotEmpty()
         val isSuspend = descriptor is FunctionDescriptor && descriptor.isSuspend
+        val coroutineExtensionParameter = descriptor.extensionReceiverParameter?.let { parameter ->
+            parameter.coroutinesReturnType?.let { parameter to it }
+        }
+        val coroutinesValueParameters = descriptor.valueParameters.mapNotNull { parameter ->
+            parameter.coroutinesReturnType?.let { parameter to it }
+        }
         val returnType = descriptor.coroutinesReturnType
 
         //region CONFLICT_COROUTINES
@@ -101,16 +119,22 @@ public class KmpNativeCoroutinesChecker(
 
         //region EXPOSED_*
         if (isPublic && !isOverride && annotationCount == 0 && annotations.nativeCoroutinesIgnore == null) {
-            if (isSuspend) {
-                exposedSuspendFunction?.on(declaration)?.let(context.trace::report)
+            if (isSuspend) exposedSuspendFunction?.on(declaration)?.let(context.trace::report)
+            coroutineExtensionParameter?.let { (param, type) ->
+                val element = getSourceFromDescriptor(param) as? KtParameter ?: declaration
+                if (type.hasSuspend) exposedSuspendType?.on(element)?.let(context.trace::report)
+                if (type.hasFlow) exposedFlowType?.on(element)?.let(context.trace::report)
             }
-            if (returnType is CoroutinesReturnType.Flow) {
-                val diagnosticFactory = when {
-                    descriptor !is PropertyDescriptor -> exposedFlowType
-                    returnType != CoroutinesReturnType.Flow.State -> exposedFlowType
-                    else -> exposedStateFlowProperty
-                }
-                diagnosticFactory?.on(declaration)?.let(context.trace::report)
+            coroutinesValueParameters.forEach { (param, type) ->
+                val element = getSourceFromDescriptor(param) as? KtParameter ?: declaration
+                if (type.hasSuspend) exposedSuspendType?.on(element)?.let(context.trace::report)
+                if (type.hasFlow) exposedFlowType?.on(element)?.let(context.trace::report)
+            }
+            if (descriptor is PropertyDescriptor && returnType == CoroutinesReturnType.Flow.State) {
+                exposedStateFlowProperty?.on(declaration)?.let(context.trace::report)
+            } else if (returnType != null) {
+                if (returnType.hasSuspend) exposedSuspendType?.on(declaration)?.let(context.trace::report)
+                if (returnType.hasFlow) exposedFlowType?.on(declaration)?.let(context.trace::report)
             }
         }
         //endregion
@@ -128,7 +152,7 @@ public class KmpNativeCoroutinesChecker(
         if (!descriptor.isCoroutineScopeProperty) {
             context.trace.report(INVALID_COROUTINE_SCOPE, annotations.nativeCoroutineScope, declaration)
         }
-        if (!isSuspend && returnType !is CoroutinesReturnType.Flow) {
+        if (!isSuspend && coroutineExtensionParameter == null && coroutinesValueParameters.isEmpty() && returnType == null) {
             context.trace.report(INVALID_COROUTINES, annotations.nativeCoroutines, declaration)
             context.trace.report(INVALID_COROUTINES_IGNORE, annotations.nativeCoroutinesIgnore, declaration)
             context.trace.report(INVALID_COROUTINES_REFINED, annotations.nativeCoroutinesRefined, declaration)

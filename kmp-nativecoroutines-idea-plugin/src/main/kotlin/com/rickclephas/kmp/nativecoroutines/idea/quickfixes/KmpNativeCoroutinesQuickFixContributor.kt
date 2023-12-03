@@ -7,6 +7,8 @@ import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNati
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.EXPOSED_STATE_FLOW_PROPERTY_ERROR
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.EXPOSED_SUSPEND_FUNCTION
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.EXPOSED_SUSPEND_FUNCTION_ERROR
+import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.EXPOSED_SUSPEND_TYPE
+import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.EXPOSED_SUSPEND_TYPE_ERROR
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.IGNORED_COROUTINES
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.IGNORED_COROUTINES_REFINED
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.IGNORED_COROUTINES_REFINED_STATE
@@ -36,7 +38,11 @@ import org.jetbrains.kotlin.idea.quickfix.QuickFixes
 public class KmpNativeCoroutinesQuickFixContributor: QuickFixContributor {
     override fun registerQuickFixes(quickFixes: QuickFixes) {
         quickFixes.registerAddAnnotationFix(
-            listOf(EXPOSED_FLOW_TYPE, EXPOSED_FLOW_TYPE_ERROR, EXPOSED_SUSPEND_FUNCTION, EXPOSED_SUSPEND_FUNCTION_ERROR),
+            listOf(
+                EXPOSED_FLOW_TYPE, EXPOSED_FLOW_TYPE_ERROR,
+                EXPOSED_SUSPEND_FUNCTION, EXPOSED_SUSPEND_FUNCTION_ERROR,
+                EXPOSED_SUSPEND_TYPE, EXPOSED_SUSPEND_TYPE_ERROR,
+            ),
             FqNames.nativeCoroutines,
         )
         quickFixes.registerAddAnnotationFix(

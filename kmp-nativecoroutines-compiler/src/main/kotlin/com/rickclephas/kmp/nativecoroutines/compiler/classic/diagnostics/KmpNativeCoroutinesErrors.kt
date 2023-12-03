@@ -23,6 +23,10 @@ public object KmpNativeCoroutinesErrors {
     @JvmField
     public val EXPOSED_SUSPEND_FUNCTION_ERROR: DiagnosticFactory0<KtDeclaration> = DiagnosticFactory0.create(Severity.ERROR, PositioningStrategies.SUSPEND_MODIFIER)
     @JvmField
+    public val EXPOSED_SUSPEND_TYPE: DiagnosticFactory0<KtDeclaration> = DiagnosticFactory0.create(Severity.WARNING, PositioningStrategies.DECLARATION_RETURN_TYPE)
+    @JvmField
+    public val EXPOSED_SUSPEND_TYPE_ERROR: DiagnosticFactory0<KtDeclaration> = DiagnosticFactory0.create(Severity.ERROR, PositioningStrategies.DECLARATION_RETURN_TYPE)
+    @JvmField
     public val IGNORED_COROUTINES: DiagnosticFactory0<KtElement> = DiagnosticFactory0.create(Severity.ERROR)
     @JvmField
     public val IGNORED_COROUTINES_REFINED: DiagnosticFactory0<KtElement> = DiagnosticFactory0.create(Severity.ERROR)
