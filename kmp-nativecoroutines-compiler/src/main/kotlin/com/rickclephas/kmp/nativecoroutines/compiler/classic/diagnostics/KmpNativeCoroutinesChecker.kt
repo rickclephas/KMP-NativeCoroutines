@@ -123,12 +123,12 @@ public class KmpNativeCoroutinesChecker(
         if (isPublic && !isOverride && annotationCount == 0 && annotations.nativeCoroutinesIgnore == null) {
             if (isSuspend) exposedSuspendFunction?.on(declaration)?.let(context.trace::report)
             coroutineExtensionParameter?.let { (param, type) ->
-                val element = getSourceFromDescriptor(param) as? KtParameter ?: declaration
+                val element = getSourceFromDescriptor(param) as? KtElement ?: declaration
                 if (type.hasSuspend) exposedSuspendType?.on(element)?.let(context.trace::report)
                 if (type.hasFlow) exposedFlowType?.on(element)?.let(context.trace::report)
             }
             coroutinesValueParameters.forEach { (param, type) ->
-                val element = getSourceFromDescriptor(param) as? KtParameter ?: declaration
+                val element = getSourceFromDescriptor(param) as? KtElement ?: declaration
                 if (type.hasSuspend) exposedSuspendType?.on(element)?.let(context.trace::report)
                 if (type.hasFlow) exposedFlowType?.on(element)?.let(context.trace::report)
             }
