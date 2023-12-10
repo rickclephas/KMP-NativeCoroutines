@@ -18,6 +18,7 @@ public class KmpNativeCoroutinesModelBuilderService: AbstractModelBuilderService
         )
     }
 
+    @Suppress("DEPRECATION", "OVERRIDE_DEPRECATION")
     override fun getErrorMessageBuilder(project: Project, e: Exception): ErrorMessageBuilder =
         ErrorMessageBuilder.create(project, e, "Gradle import errors")
             .withDescription("Unable to build KMP-NativeCoroutines plugin configuration")
@@ -25,6 +26,7 @@ public class KmpNativeCoroutinesModelBuilderService: AbstractModelBuilderService
     private operator fun <T> Any.get(fieldName: String, clazz: Class<*> = this.javaClass): T? {
         val field = clazz.declaredFields.firstOrNull { it.name == fieldName }
             ?: return get(fieldName, clazz.superclass ?: return null)
+        @Suppress("DEPRECATION")
         val isAccessible = field.isAccessible
         try {
             field.isAccessible = true
