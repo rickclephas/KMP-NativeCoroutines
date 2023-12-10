@@ -26,15 +26,17 @@ internal fun ConeKotlinType.getCoroutinesType(session: FirSession): CoroutinesTy
         return CoroutinesType.Function(isSuspendFunctionType, receiverType, valueTypes, returnType)
     }
     val symbol = (this as? ConeClassLikeType)?.toSymbol(session)?.fullyExpandedClass(session) ?: return null
-    return coroutinesTypes.firstNotNullOfOrNull { (lookupTag, returnType) ->
-        returnType.takeIf { symbol.isSubclassOf(lookupTag, session, isStrict = false, lookupInterfaces = true) }
-    }
+    val symbolLookupTag = symbol.toLookupTag()
+    val stateFlowLookupTag = CoroutinesClassIds.stateFlow.toLookupTag()
+    val flowLookupTag = CoroutinesClassIds.flow.toLookupTag()
+    if (symbolLookupTag == stateFlowLookupTag) return CoroutinesType.Flow.State(false)
+    if (symbolLookupTag == flowLookupTag) return CoroutinesType.Flow.Generic(false)
+    if (symbol.isSubclassOf(stateFlowLookupTag, session, isStrict = true, lookupInterfaces = true))
+        return CoroutinesType.Flow.State(true)
+    if (symbol.isSubclassOf(flowLookupTag, session, isStrict = true, lookupInterfaces = true))
+        return CoroutinesType.Flow.Generic(true)
+    return null
 }
-
-private val coroutinesTypes = mapOf(
-    CoroutinesClassIds.stateFlow.toLookupTag() to CoroutinesType.Flow.State,
-    CoroutinesClassIds.flow.toLookupTag() to CoroutinesType.Flow.Generic,
-)
 
 internal fun FirCallableDeclaration.isCoroutineScopeProperty(session: FirSession): Boolean {
     if (this !is FirProperty) return false

@@ -2,8 +2,9 @@ package com.rickclephas.kmp.nativecoroutines.compiler.utils
 
 internal sealed class CoroutinesType private constructor() {
     sealed class Flow private constructor(): CoroutinesType() {
-        data object Generic: Flow()
-        data object State: Flow()
+        abstract val isCustom: Boolean
+        data class Generic(override val isCustom: Boolean): Flow()
+        data class State(override val isCustom: Boolean): Flow()
     }
     data class Function(
         val isSuspend: Boolean,
@@ -30,7 +31,7 @@ internal val CoroutinesType?.hasFlow: Boolean get() {
 }
 
 internal fun CoroutinesType?.hasUnsupportedInputFlow(isInput: Boolean): Boolean {
-    if (this is CoroutinesType.Flow.Generic) return false
+    if (this is CoroutinesType.Flow.Generic) return isCustom && isInput
     if (this is CoroutinesType.Flow) return isInput
     if (this !is CoroutinesType.Function) return false
     if (receiverType.hasUnsupportedInputFlow(!isInput)) return true

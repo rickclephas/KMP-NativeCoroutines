@@ -29,11 +29,11 @@ private fun KotlinType.getCoroutinesType(
         if (!isSuspendFunctionType && receiverType == null && valueTypes.all { it == null } && returnType == null) return null
         return CoroutinesType.Function(isSuspendFunctionType, receiverType, valueTypes, returnType)
     }
-    if (constructor == typeConstructors.stateFlow) return CoroutinesType.Flow.State
-    if (constructor == typeConstructors.flow) return CoroutinesType.Flow.Generic
+    if (constructor == typeConstructors.stateFlow) return CoroutinesType.Flow.State(false)
+    if (constructor == typeConstructors.flow) return CoroutinesType.Flow.Generic(false)
     supertypes().forEach {
-        if (it.constructor == typeConstructors.stateFlow) return CoroutinesType.Flow.State
-        if (it.constructor == typeConstructors.flow) return CoroutinesType.Flow.Generic
+        if (it.constructor == typeConstructors.stateFlow) return CoroutinesType.Flow.State(true)
+        if (it.constructor == typeConstructors.flow) return CoroutinesType.Flow.Generic(true)
     }
     return null
 }

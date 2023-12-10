@@ -132,7 +132,7 @@ internal class FirKmpNativeCoroutinesDeclarationChecker(
                 if (type.hasSuspend) exposedSuspendType.reportOn(param.source)
                 if (type.hasFlow) exposedFlowType.reportOn(param.source)
             }
-            if (declaration is FirProperty && returnType == CoroutinesType.Flow.State) {
+            if (declaration is FirProperty && returnType is CoroutinesType.Flow.State) {
                 exposedStateFlowProperty.reportOn(declaration.source)
             } else if (returnType != null) {
                 if (returnType.hasSuspend) exposedSuspendType.reportOn(declaration.source)

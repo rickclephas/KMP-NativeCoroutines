@@ -132,7 +132,7 @@ public class KmpNativeCoroutinesChecker(
                 if (type.hasSuspend) exposedSuspendType?.on(element)?.let(context.trace::report)
                 if (type.hasFlow) exposedFlowType?.on(element)?.let(context.trace::report)
             }
-            if (descriptor is PropertyDescriptor && returnType == CoroutinesType.Flow.State) {
+            if (descriptor is PropertyDescriptor && returnType is CoroutinesType.Flow.State) {
                 exposedStateFlowProperty?.on(declaration)?.let(context.trace::report)
             } else if (returnType != null) {
                 if (returnType.hasSuspend) exposedSuspendType?.on(declaration)?.let(context.trace::report)
