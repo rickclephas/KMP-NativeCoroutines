@@ -28,6 +28,34 @@ fun topLevelCustomFlowFunction(): <!EXPOSED_FLOW_TYPE!>CustomFlow<Int><!> = thro
 
 <!EXPOSED_SUSPEND_FUNCTION!>suspend<!> fun topLevelSuspendFlowFunction(): <!EXPOSED_FLOW_TYPE!>Flow<Int><!> = throw Throwable()
 
+fun topLevelSuspendTypeFunction(): <!EXPOSED_SUSPEND_TYPE!>(suspend () -> Int)<!> = throw Throwable()
+
+fun topLevelSuspendTypeArgFunction(block: <!EXPOSED_SUSPEND_TYPE!>suspend () -> Int<!>): Int = 0
+
+fun <!EXPOSED_SUSPEND_TYPE!>(suspend () -> Int)<!>.topLevelSuspendTypeExtensionFunction(): Int = 0
+
+fun topLevelFlowArgFunction(flow: <!EXPOSED_FLOW_TYPE!>Flow<Int><!>): Int = 0
+
+fun topLevelSharedFlowArgFunction(flow: <!EXPOSED_FLOW_TYPE!>SharedFlow<Int><!>): Int = 0
+
+fun topLevelStateFlowArgFunction(flow: <!EXPOSED_FLOW_TYPE!>StateFlow<Int><!>): Int = 0
+
+fun topLevelCustomFlowArgFunction(flow: <!EXPOSED_FLOW_TYPE!>CustomFlow<Int><!>): Int = 0
+
+fun <!EXPOSED_FLOW_TYPE!>Flow<Int><!>.topLevelFlowExtensionFunction(): Int = 0
+
+fun <!EXPOSED_FLOW_TYPE!>SharedFlow<Int><!>.topLevelSharedFlowExtensionFunction(): Int = 0
+
+fun <!EXPOSED_FLOW_TYPE!>StateFlow<Int><!>.topLevelStateFlowExtensionFunction(): Int = 0
+
+fun <!EXPOSED_FLOW_TYPE!>CustomFlow<Int><!>.topLevelCustomFlowExtensionFunction(): Int = 0
+
+fun topLevelFlowBlockFunction(block: <!EXPOSED_FLOW_TYPE!>() -> Flow<Int><!>): Int = 0
+
+fun topLevelFlowArgBlockFunction(block: <!EXPOSED_FLOW_TYPE!>(Flow<Int>) -> Int<!>): Int = 0
+
+fun topLevelFlowExtensionBlockFunction(block: <!EXPOSED_FLOW_TYPE!>Flow<Int>.() -> Int<!>): Int = 0
+
 val topLevelFlowProperty: <!EXPOSED_FLOW_TYPE!>Flow<Int><!> get() = throw Throwable()
 
 val topLevelSharedFlowProperty: <!EXPOSED_FLOW_TYPE!>SharedFlow<Int><!> get() = throw Throwable()

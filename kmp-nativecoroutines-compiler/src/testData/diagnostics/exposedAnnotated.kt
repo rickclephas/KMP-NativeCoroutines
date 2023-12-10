@@ -37,6 +37,48 @@ fun topLevelCustomFlowFunction(): CustomFlow<Int> = throw Throwable()
 suspend fun topLevelSuspendFlowFunction(): Flow<Int> = throw Throwable()
 
 @NativeCoroutines
+fun topLevelSuspendTypeFunction(): (suspend () -> Int) = throw Throwable()
+
+@NativeCoroutines
+fun topLevelSuspendTypeArgFunction(block: suspend () -> Int): Int = 0
+
+@NativeCoroutines
+fun (suspend () -> Int).topLevelSuspendTypeExtensionFunction(): Int = 0
+
+@NativeCoroutines
+fun topLevelFlowArgFunction(flow: Flow<Int>): Int = 0
+
+<!UNSUPPORTED_INPUT_FLOW!>@NativeCoroutines<!>
+fun topLevelSharedFlowArgFunction(flow: SharedFlow<Int>): Int = 0
+
+<!UNSUPPORTED_INPUT_FLOW!>@NativeCoroutines<!>
+fun topLevelStateFlowArgFunction(flow: StateFlow<Int>): Int = 0
+
+<!UNSUPPORTED_INPUT_FLOW!>@NativeCoroutines<!>
+fun topLevelCustomFlowArgFunction(flow: CustomFlow<Int>): Int = 0
+
+@NativeCoroutines
+fun Flow<Int>.topLevelFlowExtensionFunction(): Int = 0
+
+<!UNSUPPORTED_INPUT_FLOW!>@NativeCoroutines<!>
+fun SharedFlow<Int>.topLevelSharedFlowExtensionFunction(): Int = 0
+
+<!UNSUPPORTED_INPUT_FLOW!>@NativeCoroutines<!>
+fun StateFlow<Int>.topLevelStateFlowExtensionFunction(): Int = 0
+
+<!UNSUPPORTED_INPUT_FLOW!>@NativeCoroutines<!>
+fun CustomFlow<Int>.topLevelCustomFlowExtensionFunction(): Int = 0
+
+@NativeCoroutines
+fun topLevelFlowBlockFunction(block: () -> Flow<Int>): Int = 0
+
+@NativeCoroutines
+fun topLevelFlowArgBlockFunction(block: (Flow<Int>) -> Int): Int = 0
+
+@NativeCoroutines
+fun topLevelFlowExtensionBlockFunction(block: Flow<Int>.() -> Int): Int = 0
+
+@NativeCoroutines
 val topLevelFlowProperty: Flow<Int> get() = throw Throwable()
 
 @NativeCoroutines
