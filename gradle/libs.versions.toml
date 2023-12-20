@@ -1,8 +1,8 @@
 [versions]
 kotlin = "1.9.21"
 kotlinx-coroutines = "1.7.3"
-ksp = "1.9.21-1.0.15"
-kotlinpoet = "1.14.2"
+ksp = "1.9.21-1.0.16"
+kotlinpoet = "1.15.3"
 junit = "5.9.1"
 
 [libraries]
@@ -32,7 +32,7 @@ kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serializa
 
 [plugins]
 gradle-plugin-publish = { id = "com.gradle.plugin-publish", version = "1.2.0" }
-intellij = { id = "org.jetbrains.intellij", version = "1.15.0" }
+intellij = { id = "org.jetbrains.intellij", version = "1.16.0" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 

@@ -16,15 +16,15 @@ dependencies {
 }
 
 intellij {
-    version = "2022.2"
+    version = "2023.3"
     type = "IC"
     plugins = listOf("org.jetbrains.kotlin", "com.intellij.gradle")
 }
 
 tasks {
     patchPluginXml {
-        sinceBuild = "222"
-        untilBuild = "232.*"
+        sinceBuild = "233"
+        untilBuild = "233.*"
     }
 
     buildSearchableOptions {
@@ -39,7 +39,7 @@ tasks {
 
     publishPlugin {
         token = System.getenv("IDEA_PUBLISH_TOKEN")
-        if ((version as String).contains("-kotlin-")) {
+        if (listOf("-kotlin-", "-EAP-").any { (version as String).contains(it) }) {
             channels = listOf("eap")
         }
     }
