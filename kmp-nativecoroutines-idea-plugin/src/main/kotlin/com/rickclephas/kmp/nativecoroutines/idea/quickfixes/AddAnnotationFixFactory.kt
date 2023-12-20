@@ -10,6 +10,7 @@ import org.jetbrains.kotlin.diagnostics.DiagnosticFactory0
 import org.jetbrains.kotlin.idea.quickfix.AddAnnotationFix
 import org.jetbrains.kotlin.idea.quickfix.KotlinIntentionActionsFactory
 import org.jetbrains.kotlin.idea.quickfix.QuickFixes
+import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.psi.KtCallableDeclaration
 import org.jetbrains.kotlin.psi.KtDeclaration
@@ -35,12 +36,12 @@ internal class AddAnnotationFixFactory(
     private class HighPriorityAddAnnotationFix(
         element: KtModifierListOwner,
         annotationFqName: FqName
-    ): AddAnnotationFix(element, annotationFqName), HighPriorityAction
+    ): AddAnnotationFix(element, ClassId.topLevel(annotationFqName)), HighPriorityAction
 
     private class LowPriorityAddAnnotationFix(
         element: KtModifierListOwner,
         annotationFqName: FqName
-    ): AddAnnotationFix(element, annotationFqName), LowPriorityAction
+    ): AddAnnotationFix(element, ClassId.topLevel(annotationFqName)), LowPriorityAction
 
     override fun doCreateActions(diagnostic: Diagnostic): List<IntentionAction> {
         val diagnosticFactory = diagnosticFactories.firstOrNull { it == diagnostic.factory } ?: return emptyList()
@@ -50,7 +51,7 @@ internal class AddAnnotationFixFactory(
         }
         return listOfNotNull(
             HighPriorityAddAnnotationFix(declaration, preferredFqName),
-            alternativeFqName?.let { AddAnnotationFix(declaration, it) },
+            alternativeFqName?.let { AddAnnotationFix(declaration, ClassId.topLevel(it)) },
             LowPriorityAddAnnotationFix(declaration, NativeCoroutinesFqNames.nativeCoroutinesIgnore)
         )
     }

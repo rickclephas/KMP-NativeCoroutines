@@ -39,10 +39,3 @@ jobs:
           SIGNING_SECRET_KEY: ${{ secrets.SIGNING_SECRET_KEY }}
           GRADLE_PUBLISH_KEY: ${{ secrets.GRADLE_PUBLISH_KEY }}
           GRADLE_PUBLISH_SECRET: ${{ secrets.GRADLE_PUBLISH_SECRET }}
-      - name: Publish IDEA plugin
-        run: ./gradlew publishPlugin
-        env:
-          IDEA_CERTIFICATE_CHAIN: ${{ secrets.IDEA_CERTIFICATE_CHAIN }}
-          IDEA_PRIVATE_KEY: ${{ secrets.IDEA_PRIVATE_KEY }}
-          IDEA_PRIVATE_KEY_PASSWORD: ${{ secrets.IDEA_PRIVATE_KEY_PASSWORD }}
-          IDEA_PUBLISH_TOKEN: ${{ secrets.IDEA_PUBLISH_TOKEN }}
