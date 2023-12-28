@@ -67,11 +67,5 @@ kotlin {
                 implementation(libs.kotlinx.coroutines.test)
             }
         }
-        nativeMain {
-            dependencies {
-                // TODO: Remove workaround for https://github.com/Kotlin/kotlinx.coroutines/issues/3968
-                implementation("org.jetbrains.kotlinx:atomicfu:0.23.1")
-            }
-        }
     }
 }
