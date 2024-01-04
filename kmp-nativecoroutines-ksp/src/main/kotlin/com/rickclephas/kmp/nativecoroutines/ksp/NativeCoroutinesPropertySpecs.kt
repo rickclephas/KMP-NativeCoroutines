@@ -11,9 +11,9 @@ internal fun KSPropertyDeclaration.toNativeCoroutinesPropertySpecs(
     options: KmpNativeCoroutinesOptions,
     asState: Boolean,
     shouldRefine: Boolean
-): List<PropertySpec>? {
+): List<PropertySpec> {
     val typeParameterResolver = getTypeParameterResolver()
-    val type = type.getReturnType(typeParameterResolver) ?: return null
+    val type = type.getReturnType(typeParameterResolver) ?: throw DeferSymbolException()
     if (type !is ReturnType.Flow) return emptyList() // Only Flow properties are supported
     return buildList {
         val flowSuffix = if (asState) options.stateFlowSuffix else options.suffix

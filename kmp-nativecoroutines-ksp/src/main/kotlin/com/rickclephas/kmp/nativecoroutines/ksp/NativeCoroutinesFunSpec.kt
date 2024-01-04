@@ -10,7 +10,7 @@ internal fun KSFunctionDeclaration.toNativeCoroutinesFunSpec(
     scopeProperty: CoroutineScopeProvider.ScopeProperty,
     options: KmpNativeCoroutinesOptions,
     shouldRefine: Boolean
-): FunSpec? {
+): FunSpec {
     val typeParameterResolver = getTypeParameterResolver()
     val classDeclaration = parentDeclaration as? KSClassDeclaration
 
@@ -45,7 +45,7 @@ internal fun KSFunctionDeclaration.toNativeCoroutinesFunSpec(
     }
     val parameters = parameters.toParameterSpecs(typeParameterResolver).also(builder::addParameters)
 
-    val returnType = returnType?.getReturnType(typeParameterResolver) ?: return null
+    val returnType = returnType?.getReturnType(typeParameterResolver) ?: throw DeferSymbolException()
     val isSuspend = modifiers.contains(Modifier.SUSPEND)
 
     var returnTypeName = when (returnType) {
