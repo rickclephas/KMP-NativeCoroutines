@@ -45,11 +45,11 @@ internal fun KSFunctionDeclaration.toNativeCoroutinesFunSpec(
     }
     val parameters = parameters.toParameterSpecs(typeParameterResolver).also(builder::addParameters)
 
-    val returnType = returnType?.getReturnType(typeParameterResolver) ?: throw DeferSymbolException()
+    val returnType = returnType?.getCoroutinesType(typeParameterResolver) ?: throw DeferSymbolException()
     val isSuspend = modifiers.contains(Modifier.SUSPEND)
 
     var returnTypeName = when (returnType) {
-        is ReturnType.Flow -> nativeFlowClassName.parameterizedBy(returnType.valueType).copy(nullable = returnType.nullable)
+        is CoroutinesType.Flow -> nativeFlowClassName.parameterizedBy(returnType.valueType).copy(nullable = returnType.isNullable)
         else -> returnType.typeReference.toTypeName(typeParameterResolver)
     }
     if (isSuspend) {
@@ -81,10 +81,10 @@ internal fun KSFunctionDeclaration.toNativeCoroutinesFunSpec(
         codeArgs.add(1, receiverParameter)
         code = "%M { %N.$code }"
     }
-    if (returnType is ReturnType.Flow) {
+    if (returnType is CoroutinesType.Flow) {
         codeArgs.add(asNativeFlowMemberName)
         scopeProperty.codeArg.let(codeArgs::addAll)
-        if (returnType.nullable) code += "?"
+        if (returnType.isNullable) code += "?"
         code = "$code.%M(${scopeProperty.code})"
     }
     if (isSuspend) {
