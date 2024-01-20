@@ -31,7 +31,7 @@ Compatibility versions for older and/or preview Kotlin versions are also availab
 
 | Version        | Version suffix      |   Kotlin    |    KSP     | Coroutines |
 |----------------|---------------------|:-----------:|:----------:|:----------:|
-| _latest_       | -kotlin-2.0.0-Beta2 | 2.0.0-Beta2 |   1.0.16   |  1.8.0-RC  |
+| _latest_       | -kotlin-2.0.0-Beta2 | 2.0.0-Beta2 |   1.0.16   | 1.8.0-RC2  |
 | **_latest_**   | **_no suffix_**     | **1.9.22**  | **1.0.16** | **1.7.3**  |
 | 1.0.0-ALPHA-23 | _no suffix_         |   1.9.21    |   1.0.16   |   1.7.3    |
 | 1.0.0-ALPHA-22 | _no suffix_         |   1.9.21    |   1.0.15   |   1.7.3    |
