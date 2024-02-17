@@ -36,6 +36,7 @@ import org.jetbrains.kotlin.AbstractKtSourceElement
 import org.jetbrains.kotlin.diagnostics.DiagnosticReporter
 import org.jetbrains.kotlin.diagnostics.KtDiagnosticFactory0
 import org.jetbrains.kotlin.diagnostics.reportOn
+import org.jetbrains.kotlin.fir.analysis.checkers.MppCheckerKind
 import org.jetbrains.kotlin.fir.analysis.checkers.context.CheckerContext
 import org.jetbrains.kotlin.fir.analysis.checkers.declaration.FirCallableDeclarationChecker
 import org.jetbrains.kotlin.fir.declarations.FirCallableDeclaration
@@ -49,7 +50,7 @@ import org.jetbrains.kotlin.fir.expressions.FirAnnotation
 
 internal class FirKmpNativeCoroutinesDeclarationChecker(
     exposedSeverity: ExposedSeverity
-): FirCallableDeclarationChecker() {
+): FirCallableDeclarationChecker(MppCheckerKind.Common) {
 
     private val exposedSuspendFunction = when (exposedSeverity) {
         ExposedSeverity.NONE -> null
