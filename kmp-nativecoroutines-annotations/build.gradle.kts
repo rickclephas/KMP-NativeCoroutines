@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
+
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     `kmp-nativecoroutines-publish`
@@ -28,4 +30,10 @@ kotlin {
     linuxArm64()
     linuxX64()
     mingwX64()
+    @OptIn(ExperimentalWasmDsl::class)
+    wasmJs {
+        browser()
+        nodejs()
+        d8()
+    }
 }
