@@ -16,7 +16,7 @@ dependencies {
 }
 
 intellij {
-    version = "2023.3"
+    version = "241.12662.62-EAP-SNAPSHOT"
     type = "IC"
     plugins = listOf("org.jetbrains.kotlin", "com.intellij.gradle")
 }
@@ -24,7 +24,7 @@ intellij {
 tasks {
     patchPluginXml {
         sinceBuild = "233"
-        untilBuild = "233.*"
+        untilBuild = "241.*"
     }
 
     buildSearchableOptions {
