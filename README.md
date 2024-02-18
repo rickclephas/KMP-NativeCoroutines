@@ -32,7 +32,8 @@ Compatibility versions for older and/or preview Kotlin versions are also availab
 | Version        | Version suffix      |   Kotlin    |    KSP     | Coroutines |
 |----------------|---------------------|:-----------:|:----------:|:----------:|
 | _latest_       | -kotlin-2.0.0-Beta3 | 2.0.0-Beta3 |   1.0.16   | 1.8.0-RC2  |
-| **_latest_**   | **_no suffix_**     | **1.9.22**  | **1.0.16** | **1.7.3**  |
+| **_latest_**   | **_no suffix_**     | **1.9.22**  | **1.0.17** | **1.8.0**  |
+| 1.0.0-ALPHA-24 | _no suffix_         |   1.9.22    |   1.0.17   |   1.7.3    |
 | 1.0.0-ALPHA-23 | _no suffix_         |   1.9.21    |   1.0.16   |   1.7.3    |
 | 1.0.0-ALPHA-22 | _no suffix_         |   1.9.21    |   1.0.15   |   1.7.3    |
 | 1.0.0-ALPHA-21 | _no suffix_         |   1.9.20    |   1.0.14   |   1.7.3    |
@@ -67,7 +68,7 @@ Make sure to always use the same versions for all the libraries!
 For Kotlin just add the plugin to your `build.gradle.kts`:
 ```kotlin
 plugins {
-    id("com.google.devtools.ksp") version "1.9.24-1.0.16"
+    id("com.google.devtools.ksp") version "1.9.22-1.0.17"
     id("com.rickclephas.kmp.nativecoroutines") version "1.0.0-ALPHA-24"
 }
 ```
