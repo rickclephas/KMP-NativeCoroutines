@@ -15,10 +15,12 @@ class AsyncResultTests: XCTestCase {
 
     func testCancellableInvoked() async {
         var cancelCount = 0
-        let nativeSuspend: NativeSuspend<String, Error, Void> = { _, _, cancelCallback in
+        let nativeSuspend: NativeSuspend<String, Error> = { returnType, _, _, cancelCallback in
+            guard returnType == nil else { return { nil } }
             return {
                 cancelCount += 1
-                cancelCallback(NSError(domain: "Ignored", code: 0), ())
+                _ = cancelCallback(NSError(domain: "Ignored", code: 0), ())
+                return nil
             }
         }
         let handle = Task {
@@ -41,9 +43,10 @@ class AsyncResultTests: XCTestCase {
     
     func testCompletionWithValue() async {
         let value = TestValue()
-        let nativeSuspend: NativeSuspend<TestValue, NSError, Void> = { resultCallback, _, _ in
-            resultCallback(value, ())
-            return { }
+        let nativeSuspend: NativeSuspend<TestValue, NSError> = { returnType, resultCallback, _, _ in
+            guard returnType == nil else { return { nil } }
+            _ = resultCallback(value, ())
+            return { nil }
         }
         let result = await asyncResult(for: nativeSuspend)
         guard case let .success(receivedValue) = result else {
@@ -55,9 +58,10 @@ class AsyncResultTests: XCTestCase {
     
     func testCompletionWithError() async {
         let sendError = NSError(domain: "Test", code: 0)
-        let nativeSuspend: NativeSuspend<TestValue, NSError, Void> = { _, errorCallback, _ in
-            errorCallback(sendError, ())
-            return { }
+        let nativeSuspend: NativeSuspend<TestValue, NSError> = { returnType, _, errorCallback, _ in
+            guard returnType == nil else { return { nil } }
+            _ = errorCallback(sendError, ())
+            return { nil }
         }
         let result = await asyncResult(for: nativeSuspend)
         guard case let .failure(error) = result else {

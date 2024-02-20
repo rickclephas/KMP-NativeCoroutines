@@ -8,6 +8,8 @@ import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativ
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.EXPOSED_STATE_FLOW_PROPERTY_ERROR
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.EXPOSED_SUSPEND_FUNCTION
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.EXPOSED_SUSPEND_FUNCTION_ERROR
+import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.EXPOSED_SUSPEND_TYPE
+import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.EXPOSED_SUSPEND_TYPE_ERROR
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.IGNORED_COROUTINES
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.IGNORED_COROUTINES_REFINED
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.IGNORED_COROUTINES_REFINED_STATE
@@ -29,9 +31,14 @@ import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativ
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.REDUNDANT_PRIVATE_COROUTINES_REFINED_STATE
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.REDUNDANT_PRIVATE_COROUTINES_STATE
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.UNSUPPORTED_CLASS_EXTENSION_PROPERTY
+import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.UNSUPPORTED_INPUT_FLOW
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesAnnotations
-import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.getCoroutinesReturnType
-import com.rickclephas.kmp.nativecoroutines.compiler.utils.CoroutinesReturnType
+import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.getCoroutinesType
+import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.isCoroutineScopeProperty
+import com.rickclephas.kmp.nativecoroutines.compiler.utils.CoroutinesType
+import com.rickclephas.kmp.nativecoroutines.compiler.utils.hasFlow
+import com.rickclephas.kmp.nativecoroutines.compiler.utils.hasSuspend
+import com.rickclephas.kmp.nativecoroutines.compiler.utils.hasUnsupportedInputFlow
 import org.jetbrains.kotlin.AbstractKtSourceElement
 import org.jetbrains.kotlin.diagnostics.DiagnosticReporter
 import org.jetbrains.kotlin.diagnostics.KtDiagnosticFactory0
@@ -39,6 +46,7 @@ import org.jetbrains.kotlin.diagnostics.reportOn
 import org.jetbrains.kotlin.fir.analysis.checkers.context.CheckerContext
 import org.jetbrains.kotlin.fir.analysis.checkers.declaration.FirCallableDeclarationChecker
 import org.jetbrains.kotlin.fir.declarations.FirCallableDeclaration
+import org.jetbrains.kotlin.fir.declarations.FirFunction
 import org.jetbrains.kotlin.fir.declarations.FirProperty
 import org.jetbrains.kotlin.fir.declarations.FirSimpleFunction
 import org.jetbrains.kotlin.fir.declarations.utils.effectiveVisibility
@@ -55,6 +63,12 @@ internal class FirKmpNativeCoroutinesDeclarationChecker(
         ExposedSeverity.NONE -> null
         ExposedSeverity.WARNING -> EXPOSED_SUSPEND_FUNCTION
         ExposedSeverity.ERROR -> EXPOSED_SUSPEND_FUNCTION_ERROR
+    }
+
+    private val exposedSuspendType = when (exposedSeverity) {
+        ExposedSeverity.NONE -> null
+        ExposedSeverity.WARNING -> EXPOSED_SUSPEND_TYPE
+        ExposedSeverity.ERROR -> EXPOSED_SUSPEND_TYPE_ERROR
     }
 
     private val exposedFlowType = when (exposedSeverity) {
@@ -86,7 +100,13 @@ internal class FirKmpNativeCoroutinesDeclarationChecker(
         val isPublic = declaration.effectiveVisibility.publicApi
         val isOverride = declaration.isOverride
         val isSuspend = declaration.isSuspend
-        val returnType = declaration.getCoroutinesReturnType(context.session)
+        val coroutineReceiverParameter = declaration.receiverParameter?.let { parameter ->
+            parameter.typeRef.getCoroutinesType(context.session)?.let { parameter to it }
+        }
+        val coroutineValueParameters = (declaration as? FirFunction)?.valueParameters?.mapNotNull { parameter ->
+            parameter.returnTypeRef.getCoroutinesType(context.session)?.let { parameter to it }
+        } ?: emptyList()
+        val returnType = declaration.returnTypeRef.getCoroutinesType(context.session)
 
         //region CONFLICT_COROUTINES
         val coroutinesAnnotations = listOf(
@@ -103,15 +123,20 @@ internal class FirKmpNativeCoroutinesDeclarationChecker(
 
         //region EXPOSED_*
         if (isPublic && !isOverride && annotationCount == 0 && annotations.nativeCoroutinesIgnore == null) {
-            if (isSuspend) {
-                exposedSuspendFunction.reportOn(declaration.source)
+            if (isSuspend) exposedSuspendFunction.reportOn(declaration.source)
+            coroutineReceiverParameter?.let { (param, type) ->
+                if (type.hasSuspend) exposedSuspendType.reportOn(param.source)
+                if (type.hasFlow) exposedFlowType.reportOn(param.source)
             }
-            if (returnType is CoroutinesReturnType.Flow) {
-                val diagnosticFactory = when {
-                    declaration is FirProperty && returnType == CoroutinesReturnType.Flow.State -> exposedStateFlowProperty
-                    else -> exposedFlowType
-                }
-                diagnosticFactory.reportOn(declaration.source)
+            coroutineValueParameters.forEach { (param, type) ->
+                if (type.hasSuspend) exposedSuspendType.reportOn(param.source)
+                if (type.hasFlow) exposedFlowType.reportOn(param.source)
+            }
+            if (declaration is FirProperty && returnType is CoroutinesType.Flow.State) {
+                exposedStateFlowProperty.reportOn(declaration.source)
+            } else if (returnType != null) {
+                if (returnType.hasSuspend) exposedSuspendType.reportOn(declaration.source)
+                if (returnType.hasFlow) exposedFlowType.reportOn(declaration.source)
             }
         }
         //endregion
@@ -126,15 +151,15 @@ internal class FirKmpNativeCoroutinesDeclarationChecker(
         //endregion
 
         //region INVALID_*
-        if (declaration !is FirProperty || returnType != CoroutinesReturnType.CoroutineScope) {
+        if (!declaration.isCoroutineScopeProperty(context.session)) {
             INVALID_COROUTINE_SCOPE.reportOn(annotations.nativeCoroutineScope)
         }
-        if (!isSuspend && returnType !is CoroutinesReturnType.Flow) {
+        if (!isSuspend && coroutineReceiverParameter == null && coroutineValueParameters.isEmpty() && returnType == null) {
             INVALID_COROUTINES.reportOn(annotations.nativeCoroutines)
             INVALID_COROUTINES_IGNORE.reportOn(annotations.nativeCoroutinesIgnore)
             INVALID_COROUTINES_REFINED.reportOn(annotations.nativeCoroutinesRefined)
         }
-        if (declaration !is FirProperty || returnType !is CoroutinesReturnType.Flow.State) {
+        if (declaration !is FirProperty || returnType !is CoroutinesType.Flow.State) {
             INVALID_COROUTINES_REFINED_STATE.reportOn(annotations.nativeCoroutinesRefinedState)
             INVALID_COROUTINES_STATE.reportOn(annotations.nativeCoroutinesState)
         }
@@ -160,6 +185,13 @@ internal class FirKmpNativeCoroutinesDeclarationChecker(
         //region UNSUPPORTED_*
         if (declaration is FirProperty && declaration.dispatchReceiverType != null && declaration.isExtension) {
             coroutinesAnnotations.forEach { UNSUPPORTED_CLASS_EXTENSION_PROPERTY.reportOn(it) }
+        }
+        if (
+            coroutineReceiverParameter?.second.hasUnsupportedInputFlow(true) ||
+            coroutineValueParameters.any { it.second.hasUnsupportedInputFlow(true) } ||
+            returnType.hasUnsupportedInputFlow(false)
+        ) {
+            coroutinesAnnotations.forEach { UNSUPPORTED_INPUT_FLOW.reportOn(it) }
         }
         //endregion
     }

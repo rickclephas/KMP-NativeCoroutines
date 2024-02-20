@@ -74,15 +74,15 @@ internal class CoroutineScopeProvider(
         }
     }
 
-    fun getScopeProperty(declaration: KSDeclaration): ScopeProperty? {
+    fun getScopeProperty(declaration: KSDeclaration): ScopeProperty {
         val classDeclaration = declaration.parentDeclaration as? KSClassDeclaration
         if (classDeclaration != null) {
-            val classScopeProperty = classDeclaration.let(::getScopeProperty) ?: return null
+            val classScopeProperty = classDeclaration.let(::getScopeProperty)
             if (classScopeProperty != ScopeProperty.DEFAULT) return classScopeProperty
         }
         val file = declaration.containingFile ?: run {
             logger.error("Declaration isn't contained in a source file", declaration)
-            return null
+            return ScopeProperty.DEFAULT
         }
         scopeProperties[file.scopePropertyKey]?.let { return it }
         if (classDeclaration == null) {
@@ -95,18 +95,18 @@ internal class CoroutineScopeProvider(
                 }
             }?.resolve()?.declaration as? KSClassDeclaration
             if (receiverClassDeclaration != null) {
-                val receiverScopeProperty = receiverClassDeclaration.let(::getScopeProperty) ?: return null
+                val receiverScopeProperty = receiverClassDeclaration.let(::getScopeProperty)
                 if (receiverScopeProperty != ScopeProperty.DEFAULT) return receiverScopeProperty
             }
         }
         return ScopeProperty.DEFAULT
     }
 
-    private fun getScopeProperty(classDeclaration: KSClassDeclaration): ScopeProperty? {
+    private fun getScopeProperty(classDeclaration: KSClassDeclaration): ScopeProperty {
         var containingFile: KSFile = classDeclaration.containingFile ?: return ScopeProperty.DEFAULT
         scopeProperties[classDeclaration.scopePropertyKey]?.let { return it }
         classDeclaration.getAllSuperTypes().forEach { superType ->
-            if (superType.isError) return null
+            if (superType.isError) throw DeferSymbolException()
             val superClassDeclaration = superType.declaration as? KSClassDeclaration ?: return@forEach
             scopeProperties[superClassDeclaration.scopePropertyKey]?.let { return it }
             // If this class is a KMMViewModel, use the ViewModelScope

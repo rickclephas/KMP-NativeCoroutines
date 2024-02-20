@@ -6,6 +6,7 @@
 //
 
 import XCTest
+import RxSwift
 import KMPNativeCoroutinesCore
 import KMPNativeCoroutinesRxSwift
 
@@ -15,8 +16,12 @@ class ObservableTests: XCTestCase {
 
     func testDisposableInvoked() {
         var cancelCount = 0
-        let nativeFlow: NativeFlow<TestValue, NSError, Void> = { _, _, _ in
-            return { cancelCount += 1 }
+        let nativeFlow: NativeFlow<TestValue, NSError> = { returnType, _, _, _ in
+            guard returnType == nil else { return { nil } }
+            return {
+                cancelCount += 1
+                return nil
+            }
         }
         let disposable = createObservable(for: nativeFlow).subscribe()
         XCTAssertEqual(cancelCount, 0, "Disposable shouldn't be invoked yet")
@@ -26,12 +31,13 @@ class ObservableTests: XCTestCase {
     
     func testCompletionWithCorrectValues() {
         let values = [TestValue(), TestValue(), TestValue(), TestValue(), TestValue()]
-        let nativeFlow: NativeFlow<TestValue, NSError, Void> = { itemCallback, completionCallback, _ in
+        let nativeFlow: NativeFlow<TestValue, NSError> = { returnType, itemCallback, completionCallback, _ in
+            guard returnType == nil else { return { nil } }
             for value in values {
-                itemCallback(value, {}, ())
+                _ = itemCallback(value, {}, ())
             }
-            completionCallback(nil, ())
-            return { }
+            _ = completionCallback(nil, ())
+            return { nil }
         }
         var completionCount = 0
         var valueCount = 0
@@ -51,9 +57,10 @@ class ObservableTests: XCTestCase {
     
     func testCompletionWithError() {
         let error = NSError(domain: "Test", code: 0)
-        let nativeFlow: NativeFlow<TestValue, NSError, Void> = { _, completionCallback, _ in
-            completionCallback(error, ())
-            return { }
+        let nativeFlow: NativeFlow<TestValue, NSError> = { returnType, _, completionCallback, _ in
+            guard returnType == nil else { return { nil } }
+            _ = completionCallback(error, ())
+            return { nil }
         }
         var errorCount = 0
         var valueCount = 0
@@ -69,5 +76,16 @@ class ObservableTests: XCTestCase {
         _ = disposable // This is just to remove the unused variable warning
         XCTAssertEqual(errorCount, 1, "Error closure should be called once")
         XCTAssertEqual(valueCount, 0, "Value closure shouldn't be called")
+    }
+    
+    func testObservableIsOriginal() {
+        let nativeFlow = Observable.just(TestValue()).asNativeFlow()
+        _ = createObservable { returnType, onItem, onComplete, onCancelled in
+            if let returnType {
+                return nativeFlow(returnType, onItem, onComplete, onCancelled)
+            }
+            XCTFail("Observable should be returned")
+            return { nil }
+        }
     }
 }

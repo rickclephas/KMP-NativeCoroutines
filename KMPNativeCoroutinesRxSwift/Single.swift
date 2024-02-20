@@ -8,15 +8,20 @@
 import RxSwift
 import KMPNativeCoroutinesCore
 
+internal let RETURN_TYPE_RXSWIFT_SINGLE = "rxswift-single"
+
 /// Creates a `Single` for the provided `NativeSuspend`.
 /// - Parameter nativeSuspend: The native suspend function to await.
 /// - Returns: A single that either finishes with a single value or fails with an error.
-public func createSingle<Result, Failure: Error, Unit>(
-    for nativeSuspend: @escaping NativeSuspend<Result, Failure, Unit>
+public func createSingle<Result, Failure: Error>(
+    for nativeSuspend: @escaping NativeSuspend<Result, Failure>
 ) -> Single<Result> {
+    if let single = nativeSuspend(RETURN_TYPE_RXSWIFT_SINGLE, EmptyNativeCallback, EmptyNativeCallback, EmptyNativeCallback)() {
+        return single as! Single<Result>
+    }
     return Single.deferred {
         return Single.create { observer in
-            let nativeCancellable = nativeSuspend({ output, unit in
+            let nativeCancellable = nativeSuspend(nil, { output, unit in
                 observer(.success(output))
                 return unit
             }, { error, unit in

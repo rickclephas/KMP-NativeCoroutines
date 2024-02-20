@@ -25,7 +25,7 @@ class NativeSuspendTests {
         var receivedResultCount = 0
         var receivedErrorCount = 0
         var receivedCancellationCount = 0
-        nativeSuspend({ receivedValue, _ ->
+        nativeSuspend(null, { receivedValue, _ ->
             assertSame(value, receivedValue, "Received incorrect value")
             receivedResultCount++
         }, { _, _ ->
@@ -46,7 +46,7 @@ class NativeSuspendTests {
         var receivedResultCount = 0
         var receivedErrorCount = 0
         var receivedCancellationCount = 0
-        nativeSuspend({ _, _ ->
+        nativeSuspend(null, { _, _ ->
             receivedResultCount++
         }, { error, _ ->
             val kotlinException = error.kotlinCause
@@ -67,7 +67,7 @@ class NativeSuspendTests {
         var receivedResultCount = 0
         var receivedErrorCount = 0
         var receivedCancellationCount = 0
-        val cancel = nativeSuspend({ _, _ ->
+        val cancel = nativeSuspend(null, { _, _ ->
             receivedResultCount++
         }, { _, _ ->
             receivedErrorCount++
@@ -82,5 +82,21 @@ class NativeSuspendTests {
         assertEquals(1, receivedCancellationCount, "Cancellation callback should be called once")
         assertEquals(0, receivedErrorCount, "Error callback shouldn't be called")
         assertEquals(0, receivedResultCount, "Result callback shouldn't be called")
+    }
+
+    @Test
+    fun ensureSuspendReturnTypeReturnsBlock() = runTest {
+        val value = RandomValue()
+        val block: (suspend () -> RandomValue) = { value }
+        val nativeSuspend = nativeSuspend(UnsupportedCoroutineScope, block)
+        val cancellable = nativeSuspend(RETURN_TYPE_KOTLIN_SUSPEND, ::EmptyNativeCallback, ::EmptyNativeCallback, ::EmptyNativeCallback)
+        assertSame(block, cancellable())
+    }
+
+    @Test
+    fun ensureUnknownReturnTypeReturnsNull() = runTest {
+        val nativeSuspend = nativeSuspend(UnsupportedCoroutineScope) { RandomValue() }
+        val cancellable = nativeSuspend("unknown", ::EmptyNativeCallback, ::EmptyNativeCallback, ::EmptyNativeCallback)
+        assertNull(cancellable())
     }
 }
