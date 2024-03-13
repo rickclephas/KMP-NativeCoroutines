@@ -29,9 +29,15 @@ import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNati
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.REDUNDANT_PRIVATE_COROUTINES_REFINED
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.REDUNDANT_PRIVATE_COROUTINES_REFINED_STATE
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.UNSUPPORTED_CLASS_EXTENSION_PROPERTY
-import com.rickclephas.kmp.nativecoroutines.compiler.classic.utils.NativeCoroutinesAnnotations
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.utils.coroutinesReturnType
+import com.rickclephas.kmp.nativecoroutines.compiler.classic.utils.getNativeCoroutinesAnnotations
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.CoroutinesReturnType
+import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutines
+import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutineScope
+import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutinesIgnore
+import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutinesRefined
+import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutinesRefinedState
+import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutinesState
 import org.jetbrains.kotlin.descriptors.CallableDescriptor
 import org.jetbrains.kotlin.descriptors.DeclarationDescriptor
 import org.jetbrains.kotlin.descriptors.FunctionDescriptor
@@ -77,21 +83,20 @@ public class KmpNativeCoroutinesChecker(
     ) {
         if (descriptor !is CallableDescriptor) return
         if (descriptor !is SimpleFunctionDescriptor && descriptor !is PropertyDescriptor) return
-        val annotations = NativeCoroutinesAnnotations(descriptor)
+        val annotations = descriptor.getNativeCoroutinesAnnotations()
         val isPublic = descriptor.isEffectivelyPublicApi
         val isOverride = descriptor.overriddenDescriptors.isNotEmpty()
         val isSuspend = descriptor is FunctionDescriptor && descriptor.isSuspend
         val returnType = descriptor.coroutinesReturnType
 
         //region CONFLICT_COROUTINES
-        val coroutinesAnnotations = listOf(
-            annotations.nativeCoroutines,
-            annotations.nativeCoroutinesRefined,
-            annotations.nativeCoroutinesRefinedState,
-            annotations.nativeCoroutinesState,
+        val coroutinesAnnotations = listOfNotNull(
+            annotations[NativeCoroutines],
+            annotations[NativeCoroutinesRefined],
+            annotations[NativeCoroutinesRefinedState],
+            annotations[NativeCoroutinesState],
         )
-        val annotationCount = coroutinesAnnotations.count { it != null }
-        if (annotationCount > 1) {
+        if (coroutinesAnnotations.size > 1) {
             coroutinesAnnotations.forEach {
                 context.trace.report(CONFLICT_COROUTINES, it, declaration)
             }
@@ -99,7 +104,7 @@ public class KmpNativeCoroutinesChecker(
         //endregion
 
         //region EXPOSED_*
-        if (isPublic && !isOverride && annotationCount == 0 && annotations.nativeCoroutinesIgnore == null) {
+        if (isPublic && !isOverride && coroutinesAnnotations.isEmpty() && !annotations.contains(NativeCoroutinesIgnore)) {
             if (isSuspend) {
                 exposedSuspendFunction?.on(declaration)?.let(context.trace::report)
             }
@@ -115,43 +120,43 @@ public class KmpNativeCoroutinesChecker(
         //endregion
 
         //region IGNORED_*
-        if (annotations.nativeCoroutinesIgnore != null) {
-            context.trace.report(IGNORED_COROUTINES, annotations.nativeCoroutines, declaration)
-            context.trace.report(IGNORED_COROUTINES_REFINED, annotations.nativeCoroutinesRefined, declaration)
-            context.trace.report(IGNORED_COROUTINES_REFINED_STATE, annotations.nativeCoroutinesRefinedState, declaration)
-            context.trace.report(IGNORED_COROUTINES_STATE, annotations.nativeCoroutinesState, declaration)
+        if (annotations.contains(NativeCoroutinesIgnore)) {
+            context.trace.report(IGNORED_COROUTINES, annotations[NativeCoroutines], declaration)
+            context.trace.report(IGNORED_COROUTINES_REFINED, annotations[NativeCoroutinesRefined], declaration)
+            context.trace.report(IGNORED_COROUTINES_REFINED_STATE, annotations[NativeCoroutinesRefinedState], declaration)
+            context.trace.report(IGNORED_COROUTINES_STATE, annotations[NativeCoroutinesState], declaration)
         }
         //endregion
 
         //region INVALID_*
         if (descriptor !is PropertyDescriptor || returnType != CoroutinesReturnType.CoroutineScope) {
-            context.trace.report(INVALID_COROUTINE_SCOPE, annotations.nativeCoroutineScope, declaration)
+            context.trace.report(INVALID_COROUTINE_SCOPE, annotations[NativeCoroutineScope], declaration)
         }
         if (!isSuspend && returnType !is CoroutinesReturnType.Flow) {
-            context.trace.report(INVALID_COROUTINES, annotations.nativeCoroutines, declaration)
-            context.trace.report(INVALID_COROUTINES_IGNORE, annotations.nativeCoroutinesIgnore, declaration)
-            context.trace.report(INVALID_COROUTINES_REFINED, annotations.nativeCoroutinesRefined, declaration)
+            context.trace.report(INVALID_COROUTINES, annotations[NativeCoroutines], declaration)
+            context.trace.report(INVALID_COROUTINES_IGNORE, annotations[NativeCoroutinesIgnore], declaration)
+            context.trace.report(INVALID_COROUTINES_REFINED, annotations[NativeCoroutinesRefined], declaration)
         }
         if (descriptor !is PropertyDescriptor || returnType !is CoroutinesReturnType.Flow.State) {
-            context.trace.report(INVALID_COROUTINES_REFINED_STATE, annotations.nativeCoroutinesRefinedState, declaration)
-            context.trace.report(INVALID_COROUTINES_STATE, annotations.nativeCoroutinesState, declaration)
+            context.trace.report(INVALID_COROUTINES_REFINED_STATE, annotations[NativeCoroutinesRefinedState], declaration)
+            context.trace.report(INVALID_COROUTINES_STATE, annotations[NativeCoroutinesState], declaration)
         }
         //endregion
 
         //region REDUNDANT_*
         if (isOverride) {
-            context.trace.report(REDUNDANT_OVERRIDE_COROUTINES, annotations.nativeCoroutines, declaration)
-            context.trace.report(REDUNDANT_OVERRIDE_COROUTINES_IGNORE, annotations.nativeCoroutinesIgnore, declaration)
-            context.trace.report(REDUNDANT_OVERRIDE_COROUTINES_REFINED, annotations.nativeCoroutinesRefined, declaration)
-            context.trace.report(REDUNDANT_OVERRIDE_COROUTINES_REFINED_STATE, annotations.nativeCoroutinesRefinedState, declaration)
-            context.trace.report(REDUNDANT_OVERRIDE_COROUTINES_STATE, annotations.nativeCoroutinesState, declaration)
+            context.trace.report(REDUNDANT_OVERRIDE_COROUTINES, annotations[NativeCoroutines], declaration)
+            context.trace.report(REDUNDANT_OVERRIDE_COROUTINES_IGNORE, annotations[NativeCoroutinesIgnore], declaration)
+            context.trace.report(REDUNDANT_OVERRIDE_COROUTINES_REFINED, annotations[NativeCoroutinesRefined], declaration)
+            context.trace.report(REDUNDANT_OVERRIDE_COROUTINES_REFINED_STATE, annotations[NativeCoroutinesRefinedState], declaration)
+            context.trace.report(REDUNDANT_OVERRIDE_COROUTINES_STATE, annotations[NativeCoroutinesState], declaration)
         }
         if (!isPublic) {
-            context.trace.report(REDUNDANT_PRIVATE_COROUTINES, annotations.nativeCoroutines, declaration)
-            context.trace.report(REDUNDANT_PRIVATE_COROUTINES_IGNORE, annotations.nativeCoroutinesIgnore, declaration)
-            context.trace.report(REDUNDANT_PRIVATE_COROUTINES_REFINED, annotations.nativeCoroutinesRefined, declaration)
-            context.trace.report(REDUNDANT_PRIVATE_COROUTINES_REFINED_STATE, annotations.nativeCoroutinesRefinedState, declaration)
-            context.trace.report(REDUNDANT_PRIVATE_COROUTINES_STATE, annotations.nativeCoroutinesState, declaration)
+            context.trace.report(REDUNDANT_PRIVATE_COROUTINES, annotations[NativeCoroutines], declaration)
+            context.trace.report(REDUNDANT_PRIVATE_COROUTINES_IGNORE, annotations[NativeCoroutinesIgnore], declaration)
+            context.trace.report(REDUNDANT_PRIVATE_COROUTINES_REFINED, annotations[NativeCoroutinesRefined], declaration)
+            context.trace.report(REDUNDANT_PRIVATE_COROUTINES_REFINED_STATE, annotations[NativeCoroutinesRefinedState], declaration)
+            context.trace.report(REDUNDANT_PRIVATE_COROUTINES_STATE, annotations[NativeCoroutinesState], declaration)
         }
         //endregion
 
