@@ -1,18 +1,17 @@
 package com.rickclephas.kmp.nativecoroutines.compiler.fir.utils
 
-import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesClassIds as ClassIds
+import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation
+import org.jetbrains.kotlin.fir.FirAnnotationContainer
 import org.jetbrains.kotlin.fir.FirSession
-import org.jetbrains.kotlin.fir.declarations.FirCallableDeclaration
-import org.jetbrains.kotlin.fir.declarations.getAnnotationByClassId
+import org.jetbrains.kotlin.fir.declarations.toAnnotationClassId
+import org.jetbrains.kotlin.fir.expressions.FirAnnotation
 
-internal class NativeCoroutinesAnnotations(
-    declaration: FirCallableDeclaration,
+internal fun FirAnnotationContainer.getNativeCoroutinesAnnotations(
     session: FirSession
-) {
-    val nativeCoroutines = declaration.getAnnotationByClassId(ClassIds.nativeCoroutines, session)
-    val nativeCoroutineScope = declaration.getAnnotationByClassId(ClassIds.nativeCoroutineScope, session)
-    val nativeCoroutinesIgnore = declaration.getAnnotationByClassId(ClassIds.nativeCoroutinesIgnore, session)
-    val nativeCoroutinesRefined = declaration.getAnnotationByClassId(ClassIds.nativeCoroutinesRefined, session)
-    val nativeCoroutinesRefinedState = declaration.getAnnotationByClassId(ClassIds.nativeCoroutinesRefinedState, session)
-    val nativeCoroutinesState = declaration.getAnnotationByClassId(ClassIds.nativeCoroutinesState, session)
+): Map<NativeCoroutinesAnnotation, FirAnnotation> = buildMap {
+    for (annotation in annotations) {
+        val classId = annotation.toAnnotationClassId(session) ?: continue
+        val nativeCoroutinesAnnotation = NativeCoroutinesAnnotation.forClassId(classId) ?: continue
+        put(nativeCoroutinesAnnotation, annotation)
+    }
 }
