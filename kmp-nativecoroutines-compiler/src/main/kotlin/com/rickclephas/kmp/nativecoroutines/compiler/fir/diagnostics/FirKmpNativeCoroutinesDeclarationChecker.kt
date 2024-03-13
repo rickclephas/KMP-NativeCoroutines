@@ -29,9 +29,15 @@ import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativ
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.REDUNDANT_PRIVATE_COROUTINES_REFINED_STATE
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.REDUNDANT_PRIVATE_COROUTINES_STATE
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.UNSUPPORTED_CLASS_EXTENSION_PROPERTY
-import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesAnnotations
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.getCoroutinesReturnType
+import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.getNativeCoroutinesAnnotations
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.CoroutinesReturnType
+import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutines
+import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutineScope
+import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutinesIgnore
+import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutinesRefined
+import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutinesRefinedState
+import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutinesState
 import org.jetbrains.kotlin.AbstractKtSourceElement
 import org.jetbrains.kotlin.diagnostics.DiagnosticReporter
 import org.jetbrains.kotlin.diagnostics.KtDiagnosticFactory0
@@ -83,27 +89,26 @@ internal class FirKmpNativeCoroutinesDeclarationChecker(
             reporter.reportOn(source, this, context)
         }
 
-        val annotations = NativeCoroutinesAnnotations(declaration, context.session)
+        val annotations = declaration.getNativeCoroutinesAnnotations(context.session)
         val isPublic = declaration.effectiveVisibility.publicApi
         val isOverride = declaration.isOverride
         val isSuspend = declaration.isSuspend
         val returnType = declaration.getCoroutinesReturnType(context.session)
 
         //region CONFLICT_COROUTINES
-        val coroutinesAnnotations = listOf(
-            annotations.nativeCoroutines,
-            annotations.nativeCoroutinesRefined,
-            annotations.nativeCoroutinesRefinedState,
-            annotations.nativeCoroutinesState,
+        val coroutinesAnnotations = listOfNotNull(
+            annotations[NativeCoroutines],
+            annotations[NativeCoroutinesRefined],
+            annotations[NativeCoroutinesRefinedState],
+            annotations[NativeCoroutinesState],
         )
-        val annotationCount = coroutinesAnnotations.count { it != null }
-        if (annotationCount > 1) {
+        if (coroutinesAnnotations.size > 1) {
             coroutinesAnnotations.forEach { CONFLICT_COROUTINES.reportOn(it) }
         }
         //endregion
 
         //region EXPOSED_*
-        if (isPublic && !isOverride && annotationCount == 0 && annotations.nativeCoroutinesIgnore == null) {
+        if (isPublic && !isOverride && coroutinesAnnotations.isEmpty() && !annotations.containsKey(NativeCoroutinesIgnore)) {
             if (isSuspend) {
                 exposedSuspendFunction.reportOn(declaration.source)
             }
@@ -118,43 +123,43 @@ internal class FirKmpNativeCoroutinesDeclarationChecker(
         //endregion
 
         //region IGNORED_*
-        if (annotations.nativeCoroutinesIgnore != null) {
-            IGNORED_COROUTINES.reportOn(annotations.nativeCoroutines)
-            IGNORED_COROUTINES_REFINED.reportOn(annotations.nativeCoroutinesRefined)
-            IGNORED_COROUTINES_REFINED_STATE.reportOn(annotations.nativeCoroutinesRefinedState)
-            IGNORED_COROUTINES_STATE.reportOn(annotations.nativeCoroutinesState)
+        if (annotations.containsKey(NativeCoroutinesIgnore)) {
+            IGNORED_COROUTINES.reportOn(annotations[NativeCoroutines])
+            IGNORED_COROUTINES_REFINED.reportOn(annotations[NativeCoroutinesRefined])
+            IGNORED_COROUTINES_REFINED_STATE.reportOn(annotations[NativeCoroutinesRefinedState])
+            IGNORED_COROUTINES_STATE.reportOn(annotations[NativeCoroutinesState])
         }
         //endregion
 
         //region INVALID_*
         if (declaration !is FirProperty || returnType != CoroutinesReturnType.CoroutineScope) {
-            INVALID_COROUTINE_SCOPE.reportOn(annotations.nativeCoroutineScope)
+            INVALID_COROUTINE_SCOPE.reportOn(annotations[NativeCoroutineScope])
         }
         if (!isSuspend && returnType !is CoroutinesReturnType.Flow) {
-            INVALID_COROUTINES.reportOn(annotations.nativeCoroutines)
-            INVALID_COROUTINES_IGNORE.reportOn(annotations.nativeCoroutinesIgnore)
-            INVALID_COROUTINES_REFINED.reportOn(annotations.nativeCoroutinesRefined)
+            INVALID_COROUTINES.reportOn(annotations[NativeCoroutines])
+            INVALID_COROUTINES_IGNORE.reportOn(annotations[NativeCoroutinesIgnore])
+            INVALID_COROUTINES_REFINED.reportOn(annotations[NativeCoroutinesRefined])
         }
         if (declaration !is FirProperty || returnType !is CoroutinesReturnType.Flow.State) {
-            INVALID_COROUTINES_REFINED_STATE.reportOn(annotations.nativeCoroutinesRefinedState)
-            INVALID_COROUTINES_STATE.reportOn(annotations.nativeCoroutinesState)
+            INVALID_COROUTINES_REFINED_STATE.reportOn(annotations[NativeCoroutinesRefinedState])
+            INVALID_COROUTINES_STATE.reportOn(annotations[NativeCoroutinesState])
         }
         //endregion
 
         //region REDUNDANT_*
         if (isOverride) {
-            REDUNDANT_OVERRIDE_COROUTINES.reportOn(annotations.nativeCoroutines)
-            REDUNDANT_OVERRIDE_COROUTINES_IGNORE.reportOn(annotations.nativeCoroutinesIgnore)
-            REDUNDANT_OVERRIDE_COROUTINES_REFINED.reportOn(annotations.nativeCoroutinesRefined)
-            REDUNDANT_OVERRIDE_COROUTINES_REFINED_STATE.reportOn(annotations.nativeCoroutinesRefinedState)
-            REDUNDANT_OVERRIDE_COROUTINES_STATE.reportOn(annotations.nativeCoroutinesState)
+            REDUNDANT_OVERRIDE_COROUTINES.reportOn(annotations[NativeCoroutines])
+            REDUNDANT_OVERRIDE_COROUTINES_IGNORE.reportOn(annotations[NativeCoroutinesIgnore])
+            REDUNDANT_OVERRIDE_COROUTINES_REFINED.reportOn(annotations[NativeCoroutinesRefined])
+            REDUNDANT_OVERRIDE_COROUTINES_REFINED_STATE.reportOn(annotations[NativeCoroutinesRefinedState])
+            REDUNDANT_OVERRIDE_COROUTINES_STATE.reportOn(annotations[NativeCoroutinesState])
         }
         if (!isPublic) {
-            REDUNDANT_PRIVATE_COROUTINES.reportOn(annotations.nativeCoroutines)
-            REDUNDANT_PRIVATE_COROUTINES_IGNORE.reportOn(annotations.nativeCoroutinesIgnore)
-            REDUNDANT_PRIVATE_COROUTINES_REFINED.reportOn(annotations.nativeCoroutinesRefined)
-            REDUNDANT_PRIVATE_COROUTINES_REFINED_STATE.reportOn(annotations.nativeCoroutinesRefinedState)
-            REDUNDANT_PRIVATE_COROUTINES_STATE.reportOn(annotations.nativeCoroutinesState)
+            REDUNDANT_PRIVATE_COROUTINES.reportOn(annotations[NativeCoroutines])
+            REDUNDANT_PRIVATE_COROUTINES_IGNORE.reportOn(annotations[NativeCoroutinesIgnore])
+            REDUNDANT_PRIVATE_COROUTINES_REFINED.reportOn(annotations[NativeCoroutinesRefined])
+            REDUNDANT_PRIVATE_COROUTINES_REFINED_STATE.reportOn(annotations[NativeCoroutinesRefinedState])
+            REDUNDANT_PRIVATE_COROUTINES_STATE.reportOn(annotations[NativeCoroutinesState])
         }
         //endregion
 
