@@ -32,7 +32,7 @@ interface TestInterface {
     val propertyC: StateFlow<Int>
 }
 
-class TestClass: TestInterface {
+internal class TestClass: TestInterface {
 
     @NativeCoroutines
     override suspend fun functionA(): Int = 0

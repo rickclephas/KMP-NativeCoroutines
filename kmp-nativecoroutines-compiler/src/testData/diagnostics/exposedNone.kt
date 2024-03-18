@@ -1,4 +1,5 @@
 // FIR_IDENTICAL
+// DIAGNOSTICS: -NOT_A_MULTIPLATFORM_COMPILATION
 // EXPOSED_SEVERITY: NONE
 
 // FILE: customFlows.kt
@@ -69,4 +70,17 @@ internal class TestClassB {
     suspend fun suspendFunction(): Int = 0
 
     val flowProperty: Flow<Int> get() = throw Throwable()
+}
+
+
+expect class TestClassC {
+    suspend fun suspendFunction(): Int
+
+    val flowProperty: Flow<Int>
+}
+
+actual class TestClassC {
+    actual suspend fun suspendFunction(): Int = 0
+
+    actual val flowProperty: Flow<Int> get() = throw Throwable()
 }
