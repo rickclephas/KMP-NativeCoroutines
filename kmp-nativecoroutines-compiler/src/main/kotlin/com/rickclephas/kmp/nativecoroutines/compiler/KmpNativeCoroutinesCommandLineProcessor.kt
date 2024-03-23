@@ -1,8 +1,6 @@
 package com.rickclephas.kmp.nativecoroutines.compiler
 
-import com.rickclephas.kmp.nativecoroutines.compiler.config.ConfigOption
-import com.rickclephas.kmp.nativecoroutines.compiler.config.EXPOSED_SEVERITY
-import com.rickclephas.kmp.nativecoroutines.compiler.config.set
+import com.rickclephas.kmp.nativecoroutines.compiler.config.*
 import org.jetbrains.kotlin.compiler.plugin.*
 import org.jetbrains.kotlin.config.CompilerConfiguration
 
@@ -10,7 +8,9 @@ import org.jetbrains.kotlin.config.CompilerConfiguration
 public class KmpNativeCoroutinesCommandLineProcessor: CommandLineProcessor {
 
     override val pluginId: String = "com.rickclephas.kmp.nativecoroutines"
-    override val pluginOptions: Collection<AbstractCliOption> = listOf(EXPOSED_SEVERITY)
+    override val pluginOptions: Collection<AbstractCliOption> = listOf(
+        EXPOSED_SEVERITY, GENERATED_SOURCE_DIR
+    )
 
     override fun processOption(
         option: AbstractCliOption,
@@ -18,6 +18,7 @@ public class KmpNativeCoroutinesCommandLineProcessor: CommandLineProcessor {
         configuration: CompilerConfiguration
     ): Unit = when (option) {
         is ConfigOption<*> -> configuration[option] = value
+        is ConfigListOption<*> -> configuration.add(option, value)
         else -> throw CliOptionProcessingException("Unknown option: ${option.optionName}")
     }
 }

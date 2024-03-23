@@ -13,8 +13,14 @@ public class KmpNativeCoroutinesModelBuilderService: AbstractModelBuilderService
     override fun buildAll(modelName: String, project: Project, context: ModelBuilderContext): KmpNativeCoroutinesModel? {
         if (project.plugins.findPlugin("com.rickclephas.kmp.nativecoroutines") == null) return null
         val extension = project.extensions.findByName("nativeCoroutines") ?: return null
+
+        val exposedSeverity = extension.get<Enum<*>>("exposedSeverity")?.name ?: "WARNING"
+        val generatedSourceDirs = extension.get<List<Any>>("generatedSourceDirs").orEmpty()
+            .map { project.file(it).absolutePath }.distinct()
+
         return KmpNativeCoroutinesModelImpl(
-            exposedSeverity = extension.get<Enum<*>>("exposedSeverity")?.name ?: "WARNING"
+            exposedSeverity = exposedSeverity,
+            generatedSourceDirs = generatedSourceDirs
         )
     }
 
