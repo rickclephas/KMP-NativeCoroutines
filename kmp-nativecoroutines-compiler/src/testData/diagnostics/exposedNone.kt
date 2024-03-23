@@ -80,7 +80,6 @@ internal class TestClassB {
     val flowProperty: Flow<Int> get() = throw Throwable()
 }
 
-
 expect class TestClassC {
     suspend fun suspendFunction(): Int
 
