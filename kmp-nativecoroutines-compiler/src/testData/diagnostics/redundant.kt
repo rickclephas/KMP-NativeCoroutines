@@ -32,25 +32,25 @@ interface TestInterface {
     val propertyC: StateFlow<Int>
 }
 
-class TestClass: TestInterface {
+internal class TestClass: TestInterface {
 
-    <!REDUNDANT_OVERRIDE_COROUTINES!>@NativeCoroutines<!>
+    @NativeCoroutines
     override suspend fun functionA(): Int = 0
 
     override fun functionB(): Flow<Int> = throw Throwable()
 
-    <!REDUNDANT_OVERRIDE_COROUTINES_IGNORE!>@NativeCoroutinesIgnore<!>
+    @NativeCoroutinesIgnore
     override suspend fun functionC(): Int = 0
 
-    <!REDUNDANT_OVERRIDE_COROUTINES_REFINED!>@NativeCoroutinesRefined<!>
+    @NativeCoroutinesRefined
     override suspend fun functionF(): Int = 0
 
     override fun functionG(): Flow<Int> = throw Throwable()
 
-    <!REDUNDANT_OVERRIDE_COROUTINES_STATE!>@NativeCoroutinesState<!>
+    @NativeCoroutinesState
     override val propertyA: StateFlow<Int> get() = throw Throwable()
 
-    <!REDUNDANT_OVERRIDE_COROUTINES_REFINED_STATE!>@NativeCoroutinesRefinedState<!>
+    @NativeCoroutinesRefinedState
     override val propertyC: StateFlow<Int> get() = throw Throwable()
 
     <!REDUNDANT_PRIVATE_COROUTINES!>@NativeCoroutines<!>
