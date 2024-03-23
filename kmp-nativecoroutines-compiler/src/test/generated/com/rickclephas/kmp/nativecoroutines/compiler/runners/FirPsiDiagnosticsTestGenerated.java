@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
 public class FirPsiDiagnosticsTestGenerated extends AbstractFirPsiDiagnosticsTest {
     @Test
     public void testAllFilesPresentInDiagnostics() throws Exception {
-        KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("src/testData/diagnostics"), Pattern.compile("^(.+)\\.kt$"), null, true);
+        KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("src/testData/diagnostics"), Pattern.compile("^(.+)\\.kt$"), Pattern.compile("^(.+)\\.fir\\.kt$"), true);
     }
 
     @Test
@@ -55,6 +55,12 @@ public class FirPsiDiagnosticsTestGenerated extends AbstractFirPsiDiagnosticsTes
     @TestMetadata("ignored.kt")
     public void testIgnored() throws Exception {
         runTest("src/testData/diagnostics/ignored.kt");
+    }
+
+    @Test
+    @TestMetadata("incompatible.kt")
+    public void testIncompatible() throws Exception {
+        runTest("src/testData/diagnostics/incompatible.kt");
     }
 
     @Test
