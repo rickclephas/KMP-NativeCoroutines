@@ -15,3 +15,8 @@ internal fun FirAnnotationContainer.getNativeCoroutinesAnnotations(
         put(nativeCoroutinesAnnotation, annotation)
     }
 }
+
+internal fun FirAnnotation.isNativeCoroutinesAnnotation(session: FirSession): Boolean {
+    val classId = toAnnotationClassId(session) ?: return false
+    return NativeCoroutinesAnnotation.entries.any { it.classId == classId }
+}

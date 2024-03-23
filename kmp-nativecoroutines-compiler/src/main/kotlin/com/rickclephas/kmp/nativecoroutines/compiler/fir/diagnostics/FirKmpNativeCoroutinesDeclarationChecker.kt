@@ -31,6 +31,7 @@ import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativ
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.UNSUPPORTED_CLASS_EXTENSION_PROPERTY
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.getCoroutinesReturnType
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.getNativeCoroutinesAnnotations
+import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.isRefined
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.CoroutinesReturnType
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutines
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutineScope
@@ -89,6 +90,7 @@ internal class FirKmpNativeCoroutinesDeclarationChecker(
         }
 
         val annotations = declaration.getNativeCoroutinesAnnotations(context.session)
+        val isRefined = declaration.isRefined(context.session)
         val isPublic = declaration.effectiveVisibility.publicApi
         val isOverride = declaration.isOverride
         val isSuspend = declaration.isSuspend
@@ -107,7 +109,7 @@ internal class FirKmpNativeCoroutinesDeclarationChecker(
         //endregion
 
         //region EXPOSED_*
-        if (isPublic && !isOverride && coroutinesAnnotations.isEmpty() && !annotations.containsKey(NativeCoroutinesIgnore)) {
+        if (!isRefined && isPublic && !isOverride && coroutinesAnnotations.isEmpty() && !annotations.containsKey(NativeCoroutinesIgnore)) {
             if (isSuspend) {
                 exposedSuspendFunction.reportOn(declaration.source)
             }
