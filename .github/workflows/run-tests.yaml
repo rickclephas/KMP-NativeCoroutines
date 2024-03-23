@@ -23,7 +23,7 @@ jobs:
         os: [ macos-12 ]
         xcode: [ 14.2 ]
         java: [ 17 ]
-        module: [ core, ksp, compiler ]
+        module: [ annotations, compiler, compiler-embeddable, core, gradle-plugin, ksp ]
     name: ${{ format('{0} ({1}, Xcode {2}, JDK {3})', matrix.module, matrix.os, matrix.xcode, matrix.java) }}
     runs-on: ${{ matrix.os }}
     steps:
@@ -67,6 +67,8 @@ jobs:
         run: ./gradlew :kmp-nativecoroutines-idea-plugin:verifyPlugin
       - name: Run plugin verifier
         run: ./gradlew :kmp-nativecoroutines-idea-plugin:runPluginVerifier
+      - name: Run binary compatibility validator
+        run: ./gradlew :kmp-nativecoroutines-idea-plugin:apiCheck
   run-swift-tests:
     if: github.event_name != 'pull_request' || github.event.pull_request.draft == false
     strategy:
