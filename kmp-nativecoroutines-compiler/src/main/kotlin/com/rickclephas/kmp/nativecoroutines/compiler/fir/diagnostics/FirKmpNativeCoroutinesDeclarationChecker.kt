@@ -179,7 +179,7 @@ internal class FirKmpNativeCoroutinesDeclarationChecker(
             }
         }
         if (isActual) {
-            val expect = declaration.symbol.getSingleExpectForActualOrNull()
+            val expect = declaration.symbol.getSingleMatchedExpectForActualOrNull()
             if (expect != null) {
                 val expectAnnotations = expect.getNativeCoroutinesAnnotations(context.session)
                 val invalidAnnotations = annotations.filterKeys { !expectAnnotations.containsKey(it) }
