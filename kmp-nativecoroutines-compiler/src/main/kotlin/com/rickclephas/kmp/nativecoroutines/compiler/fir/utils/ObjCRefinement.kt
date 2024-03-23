@@ -14,7 +14,7 @@ internal fun FirCallableDeclaration.isRefined(session: FirSession): Boolean =
     }
 
 private fun FirAnnotation.isRefinementAnnotation(session: FirSession): Boolean =
-    toAnnotationClassLikeSymbol(session)?.resolvedCompilerAnnotationsWithClassIds.orEmpty().any { metaAnnotation ->
+    toAnnotationClassLikeSymbol(session)?.resolvedAnnotationsWithClassIds.orEmpty().any { metaAnnotation ->
         val classId = metaAnnotation.toAnnotationClassId(session)
         classId == hidesFromObjCClassId || classId == refinesInSwiftClassId
     }
