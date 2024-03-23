@@ -12,9 +12,9 @@ import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNati
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.INVALID_COROUTINES_IGNORE
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.INVALID_COROUTINE_SCOPE
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.INVALID_COROUTINES_STATE
-import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.REDUNDANT_OVERRIDE_COROUTINES
-import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.REDUNDANT_OVERRIDE_COROUTINES_IGNORE
-import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.REDUNDANT_OVERRIDE_COROUTINES_STATE
+import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.INCOMPATIBLE_OVERRIDE_COROUTINES
+import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.INCOMPATIBLE_OVERRIDE_COROUTINES_IGNORE
+import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.INCOMPATIBLE_OVERRIDE_COROUTINES_STATE
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.REDUNDANT_PRIVATE_COROUTINES
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.REDUNDANT_PRIVATE_COROUTINES_IGNORE
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.REDUNDANT_PRIVATE_COROUTINES_STATE
@@ -22,15 +22,21 @@ import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNati
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.EXPOSED_STATE_FLOW_PROPERTY_ERROR
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.IGNORED_COROUTINES_REFINED
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.IGNORED_COROUTINES_REFINED_STATE
+import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.INCOMPATIBLE_ACTUAL_COROUTINES
+import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.INCOMPATIBLE_ACTUAL_COROUTINES_IGNORE
+import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.INCOMPATIBLE_ACTUAL_COROUTINES_REFINED
+import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.INCOMPATIBLE_ACTUAL_COROUTINES_REFINED_STATE
+import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.INCOMPATIBLE_ACTUAL_COROUTINES_STATE
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.INVALID_COROUTINES_REFINED
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.INVALID_COROUTINES_REFINED_STATE
-import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.REDUNDANT_OVERRIDE_COROUTINES_REFINED
-import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.REDUNDANT_OVERRIDE_COROUTINES_REFINED_STATE
+import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.INCOMPATIBLE_OVERRIDE_COROUTINES_REFINED
+import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.INCOMPATIBLE_OVERRIDE_COROUTINES_REFINED_STATE
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.REDUNDANT_PRIVATE_COROUTINES_REFINED
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.REDUNDANT_PRIVATE_COROUTINES_REFINED_STATE
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.UNSUPPORTED_CLASS_EXTENSION_PROPERTY
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.utils.coroutinesReturnType
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.utils.getNativeCoroutinesAnnotations
+import com.rickclephas.kmp.nativecoroutines.compiler.classic.utils.isRefined
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.CoroutinesReturnType
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutines
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutineScope
@@ -38,11 +44,8 @@ import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnot
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutinesRefined
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutinesRefinedState
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutinesState
-import org.jetbrains.kotlin.descriptors.CallableDescriptor
-import org.jetbrains.kotlin.descriptors.DeclarationDescriptor
-import org.jetbrains.kotlin.descriptors.FunctionDescriptor
-import org.jetbrains.kotlin.descriptors.PropertyDescriptor
-import org.jetbrains.kotlin.descriptors.SimpleFunctionDescriptor
+import org.jetbrains.kotlin.descriptors.*
+import org.jetbrains.kotlin.descriptors.annotations.Annotated
 import org.jetbrains.kotlin.descriptors.annotations.AnnotationDescriptor
 import org.jetbrains.kotlin.diagnostics.DiagnosticFactory0
 import org.jetbrains.kotlin.psi.KtDeclaration
@@ -53,9 +56,13 @@ import org.jetbrains.kotlin.resolve.checkers.DeclarationChecker
 import org.jetbrains.kotlin.resolve.checkers.DeclarationCheckerContext
 import org.jetbrains.kotlin.resolve.descriptorUtil.isEffectivelyPublicApi
 import org.jetbrains.kotlin.resolve.descriptorUtil.isExtension
+import org.jetbrains.kotlin.resolve.multiplatform.findExpects
+import java.nio.file.Path
+import kotlin.io.path.Path
 
 public class KmpNativeCoroutinesChecker(
-    exposedSeverity: ExposedSeverity
+    exposedSeverity: ExposedSeverity,
+    private val generatedSourceDirs: List<Path>
 ): DeclarationChecker {
 
     private val exposedSuspendFunction = when (exposedSeverity) {
@@ -81,11 +88,13 @@ public class KmpNativeCoroutinesChecker(
         descriptor: DeclarationDescriptor,
         context: DeclarationCheckerContext
     ) {
-        if (descriptor !is CallableDescriptor) return
+        if (descriptor !is CallableMemberDescriptor) return
         if (descriptor !is SimpleFunctionDescriptor && descriptor !is PropertyDescriptor) return
         val annotations = descriptor.getNativeCoroutinesAnnotations()
+        val isRefined = descriptor.isRefined
         val isPublic = descriptor.isEffectivelyPublicApi
         val isOverride = descriptor.overriddenDescriptors.isNotEmpty()
+        val isActual = descriptor.isActual
         val isSuspend = descriptor is FunctionDescriptor && descriptor.isSuspend
         val returnType = descriptor.coroutinesReturnType
 
@@ -104,11 +113,14 @@ public class KmpNativeCoroutinesChecker(
         //endregion
 
         //region EXPOSED_*
-        if (isPublic && !isOverride && coroutinesAnnotations.isEmpty() && !annotations.contains(NativeCoroutinesIgnore)) {
-            if (isSuspend) {
+        val hasAnnotation = coroutinesAnnotations.isNotEmpty()
+        val isIgnored = annotations.contains(NativeCoroutinesIgnore)
+        if (!isRefined && isPublic && !isOverride && !isActual && !hasAnnotation && !isIgnored) {
+            val isGenerated = generatedSourceDirs.any(Path(declaration.containingKtFile.virtualFilePath)::startsWith)
+            if (!isGenerated && isSuspend) {
                 exposedSuspendFunction?.on(declaration)?.let(context.trace::report)
             }
-            if (returnType is CoroutinesReturnType.Flow) {
+            if (!isGenerated && returnType is CoroutinesReturnType.Flow) {
                 val diagnosticFactory = when {
                     descriptor !is PropertyDescriptor -> exposedFlowType
                     returnType != CoroutinesReturnType.Flow.State -> exposedFlowType
@@ -120,7 +132,7 @@ public class KmpNativeCoroutinesChecker(
         //endregion
 
         //region IGNORED_*
-        if (annotations.contains(NativeCoroutinesIgnore)) {
+        if (isIgnored) {
             context.trace.report(IGNORED_COROUTINES, annotations[NativeCoroutines], declaration)
             context.trace.report(IGNORED_COROUTINES_REFINED, annotations[NativeCoroutinesRefined], declaration)
             context.trace.report(IGNORED_COROUTINES_REFINED_STATE, annotations[NativeCoroutinesRefinedState], declaration)
@@ -143,15 +155,34 @@ public class KmpNativeCoroutinesChecker(
         }
         //endregion
 
-        //region REDUNDANT_*
+        //region INCOMPATIBLE_*
         if (isOverride) {
-            context.trace.report(REDUNDANT_OVERRIDE_COROUTINES, annotations[NativeCoroutines], declaration)
-            context.trace.report(REDUNDANT_OVERRIDE_COROUTINES_IGNORE, annotations[NativeCoroutinesIgnore], declaration)
-            context.trace.report(REDUNDANT_OVERRIDE_COROUTINES_REFINED, annotations[NativeCoroutinesRefined], declaration)
-            context.trace.report(REDUNDANT_OVERRIDE_COROUTINES_REFINED_STATE, annotations[NativeCoroutinesRefinedState], declaration)
-            context.trace.report(REDUNDANT_OVERRIDE_COROUTINES_STATE, annotations[NativeCoroutinesState], declaration)
+            val overriddenAnnotations = descriptor.overriddenDescriptors.map(Annotated::getNativeCoroutinesAnnotations)
+            val invalidAnnotations = annotations.filterKeys { annotation ->
+                overriddenAnnotations.any { !it.containsKey(annotation) }
+            }
+            context.trace.report(INCOMPATIBLE_OVERRIDE_COROUTINES, invalidAnnotations[NativeCoroutines], declaration)
+            context.trace.report(INCOMPATIBLE_OVERRIDE_COROUTINES_IGNORE, invalidAnnotations[NativeCoroutinesIgnore], declaration)
+            context.trace.report(INCOMPATIBLE_OVERRIDE_COROUTINES_REFINED, invalidAnnotations[NativeCoroutinesRefined], declaration)
+            context.trace.report(INCOMPATIBLE_OVERRIDE_COROUTINES_REFINED_STATE, invalidAnnotations[NativeCoroutinesRefinedState], declaration)
+            context.trace.report(INCOMPATIBLE_OVERRIDE_COROUTINES_STATE, invalidAnnotations[NativeCoroutinesState], declaration)
         }
-        if (!isPublic) {
+        if (isActual) {
+            val expect = descriptor.findExpects().singleOrNull() as? CallableMemberDescriptor
+            if (expect != null) {
+                val expectAnnotations = expect.getNativeCoroutinesAnnotations()
+                val invalidAnnotations = annotations.filterKeys { !expectAnnotations.containsKey(it) }
+                context.trace.report(INCOMPATIBLE_ACTUAL_COROUTINES, invalidAnnotations[NativeCoroutines], declaration)
+                context.trace.report(INCOMPATIBLE_ACTUAL_COROUTINES_IGNORE, invalidAnnotations[NativeCoroutinesIgnore], declaration)
+                context.trace.report(INCOMPATIBLE_ACTUAL_COROUTINES_REFINED, invalidAnnotations[NativeCoroutinesRefined], declaration)
+                context.trace.report(INCOMPATIBLE_ACTUAL_COROUTINES_REFINED_STATE, invalidAnnotations[NativeCoroutinesRefinedState], declaration)
+                context.trace.report(INCOMPATIBLE_ACTUAL_COROUTINES_STATE, invalidAnnotations[NativeCoroutinesState], declaration)
+            }
+        }
+        //endregion
+
+        //region REDUNDANT_*
+        if (!isOverride && !isPublic) {
             context.trace.report(REDUNDANT_PRIVATE_COROUTINES, annotations[NativeCoroutines], declaration)
             context.trace.report(REDUNDANT_PRIVATE_COROUTINES_IGNORE, annotations[NativeCoroutinesIgnore], declaration)
             context.trace.report(REDUNDANT_PRIVATE_COROUTINES_REFINED, annotations[NativeCoroutinesRefined], declaration)

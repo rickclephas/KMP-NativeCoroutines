@@ -24,6 +24,7 @@ abstract class AbstractKmpNativeCoroutinesTest: AbstractKotlinCompilerTest() {
             useConfigurators(::KmpNativeCoroutinesCompilerPluginConfigurator)
             useAdditionalSourceProviders(::HelpersSourceProvider.bind(setOf(
                 HelpersSourceProvider.kmpNativeCoroutinesAnnotations,
+                HelpersSourceProvider.kotlinNative,
                 HelpersSourceProvider.kotlinxCoroutinesCore
             )))
         }

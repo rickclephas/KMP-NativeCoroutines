@@ -47,7 +47,12 @@ public class KmpNativeCoroutinesPlugin: KotlinCompilerPluginSupportPlugin {
         val project = kotlinCompilation.target.project
         val extension = project.extensions.getByType(KmpNativeCoroutinesExtension::class.java)
         return project.provider {
-            listOf(SubpluginOption("exposedSeverity", extension.exposedSeverity.name))
+            buildList {
+                add(SubpluginOption("exposedSeverity", extension.exposedSeverity.name))
+                extension.generatedSourceDirs.map { project.file(it).absolutePath }.distinct().forEach {
+                    add(SubpluginOption("generatedSourceDir", it))
+                }
+            }
         }
     }
 
