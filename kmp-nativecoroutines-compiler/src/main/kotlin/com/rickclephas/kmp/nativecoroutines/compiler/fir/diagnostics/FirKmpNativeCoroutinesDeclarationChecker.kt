@@ -52,9 +52,12 @@ import org.jetbrains.kotlin.fir.declarations.utils.isExtension
 import org.jetbrains.kotlin.fir.declarations.utils.isOverride
 import org.jetbrains.kotlin.fir.declarations.utils.isSuspend
 import org.jetbrains.kotlin.fir.expressions.FirAnnotation
+import java.nio.file.Path
+import kotlin.io.path.Path
 
 internal class FirKmpNativeCoroutinesDeclarationChecker(
-    exposedSeverity: ExposedSeverity
+    exposedSeverity: ExposedSeverity,
+    private val generatedSourceDirs: List<Path>
 ): FirCallableDeclarationChecker() {
 
     private val exposedSuspendFunction = when (exposedSeverity) {
@@ -107,11 +110,16 @@ internal class FirKmpNativeCoroutinesDeclarationChecker(
         //endregion
 
         //region EXPOSED_*
-        if (isPublic && !isOverride && coroutinesAnnotations.isEmpty() && !annotations.containsKey(NativeCoroutinesIgnore)) {
-            if (isSuspend) {
+        val hasAnnotation = coroutinesAnnotations.isNotEmpty()
+        val isIgnored = annotations.containsKey(NativeCoroutinesIgnore)
+        if (isPublic && !isOverride && !hasAnnotation && !isIgnored) {
+            val isGenerated = context.containingFilePath?.let {
+                generatedSourceDirs.any(Path(it)::startsWith)
+            } ?: false
+            if (!isGenerated && isSuspend) {
                 exposedSuspendFunction.reportOn(declaration.source)
             }
-            if (returnType is CoroutinesReturnType.Flow) {
+            if (!isGenerated && returnType is CoroutinesReturnType.Flow) {
                 val diagnosticFactory = when {
                     declaration is FirProperty && returnType == CoroutinesReturnType.Flow.State -> exposedStateFlowProperty
                     else -> exposedFlowType
@@ -122,7 +130,7 @@ internal class FirKmpNativeCoroutinesDeclarationChecker(
         //endregion
 
         //region IGNORED_*
-        if (annotations.containsKey(NativeCoroutinesIgnore)) {
+        if (isIgnored) {
             IGNORED_COROUTINES.reportOn(annotations[NativeCoroutines])
             IGNORED_COROUTINES_REFINED.reportOn(annotations[NativeCoroutinesRefined])
             IGNORED_COROUTINES_REFINED_STATE.reportOn(annotations[NativeCoroutinesRefinedState])

@@ -3,6 +3,8 @@ package com.rickclephas.kmp.nativecoroutines.idea.compiler.extensions
 import com.rickclephas.kmp.nativecoroutines.compiler.config.ConfigOption
 import com.rickclephas.kmp.nativecoroutines.compiler.config.EXPOSED_SEVERITY
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesChecker
+import com.rickclephas.kmp.nativecoroutines.compiler.config.ConfigListOption
+import com.rickclephas.kmp.nativecoroutines.compiler.config.GENERATED_SOURCE_DIR
 import org.jetbrains.kotlin.analyzer.moduleInfo
 import org.jetbrains.kotlin.container.StorageComponentContainer
 import org.jetbrains.kotlin.container.useInstance
@@ -27,8 +29,9 @@ public class KmpNativeCoroutinesStorageComponentContainerContributor: StorageCom
         val kotlinFacet = KotlinFacet.get(moduleInfo.module) ?: return
         val pluginOptions = kotlinFacet.configuration.settings.compilerArguments?.pluginOptions ?: emptyArray()
         val exposedSeverity = pluginOptions.getPluginOption(EXPOSED_SEVERITY) ?: return
+        val generatedSourceDirs = pluginOptions.getPluginOption(GENERATED_SOURCE_DIR)
 
-        container.useInstance(KmpNativeCoroutinesChecker(exposedSeverity))
+        container.useInstance(KmpNativeCoroutinesChecker(exposedSeverity, generatedSourceDirs))
     }
 
     private fun TargetPlatform.hasApple(): Boolean = isNotEmpty() && any {
@@ -39,10 +42,17 @@ public class KmpNativeCoroutinesStorageComponentContainerContributor: StorageCom
         }
     }
 
+    private val String.optionPrefix: String
+        get() = "plugin:com.rickclephas.kmp.nativecoroutines:$this="
+
     private fun <T: Any> Array<String>.getPluginOption(option: ConfigOption<T>): T? {
-        val pluginId = "com.rickclephas.kmp.nativecoroutines"
-        val prefix = "plugin:$pluginId:${option.optionName}="
+        val prefix = option.optionName.optionPrefix
         val value = firstOrNull { it.startsWith(prefix) }?.substring(prefix.length)
         return value?.let(option::parse)
+    }
+
+    private fun <T: Any> Array<String>.getPluginOption(option: ConfigListOption<T>): List<T> {
+        val prefix = option.optionName.optionPrefix
+        return filter { it.startsWith(prefix) }.map { option.parse(it.substring(prefix.length)) }
     }
 }

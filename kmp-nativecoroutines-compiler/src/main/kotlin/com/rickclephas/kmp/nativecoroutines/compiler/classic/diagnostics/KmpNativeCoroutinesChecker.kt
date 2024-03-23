@@ -53,9 +53,12 @@ import org.jetbrains.kotlin.resolve.checkers.DeclarationChecker
 import org.jetbrains.kotlin.resolve.checkers.DeclarationCheckerContext
 import org.jetbrains.kotlin.resolve.descriptorUtil.isEffectivelyPublicApi
 import org.jetbrains.kotlin.resolve.descriptorUtil.isExtension
+import java.nio.file.Path
+import kotlin.io.path.Path
 
 public class KmpNativeCoroutinesChecker(
-    exposedSeverity: ExposedSeverity
+    exposedSeverity: ExposedSeverity,
+    private val generatedSourceDirs: List<Path>
 ): DeclarationChecker {
 
     private val exposedSuspendFunction = when (exposedSeverity) {
@@ -104,11 +107,14 @@ public class KmpNativeCoroutinesChecker(
         //endregion
 
         //region EXPOSED_*
-        if (isPublic && !isOverride && coroutinesAnnotations.isEmpty() && !annotations.contains(NativeCoroutinesIgnore)) {
-            if (isSuspend) {
+        val hasAnnotation = coroutinesAnnotations.isNotEmpty()
+        val isIgnored = annotations.contains(NativeCoroutinesIgnore)
+        if (isPublic && !isOverride && !hasAnnotation && !isIgnored) {
+            val isGenerated = generatedSourceDirs.any(Path(declaration.containingKtFile.virtualFilePath)::startsWith)
+            if (!isGenerated && isSuspend) {
                 exposedSuspendFunction?.on(declaration)?.let(context.trace::report)
             }
-            if (returnType is CoroutinesReturnType.Flow) {
+            if (!isGenerated && returnType is CoroutinesReturnType.Flow) {
                 val diagnosticFactory = when {
                     descriptor !is PropertyDescriptor -> exposedFlowType
                     returnType != CoroutinesReturnType.Flow.State -> exposedFlowType
@@ -120,7 +126,7 @@ public class KmpNativeCoroutinesChecker(
         //endregion
 
         //region IGNORED_*
-        if (annotations.contains(NativeCoroutinesIgnore)) {
+        if (isIgnored) {
             context.trace.report(IGNORED_COROUTINES, annotations[NativeCoroutines], declaration)
             context.trace.report(IGNORED_COROUTINES_REFINED, annotations[NativeCoroutinesRefined], declaration)
             context.trace.report(IGNORED_COROUTINES_REFINED_STATE, annotations[NativeCoroutinesRefinedState], declaration)
