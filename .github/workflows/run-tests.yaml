@@ -48,6 +48,12 @@ jobs:
         env:
           GRADLE_MODULE: ${{ format(':kmp-nativecoroutines-{0}', matrix.module) }}
         run: ./gradlew $GRADLE_MODULE:check
+      - name: Archive reports
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reports
+          path: '*/build/reports/'
   run-idea-tests:
     if: github.event_name != 'pull_request' || github.event.pull_request.draft == false
     runs-on: ubuntu-latest
