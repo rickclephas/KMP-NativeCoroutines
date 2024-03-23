@@ -13,6 +13,8 @@ interface CustomStateFlow<out T>: StateFlow<T>
 
 // FILE: test.kt
 
+import kotlin.native.HiddenFromObjC
+import kotlin.native.ShouldRefineInSwift
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -29,6 +31,9 @@ fun topLevelCustomFlowFunction(): CustomFlow<Int> = throw Throwable()
 
 suspend fun topLevelSuspendFlowFunction(): Flow<Int> = throw Throwable()
 
+@HiddenFromObjC
+suspend fun topLevelRefinedSuspendFunction(): Int = 0
+
 val topLevelFlowProperty: Flow<Int> get() = throw Throwable()
 
 val topLevelSharedFlowProperty: SharedFlow<Int> get() = throw Throwable()
@@ -38,6 +43,9 @@ val topLevelStateFlowProperty: StateFlow<Int> get() = throw Throwable()
 val topLevelCustomFlowProperty: CustomFlow<Int> get() = throw Throwable()
 
 val topLevelCustomStateFlowProperty: CustomStateFlow<Int> get() = throw Throwable()
+
+@ShouldRefineInSwift
+val topLevelRefinedFlowProperty: Flow<Int> get() = throw Throwable()
 
 interface TestInterface {
 
