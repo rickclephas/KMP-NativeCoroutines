@@ -1,0 +1,18 @@
+public abstract interface annotation class com/rickclephas/kmp/nativecoroutines/NativeCoroutineScope : java/lang/annotation/Annotation {
+}
+
+public abstract interface annotation class com/rickclephas/kmp/nativecoroutines/NativeCoroutines : java/lang/annotation/Annotation {
+}
+
+public abstract interface annotation class com/rickclephas/kmp/nativecoroutines/NativeCoroutinesIgnore : java/lang/annotation/Annotation {
+}
+
+public abstract interface annotation class com/rickclephas/kmp/nativecoroutines/NativeCoroutinesRefined : java/lang/annotation/Annotation {
+}
+
+public abstract interface annotation class com/rickclephas/kmp/nativecoroutines/NativeCoroutinesRefinedState : java/lang/annotation/Annotation {
+}
+
+public abstract interface annotation class com/rickclephas/kmp/nativecoroutines/NativeCoroutinesState : java/lang/annotation/Annotation {
+}
+

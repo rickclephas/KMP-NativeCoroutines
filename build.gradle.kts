@@ -1,3 +1,4 @@
+import kotlinx.validation.ExperimentalBCVApi
 import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension
 import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootPlugin
 import org.jetbrains.kotlin.gradle.targets.js.npm.tasks.KotlinNpmInstallTask
@@ -5,6 +6,7 @@ import org.jetbrains.kotlin.gradle.targets.js.npm.tasks.KotlinNpmInstallTask
 plugins {
     alias(libs.plugins.kotlin.multiplatform) apply false
     alias(libs.plugins.kotlin.jvm) apply false
+    alias(libs.plugins.kotlinx.binary.compatibility.validator)
 }
 
 buildscript {
@@ -20,6 +22,13 @@ allprojects {
 
     repositories {
         mavenCentral()
+    }
+}
+
+apiValidation {
+    @OptIn(ExperimentalBCVApi::class)
+    klib {
+        enabled = true
     }
 }
 

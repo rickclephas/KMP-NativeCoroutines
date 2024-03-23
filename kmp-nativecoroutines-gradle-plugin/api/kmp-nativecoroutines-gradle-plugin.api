@@ -1,0 +1,40 @@
+public final class com/rickclephas/kmp/nativecoroutines/gradle/ExposedSeverity : java/lang/Enum {
+	public static final field ERROR Lcom/rickclephas/kmp/nativecoroutines/gradle/ExposedSeverity;
+	public static final field NONE Lcom/rickclephas/kmp/nativecoroutines/gradle/ExposedSeverity;
+	public static final field WARNING Lcom/rickclephas/kmp/nativecoroutines/gradle/ExposedSeverity;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/rickclephas/kmp/nativecoroutines/gradle/ExposedSeverity;
+	public static fun values ()[Lcom/rickclephas/kmp/nativecoroutines/gradle/ExposedSeverity;
+}
+
+public class com/rickclephas/kmp/nativecoroutines/gradle/KmpNativeCoroutinesExtension {
+	public fun <init> ()V
+	public final fun getExposedSeverity ()Lcom/rickclephas/kmp/nativecoroutines/gradle/ExposedSeverity;
+	public final fun getFileSuffix ()Ljava/lang/String;
+	public final fun getFlowReplayCacheSuffix ()Ljava/lang/String;
+	public final fun getFlowValueSuffix ()Ljava/lang/String;
+	public final fun getStateFlowSuffix ()Ljava/lang/String;
+	public final fun getStateSuffix ()Ljava/lang/String;
+	public final fun getSuffix ()Ljava/lang/String;
+	public final fun setExposedSeverity (Lcom/rickclephas/kmp/nativecoroutines/gradle/ExposedSeverity;)V
+	public final fun setFileSuffix (Ljava/lang/String;)V
+	public final fun setFlowReplayCacheSuffix (Ljava/lang/String;)V
+	public final fun setFlowValueSuffix (Ljava/lang/String;)V
+	public final fun setStateFlowSuffix (Ljava/lang/String;)V
+	public final fun setStateSuffix (Ljava/lang/String;)V
+	public final fun setSuffix (Ljava/lang/String;)V
+}
+
+public final class com/rickclephas/kmp/nativecoroutines/gradle/KmpNativeCoroutinesPlugin : org/jetbrains/kotlin/gradle/plugin/KotlinCompilerPluginSupportPlugin {
+	public static final field kotlinPluginId Ljava/lang/String;
+	public static final field kspPluginId Ljava/lang/String;
+	public fun <init> ()V
+	public synthetic fun apply (Ljava/lang/Object;)V
+	public fun apply (Lorg/gradle/api/Project;)V
+	public fun applyToCompilation (Lorg/jetbrains/kotlin/gradle/plugin/KotlinCompilation;)Lorg/gradle/api/provider/Provider;
+	public fun getCompilerPluginId ()Ljava/lang/String;
+	public fun getPluginArtifact ()Lorg/jetbrains/kotlin/gradle/plugin/SubpluginArtifact;
+	public fun getPluginArtifactForNative ()Lorg/jetbrains/kotlin/gradle/plugin/SubpluginArtifact;
+	public fun isApplicable (Lorg/jetbrains/kotlin/gradle/plugin/KotlinCompilation;)Z
+}
+
