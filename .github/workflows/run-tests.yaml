@@ -111,7 +111,7 @@ jobs:
       matrix:
         platform: [ iOS, macOS, tvOS, watchOS ]
         embeddable-compiler: [ true, false ]
-    name: ${{ format('{0} (embeddable {1})', matrix.platform, matrix.embeddable-compiler) }}
+    name: ${{ format('Sample {0} (embeddable {1})', matrix.platform, matrix.embeddable-compiler) }}
     runs-on: macos-14
     env:
       XCODEBUILD_SCHEME_iOS: iOS App
