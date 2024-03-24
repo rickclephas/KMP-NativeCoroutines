@@ -10,7 +10,6 @@ on:
       - kotlin/**
 env:
   GRADLE_OPTS: -Dorg.gradle.parallel=true -Dorg.gradle.caching=true
-  MACOS_RUNNER: 'macos-14'
   JAVA_VERSION: '17'
   XCODE_VERSION: '15.2'
   XCODEBUILD_DESTINATION_iOS: platform=iOS Simulator,name=iPhone 14 Pro
@@ -25,7 +24,7 @@ jobs:
       matrix:
         module: [ core, ksp, compiler ]
     name: ${{ matrix.module }}
-    runs-on: ${{ env.MACOS_RUNNER }}
+    runs-on: macos-14
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -85,7 +84,7 @@ jobs:
         platform: [ iOS, macOS, tvOS, watchOS ]
         implementation: [ Async, Combine, RxSwift ]
     name: ${{ format('{0} {1}', matrix.implementation, matrix.platform) }}
-    runs-on: ${{ env.MACOS_RUNNER }}
+    runs-on: macos-14
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -113,7 +112,7 @@ jobs:
         platform: [ iOS, macOS, tvOS, watchOS ]
         embeddable-compiler: [ true, false ]
     name: ${{ format('{0} (embeddable {1})', matrix.platform, matrix.embeddable-compiler) }}
-    runs-on: ${{ env.MACOS_RUNNER }}
+    runs-on: macos-14
     env:
       XCODEBUILD_SCHEME_iOS: iOS App
       XCODEBUILD_SCHEME_macOS: macOS App
