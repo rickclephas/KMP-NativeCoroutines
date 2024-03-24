@@ -10,6 +10,9 @@ on:
       - kotlin/**
 env:
   GRADLE_OPTS: -Dorg.gradle.parallel=true -Dorg.gradle.caching=true
+  MACOS_RUNNER: 'macos-12'
+  JAVA_VERSION: '17'
+  XCODE_VERSION: '14.2'
   XCODEBUILD_DESTINATION_iOS: platform=iOS Simulator,name=iPhone 14 Pro
   XCODEBUILD_DESTINATION_macOS: platform=OS X
   XCODEBUILD_DESTINATION_tvOS: platform=tvOS Simulator,name=Apple TV 4K (3rd generation)
@@ -20,26 +23,23 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ macos-12 ]
-        xcode: [ 14.2 ]
-        java: [ 17 ]
         module: [ core, ksp, compiler ]
-    name: ${{ format('{0} ({1}, Xcode {2}, JDK {3})', matrix.module, matrix.os, matrix.xcode, matrix.java) }}
-    runs-on: ${{ matrix.os }}
+    name: ${{ matrix.module }}
+    runs-on: ${{ env.MACOS_RUNNER }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Setup Xcode
         uses: maxim-lobanov/setup-xcode@v1
         with:
-          xcode-version: ${{ matrix.xcode }}
+          xcode-version: ${{ env.XCODE_VERSION }}
       - name: Gradle Wrapper Validation
         uses: gradle/wrapper-validation-action@v2
       - name: Setup JDK
         uses: actions/setup-java@v4
         with:
           distribution: zulu
-          java-version: ${{ matrix.java }}
+          java-version: ${{ env.JAVA_VERSION }}
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
         with:
@@ -68,7 +68,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: zulu
-          java-version: 17
+          java-version: ${{ env.JAVA_VERSION }}
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
         with:
@@ -82,19 +82,17 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ macos-12 ]
-        xcode: [ 14.2 ]
         platform: [ iOS, macOS, tvOS, watchOS ]
         implementation: [ Async, Combine, RxSwift ]
-    name: ${{ format('{0} {1} ({2}, Xcode {3})', matrix.implementation, matrix.platform, matrix.os, matrix.xcode) }}
-    runs-on: ${{ matrix.os }}
+    name: ${{ format('{0} {1}', matrix.implementation, matrix.platform) }}
+    runs-on: ${{ env.MACOS_RUNNER }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Setup Xcode
         uses: maxim-lobanov/setup-xcode@v1
         with:
-          xcode-version: ${{ matrix.xcode }}
+          xcode-version: ${{ env.XCODE_VERSION }}
       - name: Run tests
         env:
           XCODEBUILD_SCHEME: ${{ format('KMPNativeCoroutines{0}', matrix.implementation) }}
@@ -112,13 +110,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ macos-12 ]
-        xcode: [ 14.2 ]
-        java: [ 17 ]
         platform: [ iOS, macOS, tvOS, watchOS ]
         embeddable-compiler: [ true, false ]
-    name: ${{ format('{0} (embeddable {1}) ({2}, Xcode {3}, JDK {4})', matrix.platform, matrix.embeddable-compiler, matrix.os, matrix.xcode, matrix.java) }}
-    runs-on: ${{ matrix.os }}
+    name: ${{ format('{0} (embeddable {1})', matrix.platform, matrix.embeddable-compiler) }}
+    runs-on: ${{ env.MACOS_RUNNER }}
     env:
       XCODEBUILD_SCHEME_iOS: iOS App
       XCODEBUILD_SCHEME_macOS: macOS App
@@ -135,12 +130,12 @@ jobs:
       - name: Setup Xcode
         uses: maxim-lobanov/setup-xcode@v1
         with:
-          xcode-version: ${{ matrix.xcode }}
+          xcode-version: ${{ env.XCODE_VERSION }}
       - name: Setup JDK
         uses: actions/setup-java@v4
         with:
           distribution: zulu
-          java-version: ${{ matrix.java }}
+          java-version: ${{ env.JAVA_VERSION }}
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
         with:
