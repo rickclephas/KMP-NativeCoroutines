@@ -41,7 +41,9 @@ jobs:
           distribution: zulu
           java-version: ${{ matrix.java }}
       - name: Setup Gradle
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
       - name: Cache Konan
         uses: ./.github/actions/cache-konan
       - name: Run tests
@@ -68,7 +70,9 @@ jobs:
           distribution: zulu
           java-version: 17
       - name: Setup Gradle
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
       - name: Verify plugin
         run: ./gradlew :kmp-nativecoroutines-idea-plugin:verifyPlugin
       - name: Run plugin verifier
@@ -138,7 +142,9 @@ jobs:
           distribution: zulu
           java-version: ${{ matrix.java }}
       - name: Setup Gradle
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
       - name: Cache Konan
         uses: ./.github/actions/cache-konan
       - name: Set kotlin.native.useEmbeddableCompilerJar

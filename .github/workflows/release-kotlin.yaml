@@ -20,7 +20,9 @@ jobs:
           distribution: 'zulu'
           java-version: '17'
       - name: Setup Gradle
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
       - name: Cache Konan
         uses: ./.github/actions/cache-konan
       - name: Publish to Sonatype
