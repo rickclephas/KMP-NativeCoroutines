@@ -32,7 +32,7 @@ kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serializa
 
 [plugins]
 gradle-plugin-publish = { id = "com.gradle.plugin-publish", version = "1.2.0" }
-intellij = { id = "org.jetbrains.intellij", version = "1.16.0" }
+intellij = { id = "org.jetbrains.intellij", version = "1.17.2" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 
