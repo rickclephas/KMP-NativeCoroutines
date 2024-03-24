@@ -35,6 +35,10 @@ public open class KmpNativeCoroutinesExtension {
      * The severity of the exposed coroutines check.
      */
     public var exposedSeverity: ExposedSeverity = ExposedSeverity.WARNING
+    /**
+     * A list of generated source directories.
+     */
+    public val generatedSourceDirs: MutableList<Any> = mutableListOf("build/generated")
 }
 
 public enum class ExposedSeverity {
