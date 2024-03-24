@@ -11,3 +11,8 @@ internal fun Annotated.getNativeCoroutinesAnnotations(): Map<NativeCoroutinesAnn
         put(nativeCoroutinesAnnotation, annotation)
     }
 }
+
+internal val AnnotationDescriptor.isNativeCoroutinesAnnotation: Boolean get() {
+    val fqName = fqName ?: return false
+    return NativeCoroutinesAnnotation.entries.any { it.fqName == fqName }
+}
