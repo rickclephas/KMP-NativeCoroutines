@@ -10,9 +10,9 @@ on:
       - kotlin/**
 env:
   GRADLE_OPTS: -Dorg.gradle.parallel=true -Dorg.gradle.caching=true
-  MACOS_RUNNER: 'macos-12'
+  MACOS_RUNNER: 'macos-14'
   JAVA_VERSION: '17'
-  XCODE_VERSION: '14.2'
+  XCODE_VERSION: '15.2'
   XCODEBUILD_DESTINATION_iOS: platform=iOS Simulator,name=iPhone 14 Pro
   XCODEBUILD_DESTINATION_macOS: platform=OS X
   XCODEBUILD_DESTINATION_tvOS: platform=tvOS Simulator,name=Apple TV 4K (3rd generation)
