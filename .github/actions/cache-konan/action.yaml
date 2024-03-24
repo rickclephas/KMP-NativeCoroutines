@@ -3,7 +3,7 @@ description: Caches Konan files
 runs:
   using: composite
   steps:
-    - uses: actions/cache@v3
+    - uses: actions/cache@v4
       with:
         path: ~/.konan
         key: ${{ runner.os }}-konan-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties', 'gradle/libs.versions.toml') }}

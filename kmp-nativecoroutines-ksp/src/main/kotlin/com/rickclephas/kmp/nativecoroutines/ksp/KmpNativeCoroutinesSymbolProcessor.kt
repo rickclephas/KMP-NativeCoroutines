@@ -69,6 +69,7 @@ internal class KmpNativeCoroutinesSymbolProcessor(
             logger.error("Property isn't contained in a source file", property)
             return true
         }
+        if (!property.shouldProcess) return true
         val scopeProperty = coroutineScopeProvider.getScopeProperty(property) ?: return false
         val propertySpecs = property.toNativeCoroutinesPropertySpecs(scopeProperty, options, asState, shouldRefine) ?: return false
         val fileSpecBuilder = file.getFileSpecBuilder()
@@ -92,6 +93,7 @@ internal class KmpNativeCoroutinesSymbolProcessor(
             logger.error("Function isn't contained in a source file", function)
             return true
         }
+        if (!function.shouldProcess) return true
         val scopeProperty = coroutineScopeProvider.getScopeProperty(function) ?: return false
         val funSpec = function.toNativeCoroutinesFunSpec(scopeProperty, options, shouldRefine) ?: return false
         file.getFileSpecBuilder().addFunction(funSpec)
@@ -100,4 +102,7 @@ internal class KmpNativeCoroutinesSymbolProcessor(
 
     private fun processRefinedFunction(function: KSFunctionDeclaration): Boolean =
         processFunction(function, shouldRefine = true)
+
+    private val KSDeclaration.shouldProcess: Boolean
+        get() = !isActual && Modifier.OVERRIDE !in modifiers
 }
