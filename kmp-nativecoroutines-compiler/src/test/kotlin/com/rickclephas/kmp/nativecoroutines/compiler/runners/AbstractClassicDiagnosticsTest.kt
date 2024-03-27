@@ -7,6 +7,7 @@ import org.jetbrains.kotlin.test.frontend.classic.ClassicFrontendFacade
 import org.jetbrains.kotlin.test.frontend.classic.ClassicFrontendOutputArtifact
 import org.jetbrains.kotlin.test.frontend.classic.handlers.ClassicDiagnosticsHandler
 import org.jetbrains.kotlin.test.model.*
+import org.jetbrains.kotlin.test.services.LibraryProvider
 
 abstract class AbstractClassicDiagnosticsTest: AbstractBaseDiagnosticsTest<ClassicFrontendOutputArtifact>() {
     final override val targetFrontend: FrontendKind<ClassicFrontendOutputArtifact>
@@ -14,6 +15,7 @@ abstract class AbstractClassicDiagnosticsTest: AbstractBaseDiagnosticsTest<Class
     final override val frontend: Constructor<FrontendFacade<ClassicFrontendOutputArtifact>>
         get() = ::ClassicFrontendFacade
     final override fun TestConfigurationBuilder.handlersSetup() = classicFrontendHandlersStep {
-         useHandlers(::ClassicDiagnosticsHandler)
+        useHandlers(::ClassicDiagnosticsHandler)
+        useAdditionalService(::LibraryProvider)
     }
 }

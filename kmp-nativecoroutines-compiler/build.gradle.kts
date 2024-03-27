@@ -34,13 +34,15 @@ java {
 }
 
 tasks.compileKotlin.configure {
-    kotlinOptions {
-        freeCompilerArgs = listOf("-Xjvm-default=all")
+    compilerOptions {
+        freeCompilerArgs.add("-Xjvm-default=all")
     }
 }
 
 tasks.test {
-    systemProperty("kotlin.internal.native.test.nativeHome", NativeCompilerDownloader(project).compilerDirectory.absolutePath)
+    val compilerDownloader = NativeCompilerDownloader(project)
+    compilerDownloader.downloadIfNeeded()
+    systemProperty("kotlin.internal.native.test.nativeHome", compilerDownloader.compilerDirectory.absolutePath)
     inputs.dir("src/testData")
     useJUnitPlatform()
 }

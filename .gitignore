@@ -1,3 +1,4 @@
+.kotlin/
 local.properties
 
 # Created by https://www.toptal.com/developers/gitignore/api/swift,xcode,gradle,kotlin,intellij,cocoapods
