@@ -1,7 +1,7 @@
 package com.rickclephas.kmp.nativecoroutines.idea.gradle
 
 import com.intellij.openapi.application.PathManager
-import com.intellij.openapi.util.Key
+import com.intellij.openapi.externalSystem.model.Key
 import com.rickclephas.kmp.nativecoroutines.compiler.KmpNativeCoroutinesCommandLineProcessor
 import com.rickclephas.kmp.nativecoroutines.compiler.config.ConfigListOption
 import com.rickclephas.kmp.nativecoroutines.compiler.config.ConfigOption

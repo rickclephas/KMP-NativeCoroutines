@@ -1,6 +1,6 @@
 package com.rickclephas.kmp.nativecoroutines.idea.gradle
 
-import com.intellij.openapi.util.Key
+import com.intellij.openapi.externalSystem.model.Key
 import java.io.Serializable
 
 public interface KmpNativeCoroutinesModel: Serializable {
@@ -13,4 +13,4 @@ internal class KmpNativeCoroutinesModelImpl(
     override val generatedSourceDirs: List<String>
 ): KmpNativeCoroutinesModel
 
-internal val KmpNativeCoroutinesModelKey = Key<KmpNativeCoroutinesModel>(KmpNativeCoroutinesModel::class.java.name)
+internal val KmpNativeCoroutinesModelKey = Key<KmpNativeCoroutinesModel>(KmpNativeCoroutinesModel::class.java.name, 1)
