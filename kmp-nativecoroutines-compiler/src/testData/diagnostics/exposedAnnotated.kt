@@ -1,4 +1,5 @@
 // FIR_IDENTICAL
+// DIAGNOSTICS: -NOT_A_MULTIPLATFORM_COMPILATION
 // EXPOSED_SEVERITY: WARNING
 
 // FILE: customFlow.kt
@@ -14,6 +15,8 @@ import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesIgnore
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesRefined
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesRefinedState
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState
+import kotlin.native.HiddenFromObjC
+import kotlin.native.ShouldRefineInSwift
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -36,6 +39,9 @@ fun topLevelCustomFlowFunction(): CustomFlow<Int> = throw Throwable()
 @NativeCoroutinesIgnore
 suspend fun topLevelSuspendFlowFunction(): Flow<Int> = throw Throwable()
 
+@HiddenFromObjC
+suspend fun topLevelRefinedSuspendFunction(): Int = 0
+
 @NativeCoroutines
 val topLevelFlowProperty: Flow<Int> get() = throw Throwable()
 
@@ -47,6 +53,9 @@ val topLevelStateFlowProperty: StateFlow<Int> get() = throw Throwable()
 
 @NativeCoroutinesIgnore
 val topLevelCustomFlowProperty: CustomFlow<Int> get() = throw Throwable()
+
+@ShouldRefineInSwift
+val topLevelRefinedFlowProperty: Flow<Int> get() = throw Throwable()
 
 interface TestInterface {
 
@@ -85,4 +94,18 @@ internal class TestClassB {
     suspend fun suspendFunction(): Int = 0
 
     val flowProperty: Flow<Int> get() = throw Throwable()
+}
+
+expect class TestClassC {
+    @NativeCoroutines
+    suspend fun suspendFunction(): Int
+
+    @NativeCoroutines
+    val flowProperty: Flow<Int>
+}
+
+actual class TestClassC {
+    actual suspend fun suspendFunction(): Int = 0
+
+    actual val flowProperty: Flow<Int> get() = throw Throwable()
 }
