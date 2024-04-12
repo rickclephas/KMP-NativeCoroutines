@@ -6,7 +6,7 @@ public final class com/rickclephas/kmp/nativecoroutines/idea/compiler/extensions
 public final class com/rickclephas/kmp/nativecoroutines/idea/gradle/KmpNativeCoroutinesGradleProjectImportHandler : org/jetbrains/kotlin/idea/gradleJava/compilerPlugin/AbstractCompilerPluginGradleImportHandler {
 	public fun <init> ()V
 	public fun getCompilerPluginId ()Ljava/lang/String;
-	public fun getModelKey ()Lcom/intellij/openapi/util/Key;
+	public fun getModelKey ()Lcom/intellij/openapi/externalSystem/model/Key;
 	public synthetic fun getOptions (Ljava/lang/Object;)Ljava/util/List;
 	public fun getPluginJarFileFromIdea ()Ljava/lang/String;
 	public fun getPluginName ()Ljava/lang/String;
@@ -14,6 +14,7 @@ public final class com/rickclephas/kmp/nativecoroutines/idea/gradle/KmpNativeCor
 
 public abstract interface class com/rickclephas/kmp/nativecoroutines/idea/gradle/KmpNativeCoroutinesModel : java/io/Serializable {
 	public abstract fun getExposedSeverity ()Ljava/lang/String;
+	public abstract fun getGeneratedSourceDirs ()Ljava/util/List;
 }
 
 public final class com/rickclephas/kmp/nativecoroutines/idea/gradle/KmpNativeCoroutinesModelBuilderService : org/jetbrains/plugins/gradle/tooling/AbstractModelBuilderService {
