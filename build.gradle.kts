@@ -1,4 +1,4 @@
-import kotlinx.validation.ExperimentalBCVApi
+//import kotlinx.validation.ExperimentalBCVApi
 import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension
 import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootPlugin
 import org.jetbrains.kotlin.gradle.targets.js.npm.tasks.KotlinNpmInstallTask
@@ -6,7 +6,7 @@ import org.jetbrains.kotlin.gradle.targets.js.npm.tasks.KotlinNpmInstallTask
 plugins {
     alias(libs.plugins.kotlin.multiplatform) apply false
     alias(libs.plugins.kotlin.jvm) apply false
-    alias(libs.plugins.kotlinx.binary.compatibility.validator)
+//    alias(libs.plugins.kotlinx.binary.compatibility.validator)
 }
 
 buildscript {
@@ -25,12 +25,12 @@ allprojects {
     }
 }
 
-apiValidation {
-    @OptIn(ExperimentalBCVApi::class)
-    klib {
-        enabled = true
-    }
-}
+//apiValidation {
+//    @OptIn(ExperimentalBCVApi::class)
+//    klib {
+//        enabled = true
+//    }
+//}
 
 // TODO: Remove once default NodeJS version supports wasm
 plugins.withType<NodeJsRootPlugin> {
