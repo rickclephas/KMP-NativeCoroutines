@@ -15,7 +15,7 @@ public class KmpNativeCoroutinesProjectResolverExtension: AbstractProjectResolve
 
     override fun populateModuleExtraModels(gradleModule: IdeaModule, ideModule: DataNode<ModuleData>) {
         resolverCtx.getExtraProject(gradleModule, KmpNativeCoroutinesModel::class.java)?.let {
-            ideModule.putCopyableUserData(KmpNativeCoroutinesModelKey, it)
+            ideModule.createChild(KmpNativeCoroutinesModelKey, it)
         }
         super.populateModuleExtraModels(gradleModule, ideModule)
     }
