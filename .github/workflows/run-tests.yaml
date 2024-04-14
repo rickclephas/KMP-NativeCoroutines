@@ -22,7 +22,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        module: [ core, ksp, compiler ]
+        module: [ annotations, compiler, compiler-embeddable, core, gradle-plugin, ksp ]
     name: ${{ matrix.module }}
     runs-on: macos-14
     steps:
@@ -76,6 +76,8 @@ jobs:
         run: ./gradlew :kmp-nativecoroutines-idea-plugin:verifyPlugin
       - name: Run plugin verifier
         run: ./gradlew :kmp-nativecoroutines-idea-plugin:runPluginVerifier
+      - name: Run binary compatibility validator
+        run: ./gradlew :kmp-nativecoroutines-idea-plugin:apiCheck
   run-swift-tests:
     if: github.event_name != 'pull_request' || github.event.pull_request.draft == false
     strategy:
