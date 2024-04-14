@@ -29,18 +29,18 @@ This library solves both of these limitations 😄.
 The latest version of the library uses Kotlin version `1.9.23`.  
 Compatibility versions for older and/or preview Kotlin versions are also available:
 
-| Version        | Version suffix      |   Kotlin    |    KSP     | Coroutines |
-|----------------|---------------------|:-----------:|:----------:|:----------:|
-| _latest_       | -kotlin-2.0.0-Beta5 | 2.0.0-Beta5 |   1.0.17   |   1.8.0    |
-| **_latest_**   | **_no suffix_**     | **1.9.23**  | **1.0.20** | **1.8.0**  |
-| 1.0.0-ALPHA-25 | _no suffix_         |   1.9.22    |   1.0.17   |   1.8.0    |
-| 1.0.0-ALPHA-23 | _no suffix_         |   1.9.21    |   1.0.16   |   1.7.3    |
-| 1.0.0-ALPHA-21 | _no suffix_         |   1.9.20    |   1.0.14   |   1.7.3    |
-| 1.0.0-ALPHA-18 | _no suffix_         |   1.9.10    |   1.0.13   |   1.7.3    |
-| 1.0.0-ALPHA-17 | _no suffix_         |    1.9.0    |   1.0.12   |   1.7.3    |
-| 1.0.0-ALPHA-12 | _no suffix_         |   1.8.22    |   1.0.11   |   1.7.2    |
-| 1.0.0-ALPHA-10 | _no suffix_         |   1.8.21    |   1.0.11   |   1.7.1    |
-| 1.0.0-ALPHA-7  | _no suffix_         |   1.8.20    |   1.0.10   |   1.6.4    |
+| Version        | Version suffix    |   Kotlin   |    KSP     | Coroutines |
+|----------------|-------------------|:----------:|:----------:|:----------:|
+| _latest_       | -kotlin-2.0.0-RC1 | 2.0.0-RC1  |   1.0.20   |   1.8.0    |
+| **_latest_**   | **_no suffix_**   | **1.9.23** | **1.0.20** | **1.8.0**  |
+| 1.0.0-ALPHA-25 | _no suffix_       |   1.9.22   |   1.0.17   |   1.8.0    |
+| 1.0.0-ALPHA-23 | _no suffix_       |   1.9.21   |   1.0.16   |   1.7.3    |
+| 1.0.0-ALPHA-21 | _no suffix_       |   1.9.20   |   1.0.14   |   1.7.3    |
+| 1.0.0-ALPHA-18 | _no suffix_       |   1.9.10   |   1.0.13   |   1.7.3    |
+| 1.0.0-ALPHA-17 | _no suffix_       |   1.9.0    |   1.0.12   |   1.7.3    |
+| 1.0.0-ALPHA-12 | _no suffix_       |   1.8.22   |   1.0.11   |   1.7.2    |
+| 1.0.0-ALPHA-10 | _no suffix_       |   1.8.21   |   1.0.11   |   1.7.1    |
+| 1.0.0-ALPHA-7  | _no suffix_       |   1.8.20   |   1.0.10   |   1.6.4    |
 
 You can choose from a couple of Swift implementations.  
 Depending on the implementation you can support as low as iOS 9, macOS 10.9, tvOS 9 and watchOS 3:
