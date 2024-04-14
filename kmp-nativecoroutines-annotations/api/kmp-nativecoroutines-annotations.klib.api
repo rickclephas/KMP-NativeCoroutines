@@ -1,0 +1,26 @@
+// Klib ABI Dump
+// Targets: [iosArm64, iosSimulatorArm64, iosX64, js, linuxArm64, linuxX64, macosArm64, macosX64, mingwX64, tvosArm64, tvosSimulatorArm64, tvosX64, wasmJs, watchosArm32, watchosArm64, watchosDeviceArm64, watchosSimulatorArm64, watchosX64]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <com.rickclephas.kmp:kmp-nativecoroutines-annotations>
+open annotation class com.rickclephas.kmp.nativecoroutines/NativeCoroutineScope : kotlin/Annotation { // com.rickclephas.kmp.nativecoroutines/NativeCoroutineScope|null[0]
+    constructor <init>() // com.rickclephas.kmp.nativecoroutines/NativeCoroutineScope.<init>|<init>(){}[0]
+}
+open annotation class com.rickclephas.kmp.nativecoroutines/NativeCoroutines : kotlin/Annotation { // com.rickclephas.kmp.nativecoroutines/NativeCoroutines|null[0]
+    constructor <init>() // com.rickclephas.kmp.nativecoroutines/NativeCoroutines.<init>|<init>(){}[0]
+}
+open annotation class com.rickclephas.kmp.nativecoroutines/NativeCoroutinesIgnore : kotlin/Annotation { // com.rickclephas.kmp.nativecoroutines/NativeCoroutinesIgnore|null[0]
+    constructor <init>() // com.rickclephas.kmp.nativecoroutines/NativeCoroutinesIgnore.<init>|<init>(){}[0]
+}
+open annotation class com.rickclephas.kmp.nativecoroutines/NativeCoroutinesRefined : kotlin/Annotation { // com.rickclephas.kmp.nativecoroutines/NativeCoroutinesRefined|null[0]
+    constructor <init>() // com.rickclephas.kmp.nativecoroutines/NativeCoroutinesRefined.<init>|<init>(){}[0]
+}
+open annotation class com.rickclephas.kmp.nativecoroutines/NativeCoroutinesRefinedState : kotlin/Annotation { // com.rickclephas.kmp.nativecoroutines/NativeCoroutinesRefinedState|null[0]
+    constructor <init>() // com.rickclephas.kmp.nativecoroutines/NativeCoroutinesRefinedState.<init>|<init>(){}[0]
+}
+open annotation class com.rickclephas.kmp.nativecoroutines/NativeCoroutinesState : kotlin/Annotation { // com.rickclephas.kmp.nativecoroutines/NativeCoroutinesState|null[0]
+    constructor <init>() // com.rickclephas.kmp.nativecoroutines/NativeCoroutinesState.<init>|<init>(){}[0]
+}
