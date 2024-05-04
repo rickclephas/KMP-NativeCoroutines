@@ -26,9 +26,6 @@ internal class KmpNativeCoroutinesDeclarationGenerationExtension(
     configuration: CompilerConfiguration,
 ): FirDeclarationGenerationExtension(session) {
 
-    private val symbolProvider = session.symbolProvider
-    private val predicateBasedProvider = session.predicateBasedProvider
-
     private val predicates = NativeCoroutinesAnnotation.entries.associateWith {
         LookupPredicate.AnnotatedWith(setOf(it.fqName))
     }
@@ -54,7 +51,7 @@ internal class KmpNativeCoroutinesDeclarationGenerationExtension(
 
     @OptIn(ExperimentalTopLevelDeclarationsGenerationApi::class)
     override fun getTopLevelCallableIds(): Set<CallableId> {
-        val symbols = predicateBasedProvider.getSymbolsByPredicate(lookupPredicate)
+        val symbols = session.predicateBasedProvider.getSymbolsByPredicate(lookupPredicate)
         val callableIds = mutableSetOf<CallableId>()
         for (symbol in symbols) {
             if (symbol !is FirCallableSymbol) continue
@@ -95,7 +92,7 @@ internal class KmpNativeCoroutinesDeclarationGenerationExtension(
     }
 
     private fun getAnnotationForSymbol(symbol: FirCallableSymbol<*>): NativeCoroutinesAnnotation? =
-        predicates.entries.singleOrNull { (_, predicate) -> predicateBasedProvider.matches(predicate, symbol) }?.key
+        predicates.entries.singleOrNull { (_, predicate) -> session.predicateBasedProvider.matches(predicate, symbol) }?.key
 
     override fun generateFunctions(
         callableId: CallableId,
@@ -106,7 +103,7 @@ internal class KmpNativeCoroutinesDeclarationGenerationExtension(
 
     private fun MutableList<FirNamedFunctionSymbol>.generateNativeFunctions(callableId: CallableId) {
         val originalCallableName = callableId.callableName.withoutSuffix(suffix) ?: return
-        val symbols = symbolProvider.getFunctionSymbols(callableId.copy(originalCallableName))
+        val symbols = session.symbolProvider.getFunctionSymbols(callableId.copy(originalCallableName))
         for (symbol in symbols) {
             val annotation = getAnnotationForSymbol(symbol) ?: continue
             val isRefined = annotation == NativeCoroutinesRefined
@@ -128,7 +125,7 @@ internal class KmpNativeCoroutinesDeclarationGenerationExtension(
 
     private fun MutableList<FirPropertySymbol>.generateNativeProperties(callableId: CallableId) {
         val originalCallableName = callableId.callableName.withoutSuffix(suffix) ?: return
-        val symbols = symbolProvider.getPropertySymbols(callableId.copy(originalCallableName))
+        val symbols = session.symbolProvider.getPropertySymbols(callableId.copy(originalCallableName))
         for (symbol in symbols) {
             val annotation = getAnnotationForSymbol(symbol) ?: continue
             val isRefined = annotation == NativeCoroutinesRefined
@@ -139,7 +136,7 @@ internal class KmpNativeCoroutinesDeclarationGenerationExtension(
 
     private fun MutableList<FirPropertySymbol>.generateFlowValueProperties(callableId: CallableId) {
         val originalCallableName = callableId.callableName.withoutSuffix(flowValueSuffix) ?: return
-        val symbols = symbolProvider.getPropertySymbols(callableId.copy(originalCallableName))
+        val symbols = session.symbolProvider.getPropertySymbols(callableId.copy(originalCallableName))
         for (symbol in symbols) {
             val annotation = getAnnotationForSymbol(symbol) ?: continue
             val isRefined = annotation == NativeCoroutinesRefined
@@ -150,7 +147,7 @@ internal class KmpNativeCoroutinesDeclarationGenerationExtension(
 
     private fun MutableList<FirPropertySymbol>.generateFlowReplayCacheProperties(callableId: CallableId) {
         val originalCallableName = callableId.callableName.withoutSuffix(flowReplayCacheSuffix) ?: return
-        val symbols = symbolProvider.getPropertySymbols(callableId.copy(originalCallableName))
+        val symbols = session.symbolProvider.getPropertySymbols(callableId.copy(originalCallableName))
         for (symbol in symbols) {
             val annotation = getAnnotationForSymbol(symbol) ?: continue
             val isRefined = annotation == NativeCoroutinesRefined
@@ -161,7 +158,7 @@ internal class KmpNativeCoroutinesDeclarationGenerationExtension(
 
     private fun MutableList<FirPropertySymbol>.generateStateProperties(callableId: CallableId) {
         val originalCallableName = callableId.callableName.withoutSuffix(stateSuffix) ?: return
-        val symbols = symbolProvider.getPropertySymbols(callableId.copy(originalCallableName))
+        val symbols = session.symbolProvider.getPropertySymbols(callableId.copy(originalCallableName))
         for (symbol in symbols) {
             val annotation = getAnnotationForSymbol(symbol) ?: continue
             val isRefined = annotation == NativeCoroutinesRefinedState
@@ -172,7 +169,7 @@ internal class KmpNativeCoroutinesDeclarationGenerationExtension(
 
     private fun MutableList<FirPropertySymbol>.generateStateFlowProperties(callableId: CallableId) {
         val originalCallableName = callableId.callableName.withoutSuffix(stateFlowSuffix) ?: return
-        val symbols = symbolProvider.getPropertySymbols(callableId.copy(originalCallableName))
+        val symbols = session.symbolProvider.getPropertySymbols(callableId.copy(originalCallableName))
         for (symbol in symbols) {
             val annotation = getAnnotationForSymbol(symbol) ?: continue
             val isRefined = annotation == NativeCoroutinesRefinedState
