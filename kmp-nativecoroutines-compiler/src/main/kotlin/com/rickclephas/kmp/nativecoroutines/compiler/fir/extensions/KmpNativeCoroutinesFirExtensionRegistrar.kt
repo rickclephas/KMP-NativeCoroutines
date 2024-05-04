@@ -8,5 +8,6 @@ internal class KmpNativeCoroutinesFirExtensionRegistrar(
 ): FirExtensionRegistrar() {
     override fun ExtensionRegistrarContext.configurePlugin() {
         +::KmpNativeCoroutinesFirAdditionalCheckersExtension.bind(configuration)
+        +::KmpNativeCoroutinesDeclarationGenerationExtension.bind(configuration)
     }
 }
