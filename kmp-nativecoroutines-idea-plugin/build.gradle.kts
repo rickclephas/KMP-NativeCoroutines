@@ -16,15 +16,16 @@ dependencies {
 }
 
 intellij {
-    version = "2024.1"
+//    version = "2024.1"
+    localPath = "/Users/rickclephas/Library/Caches/JetBrains/org.jetbrains.fleet-plugin/fleet-backend-sdk"
     type = "IC"
     plugins = listOf("org.jetbrains.kotlin", "com.intellij.gradle")
 }
 
 tasks {
     patchPluginXml {
-        sinceBuild = "241"
-        untilBuild = "241.*"
+        sinceBuild = "242"
+        untilBuild = "242.*"
     }
 
     buildSearchableOptions {
@@ -47,4 +48,11 @@ tasks {
     runIde {
         maxHeapSize = "4g"
     }
+}
+
+val pluginDist by configurations.creating {
+    isCanBeResolved = false
+}
+artifacts {
+    add(pluginDist.name, tasks.buildPlugin)
 }
