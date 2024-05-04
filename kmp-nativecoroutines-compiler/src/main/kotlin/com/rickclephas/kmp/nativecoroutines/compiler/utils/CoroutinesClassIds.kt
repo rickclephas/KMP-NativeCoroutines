@@ -7,4 +7,7 @@ internal object CoroutinesClassIds {
     val coroutineScope: ClassId = ClassId.topLevel(FqNames.coroutineScope)
     val flow: ClassId = ClassId.topLevel(FqNames.flow)
     val stateFlow: ClassId = ClassId.topLevel(FqNames.stateFlow)
+
+    val nativeFlow: ClassId = ClassId.topLevel(FqNames.nativeFlow)
+    val nativeSuspend: ClassId = ClassId.topLevel(FqNames.nativeSuspend)
 }
