@@ -1,6 +1,7 @@
 package com.rickclephas.kmp.nativecoroutines.compiler.fir.extensions
 
 import com.rickclephas.kmp.nativecoroutines.compiler.config.*
+import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.createFunction
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.getFunctionSymbols
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.getPropertySymbols
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation
@@ -12,14 +13,18 @@ import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnot
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutineScope
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.withSuffix
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.withoutSuffix
+import org.jetbrains.kotlin.GeneratedDeclarationKey
 import org.jetbrains.kotlin.config.CompilerConfiguration
 import org.jetbrains.kotlin.fir.FirSession
 import org.jetbrains.kotlin.fir.extensions.*
 import org.jetbrains.kotlin.fir.extensions.predicate.LookupPredicate
+import org.jetbrains.kotlin.fir.plugin.createConeType
 import org.jetbrains.kotlin.fir.resolve.providers.symbolProvider
 import org.jetbrains.kotlin.fir.symbols.impl.*
 import org.jetbrains.kotlin.name.CallableId
 import org.jetbrains.kotlin.name.Name
+import org.jetbrains.kotlin.name.StandardClassIds
+import org.jetbrains.kotlin.utils.addIfNotNull
 
 internal class KmpNativeCoroutinesDeclarationGenerationExtension(
     session: FirSession,
@@ -98,16 +103,23 @@ internal class KmpNativeCoroutinesDeclarationGenerationExtension(
         callableId: CallableId,
         context: MemberGenerationContext?
     ): List<FirNamedFunctionSymbol> = buildList {
-        generateNativeFunctions(callableId)
+        generateNativeFunctions(callableId, context?.owner)
     }
 
-    private fun MutableList<FirNamedFunctionSymbol>.generateNativeFunctions(callableId: CallableId) {
+    object Key: GeneratedDeclarationKey()
+
+    @OptIn(ExperimentalTopLevelDeclarationsGenerationApi::class)
+    private fun MutableList<FirNamedFunctionSymbol>.generateNativeFunctions(
+        callableId: CallableId,
+        owner: FirClassSymbol<*>?
+    ) {
         val originalCallableName = callableId.callableName.withoutSuffix(suffix) ?: return
         val symbols = session.symbolProvider.getFunctionSymbols(callableId.copy(originalCallableName))
         for (symbol in symbols) {
             val annotation = getAnnotationForSymbol(symbol) ?: continue
             val isRefined = annotation == NativeCoroutinesRefined
             if (!isRefined && annotation != NativeCoroutines) continue
+            addIfNotNull(createFunction(owner, Key, callableId, { StandardClassIds.Unit.createConeType(session) }).symbol)
             // TODO: generate native function
         }
     }
