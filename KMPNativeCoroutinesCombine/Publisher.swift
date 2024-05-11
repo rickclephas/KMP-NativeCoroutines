@@ -19,6 +19,17 @@ public func createPublisher<Output, Failure: Error, Unit>(
         .eraseToAnyPublisher()
 }
 
+/// Creates an `AnyPublisher` for the provided `NativeFlow`.
+/// - Parameter nativeFlow: The native flow to collect.
+/// - Returns: A publisher that publishes the collected values.
+public func createPublisher<Unit, Failure: Error>(
+    for nativeFlow: @escaping NativeFlow<Unit, Failure, Unit>
+) -> AnyPublisher<Void, Failure> {
+    return NativeFlowPublisher(nativeFlow: nativeFlow)
+        .map { _ in }
+        .eraseToAnyPublisher()
+}
+
 internal struct NativeFlowPublisher<Output, Failure: Error, Unit>: Publisher {
     
     typealias Output = Output
