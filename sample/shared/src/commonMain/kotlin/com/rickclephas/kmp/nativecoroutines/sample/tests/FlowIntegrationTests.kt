@@ -54,4 +54,12 @@ public class FlowIntegrationTests: IntegrationTests() {
             emit(it)
         }
     }
+
+    @NativeCoroutines
+    public fun getUnitFlow(count: Int, delay: Long): Flow<Unit> = flow {
+        repeat(count) {
+            delay(delay)
+            emit(Unit)
+        }
+    }
 }
