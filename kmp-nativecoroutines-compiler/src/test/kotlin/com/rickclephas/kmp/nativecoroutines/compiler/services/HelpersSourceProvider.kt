@@ -14,6 +14,7 @@ internal class HelpersSourceProvider(
 
     companion object {
         const val kmpNativeCoroutinesAnnotations = "kmp-nativecoroutines-annotations"
+        const val kotlinNative = "kotlin-native"
         const val kotlinxCoroutinesCore = "kotlinx-coroutines-core"
     }
 

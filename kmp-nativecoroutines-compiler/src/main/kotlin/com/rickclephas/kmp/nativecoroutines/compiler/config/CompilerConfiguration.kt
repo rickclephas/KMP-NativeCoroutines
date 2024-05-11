@@ -10,3 +10,9 @@ internal operator fun <T: Any> CompilerConfiguration.get(option: ConfigOption<T>
 
 internal operator fun <T: Any> CompilerConfiguration.get(option: ConfigOptionWithDefault<T>): T =
     get(option as ConfigOption<T>) ?: option.defaultValue
+
+internal fun <T: Any> CompilerConfiguration.add(option: ConfigListOption<T>, value: String) =
+    add(option.configKey, option.parse(value))
+
+internal operator fun <T: Any> CompilerConfiguration.get(option: ConfigListOption<T>): List<T> =
+    getList(option.configKey)
