@@ -1,6 +1,6 @@
 package com.rickclephas.kmp.nativecoroutines.compiler.fir.utils
 
-import com.rickclephas.kmp.nativecoroutines.compiler.utils.CoroutinesClassIds
+import com.rickclephas.kmp.nativecoroutines.compiler.utils.ClassIds
 import org.jetbrains.kotlin.fir.FirSession
 import org.jetbrains.kotlin.fir.plugin.createConeType
 import org.jetbrains.kotlin.fir.resolve.lookupSuperTypes
@@ -25,8 +25,8 @@ internal fun ConeKotlinType.getCoroutinesType(session: FirSession): CoroutinesTy
     }
     for (type in types) {
         when (type.lookupTag.classId) {
-            CoroutinesClassIds.stateFlow -> return CoroutinesType.Flow.State(type.getFlowValueType(session))
-            CoroutinesClassIds.flow -> return CoroutinesType.Flow.Generic(type.getFlowValueType(session))
+            ClassIds.stateFlow -> return CoroutinesType.Flow.State(type.getFlowValueType(session))
+            ClassIds.flow -> return CoroutinesType.Flow.Generic(type.getFlowValueType(session))
         }
     }
     return null
