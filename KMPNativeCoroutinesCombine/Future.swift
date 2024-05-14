@@ -18,6 +18,17 @@ public func createFuture<Result, Failure: Error, Unit>(
         .eraseToAnyPublisher()
 }
 
+/// Creates an `AnyPublisher` for the provided `NativeSuspend`.
+/// - Parameter nativeSuspend: The native suspend function to await.
+/// - Returns: A publisher that either finishes with a single value or fails with an error.
+public func createFuture<Unit, Failure: Error>(
+    for nativeSuspend: @escaping NativeSuspend<Unit, Failure, Unit>
+) -> AnyPublisher<Void, Failure> {
+    return NativeSuspendFuture(nativeSuspend: nativeSuspend)
+        .map { _ in }
+        .eraseToAnyPublisher()
+}
+
 internal struct NativeSuspendFuture<Result, Failure: Error, Unit>: Publisher {
     
     typealias Output = Result
