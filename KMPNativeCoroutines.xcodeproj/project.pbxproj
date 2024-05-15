@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1D4D6C272BEFAC0200A5B3C9 /* AsyncError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4D6C262BEFAC0200A5B3C9 /* AsyncError.swift */; };
 		1D4E296A268A26B000C0D4EF /* FuturePublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4E2969268A26B000C0D4EF /* FuturePublisher.swift */; };
 		1D7175B7266FE9F800846F75 /* KMPNativeCoroutinesCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D717583266FE90400846F75 /* KMPNativeCoroutinesCore.framework */; };
 		1D7175BC266FF03200846F75 /* NativeCallback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2EC83C266D209600B118B0 /* NativeCallback.swift */; };
@@ -82,6 +83,7 @@
 		1D2EC840266D220900B118B0 /* NativeSuspend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeSuspend.swift; sourceTree = "<group>"; };
 		1D2EC86A266D290000B118B0 /* Publisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Publisher.swift; sourceTree = "<group>"; };
 		1D2EC86C266D29E800B118B0 /* Future.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Future.swift; sourceTree = "<group>"; };
+		1D4D6C262BEFAC0200A5B3C9 /* AsyncError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncError.swift; sourceTree = "<group>"; };
 		1D4E2969268A26B000C0D4EF /* FuturePublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuturePublisher.swift; sourceTree = "<group>"; };
 		1D717583266FE90400846F75 /* KMPNativeCoroutinesCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KMPNativeCoroutinesCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D71759F266FE9B700846F75 /* KMPNativeCoroutinesCombine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KMPNativeCoroutinesCombine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -197,6 +199,7 @@
 		1DA5DCE6267613BB002448E3 /* KMPNativeCoroutinesAsync */ = {
 			isa = PBXGroup;
 			children = (
+				1D4D6C262BEFAC0200A5B3C9 /* AsyncError.swift */,
 				1DA5DCFC26761404002448E3 /* AsyncFunction.swift */,
 				1DFC35FB268A2DE3008393FA /* AsyncResult.swift */,
 				1DFB127926A09796001BE321 /* AsyncSequence.swift */,
@@ -574,6 +577,7 @@
 				1DA5DCFD26761404002448E3 /* AsyncFunction.swift in Sources */,
 				1DFC35FC268A2DE3008393FA /* AsyncResult.swift in Sources */,
 				1DFB127A26A09796001BE321 /* AsyncSequence.swift in Sources */,
+				1D4D6C272BEFAC0200A5B3C9 /* AsyncError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

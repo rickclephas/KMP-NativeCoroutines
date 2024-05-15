@@ -18,6 +18,15 @@ public func asyncFunction<Result, Failure: Error, Unit>(
     try await AsyncFunctionTask(nativeSuspend: nativeSuspend).awaitResult()
 }
 
+/// Wraps the `NativeSuspend` in an async function.
+/// - Parameter nativeSuspend: The native suspend function to await.
+/// - Throws: Errors thrown by the `nativeSuspend`.
+public func asyncFunction<Unit, Failure: Error>(
+    for nativeSuspend: @escaping NativeSuspend<Unit, Failure, Unit>
+) async throws -> Void {
+    _ = try await AsyncFunctionTask(nativeSuspend: nativeSuspend).awaitResult()
+}
+
 private class AsyncFunctionTask<Result, Failure: Error, Unit>: @unchecked Sendable {
     
     private let semaphore = DispatchSemaphore(value: 1)
