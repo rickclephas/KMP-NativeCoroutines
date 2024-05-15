@@ -14,6 +14,21 @@ import KMPNativeCoroutinesCore
 public func createObservable<Output, Failure: Error, Unit>(
     for nativeFlow: @escaping NativeFlow<Output, Failure, Unit>
 ) -> Observable<Output> {
+    return createObservableImpl(for: nativeFlow)
+}
+
+/// Creates an `Observable` for the provided `NativeFlow`.
+/// - Parameter nativeFlow: The native flow to collect.
+/// - Returns: An observable that publishes the collected values.
+public func createObservable<Unit, Failure: Error>(
+    for nativeFlow: @escaping NativeFlow<Unit, Failure, Unit>
+) -> Observable<Void> {
+    return createObservableImpl(for: nativeFlow).map { _ in }
+}
+
+private func createObservableImpl<Output, Failure: Error, Unit>(
+    for nativeFlow: @escaping NativeFlow<Output, Failure, Unit>
+) -> Observable<Output> {
     return Observable.deferred {
         return Observable.create { observer in
             let nativeCancellable = nativeFlow({ item, next, _ in

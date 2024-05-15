@@ -1,6 +1,6 @@
 [versions]
 kotlin = "1.9.24"
-kotlinx-coroutines = "1.8.0"
+kotlinx-coroutines = "1.8.1"
 kotlinx-binary-compatibility-validator = "0.15.0-Beta.2"
 ksp = "1.9.24-1.0.20"
 kotlinpoet = "1.16.0"
