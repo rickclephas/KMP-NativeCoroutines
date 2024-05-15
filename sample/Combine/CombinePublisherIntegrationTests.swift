@@ -198,4 +198,27 @@ class CombinePublisherIntegrationTests: XCTestCase {
         wait(for: [valuesExpectation], timeout: 6)
         cancellable.cancel()
     }
+    
+    func testUnitValues() {
+        let integrationTests = FlowIntegrationTests()
+        let publisher = createPublisher(for: integrationTests.getUnitFlow(count: 2, delay: 100))
+        let valuesExpectation = expectation(description: "Waiting for values")
+        valuesExpectation.expectedFulfillmentCount = 2
+        let completionExpectation = expectation(description: "Waiting for completion")
+        var receivedValueCount = 0
+        let cancellable = publisher.sink { completion in
+            if case .failure(_) = completion {
+                XCTFail("Publisher should complete without an error")
+            }
+            completionExpectation.fulfill()
+        } receiveValue: {
+            receivedValueCount += 1
+            valuesExpectation.fulfill()
+        }
+        _ = cancellable // This is just to remove the unused variable warning
+        XCTAssertEqual(integrationTests.uncompletedJobCount, 1, "There should be 1 uncompleted job")
+        wait(for: [valuesExpectation, completionExpectation], timeout: 4)
+        delay(1) // Delay is needed else the job isn't completed yet
+        XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
+    }
 }
