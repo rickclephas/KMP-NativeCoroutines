@@ -496,8 +496,8 @@ internal val defaultCoroutineScope = CoroutineScope(SupervisorJob() + Dispatcher
 ```
 
 > [!NOTE]
-> KMP-NativeCoroutines has built-in support for [KMM-ViewModel](https://github.com/rickclephas/KMM-ViewModel).  
-> Coroutines inside your `KMMViewModel` will (by default) use the `CoroutineScope` from the `ViewModelScope`. 
+> KMP-NativeCoroutines has built-in support for [KMP-ObservableViewModel](https://github.com/rickclephas/KMP-ObservableViewModel).  
+> Coroutines inside your `ViewModel` will (by default) use the `CoroutineScope` from the `ViewModelScope`. 
 
 ### Ignoring declarations
 
