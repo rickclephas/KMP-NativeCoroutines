@@ -48,6 +48,7 @@ import org.jetbrains.kotlin.AbstractKtSourceElement
 import org.jetbrains.kotlin.diagnostics.DiagnosticReporter
 import org.jetbrains.kotlin.diagnostics.KtDiagnosticFactory0
 import org.jetbrains.kotlin.diagnostics.reportOn
+import org.jetbrains.kotlin.fir.analysis.checkers.MppCheckerKind
 import org.jetbrains.kotlin.fir.analysis.checkers.context.CheckerContext
 import org.jetbrains.kotlin.fir.analysis.checkers.declaration.FirCallableDeclarationChecker
 import org.jetbrains.kotlin.fir.analysis.checkers.unsubstitutedScope
@@ -61,7 +62,7 @@ import kotlin.io.path.Path
 internal class FirKmpNativeCoroutinesDeclarationChecker(
     exposedSeverity: ExposedSeverity,
     private val generatedSourceDirs: List<Path>
-): FirCallableDeclarationChecker() {
+): FirCallableDeclarationChecker(MppCheckerKind.Common) {
 
     private val exposedSuspendFunction = when (exposedSeverity) {
         ExposedSeverity.NONE -> null
@@ -178,7 +179,7 @@ internal class FirKmpNativeCoroutinesDeclarationChecker(
             }
         }
         if (isActual) {
-            val expect = declaration.symbol.getSingleExpectForActualOrNull()
+            val expect = declaration.symbol.getSingleMatchedExpectForActualOrNull()
             if (expect != null) {
                 val expectAnnotations = expect.getNativeCoroutinesAnnotations(context.session)
                 val invalidAnnotations = annotations.filterKeys { !expectAnnotations.containsKey(it) }

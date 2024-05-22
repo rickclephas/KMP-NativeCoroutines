@@ -24,8 +24,8 @@ java {
 }
 
 tasks.compileKotlin.configure {
-    kotlinOptions {
-        freeCompilerArgs = listOf("-Xjvm-default=all")
+    compilerOptions {
+        freeCompilerArgs.add("-Xjvm-default=all")
     }
 }
 

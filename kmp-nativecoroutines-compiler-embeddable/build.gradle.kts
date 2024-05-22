@@ -34,8 +34,8 @@ val sourcesJar by tasks.getting(Jar::class) {
 
 tasks.compileKotlin.configure {
     dependsOn(syncSources)
-    kotlinOptions {
-        freeCompilerArgs = listOf("-Xjvm-default=all")
+    compilerOptions {
+        freeCompilerArgs.add("-Xjvm-default=all")
     }
 }
 
