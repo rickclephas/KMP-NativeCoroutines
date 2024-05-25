@@ -40,6 +40,7 @@ tasks.compileKotlin.configure {
 }
 
 tasks.test {
+    // TODO: Remove workaround for https://youtrack.jetbrains.com/issue/KT-66929
     val compilerDownloader = NativeCompilerDownloader(project)
     compilerDownloader.downloadIfNeeded()
     systemProperty("kotlin.internal.native.test.nativeHome", compilerDownloader.compilerDirectory.absolutePath)

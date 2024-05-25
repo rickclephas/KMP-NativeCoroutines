@@ -88,4 +88,14 @@ class AsyncResultIntegrationTests: XCTestCase {
             XCTFail("Function should fail with an error")
         }
     }
+    
+    func testUnitReturnType() async throws {
+        let integrationTests = SuspendIntegrationTests()
+        let result = await asyncResult(for: integrationTests.returnUnit(delay: 100))
+        guard case .success = result else {
+            XCTFail("Function should complete without an error")
+            return
+        }
+        await assertJobCompleted(integrationTests)
+    }
 }
