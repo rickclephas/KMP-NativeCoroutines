@@ -22,3 +22,9 @@ public enum class NativeCoroutinesAnnotation(name: String) {
             entries.firstOrNull { it.classId == classId }
     }
 }
+
+public val NativeCoroutinesAnnotation.shouldRefineInSwift: Boolean get() = when (this) {
+    NativeCoroutinesAnnotation.NativeCoroutinesRefined,
+    NativeCoroutinesAnnotation.NativeCoroutinesRefinedState -> true
+    else -> false
+}

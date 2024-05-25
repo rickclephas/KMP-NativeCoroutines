@@ -14,6 +14,7 @@ internal object FqNames {
     val flow = FqName("kotlinx.coroutines.flow.Flow")
     val stateFlow = FqName("kotlinx.coroutines.flow.StateFlow")
 
+    val nativeCoroutines = FqName("com.rickclephas.kmp.nativecoroutines")
     val nativeFlow = FqName("com.rickclephas.kmp.nativecoroutines.NativeFlow")
     val nativeSuspend = FqName("com.rickclephas.kmp.nativecoroutines.NativeSuspend")
 }
