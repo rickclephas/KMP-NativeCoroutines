@@ -3,8 +3,8 @@ package com.rickclephas.kmp.nativecoroutines.compiler.ir.codegen
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation
 import org.jetbrains.kotlin.ir.builders.*
 import org.jetbrains.kotlin.ir.declarations.IrDeclarationContainer
-import org.jetbrains.kotlin.ir.declarations.IrFunction
 import org.jetbrains.kotlin.ir.declarations.IrProperty
+import org.jetbrains.kotlin.ir.declarations.IrSimpleFunction
 import org.jetbrains.kotlin.ir.expressions.IrExpression
 import org.jetbrains.kotlin.ir.symbols.UnsafeDuringIrConstructionAPI
 import org.jetbrains.kotlin.ir.util.fileOrNull
@@ -12,7 +12,7 @@ import org.jetbrains.kotlin.ir.util.hasAnnotation
 import org.jetbrains.kotlin.ir.util.parentClassOrNull
 
 @UnsafeDuringIrConstructionAPI
-internal fun IrBuilderWithScope.irCallCoroutineScope(declaration: IrFunction): IrExpression {
+internal fun IrBuilderWithScope.irCallCoroutineScope(declaration: IrSimpleFunction): IrExpression {
     val property = declaration.parentClassOrNull?.getCoroutineScopeProperty()
         ?: declaration.fileOrNull?.getCoroutineScopeProperty()
         ?: return irNull()

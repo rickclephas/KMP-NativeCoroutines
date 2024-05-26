@@ -38,7 +38,7 @@ internal class KmpNativeCoroutinesIrTransformer(
         declaration.body = when (val type = declarationKey.type) {
             NativeCoroutinesDeclarationKey.Type.NATIVE -> context.buildNativeFunctionBody(
                 function = declaration,
-                originalSymbol = function,
+                originalFunction = function.owner,
                 callableSignature = declarationKey.callableSignature
             )
             else -> error("Unsupported type $type for native coroutines function")
