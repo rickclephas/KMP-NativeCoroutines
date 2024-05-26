@@ -19,7 +19,7 @@ internal fun CallableSignature.Type.toNativeConeKotlinType(
     }
     if (isSuspend) {
         val typeArgs = arrayOf<ConeTypeProjection>(type)
-        type = ClassIds.nativeSuspend.createConeType(session, typeArgs, type.isMarkedNullable)
+        type = ClassIds.nativeSuspend.createConeType(session, typeArgs)
     }
     return type
 }
