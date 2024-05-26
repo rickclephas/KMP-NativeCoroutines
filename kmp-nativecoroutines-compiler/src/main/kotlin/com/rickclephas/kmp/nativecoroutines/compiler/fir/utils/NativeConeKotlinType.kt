@@ -12,9 +12,9 @@ internal fun CallableSignature.Type.toNativeConeKotlinType(
     session: FirSession,
     isSuspend: Boolean = false
 ): ConeKotlinType {
-    var type = type
+    var type = rawType.type
     if (this is CallableSignature.Type.Flow) {
-        val typeArgs = arrayOf<ConeTypeProjection>(valueType)
+        val typeArgs = arrayOf<ConeTypeProjection>(valueType.rawType.type)
         type = ClassIds.nativeFlow.createConeType(session, typeArgs, type.isMarkedNullable)
     }
     if (isSuspend) {

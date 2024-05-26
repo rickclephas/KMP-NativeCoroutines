@@ -12,7 +12,9 @@ internal object FqNames {
 
     val coroutineScope = FqName("kotlinx.coroutines.CoroutineScope")
     val flow = FqName("kotlinx.coroutines.flow.Flow")
+    val sharedFlow = FqName("kotlinx.coroutines.flow.SharedFlow")
     val stateFlow = FqName("kotlinx.coroutines.flow.StateFlow")
+    val mutableStateFlow = FqName("kotlinx.coroutines.flow.MutableStateFlow")
 
     val nativeCoroutines = FqName("com.rickclephas.kmp.nativecoroutines")
     val nativeFlow = FqName("com.rickclephas.kmp.nativecoroutines.NativeFlow")

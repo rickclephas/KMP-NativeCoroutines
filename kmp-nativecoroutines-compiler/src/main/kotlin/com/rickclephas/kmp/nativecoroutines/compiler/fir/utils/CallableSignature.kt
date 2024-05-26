@@ -19,7 +19,7 @@ internal fun FirCallableSymbol<*>.getCallableSignature(session: FirSession): Cal
     val returnType = resolvedReturnTypeRefOrNull?.type?.fullyExpandedType(session) ?: return null
     val valueParameters = when (this) {
         is FirFunctionSymbol<*> -> valueParameterSymbols.map {
-            it.name to CallableSignature.Type.Other(it.resolvedReturnType)
+            it.name to it.resolvedReturnType.asRawType()
         }
         else -> emptyList()
     }
@@ -32,19 +32,30 @@ internal fun FirCallableSymbol<*>.getCallableSignature(session: FirSession): Cal
 }
 
 private fun ConeKotlinType.getCallableSignatureType(session: FirSession): CallableSignature.Type {
-    if (this !is ConeClassLikeType) return CallableSignature.Type.Other(this)
+    if (this !is ConeClassLikeType) return this.asRawType()
     val types = sequence {
         yield(this@getCallableSignatureType)
         val symbol = lookupTag.toSymbol(session) ?: return@sequence
         yieldAll(lookupSuperTypes(symbol, lookupInterfaces = true, deep = true, session))
     }
     for (type in types) {
-        when (type.lookupTag.classId) {
-            ClassIds.stateFlow -> return CallableSignature.Type.Flow.State(this, type.getFlowValueType(session))
-            ClassIds.flow -> return CallableSignature.Type.Flow.Simple(this, type.getFlowValueType(session))
+        when (val classId = type.lookupTag.classId) {
+            ClassIds.stateFlow, ClassIds.mutableStateFlow -> {
+                val valueType = type.getFlowValueType(session).asRawType()
+                val isMutable = classId == ClassIds.mutableStateFlow
+                return CallableSignature.Type.Flow.State(this.asRawType(), valueType, isMutable)
+            }
+            ClassIds.sharedFlow -> {
+                val valueType = type.getFlowValueType(session).asRawType()
+                return CallableSignature.Type.Flow.Shared(this.asRawType(), valueType)
+            }
+            ClassIds.flow -> {
+                val valueType = type.getFlowValueType(session).asRawType()
+                return CallableSignature.Type.Flow.Simple(this.asRawType(), valueType)
+            }
         }
     }
-    return CallableSignature.Type.Other(this)
+    return this.asRawType()
 }
 
 private fun ConeKotlinType.getFlowValueType(session: FirSession): ConeKotlinType {
@@ -53,3 +64,6 @@ private fun ConeKotlinType.getFlowValueType(session: FirSession): ConeKotlinType
         is ConeStarProjection, null -> StandardClassIds.Any.createConeType(session, nullable = true)
     }
 }
+
+private fun ConeKotlinType.asRawType(): CallableSignature.Type.Raw =
+    CallableSignature.Type.Raw.Simple(this)

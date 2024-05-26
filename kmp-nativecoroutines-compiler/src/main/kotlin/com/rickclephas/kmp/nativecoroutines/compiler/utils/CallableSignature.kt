@@ -11,22 +11,32 @@ internal data class CallableSignature(
     val returnType: Type
 ) {
     sealed class Type {
-        // TODO: without ConeKotlinType?
-        abstract val type: ConeKotlinType
+        abstract val rawType: Raw
 
         sealed class Flow: Type() {
-            // TODO: without ConeKotlinType?
-            abstract val valueType: ConeKotlinType
+            abstract val valueType: Type
+
             data class Simple(
-                override val type: ConeKotlinType,
-                override val valueType: ConeKotlinType
+                override val rawType: Raw,
+                override val valueType: Type
+            ): Flow()
+            data class Shared(
+                override val rawType: Raw,
+                override val valueType: Type
             ): Flow()
             data class State(
-                override val type: ConeKotlinType,
-                override val valueType: ConeKotlinType
+                override val rawType: Raw,
+                override val valueType: Type,
+                val isMutable: Boolean
             ): Flow()
         }
 
-        data class Other(override val type: ConeKotlinType) : Type()
+        sealed class Raw: Type() {
+            final override val rawType: Raw get() = this
+            // TODO: without ConeKotlinType?
+            abstract val type: ConeKotlinType
+
+            data class Simple(override val type: ConeKotlinType): Raw()
+        }
     }
 }
