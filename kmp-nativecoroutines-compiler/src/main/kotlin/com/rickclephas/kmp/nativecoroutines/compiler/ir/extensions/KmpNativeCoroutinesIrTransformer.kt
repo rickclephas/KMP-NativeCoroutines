@@ -3,8 +3,6 @@ package com.rickclephas.kmp.nativecoroutines.compiler.ir.extensions
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey
 import com.rickclephas.kmp.nativecoroutines.compiler.ir.codegen.GeneratorContext
 import com.rickclephas.kmp.nativecoroutines.compiler.ir.codegen.buildNativeFunctionBody
-import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutines
-import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutinesRefined
 import org.jetbrains.kotlin.backend.common.extensions.IrPluginContext
 import org.jetbrains.kotlin.ir.IrElement
 import org.jetbrains.kotlin.ir.declarations.*
@@ -37,14 +35,13 @@ internal class KmpNativeCoroutinesIrTransformer(
         require(declaration.body == null)
         // TODO: support non-unique callableIds
         val function = pluginContext.referenceFunctions(declarationKey.callableSignature.callableId).single()
-        declaration.body = when (declarationKey.annotation) {
-            NativeCoroutines,
-            NativeCoroutinesRefined -> context.buildNativeFunctionBody(
+        declaration.body = when (val type = declarationKey.type) {
+            NativeCoroutinesDeclarationKey.Type.NATIVE -> context.buildNativeFunctionBody(
                 function = declaration,
                 originalSymbol = function,
                 callableSignature = declarationKey.callableSignature
             )
-            else -> error("Unsupported annotation ${declarationKey.annotation} for native coroutines function")
+            else -> error("Unsupported type $type for native coroutines function")
         }
     }
 

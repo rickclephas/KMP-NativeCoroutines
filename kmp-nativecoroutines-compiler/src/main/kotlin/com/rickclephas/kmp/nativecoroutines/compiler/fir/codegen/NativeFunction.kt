@@ -29,7 +29,7 @@ internal fun FirExtension.buildNativeFunction(
         resolvePhase = FirResolvePhase.BODY_RESOLVE
         moduleData = session.moduleData
         origin = NativeCoroutinesDeclarationKey(
-            annotation,
+            NativeCoroutinesDeclarationKey.Type.NATIVE,
             callableSignature
         ).origin
 
