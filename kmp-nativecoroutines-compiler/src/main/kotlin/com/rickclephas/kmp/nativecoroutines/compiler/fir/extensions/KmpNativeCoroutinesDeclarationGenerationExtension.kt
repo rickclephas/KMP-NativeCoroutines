@@ -15,6 +15,8 @@ import com.rickclephas.kmp.nativecoroutines.compiler.utils.withSuffix
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.withoutSuffix
 import org.jetbrains.kotlin.config.CompilerConfiguration
 import org.jetbrains.kotlin.fir.FirSession
+import org.jetbrains.kotlin.fir.declarations.utils.isActual
+import org.jetbrains.kotlin.fir.declarations.utils.isOverride
 import org.jetbrains.kotlin.fir.extensions.*
 import org.jetbrains.kotlin.fir.extensions.predicate.LookupPredicate
 import org.jetbrains.kotlin.fir.resolve.providers.symbolProvider
@@ -93,8 +95,12 @@ internal class KmpNativeCoroutinesDeclarationGenerationExtension(
         }
     }
 
-    private fun getAnnotationForSymbol(symbol: FirCallableSymbol<*>): NativeCoroutinesAnnotation? =
-        predicates.entries.singleOrNull { (_, predicate) -> session.predicateBasedProvider.matches(predicate, symbol) }?.key
+    private fun getAnnotationForSymbol(symbol: FirCallableSymbol<*>): NativeCoroutinesAnnotation? {
+        if (symbol.isOverride || symbol.isActual) return null
+        return predicates.entries.singleOrNull { (_, predicate) ->
+            session.predicateBasedProvider.matches(predicate, symbol)
+        }?.key
+    }
 
     override fun generateFunctions(
         callableId: CallableId,
