@@ -26,7 +26,21 @@ class ClockCombineViewModel: ClockViewModel {
         didSet { isMonitoring = cancellable != nil }
     }
     
+    private var timeline: Timeline? = nil
+    
     func startMonitoring() {
+        
+        let database = Database()
+        let locationHistoryFilter = LocationHistoryFilter(test: "test")
+        let timelineTask = createPublisher(for: database.observeTimeline(locationHistoryFilter: locationHistoryFilter))
+            .receive(on: DispatchQueue.main)
+            .sink(
+                receiveCompletion: { _ in },
+                receiveValue: { [weak self] timeline in
+                    self?.timeline = timeline
+                }
+            )
+        
         cancellable = createPublisher(for: clock.time)
             // Convert the seconds since EPOCH to a string in the format "HH:mm:ss"
             .map { [weak self] time -> String in
