@@ -1,7 +1,6 @@
 package com.rickclephas.kmp.nativecoroutines.compiler.fir.codegen
 
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.*
-import com.rickclephas.kmp.nativecoroutines.compiler.utils.CallableSignature
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.ClassIds
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutines
@@ -25,19 +24,17 @@ import org.jetbrains.kotlin.fir.symbols.impl.FirPropertySymbol
 import org.jetbrains.kotlin.fir.types.*
 import org.jetbrains.kotlin.name.CallableId
 
-internal fun FirExtension.buildStateFlowValueProperty(
+internal fun FirExtension.buildNativeProperty(
     callableId: CallableId,
     originalSymbol: FirPropertySymbol,
     annotation: NativeCoroutinesAnnotation
 ): FirPropertySymbol? {
     val callableSignature = originalSymbol.getCallableSignature(session) ?: return null
-    if (callableSignature.isSuspend) return null
-    if (callableSignature.returnType !is CallableSignature.Type.Flow.State) return null
     return buildProperty {
         resolvePhase = FirResolvePhase.BODY_RESOLVE
         moduleData = session.moduleData
         origin = NativeCoroutinesDeclarationKey(
-            NativeCoroutinesDeclarationKey.Type.STATE_FLOW_VALUE,
+            NativeCoroutinesDeclarationKey.Type.NATIVE,
             callableSignature
         ).origin
 
@@ -60,14 +57,11 @@ internal fun FirExtension.buildStateFlowValueProperty(
         // TODO: receiverParameter
 
         // TODO: replace type parameters in returnTypeRef
-        returnTypeRef = callableSignature.returnType.valueType
+        returnTypeRef = callableSignature.returnType
             .toNativeConeKotlinType(session).toFirResolvedTypeRef()
 
-        isVar = callableSignature.returnType.isMutable
+        isVar = false
         getter = buildPropertyGetter()
-        if (isVar) {
-            setter = buildPropertySetter()
-        }
 
         isLocal = false
         bodyResolveState = FirPropertyBodyResolveState.ALL_BODIES_RESOLVED
@@ -77,8 +71,8 @@ internal fun FirExtension.buildStateFlowValueProperty(
         // TODO: containerSource?
 
         val objCName = when (annotation) {
-            NativeCoroutinesState,
-            NativeCoroutinesRefinedState -> originalSymbol.name.identifier
+            NativeCoroutines,
+            NativeCoroutinesRefined -> originalSymbol.name.identifier
             else -> null
         }
         annotations.addAll(buildAnnotationsCopy(

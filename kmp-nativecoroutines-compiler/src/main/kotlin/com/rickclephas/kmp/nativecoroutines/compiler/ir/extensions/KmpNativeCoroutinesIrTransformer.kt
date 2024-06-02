@@ -55,7 +55,11 @@ internal class KmpNativeCoroutinesIrTransformer(
         if (getter != null) {
             require(getter.body == null)
             getter.body = when (declarationKey.type) {
-                NativeCoroutinesDeclarationKey.Type.NATIVE -> TODO()
+                NativeCoroutinesDeclarationKey.Type.NATIVE -> context.buildNativePropertyGetterBody(
+                    function = getter,
+                    originalProperty = property.owner,
+                    callableSignature = declarationKey.callableSignature
+                )
                 NativeCoroutinesDeclarationKey.Type.STATE_FLOW_VALUE -> context.buildStateFlowValueGetterBody(
                     property = declaration,
                     originalProperty = property.owner

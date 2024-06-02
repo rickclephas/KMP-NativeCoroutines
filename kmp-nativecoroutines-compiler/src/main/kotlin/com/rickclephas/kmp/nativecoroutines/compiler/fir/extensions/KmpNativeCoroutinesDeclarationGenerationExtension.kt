@@ -2,6 +2,7 @@ package com.rickclephas.kmp.nativecoroutines.compiler.fir.extensions
 
 import com.rickclephas.kmp.nativecoroutines.compiler.config.*
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.codegen.buildNativeFunction
+import com.rickclephas.kmp.nativecoroutines.compiler.fir.codegen.buildNativeProperty
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.codegen.buildStateFlowValueProperty
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.getFunctionSymbols
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.getPropertySymbols
@@ -137,7 +138,7 @@ internal class KmpNativeCoroutinesDeclarationGenerationExtension(
             callableId, suffix,
             setOf(NativeCoroutines, NativeCoroutinesRefined)
         ) { symbol, annotation ->
-            null // TODO: generate native property
+            buildNativeProperty(callableId, symbol, annotation)
         }
         generateProperties(
             callableId, flowValueSuffix,
@@ -161,7 +162,7 @@ internal class KmpNativeCoroutinesDeclarationGenerationExtension(
             callableId, stateFlowSuffix,
             setOf(NativeCoroutinesState, NativeCoroutinesRefinedState)
         ) { symbol, annotation ->
-            null // TODO: generate state flow property
+            buildNativeProperty(callableId, symbol, annotation)
         }
     }
 
