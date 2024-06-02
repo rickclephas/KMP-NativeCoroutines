@@ -11,4 +11,6 @@ internal class GeneratorContext(
     val asNativeFlowSymbol = pluginContext.referenceFunctions(CallableIds.asNativeFlow).single()
     val nativeSuspendSymbol = pluginContext.referenceFunctions(CallableIds.nativeSuspend).single()
 
+    val stateFlowValueSymbol = pluginContext.referenceProperties(CallableIds.stateFlowValue).single()
+    val mutableStateFlowValueSymbol = pluginContext.referenceProperties(CallableIds.mutableStateFlowValue).single()
 }

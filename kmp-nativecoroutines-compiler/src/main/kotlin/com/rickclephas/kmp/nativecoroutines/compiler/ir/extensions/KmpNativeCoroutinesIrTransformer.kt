@@ -1,8 +1,10 @@
 package com.rickclephas.kmp.nativecoroutines.compiler.ir.extensions
 
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey
+import com.rickclephas.kmp.nativecoroutines.compiler.ir.codegen.*
 import com.rickclephas.kmp.nativecoroutines.compiler.ir.codegen.GeneratorContext
 import com.rickclephas.kmp.nativecoroutines.compiler.ir.codegen.buildNativeFunctionBody
+import com.rickclephas.kmp.nativecoroutines.compiler.ir.codegen.buildStateFlowValueGetterBody
 import org.jetbrains.kotlin.backend.common.extensions.IrPluginContext
 import org.jetbrains.kotlin.ir.IrElement
 import org.jetbrains.kotlin.ir.declarations.*
@@ -47,8 +49,30 @@ internal class KmpNativeCoroutinesIrTransformer(
 
     override fun visitProperty(declaration: IrProperty) {
         val declarationKey = declaration.nativeCoroutinesDeclarationKey ?: return
-        require(declaration.getter == null)
-        require(declaration.setter == null)
-        TODO("Add property body")
+        // TODO: support non-unique callableIds
+        val property = pluginContext.referenceProperties(declarationKey.callableSignature.callableId).single()
+        val getter = declaration.getter
+        if (getter != null) {
+            require(getter.body == null)
+            getter.body = when (declarationKey.type) {
+                NativeCoroutinesDeclarationKey.Type.NATIVE -> TODO()
+                NativeCoroutinesDeclarationKey.Type.STATE_FLOW_VALUE -> context.buildStateFlowValueGetterBody(
+                    property = declaration,
+                    originalProperty = property.owner
+                )
+                NativeCoroutinesDeclarationKey.Type.SHARED_FLOW_REPLAY_CACHE -> TODO()
+            }
+        }
+        val setter = declaration.setter
+        if (setter != null) {
+            require(setter.body == null)
+            setter.body = when (val type = declarationKey.type) {
+                NativeCoroutinesDeclarationKey.Type.STATE_FLOW_VALUE -> context.buildStateFlowValueSetterBody(
+                    property = declaration,
+                    originalProperty = property.owner
+                )
+                else -> error("Unsupported type $type for native coroutines property setter")
+            }
+        }
     }
 }
