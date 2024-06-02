@@ -3,6 +3,8 @@ package com.rickclephas.kmp.nativecoroutines.compiler.fir.codegen
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.*
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.ClassIds
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation
+import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutines
+import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutinesRefined
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.shouldRefineInSwift
 import org.jetbrains.kotlin.KtFakeSourceElementKind
 import org.jetbrains.kotlin.descriptors.EffectiveVisibility
@@ -39,7 +41,7 @@ internal fun FirExtension.buildNativeFunction(
         name = callableId.callableName
 
         status = FirResolvedDeclarationStatusImpl(
-            Visibilities.Public,
+            Visibilities.Public, // TODO: support protected visibility
             Modality.FINAL,
             EffectiveVisibility.Public
         )
@@ -60,7 +62,7 @@ internal fun FirExtension.buildNativeFunction(
 
         // TODO: replace type parameters in returnTypeRef
         returnTypeRef = callableSignature.returnType
-            .toNativeConeKotlinType(session, originalSymbol.rawStatus.isSuspend)
+            .toNativeConeKotlinType(session, callableSignature.isSuspend)
             .toFirResolvedTypeRef()
 
         // TODO: attributes?
@@ -72,8 +74,8 @@ internal fun FirExtension.buildNativeFunction(
             originalSymbol.annotations,
             originalSymbol.name.identifier,
             setOf(
-                NativeCoroutinesAnnotation.NativeCoroutines.classId,
-                NativeCoroutinesAnnotation.NativeCoroutinesRefined.classId,
+                NativeCoroutines.classId,
+                NativeCoroutinesRefined.classId,
                 ClassIds.throws,
             )
         ))

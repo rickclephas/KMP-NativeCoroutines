@@ -88,7 +88,6 @@ internal class KmpNativeCoroutinesDeclarationGenerationExtension(
                     callableName.withSuffix(stateSuffix),
                     callableName.withSuffix(stateFlowSuffix)
                 )
-
                 false -> emptySet()
             }
             NativeCoroutinesIgnore, NativeCoroutineScope -> emptySet()
@@ -106,16 +105,26 @@ internal class KmpNativeCoroutinesDeclarationGenerationExtension(
         callableId: CallableId,
         context: MemberGenerationContext?
     ): List<FirNamedFunctionSymbol> = buildList {
-        generateNativeFunctions(callableId)
+        generateFunctions(
+            callableId, suffix,
+            setOf(NativeCoroutines, NativeCoroutinesRefined)
+        ) { symbol, annotation ->
+            buildNativeFunction(callableId, symbol, annotation)
+        }
     }
 
-    private fun MutableList<FirNamedFunctionSymbol>.generateNativeFunctions(callableId: CallableId) {
+    private fun MutableList<FirNamedFunctionSymbol>.generateFunctions(
+        callableId: CallableId,
+        suffix: String?,
+        annotations: Set<NativeCoroutinesAnnotation>,
+        generateFunction: (FirNamedFunctionSymbol, NativeCoroutinesAnnotation) -> FirNamedFunctionSymbol?
+    ) {
         val originalCallableName = callableId.callableName.withoutSuffix(suffix) ?: return
         val symbols = session.symbolProvider.getFunctionSymbols(callableId.copy(originalCallableName))
         for (symbol in symbols) {
             val annotation = getAnnotationForSymbol(symbol) ?: continue
-            if (annotation != NativeCoroutines && annotation != NativeCoroutinesRefined) continue
-            addIfNotNull(buildNativeFunction(callableId, symbol, annotation))
+            if (annotation !in annotations) continue
+            addIfNotNull(generateFunction(symbol, annotation))
         }
     }
 
@@ -123,65 +132,50 @@ internal class KmpNativeCoroutinesDeclarationGenerationExtension(
         callableId: CallableId,
         context: MemberGenerationContext?
     ): List<FirPropertySymbol> = buildList {
-        generateNativeProperties(callableId)
-        generateFlowValueProperties(callableId)
-        generateFlowReplayCacheProperties(callableId)
-        generateStateProperties(callableId)
-        generateStateFlowProperties(callableId)
+        generateProperties(
+            callableId, suffix,
+            setOf(NativeCoroutines, NativeCoroutinesRefined)
+        ) { symbol, annotation ->
+            null // TODO: generate native property
+        }
+        generateProperties(
+            callableId, flowValueSuffix,
+            setOf(NativeCoroutines, NativeCoroutinesRefined)
+        ) { symbol, annotation ->
+            null // TODO: generate flow value property
+        }
+        generateProperties(
+            callableId, flowReplayCacheSuffix,
+            setOf(NativeCoroutines, NativeCoroutinesRefined)
+        ) { symbol, annotation ->
+            null // TODO: generate flow replay cache property
+        }
+        generateProperties(
+            callableId, stateSuffix,
+            setOf(NativeCoroutinesState, NativeCoroutinesRefinedState)
+        ) { symbol, annotation ->
+            null // TODO: generate state property
+        }
+        generateProperties(
+            callableId, stateFlowSuffix,
+            setOf(NativeCoroutinesState, NativeCoroutinesRefinedState)
+        ) { symbol, annotation ->
+            null // TODO: generate state flow property
+        }
     }
 
-    private fun MutableList<FirPropertySymbol>.generateNativeProperties(callableId: CallableId) {
+    private fun MutableList<FirPropertySymbol>.generateProperties(
+        callableId: CallableId,
+        suffix: String?,
+        annotations: Set<NativeCoroutinesAnnotation>,
+        generateProperty: (FirPropertySymbol, NativeCoroutinesAnnotation) -> FirPropertySymbol?
+    ) {
         val originalCallableName = callableId.callableName.withoutSuffix(suffix) ?: return
         val symbols = session.symbolProvider.getPropertySymbols(callableId.copy(originalCallableName))
         for (symbol in symbols) {
             val annotation = getAnnotationForSymbol(symbol) ?: continue
-            val isRefined = annotation == NativeCoroutinesRefined
-            if (!isRefined && annotation != NativeCoroutines) continue
-            // TODO: generate native property
-        }
-    }
-
-    private fun MutableList<FirPropertySymbol>.generateFlowValueProperties(callableId: CallableId) {
-        val originalCallableName = callableId.callableName.withoutSuffix(flowValueSuffix) ?: return
-        val symbols = session.symbolProvider.getPropertySymbols(callableId.copy(originalCallableName))
-        for (symbol in symbols) {
-            val annotation = getAnnotationForSymbol(symbol) ?: continue
-            val isRefined = annotation == NativeCoroutinesRefined
-            if (!isRefined && annotation != NativeCoroutines) continue
-            // TODO: generate flow value property
-        }
-    }
-
-    private fun MutableList<FirPropertySymbol>.generateFlowReplayCacheProperties(callableId: CallableId) {
-        val originalCallableName = callableId.callableName.withoutSuffix(flowReplayCacheSuffix) ?: return
-        val symbols = session.symbolProvider.getPropertySymbols(callableId.copy(originalCallableName))
-        for (symbol in symbols) {
-            val annotation = getAnnotationForSymbol(symbol) ?: continue
-            val isRefined = annotation == NativeCoroutinesRefined
-            if (!isRefined && annotation != NativeCoroutines) continue
-            // TODO: generate flow replay cache property
-        }
-    }
-
-    private fun MutableList<FirPropertySymbol>.generateStateProperties(callableId: CallableId) {
-        val originalCallableName = callableId.callableName.withoutSuffix(stateSuffix) ?: return
-        val symbols = session.symbolProvider.getPropertySymbols(callableId.copy(originalCallableName))
-        for (symbol in symbols) {
-            val annotation = getAnnotationForSymbol(symbol) ?: continue
-            val isRefined = annotation == NativeCoroutinesRefinedState
-            if (!isRefined && annotation != NativeCoroutinesState) continue
-            // TODO: generate state property
-        }
-    }
-
-    private fun MutableList<FirPropertySymbol>.generateStateFlowProperties(callableId: CallableId) {
-        val originalCallableName = callableId.callableName.withoutSuffix(stateFlowSuffix) ?: return
-        val symbols = session.symbolProvider.getPropertySymbols(callableId.copy(originalCallableName))
-        for (symbol in symbols) {
-            val annotation = getAnnotationForSymbol(symbol) ?: continue
-            val isRefined = annotation == NativeCoroutinesRefinedState
-            if (!isRefined && annotation != NativeCoroutinesState) continue
-            // TODO: generate state flow property
+            if (annotation !in annotations) continue
+            addIfNotNull(generateProperty(symbol, annotation))
         }
     }
 }
