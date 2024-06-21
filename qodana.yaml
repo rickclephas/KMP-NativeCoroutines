@@ -1,5 +1,4 @@
 version: 1.0
-projectJDK: '17'
-bootstrap: sudo apt install openjdk-11-jdk
+projectJDK: '11'
 profile:
   name: qodana.recommended
