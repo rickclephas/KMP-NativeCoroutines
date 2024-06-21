@@ -310,6 +310,15 @@ if case let .success(letters) = result {
 }
 ```
 
+for `Unit` returning functions there is also the `asyncError(for:)` function:
+```swift
+import KMPNativeCoroutinesAsync
+
+if let error = await asyncError(for: integrationTests.returnUnit()) {
+    print("Failed with error: \(error)")
+}
+```
+
 #### AsyncSequence
 
 For `Flow`s there is the `asyncSequence(for:)` function to get an `AsyncSequence`:
@@ -338,6 +347,9 @@ The Combine implementation provides a couple functions to get an `AnyPublisher` 
 > [!NOTE]
 > These functions create deferred `AnyPublisher`s.  
 > Meaning every subscription will trigger the collection of the `Flow` or execution of the suspend function.
+
+> [!NOTE]
+> You **must** keep a reference to the returned `Cancellable`s otherwise the collection will be cancelled immediately. 
 
 #### Publisher
 
