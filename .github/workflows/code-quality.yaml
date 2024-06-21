@@ -22,6 +22,6 @@ jobs:
       - name: 'Qodana Scan'
         uses: JetBrains/qodana-action@v2024.1
         with:
-          args: --volume ${{ steps.get-java-home-11.outputs.JAVA_HOME_11_X64 }}:/root/.jdks/jdk11
+          args: -v,${{ steps.get-java-home-11.outputs.JAVA_HOME_11_X64 }}:/root/.jdks/jdk11
         env:
           QODANA_TOKEN: ${{ secrets.QODANA_TOKEN }}
