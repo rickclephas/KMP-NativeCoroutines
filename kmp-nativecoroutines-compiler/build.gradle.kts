@@ -1,4 +1,8 @@
+import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
+import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
+import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinUsages
 import org.jetbrains.kotlin.gradle.utils.NativeCompilerDownloader
+import org.jetbrains.kotlin.konan.target.HostManager
 
 plugins {
     alias(libs.plugins.kotlin.jvm)
@@ -8,6 +12,14 @@ plugins {
 sourceSets {
     test {
         java.srcDir("src/test/generated")
+    }
+}
+
+val nativeTestClasspath by configurations.creating {
+    attributes {
+        attribute(KotlinPlatformType.attribute, KotlinPlatformType.native)
+        attribute(KotlinNativeTarget.konanTargetAttribute, HostManager.hostName)
+        attribute(Usage.USAGE_ATTRIBUTE, objects.named(KotlinUsages.KOTLIN_API))
     }
 }
 
@@ -21,6 +33,9 @@ dependencies {
     testImplementation(libs.junit.platform.commons)
     testImplementation(libs.junit.platform.launcher)
     testRuntimeOnly(libs.junit)
+
+    nativeTestClasspath(project(":kmp-nativecoroutines-annotations"))
+    nativeTestClasspath(project(":kmp-nativecoroutines-core"))
 }
 
 kotlin {
@@ -40,12 +55,16 @@ tasks.compileKotlin.configure {
 }
 
 tasks.test {
-    // TODO: Remove workaround for https://youtrack.jetbrains.com/issue/KT-66929
-    val compilerDownloader = NativeCompilerDownloader(project)
-    compilerDownloader.downloadIfNeeded()
-    systemProperty("kotlin.internal.native.test.nativeHome", compilerDownloader.compilerDirectory.absolutePath)
+    dependsOn(nativeTestClasspath)
+
     inputs.dir("src/testData")
     useJUnitPlatform()
+
+    // TODO: Remove workaround for https://youtrack.jetbrains.com/issue/KT-66929
+    val nativeCompilerDir =  NativeCompilerDownloader(project).apply { downloadIfNeeded() }.compilerDirectory
+    systemProperty("kotlin.internal.native.test.nativeHome", nativeCompilerDir.absolutePath)
+
+    systemProperty("com.rickclephas.kmp.nativecoroutines.test.classpath-native", nativeTestClasspath.asPath)
 }
 
 val deleteGeneratedTests by tasks.registering(Delete::class) {
