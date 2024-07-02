@@ -13,6 +13,12 @@ internal sealed class KmpNativeCoroutinesRuntimeClasspathProvider(
         System.getProperty(propertyKey).split(File.pathSeparator).map(::File)
 }
 
+internal class KmpNativeCoroutinesJvmRuntimeClasspathProvider(
+    testServices: TestServices
+): KmpNativeCoroutinesRuntimeClasspathProvider(
+    testServices, "com.rickclephas.kmp.nativecoroutines.test.classpath-jvm"
+)
+
 internal class KmpNativeCoroutinesNativeRuntimeClasspathProvider(
     testServices: TestServices
 ): KmpNativeCoroutinesRuntimeClasspathProvider(

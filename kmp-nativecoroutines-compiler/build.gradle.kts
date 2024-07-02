@@ -22,6 +22,11 @@ val nativeTestClasspath by configurations.creating {
         attribute(Usage.USAGE_ATTRIBUTE, objects.named(KotlinUsages.KOTLIN_API))
     }
 }
+val jvmTestClasspath by configurations.creating {
+    attributes {
+        attribute(KotlinPlatformType.attribute, KotlinPlatformType.jvm)
+    }
+}
 
 dependencies {
     compileOnly(libs.kotlin.compiler)
@@ -34,8 +39,14 @@ dependencies {
     testImplementation(libs.junit.platform.launcher)
     testRuntimeOnly(libs.junit)
 
+    testRuntimeOnly(libs.kotlin.test)
+    testRuntimeOnly(libs.kotlin.script.runtime)
+    testRuntimeOnly(libs.kotlin.annotations.jvm)
+
     nativeTestClasspath(project(":kmp-nativecoroutines-annotations"))
     nativeTestClasspath(project(":kmp-nativecoroutines-core"))
+    jvmTestClasspath(project(":kmp-nativecoroutines-annotations"))
+    jvmTestClasspath(project(":kmp-nativecoroutines-core"))
 }
 
 kotlin {
@@ -56,6 +67,7 @@ tasks.compileKotlin.configure {
 
 tasks.test {
     dependsOn(nativeTestClasspath)
+    dependsOn(jvmTestClasspath)
 
     inputs.dir("src/testData")
     useJUnitPlatform()
@@ -64,6 +76,21 @@ tasks.test {
     val nativeCompilerDir =  NativeCompilerDownloader(project).apply { downloadIfNeeded() }.compilerDirectory
     systemProperty("kotlin.internal.native.test.nativeHome", nativeCompilerDir.absolutePath)
 
+    listOf(
+        "kotlin-stdlib",
+        "kotlin-stdlib-jdk8",
+        "kotlin-reflect",
+        "kotlin-test",
+        "kotlin-script-runtime",
+        "kotlin-annotations-jvm"
+    ).forEach { jarName ->
+        val path = project.configurations.testRuntimeClasspath.get().files.find {
+            """$jarName-\d.*jar""".toRegex().matches(it.name)
+        }?.absolutePath ?: return@forEach
+        systemProperty("org.jetbrains.kotlin.test.$jarName", path)
+    }
+
+    systemProperty("com.rickclephas.kmp.nativecoroutines.test.classpath-jvm", jvmTestClasspath.asPath)
     systemProperty("com.rickclephas.kmp.nativecoroutines.test.classpath-native", nativeTestClasspath.asPath)
 }
 

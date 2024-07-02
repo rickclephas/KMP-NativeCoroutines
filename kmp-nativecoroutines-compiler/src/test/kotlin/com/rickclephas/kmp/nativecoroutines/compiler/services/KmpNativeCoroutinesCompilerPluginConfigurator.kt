@@ -2,6 +2,7 @@ package com.rickclephas.kmp.nativecoroutines.compiler.services
 
 import com.rickclephas.kmp.nativecoroutines.compiler.KmpNativeCoroutinesCompilerPluginRegistrar
 import com.rickclephas.kmp.nativecoroutines.compiler.config.EXPOSED_SEVERITY
+import org.jetbrains.kotlin.cli.jvm.config.addJvmClasspathRoots
 import com.rickclephas.kmp.nativecoroutines.compiler.directives.KmpNativeCoroutinesDirectives as Directives
 import org.jetbrains.kotlin.compiler.plugin.CompilerPluginRegistrar
 import org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi
@@ -21,6 +22,12 @@ internal class KmpNativeCoroutinesCompilerPluginConfigurator(
 
     override fun DirectiveToConfigurationKeyExtractor.provideConfigurationKeys() {
         register(Directives.EXPOSED_SEVERITY, EXPOSED_SEVERITY.configKey)
+    }
+
+    override fun configureCompilerConfiguration(configuration: CompilerConfiguration, module: TestModule) {
+        super.configureCompilerConfiguration(configuration, module)
+        val jvmClasspathProvider = KmpNativeCoroutinesJvmRuntimeClasspathProvider(testServices)
+        configuration.addJvmClasspathRoots(jvmClasspathProvider.runtimeClassPaths(module))
     }
 
     override fun CompilerPluginRegistrar.ExtensionStorage.registerCompilerExtensions(
