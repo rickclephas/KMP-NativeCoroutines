@@ -16,8 +16,6 @@ internal fun GeneratorContext.buildNativePropertyGetterBody(
 ): IrBlockBody = DeclarationIrBuilder(
     generatorContext = this,
     symbol = function.symbol,
-    startOffset = originalProperty.startOffset,
-    endOffset = originalProperty.endOffset
 ).irBlockBody {
     val coroutineScope = irTemporary(irCallCoroutineScope(function))
     var expression = irCallOriginalPropertyGetter(originalProperty, function)

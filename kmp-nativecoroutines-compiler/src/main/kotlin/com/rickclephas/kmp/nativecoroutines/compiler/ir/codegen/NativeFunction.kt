@@ -15,8 +15,6 @@ internal fun GeneratorContext.buildNativeFunctionBody(
 ): IrBlockBody = DeclarationIrBuilder(
     generatorContext = this,
     symbol = function.symbol,
-    startOffset = originalFunction.startOffset,
-    endOffset = originalFunction.endOffset
 ).irBlockBody {
     val coroutineScope = irTemporary(irCallCoroutineScope(function))
     var expression = irCallOriginalFunction(originalFunction, function)
