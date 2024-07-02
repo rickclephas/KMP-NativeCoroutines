@@ -93,6 +93,14 @@ public final class com/rickclephas/kmp/nativecoroutines/compiler/config/Generate
 	public static final fun getGENERATED_SOURCE_DIR ()Lcom/rickclephas/kmp/nativecoroutines/compiler/config/ConfigListOption;
 }
 
+public final class com/rickclephas/kmp/nativecoroutines/compiler/config/SuffixesKt {
+	public static final fun getFLOW_REPLAY_CACHE_SUFFIX ()Lcom/rickclephas/kmp/nativecoroutines/compiler/config/ConfigOption;
+	public static final fun getFLOW_VALUE_SUFFIX ()Lcom/rickclephas/kmp/nativecoroutines/compiler/config/ConfigOption;
+	public static final fun getSTATE_FLOW_SUFFIX ()Lcom/rickclephas/kmp/nativecoroutines/compiler/config/ConfigOption;
+	public static final fun getSTATE_SUFFIX ()Lcom/rickclephas/kmp/nativecoroutines/compiler/config/ConfigOptionWithDefault;
+	public static final fun getSUFFIX ()Lcom/rickclephas/kmp/nativecoroutines/compiler/config/ConfigOptionWithDefault;
+}
+
 public final class com/rickclephas/kmp/nativecoroutines/compiler/fir/diagnostics/FirKmpNativeCoroutinesErrors {
 	public static final field INSTANCE Lcom/rickclephas/kmp/nativecoroutines/compiler/fir/diagnostics/FirKmpNativeCoroutinesErrors;
 	public final fun getCONFLICT_COROUTINES ()Lorg/jetbrains/kotlin/diagnostics/KtDiagnosticFactory0;
@@ -148,5 +156,9 @@ public final class com/rickclephas/kmp/nativecoroutines/compiler/utils/NativeCor
 public final class com/rickclephas/kmp/nativecoroutines/compiler/utils/NativeCoroutinesAnnotation$Companion {
 	public final fun forClassId (Lorg/jetbrains/kotlin/name/ClassId;)Lcom/rickclephas/kmp/nativecoroutines/compiler/utils/NativeCoroutinesAnnotation;
 	public final fun forFqName (Lorg/jetbrains/kotlin/name/FqName;)Lcom/rickclephas/kmp/nativecoroutines/compiler/utils/NativeCoroutinesAnnotation;
+}
+
+public final class com/rickclephas/kmp/nativecoroutines/compiler/utils/NativeCoroutinesAnnotationKt {
+	public static final fun getShouldRefineInSwift (Lcom/rickclephas/kmp/nativecoroutines/compiler/utils/NativeCoroutinesAnnotation;)Z
 }
 
