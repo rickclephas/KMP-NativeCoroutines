@@ -32,6 +32,9 @@ internal fun IrBuilderWithScope.irCallAsNativeFlow(
             extensionReceiver = irGet(flow)
             putValueArgument(0, irGet(coroutineScope))
         }
+        if (flowType.isNullable()) {
+            expression = irIfNull(returnType, irGet(flow), irNull(), expression)
+        }
         expression
     }
 }
