@@ -1,5 +1,6 @@
 package com.rickclephas.kmp.nativecoroutines.compiler.ir.codegen
 
+import com.rickclephas.kmp.nativecoroutines.compiler.ir.utils.IrBlockBodyExpression.Companion.irGet
 import com.rickclephas.kmp.nativecoroutines.compiler.ir.utils.getFlowValueTypeArg
 import org.jetbrains.kotlin.backend.common.lower.DeclarationIrBuilder
 import org.jetbrains.kotlin.ir.builders.*
@@ -21,7 +22,7 @@ internal fun GeneratorContext.buildStateFlowValueGetterBody(
         startOffset = originalProperty.startOffset,
         endOffset = originalProperty.endOffset
     ).irBlockBody {
-        var expression = irCallOriginalPropertyGetter(originalProperty, getter)
+        var expression = irGet(irCallOriginalPropertyGetter(originalProperty, getter))
         val valueTypeArg = expression.type.getFlowValueTypeArg()
         val valueGetter = stateFlowValueSymbol.owner.getter?.symbol
             ?: error("Failed to find StateFlow.value getter")
@@ -45,7 +46,7 @@ internal fun GeneratorContext.buildStateFlowValueSetterBody(
         startOffset = originalProperty.startOffset,
         endOffset = originalProperty.endOffset
     ).irBlockBody {
-        var expression = irCallOriginalPropertyGetter(originalProperty, setter)
+        var expression = irGet(irCallOriginalPropertyGetter(originalProperty, setter))
         val valueSetter = mutableStateFlowValueSymbol.owner.setter?.symbol
             ?: error("Failed to find MutableStateFlow.value setter")
         expression = irCall(valueSetter).apply {

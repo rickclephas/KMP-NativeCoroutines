@@ -1,5 +1,6 @@
 package com.rickclephas.kmp.nativecoroutines.compiler.ir.codegen
 
+import com.rickclephas.kmp.nativecoroutines.compiler.ir.utils.IrBlockBodyExpression.Companion.irGet
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.CallableSignature
 import org.jetbrains.kotlin.backend.common.lower.DeclarationIrBuilder
 import org.jetbrains.kotlin.ir.builders.*
@@ -24,5 +25,5 @@ internal fun GeneratorContext.buildNativeFunctionBody(
     if (callableSignature.isSuspend) {
         expression = irCallNativeSuspend(expression, coroutineScope)
     }
-    +irReturn(expression)
+    +irReturn(irGet(expression))
 }
