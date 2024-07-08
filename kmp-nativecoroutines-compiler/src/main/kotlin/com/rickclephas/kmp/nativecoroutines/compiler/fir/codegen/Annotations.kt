@@ -34,6 +34,7 @@ internal fun FirExtension.buildAnnotationsCopy(
         if (classId in ignoredAnnotations) continue
         annotations.add(buildAnnotationCopy(annotation) {
             source = annotation.source?.fakeElement(KtFakeSourceElementKind.PluginGenerated)
+            // TODO: annotation arguments aren't available yet
         })
     }
     if (objcNameAnnotation == null && objCName != null) {
