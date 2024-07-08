@@ -9,8 +9,7 @@ import org.jetbrains.kotlin.ir.builders.irReturn
 import org.jetbrains.kotlin.ir.declarations.IrVariable
 import org.jetbrains.kotlin.ir.symbols.UnsafeDuringIrConstructionAPI
 import org.jetbrains.kotlin.ir.types.IrSimpleType
-import org.jetbrains.kotlin.ir.types.classifierOrFail
-import org.jetbrains.kotlin.ir.types.impl.IrSimpleTypeImpl
+import org.jetbrains.kotlin.ir.util.substitute
 
 @UnsafeDuringIrConstructionAPI
 internal fun IrBuilderWithScope.irCallNativeSuspend(
@@ -19,18 +18,12 @@ internal fun IrBuilderWithScope.irCallNativeSuspend(
 ): IrBlockBodyExpression {
     val context = context as GeneratorContext
     val expressionType = blockExpression.type as IrSimpleType
-    val lambdaType = IrSimpleTypeImpl(
-        context.nativeSuspendSymbol.owner.valueParameters[1].type.classifierOrFail,
-        false,
-        listOf(expressionType),
-        emptyList()
-    )
-    val returnType = IrSimpleTypeImpl(
-        context.nativeSuspendSymbol.owner.returnType.classifierOrFail,
-        false,
-        listOf(expressionType),
-        emptyList()
-    )
+    val lambdaType = context.nativeSuspendSymbol.owner.run {
+        valueParameters[1].type.substitute(typeParameters, listOf(expressionType))
+    }
+    val returnType = context.nativeSuspendSymbol.owner.run {
+        returnType.substitute(typeParameters, listOf(expressionType))
+    }
     return IrBlockBodyExpression(returnType) {
         val lambda = irLambda(true, expressionType, lambdaType) {
             +irReturn(irGet(blockExpression))

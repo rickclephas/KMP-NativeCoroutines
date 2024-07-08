@@ -8,7 +8,7 @@ import org.jetbrains.kotlin.ir.declarations.IrVariable
 import org.jetbrains.kotlin.ir.expressions.IrExpression
 import org.jetbrains.kotlin.ir.symbols.UnsafeDuringIrConstructionAPI
 import org.jetbrains.kotlin.ir.types.*
-import org.jetbrains.kotlin.ir.types.impl.IrSimpleTypeImpl
+import org.jetbrains.kotlin.ir.util.substitute
 
 @UnsafeDuringIrConstructionAPI
 internal fun IrBuilderWithScope.irCallAsNativeFlow(
@@ -18,12 +18,9 @@ internal fun IrBuilderWithScope.irCallAsNativeFlow(
     val context = context as GeneratorContext
     val flowType = flowExpression.type
     val valueTypeArg = flowType.getFlowValueTypeArg()
-    val nativeFlowType = IrSimpleTypeImpl(
-        context.asNativeFlowSymbol.owner.returnType.classifierOrFail,
-        false,
-        listOf(valueTypeArg),
-        emptyList()
-    )
+    val nativeFlowType = context.asNativeFlowSymbol.owner.run {
+        returnType.substitute(typeParameters, listOf(valueTypeArg.typeOrFail))
+    }
     val returnType = if (flowType.isNullable()) nativeFlowType.makeNullable() else nativeFlowType
     return IrBlockBodyExpression(returnType) {
         val flow = irTemporary(irGet(flowExpression))
