@@ -76,18 +76,21 @@ tasks.test {
     val nativeCompilerDir =  NativeCompilerDownloader(project).apply { downloadIfNeeded() }.compilerDirectory
     systemProperty("kotlin.internal.native.test.nativeHome", nativeCompilerDir.absolutePath)
 
-    listOf(
-        "kotlin-stdlib",
-        "kotlin-stdlib-jdk8",
-        "kotlin-reflect",
-        "kotlin-test",
-        "kotlin-script-runtime",
-        "kotlin-annotations-jvm"
-    ).forEach { jarName ->
-        val path = project.configurations.testRuntimeClasspath.get().files.find {
-            """$jarName-\d.*jar""".toRegex().matches(it.name)
-        }?.absolutePath ?: return@forEach
-        systemProperty("org.jetbrains.kotlin.test.$jarName", path)
+    val testRuntimeClasspathFiles = project.configurations.testRuntimeClasspath.map { it.files }
+    doFirst {
+        listOf(
+            "kotlin-stdlib",
+            "kotlin-stdlib-jdk8",
+            "kotlin-reflect",
+            "kotlin-test",
+            "kotlin-script-runtime",
+            "kotlin-annotations-jvm"
+        ).forEach { jarName ->
+            val path = testRuntimeClasspathFiles.get().find {
+                """$jarName-\d.*jar""".toRegex().matches(it.name)
+            }?.absolutePath ?: return@forEach
+            systemProperty("org.jetbrains.kotlin.test.$jarName", path)
+        }
     }
 
     systemProperty("com.rickclephas.kmp.nativecoroutines.test.classpath-jvm", jvmTestClasspath.asPath)
