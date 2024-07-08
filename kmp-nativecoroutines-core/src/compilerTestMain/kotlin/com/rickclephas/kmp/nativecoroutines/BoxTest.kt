@@ -2,6 +2,7 @@ package com.rickclephas.kmp.nativecoroutines
 
 import kotlinx.coroutines.runBlocking
 import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
 public class BoxTest internal constructor() {
@@ -46,6 +47,22 @@ public class BoxTest internal constructor() {
             })
         }
         resultBuilder.appendLine()
+    }
+
+    public suspend fun <T> awaitAndCollect(
+        nativeSuspendFlow: NativeSuspend<NativeFlow<T>>,
+        maxValues: Int? = null
+    ) {
+        val nativeFlow = suspendCoroutine<NativeFlow<T>> { cont ->
+            nativeSuspendFlow({ result, _ ->
+                cont.resume(result)
+            }, { error, _ ->
+                cont.resumeWithException(error)
+            }, { error, _ ->
+                cont.resumeWithException(error)
+            })
+        }
+        collect(nativeFlow, maxValues)
     }
 
     override fun toString(): String = resultBuilder.toString()
