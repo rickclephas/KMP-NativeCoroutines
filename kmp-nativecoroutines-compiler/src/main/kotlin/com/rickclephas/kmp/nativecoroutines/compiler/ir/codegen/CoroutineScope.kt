@@ -7,15 +7,18 @@ import org.jetbrains.kotlin.ir.declarations.IrProperty
 import org.jetbrains.kotlin.ir.declarations.IrSimpleFunction
 import org.jetbrains.kotlin.ir.expressions.IrExpression
 import org.jetbrains.kotlin.ir.symbols.UnsafeDuringIrConstructionAPI
+import org.jetbrains.kotlin.ir.types.defaultType
+import org.jetbrains.kotlin.ir.types.makeNullable
 import org.jetbrains.kotlin.ir.util.fileOrNull
 import org.jetbrains.kotlin.ir.util.hasAnnotation
 import org.jetbrains.kotlin.ir.util.parentClassOrNull
 
 @UnsafeDuringIrConstructionAPI
 internal fun IrBuilderWithScope.irCallCoroutineScope(declaration: IrSimpleFunction): IrExpression {
+    val context = context as GeneratorContext
     val property = declaration.parentClassOrNull?.getCoroutineScopeProperty()
         ?: declaration.fileOrNull?.getCoroutineScopeProperty()
-        ?: return irNull()
+        ?: return irNull(context.coroutineScopeSymbol.defaultType.makeNullable())
     val getter = property.getter ?: error("CoroutineScope property doesn't have a getter")
     if (getter.extensionReceiverParameter != null) {
         error("CoroutineScope property shouldn't have an extension receiver")

@@ -30,7 +30,7 @@ internal fun IrBuilderWithScope.irCallAsNativeFlow(
             putValueArgument(0, irGet(coroutineScope))
         }
         if (flowType.isNullable()) {
-            expression = irIfNull(returnType, irGet(flow), irNull(), expression)
+            expression = irIfNull(returnType, irGet(flow), irNull(returnType), expression)
         }
         expression
     }
