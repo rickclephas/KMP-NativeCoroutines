@@ -3,7 +3,7 @@ kotlin = "2.0.20-Beta1"
 kotlinx-coroutines = "1.9.0-RC"
 kotlinx-binary-compatibility-validator = "0.15.0-Beta.2"
 ksp = "2.0.20-Beta1-1.0.22"
-kotlinpoet = "1.17.0"
+kotlinpoet = "1.18.0"
 junit = "5.9.1"
 
 [libraries]
