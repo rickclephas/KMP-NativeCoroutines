@@ -35,7 +35,7 @@ val sourcesJar by tasks.getting(Jar::class) {
 
 sourceSets {
     main {
-        java.srcDir("$buildDir/generated/kmp-nativecoroutines-version/main")
+        java.srcDir(layout.buildDirectory.dir("generated/kmp-nativecoroutines-version/main"))
     }
 }
 
