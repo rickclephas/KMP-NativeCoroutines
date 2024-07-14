@@ -23,5 +23,6 @@ jobs:
         uses: JetBrains/qodana-action@v2024.1
         with:
           args: -v,${{ steps.get-java-home-11.outputs.JAVA_HOME_11_X64 }}:/root/.jdks/jdk11
+          post-pr-comment: false
         env:
           QODANA_TOKEN: ${{ secrets.QODANA_TOKEN }}
