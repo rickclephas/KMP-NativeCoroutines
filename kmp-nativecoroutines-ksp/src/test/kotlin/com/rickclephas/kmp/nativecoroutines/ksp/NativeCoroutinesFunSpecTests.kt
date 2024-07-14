@@ -388,7 +388,7 @@ class NativeCoroutinesFunSpecTests: CompilationTests() {
         
         @Deprecated(
           message = "it's old",
-          replaceWith = ReplaceWith(expression = "", imports = arrayOf()),
+          replaceWith = ReplaceWith(expression = ""),
           level = DeprecationLevel.WARNING,
         )
         @ObjCName(name = "returnSuspendValue")
