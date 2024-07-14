@@ -614,7 +614,7 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         
         @Deprecated(
           message = "it's old",
-          replaceWith = ReplaceWith(expression = "", imports = arrayOf()),
+          replaceWith = ReplaceWith(expression = ""),
           level = DeprecationLevel.WARNING,
         )
         @ObjCName(name = "sharedFlow")
@@ -624,7 +624,7 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         
         @Deprecated(
           message = "it's old",
-          replaceWith = ReplaceWith(expression = "", imports = arrayOf()),
+          replaceWith = ReplaceWith(expression = ""),
           level = DeprecationLevel.WARNING,
         )
         public val sharedFlowReplayCache: List<String>
@@ -653,7 +653,7 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         
         @Deprecated(
           message = "it's old",
-          replaceWith = ReplaceWith(expression = "", imports = arrayOf()),
+          replaceWith = ReplaceWith(expression = ""),
           level = DeprecationLevel.WARNING,
         )
         @ObjCName(name = "stateFlow")
@@ -663,7 +663,7 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         
         @Deprecated(
           message = "it's old",
-          replaceWith = ReplaceWith(expression = "", imports = arrayOf()),
+          replaceWith = ReplaceWith(expression = ""),
           level = DeprecationLevel.WARNING,
         )
         public val stateFlowValue: String
