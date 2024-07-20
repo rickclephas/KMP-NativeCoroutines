@@ -23,7 +23,11 @@ This library solves both of these limitations 😄.
 
 ## Compatibility
 
-The latest version of the library uses Kotlin version `2.0.0`.  
+The latest version of the library uses Kotlin version `2.0.0`.
+
+> [!WARNING]
+> Using unspported versions will probably lead to silent failures.
+
 Compatibility versions for older and/or preview Kotlin versions are also available:
 
 | Version        | Version suffix       |    Kotlin    |    KSP     | Coroutines |
