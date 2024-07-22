@@ -82,5 +82,7 @@ internal fun FirExtension.buildNativeFunction(
         if (annotation.shouldRefineInSwift) {
             annotations.add(buildAnnotation(ClassIds.shouldRefineInSwift))
         }
+
+        body = session.buildCallableReferenceBlock(originalSymbol)
     }.symbol
 }

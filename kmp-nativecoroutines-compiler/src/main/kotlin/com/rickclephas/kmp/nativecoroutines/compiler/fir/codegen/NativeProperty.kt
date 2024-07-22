@@ -61,7 +61,7 @@ internal fun FirExtension.buildNativeProperty(
             .toNativeConeKotlinType(session).toFirResolvedTypeRef()
 
         isVar = false
-        getter = buildPropertyGetter()
+        getter = buildPropertyGetter(session, originalSymbol)
 
         isLocal = false
         bodyResolveState = FirPropertyBodyResolveState.ALL_BODIES_RESOLVED

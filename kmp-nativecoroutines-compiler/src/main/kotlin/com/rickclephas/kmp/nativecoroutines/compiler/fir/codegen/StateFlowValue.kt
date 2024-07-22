@@ -64,7 +64,7 @@ internal fun FirExtension.buildStateFlowValueProperty(
             .toNativeConeKotlinType(session).toFirResolvedTypeRef()
 
         isVar = callableSignature.returnType.isMutable
-        getter = buildPropertyGetter()
+        getter = buildPropertyGetter(session, originalSymbol)
         if (isVar) {
             setter = buildPropertySetter()
         }

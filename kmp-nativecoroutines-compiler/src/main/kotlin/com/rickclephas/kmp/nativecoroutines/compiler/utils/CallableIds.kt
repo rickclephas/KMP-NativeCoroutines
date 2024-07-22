@@ -4,6 +4,8 @@ import org.jetbrains.kotlin.name.CallableId
 import org.jetbrains.kotlin.name.Name
 
 internal object CallableIds {
+    val todo = CallableId(FqNames.kotlin, Name.identifier("TODO"))
+
     val asNativeFlow = CallableId(FqNames.nativeCoroutines, Name.identifier("asNativeFlow"))
     val nativeSuspend = CallableId(FqNames.nativeCoroutines, Name.identifier("nativeSuspend"))
 

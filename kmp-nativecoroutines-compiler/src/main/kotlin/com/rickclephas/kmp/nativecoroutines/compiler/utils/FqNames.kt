@@ -3,6 +3,8 @@ package com.rickclephas.kmp.nativecoroutines.compiler.utils
 import org.jetbrains.kotlin.name.FqName
 
 internal object FqNames {
+    val kotlin = FqName("kotlin")
+
     val throws = FqName("kotlin.Throws")
 
     val hidesFromObjC = FqName("kotlin.native.HidesFromObjC")
