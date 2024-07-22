@@ -18,6 +18,7 @@ import com.rickclephas.kmp.nativecoroutines.compiler.utils.withoutSuffix
 import org.jetbrains.kotlin.config.CompilerConfiguration
 import org.jetbrains.kotlin.fir.FirSession
 import org.jetbrains.kotlin.fir.declarations.utils.isActual
+import org.jetbrains.kotlin.fir.declarations.utils.isMemberDeclaration
 import org.jetbrains.kotlin.fir.declarations.utils.isOverride
 import org.jetbrains.kotlin.fir.extensions.*
 import org.jetbrains.kotlin.fir.extensions.predicate.LookupPredicate
@@ -177,6 +178,7 @@ internal class KmpNativeCoroutinesDeclarationGenerationExtension(
         for (symbol in symbols) {
             val annotation = getAnnotationForSymbol(symbol) ?: continue
             if (annotation !in annotations) continue
+            if (symbol.isExtension && symbol.isMemberDeclaration) continue
             addIfNotNull(generateProperty(symbol, annotation))
         }
     }
