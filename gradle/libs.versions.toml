@@ -2,8 +2,8 @@
 kotlin = "2.0.0"
 kotlinx-coroutines = "1.8.1"
 kotlinx-binary-compatibility-validator = "0.15.0-Beta.2"
-ksp = "2.0.0-1.0.21"
-kotlinpoet = "1.16.0"
+ksp = "2.0.0-1.0.23"
+kotlinpoet = "1.18.1"
 junit = "5.9.1"
 
 [libraries]
@@ -35,7 +35,7 @@ kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serializa
 
 [plugins]
 gradle-plugin-publish = { id = "com.gradle.plugin-publish", version = "1.2.0" }
-intellij = { id = "org.jetbrains.intellij", version = "1.17.2" }
+intellij-platform = { id = "org.jetbrains.intellij.platform", version = "2.0.0-rc1" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlinx-binary-compatibility-validator = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version.ref = "kotlinx-binary-compatibility-validator" }

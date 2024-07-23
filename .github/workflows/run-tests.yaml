@@ -72,10 +72,12 @@ jobs:
         uses: gradle/actions/setup-gradle@v3
         with:
           cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
+      - name: Verify plugin project configuration
+        run: ./gradlew :kmp-nativecoroutines-idea-plugin:verifyPluginProjectConfiguration
+      - name: Verify plugin structure
+        run: ./gradlew :kmp-nativecoroutines-idea-plugin:verifyPluginStructure
       - name: Verify plugin
         run: ./gradlew :kmp-nativecoroutines-idea-plugin:verifyPlugin
-      - name: Run plugin verifier
-        run: ./gradlew :kmp-nativecoroutines-idea-plugin:runPluginVerifier
       - name: Run binary compatibility validator
         run: ./gradlew :kmp-nativecoroutines-idea-plugin:apiCheck
   run-swift-tests:
