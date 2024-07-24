@@ -9,7 +9,7 @@ public class KmpNativeCoroutinesCommandLineProcessor: CommandLineProcessor {
 
     override val pluginId: String = "com.rickclephas.kmp.nativecoroutines"
     override val pluginOptions: Collection<AbstractCliOption> = listOf(
-        EXPOSED_SEVERITY, GENERATED_SOURCE_DIR,
+        EXPOSED_SEVERITY, GENERATED_SOURCE_DIR, K2_MODE,
         SUFFIX, FLOW_VALUE_SUFFIX, FLOW_REPLAY_CACHE_SUFFIX, STATE_SUFFIX, STATE_FLOW_SUFFIX
     )
 

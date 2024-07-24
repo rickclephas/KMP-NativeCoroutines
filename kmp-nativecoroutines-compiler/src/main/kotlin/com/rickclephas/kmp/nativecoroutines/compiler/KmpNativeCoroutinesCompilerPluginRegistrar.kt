@@ -1,6 +1,8 @@
 package com.rickclephas.kmp.nativecoroutines.compiler
 
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.extensions.KmpNativeCoroutinesStorageComponentContainerContributor
+import com.rickclephas.kmp.nativecoroutines.compiler.config.K2_MODE
+import com.rickclephas.kmp.nativecoroutines.compiler.config.get
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.extensions.KmpNativeCoroutinesFirExtensionRegistrar
 import com.rickclephas.kmp.nativecoroutines.compiler.ir.extensions.KmpNativeCoroutinesIrGenerationExtension
 import org.jetbrains.kotlin.backend.common.extensions.IrGenerationExtension
@@ -20,6 +22,8 @@ public class KmpNativeCoroutinesCompilerPluginRegistrar: CompilerPluginRegistrar
         StorageComponentContainerContributor.registerExtension(
             KmpNativeCoroutinesStorageComponentContainerContributor(configuration)
         )
-        IrGenerationExtension.registerExtension(KmpNativeCoroutinesIrGenerationExtension())
+        if (configuration[K2_MODE]) {
+            IrGenerationExtension.registerExtension(KmpNativeCoroutinesIrGenerationExtension())
+        }
     }
 }

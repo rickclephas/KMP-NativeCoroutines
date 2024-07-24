@@ -1,5 +1,6 @@
 package com.rickclephas.kmp.nativecoroutines.compiler.runners
 
+import com.rickclephas.kmp.nativecoroutines.compiler.directives.KmpNativeCoroutinesDirectives
 import com.rickclephas.kmp.nativecoroutines.compiler.services.KmpNativeCoroutinesCompilerPluginConfigurator
 import com.rickclephas.kmp.nativecoroutines.compiler.services.KmpNativeCoroutinesJvmRuntimeClasspathProvider
 import org.jetbrains.kotlin.test.Constructor
@@ -70,6 +71,7 @@ abstract class AbstractFirBaseCodegenTest(
             +DUMP_IR
             +DUMP_KT_IR
             +IGNORE_DEXING
+            +KmpNativeCoroutinesDirectives.K2_MODE
         }
         configureFirParser(firParser)
         configureFirHandlersStep {

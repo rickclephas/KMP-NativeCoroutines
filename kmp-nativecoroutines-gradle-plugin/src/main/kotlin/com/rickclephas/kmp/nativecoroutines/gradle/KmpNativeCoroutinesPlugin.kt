@@ -57,6 +57,7 @@ public class KmpNativeCoroutinesPlugin: KotlinCompilerPluginSupportPlugin {
                 extension.flowReplayCacheSuffix?.let { add(SubpluginOption("flowReplayCacheSuffix", it)) }
                 add(SubpluginOption("stateSuffix", extension.stateSuffix))
                 extension.stateFlowSuffix?.let { add(SubpluginOption("stateFlowSuffix", it)) }
+                add(SubpluginOption("k2Mode", extension.k2Mode.toString()))
             }
         }
     }
