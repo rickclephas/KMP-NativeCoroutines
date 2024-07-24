@@ -61,6 +61,7 @@ internal fun FirExtension.buildNativeProperty(
             .toNativeConeKotlinType(session).toFirResolvedTypeRef()
 
         isVar = false
+        // TODO: replace type parameters in getter?
         getter = buildPropertyGetter(session, originalSymbol)
 
         isLocal = false
