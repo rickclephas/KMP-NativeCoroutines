@@ -9,6 +9,7 @@ import org.jetbrains.kotlin.fir.declarations.builder.buildValueParameter
 import org.jetbrains.kotlin.fir.extensions.FirExtension
 import org.jetbrains.kotlin.fir.moduleData
 import org.jetbrains.kotlin.fir.resolve.substitution.ConeSubstitutor
+import org.jetbrains.kotlin.fir.symbols.SymbolInternals
 import org.jetbrains.kotlin.fir.symbols.impl.FirFunctionSymbol
 import org.jetbrains.kotlin.fir.symbols.impl.FirValueParameterSymbol
 import org.jetbrains.kotlin.fir.types.coneType
@@ -44,11 +45,10 @@ internal fun FirExtension.buildValueParametersCopy(
             .let(substitutor::substituteOrSelf)
             .toFirResolvedTypeRef()
 
-        // TODO: attributes?
-        // TODO: deprecationProvider?
-        // TODO: containerSource?
-        // TODO: backingField?
-        // TODO: defaultValue?
+        @OptIn(SymbolInternals::class)
+        deprecationsProvider = parameter.fir.deprecationsProvider
+
+        // TODO: support defaultValue once exported to ObjC
 
         annotations.addAll(buildAnnotationsCopy(parameter.annotations))
     }

@@ -45,8 +45,6 @@ internal fun FirExtension.buildTypeParametersCopy(
             // TODO: can we access resolvedBounds?
             bounds.addAll(parameter.resolvedBounds)
 
-            // TODO: attributes?
-
             annotations.addAll(buildAnnotationsCopy(parameter.annotations))
         }
     }

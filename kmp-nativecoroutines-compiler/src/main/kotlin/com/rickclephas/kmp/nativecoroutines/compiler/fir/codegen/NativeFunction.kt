@@ -17,6 +17,7 @@ import org.jetbrains.kotlin.fir.declarations.impl.FirResolvedDeclarationStatusIm
 import org.jetbrains.kotlin.fir.declarations.origin
 import org.jetbrains.kotlin.fir.extensions.FirExtension
 import org.jetbrains.kotlin.fir.moduleData
+import org.jetbrains.kotlin.fir.symbols.SymbolInternals
 import org.jetbrains.kotlin.fir.symbols.impl.FirNamedFunctionSymbol
 import org.jetbrains.kotlin.fir.types.*
 import org.jetbrains.kotlin.name.CallableId
@@ -72,10 +73,8 @@ internal fun FirExtension.buildNativeFunction(
             .let(typeParameters.substitutor::substituteOrSelf)
             .toFirResolvedTypeRef()
 
-        // TODO: attributes?
-        // TODO: deprecationsProvider?
-        // TODO: containerSource?
-        // TODO: contractDescription?
+        @OptIn(SymbolInternals::class)
+        deprecationsProvider = originalSymbol.fir.deprecationsProvider
 
         annotations.addAll(buildAnnotationsCopy(
             originalSymbol.annotations,

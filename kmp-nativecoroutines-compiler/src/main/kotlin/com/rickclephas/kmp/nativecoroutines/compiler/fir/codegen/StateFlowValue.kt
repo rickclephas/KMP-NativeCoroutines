@@ -21,6 +21,7 @@ import org.jetbrains.kotlin.fir.declarations.impl.FirResolvedDeclarationStatusIm
 import org.jetbrains.kotlin.fir.declarations.origin
 import org.jetbrains.kotlin.fir.extensions.FirExtension
 import org.jetbrains.kotlin.fir.moduleData
+import org.jetbrains.kotlin.fir.symbols.SymbolInternals
 import org.jetbrains.kotlin.fir.symbols.impl.FirPropertySymbol
 import org.jetbrains.kotlin.fir.types.*
 import org.jetbrains.kotlin.name.CallableId
@@ -72,9 +73,8 @@ internal fun FirExtension.buildStateFlowValueProperty(
         isLocal = false
         bodyResolveState = FirPropertyBodyResolveState.ALL_BODIES_RESOLVED
 
-        // TODO: attributes?
-        // TODO: deprecationsProvider?
-        // TODO: containerSource?
+        @OptIn(SymbolInternals::class)
+        deprecationsProvider = originalSymbol.fir.deprecationsProvider
 
         val objCName = when (annotation) {
             NativeCoroutinesState,
