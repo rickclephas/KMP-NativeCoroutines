@@ -8,6 +8,7 @@ import org.jetbrains.kotlin.fir.declarations.FirValueParameter
 import org.jetbrains.kotlin.fir.declarations.builder.buildValueParameter
 import org.jetbrains.kotlin.fir.extensions.FirExtension
 import org.jetbrains.kotlin.fir.moduleData
+import org.jetbrains.kotlin.fir.resolve.substitution.ConeSubstitutor
 import org.jetbrains.kotlin.fir.symbols.impl.FirFunctionSymbol
 import org.jetbrains.kotlin.fir.symbols.impl.FirValueParameterSymbol
 import org.jetbrains.kotlin.fir.types.coneType
@@ -17,6 +18,7 @@ internal fun FirExtension.buildValueParametersCopy(
     originalParameters: List<FirValueParameterSymbol>,
     containingFunctionSymbol: FirFunctionSymbol<*>,
     origin: FirDeclarationOrigin,
+    substitutor: ConeSubstitutor,
 ): List<FirValueParameter> = originalParameters.map { parameter ->
     buildValueParameter {
         resolvePhase = FirResolvePhase.BODY_RESOLVE
@@ -37,11 +39,10 @@ internal fun FirExtension.buildValueParametersCopy(
         // TODO: contextReceivers
 
         // TODO: can we access resolvedReturnTypeRef?
-        returnTypeRef = parameter.resolvedReturnTypeRef.let {
-            it.coneType.toFirResolvedTypeRef(
-                it.source?.fakeElement(KtFakeSourceElementKind.PluginGenerated)
-            )
-        }
+        // TODO: copy type ref annotations?
+        returnTypeRef = parameter.resolvedReturnTypeRef.coneType
+            .let(substitutor::substituteOrSelf)
+            .toFirResolvedTypeRef()
 
         // TODO: attributes?
         // TODO: deprecationProvider?
