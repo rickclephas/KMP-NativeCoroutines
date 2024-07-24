@@ -207,5 +207,7 @@ internal class FirKmpNativeCoroutinesDeclarationChecker(
             coroutinesAnnotations.forEach { UNSUPPORTED_CLASS_EXTENSION_PROPERTY.reportOn(it) }
         }
         //endregion
+
+        // TODO: Add explicit return type check in K2 mode
     }
 }
