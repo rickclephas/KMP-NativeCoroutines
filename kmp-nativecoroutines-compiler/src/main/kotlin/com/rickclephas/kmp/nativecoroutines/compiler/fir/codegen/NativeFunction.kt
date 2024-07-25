@@ -58,8 +58,11 @@ internal fun FirExtension.buildNativeFunction(
         this.typeParameters.addAll(typeParameters.parameters)
 
         // TODO: contextReceivers
-        // TODO: receiverParameter
 
+        receiverParameter = buildReceiverParameterCopy(
+            originalSymbol.receiverParameter,
+            typeParameters.substitutor
+        )
         valueParameters.addAll(buildValueParametersCopy(
             originalSymbol.valueParameterSymbols,
             symbol,
