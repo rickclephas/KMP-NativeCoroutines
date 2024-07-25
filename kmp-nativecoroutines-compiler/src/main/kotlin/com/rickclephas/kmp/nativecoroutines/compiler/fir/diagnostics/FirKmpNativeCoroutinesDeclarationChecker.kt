@@ -12,6 +12,7 @@ import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativ
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.IGNORED_COROUTINES_REFINED
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.IGNORED_COROUTINES_REFINED_STATE
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.IGNORED_COROUTINES_STATE
+import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.IMPLICIT_RETURN_TYPE
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.INCOMPATIBLE_ACTUAL_COROUTINES
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.INCOMPATIBLE_ACTUAL_COROUTINES_IGNORE
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.INCOMPATIBLE_ACTUAL_COROUTINES_REFINED
@@ -36,6 +37,7 @@ import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativ
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.UNSUPPORTED_CLASS_EXTENSION_PROPERTY
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.getCoroutinesReturnType
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.getNativeCoroutinesAnnotations
+import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.hasImplicitReturnType
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.isRefined
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.CoroutinesReturnType
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutines
@@ -61,7 +63,8 @@ import kotlin.io.path.Path
 
 internal class FirKmpNativeCoroutinesDeclarationChecker(
     exposedSeverity: ExposedSeverity,
-    private val generatedSourceDirs: List<Path>
+    private val generatedSourceDirs: List<Path>,
+    private val isK2Mode: Boolean,
 ): FirCallableDeclarationChecker(MppCheckerKind.Common) {
 
     private val exposedSuspendFunction = when (exposedSeverity) {
@@ -208,6 +211,10 @@ internal class FirKmpNativeCoroutinesDeclarationChecker(
         }
         //endregion
 
-        // TODO: Add explicit return type check in K2 mode
+        //region IMPLICIT_RETURN_TYPE
+        if (hasAnnotation && isK2Mode && declaration.hasImplicitReturnType()) {
+            IMPLICIT_RETURN_TYPE.reportOn(declaration.source)
+        }
+        //endregion
     }
 }

@@ -6,6 +6,7 @@ import org.jetbrains.kotlin.diagnostics.PositioningStrategies
 import org.jetbrains.kotlin.diagnostics.Severity
 import org.jetbrains.kotlin.psi.KtDeclaration
 import org.jetbrains.kotlin.psi.KtElement
+import org.jetbrains.kotlin.psi.KtNamedDeclaration
 
 public object KmpNativeCoroutinesErrors {
     @JvmField
@@ -81,6 +82,9 @@ public object KmpNativeCoroutinesErrors {
 
     @JvmField
     public val UNSUPPORTED_CLASS_EXTENSION_PROPERTY: DiagnosticFactory0<KtElement> = DiagnosticFactory0.create(Severity.ERROR)
+
+    @JvmField
+    public val IMPLICIT_RETURN_TYPE: DiagnosticFactory0<KtNamedDeclaration> = DiagnosticFactory0.create(Severity.ERROR, PositioningStrategies.DECLARATION_NAME)
 
     init {
         Errors.Initializer.initializeFactoryNamesAndDefaultErrorMessages(KmpNativeCoroutinesErrors::class.java, DefaultErrorMessages)
