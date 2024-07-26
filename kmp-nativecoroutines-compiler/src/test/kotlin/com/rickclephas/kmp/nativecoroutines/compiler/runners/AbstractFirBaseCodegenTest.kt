@@ -72,6 +72,11 @@ abstract class AbstractFirBaseCodegenTest(
             +DUMP_KT_IR
             +IGNORE_DEXING
             +KmpNativeCoroutinesDirectives.K2_MODE
+            KmpNativeCoroutinesDirectives.SUFFIX with "Native"
+            KmpNativeCoroutinesDirectives.FLOW_VALUE_SUFFIX with "Value"
+            KmpNativeCoroutinesDirectives.FLOW_REPLAY_CACHE_SUFFIX with "ReplayCache"
+            KmpNativeCoroutinesDirectives.STATE_SUFFIX with "Value"
+            KmpNativeCoroutinesDirectives.STATE_FLOW_SUFFIX with "Flow"
         }
         configureFirParser(firParser)
         configureFirHandlersStep {
