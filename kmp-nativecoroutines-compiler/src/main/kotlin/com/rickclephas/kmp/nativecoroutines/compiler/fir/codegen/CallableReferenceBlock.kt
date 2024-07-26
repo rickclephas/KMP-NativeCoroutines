@@ -2,7 +2,6 @@ package com.rickclephas.kmp.nativecoroutines.compiler.fir.codegen
 
 import org.jetbrains.kotlin.builtins.functions.FunctionTypeKind
 import org.jetbrains.kotlin.fir.FirSession
-import org.jetbrains.kotlin.fir.declarations.utils.isMemberDeclaration
 import org.jetbrains.kotlin.fir.declarations.utils.isSuspend
 import org.jetbrains.kotlin.fir.expressions.FirBlock
 import org.jetbrains.kotlin.fir.expressions.builder.buildBlock
@@ -11,7 +10,6 @@ import org.jetbrains.kotlin.fir.references.builder.buildResolvedNamedReference
 import org.jetbrains.kotlin.fir.symbols.impl.FirCallableSymbol
 import org.jetbrains.kotlin.fir.symbols.impl.FirNamedFunctionSymbol
 import org.jetbrains.kotlin.fir.symbols.impl.FirPropertySymbol
-import org.jetbrains.kotlin.fir.symbols.impl.isExtension
 import org.jetbrains.kotlin.fir.types.*
 import org.jetbrains.kotlin.name.StandardClassIds
 import org.jetbrains.kotlin.utils.addIfNotNull
@@ -49,8 +47,8 @@ private fun FirNamedFunctionSymbol.getReferenceConeType(): ConeKotlinType {
 
 private fun FirPropertySymbol.getReferenceConeType(): ConeKotlinType {
     val isVar = isVar
-    val isMember = isMemberDeclaration
-    val isExtension = isExtension
+    val isMember = dispatchReceiverType != null
+    val isExtension = receiverParameter != null
     val classId = when {
         isMember && isExtension -> throw UnsupportedOperationException("Member-extension properties aren't supported")
         isMember || isExtension -> if (isVar) StandardClassIds.KMutableProperty1 else StandardClassIds.KProperty1
