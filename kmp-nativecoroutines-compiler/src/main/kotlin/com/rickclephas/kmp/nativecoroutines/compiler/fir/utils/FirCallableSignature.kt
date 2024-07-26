@@ -59,7 +59,6 @@ internal fun FirCallableSymbol<*>.getCallableSignature(session: FirSession): Fir
             else -> emptyList()
         }
         CallableSignature(
-            callableId,
             rawStatus.isSuspend,
             valueParameters,
             createType(returnType)

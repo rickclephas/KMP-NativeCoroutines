@@ -1,10 +1,8 @@
 package com.rickclephas.kmp.nativecoroutines.compiler.utils
 
-import org.jetbrains.kotlin.name.CallableId
 import org.jetbrains.kotlin.name.Name
 
 internal data class CallableSignature(
-    val callableId: CallableId,
     val isSuspend: Boolean,
     val valueParameters: List<Pair<Name, Type>>,
     val returnType: Type
