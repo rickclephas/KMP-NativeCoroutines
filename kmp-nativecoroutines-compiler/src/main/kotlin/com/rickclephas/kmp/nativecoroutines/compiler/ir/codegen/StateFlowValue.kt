@@ -19,8 +19,6 @@ internal fun GeneratorContext.buildStateFlowValueGetterBody(
     return DeclarationIrBuilder(
         generatorContext = this,
         symbol = getter.symbol,
-        startOffset = originalProperty.startOffset,
-        endOffset = originalProperty.endOffset
     ).irBlockBody {
         var expression = irGet(irCallOriginalPropertyGetter(originalProperty, getter))
         val valueTypeArg = expression.type.getFlowValueTypeArg()
@@ -43,8 +41,6 @@ internal fun GeneratorContext.buildStateFlowValueSetterBody(
     return DeclarationIrBuilder(
         generatorContext = this,
         symbol = setter.symbol,
-        startOffset = originalProperty.startOffset,
-        endOffset = originalProperty.endOffset
     ).irBlockBody {
         var expression = irGet(irCallOriginalPropertyGetter(originalProperty, setter))
         val valueSetter = mutableStateFlowValueSymbol.owner.setter?.symbol
