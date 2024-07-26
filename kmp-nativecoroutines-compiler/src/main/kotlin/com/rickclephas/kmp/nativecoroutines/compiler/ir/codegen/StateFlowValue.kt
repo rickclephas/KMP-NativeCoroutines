@@ -7,6 +7,8 @@ import org.jetbrains.kotlin.ir.builders.*
 import org.jetbrains.kotlin.ir.declarations.IrProperty
 import org.jetbrains.kotlin.ir.expressions.IrBlockBody
 import org.jetbrains.kotlin.ir.symbols.UnsafeDuringIrConstructionAPI
+import org.jetbrains.kotlin.ir.types.isNullable
+import org.jetbrains.kotlin.ir.types.makeNullable
 import org.jetbrains.kotlin.ir.types.typeOrFail
 
 @UnsafeDuringIrConstructionAPI
@@ -21,11 +23,17 @@ internal fun GeneratorContext.buildStateFlowValueGetterBody(
         symbol = getter.symbol,
     ).irBlockBody {
         var expression = irGet(irCallOriginalPropertyGetter(originalProperty, getter))
-        val valueTypeArg = expression.type.getFlowValueTypeArg()
+        val flowType = expression.type
+        val valueType = flowType.getFlowValueTypeArg().typeOrFail
+        val returnType = if (flowType.isNullable()) valueType.makeNullable() else valueType
         val valueGetter = stateFlowValueSymbol.owner.getter?.symbol
             ?: error("Failed to find StateFlow.value getter")
-        expression = irCall(valueGetter, valueTypeArg.typeOrFail).apply {
-            dispatchReceiver = expression
+        val flow = irTemporary(expression)
+        expression = irCall(valueGetter, valueType).apply {
+            dispatchReceiver = irGet(flow)
+        }
+        if (flowType.isNullable()) {
+            expression = irIfNull(returnType, irGet(flow), irNull(returnType), expression)
         }
         +irReturn(expression)
     }
