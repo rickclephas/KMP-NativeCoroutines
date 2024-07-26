@@ -27,7 +27,8 @@ internal fun FirExtension.buildNativeFunction(
     originalSymbol: FirNamedFunctionSymbol,
     annotation: NativeCoroutinesAnnotation
 ): FirNamedFunctionSymbol? {
-    val callableSignature = originalSymbol.getCallableSignature(session) ?: return null
+    val firCallableSignature = originalSymbol.getCallableSignature(session) ?: return null
+    val callableSignature = firCallableSignature.signature
     return buildSimpleFunction {
         resolvePhase = FirResolvePhase.BODY_RESOLVE
         moduleData = session.moduleData
@@ -71,10 +72,10 @@ internal fun FirExtension.buildNativeFunction(
         ))
 
         // TODO: copy type ref annotations?
-        returnTypeRef = callableSignature.returnType
-            .toNativeConeKotlinType(session, callableSignature.isSuspend)
-            .let(typeParameters.substitutor::substituteOrSelf)
-            .toFirResolvedTypeRef()
+        returnTypeRef = firCallableSignature.getNativeType(
+            callableSignature.returnType,
+            callableSignature.isSuspend
+        ).let(typeParameters.substitutor::substituteOrSelf).toFirResolvedTypeRef()
 
         @OptIn(SymbolInternals::class)
         deprecationsProvider = originalSymbol.fir.deprecationsProvider

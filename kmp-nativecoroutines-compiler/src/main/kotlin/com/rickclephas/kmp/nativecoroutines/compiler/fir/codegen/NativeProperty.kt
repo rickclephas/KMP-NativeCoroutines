@@ -30,7 +30,9 @@ internal fun FirExtension.buildNativeProperty(
     originalSymbol: FirPropertySymbol,
     annotation: NativeCoroutinesAnnotation
 ): FirPropertySymbol? {
-    val callableSignature = originalSymbol.getCallableSignature(session) ?: return null
+    val firCallableSignature = originalSymbol.getCallableSignature(session) ?: return null
+    val callableSignature = firCallableSignature.signature
+    if (callableSignature.isSuspend) return null
     return buildProperty {
         resolvePhase = FirResolvePhase.BODY_RESOLVE
         moduleData = session.moduleData
@@ -66,8 +68,7 @@ internal fun FirExtension.buildNativeProperty(
             typeParameters.substitutor
         )
 
-        returnTypeRef = callableSignature.returnType
-            .toNativeConeKotlinType(session)
+        returnTypeRef = firCallableSignature.getNativeType(callableSignature.returnType)
             .let(typeParameters.substitutor::substituteOrSelf)
             .toFirResolvedTypeRef()
 

@@ -31,7 +31,8 @@ internal fun FirExtension.buildStateFlowValueProperty(
     originalSymbol: FirPropertySymbol,
     annotation: NativeCoroutinesAnnotation
 ): FirPropertySymbol? {
-    val callableSignature = originalSymbol.getCallableSignature(session) ?: return null
+    val firCallableSignature = originalSymbol.getCallableSignature(session) ?: return null
+    val callableSignature = firCallableSignature.signature
     if (callableSignature.isSuspend) return null
     if (callableSignature.returnType !is CallableSignature.Type.Flow.State) return null
     return buildProperty {
@@ -69,12 +70,11 @@ internal fun FirExtension.buildStateFlowValueProperty(
             typeParameters.substitutor
         )
 
-        returnTypeRef = callableSignature.returnType.valueType
-            .toNativeConeKotlinType(session)
+        returnTypeRef = firCallableSignature.getNativeType(callableSignature.returnType.valueType)
             .let(typeParameters.substitutor::substituteOrSelf)
             .toFirResolvedTypeRef()
 
-        isVar = callableSignature.returnType.isMutable && !callableSignature.returnType.rawType.type.isNullable
+        isVar = callableSignature.returnType.isMutable
         getter = buildPropertyGetter(session, originalSymbol)
         if (isVar) {
             setter = buildPropertySetter()
