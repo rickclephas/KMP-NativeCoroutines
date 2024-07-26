@@ -65,6 +65,14 @@ public class BoxTest internal constructor() {
         collect(nativeFlow, maxValues)
     }
 
+    public fun <T> value(value: T) {
+        resultBuilder.appendLine(value)
+    }
+
+    public fun <T> values(values: List<T>) {
+        resultBuilder.appendLine(values.joinToString(","))
+    }
+
     override fun toString(): String = resultBuilder.toString()
 }
 
