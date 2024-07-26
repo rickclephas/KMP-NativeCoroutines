@@ -55,14 +55,24 @@ internal fun FirExtension.buildStateFlowValueProperty(
 
         dispatchReceiverType = originalSymbol.dispatchReceiverType
 
-        // TODO: support typeParameters
-        if (originalSymbol.typeParameterSymbols.isNotEmpty()) return null
-        // TODO: contextReceivers
-        // TODO: receiverParameter
+        val typeParameters = buildTypeParametersCopy(
+            originalSymbol.typeParameterSymbols,
+            symbol,
+            origin
+        )
+        this.typeParameters.addAll(typeParameters.parameters)
 
-        // TODO: replace type parameters in returnTypeRef
+        // TODO: contextReceivers
+
+        receiverParameter = buildReceiverParameterCopy(
+            originalSymbol.receiverParameter,
+            typeParameters.substitutor
+        )
+
         returnTypeRef = callableSignature.returnType.valueType
-            .toNativeConeKotlinType(session).toFirResolvedTypeRef()
+            .toNativeConeKotlinType(session)
+            .let(typeParameters.substitutor::substituteOrSelf)
+            .toFirResolvedTypeRef()
 
         isVar = callableSignature.returnType.isMutable
         getter = buildPropertyGetter(session, originalSymbol)

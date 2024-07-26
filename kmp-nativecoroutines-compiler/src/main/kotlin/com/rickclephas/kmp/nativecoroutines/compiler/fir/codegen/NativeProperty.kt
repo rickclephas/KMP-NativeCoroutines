@@ -52,17 +52,26 @@ internal fun FirExtension.buildNativeProperty(
 
         dispatchReceiverType = originalSymbol.dispatchReceiverType
 
-        // TODO: support typeParameters
-        if (originalSymbol.typeParameterSymbols.isNotEmpty()) return null
-        // TODO: contextReceivers
-        // TODO: receiverParameter
+        val typeParameters = buildTypeParametersCopy(
+            originalSymbol.typeParameterSymbols,
+            symbol,
+            origin
+        )
+        this.typeParameters.addAll(typeParameters.parameters)
 
-        // TODO: replace type parameters in returnTypeRef
+        // TODO: contextReceivers
+
+        receiverParameter = buildReceiverParameterCopy(
+            originalSymbol.receiverParameter,
+            typeParameters.substitutor
+        )
+
         returnTypeRef = callableSignature.returnType
-            .toNativeConeKotlinType(session).toFirResolvedTypeRef()
+            .toNativeConeKotlinType(session)
+            .let(typeParameters.substitutor::substituteOrSelf)
+            .toFirResolvedTypeRef()
 
         isVar = false
-        // TODO: replace type parameters in getter?
         getter = buildPropertyGetter(session, originalSymbol)
 
         isLocal = false

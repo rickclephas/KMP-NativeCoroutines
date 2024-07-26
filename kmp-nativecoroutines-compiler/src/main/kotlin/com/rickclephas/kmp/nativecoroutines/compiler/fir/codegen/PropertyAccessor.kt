@@ -25,7 +25,6 @@ internal fun FirPropertyBuilder.buildPropertyGetter(
     propertySymbol = this@buildPropertyGetter.symbol
     isGetter = true
     body = session.buildCallableReferenceBlock(originalSymbol)
-    // TODO: other properties?
 }
 
 internal fun FirPropertyBuilder.buildPropertySetter(): FirPropertyAccessor = buildPropertyAccessor {
@@ -47,5 +46,4 @@ internal fun FirPropertyBuilder.buildPropertySetter(): FirPropertyAccessor = bui
         }
     )
     isGetter = false
-    // TODO: other properties?
 }
