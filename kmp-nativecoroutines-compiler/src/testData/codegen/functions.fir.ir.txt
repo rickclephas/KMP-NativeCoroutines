@@ -1,0 +1,352 @@
+FILE fqName:<root> fileName:/functions.kt
+  CLASS CLASS name:MyClass14 modality:FINAL visibility:public superTypes:[kotlin.Any]
+    $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:<root>.MyClass14<T of <root>.MyClass14>
+    TYPE_PARAMETER name:T index:0 variance: superTypes:[kotlin.Any?] reified:false
+    PROPERTY name:value visibility:private modality:FINAL [val]
+      FIELD PROPERTY_BACKING_FIELD name:value type:T of <root>.MyClass14 visibility:private [final]
+        EXPRESSION_BODY
+          GET_VAR 'value: T of <root>.MyClass14 declared in <root>.MyClass14.<init>' type=T of <root>.MyClass14 origin=INITIALIZE_PROPERTY_FROM_PARAMETER
+      FUN DEFAULT_PROPERTY_ACCESSOR name:<get-value> visibility:private modality:FINAL <> ($this:<root>.MyClass14<T of <root>.MyClass14>) returnType:T of <root>.MyClass14
+        correspondingProperty: PROPERTY name:value visibility:private modality:FINAL [val]
+        $this: VALUE_PARAMETER name:<this> type:<root>.MyClass14<T of <root>.MyClass14>
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='private final fun <get-value> (): T of <root>.MyClass14 declared in <root>.MyClass14'
+            GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:value type:T of <root>.MyClass14 visibility:private [final]' type=T of <root>.MyClass14 origin=null
+              receiver: GET_VAR '<this>: <root>.MyClass14<T of <root>.MyClass14> declared in <root>.MyClass14.<get-value>' type=<root>.MyClass14<T of <root>.MyClass14> origin=null
+    CONSTRUCTOR visibility:public <> (value:T of <root>.MyClass14) returnType:<root>.MyClass14<T of <root>.MyClass14> [primary]
+      VALUE_PARAMETER name:value index:0 type:T of <root>.MyClass14
+      BLOCK_BODY
+        DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
+        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:MyClass14 modality:FINAL visibility:public superTypes:[kotlin.Any]'
+    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
+      overridden:
+        public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in kotlin.Any
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+      VALUE_PARAMETER name:other index:0 type:kotlin.Any?
+    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN <> ($this:kotlin.Any) returnType:kotlin.Int [fake_override]
+      overridden:
+        public open fun hashCode (): kotlin.Int declared in kotlin.Any
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+    FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN <> ($this:kotlin.Any) returnType:kotlin.String [fake_override]
+      overridden:
+        public open fun toString (): kotlin.String declared in kotlin.Any
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+    FUN GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:returnGenericSuspendValueNative visibility:public modality:FINAL <> ($this:<root>.MyClass14<T of <root>.MyClass14>) returnType:kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<T of <root>.MyClass14, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>
+      annotations:
+        ObjCName(name = "returnGenericSuspendValue", swiftName = <null>, exact = <null>)
+      $this: VALUE_PARAMETER name:<this> type:<root>.MyClass14<T of <root>.MyClass14>
+      BLOCK_BODY
+        VAR IR_TEMPORARY_VARIABLE name:tmp_0 type:kotlinx.coroutines.CoroutineScope? [val]
+          CONST Null type=kotlinx.coroutines.CoroutineScope? value=null
+        RETURN type=kotlin.Nothing from='public final fun returnGenericSuspendValueNative (): kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<T of <root>.MyClass14, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> declared in <root>.MyClass14'
+          CALL 'public final fun nativeSuspend <T> (scope: kotlinx.coroutines.CoroutineScope?, block: kotlin.coroutines.SuspendFunction0<T of com.rickclephas.kmp.nativecoroutines.nativeSuspend>): kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<T of com.rickclephas.kmp.nativecoroutines.nativeSuspend, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> declared in com.rickclephas.kmp.nativecoroutines' type=kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<T of <root>.MyClass14, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> origin=null
+            <T>: T of <root>.MyClass14
+            scope: GET_VAR 'val tmp_0: kotlinx.coroutines.CoroutineScope? declared in <root>.MyClass14.returnGenericSuspendValueNative' type=kotlinx.coroutines.CoroutineScope? origin=null
+            block: FUN_EXPR type=kotlin.coroutines.SuspendFunction0<T of <root>.MyClass14> origin=LAMBDA
+              FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> () returnType:T of <root>.MyClass14 [suspend]
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='local final fun <anonymous> (): T of <root>.MyClass14 declared in <root>.MyClass14.returnGenericSuspendValueNative'
+                    CALL 'public final fun returnGenericSuspendValue (): T of <root>.MyClass14 declared in <root>.MyClass14' type=T of <root>.MyClass14 origin=null
+                      $this: GET_VAR '<this>: <root>.MyClass14<T of <root>.MyClass14> declared in <root>.MyClass14.returnGenericSuspendValueNative' type=<root>.MyClass14<T of <root>.MyClass14> origin=null
+    FUN name:returnGenericSuspendValue visibility:public modality:FINAL <> ($this:<root>.MyClass14<T of <root>.MyClass14>) returnType:T of <root>.MyClass14 [suspend]
+      annotations:
+        NativeCoroutines
+      $this: VALUE_PARAMETER name:<this> type:<root>.MyClass14<T of <root>.MyClass14>
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public final fun returnGenericSuspendValue (): T of <root>.MyClass14 declared in <root>.MyClass14'
+          CALL 'private final fun <get-value> (): T of <root>.MyClass14 declared in <root>.MyClass14' type=T of <root>.MyClass14 origin=GET_PROPERTY
+            $this: GET_VAR '<this>: <root>.MyClass14<T of <root>.MyClass14> declared in <root>.MyClass14.returnGenericSuspendValue' type=<root>.MyClass14<T of <root>.MyClass14> origin=null
+  CLASS CLASS name:MyClass16 modality:FINAL visibility:public superTypes:[kotlin.Any]
+    $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:<root>.MyClass16
+    CONSTRUCTOR visibility:public <> () returnType:<root>.MyClass16 [primary]
+      BLOCK_BODY
+        DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
+        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:MyClass16 modality:FINAL visibility:public superTypes:[kotlin.Any]'
+    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
+      overridden:
+        public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in kotlin.Any
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+      VALUE_PARAMETER name:other index:0 type:kotlin.Any?
+    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN <> ($this:kotlin.Any) returnType:kotlin.Int [fake_override]
+      overridden:
+        public open fun hashCode (): kotlin.Int declared in kotlin.Any
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+    FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN <> ($this:kotlin.Any) returnType:kotlin.String [fake_override]
+      overridden:
+        public open fun toString (): kotlin.String declared in kotlin.Any
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+    FUN GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:functionWithGenericValuesNative visibility:public modality:FINAL <T1, T2> ($this:<root>.MyClass16, value1:T1 of <root>.MyClass16.functionWithGenericValuesNative, value2:T2 of <root>.MyClass16.functionWithGenericValuesNative) returnType:kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>
+      annotations:
+        ObjCName(name = "functionWithGenericValues", swiftName = <null>, exact = <null>)
+      TYPE_PARAMETER GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:T1 index:0 variance: superTypes:[kotlin.Any?] reified:false
+      TYPE_PARAMETER GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:T2 index:1 variance: superTypes:[T1 of <root>.MyClass16.functionWithGenericValuesNative] reified:false
+      $this: VALUE_PARAMETER name:<this> type:<root>.MyClass16
+      VALUE_PARAMETER GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:value1 index:0 type:T1 of <root>.MyClass16.functionWithGenericValuesNative
+      VALUE_PARAMETER GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:value2 index:1 type:T2 of <root>.MyClass16.functionWithGenericValuesNative
+      BLOCK_BODY
+        VAR IR_TEMPORARY_VARIABLE name:tmp_1 type:kotlinx.coroutines.CoroutineScope? [val]
+          CONST Null type=kotlinx.coroutines.CoroutineScope? value=null
+        RETURN type=kotlin.Nothing from='public final fun functionWithGenericValuesNative <T1, T2> (value1: T1 of <root>.MyClass16.functionWithGenericValuesNative, value2: T2 of <root>.MyClass16.functionWithGenericValuesNative): kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> declared in <root>.MyClass16'
+          CALL 'public final fun nativeSuspend <T> (scope: kotlinx.coroutines.CoroutineScope?, block: kotlin.coroutines.SuspendFunction0<T of com.rickclephas.kmp.nativecoroutines.nativeSuspend>): kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<T of com.rickclephas.kmp.nativecoroutines.nativeSuspend, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> declared in com.rickclephas.kmp.nativecoroutines' type=kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> origin=null
+            <T>: kotlin.String
+            scope: GET_VAR 'val tmp_1: kotlinx.coroutines.CoroutineScope? declared in <root>.MyClass16.functionWithGenericValuesNative' type=kotlinx.coroutines.CoroutineScope? origin=null
+            block: FUN_EXPR type=kotlin.coroutines.SuspendFunction0<kotlin.String> origin=LAMBDA
+              FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> () returnType:kotlin.String [suspend]
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='local final fun <anonymous> (): kotlin.String declared in <root>.MyClass16.functionWithGenericValuesNative'
+                    CALL 'public final fun functionWithGenericValues <T1, T2> (value1: T1 of <root>.MyClass16.functionWithGenericValues, value2: T2 of <root>.MyClass16.functionWithGenericValues): kotlin.String declared in <root>.MyClass16' type=kotlin.String origin=null
+                      <T1>: T1 of <root>.MyClass16.functionWithGenericValuesNative
+                      <T2>: T2 of <root>.MyClass16.functionWithGenericValuesNative
+                      $this: GET_VAR '<this>: <root>.MyClass16 declared in <root>.MyClass16.functionWithGenericValuesNative' type=<root>.MyClass16 origin=null
+                      value1: GET_VAR 'value1: T1 of <root>.MyClass16.functionWithGenericValuesNative declared in <root>.MyClass16.functionWithGenericValuesNative' type=T1 of <root>.MyClass16.functionWithGenericValuesNative origin=null
+                      value2: GET_VAR 'value2: T2 of <root>.MyClass16.functionWithGenericValuesNative declared in <root>.MyClass16.functionWithGenericValuesNative' type=T2 of <root>.MyClass16.functionWithGenericValuesNative origin=null
+    FUN name:functionWithGenericValues visibility:public modality:FINAL <T1, T2> ($this:<root>.MyClass16, value1:T1 of <root>.MyClass16.functionWithGenericValues, value2:T2 of <root>.MyClass16.functionWithGenericValues) returnType:kotlin.String [suspend]
+      annotations:
+        NativeCoroutines
+      TYPE_PARAMETER name:T1 index:0 variance: superTypes:[kotlin.Any?] reified:false
+      TYPE_PARAMETER name:T2 index:1 variance: superTypes:[T1 of <root>.MyClass16.functionWithGenericValues] reified:false
+      $this: VALUE_PARAMETER name:<this> type:<root>.MyClass16
+      VALUE_PARAMETER name:value1 index:0 type:T1 of <root>.MyClass16.functionWithGenericValues
+      VALUE_PARAMETER name:value2 index:1 type:T2 of <root>.MyClass16.functionWithGenericValues
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public final fun functionWithGenericValues <T1, T2> (value1: T1 of <root>.MyClass16.functionWithGenericValues, value2: T2 of <root>.MyClass16.functionWithGenericValues): kotlin.String declared in <root>.MyClass16'
+          CALL 'public final fun plus (other: kotlin.Any?): kotlin.String declared in kotlin.String' type=kotlin.String origin=PLUS
+            $this: CALL 'public final fun toString (): kotlin.String declared in kotlin' type=kotlin.String origin=null
+              $receiver: GET_VAR 'value1: T1 of <root>.MyClass16.functionWithGenericValues declared in <root>.MyClass16.functionWithGenericValues' type=T1 of <root>.MyClass16.functionWithGenericValues origin=null
+            other: CALL 'public final fun toString (): kotlin.String declared in kotlin' type=kotlin.String origin=null
+              $receiver: GET_VAR 'value2: T2 of <root>.MyClass16.functionWithGenericValues declared in <root>.MyClass16.functionWithGenericValues' type=T2 of <root>.MyClass16.functionWithGenericValues origin=null
+  CLASS CLASS name:MyClass8 modality:FINAL visibility:public superTypes:[kotlin.Any]
+    $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:<root>.MyClass8
+    CONSTRUCTOR visibility:public <> () returnType:<root>.MyClass8 [primary]
+      BLOCK_BODY
+        DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
+        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:MyClass8 modality:FINAL visibility:public superTypes:[kotlin.Any]'
+    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
+      overridden:
+        public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in kotlin.Any
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+      VALUE_PARAMETER name:other index:0 type:kotlin.Any?
+    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN <> ($this:kotlin.Any) returnType:kotlin.Int [fake_override]
+      overridden:
+        public open fun hashCode (): kotlin.Int declared in kotlin.Any
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+    FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN <> ($this:kotlin.Any) returnType:kotlin.String [fake_override]
+      overridden:
+        public open fun toString (): kotlin.String declared in kotlin.Any
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+    FUN GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:returnSuspendValueNative visibility:public modality:FINAL <> ($this:<root>.MyClass8) returnType:kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>
+      annotations:
+        ObjCName(name = "returnSuspendValue", swiftName = <null>, exact = <null>)
+      $this: VALUE_PARAMETER name:<this> type:<root>.MyClass8
+      BLOCK_BODY
+        VAR IR_TEMPORARY_VARIABLE name:tmp_2 type:kotlinx.coroutines.CoroutineScope? [val]
+          CONST Null type=kotlinx.coroutines.CoroutineScope? value=null
+        RETURN type=kotlin.Nothing from='public final fun returnSuspendValueNative (): kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> declared in <root>.MyClass8'
+          CALL 'public final fun nativeSuspend <T> (scope: kotlinx.coroutines.CoroutineScope?, block: kotlin.coroutines.SuspendFunction0<T of com.rickclephas.kmp.nativecoroutines.nativeSuspend>): kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<T of com.rickclephas.kmp.nativecoroutines.nativeSuspend, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> declared in com.rickclephas.kmp.nativecoroutines' type=kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> origin=null
+            <T>: kotlin.String
+            scope: GET_VAR 'val tmp_2: kotlinx.coroutines.CoroutineScope? declared in <root>.MyClass8.returnSuspendValueNative' type=kotlinx.coroutines.CoroutineScope? origin=null
+            block: FUN_EXPR type=kotlin.coroutines.SuspendFunction0<kotlin.String> origin=LAMBDA
+              FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> () returnType:kotlin.String [suspend]
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='local final fun <anonymous> (): kotlin.String declared in <root>.MyClass8.returnSuspendValueNative'
+                    CALL 'public final fun returnSuspendValue (): kotlin.String declared in <root>.MyClass8' type=kotlin.String origin=null
+                      $this: GET_VAR '<this>: <root>.MyClass8 declared in <root>.MyClass8.returnSuspendValueNative' type=<root>.MyClass8 origin=null
+    FUN name:returnSuspendValue visibility:public modality:FINAL <> ($this:<root>.MyClass8) returnType:kotlin.String [suspend]
+      annotations:
+        NativeCoroutines
+      $this: VALUE_PARAMETER name:<this> type:<root>.MyClass8
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public final fun returnSuspendValue (): kotlin.String declared in <root>.MyClass8'
+          CONST String type=kotlin.String value="OK8"
+  FUN name:box visibility:public modality:FINAL <> () returnType:kotlin.String
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in <root>'
+        CALL 'public final fun runBoxTest (action: @[ExtensionFunctionType] kotlin.coroutines.SuspendFunction1<com.rickclephas.kmp.nativecoroutines.BoxTest, kotlin.Unit>): kotlin.String declared in com.rickclephas.kmp.nativecoroutines' type=kotlin.String origin=null
+          action: FUN_EXPR type=@[ExtensionFunctionType] kotlin.coroutines.SuspendFunction1<com.rickclephas.kmp.nativecoroutines.BoxTest, kotlin.Unit> origin=LAMBDA
+            FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> ($receiver:com.rickclephas.kmp.nativecoroutines.BoxTest) returnType:kotlin.Unit [suspend]
+              $receiver: VALUE_PARAMETER name:$this$runBoxTest type:com.rickclephas.kmp.nativecoroutines.BoxTest
+              BLOCK_BODY
+                CALL 'public final fun await <T> (nativeSuspend: kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<T of com.rickclephas.kmp.nativecoroutines.BoxTest.await, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>): kotlin.Unit declared in com.rickclephas.kmp.nativecoroutines.BoxTest' type=kotlin.Unit origin=null
+                  <T>: kotlin.String
+                  $this: GET_VAR '$this$runBoxTest: com.rickclephas.kmp.nativecoroutines.BoxTest declared in <root>.box.<anonymous>' type=com.rickclephas.kmp.nativecoroutines.BoxTest origin=null
+                  nativeSuspend: CALL 'public final fun returnSuspendValueNative (): kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> declared in <root>' type=kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> origin=null
+                CALL 'public final fun await <T> (nativeSuspend: kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<T of com.rickclephas.kmp.nativecoroutines.BoxTest.await, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>): kotlin.Unit declared in com.rickclephas.kmp.nativecoroutines.BoxTest' type=kotlin.Unit origin=null
+                  <T>: kotlin.String?
+                  $this: GET_VAR '$this$runBoxTest: com.rickclephas.kmp.nativecoroutines.BoxTest declared in <root>.box.<anonymous>' type=com.rickclephas.kmp.nativecoroutines.BoxTest origin=null
+                  nativeSuspend: CALL 'public final fun returnNullableSuspendValueNative (): kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> declared in <root>' type=kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> origin=null
+                CALL 'public final fun collect <T> (nativeFlow: kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<T of com.rickclephas.kmp.nativecoroutines.BoxTest.collect, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>, maxValues: kotlin.Int?): kotlin.Unit declared in com.rickclephas.kmp.nativecoroutines.BoxTest' type=kotlin.Unit origin=null
+                  <T>: kotlin.String
+                  $this: GET_VAR '$this$runBoxTest: com.rickclephas.kmp.nativecoroutines.BoxTest declared in <root>.box.<anonymous>' type=com.rickclephas.kmp.nativecoroutines.BoxTest origin=null
+                  nativeFlow: CALL 'public final fun returnFlowValueNative (): kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<kotlin.String, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> declared in <root>' type=kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<kotlin.String, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> origin=null
+                CALL 'public final fun collect <T> (nativeFlow: kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<T of com.rickclephas.kmp.nativecoroutines.BoxTest.collect, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>, maxValues: kotlin.Int?): kotlin.Unit declared in com.rickclephas.kmp.nativecoroutines.BoxTest' type=kotlin.Unit origin=null
+                  <T>: kotlin.String?
+                  $this: GET_VAR '$this$runBoxTest: com.rickclephas.kmp.nativecoroutines.BoxTest declared in <root>.box.<anonymous>' type=com.rickclephas.kmp.nativecoroutines.BoxTest origin=null
+                  nativeFlow: CALL 'public final fun returnNullableFlowValueNative (): kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<kotlin.String?, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> declared in <root>' type=kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<kotlin.String?, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> origin=null
+                CALL 'public final fun value <T> (value: T of com.rickclephas.kmp.nativecoroutines.BoxTest.value): kotlin.Unit declared in com.rickclephas.kmp.nativecoroutines.BoxTest' type=kotlin.Unit origin=null
+                  <T>: kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<kotlin.String, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>?
+                  $this: GET_VAR '$this$runBoxTest: com.rickclephas.kmp.nativecoroutines.BoxTest declared in <root>.box.<anonymous>' type=com.rickclephas.kmp.nativecoroutines.BoxTest origin=null
+                  value: CALL 'public final fun returnNullableFlowNative (): kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<kotlin.String, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>? declared in <root>' type=kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<kotlin.String, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>? origin=null
+                CALL 'public final fun value <T> (value: T of com.rickclephas.kmp.nativecoroutines.BoxTest.value): kotlin.Unit declared in com.rickclephas.kmp.nativecoroutines.BoxTest' type=kotlin.Unit origin=null
+                  <T>: kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<kotlin.String?, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>?
+                  $this: GET_VAR '$this$runBoxTest: com.rickclephas.kmp.nativecoroutines.BoxTest declared in <root>.box.<anonymous>' type=com.rickclephas.kmp.nativecoroutines.BoxTest origin=null
+                  value: CALL 'public final fun returnNullableFlowAndValueNative (): kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<kotlin.String?, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>? declared in <root>' type=kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<kotlin.String?, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>? origin=null
+                CALL 'public final fun collect <T> (nativeFlow: kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<T of com.rickclephas.kmp.nativecoroutines.BoxTest.collect, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>, maxValues: kotlin.Int?): kotlin.Unit declared in com.rickclephas.kmp.nativecoroutines.BoxTest' type=kotlin.Unit origin=null
+                  <T>: kotlin.String
+                  $this: GET_VAR '$this$runBoxTest: com.rickclephas.kmp.nativecoroutines.BoxTest declared in <root>.box.<anonymous>' type=com.rickclephas.kmp.nativecoroutines.BoxTest origin=null
+                  nativeFlow: CALL 'public final fun returnStateFlowValueNative (): kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<kotlin.String, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> declared in <root>' type=kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<kotlin.String, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> origin=null
+                  maxValues: CONST Int type=kotlin.Int value=1
+                CALL 'public final fun await <T> (nativeSuspend: kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<T of com.rickclephas.kmp.nativecoroutines.BoxTest.await, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>): kotlin.Unit declared in com.rickclephas.kmp.nativecoroutines.BoxTest' type=kotlin.Unit origin=null
+                  <T>: kotlin.String
+                  $this: GET_VAR '$this$runBoxTest: com.rickclephas.kmp.nativecoroutines.BoxTest declared in <root>.box.<anonymous>' type=com.rickclephas.kmp.nativecoroutines.BoxTest origin=null
+                  nativeSuspend: CALL 'public final fun returnSuspendValueNative (): kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> declared in <root>.MyClass8' type=kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> origin=null
+                    $this: CONSTRUCTOR_CALL 'public constructor <init> () declared in <root>.MyClass8' type=<root>.MyClass8 origin=null
+                CALL 'public final fun await <T> (nativeSuspend: kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<T of com.rickclephas.kmp.nativecoroutines.BoxTest.await, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>): kotlin.Unit declared in com.rickclephas.kmp.nativecoroutines.BoxTest' type=kotlin.Unit origin=null
+                  <T>: kotlin.String
+                  $this: GET_VAR '$this$runBoxTest: com.rickclephas.kmp.nativecoroutines.BoxTest declared in <root>.box.<anonymous>' type=com.rickclephas.kmp.nativecoroutines.BoxTest origin=null
+                  nativeSuspend: CALL 'public final fun returnSuspendParameterValueNative (value: kotlin.String): kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> declared in <root>' type=kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> origin=null
+                    value: CONST String type=kotlin.String value="OK9"
+                CALL 'public final fun await <T> (nativeSuspend: kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<T of com.rickclephas.kmp.nativecoroutines.BoxTest.await, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>): kotlin.Unit declared in com.rickclephas.kmp.nativecoroutines.BoxTest' type=kotlin.Unit origin=null
+                  <T>: kotlin.Int
+                  $this: GET_VAR '$this$runBoxTest: com.rickclephas.kmp.nativecoroutines.BoxTest declared in <root>.box.<anonymous>' type=com.rickclephas.kmp.nativecoroutines.BoxTest origin=null
+                  nativeSuspend: CALL 'public final fun returnSuspendParameterValueNative (value: kotlin.Int): kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.Int, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> declared in <root>' type=kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.Int, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> origin=null
+                    value: CONST Int type=kotlin.Int value=9
+                CALL 'public final fun await <T> (nativeSuspend: kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<T of com.rickclephas.kmp.nativecoroutines.BoxTest.await, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>): kotlin.Unit declared in com.rickclephas.kmp.nativecoroutines.BoxTest' type=kotlin.Unit origin=null
+                  <T>: kotlin.String
+                  $this: GET_VAR '$this$runBoxTest: com.rickclephas.kmp.nativecoroutines.BoxTest declared in <root>.box.<anonymous>' type=com.rickclephas.kmp.nativecoroutines.BoxTest origin=null
+                  nativeSuspend: CALL 'public final fun returnThrowsSuspendValueNative (): kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> declared in <root>' type=kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> origin=null
+                CALL 'public final fun await <T> (nativeSuspend: kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<T of com.rickclephas.kmp.nativecoroutines.BoxTest.await, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>): kotlin.Unit declared in com.rickclephas.kmp.nativecoroutines.BoxTest' type=kotlin.Unit origin=null
+                  <T>: kotlin.String
+                  $this: GET_VAR '$this$runBoxTest: com.rickclephas.kmp.nativecoroutines.BoxTest declared in <root>.box.<anonymous>' type=com.rickclephas.kmp.nativecoroutines.BoxTest origin=null
+                  nativeSuspend: CALL 'public final fun returnSuspendVarargValueNative (vararg values: kotlin.String): kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> declared in <root>' type=kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> origin=null
+                    values: VARARG type=kotlin.Array<out kotlin.String> varargElementType=kotlin.String
+                      CONST String type=kotlin.String value="OK11"
+                CALL 'public final fun await <T> (nativeSuspend: kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<T of com.rickclephas.kmp.nativecoroutines.BoxTest.await, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>): kotlin.Unit declared in com.rickclephas.kmp.nativecoroutines.BoxTest' type=kotlin.Unit origin=null
+                  <T>: kotlin.String
+                  $this: GET_VAR '$this$runBoxTest: com.rickclephas.kmp.nativecoroutines.BoxTest declared in <root>.box.<anonymous>' type=com.rickclephas.kmp.nativecoroutines.BoxTest origin=null
+                  nativeSuspend: CALL 'public final fun returnGenericSuspendValueNative (): kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<T of <root>.MyClass14, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> declared in <root>.MyClass14' type=kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> origin=null
+                    $this: CONSTRUCTOR_CALL 'public constructor <init> (value: T of <root>.MyClass14) declared in <root>.MyClass14' type=<root>.MyClass14<kotlin.String> origin=null
+                      <class: T>: kotlin.String
+                      value: CONST String type=kotlin.String value="OK12"
+                CALL 'public final fun await <T> (nativeSuspend: kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<T of com.rickclephas.kmp.nativecoroutines.BoxTest.await, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>): kotlin.Unit declared in com.rickclephas.kmp.nativecoroutines.BoxTest' type=kotlin.Unit origin=null
+                  <T>: kotlin.String
+                  $this: GET_VAR '$this$runBoxTest: com.rickclephas.kmp.nativecoroutines.BoxTest declared in <root>.box.<anonymous>' type=com.rickclephas.kmp.nativecoroutines.BoxTest origin=null
+                  nativeSuspend: CALL 'public final fun returnRefinedSuspendValueNative (): kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> declared in <root>' type=kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> origin=null
+                CALL 'public final fun awaitAndCollect <T> (nativeSuspendFlow: kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<T of com.rickclephas.kmp.nativecoroutines.BoxTest.awaitAndCollect, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>, maxValues: kotlin.Int?): kotlin.Unit declared in com.rickclephas.kmp.nativecoroutines.BoxTest' type=kotlin.Unit origin=null
+                  <T>: kotlin.String
+                  $this: GET_VAR '$this$runBoxTest: com.rickclephas.kmp.nativecoroutines.BoxTest declared in <root>.box.<anonymous>' type=com.rickclephas.kmp.nativecoroutines.BoxTest origin=null
+                  nativeSuspendFlow: CALL 'public final fun returnSuspendFlowValueNative (): kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<kotlin.String, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> declared in <root>' type=kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<kotlin.String, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> origin=null
+                CALL 'public final fun await <T> (nativeSuspend: kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<T of com.rickclephas.kmp.nativecoroutines.BoxTest.await, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>): kotlin.Unit declared in com.rickclephas.kmp.nativecoroutines.BoxTest' type=kotlin.Unit origin=null
+                  <T>: kotlin.String
+                  $this: GET_VAR '$this$runBoxTest: com.rickclephas.kmp.nativecoroutines.BoxTest declared in <root>.box.<anonymous>' type=com.rickclephas.kmp.nativecoroutines.BoxTest origin=null
+                  nativeSuspend: CALL 'public final fun returnGenericSuspendValueNative <T> (value: T of <root>.returnGenericSuspendValueNative): kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<T of <root>.returnGenericSuspendValueNative, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> declared in <root>' type=kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> origin=null
+                    <T>: kotlin.String
+                    value: CONST String type=kotlin.String value="OK15"
+                CALL 'public final fun await <T> (nativeSuspend: kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<T of com.rickclephas.kmp.nativecoroutines.BoxTest.await, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>): kotlin.Unit declared in com.rickclephas.kmp.nativecoroutines.BoxTest' type=kotlin.Unit origin=null
+                  <T>: kotlin.String
+                  $this: GET_VAR '$this$runBoxTest: com.rickclephas.kmp.nativecoroutines.BoxTest declared in <root>.box.<anonymous>' type=com.rickclephas.kmp.nativecoroutines.BoxTest origin=null
+                  nativeSuspend: CALL 'public final fun functionWithGenericValuesNative <T1, T2> (value1: T1 of <root>.MyClass16.functionWithGenericValuesNative, value2: T2 of <root>.MyClass16.functionWithGenericValuesNative): kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> declared in <root>.MyClass16' type=kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> origin=null
+                    <T1>: kotlin.CharSequence
+                    <T2>: kotlin.String
+                    $this: CONSTRUCTOR_CALL 'public constructor <init> () declared in <root>.MyClass16' type=<root>.MyClass16 origin=null
+                    value1: CONST String type=kotlin.String value="OK"
+                    value2: CONST String type=kotlin.String value="16"
+  FUN name:returnFlowValue visibility:public modality:FINAL <> () returnType:kotlinx.coroutines.flow.Flow<kotlin.String>
+    annotations:
+      NativeCoroutines
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun returnFlowValue (): kotlinx.coroutines.flow.Flow<kotlin.String> declared in <root>'
+        CALL 'public final fun flowOf <T> (value: T of kotlinx.coroutines.flow.flowOf): kotlinx.coroutines.flow.Flow<T of kotlinx.coroutines.flow.flowOf> declared in kotlinx.coroutines.flow' type=kotlinx.coroutines.flow.Flow<kotlin.String> origin=null
+          <T>: kotlin.String
+          value: CONST String type=kotlin.String value="OK3"
+  FUN name:returnGenericSuspendValue visibility:public modality:FINAL <T> (value:T of <root>.returnGenericSuspendValue) returnType:T of <root>.returnGenericSuspendValue [suspend]
+    annotations:
+      NativeCoroutines
+    TYPE_PARAMETER name:T index:0 variance: superTypes:[kotlin.Any?] reified:false
+    VALUE_PARAMETER name:value index:0 type:T of <root>.returnGenericSuspendValue
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun returnGenericSuspendValue <T> (value: T of <root>.returnGenericSuspendValue): T of <root>.returnGenericSuspendValue declared in <root>'
+        GET_VAR 'value: T of <root>.returnGenericSuspendValue declared in <root>.returnGenericSuspendValue' type=T of <root>.returnGenericSuspendValue origin=null
+  FUN name:returnNullableFlow visibility:public modality:FINAL <> () returnType:kotlinx.coroutines.flow.Flow<kotlin.String>?
+    annotations:
+      NativeCoroutines
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun returnNullableFlow (): kotlinx.coroutines.flow.Flow<kotlin.String>? declared in <root>'
+        CONST Null type=kotlin.Nothing? value=null
+  FUN name:returnNullableFlowAndValue visibility:public modality:FINAL <> () returnType:kotlinx.coroutines.flow.Flow<kotlin.String?>?
+    annotations:
+      NativeCoroutines
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun returnNullableFlowAndValue (): kotlinx.coroutines.flow.Flow<kotlin.String?>? declared in <root>'
+        CONST Null type=kotlin.Nothing? value=null
+  FUN name:returnNullableFlowValue visibility:public modality:FINAL <> () returnType:kotlinx.coroutines.flow.Flow<kotlin.String?>
+    annotations:
+      NativeCoroutines
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun returnNullableFlowValue (): kotlinx.coroutines.flow.Flow<kotlin.String?> declared in <root>'
+        CALL 'public final fun flowOf <T> (value: T of kotlinx.coroutines.flow.flowOf): kotlinx.coroutines.flow.Flow<T of kotlinx.coroutines.flow.flowOf> declared in kotlinx.coroutines.flow' type=kotlinx.coroutines.flow.Flow<kotlin.String?> origin=null
+          <T>: kotlin.String?
+          value: CONST Null type=kotlin.Nothing? value=null
+  FUN name:returnNullableSuspendValue visibility:public modality:FINAL <> () returnType:kotlin.String? [suspend]
+    annotations:
+      NativeCoroutines
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun returnNullableSuspendValue (): kotlin.String? declared in <root>'
+        CONST Null type=kotlin.Nothing? value=null
+  FUN name:returnRefinedSuspendValue visibility:public modality:FINAL <> () returnType:kotlin.String [suspend]
+    annotations:
+      NativeCoroutinesRefined
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun returnRefinedSuspendValue (): kotlin.String declared in <root>'
+        CONST String type=kotlin.String value="OK13"
+  FUN name:returnStateFlowValue visibility:public modality:FINAL <> () returnType:kotlinx.coroutines.flow.StateFlow<kotlin.String>
+    annotations:
+      NativeCoroutines
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun returnStateFlowValue (): kotlinx.coroutines.flow.StateFlow<kotlin.String> declared in <root>'
+        CALL 'public final fun MutableStateFlow <T> (value: T of kotlinx.coroutines.flow.MutableStateFlow): kotlinx.coroutines.flow.MutableStateFlow<T of kotlinx.coroutines.flow.MutableStateFlow> declared in kotlinx.coroutines.flow' type=kotlinx.coroutines.flow.MutableStateFlow<kotlin.String> origin=null
+          <T>: kotlin.String
+          value: CONST String type=kotlin.String value="OK7"
+  FUN name:returnSuspendFlowValue visibility:public modality:FINAL <> () returnType:kotlinx.coroutines.flow.Flow<kotlin.String> [suspend]
+    annotations:
+      NativeCoroutinesRefined
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun returnSuspendFlowValue (): kotlinx.coroutines.flow.Flow<kotlin.String> declared in <root>'
+        CALL 'public final fun flowOf <T> (value: T of kotlinx.coroutines.flow.flowOf): kotlinx.coroutines.flow.Flow<T of kotlinx.coroutines.flow.flowOf> declared in kotlinx.coroutines.flow' type=kotlinx.coroutines.flow.Flow<kotlin.String> origin=null
+          <T>: kotlin.String
+          value: CONST String type=kotlin.String value="OK14"
+  FUN name:returnSuspendParameterValue visibility:public modality:FINAL <> (value:kotlin.Int) returnType:kotlin.Int [suspend]
+    annotations:
+      NativeCoroutines
+    VALUE_PARAMETER name:value index:0 type:kotlin.Int
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun returnSuspendParameterValue (value: kotlin.Int): kotlin.Int declared in <root>'
+        GET_VAR 'value: kotlin.Int declared in <root>.returnSuspendParameterValue' type=kotlin.Int origin=null
+  FUN name:returnSuspendParameterValue visibility:public modality:FINAL <> (value:kotlin.String) returnType:kotlin.String [suspend]
+    annotations:
+      NativeCoroutines
+    VALUE_PARAMETER name:value index:0 type:kotlin.String
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun returnSuspendParameterValue (value: kotlin.String): kotlin.String declared in <root>'
+        GET_VAR 'value: kotlin.String declared in <root>.returnSuspendParameterValue' type=kotlin.String origin=null
+  FUN name:returnSuspendValue visibility:public modality:FINAL <> () returnType:kotlin.String [suspend]
+    annotations:
+      NativeCoroutines
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun returnSuspendValue (): kotlin.String declared in <root>'
+        CONST String type=kotlin.String value="OK1"
+  FUN name:returnSuspendVarargValue visibility:public modality:FINAL <> (values:kotlin.Array<out kotlin.String>) returnType:kotlin.String [suspend]
+    annotations:
+      NativeCoroutines
+    VALUE_PARAMETER name:values index:0 type:kotlin.Array<out kotlin.String> varargElementType:kotlin.String [vararg]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun returnSuspendVarargValue (vararg values: kotlin.String): kotlin.String declared in <root>'
+        CALL 'public final fun get (index: kotlin.Int): T of kotlin.Array declared in kotlin.Array' type=kotlin.String origin=GET_ARRAY_ELEMENT
+          $this: GET_VAR 'values: kotlin.Array<out kotlin.String> declared in <root>.returnSuspendVarargValue' type=kotlin.Array<out kotlin.String> origin=null
+          index: CONST Int type=kotlin.Int value=0
+  FUN name:returnThrowsSuspendValue visibility:public modality:FINAL <> () returnType:kotlin.String [suspend]
+    annotations:
+      Throws(exceptionClasses = [])
+      NativeCoroutines
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun returnThrowsSuspendValue (): kotlin.String declared in <root>'
+        CONST String type=kotlin.String value="OK10"
