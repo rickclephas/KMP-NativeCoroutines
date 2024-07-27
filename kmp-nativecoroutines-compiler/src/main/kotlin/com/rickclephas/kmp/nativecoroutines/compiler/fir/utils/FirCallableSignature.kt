@@ -26,18 +26,19 @@ internal class FirCallableSignature(
         }
 
         fun ConeKotlinType.asRawType(): CallableSignature.Type.Raw =
-            CallableSignature.Type.Raw(rawTypeIndex)
+            CallableSignature.Type.Raw(rawTypeIndex, isMarkedNullable)
 
         fun ConeKotlinType.asSimpleFlow(valueType: CallableSignature.Type): CallableSignature.Type.Flow.Simple =
-            CallableSignature.Type.Flow.Simple(rawTypeIndex, valueType)
+            CallableSignature.Type.Flow.Simple(rawTypeIndex, isMarkedNullable, valueType)
 
         fun ConeKotlinType.asSharedFlow(valueType: CallableSignature.Type): CallableSignature.Type.Flow.Shared =
-            CallableSignature.Type.Flow.Shared(rawTypeIndex, valueType)
+            CallableSignature.Type.Flow.Shared(rawTypeIndex, isMarkedNullable, valueType)
 
         fun ConeKotlinType.asStateFlow(
             valueType: CallableSignature.Type,
             isMutable: Boolean
-        ): CallableSignature.Type.Flow.State = CallableSignature.Type.Flow.State(rawTypeIndex, valueType, isMutable)
+        ): CallableSignature.Type.Flow.State =
+            CallableSignature.Type.Flow.State(rawTypeIndex, isMarkedNullable, valueType, isMutable)
 
         fun build(signature: CallableSignature): FirCallableSignature =
             FirCallableSignature(signature, rawTypes)
