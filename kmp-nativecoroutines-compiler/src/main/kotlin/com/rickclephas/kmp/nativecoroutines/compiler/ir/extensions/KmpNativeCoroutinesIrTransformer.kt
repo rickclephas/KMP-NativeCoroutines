@@ -75,7 +75,10 @@ internal class KmpNativeCoroutinesIrTransformer(
                 property = declaration,
                 originalProperty = property.owner
             )
-            NativeCoroutinesDeclarationKey.Type.SHARED_FLOW_REPLAY_CACHE -> TODO()
+            NativeCoroutinesDeclarationKey.Type.SHARED_FLOW_REPLAY_CACHE -> context.buildSharedFlowReplayCacheGetterBody(
+                property = declaration,
+                originalProperty = property.owner
+            )
         }
         val setter = declaration.setter
         if (setter != null) {

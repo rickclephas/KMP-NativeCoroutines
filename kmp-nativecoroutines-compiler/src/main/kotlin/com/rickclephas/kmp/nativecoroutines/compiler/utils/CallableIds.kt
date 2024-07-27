@@ -9,6 +9,7 @@ internal object CallableIds {
     val asNativeFlow = CallableId(FqNames.nativeCoroutines, Name.identifier("asNativeFlow"))
     val nativeSuspend = CallableId(FqNames.nativeCoroutines, Name.identifier("nativeSuspend"))
 
+    val sharedFlowReplayCache = CallableId(ClassIds.sharedFlow, Name.identifier("replayCache"))
     val stateFlowValue = CallableId(ClassIds.stateFlow, Name.identifier("value"))
     val mutableStateFlowValue = CallableId(ClassIds.mutableStateFlow, Name.identifier("value"))
 }
