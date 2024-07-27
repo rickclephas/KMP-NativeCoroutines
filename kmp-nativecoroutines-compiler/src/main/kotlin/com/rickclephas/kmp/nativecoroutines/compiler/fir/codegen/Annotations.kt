@@ -12,8 +12,8 @@ import org.jetbrains.kotlin.fir.expressions.builder.buildAnnotationArgumentMappi
 import org.jetbrains.kotlin.fir.expressions.builder.buildAnnotationCopy
 import org.jetbrains.kotlin.fir.expressions.builder.buildLiteralExpression
 import org.jetbrains.kotlin.fir.extensions.FirExtension
-import org.jetbrains.kotlin.fir.plugin.createConeType
 import org.jetbrains.kotlin.fir.types.builder.buildResolvedTypeRef
+import org.jetbrains.kotlin.fir.types.constructClassLikeType
 import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.types.ConstantValueKind
@@ -44,19 +44,19 @@ internal fun FirExtension.buildAnnotationsCopy(
     return annotations
 }
 
-internal fun FirExtension.buildAnnotation(
+internal fun buildAnnotation(
     classId: ClassId,
     arguments: Map<Name, FirExpression> = emptyMap()
 ) = buildAnnotation {
     annotationTypeRef = buildResolvedTypeRef {
-        type = classId.createConeType(session)
+        type = classId.constructClassLikeType()
     }
     argumentMapping = buildAnnotationArgumentMapping {
         mapping.putAll(arguments)
     }
 }
 
-internal fun FirExtension.buildObjCNameAnnotation(
+internal fun buildObjCNameAnnotation(
     name: String
 ) = buildAnnotation(ClassIds.objCName, mapOf(
     Names.ObjCName.name to buildLiteralExpression(null, ConstantValueKind.String, name, setType = true)
