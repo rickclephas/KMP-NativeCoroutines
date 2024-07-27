@@ -25,6 +25,7 @@ import org.jetbrains.kotlin.fir.symbols.SymbolInternals
 import org.jetbrains.kotlin.fir.symbols.impl.FirPropertySymbol
 import org.jetbrains.kotlin.fir.types.*
 import org.jetbrains.kotlin.name.CallableId
+import org.jetbrains.kotlin.utils.addToStdlib.applyIf
 
 internal fun FirExtension.buildStateFlowValueProperty(
     callableId: CallableId,
@@ -71,6 +72,9 @@ internal fun FirExtension.buildStateFlowValueProperty(
         )
 
         returnTypeRef = firCallableSignature.getNativeType(callableSignature.returnType.valueType)
+            .applyIf(callableSignature.returnType.isNullable) {
+                withNullability(ConeNullability.NULLABLE, session.typeContext)
+            }
             .let(typeParameters.substitutor::substituteOrSelf)
             .toFirResolvedTypeRef()
 
