@@ -27,9 +27,12 @@ internal class CoroutineScopeProvider(
         companion object {
             val DEFAULT = ScopeProperty("null", emptyList(), null)
 
-            fun viewModelScope(containingFile: KSFile): ScopeProperty = ScopeProperty("%N.%M", listOf(
+            fun viewModelScope(
+                packageName: String,
+                containingFile: KSFile
+            ): ScopeProperty = ScopeProperty("%N.%M", listOf(
                 "viewModelScope",
-                MemberName("com.rickclephas.kmm.viewmodel", "coroutineScope", true)
+                MemberName(packageName, "coroutineScope", true)
             ), containingFile)
         }
     }
@@ -109,13 +112,24 @@ internal class CoroutineScopeProvider(
             if (superType.isError) return null
             val superClassDeclaration = superType.declaration as? KSClassDeclaration ?: return@forEach
             scopeProperties[superClassDeclaration.scopePropertyKey]?.let { return it }
-            // If this class is a KMMViewModel, use the ViewModelScope
-            if (superClassDeclaration.isKMMViewModel()) return ScopeProperty.viewModelScope(containingFile)
+            // If this class is a KMPObservableViewModel, use the ViewModelScope
+            superClassDeclaration.getKMPObservableViewModelPackage()?.let {
+                return ScopeProperty.viewModelScope(it, containingFile)
+            }
             containingFile = superClassDeclaration.containingFile ?: containingFile
         }
         return ScopeProperty.DEFAULT
     }
 
-    private fun KSClassDeclaration.isKMMViewModel(): Boolean =
-        packageName.asString() == "com.rickclephas.kmm.viewmodel" && simpleName.asString() == "KMMViewModel"
+    private fun KSClassDeclaration.getKMPObservableViewModelPackage(): String? {
+        var packageName = "com.rickclephas.kmm.viewmodel"
+        if (this.packageName.asString() == packageName && simpleName.asString() == "KMMViewModel") {
+            return packageName
+        }
+        packageName = "com.rickclephas.kmp.observableviewmodel"
+        if (this.packageName.asString() == packageName && simpleName.asString() == "ViewModel") {
+            return packageName
+        }
+        return null
+    }
 }
