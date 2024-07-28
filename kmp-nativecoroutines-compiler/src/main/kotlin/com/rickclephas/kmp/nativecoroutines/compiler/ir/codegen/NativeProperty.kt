@@ -18,8 +18,10 @@ internal fun GeneratorContext.buildNativePropertyGetterBody(
     generatorContext = this,
     symbol = function.symbol,
 ).irBlockBody {
-    val coroutineScope = irTemporary(irCallCoroutineScope(function))
-    var expression = irCallOriginalPropertyGetter(originalProperty, function)
+    val originalGetter = originalProperty.getter
+    require(originalGetter != null)
+    val coroutineScope = irTemporary(irCallCoroutineScope(originalGetter, function))
+    var expression = irCallOriginalPropertyGetter(originalGetter, function)
     if (callableSignature.returnType is CallableSignature.Type.Flow) {
         expression = irCallAsNativeFlow(expression, coroutineScope)
     }

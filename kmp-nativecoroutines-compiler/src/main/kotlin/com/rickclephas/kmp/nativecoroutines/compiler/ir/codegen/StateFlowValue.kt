@@ -18,11 +18,13 @@ internal fun GeneratorContext.buildStateFlowValueGetterBody(
 ): IrBlockBody {
     val getter = property.getter
     require(getter != null)
+    val originalGetter = originalProperty.getter
+    require(originalGetter != null)
     return DeclarationIrBuilder(
         generatorContext = this,
         symbol = getter.symbol,
     ).irBlockBody {
-        var expression = irGet(irCallOriginalPropertyGetter(originalProperty, getter))
+        var expression = irGet(irCallOriginalPropertyGetter(originalGetter, getter))
         val flowType = expression.type
         val valueType = flowType.getFlowValueTypeArg().typeOrFail
         val returnType = if (flowType.isNullable()) valueType.makeNullable() else valueType
@@ -46,11 +48,13 @@ internal fun GeneratorContext.buildStateFlowValueSetterBody(
 ): IrBlockBody {
     val setter = property.setter
     require(setter != null)
+    val originalGetter = originalProperty.getter
+    require(originalGetter != null)
     return DeclarationIrBuilder(
         generatorContext = this,
         symbol = setter.symbol,
     ).irBlockBody {
-        var expression = irGet(irCallOriginalPropertyGetter(originalProperty, setter))
+        var expression = irGet(irCallOriginalPropertyGetter(originalGetter, setter))
         val valueSetter = mutableStateFlowValueSymbol.owner.setter?.symbol
             ?: error("Failed to find MutableStateFlow.value setter")
         expression = irCall(valueSetter).apply {

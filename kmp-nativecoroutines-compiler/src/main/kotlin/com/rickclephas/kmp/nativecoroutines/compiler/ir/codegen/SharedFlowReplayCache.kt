@@ -16,11 +16,13 @@ internal fun GeneratorContext.buildSharedFlowReplayCacheGetterBody(
 ): IrBlockBody {
     val getter = property.getter
     require(getter != null)
+    val originalGetter = originalProperty.getter
+    require(originalGetter != null)
     return DeclarationIrBuilder(
         generatorContext = this,
         symbol = getter.symbol,
     ).irBlockBody {
-        var expression = irGet(irCallOriginalPropertyGetter(originalProperty, getter))
+        var expression = irGet(irCallOriginalPropertyGetter(originalGetter, getter))
         val flowType = expression.type
         val valueTypeArg = flowType.getFlowValueTypeArg()
         val valueType = valueTypeArg.typeOrFail

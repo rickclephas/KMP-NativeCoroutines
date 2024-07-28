@@ -17,7 +17,7 @@ internal fun GeneratorContext.buildNativeFunctionBody(
     generatorContext = this,
     symbol = function.symbol,
 ).irBlockBody {
-    val coroutineScope = irTemporary(irCallCoroutineScope(function))
+    val coroutineScope = irTemporary(irCallCoroutineScope(originalFunction, function))
     var expression = irCallOriginalFunction(originalFunction, function)
     if (callableSignature.returnType is CallableSignature.Type.Flow) {
         expression = irCallAsNativeFlow(expression, coroutineScope)
