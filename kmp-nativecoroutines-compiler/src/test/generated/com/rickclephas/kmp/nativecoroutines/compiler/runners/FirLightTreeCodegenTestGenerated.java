@@ -22,6 +22,12 @@ public class FirLightTreeCodegenTestGenerated extends AbstractFirLightTreeCodege
   }
 
   @Test
+  @TestMetadata("coroutinescope.kt")
+  public void testCoroutinescope() {
+    runTest("src/testData/codegen/coroutinescope.kt");
+  }
+
+  @Test
   @TestMetadata("functions.kt")
   public void testFunctions() {
     runTest("src/testData/codegen/functions.kt");
