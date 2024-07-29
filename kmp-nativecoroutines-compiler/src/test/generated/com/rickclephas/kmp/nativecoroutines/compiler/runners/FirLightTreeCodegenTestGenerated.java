@@ -44,4 +44,10 @@ public class FirLightTreeCodegenTestGenerated extends AbstractFirLightTreeCodege
   public void testProperties() {
     runTest("src/testData/codegen/properties.kt");
   }
+
+  @Test
+  @TestMetadata("viewmodelscope.kt")
+  public void testViewmodelscope() {
+    runTest("src/testData/codegen/viewmodelscope.kt");
+  }
 }

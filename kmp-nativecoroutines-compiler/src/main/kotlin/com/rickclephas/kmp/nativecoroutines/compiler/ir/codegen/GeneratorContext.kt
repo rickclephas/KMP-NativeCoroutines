@@ -17,4 +17,10 @@ internal class GeneratorContext(
     val sharedFlowReplayCacheSymbol = pluginContext.referenceProperties(CallableIds.sharedFlowReplayCache).single()
     val stateFlowValueSymbol = pluginContext.referenceProperties(CallableIds.stateFlowValue).single()
     val mutableStateFlowValueSymbol = pluginContext.referenceProperties(CallableIds.mutableStateFlowValue).single()
+
+    val observableViewModelSymbol = pluginContext.referenceClass(ClassIds.observableViewModel)
+    val observableViewModelScopeSymbol = pluginContext.referenceProperties(CallableIds.observableViewModelScope).singleOrNull()
+    val observableCoroutineScopeSymbol = pluginContext.referenceProperties(CallableIds.observableCoroutineScope).singleOrNull()
+    val androidxViewModelSymbol = pluginContext.referenceClass(ClassIds.androidxViewModel)
+    val androidxViewModelScopeSymbol = pluginContext.referenceProperties(CallableIds.androidxViewModelScope).singleOrNull()
 }

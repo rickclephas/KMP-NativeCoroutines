@@ -1,6 +1,7 @@
 package com.rickclephas.kmp.nativecoroutines.compiler.utils
 
 import org.jetbrains.kotlin.name.CallableId
+import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.Name
 
 internal object CallableIds {
@@ -12,4 +13,8 @@ internal object CallableIds {
     val sharedFlowReplayCache = CallableId(ClassIds.sharedFlow, Name.identifier("replayCache"))
     val stateFlowValue = CallableId(ClassIds.stateFlow, Name.identifier("value"))
     val mutableStateFlowValue = CallableId(ClassIds.mutableStateFlow, Name.identifier("value"))
+
+    val observableViewModelScope = CallableId(ClassIds.observableViewModel, Name.identifier("viewModelScope"))
+    val observableCoroutineScope = CallableId(FqName("com.rickclephas.kmp.observableviewmodel"), Name.identifier("coroutineScope"))
+    val androidxViewModelScope = CallableId(FqName("androidx.lifecycle"), Name.identifier("viewModelScope"))
 }
