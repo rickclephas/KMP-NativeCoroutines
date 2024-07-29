@@ -3,6 +3,7 @@ package com.rickclephas.kmp.nativecoroutines.compiler.utils
 import org.jetbrains.kotlin.name.ClassId
 
 internal object ClassIds {
+    val deprecated = ClassId.topLevel(FqNames.deprecated)
     val throws = ClassId.topLevel(FqNames.throws)
 
     val hidesFromObjC = ClassId.topLevel(FqNames.hidesFromObjC)

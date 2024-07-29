@@ -5,6 +5,7 @@ import org.jetbrains.kotlin.name.FqName
 internal object FqNames {
     val kotlin = FqName("kotlin")
 
+    val deprecated = FqName("kotlin.Deprecated")
     val throws = FqName("kotlin.Throws")
 
     val hidesFromObjC = FqName("kotlin.native.HidesFromObjC")

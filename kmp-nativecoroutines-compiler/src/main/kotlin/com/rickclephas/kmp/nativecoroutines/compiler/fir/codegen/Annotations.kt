@@ -23,7 +23,7 @@ internal fun FirExtension.buildAnnotationsCopy(
     for (annotation in originalAnnotations) {
         when (annotation.toAnnotationClassId(session)) {
             ClassIds.objCName -> objcNameAnnotation = annotation
-            // TODO: Deprecated
+            ClassIds.deprecated -> buildDeprecatedAnnotationCopy(annotation)?.let(annotations::add)
             // TODO: RequiresOptIn
             else -> continue
         }
@@ -70,6 +70,23 @@ private fun buildObjCNameAnnotationCopy(
     }
     if (arguments.isEmpty()) return null
     return buildAnnotation(ClassIds.objCName, arguments)
+}
+
+private fun buildDeprecatedAnnotationCopy(annotation: FirAnnotation): FirAnnotation? {
+    val originalArguments = annotation.getArguments(
+        Names.Deprecated.message,
+        Names.Deprecated.replaceWith,
+        Names.Deprecated.level,
+    )
+    val message = originalArguments[Names.Deprecated.message]?.getLiteralValue<String>() ?: return null
+    val level = originalArguments[Names.Deprecated.level]
+    val arguments = buildMap {
+        put(Names.Deprecated.message, message.asFirExpression())
+        if (level != null) {
+            put(Names.Deprecated.level, level)
+        }
+    }
+    return buildAnnotation(ClassIds.deprecated, arguments)
 }
 
 private fun FirAnnotation.getArguments(vararg names: Name): Map<Name, FirExpression> {
