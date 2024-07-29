@@ -74,7 +74,7 @@ internal fun FirExtension.buildSharedFlowReplayCacheProperty(
         ).let(typeParameters.substitutor::substituteOrSelf).toFirResolvedTypeRef()
 
         isVar = false
-        getter = buildPropertyGetter(session, originalSymbol)
+        getter = buildPropertyGetter(this, originalSymbol)
 
         isLocal = false
         bodyResolveState = FirPropertyBodyResolveState.ALL_BODIES_RESOLVED

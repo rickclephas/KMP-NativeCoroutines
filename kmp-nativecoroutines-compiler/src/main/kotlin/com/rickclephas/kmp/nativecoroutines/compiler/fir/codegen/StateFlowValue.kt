@@ -77,9 +77,9 @@ internal fun FirExtension.buildStateFlowValueProperty(
             .toFirResolvedTypeRef()
 
         isVar = callableSignature.returnType.isMutable
-        getter = buildPropertyGetter(session, originalSymbol)
+        getter = buildPropertyGetter(this, originalSymbol)
         if (isVar) {
-            setter = buildPropertySetter()
+            setter = buildPropertySetter(this, originalSymbol)
         }
 
         isLocal = false
