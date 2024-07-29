@@ -24,7 +24,6 @@ internal fun FirExtension.buildAnnotationsCopy(
         when (annotation.toAnnotationClassId(session)) {
             ClassIds.objCName -> objcNameAnnotation = annotation
             ClassIds.deprecated -> buildDeprecatedAnnotationCopy(annotation)?.let(annotations::add)
-            // TODO: RequiresOptIn
             else -> continue
         }
     }
