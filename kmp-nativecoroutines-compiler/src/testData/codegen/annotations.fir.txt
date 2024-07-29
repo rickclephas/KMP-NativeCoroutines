@@ -1,0 +1,67 @@
+FILE: annotations.kt
+    @R|com/rickclephas/kmp/nativecoroutines/NativeCoroutines|() @R|kotlin/Deprecated|(message = String(This is deprecated 1)) public final suspend fun deprecatedFunction1(): R|kotlin/String| {
+        ^deprecatedFunction1 String(OK1)
+    }
+    @R|com/rickclephas/kmp/nativecoroutines/NativeCoroutines|() @R|kotlin/Deprecated|(message = String(This is deprecated 2), level = Q|kotlin/DeprecationLevel|.R|kotlin/DeprecationLevel.WARNING|) public final suspend fun deprecatedFunction2(): R|kotlin/String| {
+        ^deprecatedFunction2 String(OK2)
+    }
+    @R|com/rickclephas/kmp/nativecoroutines/NativeCoroutines|() @R|kotlin/Deprecated|(message = String(This is deprecated 3), replaceWith = R|kotlin/ReplaceWith.ReplaceWith|(String(deprecatedFunction2())), level = Q|kotlin/DeprecationLevel|.R|kotlin/DeprecationLevel.ERROR|) public final suspend fun deprecatedFunction3(): R|kotlin/String| {
+        ^deprecatedFunction3 String(OK3)
+    }
+    @R|com/rickclephas/kmp/nativecoroutines/NativeCoroutines|() @R|kotlin/Deprecated|(message = String(This is deprecated 4)) public final val deprecatedProperty1: R|kotlinx/coroutines/flow/Flow<kotlin/String>| = R|kotlinx/coroutines/flow/flowOf|<R|kotlin/String|>(String(OK4))
+        public get(): R|kotlinx/coroutines/flow/Flow<kotlin/String>|
+    @R|com/rickclephas/kmp/nativecoroutines/NativeCoroutines|() @R|kotlin/Deprecated|(message = String(This is deprecated 5), level = Q|kotlin/DeprecationLevel|.R|kotlin/DeprecationLevel.WARNING|) public final val deprecatedProperty2: R|kotlinx/coroutines/flow/Flow<kotlin/String>| = R|kotlinx/coroutines/flow/flowOf|<R|kotlin/String|>(String(OK5))
+        public get(): R|kotlinx/coroutines/flow/Flow<kotlin/String>|
+    @R|com/rickclephas/kmp/nativecoroutines/NativeCoroutines|() @R|kotlin/Deprecated|(message = String(This is deprecated 6), replaceWith = R|kotlin/ReplaceWith.ReplaceWith|(String(deprecatedProperty2)), level = Q|kotlin/DeprecationLevel|.R|kotlin/DeprecationLevel.ERROR|) public final val deprecatedProperty3: R|kotlinx/coroutines/flow/Flow<kotlin/String>| = R|kotlinx/coroutines/flow/flowOf|<R|kotlin/String|>(String(OK6))
+        public get(): R|kotlinx/coroutines/flow/Flow<kotlin/String>|
+    @R|com/rickclephas/kmp/nativecoroutines/NativeCoroutines|() public final val deprecatedProperty4: R|kotlinx/coroutines/flow/MutableStateFlow<kotlin/String>| = R|kotlinx/coroutines/flow/MutableStateFlow|<R|kotlin/String|>(String(OK7))
+        @PROPERTY_GETTER:R|kotlin/Deprecated|(message = String(This is deprecated 7)) public get(): R|kotlinx/coroutines/flow/MutableStateFlow<kotlin/String>|
+    public final fun box(): R|kotlin/String| {
+        ^box R|com/rickclephas/kmp/nativecoroutines/runBoxTest|(<L> = runBoxTest@fun R|com/rickclephas/kmp/nativecoroutines/BoxTest|.<anonymous>(): R|kotlin/Unit| <inline=NoInline>  {
+            this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.await|<R|kotlin/String|>(R|/deprecatedFunction1Native|())
+            this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.await|<R|kotlin/String|>(R|/deprecatedFunction2Native|())
+            this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.collect|<R|kotlin/String|>(R|/deprecatedProperty1Native|)
+            this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.collect|<R|kotlin/String|>(R|/deprecatedProperty2Native|)
+            this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.collect|<R|kotlin/String|>(R|/deprecatedProperty4Native|, Int(1))
+        }
+        )
+    }
+FILE: __GENERATED DECLARATIONS__.kt
+    @R|kotlin/Deprecated|(message = String(This is deprecated 1)) @R|kotlin/native/ObjCName|(name = String(deprecatedFunction1)) public final fun deprecatedFunction1Native(): R|com/rickclephas/kmp/nativecoroutines/NativeSuspend<kotlin/String>| {
+        ::R|/deprecatedFunction1|
+        R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
+    }
+    @R|kotlin/Deprecated|(message = String(This is deprecated 2), level = Q|kotlin/DeprecationLevel|.R|kotlin/DeprecationLevel.WARNING|) @R|kotlin/native/ObjCName|(name = String(deprecatedFunction2)) public final fun deprecatedFunction2Native(): R|com/rickclephas/kmp/nativecoroutines/NativeSuspend<kotlin/String>| {
+        ::R|/deprecatedFunction2|
+        R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
+    }
+    @R|kotlin/Deprecated|(message = String(This is deprecated 3), level = Q|kotlin/DeprecationLevel|.R|kotlin/DeprecationLevel.ERROR|) @R|kotlin/native/ObjCName|(name = String(deprecatedFunction3)) public final fun deprecatedFunction3Native(): R|com/rickclephas/kmp/nativecoroutines/NativeSuspend<kotlin/String>| {
+        ::R|/deprecatedFunction3|
+        R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
+    }
+    @R|kotlin/Deprecated|(message = String(This is deprecated 4)) @R|kotlin/native/ObjCName|(name = String(deprecatedProperty1)) public final val deprecatedProperty1Native: R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>|
+        public get(): R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>| {
+            ::R|/deprecatedProperty1|
+            R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
+        }
+    @R|kotlin/Deprecated|(message = String(This is deprecated 5), level = Q|kotlin/DeprecationLevel|.R|kotlin/DeprecationLevel.WARNING|) @R|kotlin/native/ObjCName|(name = String(deprecatedProperty2)) public final val deprecatedProperty2Native: R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>|
+        public get(): R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>| {
+            ::R|/deprecatedProperty2|
+            R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
+        }
+    @R|kotlin/Deprecated|(message = String(This is deprecated 6), level = Q|kotlin/DeprecationLevel|.R|kotlin/DeprecationLevel.ERROR|) @R|kotlin/native/ObjCName|(name = String(deprecatedProperty3)) public final val deprecatedProperty3Native: R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>|
+        public get(): R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>| {
+            ::R|/deprecatedProperty3|
+            R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
+        }
+    @R|kotlin/native/ObjCName|(name = String(deprecatedProperty4)) public final val deprecatedProperty4Native: R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>|
+        @R|kotlin/Deprecated|(message = String(This is deprecated 7)) public get(): R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>| {
+            ::R|/deprecatedProperty4|
+            R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
+        }
+    public final var deprecatedProperty4Value: R|kotlin/String|
+        @R|kotlin/Deprecated|(message = String(This is deprecated 7)) public get(): R|kotlin/String| {
+            ::R|/deprecatedProperty4|
+            R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
+        }
+        @R|kotlin/Deprecated|(message = String(This is deprecated 7)) public set(value: R|kotlin/String|): R|kotlin/Unit|

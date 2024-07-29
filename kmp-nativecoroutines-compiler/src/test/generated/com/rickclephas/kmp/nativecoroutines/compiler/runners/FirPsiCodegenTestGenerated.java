@@ -22,6 +22,12 @@ public class FirPsiCodegenTestGenerated extends AbstractFirPsiCodegenTest {
   }
 
   @Test
+  @TestMetadata("annotations.kt")
+  public void testAnnotations() {
+    runTest("src/testData/codegen/annotations.kt");
+  }
+
+  @Test
   @TestMetadata("coroutinescope.kt")
   public void testCoroutinescope() {
     runTest("src/testData/codegen/coroutinescope.kt");
