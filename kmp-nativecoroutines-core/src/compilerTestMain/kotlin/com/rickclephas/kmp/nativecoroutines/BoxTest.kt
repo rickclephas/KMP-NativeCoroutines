@@ -13,10 +13,12 @@ public class BoxTest internal constructor() {
         suspendCoroutine { cont ->
             var valueCount = 0
             var cancellable: NativeCancellable? = null
+            var cancel = false
             cancellable = nativeFlow({ value, next, _ ->
                 if (valueCount != 0) resultBuilder.append(",")
                 resultBuilder.append(value)
                 if (++valueCount == maxValues) {
+                    cancel = true
                     cancellable?.invoke()
                 }
                 next()
@@ -29,6 +31,7 @@ public class BoxTest internal constructor() {
                 resultBuilder.append(";<cancelled>")
                 cont.resume(Unit)
             })
+            if (cancel) cancellable()
         }
         resultBuilder.appendLine()
     }
