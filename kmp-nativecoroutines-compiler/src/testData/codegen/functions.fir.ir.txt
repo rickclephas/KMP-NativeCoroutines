@@ -345,7 +345,6 @@ FILE fqName:<root> fileName:/functions.kt
           index: CONST Int type=kotlin.Int value=0
   FUN name:returnThrowsSuspendValue visibility:public modality:FINAL <> () returnType:kotlin.String [suspend]
     annotations:
-      Throws(exceptionClasses = [])
       NativeCoroutines
     BLOCK_BODY
       RETURN type=kotlin.Nothing from='public final fun returnThrowsSuspendValue (): kotlin.String declared in <root>'

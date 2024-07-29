@@ -41,7 +41,7 @@ FILE: functions.kt
     @R|com/rickclephas/kmp/nativecoroutines/NativeCoroutines|() public final suspend fun returnSuspendParameterValue(value: R|kotlin/Int|): R|kotlin/Int| {
         ^returnSuspendParameterValue R|<local>/value|
     }
-    @R|kotlin/jvm/Throws|() @R|com/rickclephas/kmp/nativecoroutines/NativeCoroutines|() public final suspend fun returnThrowsSuspendValue(): R|kotlin/String| {
+    @R|com/rickclephas/kmp/nativecoroutines/NativeCoroutines|() public final suspend fun returnThrowsSuspendValue(): R|kotlin/String| {
         ^returnThrowsSuspendValue String(OK10)
     }
     @R|com/rickclephas/kmp/nativecoroutines/NativeCoroutines|() public final suspend fun returnSuspendVarargValue(vararg values: R|kotlin/Array<out kotlin/String>|): R|kotlin/String| {
@@ -148,7 +148,7 @@ FILE: __GENERATED DECLARATIONS__.kt
         ::R|/returnSuspendParameterValue|
         R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
     }
-    @R|kotlin/jvm/Throws|() @R|kotlin/native/ObjCName|(name = String(returnThrowsSuspendValue)) public final fun returnThrowsSuspendValueNative(): R|com/rickclephas/kmp/nativecoroutines/NativeSuspend<kotlin/String>| {
+    @R|kotlin/native/ObjCName|(name = String(returnThrowsSuspendValue)) public final fun returnThrowsSuspendValueNative(): R|com/rickclephas/kmp/nativecoroutines/NativeSuspend<kotlin/String>| {
         ::R|/returnThrowsSuspendValue|
         R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
     }

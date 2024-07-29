@@ -38,7 +38,6 @@ suspend fun returnSuspendParameterValue(value: String): String = value
 @NativeCoroutines
 suspend fun returnSuspendParameterValue(value: Int): Int = value
 
-@Throws
 @NativeCoroutines
 suspend fun returnThrowsSuspendValue(): String = "OK10"
 

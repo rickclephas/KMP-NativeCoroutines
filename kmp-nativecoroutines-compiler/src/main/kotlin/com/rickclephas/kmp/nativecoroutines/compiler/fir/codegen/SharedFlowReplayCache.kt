@@ -4,8 +4,6 @@ import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.*
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.CallableSignature
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.ClassIds
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation
-import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutines
-import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutinesRefined
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.shouldRefineInSwift
 import org.jetbrains.kotlin.KtFakeSourceElementKind
 import org.jetbrains.kotlin.descriptors.EffectiveVisibility
@@ -28,7 +26,8 @@ import org.jetbrains.kotlin.name.StandardClassIds
 internal fun FirExtension.buildSharedFlowReplayCacheProperty(
     callableId: CallableId,
     originalSymbol: FirPropertySymbol,
-    annotation: NativeCoroutinesAnnotation
+    annotation: NativeCoroutinesAnnotation,
+    objCNameSuffix: String?
 ): FirPropertySymbol? {
     val firCallableSignature = originalSymbol.getCallableSignature(session) ?: return null
     val callableSignature = firCallableSignature.signature
@@ -83,15 +82,7 @@ internal fun FirExtension.buildSharedFlowReplayCacheProperty(
         @OptIn(SymbolInternals::class)
         deprecationsProvider = originalSymbol.fir.deprecationsProvider
 
-        annotations.addAll(buildAnnotationsCopy(
-            originalSymbol.annotations,
-            null,
-            setOf(
-                NativeCoroutines.classId,
-                NativeCoroutinesRefined.classId,
-                ClassIds.throws,
-            )
-        ))
+        annotations.addAll(buildAnnotationsCopy(originalSymbol.annotations, objCNameSuffix = objCNameSuffix))
         if (annotation.shouldRefineInSwift) {
             annotations.add(buildAnnotation(ClassIds.shouldRefineInSwift))
         }

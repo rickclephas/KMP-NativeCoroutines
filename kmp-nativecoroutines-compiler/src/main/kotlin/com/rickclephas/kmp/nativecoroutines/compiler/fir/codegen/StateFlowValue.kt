@@ -4,10 +4,6 @@ import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.*
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.CallableSignature
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.ClassIds
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation
-import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutines
-import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutinesState
-import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutinesRefined
-import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutinesRefinedState
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.shouldRefineInSwift
 import org.jetbrains.kotlin.KtFakeSourceElementKind
 import org.jetbrains.kotlin.descriptors.EffectiveVisibility
@@ -30,7 +26,9 @@ import org.jetbrains.kotlin.utils.addToStdlib.applyIf
 internal fun FirExtension.buildStateFlowValueProperty(
     callableId: CallableId,
     originalSymbol: FirPropertySymbol,
-    annotation: NativeCoroutinesAnnotation
+    annotation: NativeCoroutinesAnnotation,
+    objCName: String? = null,
+    objCNameSuffix: String? = null,
 ): FirPropertySymbol? {
     val firCallableSignature = originalSymbol.getCallableSignature(session) ?: return null
     val callableSignature = firCallableSignature.signature
@@ -90,22 +88,7 @@ internal fun FirExtension.buildStateFlowValueProperty(
         @OptIn(SymbolInternals::class)
         deprecationsProvider = originalSymbol.fir.deprecationsProvider
 
-        val objCName = when (annotation) {
-            NativeCoroutinesState,
-            NativeCoroutinesRefinedState -> originalSymbol.name.identifier
-            else -> null
-        }
-        annotations.addAll(buildAnnotationsCopy(
-            originalSymbol.annotations,
-            objCName,
-            setOf(
-                NativeCoroutines.classId,
-                NativeCoroutinesRefined.classId,
-                NativeCoroutinesState.classId,
-                NativeCoroutinesRefinedState.classId,
-                ClassIds.throws,
-            )
-        ))
+        annotations.addAll(buildAnnotationsCopy(originalSymbol.annotations, objCName, objCNameSuffix))
         if (annotation.shouldRefineInSwift) {
             annotations.add(buildAnnotation(ClassIds.shouldRefineInSwift))
         }

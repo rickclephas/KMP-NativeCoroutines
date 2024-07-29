@@ -161,7 +161,6 @@ suspend fun returnSuspendVarargValue(vararg values: String): String {
   return values.get(index = 0)
 }
 
-@Throws(exceptionClasses = [])
 @NativeCoroutines
 suspend fun returnThrowsSuspendValue(): String {
   return "OK10"
@@ -285,7 +284,6 @@ fun returnSuspendVarargValueNative(vararg values: String): Function3<@ParameterN
 )
 }
 
-@Throws(exceptionClasses = [])
 @ObjCName(name = "returnThrowsSuspendValue")
 fun returnThrowsSuspendValueNative(): Function3<@ParameterName(name = "onResult") Function2<String, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
   val tmp_19: CoroutineScope? = null

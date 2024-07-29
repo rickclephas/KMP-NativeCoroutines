@@ -139,31 +139,31 @@ internal class KmpNativeCoroutinesDeclarationGenerationExtension(
             callableId, suffix,
             setOf(NativeCoroutines, NativeCoroutinesRefined)
         ) { symbol, annotation ->
-            buildNativeProperty(callableId, symbol, annotation)
+            buildNativeProperty(callableId, symbol, annotation, objCName = symbol.name.identifier)
         }
         generateProperties(
             callableId, flowValueSuffix,
             setOf(NativeCoroutines, NativeCoroutinesRefined)
         ) { symbol, annotation ->
-            buildStateFlowValueProperty(callableId, symbol, annotation)
+            buildStateFlowValueProperty(callableId, symbol, annotation, objCNameSuffix = flowValueSuffix)
         }
         generateProperties(
             callableId, flowReplayCacheSuffix,
             setOf(NativeCoroutines, NativeCoroutinesRefined)
         ) { symbol, annotation ->
-            buildSharedFlowReplayCacheProperty(callableId, symbol, annotation)
+            buildSharedFlowReplayCacheProperty(callableId, symbol, annotation, flowReplayCacheSuffix)
         }
         generateProperties(
             callableId, stateSuffix,
             setOf(NativeCoroutinesState, NativeCoroutinesRefinedState)
         ) { symbol, annotation ->
-            buildStateFlowValueProperty(callableId, symbol, annotation)
+            buildStateFlowValueProperty(callableId, symbol, annotation, objCName = symbol.name.identifier)
         }
         generateProperties(
             callableId, stateFlowSuffix,
             setOf(NativeCoroutinesState, NativeCoroutinesRefinedState)
         ) { symbol, annotation ->
-            buildNativeProperty(callableId, symbol, annotation)
+            buildNativeProperty(callableId, symbol, annotation, objCNameSuffix = stateFlowSuffix)
         }
     }
 

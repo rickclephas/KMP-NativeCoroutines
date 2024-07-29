@@ -3,8 +3,6 @@ package com.rickclephas.kmp.nativecoroutines.compiler.fir.codegen
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.*
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.ClassIds
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation
-import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutines
-import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutinesRefined
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.shouldRefineInSwift
 import org.jetbrains.kotlin.KtFakeSourceElementKind
 import org.jetbrains.kotlin.descriptors.EffectiveVisibility
@@ -80,15 +78,7 @@ internal fun FirExtension.buildNativeFunction(
         @OptIn(SymbolInternals::class)
         deprecationsProvider = originalSymbol.fir.deprecationsProvider
 
-        annotations.addAll(buildAnnotationsCopy(
-            originalSymbol.annotations,
-            originalSymbol.name.identifier,
-            setOf(
-                NativeCoroutines.classId,
-                NativeCoroutinesRefined.classId,
-                ClassIds.throws,
-            )
-        ))
+        annotations.addAll(buildAnnotationsCopy(originalSymbol.annotations, originalSymbol.name.identifier))
         if (annotation.shouldRefineInSwift) {
             annotations.add(buildAnnotation(ClassIds.shouldRefineInSwift))
         }
