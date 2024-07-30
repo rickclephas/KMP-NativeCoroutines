@@ -97,6 +97,24 @@ val refinedState: StateFlow<String> = MutableStateFlow("OK26")
 @NativeCoroutinesState
 val mutableNullableStateProperty: MutableStateFlow<String>? = MutableStateFlow("OK27")
 
+interface MyInterface28 {
+    @NativeCoroutines
+    val interfaceFlowValue: Flow<String>
+}
+
+class MyClass28: MyInterface28 {
+    @NativeCoroutines
+    override val interfaceFlowValue: Flow<String> = flowOf("OK28")
+}
+
+class MyFlow29<T1, T2>(
+    value1: T1,
+    value2: T2,
+): Flow<T2?> by flowOf<T2?>(null)
+
+@NativeCoroutines
+val customFlowValue: MyFlow29<Int, String> get() = MyFlow29(29, "OK29")
+
 fun box() = runBoxTest {
     collect(topLevelFlowNative)
     collect(topLevelSharedFlowNative, maxValues = 1)
@@ -144,4 +162,6 @@ fun box() = runBoxTest {
     collect(refinedStateFlow, maxValues = 1)
     value(mutableNullableStatePropertyValue)
     collect(mutableNullableStatePropertyFlow!!, maxValues = 1)
+    collect(MyClass28().interfaceFlowValueNative)
+    collect(customFlowValueNative)
 }

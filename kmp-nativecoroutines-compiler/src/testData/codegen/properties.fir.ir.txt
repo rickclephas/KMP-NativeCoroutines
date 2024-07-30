@@ -175,6 +175,92 @@ FILE fqName:<root> fileName:/properties.kt
       BLOCK_BODY
         RETURN type=kotlin.Nothing from='public final fun <get-mutableNullableStateProperty> (): kotlinx.coroutines.flow.MutableStateFlow<kotlin.String>? declared in <root>'
           GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:mutableNullableStateProperty type:kotlinx.coroutines.flow.MutableStateFlow<kotlin.String>? visibility:private [final,static]' type=kotlinx.coroutines.flow.MutableStateFlow<kotlin.String>? origin=null
+  CLASS CLASS name:MyClass28 modality:FINAL visibility:public superTypes:[<root>.MyInterface28]
+    $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:<root>.MyClass28
+    PROPERTY name:interfaceFlowValue visibility:public modality:OPEN [val]
+      annotations:
+        NativeCoroutines
+      overridden:
+        public abstract interfaceFlowValue: kotlinx.coroutines.flow.Flow<kotlin.String>
+      FIELD PROPERTY_BACKING_FIELD name:interfaceFlowValue type:kotlinx.coroutines.flow.Flow<kotlin.String> visibility:private [final]
+        EXPRESSION_BODY
+          CALL 'public final fun flowOf <T> (value: T of kotlinx.coroutines.flow.flowOf): kotlinx.coroutines.flow.Flow<T of kotlinx.coroutines.flow.flowOf> declared in kotlinx.coroutines.flow' type=kotlinx.coroutines.flow.Flow<kotlin.String> origin=null
+            <T>: kotlin.String
+            value: CONST String type=kotlin.String value="OK28"
+      FUN DEFAULT_PROPERTY_ACCESSOR name:<get-interfaceFlowValue> visibility:public modality:OPEN <> ($this:<root>.MyClass28) returnType:kotlinx.coroutines.flow.Flow<kotlin.String>
+        correspondingProperty: PROPERTY name:interfaceFlowValue visibility:public modality:OPEN [val]
+        overridden:
+          public abstract fun <get-interfaceFlowValue> (): kotlinx.coroutines.flow.Flow<kotlin.String> declared in <root>.MyInterface28
+        $this: VALUE_PARAMETER name:<this> type:<root>.MyClass28
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='public open fun <get-interfaceFlowValue> (): kotlinx.coroutines.flow.Flow<kotlin.String> declared in <root>.MyClass28'
+            GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:interfaceFlowValue type:kotlinx.coroutines.flow.Flow<kotlin.String> visibility:private [final]' type=kotlinx.coroutines.flow.Flow<kotlin.String> origin=null
+              receiver: GET_VAR '<this>: <root>.MyClass28 declared in <root>.MyClass28.<get-interfaceFlowValue>' type=<root>.MyClass28 origin=null
+    CONSTRUCTOR visibility:public <> () returnType:<root>.MyClass28 [primary]
+      BLOCK_BODY
+        DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
+        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:MyClass28 modality:FINAL visibility:public superTypes:[<root>.MyInterface28]'
+    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
+      overridden:
+        public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in <root>.MyInterface28
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+      VALUE_PARAMETER name:other index:0 type:kotlin.Any?
+    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN <> ($this:kotlin.Any) returnType:kotlin.Int [fake_override]
+      overridden:
+        public open fun hashCode (): kotlin.Int declared in <root>.MyInterface28
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+    FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN <> ($this:kotlin.Any) returnType:kotlin.String [fake_override]
+      overridden:
+        public open fun toString (): kotlin.String declared in <root>.MyInterface28
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+    PROPERTY FAKE_OVERRIDE name:interfaceFlowValueNative visibility:public modality:FINAL [fake_override,val]
+      annotations:
+        ObjCName(name = "interfaceFlowValue", swiftName = <null>, exact = <null>)
+      overridden:
+        public final interfaceFlowValueNative: kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<kotlin.String, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>
+      FUN FAKE_OVERRIDE name:<get-interfaceFlowValueNative> visibility:public modality:FINAL <> ($this:<root>.MyInterface28) returnType:kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<kotlin.String, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> [fake_override]
+        correspondingProperty: PROPERTY FAKE_OVERRIDE name:interfaceFlowValueNative visibility:public modality:FINAL [fake_override,val]
+        overridden:
+          public final fun <get-interfaceFlowValueNative> (): kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<kotlin.String, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> declared in <root>.MyInterface28
+        $this: VALUE_PARAMETER name:<this> type:<root>.MyInterface28
+  CLASS CLASS name:MyFlow29 modality:FINAL visibility:public superTypes:[kotlinx.coroutines.flow.Flow<T2 of <root>.MyFlow29?>]
+    $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:<root>.MyFlow29<T1 of <root>.MyFlow29, T2 of <root>.MyFlow29>
+    TYPE_PARAMETER name:T1 index:0 variance: superTypes:[kotlin.Any?] reified:false
+    TYPE_PARAMETER name:T2 index:1 variance: superTypes:[kotlin.Any?] reified:false
+    FIELD DELEGATE name:$$delegate_0 type:kotlinx.coroutines.flow.Flow<T2 of <root>.MyFlow29?> visibility:private [final]
+      EXPRESSION_BODY
+        CALL 'public final fun flowOf <T> (value: T of kotlinx.coroutines.flow.flowOf): kotlinx.coroutines.flow.Flow<T of kotlinx.coroutines.flow.flowOf> declared in kotlinx.coroutines.flow' type=kotlinx.coroutines.flow.Flow<T2 of <root>.MyFlow29?> origin=null
+          <T>: T2 of <root>.MyFlow29?
+          value: CONST Null type=kotlin.Nothing? value=null
+    CONSTRUCTOR visibility:public <> (value1:T1 of <root>.MyFlow29, value2:T2 of <root>.MyFlow29) returnType:<root>.MyFlow29<T1 of <root>.MyFlow29, T2 of <root>.MyFlow29> [primary]
+      VALUE_PARAMETER name:value1 index:0 type:T1 of <root>.MyFlow29
+      VALUE_PARAMETER name:value2 index:1 type:T2 of <root>.MyFlow29
+      BLOCK_BODY
+        DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
+        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:MyFlow29 modality:FINAL visibility:public superTypes:[kotlinx.coroutines.flow.Flow<T2 of <root>.MyFlow29?>]'
+    FUN DELEGATED_MEMBER name:collect visibility:public modality:OPEN <> ($this:<root>.MyFlow29<T1 of <root>.MyFlow29, T2 of <root>.MyFlow29>, collector:kotlinx.coroutines.flow.FlowCollector<T2 of <root>.MyFlow29?>) returnType:kotlin.Unit [suspend]
+      overridden:
+        public abstract fun collect (collector: kotlinx.coroutines.flow.FlowCollector<T of kotlinx.coroutines.flow.Flow>): kotlin.Unit declared in kotlinx.coroutines.flow.Flow
+      $this: VALUE_PARAMETER name:<this> type:<root>.MyFlow29<T1 of <root>.MyFlow29, T2 of <root>.MyFlow29>
+      VALUE_PARAMETER name:collector index:0 type:kotlinx.coroutines.flow.FlowCollector<T2 of <root>.MyFlow29?>
+      BLOCK_BODY
+        CALL 'public abstract fun collect (collector: kotlinx.coroutines.flow.FlowCollector<T of kotlinx.coroutines.flow.Flow>): kotlin.Unit declared in kotlinx.coroutines.flow.Flow' type=kotlin.Unit origin=null
+          $this: GET_FIELD 'FIELD DELEGATE name:$$delegate_0 type:kotlinx.coroutines.flow.Flow<T2 of <root>.MyFlow29?> visibility:private [final]' type=kotlinx.coroutines.flow.Flow<T2 of <root>.MyFlow29?> origin=null
+            receiver: GET_VAR '<this>: <root>.MyFlow29<T1 of <root>.MyFlow29, T2 of <root>.MyFlow29> declared in <root>.MyFlow29.collect' type=<root>.MyFlow29<T1 of <root>.MyFlow29, T2 of <root>.MyFlow29> origin=null
+          collector: GET_VAR 'collector: kotlinx.coroutines.flow.FlowCollector<T2 of <root>.MyFlow29?> declared in <root>.MyFlow29.collect' type=kotlinx.coroutines.flow.FlowCollector<T2 of <root>.MyFlow29?> origin=null
+    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
+      overridden:
+        public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in kotlinx.coroutines.flow.Flow
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+      VALUE_PARAMETER name:other index:0 type:kotlin.Any?
+    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN <> ($this:kotlin.Any) returnType:kotlin.Int [fake_override]
+      overridden:
+        public open fun hashCode (): kotlin.Int declared in kotlinx.coroutines.flow.Flow
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+    FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN <> ($this:kotlin.Any) returnType:kotlin.String [fake_override]
+      overridden:
+        public open fun toString (): kotlin.String declared in kotlinx.coroutines.flow.Flow
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
   CLASS CLASS name:MyGenericClass1 modality:FINAL visibility:public [data] superTypes:[kotlin.Any]
     $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:<root>.MyGenericClass1<T of <root>.MyGenericClass1>
     TYPE_PARAMETER name:T index:0 variance: superTypes:[kotlin.Any?] reified:false
@@ -438,6 +524,44 @@ FILE fqName:<root> fileName:/properties.kt
           RETURN type=kotlin.Nothing from='public final fun <get-genericStateFlowValue> (): T of <root>.MyGenericClass2 declared in <root>.MyGenericClass2'
             CALL 'public abstract fun <get-value> (): T of kotlinx.coroutines.flow.StateFlow declared in kotlinx.coroutines.flow.StateFlow' type=T of <root>.MyGenericClass2 origin=null
               $this: GET_VAR 'val tmp_8: kotlinx.coroutines.flow.StateFlow<T of <root>.MyGenericClass2> declared in <root>.MyGenericClass2.<get-genericStateFlowValue>' type=kotlinx.coroutines.flow.StateFlow<T of <root>.MyGenericClass2> origin=null
+  CLASS INTERFACE name:MyInterface28 modality:ABSTRACT visibility:public superTypes:[kotlin.Any]
+    $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:<root>.MyInterface28
+    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
+      overridden:
+        public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in kotlin.Any
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+      VALUE_PARAMETER name:other index:0 type:kotlin.Any?
+    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN <> ($this:kotlin.Any) returnType:kotlin.Int [fake_override]
+      overridden:
+        public open fun hashCode (): kotlin.Int declared in kotlin.Any
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+    FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN <> ($this:kotlin.Any) returnType:kotlin.String [fake_override]
+      overridden:
+        public open fun toString (): kotlin.String declared in kotlin.Any
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+    PROPERTY GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:interfaceFlowValueNative visibility:public modality:FINAL [val]
+      annotations:
+        ObjCName(name = "interfaceFlowValue", swiftName = <null>, exact = <null>)
+      FUN GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:<get-interfaceFlowValueNative> visibility:public modality:FINAL <> ($this:<root>.MyInterface28) returnType:kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<kotlin.String, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>
+        correspondingProperty: PROPERTY GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:interfaceFlowValueNative visibility:public modality:FINAL [val]
+        $this: VALUE_PARAMETER name:<this> type:<root>.MyInterface28
+        BLOCK_BODY
+          VAR IR_TEMPORARY_VARIABLE name:tmp_9 type:kotlinx.coroutines.CoroutineScope? [val]
+            CONST Null type=kotlinx.coroutines.CoroutineScope? value=null
+          VAR IR_TEMPORARY_VARIABLE name:tmp_10 type:kotlinx.coroutines.flow.Flow<kotlin.String> [val]
+            CALL 'public abstract fun <get-interfaceFlowValue> (): kotlinx.coroutines.flow.Flow<kotlin.String> declared in <root>.MyInterface28' type=kotlinx.coroutines.flow.Flow<kotlin.String> origin=null
+              $this: GET_VAR '<this>: <root>.MyInterface28 declared in <root>.MyInterface28.<get-interfaceFlowValueNative>' type=<root>.MyInterface28 origin=null
+          RETURN type=kotlin.Nothing from='public final fun <get-interfaceFlowValueNative> (): kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<kotlin.String, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> declared in <root>.MyInterface28'
+            CALL 'public final fun asNativeFlow <T> (scope: kotlinx.coroutines.CoroutineScope?): kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<T of com.rickclephas.kmp.nativecoroutines.asNativeFlow, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> declared in com.rickclephas.kmp.nativecoroutines' type=kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<kotlin.String, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> origin=null
+              <T>: kotlin.String
+              $receiver: GET_VAR 'val tmp_10: kotlinx.coroutines.flow.Flow<kotlin.String> declared in <root>.MyInterface28.<get-interfaceFlowValueNative>' type=kotlinx.coroutines.flow.Flow<kotlin.String> origin=null
+              scope: GET_VAR 'val tmp_9: kotlinx.coroutines.CoroutineScope? declared in <root>.MyInterface28.<get-interfaceFlowValueNative>' type=kotlinx.coroutines.CoroutineScope? origin=null
+    PROPERTY name:interfaceFlowValue visibility:public modality:ABSTRACT [val]
+      annotations:
+        NativeCoroutines
+      FUN DEFAULT_PROPERTY_ACCESSOR name:<get-interfaceFlowValue> visibility:public modality:ABSTRACT <> ($this:<root>.MyInterface28) returnType:kotlinx.coroutines.flow.Flow<kotlin.String>
+        correspondingProperty: PROPERTY name:interfaceFlowValue visibility:public modality:ABSTRACT [val]
+        $this: VALUE_PARAMETER name:<this> type:<root>.MyInterface28
   FUN name:box visibility:public modality:FINAL <> () returnType:kotlin.String
     BLOCK_BODY
       RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in <root>'
@@ -687,6 +811,27 @@ FILE fqName:<root> fileName:/properties.kt
                     <T0>: kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<kotlin.String, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>
                     arg0: CALL 'public final fun <get-mutableNullableStatePropertyFlow> (): kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<kotlin.String, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>? declared in <root>' type=kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<kotlin.String, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>? origin=GET_PROPERTY
                   maxValues: CONST Int type=kotlin.Int value=1
+                CALL 'public final fun collect <T> (nativeFlow: kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<T of com.rickclephas.kmp.nativecoroutines.BoxTest.collect, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>, maxValues: kotlin.Int?): kotlin.Unit declared in com.rickclephas.kmp.nativecoroutines.BoxTest' type=kotlin.Unit origin=null
+                  <T>: kotlin.String
+                  $this: GET_VAR '$this$runBoxTest: com.rickclephas.kmp.nativecoroutines.BoxTest declared in <root>.box.<anonymous>' type=com.rickclephas.kmp.nativecoroutines.BoxTest origin=null
+                  nativeFlow: CALL 'public final fun <get-interfaceFlowValueNative> (): kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<kotlin.String, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> declared in <root>.MyClass28' type=kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<kotlin.String, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> origin=GET_PROPERTY
+                    $this: CONSTRUCTOR_CALL 'public constructor <init> () declared in <root>.MyClass28' type=<root>.MyClass28 origin=null
+                CALL 'public final fun collect <T> (nativeFlow: kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<T of com.rickclephas.kmp.nativecoroutines.BoxTest.collect, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>, maxValues: kotlin.Int?): kotlin.Unit declared in com.rickclephas.kmp.nativecoroutines.BoxTest' type=kotlin.Unit origin=null
+                  <T>: kotlin.String?
+                  $this: GET_VAR '$this$runBoxTest: com.rickclephas.kmp.nativecoroutines.BoxTest declared in <root>.box.<anonymous>' type=com.rickclephas.kmp.nativecoroutines.BoxTest origin=null
+                  nativeFlow: CALL 'public final fun <get-customFlowValueNative> (): kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<kotlin.String?, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> declared in <root>' type=kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<kotlin.String?, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> origin=GET_PROPERTY
+  PROPERTY name:customFlowValue visibility:public modality:FINAL [val]
+    annotations:
+      NativeCoroutines
+    FUN name:<get-customFlowValue> visibility:public modality:FINAL <> () returnType:<root>.MyFlow29<kotlin.Int, kotlin.String>
+      correspondingProperty: PROPERTY name:customFlowValue visibility:public modality:FINAL [val]
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public final fun <get-customFlowValue> (): <root>.MyFlow29<kotlin.Int, kotlin.String> declared in <root>'
+          CONSTRUCTOR_CALL 'public constructor <init> (value1: T1 of <root>.MyFlow29, value2: T2 of <root>.MyFlow29) declared in <root>.MyFlow29' type=<root>.MyFlow29<kotlin.Int, kotlin.String> origin=null
+            <class: T1>: kotlin.Int
+            <class: T2>: kotlin.String
+            value1: CONST Int type=kotlin.Int value=29
+            value2: CONST String type=kotlin.String value="OK29"
   PROPERTY name:extensionFlow visibility:public modality:FINAL [val]
     annotations:
       NativeCoroutines

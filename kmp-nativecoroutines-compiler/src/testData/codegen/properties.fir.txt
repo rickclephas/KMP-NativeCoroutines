@@ -147,6 +147,38 @@ FILE: properties.kt
         public get(): R|kotlinx/coroutines/flow/StateFlow<kotlin/String>|
     @R|com/rickclephas/kmp/nativecoroutines/NativeCoroutinesState|() public final val mutableNullableStateProperty: R|kotlinx/coroutines/flow/MutableStateFlow<kotlin/String>?| = R|kotlinx/coroutines/flow/MutableStateFlow|<R|kotlin/String|>(String(OK27))
         public get(): R|kotlinx/coroutines/flow/MutableStateFlow<kotlin/String>?|
+    public abstract interface MyInterface28 : R|kotlin/Any| {
+        @R|com/rickclephas/kmp/nativecoroutines/NativeCoroutines|() public abstract val interfaceFlowValue: R|kotlinx/coroutines/flow/Flow<kotlin/String>|
+            public get(): R|kotlinx/coroutines/flow/Flow<kotlin/String>|
+
+        @R|kotlin/native/ObjCName|(name = String(interfaceFlowValue)) public final val interfaceFlowValueNative: R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>|
+            public get(): R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>| {
+                ::R|/MyInterface28.interfaceFlowValue|
+                R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
+            }
+
+    }
+    public final class MyClass28 : R|MyInterface28| {
+        public constructor(): R|MyClass28| {
+            super<R|kotlin/Any|>()
+        }
+
+        @R|com/rickclephas/kmp/nativecoroutines/NativeCoroutines|() public open override val interfaceFlowValue: R|kotlinx/coroutines/flow/Flow<kotlin/String>| = R|kotlinx/coroutines/flow/flowOf|<R|kotlin/String|>(String(OK28))
+            public get(): R|kotlinx/coroutines/flow/Flow<kotlin/String>|
+
+    }
+    public final class MyFlow29<T1, T2> : R|kotlinx/coroutines/flow/Flow<T2?>| {
+        public constructor<T1, T2>(value1: R|T1|, value2: R|T2|): R|MyFlow29<T1, T2>| {
+            super<R|kotlin/Any|>()
+        }
+
+        private final field $$delegate_0: R|kotlinx/coroutines/flow/Flow<T2?>| = R|kotlinx/coroutines/flow/flowOf|<R|T2?|>(Null(null))
+
+    }
+    @R|com/rickclephas/kmp/nativecoroutines/NativeCoroutines|() public final val customFlowValue: R|MyFlow29<kotlin/Int, kotlin/String>|
+        public get(): R|MyFlow29<kotlin/Int, kotlin/String>| {
+            ^ R|/MyFlow29.MyFlow29|<R|kotlin/Int|, R|kotlin/String|>(Int(29), String(OK29))
+        }
     public final fun box(): R|kotlin/String| {
         ^box R|com/rickclephas/kmp/nativecoroutines/runBoxTest|(<L> = runBoxTest@fun R|com/rickclephas/kmp/nativecoroutines/BoxTest|.<anonymous>(): R|kotlin/Unit| <inline=NoInline>  {
             this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.collect|<R|kotlin/String|>(R|/topLevelFlowNative|)
@@ -195,6 +227,8 @@ FILE: properties.kt
             this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.collect|<R|kotlin/String|>(R|/refinedStateFlow|, Int(1))
             this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.value|<R|kotlin/String?|>(R|/mutableNullableStatePropertyValue|)
             this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.collect|<R|kotlin/String|>(R|/mutableNullableStatePropertyFlow|!!, Int(1))
+            this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.collect|<R|kotlin/String|>(R|/MyClass28.MyClass28|().R|/MyInterface28.interfaceFlowValueNative|)
+            this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.collect|<R|kotlin/String?|>(R|/customFlowValueNative|)
         }
         )
     }
@@ -358,6 +392,11 @@ FILE: __GENERATED DECLARATIONS__.kt
     public final val R|kotlin/String|.extensionStateFlowValue: R|kotlin/String|
         public get(): R|kotlin/String| {
             ::R|/extensionStateFlow|
+            R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
+        }
+    @R|kotlin/native/ObjCName|(name = String(customFlowValue)) public final val customFlowValueNative: R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String?>|
+        public get(): R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String?>| {
+            ::R|/customFlowValue|
             R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
         }
     @R|kotlin/native/ObjCName|(name = String(refinedFlow)) @R|kotlin/native/ShouldRefineInSwift|() public final val refinedFlowNative: R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>|
