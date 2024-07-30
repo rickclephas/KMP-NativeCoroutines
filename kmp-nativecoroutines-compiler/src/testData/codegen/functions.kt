@@ -64,6 +64,9 @@ class MyClass16 {
         value1.toString() + value2.toString()
 }
 
+@NativeCoroutines
+suspend inline fun <reified T> returnInlineSuspendValue(value: T): T = value
+
 fun box() = runBoxTest {
     await(returnSuspendValueNative())
     await(returnNullableSuspendValueNative())
@@ -82,4 +85,5 @@ fun box() = runBoxTest {
     awaitAndCollect(returnSuspendFlowValueNative())
     await(returnGenericSuspendValueNative("OK15"))
     await(MyClass16().functionWithGenericValuesNative<CharSequence, String>("OK", "16"))
+    await(returnInlineSuspendValueNative("OK17"))
 }

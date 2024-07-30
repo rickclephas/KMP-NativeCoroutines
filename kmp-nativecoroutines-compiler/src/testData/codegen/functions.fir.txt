@@ -89,6 +89,9 @@ FILE: functions.kt
         }
 
     }
+    @R|com/rickclephas/kmp/nativecoroutines/NativeCoroutines|() public final inline suspend fun <reified T> returnInlineSuspendValue(value: R|T|): R|T| {
+        ^returnInlineSuspendValue R|<local>/value|
+    }
     public final fun box(): R|kotlin/String| {
         ^box R|com/rickclephas/kmp/nativecoroutines/runBoxTest|(<L> = runBoxTest@fun R|com/rickclephas/kmp/nativecoroutines/BoxTest|.<anonymous>(): R|kotlin/Unit| <inline=NoInline>  {
             this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.await|<R|kotlin/String|>(R|/returnSuspendValueNative|())
@@ -108,6 +111,7 @@ FILE: functions.kt
             this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.awaitAndCollect|<R|kotlin/String|>(R|/returnSuspendFlowValueNative|())
             this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.await|<R|kotlin/String|>(R|/returnGenericSuspendValueNative|<R|kotlin/String|>(String(OK15)))
             this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.await|<R|kotlin/String|>(R|/MyClass16.MyClass16|().R|/MyClass16.functionWithGenericValuesNative|<R|kotlin/CharSequence|, R|kotlin/String|>(String(OK), String(16)))
+            this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.await|<R|kotlin/String|>(R|/returnInlineSuspendValueNative|<R|kotlin/String|>(String(OK17)))
         }
         )
     }
@@ -158,6 +162,10 @@ FILE: __GENERATED DECLARATIONS__.kt
     }
     @R|kotlin/native/ObjCName|(name = String(returnGenericSuspendValue)) public final fun <T> returnGenericSuspendValueNative(value: R|T|): R|com/rickclephas/kmp/nativecoroutines/NativeSuspend<T>| {
         ::R|/returnGenericSuspendValue|
+        R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
+    }
+    @R|kotlin/native/ObjCName|(name = String(returnInlineSuspendValue)) public final inline fun <reified T> returnInlineSuspendValueNative(value: R|T|): R|com/rickclephas/kmp/nativecoroutines/NativeSuspend<T>| {
+        ::R|/returnInlineSuspendValue|
         R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
     }
     @R|kotlin/native/ObjCName|(name = String(returnRefinedSuspendValue)) @R|kotlin/native/ShouldRefineInSwift|() public final fun returnRefinedSuspendValueNative(): R|com/rickclephas/kmp/nativecoroutines/NativeSuspend<kotlin/String>| {

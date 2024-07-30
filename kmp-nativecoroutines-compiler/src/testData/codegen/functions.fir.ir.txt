@@ -250,6 +250,12 @@ FILE fqName:<root> fileName:/functions.kt
                     $this: CONSTRUCTOR_CALL 'public constructor <init> () declared in <root>.MyClass16' type=<root>.MyClass16 origin=null
                     value1: CONST String type=kotlin.String value="OK"
                     value2: CONST String type=kotlin.String value="16"
+                CALL 'public final fun await <T> (nativeSuspend: kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<T of com.rickclephas.kmp.nativecoroutines.BoxTest.await, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>): kotlin.Unit declared in com.rickclephas.kmp.nativecoroutines.BoxTest' type=kotlin.Unit origin=null
+                  <T>: kotlin.String
+                  $this: GET_VAR '$this$runBoxTest: com.rickclephas.kmp.nativecoroutines.BoxTest declared in <root>.box.<anonymous>' type=com.rickclephas.kmp.nativecoroutines.BoxTest origin=null
+                  nativeSuspend: CALL 'public final fun returnInlineSuspendValueNative <T> (value: T of <root>.returnInlineSuspendValueNative): kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<T of <root>.returnInlineSuspendValueNative, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> declared in <root>' type=kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> origin=null
+                    <T>: kotlin.String
+                    value: CONST String type=kotlin.String value="OK17"
   FUN name:returnFlowValue visibility:public modality:FINAL <> () returnType:kotlinx.coroutines.flow.Flow<kotlin.String>
     annotations:
       NativeCoroutines
@@ -266,6 +272,14 @@ FILE fqName:<root> fileName:/functions.kt
     BLOCK_BODY
       RETURN type=kotlin.Nothing from='public final fun returnGenericSuspendValue <T> (value: T of <root>.returnGenericSuspendValue): T of <root>.returnGenericSuspendValue declared in <root>'
         GET_VAR 'value: T of <root>.returnGenericSuspendValue declared in <root>.returnGenericSuspendValue' type=T of <root>.returnGenericSuspendValue origin=null
+  FUN name:returnInlineSuspendValue visibility:public modality:FINAL <T> (value:T of <root>.returnInlineSuspendValue) returnType:T of <root>.returnInlineSuspendValue [inline,suspend]
+    annotations:
+      NativeCoroutines
+    TYPE_PARAMETER name:T index:0 variance: superTypes:[kotlin.Any?] reified:true
+    VALUE_PARAMETER name:value index:0 type:T of <root>.returnInlineSuspendValue
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun returnInlineSuspendValue <T> (value: T of <root>.returnInlineSuspendValue): T of <root>.returnInlineSuspendValue declared in <root>'
+        GET_VAR 'value: T of <root>.returnInlineSuspendValue declared in <root>.returnInlineSuspendValue' type=T of <root>.returnInlineSuspendValue origin=null
   FUN name:returnNullableFlow visibility:public modality:FINAL <> () returnType:kotlinx.coroutines.flow.Flow<kotlin.String>?
     annotations:
       NativeCoroutines

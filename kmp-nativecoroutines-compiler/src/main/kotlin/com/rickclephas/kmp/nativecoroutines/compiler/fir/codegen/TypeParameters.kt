@@ -40,7 +40,7 @@ internal fun FirExtension.buildTypeParametersCopy(
             containingDeclarationSymbol = containingSymbol
 
             variance = parameter.variance
-            isReified = parameter.isReified // TODO: reified shouldn't be supported
+            isReified = parameter.isReified
 
             bounds.addAll(parameter.resolvedBounds)
 

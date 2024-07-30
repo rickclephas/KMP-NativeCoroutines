@@ -6,9 +6,11 @@ import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnot
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.shouldRefineInSwift
 import org.jetbrains.kotlin.KtFakeSourceElementKind
 import org.jetbrains.kotlin.fakeElement
+import org.jetbrains.kotlin.fir.copy
 import org.jetbrains.kotlin.fir.declarations.FirResolvePhase
 import org.jetbrains.kotlin.fir.declarations.builder.buildSimpleFunction
 import org.jetbrains.kotlin.fir.declarations.origin
+import org.jetbrains.kotlin.fir.declarations.utils.isInline
 import org.jetbrains.kotlin.fir.extensions.FirExtension
 import org.jetbrains.kotlin.fir.moduleData
 import org.jetbrains.kotlin.fir.symbols.SymbolInternals
@@ -36,7 +38,8 @@ internal fun FirExtension.buildNativeFunction(
         symbol = FirNamedFunctionSymbol(callableId)
         name = callableId.callableName
 
-        status = originalSymbol.getGeneratedDeclarationStatus(session) ?: return null
+        status = originalSymbol.getGeneratedDeclarationStatus(session)
+            ?.copy(isInline = originalSymbol.isInline) ?: return null
 
         dispatchReceiverType = originalSymbol.dispatchReceiverType
 
