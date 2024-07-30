@@ -1,7 +1,8 @@
 package com.rickclephas.kmp.nativecoroutines.compiler.ir.codegen
 
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.ClassIds
-import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation
+import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutineScope
+import org.jetbrains.kotlin.descriptors.Visibilities
 import org.jetbrains.kotlin.ir.builders.*
 import org.jetbrains.kotlin.ir.declarations.*
 import org.jetbrains.kotlin.ir.expressions.IrExpression
@@ -35,21 +36,33 @@ internal fun IrBuilderWithScope.irCallCoroutineScope(
 @UnsafeDuringIrConstructionAPI
 private fun IrSimpleFunction.getCoroutineScopeProperty(classPropertyOnly: Boolean): IrProperty? {
     val parentClass = parentClassOrNull
-    val parentClassProperty = parentClass?.getCoroutineScopeProperty()
+    val parentClassProperty = parentClass?.getCoroutineScopeProperty(true)
     if (parentClassProperty != null) return parentClassProperty
     if (classPropertyOnly) return null
-    fileOrNull?.getCoroutineScopeProperty()?.let { return it }
+    fileOrNull?.getCoroutineScopeProperty(true)?.let { return it }
     if (parentClass != null) return null
-    val extensionClassProperty = extensionReceiverParameter?.type?.getClass()?.getCoroutineScopeProperty()
+    val extensionClass = extensionReceiverParameter?.type?.getClass()
+    val extensionClassProperty = extensionClass?.getCoroutineScopeProperty(false)
     if (extensionClassProperty != null) return extensionClassProperty
     return null
 }
 
 @UnsafeDuringIrConstructionAPI
-private fun IrDeclarationContainer.getCoroutineScopeProperty(): IrProperty? =
-    declarations.filterIsInstance<IrProperty>().firstOrNull {
-        it.annotations.hasAnnotation(NativeCoroutinesAnnotation.NativeCoroutineScope.fqName)
-    }
+private fun IrDeclarationContainer.getCoroutineScopeProperty(
+    fromParent: Boolean
+): IrProperty? = declarations.filterIsInstance<IrProperty>().firstOrNull {
+    it.isVisible(fromParent) && it.annotations.hasAnnotation(NativeCoroutineScope.fqName)
+}
+
+private fun IrDeclarationWithVisibility.isVisible(
+    fromParent: Boolean
+): Boolean = when (visibility.delegate) {
+    Visibilities.Private -> fromParent
+    Visibilities.Internal -> origin != IrDeclarationOrigin.IR_EXTERNAL_DECLARATION_STUB
+    Visibilities.Protected -> fromParent
+    Visibilities.Public -> true
+    else -> false
+}
 
 private val IrSimpleFunction.dispatchOrExtensionReceiverParameter: IrValueParameter
     get() = dispatchReceiverParameter ?: extensionReceiverParameter ?: error("Missing dispatch receiver parameter")

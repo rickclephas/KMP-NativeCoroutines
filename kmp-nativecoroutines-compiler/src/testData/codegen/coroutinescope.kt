@@ -18,7 +18,7 @@ val flowProperty: Flow<String> = flowOf("OK2")
 
 open class MyClass1 {
     @NativeCoroutineScope
-    internal val coroutineScope2 = CoroutineScope(Dispatchers.Default)
+    protected val coroutineScope2 = CoroutineScope(Dispatchers.Default)
 
     @NativeCoroutines
     suspend fun returnSuspendValue(): String = "OK3"
@@ -48,7 +48,10 @@ class MyClass4 {
 // FILE: coroutinescope2.kt
 
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
+import com.rickclephas.kmp.nativecoroutines.NativeCoroutineScope
 import com.rickclephas.kmp.nativecoroutines.runBoxTest
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 
@@ -58,6 +61,22 @@ val MyClass3.flowExtProperty2: Flow<String> get() = flowOf("OK8")
 class MyClass5 {
     @NativeCoroutines
     suspend fun MyClass1.returnExtSuspendValue(): String = "OK9"
+}
+
+open class MyClass6 {
+    @NativeCoroutineScope
+    private val coroutineScope4 = CoroutineScope(Dispatchers.Default)
+
+    @NativeCoroutines
+    suspend fun returnSuspendValue(): String = "OK10"
+}
+
+@NativeCoroutines
+suspend fun MyClass6.returnExtSuspendValue(): String = "OK11"
+
+class MyClass7: MyClass6() {
+    @NativeCoroutines
+    suspend fun returnOtherSuspendValue(): String = "OK12"
 }
 
 fun box() = runBoxTest {
@@ -74,4 +93,7 @@ fun box() = runBoxTest {
     with(MyClass5()) {
         await(MyClass1().returnExtSuspendValueNative())
     }
+    await(MyClass6().returnSuspendValueNative())
+    await(MyClass6().returnExtSuspendValueNative())
+    await(MyClass7().returnOtherSuspendValueNative())
 }
