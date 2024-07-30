@@ -3,9 +3,7 @@ package com.rickclephas.kmp.nativecoroutines.compiler.fir.utils
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.CallableSignature
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.ClassIds
 import org.jetbrains.kotlin.fir.FirSession
-import org.jetbrains.kotlin.fir.resolve.fullyExpandedType
-import org.jetbrains.kotlin.fir.resolve.lookupSuperTypes
-import org.jetbrains.kotlin.fir.resolve.toSymbol
+import org.jetbrains.kotlin.fir.resolve.*
 import org.jetbrains.kotlin.fir.symbols.impl.FirCallableSymbol
 import org.jetbrains.kotlin.fir.symbols.impl.FirFunctionSymbol
 import org.jetbrains.kotlin.fir.types.*
@@ -71,8 +69,10 @@ private fun FirCallableSignature.Builder.createType(rawType: ConeKotlinType): Ca
     if (rawType !is ConeClassLikeType) return rawType.asRawType()
     val types = sequence {
         yield(rawType)
-        val symbol = rawType.lookupTag.toSymbol(session) ?: return@sequence
-        yieldAll(lookupSuperTypes(symbol, lookupInterfaces = true, deep = true, session))
+        val symbol = rawType.lookupTag.toClassSymbol(session) ?: return@sequence
+        val substitutor = createSubstitutionForSupertype(rawType, session)
+        val superTypes = lookupSuperTypes(listOf(symbol), lookupInterfaces = true, deep = true, session, substituteTypes = true)
+        yieldAll(superTypes.map { substitutor.substituteOrSelf(it) as ConeClassLikeType })
     }
     for (type in types) {
         when (val classId = type.lookupTag.classId) {
