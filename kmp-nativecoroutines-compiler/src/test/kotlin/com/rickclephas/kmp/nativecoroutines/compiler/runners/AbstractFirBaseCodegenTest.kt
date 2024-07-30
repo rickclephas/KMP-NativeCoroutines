@@ -3,6 +3,7 @@ package com.rickclephas.kmp.nativecoroutines.compiler.runners
 import com.rickclephas.kmp.nativecoroutines.compiler.directives.KmpNativeCoroutinesDirectives
 import com.rickclephas.kmp.nativecoroutines.compiler.services.KmpNativeCoroutinesCompilerPluginConfigurator
 import com.rickclephas.kmp.nativecoroutines.compiler.services.KmpNativeCoroutinesJvmRuntimeClasspathProvider
+import org.jetbrains.kotlin.config.JvmDefaultMode
 import org.jetbrains.kotlin.test.Constructor
 import org.jetbrains.kotlin.test.FirParser
 import org.jetbrains.kotlin.test.TargetBackend
@@ -20,6 +21,7 @@ import org.jetbrains.kotlin.test.directives.CodegenTestDirectives.IGNORE_DEXING
 import org.jetbrains.kotlin.test.directives.ConfigurationDirectives.WITH_STDLIB
 import org.jetbrains.kotlin.test.directives.FirDiagnosticsDirectives.FIR_DUMP
 import org.jetbrains.kotlin.test.directives.JvmEnvironmentConfigurationDirectives.FULL_JDK
+import org.jetbrains.kotlin.test.directives.LanguageSettingsDirectives.JVM_DEFAULT_MODE
 import org.jetbrains.kotlin.test.directives.configureFirParser
 import org.jetbrains.kotlin.test.frontend.fir.Fir2IrResultsConverter
 import org.jetbrains.kotlin.test.frontend.fir.FirFrontendFacade
@@ -71,6 +73,7 @@ abstract class AbstractFirBaseCodegenTest(
             +DUMP_IR
             +DUMP_KT_IR
             +IGNORE_DEXING
+            JVM_DEFAULT_MODE with JvmDefaultMode.ALL
             +KmpNativeCoroutinesDirectives.K2_MODE
             KmpNativeCoroutinesDirectives.SUFFIX with "Native"
             KmpNativeCoroutinesDirectives.FLOW_VALUE_SUFFIX with "Value"

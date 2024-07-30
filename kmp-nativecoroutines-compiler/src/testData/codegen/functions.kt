@@ -67,6 +67,40 @@ class MyClass16 {
 @NativeCoroutines
 suspend inline fun <reified T> returnInlineSuspendValue(value: T): T = value
 
+@NativeCoroutines
+suspend fun returnNullableSuspendFlow(): Flow<String>? = null
+
+@NativeCoroutines
+suspend fun String.returnExtensionValue(): String = this
+
+class MyClass20 {
+    @NativeCoroutines
+    suspend fun String.returnClassExtensionValue(): String = this
+}
+
+class MyClass21<out T> {
+    @NativeCoroutines
+    suspend fun returnGenericValue(): T? = null
+}
+
+interface MyInterface22 {
+    @NativeCoroutines
+    suspend fun returnInterfaceSuspendValue(): String
+}
+
+class MyClass22: MyInterface22 {
+    @NativeCoroutines
+    override suspend fun returnInterfaceSuspendValue(): String = "OK22"
+}
+
+class MyFlow23<T1, T2>(
+    value1: T1,
+    value2: T2,
+): Flow<T2> by flowOf<T2>(value2)
+
+@NativeCoroutines
+fun returnCustomFlowValue(): MyFlow23<Int, String> = MyFlow23(23, "OK23")
+
 fun box() = runBoxTest {
     await(returnSuspendValueNative())
     await(returnNullableSuspendValueNative())
@@ -86,4 +120,12 @@ fun box() = runBoxTest {
     await(returnGenericSuspendValueNative("OK15"))
     await(MyClass16().functionWithGenericValuesNative<CharSequence, String>("OK", "16"))
     await(returnInlineSuspendValueNative("OK17"))
+    await(returnNullableSuspendFlowNative())
+    await("OK19".returnExtensionValueNative())
+    with(MyClass20()) {
+        await("OK20".returnClassExtensionValueNative())
+    }
+    await(MyClass21<String>().returnGenericValueNative())
+    await(MyClass22().returnInterfaceSuspendValueNative())
+    collect(returnCustomFlowValueNative())
 }
