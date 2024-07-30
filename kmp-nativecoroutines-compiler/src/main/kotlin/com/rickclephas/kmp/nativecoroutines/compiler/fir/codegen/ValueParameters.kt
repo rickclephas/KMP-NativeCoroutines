@@ -37,7 +37,7 @@ internal fun FirExtension.buildValueParametersCopy(
         isVararg = parameter.isVararg
 
         // TODO: dispatchReceiverType
-        // TODO: contextReceivers
+        // TODO: support contextReceivers once exported to ObjC
 
         returnTypeRef = parameter.resolvedReturnTypeRef.coneType
             .let(substitutor::substituteOrSelf)

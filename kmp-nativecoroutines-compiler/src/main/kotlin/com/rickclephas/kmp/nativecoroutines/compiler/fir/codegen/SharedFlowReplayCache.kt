@@ -61,7 +61,7 @@ internal fun FirExtension.buildSharedFlowReplayCacheProperty(
         )
         this.typeParameters.addAll(typeParameters.parameters)
 
-        // TODO: contextReceivers
+        // TODO: support contextReceivers once exported to ObjC
 
         receiverParameter = buildReceiverParameterCopy(
             originalSymbol.receiverParameter,
