@@ -52,7 +52,6 @@ internal fun FirExtension.buildTypeParametersCopy(
     val substitutor = substitutorByMap(substitutionMap, session)
     for (parameter in parameters) {
         val bounds = parameter.bounds.map {
-            // TODO: copy type ref annotations?
             it.coneType.let(substitutor::substituteOrSelf).toFirResolvedTypeRef()
         }
         parameter.replaceBounds(bounds)

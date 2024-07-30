@@ -69,7 +69,6 @@ internal fun FirExtension.buildNativeFunction(
             typeParameters.substitutor
         ))
 
-        // TODO: copy type ref annotations?
         returnTypeRef = firCallableSignature.getNativeType(
             callableSignature.returnType,
             callableSignature.isSuspend

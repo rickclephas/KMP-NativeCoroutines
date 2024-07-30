@@ -39,7 +39,6 @@ internal fun FirExtension.buildValueParametersCopy(
         // TODO: dispatchReceiverType
         // TODO: contextReceivers
 
-        // TODO: copy type ref annotations?
         returnTypeRef = parameter.resolvedReturnTypeRef.coneType
             .let(substitutor::substituteOrSelf)
             .toFirResolvedTypeRef()

@@ -17,7 +17,6 @@ internal fun FirExtension.buildReceiverParameterCopy(
     return buildReceiverParameter {
         source = originalParameter.source?.fakeElement(KtFakeSourceElementKind.PluginGenerated)
 
-        // TODO: copy type ref annotations?
         typeRef = originalParameter.typeRef.coneType
             .let(substitutor::substituteOrSelf)
             .toFirResolvedTypeRef()
