@@ -54,6 +54,7 @@ fun box(): String {
     $this$runBoxTest.value<String>(value = <get-objCNameProperty1Value>())
     $this$runBoxTest.collect<String>(nativeFlow = <get-objCNameProperty2Flow>(), maxValues = 1)
     $this$runBoxTest.value<String>(value = <get-objCNameProperty2Value>())
+    $this$runBoxTest.await<String>(nativeSuspend = objCNameFunctionParameterNative(value = "OK13"))
   }
 )
 }
@@ -95,6 +96,12 @@ suspend fun objCNameFunction2(): String {
 @ObjCName(name = "objCNameFunction3ObjC", swiftName = "objCNameFunction3Swift")
 suspend fun objCNameFunction3(): String {
   return "OK10"
+}
+
+@NativeCoroutines
+@OptIn(markerClass = [ExperimentalObjCName::class])
+suspend fun objCNameFunctionParameter(@ObjCName(name = "valueObjC") value: String): String {
+  return value
 }
 
 // FILE: __GENERATED DECLARATIONS__.kt
@@ -167,68 +174,77 @@ fun objCNameFunction3Native(): Function3<@ParameterName(name = "onResult") Funct
 )
 }
 
+@ObjCName(name = "objCNameFunctionParameter")
+fun objCNameFunctionParameterNative(@ObjCName(name = "valueObjC") value: String): Function3<@ParameterName(name = "onResult") Function2<String, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+  val tmp_7: CoroutineScope? = null
+  return nativeSuspend<String>(scope = tmp_7, block = local suspend fun <anonymous>(): String {
+    return objCNameFunctionParameter(value = value)
+  }
+)
+}
+
 @Deprecated(message = "This is deprecated 4")
 @ObjCName(name = "deprecatedProperty1")
 val deprecatedProperty1Native: Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>
   get(): Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
-    val tmp_7: CoroutineScope? = null
-    val tmp_8: Flow<String> = <get-deprecatedProperty1>()
-    return tmp_8.asNativeFlow<String>(scope = tmp_7)
+    val tmp_8: CoroutineScope? = null
+    val tmp_9: Flow<String> = <get-deprecatedProperty1>()
+    return tmp_9.asNativeFlow<String>(scope = tmp_8)
   }
 
 @Deprecated(message = "This is deprecated 5", level = DeprecationLevel.WARNING)
 @ObjCName(name = "deprecatedProperty2")
 val deprecatedProperty2Native: Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>
   get(): Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
-    val tmp_9: CoroutineScope? = null
-    val tmp_10: Flow<String> = <get-deprecatedProperty2>()
-    return tmp_10.asNativeFlow<String>(scope = tmp_9)
+    val tmp_10: CoroutineScope? = null
+    val tmp_11: Flow<String> = <get-deprecatedProperty2>()
+    return tmp_11.asNativeFlow<String>(scope = tmp_10)
   }
 
 @Deprecated(message = "This is deprecated 6", level = DeprecationLevel.ERROR)
 @ObjCName(name = "deprecatedProperty3")
 val deprecatedProperty3Native: Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>
   get(): Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
-    val tmp_11: CoroutineScope? = null
-    val tmp_12: Flow<String> = <get-deprecatedProperty3>()
-    return tmp_12.asNativeFlow<String>(scope = tmp_11)
+    val tmp_12: CoroutineScope? = null
+    val tmp_13: Flow<String> = <get-deprecatedProperty3>()
+    return tmp_13.asNativeFlow<String>(scope = tmp_12)
   }
 
 @ObjCName(name = "deprecatedProperty4")
 val deprecatedProperty4Native: Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>
   @Deprecated(message = "This is deprecated 7")
   get(): Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
-    val tmp_13: CoroutineScope? = null
-    val tmp_14: MutableStateFlow<String> = <get-deprecatedProperty4>()
-    return tmp_14.asNativeFlow<String>(scope = tmp_13)
+    val tmp_14: CoroutineScope? = null
+    val tmp_15: MutableStateFlow<String> = <get-deprecatedProperty4>()
+    return tmp_15.asNativeFlow<String>(scope = tmp_14)
   }
 
 @ObjCName(name = "objCNameProperty1ObjC")
 val objCNameProperty1Native: Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>
   get(): Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
-    val tmp_15: CoroutineScope? = null
-    val tmp_16: StateFlow<String> = <get-objCNameProperty1>()
-    return tmp_16.asNativeFlow<String>(scope = tmp_15)
+    val tmp_16: CoroutineScope? = null
+    val tmp_17: StateFlow<String> = <get-objCNameProperty1>()
+    return tmp_17.asNativeFlow<String>(scope = tmp_16)
   }
 
 @ObjCName(name = "objCNameProperty1ObjCValue")
 val objCNameProperty1Value: String
   get(): String {
-    val tmp_17: StateFlow<String> = <get-objCNameProperty1>()
-    return tmp_17.<get-value>()
+    val tmp_18: StateFlow<String> = <get-objCNameProperty1>()
+    return tmp_18.<get-value>()
   }
 
 @ObjCName(name = "objCNameProperty2ObjCFlow")
 val objCNameProperty2Flow: Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>
   get(): Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
-    val tmp_18: CoroutineScope? = null
-    val tmp_19: StateFlow<String> = <get-objCNameProperty2>()
-    return tmp_19.asNativeFlow<String>(scope = tmp_18)
+    val tmp_19: CoroutineScope? = null
+    val tmp_20: StateFlow<String> = <get-objCNameProperty2>()
+    return tmp_20.asNativeFlow<String>(scope = tmp_19)
   }
 
 @ObjCName(name = "objCNameProperty2ObjC")
 val objCNameProperty2Value: String
   get(): String {
-    val tmp_20: StateFlow<String> = <get-objCNameProperty2>()
-    return tmp_20.<get-value>()
+    val tmp_21: StateFlow<String> = <get-objCNameProperty2>()
+    return tmp_21.<get-value>()
   }

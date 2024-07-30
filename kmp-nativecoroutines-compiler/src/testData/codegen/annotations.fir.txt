@@ -30,6 +30,9 @@ FILE: annotations.kt
         public get(): R|kotlinx/coroutines/flow/StateFlow<kotlin/String>|
     @R|com/rickclephas/kmp/nativecoroutines/NativeCoroutinesState|() @R|kotlin/OptIn|(markerClass = vararg(<getClass>(Q|kotlin/experimental/ExperimentalObjCName|))) @R|kotlin/native/ObjCName|(name = String(objCNameProperty2ObjC)) public final val objCNameProperty2: R|kotlinx/coroutines/flow/StateFlow<kotlin/String>| = R|kotlinx/coroutines/flow/MutableStateFlow|<R|kotlin/String|>(String(OK12))
         public get(): R|kotlinx/coroutines/flow/StateFlow<kotlin/String>|
+    @R|com/rickclephas/kmp/nativecoroutines/NativeCoroutines|() @R|kotlin/OptIn|(markerClass = vararg(<getClass>(Q|kotlin/experimental/ExperimentalObjCName|))) public final suspend fun objCNameFunctionParameter(@R|kotlin/native/ObjCName|(name = String(valueObjC)) value: R|kotlin/String|): R|kotlin/String| {
+        ^objCNameFunctionParameter R|<local>/value|
+    }
     public final fun box(): R|kotlin/String| {
         ^box R|com/rickclephas/kmp/nativecoroutines/runBoxTest|(<L> = runBoxTest@fun R|com/rickclephas/kmp/nativecoroutines/BoxTest|.<anonymous>(): R|kotlin/Unit| <inline=NoInline>  {
             this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.await|<R|kotlin/String|>(R|/deprecatedFunction1Native|())
@@ -45,6 +48,7 @@ FILE: annotations.kt
             this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.value|<R|kotlin/String|>(R|/objCNameProperty1Value|)
             this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.collect|<R|kotlin/String|>(R|/objCNameProperty2Flow|, Int(1))
             this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.value|<R|kotlin/String|>(R|/objCNameProperty2Value|)
+            this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.await|<R|kotlin/String|>(R|/objCNameFunctionParameterNative|(String(OK13)))
         }
         )
     }
@@ -109,6 +113,10 @@ FILE: __GENERATED DECLARATIONS__.kt
             ::R|/objCNameProperty1|
             R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
         }
+    @R|kotlin/native/ObjCName|(name = String(objCNameFunctionParameter)) public final fun objCNameFunctionParameterNative(@R|kotlin/native/ObjCName|(name = String(valueObjC)) value: R|kotlin/String|): R|com/rickclephas/kmp/nativecoroutines/NativeSuspend<kotlin/String>| {
+        ::R|/objCNameFunctionParameter|
+        R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
+    }
     @R|kotlin/native/ObjCName|(name = String(objCNameProperty2ObjC)) public final val objCNameProperty2Value: R|kotlin/String|
         public get(): R|kotlin/String| {
             ::R|/objCNameProperty2|

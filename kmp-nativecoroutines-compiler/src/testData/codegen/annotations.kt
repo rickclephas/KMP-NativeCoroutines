@@ -63,6 +63,10 @@ val objCNameProperty1: StateFlow<String> = MutableStateFlow("OK11")
 @ObjCName("objCNameProperty2ObjC")
 val objCNameProperty2: StateFlow<String> = MutableStateFlow("OK12")
 
+@NativeCoroutines
+@OptIn(ExperimentalObjCName::class)
+suspend fun objCNameFunctionParameter(@ObjCName("valueObjC") value: String): String = value
+
 fun box() = runBoxTest {
     await(deprecatedFunction1Native())
     await(deprecatedFunction2Native())
@@ -77,4 +81,5 @@ fun box() = runBoxTest {
     value(objCNameProperty1Value)
     collect(objCNameProperty2Flow, maxValues = 1)
     value(objCNameProperty2Value)
+    await(objCNameFunctionParameterNative("OK13"))
 }

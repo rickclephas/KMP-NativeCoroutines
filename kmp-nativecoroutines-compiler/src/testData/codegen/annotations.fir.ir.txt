@@ -151,6 +151,11 @@ FILE fqName:<root> fileName:/annotations.kt
                   <T>: kotlin.String
                   $this: GET_VAR '$this$runBoxTest: com.rickclephas.kmp.nativecoroutines.BoxTest declared in <root>.box.<anonymous>' type=com.rickclephas.kmp.nativecoroutines.BoxTest origin=null
                   value: CALL 'public final fun <get-objCNameProperty2Value> (): kotlin.String declared in <root>' type=kotlin.String origin=GET_PROPERTY
+                CALL 'public final fun await <T> (nativeSuspend: kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<T of com.rickclephas.kmp.nativecoroutines.BoxTest.await, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>): kotlin.Unit declared in com.rickclephas.kmp.nativecoroutines.BoxTest' type=kotlin.Unit origin=null
+                  <T>: kotlin.String
+                  $this: GET_VAR '$this$runBoxTest: com.rickclephas.kmp.nativecoroutines.BoxTest declared in <root>.box.<anonymous>' type=com.rickclephas.kmp.nativecoroutines.BoxTest origin=null
+                  nativeSuspend: CALL 'public final fun objCNameFunctionParameterNative (value: kotlin.String): kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> declared in <root>' type=kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> origin=null
+                    value: CONST String type=kotlin.String value="OK13"
   FUN name:deprecatedFunction1 visibility:public modality:FINAL <> () returnType:kotlin.String [suspend]
     annotations:
       NativeCoroutines
@@ -196,3 +201,13 @@ FILE fqName:<root> fileName:/annotations.kt
     BLOCK_BODY
       RETURN type=kotlin.Nothing from='public final fun objCNameFunction3 (): kotlin.String declared in <root>'
         CONST String type=kotlin.String value="OK10"
+  FUN name:objCNameFunctionParameter visibility:public modality:FINAL <> (value:kotlin.String) returnType:kotlin.String [suspend]
+    annotations:
+      NativeCoroutines
+      OptIn(markerClass = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB ANNOTATION_CLASS name:ExperimentalObjCName modality:OPEN visibility:public superTypes:[kotlin.Annotation]' type=kotlin.reflect.KClass<kotlin.experimental.ExperimentalObjCName>])
+    VALUE_PARAMETER name:value index:0 type:kotlin.String
+      annotations:
+        ObjCName(name = "valueObjC", swiftName = <null>, exact = <null>)
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun objCNameFunctionParameter (value: kotlin.String): kotlin.String declared in <root>'
+        GET_VAR 'value: kotlin.String declared in <root>.objCNameFunctionParameter' type=kotlin.String origin=null
