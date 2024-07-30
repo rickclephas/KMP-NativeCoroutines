@@ -74,7 +74,7 @@ intellijPlatform {
         }
     }
 
-    verifyPlugin {
+    pluginVerification {
         ides {
             recommended()
             select {
