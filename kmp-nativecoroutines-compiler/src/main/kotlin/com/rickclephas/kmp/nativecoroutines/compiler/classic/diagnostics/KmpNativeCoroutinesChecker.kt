@@ -22,6 +22,7 @@ import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNati
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.EXPOSED_STATE_FLOW_PROPERTY_ERROR
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.IGNORED_COROUTINES_REFINED
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.IGNORED_COROUTINES_REFINED_STATE
+import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.IMPLICIT_RETURN_TYPE
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.INCOMPATIBLE_ACTUAL_COROUTINES
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.INCOMPATIBLE_ACTUAL_COROUTINES_IGNORE
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.INCOMPATIBLE_ACTUAL_COROUTINES_REFINED
@@ -36,6 +37,7 @@ import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNati
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.UNSUPPORTED_CLASS_EXTENSION_PROPERTY
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.utils.coroutinesReturnType
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.utils.getNativeCoroutinesAnnotations
+import com.rickclephas.kmp.nativecoroutines.compiler.classic.utils.hasImplicitReturnType
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.utils.isRefined
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.CoroutinesReturnType
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutines
@@ -48,6 +50,7 @@ import org.jetbrains.kotlin.descriptors.*
 import org.jetbrains.kotlin.descriptors.annotations.Annotated
 import org.jetbrains.kotlin.descriptors.annotations.AnnotationDescriptor
 import org.jetbrains.kotlin.diagnostics.DiagnosticFactory0
+import org.jetbrains.kotlin.psi.KtCallableDeclaration
 import org.jetbrains.kotlin.psi.KtDeclaration
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.resolve.BindingTrace
@@ -62,7 +65,8 @@ import kotlin.io.path.Path
 
 public class KmpNativeCoroutinesChecker(
     exposedSeverity: ExposedSeverity,
-    private val generatedSourceDirs: List<Path>
+    private val generatedSourceDirs: List<Path>,
+    private val isK2Mode: Boolean,
 ): DeclarationChecker {
 
     private val exposedSuspendFunction = when (exposedSeverity) {
@@ -196,6 +200,12 @@ public class KmpNativeCoroutinesChecker(
             coroutinesAnnotations.forEach {
                 context.trace.report(UNSUPPORTED_CLASS_EXTENSION_PROPERTY, it, declaration)
             }
+        }
+        //endregion
+
+        //region IMPLICIT_RETURN_TYPE
+        if (hasAnnotation && isK2Mode && (declaration as? KtCallableDeclaration)?.hasImplicitReturnType() == true) {
+            context.trace.report(IMPLICIT_RETURN_TYPE.on(declaration))
         }
         //endregion
     }

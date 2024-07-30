@@ -15,6 +15,7 @@ import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesIgnore
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesRefined
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesRefinedState
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState
+import kotlin.experimental.ExperimentalObjCRefinement
 import kotlin.native.HiddenFromObjC
 import kotlin.native.ShouldRefineInSwift
 import kotlinx.coroutines.flow.Flow
@@ -39,6 +40,7 @@ fun topLevelCustomFlowFunction(): CustomFlow<Int> = throw Throwable()
 @NativeCoroutinesIgnore
 suspend fun topLevelSuspendFlowFunction(): Flow<Int> = throw Throwable()
 
+@OptIn(ExperimentalObjCRefinement::class)
 @HiddenFromObjC
 suspend fun topLevelRefinedSuspendFunction(): Int = 0
 
@@ -54,6 +56,7 @@ val topLevelStateFlowProperty: StateFlow<Int> get() = throw Throwable()
 @NativeCoroutinesIgnore
 val topLevelCustomFlowProperty: CustomFlow<Int> get() = throw Throwable()
 
+@OptIn(ExperimentalObjCRefinement::class)
 @ShouldRefineInSwift
 val topLevelRefinedFlowProperty: Flow<Int> get() = throw Throwable()
 
