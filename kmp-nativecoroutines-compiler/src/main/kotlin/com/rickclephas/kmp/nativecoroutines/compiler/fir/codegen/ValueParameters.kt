@@ -36,7 +36,6 @@ internal fun FirExtension.buildValueParametersCopy(
         isNoinline = parameter.isNoinline
         isVararg = parameter.isVararg
 
-        // TODO: dispatchReceiverType
         // TODO: support contextReceivers once exported to ObjC
 
         returnTypeRef = parameter.resolvedReturnTypeRef.coneType
