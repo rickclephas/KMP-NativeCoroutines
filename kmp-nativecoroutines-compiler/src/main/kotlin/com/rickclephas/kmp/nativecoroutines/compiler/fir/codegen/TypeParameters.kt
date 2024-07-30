@@ -42,7 +42,6 @@ internal fun FirExtension.buildTypeParametersCopy(
             variance = parameter.variance
             isReified = parameter.isReified // TODO: reified shouldn't be supported
 
-            // TODO: can we access resolvedBounds?
             bounds.addAll(parameter.resolvedBounds)
 
             annotations.addAll(buildAnnotationsCopy(parameter.annotations))
