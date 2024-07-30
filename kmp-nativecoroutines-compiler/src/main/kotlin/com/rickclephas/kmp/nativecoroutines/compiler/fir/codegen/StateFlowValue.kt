@@ -6,14 +6,10 @@ import com.rickclephas.kmp.nativecoroutines.compiler.utils.ClassIds
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.shouldRefineInSwift
 import org.jetbrains.kotlin.KtFakeSourceElementKind
-import org.jetbrains.kotlin.descriptors.EffectiveVisibility
-import org.jetbrains.kotlin.descriptors.Modality
-import org.jetbrains.kotlin.descriptors.Visibilities
 import org.jetbrains.kotlin.fakeElement
 import org.jetbrains.kotlin.fir.declarations.FirPropertyBodyResolveState
 import org.jetbrains.kotlin.fir.declarations.FirResolvePhase
 import org.jetbrains.kotlin.fir.declarations.builder.buildProperty
-import org.jetbrains.kotlin.fir.declarations.impl.FirResolvedDeclarationStatusImpl
 import org.jetbrains.kotlin.fir.declarations.origin
 import org.jetbrains.kotlin.fir.extensions.FirExtension
 import org.jetbrains.kotlin.fir.moduleData
@@ -47,11 +43,7 @@ internal fun FirExtension.buildStateFlowValueProperty(
         symbol = FirPropertySymbol(callableId)
         name = callableId.callableName
 
-        status = FirResolvedDeclarationStatusImpl(
-            Visibilities.Public, // TODO: support protected visibility
-            Modality.FINAL,
-            EffectiveVisibility.Public
-        )
+        status = originalSymbol.getGeneratedDeclarationStatus(session) ?: return null
 
         dispatchReceiverType = originalSymbol.dispatchReceiverType
 
