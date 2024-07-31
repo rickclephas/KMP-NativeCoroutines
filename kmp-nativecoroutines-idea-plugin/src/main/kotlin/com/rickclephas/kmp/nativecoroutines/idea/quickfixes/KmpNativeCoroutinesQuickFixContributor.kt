@@ -11,6 +11,7 @@ import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNati
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.IGNORED_COROUTINES_REFINED
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.IGNORED_COROUTINES_REFINED_STATE
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.IGNORED_COROUTINES_STATE
+import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.IMPLICIT_RETURN_TYPE
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.INCOMPATIBLE_ACTUAL_COROUTINES
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.INCOMPATIBLE_ACTUAL_COROUTINES_IGNORE
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.INCOMPATIBLE_ACTUAL_COROUTINES_REFINED
@@ -37,6 +38,7 @@ import com.rickclephas.kmp.nativecoroutines.idea.quickfixes.AddAnnotationFixFact
 import com.rickclephas.kmp.nativecoroutines.idea.quickfixes.RemoveAnnotationFixFactory.Companion.registerRemoveAnnotationFix
 import org.jetbrains.kotlin.idea.quickfix.QuickFixContributor
 import org.jetbrains.kotlin.idea.quickfix.QuickFixes
+import org.jetbrains.kotlin.idea.quickfix.SpecifyTypeExplicitlyFix
 
 public class KmpNativeCoroutinesQuickFixContributor: QuickFixContributor {
     override fun registerQuickFixes(quickFixes: QuickFixes) {
@@ -82,5 +84,7 @@ public class KmpNativeCoroutinesQuickFixContributor: QuickFixContributor {
             REDUNDANT_PRIVATE_COROUTINES_REFINED_STATE,
             REDUNDANT_PRIVATE_COROUTINES_STATE,
         )
+
+        quickFixes.register(IMPLICIT_RETURN_TYPE, SpecifyTypeExplicitlyFix())
     }
 }
