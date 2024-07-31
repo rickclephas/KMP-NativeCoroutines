@@ -34,7 +34,7 @@ jobs:
       - name: Cache Konan
         uses: ./.github/actions/cache-konan
       - name: Publish to Sonatype
-        run: ./gradlew publishAllPublicationsToSonatypeRepository
+        run: ./gradlew publishAllPublicationsToSonatypeRepository --no-configuration-cache
         env:
           SIGNING_KEY_ID: ${{ secrets.SIGNING_KEY_ID }}
           SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}

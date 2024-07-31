@@ -1,6 +1,6 @@
 package com.rickclephas.kmp.nativecoroutines.compiler.fir.utils
 
-import com.rickclephas.kmp.nativecoroutines.compiler.utils.CoroutinesClassIds
+import com.rickclephas.kmp.nativecoroutines.compiler.utils.ClassIds
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.CoroutinesReturnType
 import org.jetbrains.kotlin.fir.FirSession
 import org.jetbrains.kotlin.fir.analysis.checkers.toClassLikeSymbol
@@ -17,7 +17,7 @@ internal fun FirCallableDeclaration.getCoroutinesReturnType(session: FirSession)
 }
 
 private val coroutinesReturnTypes = mapOf(
-    CoroutinesClassIds.stateFlow.toLookupTag() to CoroutinesReturnType.Flow.State,
-    CoroutinesClassIds.flow.toLookupTag() to CoroutinesReturnType.Flow.Generic,
-    CoroutinesClassIds.coroutineScope.toLookupTag() to CoroutinesReturnType.CoroutineScope,
+    ClassIds.stateFlow.toLookupTag() to CoroutinesReturnType.Flow.State,
+    ClassIds.flow.toLookupTag() to CoroutinesReturnType.Flow.Generic,
+    ClassIds.coroutineScope.toLookupTag() to CoroutinesReturnType.CoroutineScope,
 )

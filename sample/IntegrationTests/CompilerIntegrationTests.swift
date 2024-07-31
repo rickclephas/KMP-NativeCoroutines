@@ -94,7 +94,7 @@ class CompilerIntegrationTests: XCTestCase {
         let integrationTests = IntegrationTests()
         let valueExpectation = expectation(description: "Waiting for value")
         let sendValue = NSNumber(value: randomInt())
-        _ = integrationTests.returnGenericValueFromExtension(receiver: [], value: sendValue)({ value, unit in
+        _ = integrationTests.returnGenericValueFromExtension([], value: sendValue)({ value, unit in
             XCTAssertEqual(value as! NSNumber, sendValue, "Received incorrect value")
             valueExpectation.fulfill()
             return unit

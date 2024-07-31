@@ -1,0 +1,227 @@
+// FILE: androidxviewmodel.kt
+package androidx.lifecycle
+
+open class ViewModel {
+  constructor() /* primary */ {
+    super/*Any*/()
+    /* <init>() */
+
+  }
+
+}
+
+val ViewModel.viewModelScope: CoroutineScope
+  get(): CoroutineScope {
+    return CoroutineScope(context = Dispatchers.<get-Default>())
+  }
+
+// FILE: observableviewmodel.kt
+package com.rickclephas.kmp.observableviewmodel
+
+open class ViewModel : ViewModel {
+  val viewModelScope: ViewModelScope
+    field = ViewModelScope()
+    get
+
+  constructor() /* primary */ {
+    super/*ViewModel*/()
+    /* <init>() */
+
+  }
+
+}
+
+class ViewModelScope {
+  constructor() /* primary */ {
+    super/*Any*/()
+    /* <init>() */
+
+  }
+
+}
+
+val ViewModelScope.coroutineScope: CoroutineScope
+  get(): CoroutineScope {
+    return CoroutineScope(context = Dispatchers.<get-Default>())
+  }
+
+// FILE: viewmodelscope.kt
+
+@NativeCoroutineScope
+internal val unusedCoroutineScope: CoroutineScope
+  field = CoroutineScope(context = Dispatchers.<get-Default>())
+  internal get
+
+class MyAndroidXViewModel1 : ViewModel {
+  constructor() /* primary */ {
+    super/*ViewModel*/()
+    /* <init>() */
+
+  }
+
+  @ObjCName(name = "returnSuspendValue1")
+  fun returnSuspendValue1Native(): Function3<@ParameterName(name = "onResult") Function2<String, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+    val tmp_0: CoroutineScope = <this>.<get-viewModelScope>()
+    return nativeSuspend<String>(scope = tmp_0, block = local suspend fun <anonymous>(): String {
+      return <this>.returnSuspendValue1()
+    }
+)
+  }
+
+  @NativeCoroutines
+  suspend fun returnSuspendValue1(): String {
+    return "OK1"
+  }
+
+}
+
+class MyAndroidXViewModel2 : ViewModel {
+  @NativeCoroutineScope
+  internal val customCoroutineScope: CoroutineScope
+    field = CoroutineScope(context = Dispatchers.<get-Default>())
+    internal get
+
+  constructor() /* primary */ {
+    super/*ViewModel*/()
+    /* <init>() */
+
+  }
+
+  @ObjCName(name = "returnSuspendValue1")
+  fun returnSuspendValue1Native(): Function3<@ParameterName(name = "onResult") Function2<String, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+    val tmp_1: CoroutineScope = <this>.<get-customCoroutineScope>()
+    return nativeSuspend<String>(scope = tmp_1, block = local suspend fun <anonymous>(): String {
+      return <this>.returnSuspendValue1()
+    }
+)
+  }
+
+  @NativeCoroutines
+  suspend fun returnSuspendValue1(): String {
+    return "OK5"
+  }
+
+}
+
+class MyObservableViewModel1 : ViewModel {
+  constructor() /* primary */ {
+    super/*ViewModel*/()
+    /* <init>() */
+
+  }
+
+  @ObjCName(name = "returnSuspendValue1")
+  fun returnSuspendValue1Native(): Function3<@ParameterName(name = "onResult") Function2<String, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+    val tmp_2: CoroutineScope = <this>.<get-viewModelScope>().<get-coroutineScope>()
+    return nativeSuspend<String>(scope = tmp_2, block = local suspend fun <anonymous>(): String {
+      return <this>.returnSuspendValue1()
+    }
+)
+  }
+
+  @NativeCoroutines
+  suspend fun returnSuspendValue1(): String {
+    return "OK3"
+  }
+
+}
+
+class MyObservableViewModel2 : ViewModel {
+  @NativeCoroutineScope
+  internal val customCoroutineScope: CoroutineScope
+    field = CoroutineScope(context = Dispatchers.<get-Default>())
+    internal get
+
+  constructor() /* primary */ {
+    super/*ViewModel*/()
+    /* <init>() */
+
+  }
+
+  @ObjCName(name = "returnSuspendValue1")
+  fun returnSuspendValue1Native(): Function3<@ParameterName(name = "onResult") Function2<String, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+    val tmp_3: CoroutineScope = <this>.<get-customCoroutineScope>()
+    return nativeSuspend<String>(scope = tmp_3, block = local suspend fun <anonymous>(): String {
+      return <this>.returnSuspendValue1()
+    }
+)
+  }
+
+  @NativeCoroutines
+  suspend fun returnSuspendValue1(): String {
+    return "OK7"
+  }
+
+}
+
+fun box(): String {
+  return runBoxTest(action = local suspend fun BoxTest.<anonymous>() {
+    $this$runBoxTest.await<String>(nativeSuspend = MyAndroidXViewModel1().returnSuspendValue1Native())
+    $this$runBoxTest.await<String>(nativeSuspend = MyAndroidXViewModel1().returnSuspendValue2Native())
+    $this$runBoxTest.await<String>(nativeSuspend = MyObservableViewModel1().returnSuspendValue1Native())
+    $this$runBoxTest.await<String>(nativeSuspend = MyObservableViewModel1().returnSuspendValue2Native())
+    $this$runBoxTest.await<String>(nativeSuspend = MyAndroidXViewModel2().returnSuspendValue1Native())
+    $this$runBoxTest.await<String>(nativeSuspend = MyAndroidXViewModel2().returnSuspendValue2Native())
+    $this$runBoxTest.await<String>(nativeSuspend = MyObservableViewModel2().returnSuspendValue1Native())
+    $this$runBoxTest.await<String>(nativeSuspend = MyObservableViewModel2().returnSuspendValue2Native())
+  }
+)
+}
+
+@NativeCoroutines
+suspend fun MyAndroidXViewModel1.returnSuspendValue2(): String {
+  return "OK2"
+}
+
+@NativeCoroutines
+suspend fun MyAndroidXViewModel2.returnSuspendValue2(): String {
+  return "OK6"
+}
+
+@NativeCoroutines
+suspend fun MyObservableViewModel1.returnSuspendValue2(): String {
+  return "OK4"
+}
+
+@NativeCoroutines
+suspend fun MyObservableViewModel2.returnSuspendValue2(): String {
+  return "OK8"
+}
+
+// FILE: __GENERATED DECLARATIONS__.kt
+
+@ObjCName(name = "returnSuspendValue2")
+fun MyAndroidXViewModel1.returnSuspendValue2Native(): Function3<@ParameterName(name = "onResult") Function2<String, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+  val tmp_0: CoroutineScope = <this>.<get-viewModelScope>()
+  return nativeSuspend<String>(scope = tmp_0, block = local suspend fun <anonymous>(): String {
+    return <this>.returnSuspendValue2()
+  }
+)
+}
+
+@ObjCName(name = "returnSuspendValue2")
+fun MyAndroidXViewModel2.returnSuspendValue2Native(): Function3<@ParameterName(name = "onResult") Function2<String, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+  val tmp_1: CoroutineScope = <this>.<get-viewModelScope>()
+  return nativeSuspend<String>(scope = tmp_1, block = local suspend fun <anonymous>(): String {
+    return <this>.returnSuspendValue2()
+  }
+)
+}
+
+@ObjCName(name = "returnSuspendValue2")
+fun MyObservableViewModel1.returnSuspendValue2Native(): Function3<@ParameterName(name = "onResult") Function2<String, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+  val tmp_2: CoroutineScope = <this>.<get-viewModelScope>().<get-coroutineScope>()
+  return nativeSuspend<String>(scope = tmp_2, block = local suspend fun <anonymous>(): String {
+    return <this>.returnSuspendValue2()
+  }
+)
+}
+
+@ObjCName(name = "returnSuspendValue2")
+fun MyObservableViewModel2.returnSuspendValue2Native(): Function3<@ParameterName(name = "onResult") Function2<String, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+  val tmp_3: CoroutineScope = <this>.<get-viewModelScope>().<get-coroutineScope>()
+  return nativeSuspend<String>(scope = tmp_3, block = local suspend fun <anonymous>(): String {
+    return <this>.returnSuspendValue2()
+  }
+)
+}

@@ -1,8 +1,6 @@
 package com.rickclephas.kmp.nativecoroutines.compiler
 
-import com.rickclephas.kmp.nativecoroutines.compiler.runners.AbstractClassicDiagnosticsTest
-import com.rickclephas.kmp.nativecoroutines.compiler.runners.AbstractFirLightTreeDiagnosticsTest
-import com.rickclephas.kmp.nativecoroutines.compiler.runners.AbstractFirPsiDiagnosticsTest
+import com.rickclephas.kmp.nativecoroutines.compiler.runners.*
 import org.jetbrains.kotlin.generators.generateTestGroupSuiteWithJUnit5
 
 fun main() {
@@ -17,6 +15,13 @@ fun main() {
             }
             testClass<AbstractFirLightTreeDiagnosticsTest> {
                 model("diagnostics", excludedPattern = excludePattern)
+            }
+
+            testClass<AbstractFirPsiCodegenTest> {
+                model("codegen", excludedPattern = excludePattern)
+            }
+            testClass<AbstractFirLightTreeCodegenTest> {
+                model("codegen", excludedPattern = excludePattern)
             }
         }
     }
