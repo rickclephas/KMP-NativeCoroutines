@@ -38,7 +38,9 @@ internal fun KSFunctionDeclaration.toNativeCoroutinesFunSpec(
         builder.receiver(classDeclaration.toTypeName(typeParameterResolver))
         if (extensionReceiver != null) {
             val type = extensionReceiver.toTypeName(typeParameterResolver)
-            receiverParameter = ParameterSpec.builder("receiver", type).build().also(builder::addParameter)
+            receiverParameter = ParameterSpec.builder("receiver", type)
+                .addAnnotation(ObjCNameAnnotationSpec(null, "_"))
+                .build().also(builder::addParameter)
         }
     } else if (extensionReceiver != null) {
         builder.receiver(extensionReceiver.toTypeName(typeParameterResolver))

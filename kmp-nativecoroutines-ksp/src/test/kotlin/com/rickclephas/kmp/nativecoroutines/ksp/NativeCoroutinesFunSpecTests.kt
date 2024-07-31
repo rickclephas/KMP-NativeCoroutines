@@ -314,8 +314,8 @@ class NativeCoroutinesFunSpecTests: CompilationTests() {
         import kotlin.run
         
         @ObjCName(name = "returnReceiverValue")
-        public fun MyClass.returnReceiverValueNative(`receiver`: String): NativeSuspend<String> =
-            nativeSuspend(null) { run { `receiver`.returnReceiverValue() } }
+        public fun MyClass.returnReceiverValueNative(@ObjCName(swiftName = "_") `receiver`: String):
+            NativeSuspend<String> = nativeSuspend(null) { run { `receiver`.returnReceiverValue() } }
     """.trimIndent())
 
     @Test

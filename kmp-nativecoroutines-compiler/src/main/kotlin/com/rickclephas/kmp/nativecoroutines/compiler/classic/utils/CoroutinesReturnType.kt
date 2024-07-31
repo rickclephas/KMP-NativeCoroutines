@@ -1,6 +1,6 @@
 package com.rickclephas.kmp.nativecoroutines.compiler.classic.utils
 
-import com.rickclephas.kmp.nativecoroutines.compiler.utils.CoroutinesClassIds
+import com.rickclephas.kmp.nativecoroutines.compiler.utils.ClassIds
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.CoroutinesReturnType
 import org.jetbrains.kotlin.descriptors.CallableDescriptor
 import org.jetbrains.kotlin.descriptors.ModuleDescriptor
@@ -13,11 +13,11 @@ import org.jetbrains.kotlin.types.typeUtil.supertypes
 
 internal val CallableDescriptor.coroutinesReturnType: CoroutinesReturnType? get() {
     val returnType = returnTypeOrNothing
-    val stateFlowConstructor = module.findTypeConstructor(CoroutinesClassIds.stateFlow)
+    val stateFlowConstructor = module.findTypeConstructor(ClassIds.stateFlow)
     if (returnType.constructor == stateFlowConstructor) return CoroutinesReturnType.Flow.State
-    val flowConstructor = module.findTypeConstructor(CoroutinesClassIds.flow)
+    val flowConstructor = module.findTypeConstructor(ClassIds.flow)
     if (returnType.constructor == flowConstructor) return CoroutinesReturnType.Flow.Generic
-    val coroutineScopeConstructor = module.findTypeConstructor(CoroutinesClassIds.coroutineScope)
+    val coroutineScopeConstructor = module.findTypeConstructor(ClassIds.coroutineScope)
     if (returnType.constructor == coroutineScopeConstructor) return CoroutinesReturnType.CoroutineScope
     returnType.supertypes().forEach {
         if (it.constructor == stateFlowConstructor) return CoroutinesReturnType.Flow.State

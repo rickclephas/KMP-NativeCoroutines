@@ -9,4 +9,5 @@ internal class KmpNativeCoroutinesOptions(
     val flowReplayCacheSuffix = options["nativeCoroutines.flowReplayCacheSuffix"]
     val stateSuffix = options["nativeCoroutines.stateSuffix"] ?: error("Missing required option: stateSuffix")
     val stateFlowSuffix = options["nativeCoroutines.stateFlowSuffix"]
+    val k2Mode = options["nativeCoroutines.k2Mode"]?.toBooleanStrict() ?: false
 }
