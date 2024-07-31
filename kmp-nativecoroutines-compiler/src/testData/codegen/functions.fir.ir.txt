@@ -304,7 +304,7 @@ FILE fqName:<root> fileName:/functions.kt
       VALUE_PARAMETER name:collector index:0 type:kotlinx.coroutines.flow.FlowCollector<T2 of <root>.MyFlow23>
       BLOCK_BODY
         CALL 'public abstract fun collect (collector: kotlinx.coroutines.flow.FlowCollector<T of kotlinx.coroutines.flow.Flow>): kotlin.Unit declared in kotlinx.coroutines.flow.Flow' type=kotlin.Unit origin=null
-          $this: GET_FIELD 'FIELD DELEGATE name:$$delegate_0 type:kotlinx.coroutines.flow.Flow<T2 of <root>.MyFlow23> visibility:private [final]' type=kotlinx.coroutines.flow.Flow<T2 of <root>.MyFlow23> origin=null
+          $this: GET_FIELD 'FIELD DELEGATE name:$$delegate_0 type:kotlinx.coroutines.flow.Flow<T2 of <root>.MyFlow23> visibility:private [final] declared in <root>.MyFlow23' type=kotlinx.coroutines.flow.Flow<T2 of <root>.MyFlow23> origin=null
             receiver: GET_VAR '<this>: <root>.MyFlow23<T1 of <root>.MyFlow23, T2 of <root>.MyFlow23> declared in <root>.MyFlow23.collect' type=<root>.MyFlow23<T1 of <root>.MyFlow23, T2 of <root>.MyFlow23> origin=null
           collector: GET_VAR 'collector: kotlinx.coroutines.flow.FlowCollector<T2 of <root>.MyFlow23> declared in <root>.MyFlow23.collect' type=kotlinx.coroutines.flow.FlowCollector<T2 of <root>.MyFlow23> origin=null
     FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]

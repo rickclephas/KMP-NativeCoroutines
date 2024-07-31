@@ -181,7 +181,7 @@ FILE fqName:<root> fileName:/properties.kt
       annotations:
         NativeCoroutines
       overridden:
-        public abstract interfaceFlowValue: kotlinx.coroutines.flow.Flow<kotlin.String>
+        public abstract interfaceFlowValue: kotlinx.coroutines.flow.Flow<kotlin.String> declared in <root>.MyInterface28
       FIELD PROPERTY_BACKING_FIELD name:interfaceFlowValue type:kotlinx.coroutines.flow.Flow<kotlin.String> visibility:private [final]
         EXPRESSION_BODY
           CALL 'public final fun flowOf <T> (value: T of kotlinx.coroutines.flow.flowOf): kotlinx.coroutines.flow.Flow<T of kotlinx.coroutines.flow.flowOf> declared in kotlinx.coroutines.flow' type=kotlinx.coroutines.flow.Flow<kotlin.String> origin=null
@@ -217,7 +217,7 @@ FILE fqName:<root> fileName:/properties.kt
       annotations:
         ObjCName(name = "interfaceFlowValue", swiftName = <null>, exact = <null>)
       overridden:
-        public final interfaceFlowValueNative: kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<kotlin.String, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>
+        public final interfaceFlowValueNative: kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<kotlin.String, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> declared in <root>.MyInterface28
       FUN FAKE_OVERRIDE name:<get-interfaceFlowValueNative> visibility:public modality:FINAL <> ($this:<root>.MyInterface28) returnType:kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<kotlin.String, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> [fake_override]
         correspondingProperty: PROPERTY FAKE_OVERRIDE name:interfaceFlowValueNative visibility:public modality:FINAL [fake_override,val]
         overridden:
@@ -245,7 +245,7 @@ FILE fqName:<root> fileName:/properties.kt
       VALUE_PARAMETER name:collector index:0 type:kotlinx.coroutines.flow.FlowCollector<T2 of <root>.MyFlow29?>
       BLOCK_BODY
         CALL 'public abstract fun collect (collector: kotlinx.coroutines.flow.FlowCollector<T of kotlinx.coroutines.flow.Flow>): kotlin.Unit declared in kotlinx.coroutines.flow.Flow' type=kotlin.Unit origin=null
-          $this: GET_FIELD 'FIELD DELEGATE name:$$delegate_0 type:kotlinx.coroutines.flow.Flow<T2 of <root>.MyFlow29?> visibility:private [final]' type=kotlinx.coroutines.flow.Flow<T2 of <root>.MyFlow29?> origin=null
+          $this: GET_FIELD 'FIELD DELEGATE name:$$delegate_0 type:kotlinx.coroutines.flow.Flow<T2 of <root>.MyFlow29?> visibility:private [final] declared in <root>.MyFlow29' type=kotlinx.coroutines.flow.Flow<T2 of <root>.MyFlow29?> origin=null
             receiver: GET_VAR '<this>: <root>.MyFlow29<T1 of <root>.MyFlow29, T2 of <root>.MyFlow29> declared in <root>.MyFlow29.collect' type=<root>.MyFlow29<T1 of <root>.MyFlow29, T2 of <root>.MyFlow29> origin=null
           collector: GET_VAR 'collector: kotlinx.coroutines.flow.FlowCollector<T2 of <root>.MyFlow29?> declared in <root>.MyFlow29.collect' type=kotlinx.coroutines.flow.FlowCollector<T2 of <root>.MyFlow29?> origin=null
     FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
