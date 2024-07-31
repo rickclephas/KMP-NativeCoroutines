@@ -40,7 +40,7 @@ jobs:
       matrix:
         ide: [ IC, IU, AI ]
         build: [ 241, 242 ]
-    name: ${{ format('IDEA ({0}-{1})', matrix.ide, matrix.build) }}
+    name: ${{ format('{0}-{1}', matrix.ide, matrix.build) }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

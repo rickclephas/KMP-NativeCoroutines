@@ -21,7 +21,7 @@ jobs:
         platform: [ iOS, macOS, tvOS, watchOS ]
         embeddable-compiler: [ true, false ]
         ksp-mode: [ true, false ]
-    name: ${{ format('Sample {0} (embeddable {1}, KSP {2})', matrix.platform, matrix.embeddable-compiler, matrix.ksp-mode) }}
+    name: ${{ format('{0} (embeddable {1}, KSP {2})', matrix.platform, matrix.embeddable-compiler, matrix.ksp-mode) }}
     runs-on: macos-14
     env:
       XCODEBUILD_SCHEME_iOS: iOS App
