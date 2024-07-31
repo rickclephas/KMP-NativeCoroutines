@@ -38,8 +38,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        platformType: [ IC, IU, AI ]
-    name: ${{ format('IDEA ({0})', matrix.platformType) }}
+        ide: [ IC, IU, AI ]
+        build: [ 241, 242 ]
+    name: ${{ format('IDEA ({0}-{1})', matrix.ide, matrix.build) }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -57,5 +58,5 @@ jobs:
           cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
       - name: Verify plugin
         env:
-          VERIFICATION_PLATFORM_TYPE: ${{ matrix.platformType }}
-        run: ./gradlew :kmp-nativecoroutines-idea-plugin:verifyPlugin -PverificationPlatformType=$VERIFICATION_PLATFORM_TYPE
+          VERIFICATION_IDE: ${{ format('{0}-{1}', matrix.ide, matrix.build) }}
+        run: ./gradlew :kmp-nativecoroutines-idea-plugin:verifyPlugin -PverificationIde=$VERIFICATION_IDE
