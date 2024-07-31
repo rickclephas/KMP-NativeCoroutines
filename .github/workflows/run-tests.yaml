@@ -56,7 +56,7 @@ jobs:
         with:
           name: kmp-nativecoroutines-${{ matrix.module }}-reports
           path: '*/build/reports/'
-  run-idea-tests:
+  run-common-idea-tests:
     if: github.event_name != 'pull_request' || github.event.pull_request.draft == false
     runs-on: ubuntu-latest
     steps:
@@ -77,10 +77,36 @@ jobs:
         run: ./gradlew :kmp-nativecoroutines-idea-plugin:verifyPluginProjectConfiguration
       - name: Verify plugin structure
         run: ./gradlew :kmp-nativecoroutines-idea-plugin:verifyPluginStructure
-      - name: Verify plugin
-        run: ./gradlew :kmp-nativecoroutines-idea-plugin:verifyPlugin
       - name: Run binary compatibility validator
         run: ./gradlew :kmp-nativecoroutines-idea-plugin:apiCheck
+  run-idea-tests:
+    if: github.event_name != 'pull_request' || github.event.pull_request.draft == false
+    needs:
+      - run-common-idea-tests
+    strategy:
+      fail-fast: false
+      matrix:
+        platformType: [ IC, UI, AI ]
+    name: ${{ format('IDEA ({0})', matrix.platformType) }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Gradle Wrapper Validation
+        uses: gradle/wrapper-validation-action@v2
+      - name: Setup JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: zulu
+          java-version: ${{ env.JAVA_VERSION }}
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
+      - name: Verify plugin
+        env:
+          VERIFICATION_PLATFORM_TYPE: ${{ matrix.platformType }}
+        run: ./gradlew :kmp-nativecoroutines-idea-plugin:verifyPlugin -PverificationPlatformType=$VERIFICATION_PLATFORM_TYPE
   run-swift-tests:
     if: github.event_name != 'pull_request' || github.event.pull_request.draft == false
     strategy:

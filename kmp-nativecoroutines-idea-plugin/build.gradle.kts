@@ -78,11 +78,15 @@ intellijPlatform {
         ides {
             recommended()
             select {
-                types = listOf(
-                    IntelliJPlatformType.IntellijIdeaCommunity,
-                    IntelliJPlatformType.IntellijIdeaUltimate,
-                    IntelliJPlatformType.AndroidStudio,
-                )
+                val platformType = findProperty("verificationPlatformType") as String?
+                types = when (platformType) {
+                    null -> listOf(
+                        IntelliJPlatformType.IntellijIdeaCommunity,
+                        IntelliJPlatformType.IntellijIdeaUltimate,
+                        IntelliJPlatformType.AndroidStudio,
+                    )
+                    else -> listOf(IntelliJPlatformType.fromCode(platformType))
+                }
             }
         }
     }
