@@ -11,7 +11,6 @@ env:
   XCODE_VERSION: '15.2'
 jobs:
   run-kotlin-tests:
-    if: github.event_name != 'pull_request' || github.event.pull_request.draft == false
     strategy:
       fail-fast: false
       matrix:

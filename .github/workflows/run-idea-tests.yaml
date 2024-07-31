@@ -10,7 +10,6 @@ env:
   JAVA_VERSION: '17'
 jobs:
   run-common-idea-tests:
-    if: github.event_name != 'pull_request' || github.event.pull_request.draft == false
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -33,7 +32,6 @@ jobs:
       - name: Run binary compatibility validator
         run: ./gradlew :kmp-nativecoroutines-idea-plugin:apiCheck
   run-idea-tests:
-    if: github.event_name != 'pull_request' || github.event.pull_request.draft == false
     needs:
       - run-common-idea-tests
     strategy:
