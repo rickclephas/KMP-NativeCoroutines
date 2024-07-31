@@ -1,0 +1,62 @@
+name: Run IDEA Tests
+concurrency:
+  group: run-idea-tests-${{ github.ref }}
+  cancel-in-progress: true
+on:
+  workflow_dispatch:
+  workflow_call:
+env:
+  GRADLE_OPTS: -Dorg.gradle.parallel=true -Dorg.gradle.caching=true
+  JAVA_VERSION: '17'
+jobs:
+  run-common-idea-tests:
+    name: idea-plugin
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Gradle Wrapper Validation
+        uses: gradle/wrapper-validation-action@v2
+      - name: Setup JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: zulu
+          java-version: ${{ env.JAVA_VERSION }}
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
+      - name: Verify plugin project configuration
+        run: ./gradlew :kmp-nativecoroutines-idea-plugin:verifyPluginProjectConfiguration
+      - name: Verify plugin structure
+        run: ./gradlew :kmp-nativecoroutines-idea-plugin:verifyPluginStructure
+      - name: Run binary compatibility validator
+        run: ./gradlew :kmp-nativecoroutines-idea-plugin:apiCheck
+  run-idea-tests:
+    needs:
+      - run-common-idea-tests
+    strategy:
+      fail-fast: false
+      matrix:
+        ide: [ IC, IU, AI ]
+        build: [ 241, 242 ]
+    name: ${{ format('{0}-{1}', matrix.ide, matrix.build) }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Gradle Wrapper Validation
+        uses: gradle/wrapper-validation-action@v2
+      - name: Setup JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: zulu
+          java-version: ${{ env.JAVA_VERSION }}
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
+      - name: Verify plugin
+        env:
+          VERIFICATION_IDE: ${{ format('{0}-{1}', matrix.ide, matrix.build) }}
+        run: ./gradlew :kmp-nativecoroutines-idea-plugin:verifyPlugin -PverificationIde=$VERIFICATION_IDE

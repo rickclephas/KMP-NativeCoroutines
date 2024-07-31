@@ -2,6 +2,7 @@
 
 import org.jetbrains.intellij.platform.gradle.IntelliJPlatformType
 import org.jetbrains.intellij.platform.gradle.tasks.RunIdeTask
+import org.jetbrains.intellij.platform.gradle.tasks.VerifyPluginTask
 
 plugins {
     id("java")
@@ -76,13 +77,23 @@ intellijPlatform {
 
     pluginVerification {
         ides {
-            recommended()
-            select {
-                types = listOf(
-                    IntelliJPlatformType.IntellijIdeaCommunity,
-                    IntelliJPlatformType.IntellijIdeaUltimate,
-                    IntelliJPlatformType.AndroidStudio,
-                )
+            val verificationIde = findProperty("verificationIde") as String?
+            if (verificationIde != null) {
+                val (platformType, build) = verificationIde.split('-', limit = 2)
+                select {
+                    types = listOf(IntelliJPlatformType.fromCode(platformType))
+                    sinceBuild = build
+                    untilBuild = "$build.*"
+                }
+            } else {
+                recommended()
+                select {
+                    types = listOf(
+                        IntelliJPlatformType.IntellijIdeaCommunity,
+                        IntelliJPlatformType.IntellijIdeaUltimate,
+                        IntelliJPlatformType.AndroidStudio,
+                    )
+                }
             }
         }
     }
@@ -103,4 +114,13 @@ val runAndroidStudio by intellijPlatformTesting.runIde.registering {
 
 tasks.withType(RunIdeTask::class) {
     maxHeapSize = "4g"
+}
+
+tasks.withType(VerifyPluginTask::class) {
+    val verificationIde = findProperty("verificationIde") as String? ?: return@withType
+    onlyIf {
+        val hasIdes = ides.files.isNotEmpty()
+        if (!hasIdes) logger.warn("::warning title=Skipped unknown IDE::Unknown IDE $verificationIde")
+        hasIdes
+    }
 }
