@@ -11,16 +11,20 @@ on:
 jobs:
   run-kotlin-tests:
     if: github.event_name != 'pull_request' || github.event.pull_request.draft == false
+    name: Kotlin Tests
     uses: ./.github/workflows/run-kotlin-tests.yaml
   run-swift-tests:
     if: github.event_name != 'pull_request' || github.event.pull_request.draft == false
+    name: Swift Tests
     uses: ./.github/workflows/run-swift-tests.yaml
   run-integration-tests:
     if: github.event_name != 'pull_request' || github.event.pull_request.draft == false
+    name: Integration Tests
     needs:
       - run-kotlin-tests
       - run-swift-tests
     uses: ./.github/workflows/run-integration-tests.yaml
   run-idea-tests:
     if: github.event_name != 'pull_request' || github.event.pull_request.draft == false
+    name: IDEA Tests
     uses: ./.github/workflows/run-idea-tests.yaml
