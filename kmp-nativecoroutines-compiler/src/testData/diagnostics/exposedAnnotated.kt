@@ -2,11 +2,14 @@
 // DIAGNOSTICS: -NOT_A_MULTIPLATFORM_COMPILATION -EXPECT_AND_ACTUAL_IN_THE_SAME_MODULE
 // EXPOSED_SEVERITY: WARNING
 
-// FILE: customFlow.kt
+// FILE: customFlows.kt
 
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.StateFlow
 
 interface CustomFlow<out T>: Flow<T>
+
+interface CustomStateFlow<out T>: StateFlow<T>
 
 // FILE: test.kt
 
@@ -55,6 +58,9 @@ val topLevelStateFlowProperty: StateFlow<Int> get() = throw Throwable()
 
 @NativeCoroutinesIgnore
 val topLevelCustomFlowProperty: CustomFlow<Int> get() = throw Throwable()
+
+@NativeCoroutinesState
+val topLevelCustomStateFlowProperty: CustomStateFlow<Int> get() = throw Throwable()
 
 @OptIn(ExperimentalObjCRefinement::class)
 @ShouldRefineInSwift
