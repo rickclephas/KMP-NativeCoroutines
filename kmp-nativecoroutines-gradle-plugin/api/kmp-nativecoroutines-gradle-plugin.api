@@ -14,6 +14,7 @@ public class com/rickclephas/kmp/nativecoroutines/gradle/KmpNativeCoroutinesExte
 	public final fun getFlowReplayCacheSuffix ()Ljava/lang/String;
 	public final fun getFlowValueSuffix ()Ljava/lang/String;
 	public final fun getGeneratedSourceDirs ()Ljava/util/List;
+	public final fun getK2Mode ()Z
 	public final fun getStateFlowSuffix ()Ljava/lang/String;
 	public final fun getStateSuffix ()Ljava/lang/String;
 	public final fun getSuffix ()Ljava/lang/String;
@@ -21,6 +22,7 @@ public class com/rickclephas/kmp/nativecoroutines/gradle/KmpNativeCoroutinesExte
 	public final fun setFileSuffix (Ljava/lang/String;)V
 	public final fun setFlowReplayCacheSuffix (Ljava/lang/String;)V
 	public final fun setFlowValueSuffix (Ljava/lang/String;)V
+	public final fun setK2Mode (Z)V
 	public final fun setStateFlowSuffix (Ljava/lang/String;)V
 	public final fun setStateSuffix (Ljava/lang/String;)V
 	public final fun setSuffix (Ljava/lang/String;)V

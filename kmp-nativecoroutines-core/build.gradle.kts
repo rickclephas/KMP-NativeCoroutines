@@ -1,10 +1,14 @@
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
+import org.jetbrains.kotlin.gradle.plugin.KotlinCompilation
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     `kmp-nativecoroutines-publish`
 }
+
+val buildForCompilerTest = (findProperty("buildForCompilerTest") as String?)
+    ?.toBooleanStrictOrNull() ?: false
 
 kotlin {
     explicitApi()
@@ -15,6 +19,9 @@ kotlin {
         common {
             group("nativeCoroutines") {
                 group("apple")
+                if (buildForCompilerTest) {
+                    withJvm()
+                }
             }
         }
     }
@@ -32,7 +39,14 @@ kotlin {
     tvosArm64()
     tvosX64()
     tvosSimulatorArm64()
-    jvm()
+    jvm {
+        if (buildForCompilerTest) {
+            val mainCompilation = compilations.getByName(KotlinCompilation.MAIN_COMPILATION_NAME)
+            mainCompilation.defaultSourceSet.kotlin.srcDir("src/compilerTestMain/kotlin")
+            val testCompilation = compilations.getByName(KotlinCompilation.TEST_COMPILATION_NAME)
+            testCompilation.defaultSourceSet.kotlin.srcDir("src/compilerTestTest/kotlin")
+        }
+    }
     js {
         browser()
         nodejs()

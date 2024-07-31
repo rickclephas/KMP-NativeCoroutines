@@ -1,7 +1,6 @@
 package com.rickclephas.kmp.nativecoroutines.compiler.fir.utils
 
-import com.rickclephas.kmp.nativecoroutines.compiler.utils.hidesFromObjCClassId
-import com.rickclephas.kmp.nativecoroutines.compiler.utils.refinesInSwiftClassId
+import com.rickclephas.kmp.nativecoroutines.compiler.utils.ClassIds
 import org.jetbrains.kotlin.fir.FirSession
 import org.jetbrains.kotlin.fir.declarations.FirCallableDeclaration
 import org.jetbrains.kotlin.fir.declarations.toAnnotationClassId
@@ -16,5 +15,5 @@ internal fun FirCallableDeclaration.isRefined(session: FirSession): Boolean =
 private fun FirAnnotation.isRefinementAnnotation(session: FirSession): Boolean =
     toAnnotationClassLikeSymbol(session)?.resolvedAnnotationsWithClassIds.orEmpty().any { metaAnnotation ->
         val classId = metaAnnotation.toAnnotationClassId(session)
-        classId == hidesFromObjCClassId || classId == refinesInSwiftClassId
+        classId == ClassIds.hidesFromObjC || classId == ClassIds.refinesInSwift
     }
