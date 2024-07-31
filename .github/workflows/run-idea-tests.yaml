@@ -10,6 +10,7 @@ env:
   JAVA_VERSION: '17'
 jobs:
   run-common-idea-tests:
+    name: idea-plugin
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
