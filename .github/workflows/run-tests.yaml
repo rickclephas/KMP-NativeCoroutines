@@ -48,7 +48,8 @@ jobs:
       - name: Run tests
         env:
           GRADLE_MODULE: ${{ format(':kmp-nativecoroutines-{0}', matrix.module) }}
-        run: ./gradlew $GRADLE_MODULE:check
+          IS_COMPILER_MODULE: ${{ matrix.module == 'compiler' }}
+        run: ./gradlew $GRADLE_MODULE:check -PbuildForCompilerTest=$IS_COMPILER_MODULE
       - name: Archive reports
         if: failure()
         uses: actions/upload-artifact@v4
@@ -72,10 +73,12 @@ jobs:
         uses: gradle/actions/setup-gradle@v3
         with:
           cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
+      - name: Verify plugin project configuration
+        run: ./gradlew :kmp-nativecoroutines-idea-plugin:verifyPluginProjectConfiguration
+      - name: Verify plugin structure
+        run: ./gradlew :kmp-nativecoroutines-idea-plugin:verifyPluginStructure
       - name: Verify plugin
         run: ./gradlew :kmp-nativecoroutines-idea-plugin:verifyPlugin
-      - name: Run plugin verifier
-        run: ./gradlew :kmp-nativecoroutines-idea-plugin:runPluginVerifier
       - name: Run binary compatibility validator
         run: ./gradlew :kmp-nativecoroutines-idea-plugin:apiCheck
   run-swift-tests:
@@ -113,7 +116,8 @@ jobs:
       matrix:
         platform: [ iOS, macOS, tvOS, watchOS ]
         embeddable-compiler: [ true, false ]
-    name: ${{ format('Sample {0} (embeddable {1})', matrix.platform, matrix.embeddable-compiler) }}
+        ksp-mode: [ true, false ]
+    name: ${{ format('Sample {0} (embeddable {1}, KSP {2})', matrix.platform, matrix.embeddable-compiler, matrix.ksp-mode) }}
     runs-on: macos-14
     env:
       XCODEBUILD_SCHEME_iOS: iOS App
@@ -151,6 +155,7 @@ jobs:
         env:
           XCODEBUILD_SCHEME: ${{ env[format('XCODEBUILD_SCHEME_{0}', matrix.platform)] }}
           XCODEBUILD_DESTINATION: ${{ env[format('XCODEBUILD_DESTINATION_{0}', matrix.platform)] }}
+          NATIVE_COROUTINES_KSP_MODE: ${{ matrix.ksp-mode }}
         run: >-
           xcodebuild test
           -project KMPNativeCoroutinesSample.xcodeproj

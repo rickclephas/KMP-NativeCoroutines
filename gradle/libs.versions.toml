@@ -3,7 +3,7 @@ kotlin = "2.0.10-RC"
 kotlinx-coroutines = "1.9.0-RC"
 kotlinx-binary-compatibility-validator = "0.15.0-Beta.2"
 ksp = "2.0.10-RC-1.0.23"
-kotlinpoet = "1.18.0"
+kotlinpoet = "1.18.1"
 junit = "5.9.1"
 
 [libraries]
@@ -18,6 +18,8 @@ kotlinpoet-ksp = { module = "com.squareup:kotlinpoet-ksp", version.ref = "kotlin
 
 # Testing libraries
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
+kotlin-annotations-jvm = { module = "org.jetbrains.kotlin:kotlin-annotations-jvm", version.ref = "kotlin" }
+kotlin-script-runtime = { module = "org.jetbrains.kotlin:kotlin-script-runtime", version.ref = "kotlin" }
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
 kotlin-compiler-internalTestFramework = { module = "org.jetbrains.kotlin:kotlin-compiler-internal-test-framework", version.ref = "kotlin" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinx-coroutines" }
@@ -33,7 +35,7 @@ kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serializa
 
 [plugins]
 gradle-plugin-publish = { id = "com.gradle.plugin-publish", version = "1.2.0" }
-intellij = { id = "org.jetbrains.intellij", version = "1.17.2" }
+intellij-platform = { id = "org.jetbrains.intellij.platform", version = "2.0.0" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlinx-binary-compatibility-validator = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version.ref = "kotlinx-binary-compatibility-validator" }

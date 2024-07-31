@@ -1,10 +1,7 @@
 package com.rickclephas.kmp.nativecoroutines.idea.compiler.extensions
 
-import com.rickclephas.kmp.nativecoroutines.compiler.config.ConfigOption
-import com.rickclephas.kmp.nativecoroutines.compiler.config.EXPOSED_SEVERITY
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesChecker
-import com.rickclephas.kmp.nativecoroutines.compiler.config.ConfigListOption
-import com.rickclephas.kmp.nativecoroutines.compiler.config.GENERATED_SOURCE_DIR
+import com.rickclephas.kmp.nativecoroutines.compiler.config.*
 import org.jetbrains.kotlin.analyzer.moduleInfo
 import org.jetbrains.kotlin.container.StorageComponentContainer
 import org.jetbrains.kotlin.container.useInstance
@@ -30,8 +27,9 @@ public class KmpNativeCoroutinesStorageComponentContainerContributor: StorageCom
         val pluginOptions = kotlinFacet.configuration.settings.compilerArguments?.pluginOptions ?: emptyArray()
         val exposedSeverity = pluginOptions.getPluginOption(EXPOSED_SEVERITY) ?: return
         val generatedSourceDirs = pluginOptions.getPluginOption(GENERATED_SOURCE_DIR)
+        val isK2Mode = pluginOptions.getPluginOption(K2_MODE) ?: return
 
-        container.useInstance(KmpNativeCoroutinesChecker(exposedSeverity, generatedSourceDirs))
+        container.useInstance(KmpNativeCoroutinesChecker(exposedSeverity, generatedSourceDirs, isK2Mode))
     }
 
     private fun TargetPlatform.hasApple(): Boolean = isNotEmpty() && any {
