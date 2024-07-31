@@ -15,6 +15,7 @@ public final class com/rickclephas/kmp/nativecoroutines/idea/gradle/KmpNativeCor
 public abstract interface class com/rickclephas/kmp/nativecoroutines/idea/gradle/KmpNativeCoroutinesModel : java/io/Serializable {
 	public abstract fun getExposedSeverity ()Ljava/lang/String;
 	public abstract fun getGeneratedSourceDirs ()Ljava/util/List;
+	public abstract fun getK2Mode ()Z
 }
 
 public final class com/rickclephas/kmp/nativecoroutines/idea/gradle/KmpNativeCoroutinesModelBuilderService : org/jetbrains/plugins/gradle/tooling/AbstractModelBuilderService {

@@ -1,7 +1,9 @@
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.kotlin.plugin.serialization)
-    alias(libs.plugins.ksp)
+    if (System.getenv("NATIVE_COROUTINES_KSP_MODE")?.toBooleanStrictOrNull() == true) {
+        alias(libs.plugins.ksp)
+    }
     id("com.rickclephas.kmp.nativecoroutines")
 }
 
@@ -48,4 +50,8 @@ kotlin {
             }
         }
     }
+}
+
+nativeCoroutines {
+    k2Mode = System.getenv("NATIVE_COROUTINES_KSP_MODE")?.toBooleanStrictOrNull() != true
 }

@@ -231,7 +231,7 @@ class CoroutineScopeProviderTests: CompilationTests() {
         import kotlin.run
         
         @ObjCName(name = "returnSuspendValue")
-        public fun MyClass.returnSuspendValueNative(`receiver`: MyOtherClass): NativeSuspend<String> =
-            nativeSuspend(null) { run { `receiver`.returnSuspendValue() } }
+        public fun MyClass.returnSuspendValueNative(@ObjCName(swiftName = "_") `receiver`: MyOtherClass):
+            NativeSuspend<String> = nativeSuspend(null) { run { `receiver`.returnSuspendValue() } }
     """.trimIndent())
 }
