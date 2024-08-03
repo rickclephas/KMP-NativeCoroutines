@@ -1,3 +1,5 @@
+@file:Suppress("OPTIONAL_DECLARATION_USAGE_IN_NON_COMMON_SOURCE")
+
 package com.rickclephas.kmp.nativecoroutines
 
 import kotlinx.coroutines.*
@@ -8,6 +10,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.map
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
+import kotlin.jvm.JvmName
 
 internal const val RETURN_TYPE_KOTLIN_FLOW = "kotlin-flow"
 
@@ -80,6 +83,7 @@ public fun <T> Flow<T>.asNativeFlow(scope: CoroutineScope? = null): NativeFlow<T
  * @receiver the [Flow] to collect.
  * @see Flow.collect
  */
+@JvmName("asNativeFlowUnit")
 public inline fun Flow<Unit>.asNativeFlow(scope: CoroutineScope? = null): NativeFlow<NativeUnit?> =
     map<Unit, NativeUnit?> { null }.asNativeFlow(scope)
 
@@ -126,4 +130,5 @@ public fun <T> NativeFlow<T>.asFlow(): Flow<T> {
  *
  * @see callbackFlow
  */
+@JvmName("asFlowUnit")
 public inline fun NativeFlow<NativeUnit?>.asFlow(): Flow<Unit> = asFlow<NativeUnit?>().map {  }

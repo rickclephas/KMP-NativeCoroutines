@@ -1,3 +1,5 @@
+@file:Suppress("OPTIONAL_DECLARATION_USAGE_IN_NON_COMMON_SOURCE")
+
 package com.rickclephas.kmp.nativecoroutines
 
 import kotlinx.coroutines.CancellationException
@@ -6,6 +8,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
+import kotlin.jvm.JvmName
 
 internal const val RETURN_TYPE_KOTLIN_SUSPEND = "kotlin-suspend"
 
@@ -68,6 +71,7 @@ public fun <T> nativeSuspend(scope: CoroutineScope? = null, block: suspend () ->
  * @param scope the [CoroutineScope] to run the [block] in, or `null` to use the [defaultCoroutineScope].
  * @param block the suspend-block to await.
  */
+@JvmName("nativeSuspendUnit")
 public inline fun nativeSuspend(
     scope: CoroutineScope? = null,
     crossinline block: suspend () -> Unit
@@ -112,6 +116,7 @@ public suspend fun <T> NativeSuspend<T>.await(): T {
  *
  * @see suspendCancellableCoroutine
  */
+@JvmName("awaitUnit")
 public suspend inline fun NativeSuspend<NativeUnit?>.await() {
     await<NativeUnit?>()
 }
