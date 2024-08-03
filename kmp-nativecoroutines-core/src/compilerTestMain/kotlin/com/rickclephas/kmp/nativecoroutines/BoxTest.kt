@@ -14,7 +14,7 @@ public class BoxTest internal constructor() {
             var valueCount = 0
             var cancellable: NativeCancellable? = null
             var cancel = false
-            cancellable = nativeFlow({ value, next, _ ->
+            cancellable = nativeFlow(null, { value, next, _ ->
                 if (valueCount != 0) resultBuilder.append(",")
                 resultBuilder.append(value)
                 if (++valueCount == maxValues) {
@@ -38,7 +38,7 @@ public class BoxTest internal constructor() {
 
     public suspend fun <T> await(nativeSuspend: NativeSuspend<T>) {
         suspendCoroutine { cont ->
-            nativeSuspend({ result, _ ->
+            nativeSuspend(null, { result, _ ->
                 resultBuilder.append(result)
                 cont.resume(Unit)
             }, { error, _ ->
@@ -57,7 +57,7 @@ public class BoxTest internal constructor() {
         maxValues: Int? = null
     ) {
         val nativeFlow = suspendCoroutine<NativeFlow<T>> { cont ->
-            nativeSuspendFlow({ result, _ ->
+            nativeSuspendFlow(null, { result, _ ->
                 cont.resume(result)
             }, { error, _ ->
                 cont.resumeWithException(error)
