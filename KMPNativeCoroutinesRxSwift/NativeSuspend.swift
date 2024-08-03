@@ -18,13 +18,13 @@ public extension Single where Trait == SingleTrait {
                 return { nil }
             }
             let disposable = self.subscribe(onSuccess: { value in
-                _ = onResult(value, ())
+                _ = onResult(value)
             }, onFailure: { error in
-                _ = onError(error, ())
+                _ = onError(error)
             })
             return {
                 disposable.dispose()
-                _ = onCancelled(DisposedError(), ())
+                _ = onCancelled(DisposedError())
                 return nil
             }
         }

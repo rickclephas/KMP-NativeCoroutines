@@ -21,16 +21,19 @@ public extension AsyncSequence {
                 do {
                     for try await value in self {
                         await withUnsafeContinuation { continuation in
-                            _ = onItem(value, { continuation.resume() }, ())
+                            _ = onItem(value, {
+                                continuation.resume()
+                                return nil
+                            })
                         }
                     }
                     try Task.checkCancellation()
-                    _ = onComplete(nil, ())
+                    _ = onComplete(nil)
                 } catch {
                     if error is CancellationError {
-                        _ = onCancelled(error, ())
+                        _ = onCancelled(error)
                     } else {
-                        _ = onComplete(error, ())
+                        _ = onComplete(error)
                     }
                 }
             }

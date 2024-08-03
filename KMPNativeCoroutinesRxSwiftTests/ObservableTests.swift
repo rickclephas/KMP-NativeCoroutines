@@ -34,9 +34,9 @@ class ObservableTests: XCTestCase {
         let nativeFlow: NativeFlow<TestValue, NSError> = { returnType, itemCallback, completionCallback, _ in
             guard returnType == nil else { return { nil } }
             for value in values {
-                _ = itemCallback(value, {}, ())
+                _ = itemCallback(value, { nil })
             }
-            _ = completionCallback(nil, ())
+            _ = completionCallback(nil)
             return { nil }
         }
         var completionCount = 0
@@ -59,7 +59,7 @@ class ObservableTests: XCTestCase {
         let error = NSError(domain: "Test", code: 0)
         let nativeFlow: NativeFlow<TestValue, NSError> = { returnType, _, completionCallback, _ in
             guard returnType == nil else { return { nil } }
-            _ = completionCallback(error, ())
+            _ = completionCallback(error)
             return { nil }
         }
         var errorCount = 0

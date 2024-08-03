@@ -1,3 +1,3 @@
 package com.rickclephas.kmp.nativecoroutines
 
-public expect class NativeUnit
+public actual typealias NativeUnit = Unit

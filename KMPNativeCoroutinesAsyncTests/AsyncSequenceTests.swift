@@ -19,7 +19,7 @@ class AsyncSequenceTests: XCTestCase {
             guard returnType == nil else { return { nil } }
             return {
                 cancelCount += 1
-                _ = cancelCallback(NSError(domain: "Ignored", code: 0), ())
+                _ = cancelCallback(NSError(domain: "Ignored", code: 0))
                 return nil
             }
         }
@@ -46,10 +46,11 @@ class AsyncSequenceTests: XCTestCase {
                     await withCheckedContinuation { continuation in
                         _ = itemCallback(value, {
                             continuation.resume()
-                        }, ())
+                            return nil
+                        })
                     }
                 }
-                _ = completionCallback(nil, ())
+                _ = completionCallback(nil)
             }
             return {
                 handle.cancel()
@@ -72,7 +73,7 @@ class AsyncSequenceTests: XCTestCase {
         let sendError = NSError(domain: "Test", code: 0)
         let nativeFlow: NativeFlow<TestValue, NSError> = { returnType, _, completionCallback, _ in
             guard returnType == nil else { return { nil } }
-            _ = completionCallback(sendError, ())
+            _ = completionCallback(sendError)
             return { nil }
         }
         var valueCount = 0

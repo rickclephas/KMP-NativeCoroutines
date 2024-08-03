@@ -22,9 +22,9 @@ class FlowTests {
     fun ensureCompletionIsReceived() = runTest {
         val nativeFlow: NativeFlow<RandomValue> = nativeFlow@{
                 returnType: String?,
-                onItem: NativeCallback2<RandomValue, () -> NativeUnit>,
-                onComplete: NativeCallback<NativeError?>,
-                onCancelled: NativeCallback<NativeError> ->
+                onItem: NativeCallback2<RandomValue, NativeCallback>,
+                onComplete: NativeCallback1<NativeError?>,
+                onCancelled: NativeCallback1<NativeError> ->
             if (returnType != null) return@nativeFlow { null }
             onComplete(null)
             return@nativeFlow { null }
@@ -38,9 +38,9 @@ class FlowTests {
         val error = RandomNativeError()
         val nativeFlow: NativeFlow<RandomValue> = nativeFlow@{
                 returnType: String?,
-                onItem: NativeCallback2<RandomValue, () -> NativeUnit>,
-                onComplete: NativeCallback<NativeError?>,
-                onCancelled: NativeCallback<NativeError> ->
+                onItem: NativeCallback2<RandomValue, NativeCallback>,
+                onComplete: NativeCallback1<NativeError?>,
+                onCancelled: NativeCallback1<NativeError> ->
             if (returnType != null) return@nativeFlow { null }
             onComplete(error)
             return@nativeFlow { null }
@@ -57,9 +57,9 @@ class FlowTests {
         val error = RandomNativeError()
         val nativeFlow: NativeFlow<RandomValue> = nativeFlow@{
                 returnType: String?,
-                onItem: NativeCallback2<RandomValue, () -> NativeUnit>,
-                onComplete: NativeCallback<NativeError?>,
-                onCancelled: NativeCallback<NativeError> ->
+                onItem: NativeCallback2<RandomValue, NativeCallback>,
+                onComplete: NativeCallback1<NativeError?>,
+                onCancelled: NativeCallback1<NativeError> ->
             if (returnType != null) return@nativeFlow { null }
             onCancelled(error)
             return@nativeFlow { null }
@@ -76,15 +76,16 @@ class FlowTests {
         val values = listOf(RandomValue(), RandomValue(), RandomValue(), RandomValue())
         val nativeFlow: NativeFlow<RandomValue> = nativeFlow@{
                 returnType: String?,
-                onItem: NativeCallback2<RandomValue, () -> NativeUnit>,
-                onComplete: NativeCallback<NativeError?>,
-                onCancelled: NativeCallback<NativeError> ->
+                onItem: NativeCallback2<RandomValue, NativeCallback>,
+                onComplete: NativeCallback1<NativeError?>,
+                onCancelled: NativeCallback1<NativeError> ->
             if (returnType != null) return@nativeFlow { null }
             var sendValueCount = 0
-            fun sendNextItem() {
-                if (sendValueCount !in values.indices) return
+            fun sendNextItem(): NativeUnit? {
+                if (sendValueCount !in values.indices) return null
                 val value = values[sendValueCount++]
                 onItem(value, ::sendNextItem)
+                return null
             }
             sendNextItem()
             onComplete(null)
@@ -100,9 +101,9 @@ class FlowTests {
         var cancellationCount = 0
         val nativeFlow: NativeFlow<RandomValue> = nativeFlow@{
                 returnType: String?,
-                onItem: NativeCallback2<RandomValue, () -> NativeUnit>,
-                onComplete: NativeCallback<NativeError?>,
-                onCancelled: NativeCallback<NativeError> ->
+                onItem: NativeCallback2<RandomValue, NativeCallback>,
+                onComplete: NativeCallback1<NativeError?>,
+                onCancelled: NativeCallback1<NativeError> ->
             if (returnType != null) return@nativeFlow { null }
             return@nativeFlow {
                 cancellationCount++

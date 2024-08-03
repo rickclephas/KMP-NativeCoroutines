@@ -22,8 +22,8 @@ public func createObservable<Output, Failure: Error>(
 /// Creates an `Observable` for the provided `NativeFlow`.
 /// - Parameter nativeFlow: The native flow to collect.
 /// - Returns: An observable that publishes the collected values.
-public func createObservable<Unit, Failure: Error>(
-    for nativeFlow: @escaping NativeFlow<Unit, Failure, Unit>
+public func createObservable<Failure: Error>(
+    for nativeFlow: @escaping NativeFlow<NativeUnit?, Failure>
 ) -> Observable<Void> {
     return createObservableImpl(for: nativeFlow).map { _ in }
 }
@@ -31,24 +31,24 @@ public func createObservable<Unit, Failure: Error>(
 private func createObservableImpl<Output, Failure: Error>(
     for nativeFlow: @escaping NativeFlow<Output, Failure>
 ) -> Observable<Output> {
-    if let observable = nativeFlow(RETURN_TYPE_RXSWIFT_OBSERVABLE, EmptyNativeCallback2, EmptyNativeCallback, EmptyNativeCallback)() {
+    if let observable = nativeFlow(RETURN_TYPE_RXSWIFT_OBSERVABLE, EmptyNativeCallback2, EmptyNativeCallback1, EmptyNativeCallback1)() {
         return observable as! Observable<Output>
     }
     return Observable.deferred {
         return Observable.create { observer in
-            let nativeCancellable = nativeFlow(nil, { item, next, _ in
+            let nativeCancellable = nativeFlow(nil, { item, next in
                 observer.onNext(item)
                 return next()
-            }, { error, unit in
+            }, { error in
                 if let error = error {
                     observer.onError(error)
                 } else {
                     observer.onCompleted()
                 }
-                return unit
-            }, { cancellationError, unit in
+                return nil
+            }, { cancellationError in
                 observer.onError(cancellationError)
-                return unit
+                return nil
             })
             return Disposables.create { _ = nativeCancellable() }
         }

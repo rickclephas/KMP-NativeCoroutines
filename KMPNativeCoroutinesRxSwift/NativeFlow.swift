@@ -22,16 +22,17 @@ public extension Observable {
             let disposable = self.subscribe(onNext: { value in
                 _ = onItem(value, {
                     semaphore.signal()
-                }, ())
+                    return nil
+                })
                 semaphore.wait()
             }, onError: { error in
-                _ = onComplete(error, ())
+                _ = onComplete(error)
             }, onCompleted: {
-                _ = onComplete(nil, ())
+                _ = onComplete(nil)
             })
             return {
                 disposable.dispose()
-                _ = onCancelled(DisposedError(), ())
+                _ = onCancelled(DisposedError())
                 return nil
             }
         }

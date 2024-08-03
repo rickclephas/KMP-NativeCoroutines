@@ -14,7 +14,7 @@ public class BoxTest internal constructor() {
             var valueCount = 0
             var cancellable: NativeCancellable? = null
             var cancel = false
-            cancellable = nativeFlow(null, { value, next, _ ->
+            cancellable = nativeFlow(null, { value, next ->
                 if (valueCount != 0) resultBuilder.append(",")
                 resultBuilder.append(value)
                 if (++valueCount == maxValues) {
@@ -22,14 +22,16 @@ public class BoxTest internal constructor() {
                     cancellable?.invoke()
                 }
                 next()
-            }, { error, _ ->
+            }, { error ->
                 if (error != null) {
                     resultBuilder.append(";$error")
                 }
                 cont.resume(Unit)
-            }, { _, _ ->
+                null
+            }, { _ ->
                 resultBuilder.append(";<cancelled>")
                 cont.resume(Unit)
+                null
             })
             if (cancel) cancellable()
         }
@@ -38,15 +40,18 @@ public class BoxTest internal constructor() {
 
     public suspend fun <T> await(nativeSuspend: NativeSuspend<T>) {
         suspendCoroutine { cont ->
-            nativeSuspend(null, { result, _ ->
+            nativeSuspend(null, { result ->
                 resultBuilder.append(result)
                 cont.resume(Unit)
-            }, { error, _ ->
+                null
+            }, { error ->
                 resultBuilder.append(";$error")
                 cont.resume(Unit)
-            }, { _, _ ->
+                null
+            }, { _ ->
                 resultBuilder.append(";<cancelled>")
                 cont.resume(Unit)
+                null
             })
         }
         resultBuilder.appendLine()
@@ -57,12 +62,15 @@ public class BoxTest internal constructor() {
         maxValues: Int? = null
     ) {
         val nativeFlow = suspendCoroutine<NativeFlow<T>> { cont ->
-            nativeSuspendFlow(null, { result, _ ->
+            nativeSuspendFlow(null, { result ->
                 cont.resume(result)
-            }, { error, _ ->
+                null
+            }, { error ->
                 cont.resumeWithException(error)
-            }, { error, _ ->
+                null
+            }, { error ->
                 cont.resumeWithException(error)
+                null
             })
         }
         collect(nativeFlow, maxValues)

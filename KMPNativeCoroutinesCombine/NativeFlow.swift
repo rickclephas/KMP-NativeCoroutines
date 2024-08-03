@@ -39,14 +39,14 @@ internal class NativeFlowSubsriber<Output, Failure: Error>: Subscriber, Cancella
     private var state: State? = nil
     private let semaphore = DispatchSemaphore(value: 1)
     
-    private let onItem: NativeCallback2<Output, () -> NativeUnit>
-    private let onComplete: NativeCallback<Error?>
-    private let onCancelled: NativeCallback<Error>
+    private let onItem: NativeCallback2<Output, NativeCallback>
+    private let onComplete: NativeCallback1<Error?>
+    private let onCancelled: NativeCallback1<Error>
     
     init(
-        _ onItem: @escaping NativeCallback2<Output, () -> NativeUnit>,
-        _ onComplete: @escaping NativeCallback<Error?>,
-        _ onCancelled: @escaping NativeCallback<Error>
+        _ onItem: @escaping NativeCallback2<Output, NativeCallback>,
+        _ onComplete: @escaping NativeCallback1<Error?>,
+        _ onCancelled: @escaping NativeCallback1<Error>
     ) {
         self.onItem = onItem
         self.onComplete = onComplete
@@ -88,8 +88,8 @@ internal class NativeFlowSubsriber<Output, Failure: Error>: Subscriber, Cancella
                 self.sendCancellation()
             }
             self.subscription?.request(.max(1))
-            return ()
-        }, ())
+            return nil
+        })
         return .none
     }
     
@@ -114,10 +114,10 @@ internal class NativeFlowSubsriber<Output, Failure: Error>: Subscriber, Cancella
     private func sendCompletion(_ completion: Subscribers.Completion<Failure>) {
         switch completion {
         case .finished:
-            _ = onComplete(nil, ())
+            _ = onComplete(nil)
             break;
         case let .failure(error):
-            _ = onComplete(error, ())
+            _ = onComplete(error)
             break;
         }
     }
@@ -142,6 +142,6 @@ internal class NativeFlowSubsriber<Output, Failure: Error>: Subscriber, Cancella
     }
     
     private func sendCancellation() {
-        _ = onCancelled(CancellationError(), ())
+        _ = onCancelled(CancellationError())
     }
 }

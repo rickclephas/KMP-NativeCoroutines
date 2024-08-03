@@ -24,9 +24,9 @@ class SuspendTests {
         val value = RandomValue()
         val nativeSuspend: NativeSuspend<RandomValue> = nativeSuspend@{
                 returnType: String?,
-                onResult: NativeCallback<RandomValue>,
-                onError: NativeCallback<NativeError>,
-                onCancelled: NativeCallback<NativeError> ->
+                onResult: NativeCallback1<RandomValue>,
+                onError: NativeCallback1<NativeError>,
+                onCancelled: NativeCallback1<NativeError> ->
             if (returnType != null) return@nativeSuspend { null }
             onResult(value)
             return@nativeSuspend { null }
@@ -40,9 +40,9 @@ class SuspendTests {
         val error = RandomNativeError()
         val nativeSuspend: NativeSuspend<RandomValue> = nativeSuspend@{
                 returnType: String?,
-                onResult: NativeCallback<RandomValue>,
-                onError: NativeCallback<NativeError>,
-                onCancelled: NativeCallback<NativeError> ->
+                onResult: NativeCallback1<RandomValue>,
+                onError: NativeCallback1<NativeError>,
+                onCancelled: NativeCallback1<NativeError> ->
             if (returnType != null) return@nativeSuspend { null }
             onError(error)
             return@nativeSuspend { null }
@@ -58,9 +58,9 @@ class SuspendTests {
         val error = RandomNativeError()
         val nativeSuspend: NativeSuspend<RandomValue> = nativeSuspend@{
                 returnType: String?,
-                onResult: NativeCallback<RandomValue>,
-                onError: NativeCallback<NativeError>,
-                onCancelled: NativeCallback<NativeError> ->
+                onResult: NativeCallback1<RandomValue>,
+                onError: NativeCallback1<NativeError>,
+                onCancelled: NativeCallback1<NativeError> ->
             if (returnType != null) return@nativeSuspend { null }
             onCancelled(error)
             return@nativeSuspend { null }
@@ -76,9 +76,9 @@ class SuspendTests {
         var cancellationCount = 0
         val nativeSuspend: NativeSuspend<RandomValue> = nativeSuspend@{
                 returnType: String?,
-                onResult: NativeCallback<RandomValue>,
-                onError: NativeCallback<NativeError>,
-                onCancelled: NativeCallback<NativeError> ->
+                onResult: NativeCallback1<RandomValue>,
+                onError: NativeCallback1<NativeError>,
+                onCancelled: NativeCallback1<NativeError> ->
             if (returnType != null) return@nativeSuspend { null }
             return@nativeSuspend  {
                 cancellationCount++

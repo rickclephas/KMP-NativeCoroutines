@@ -23,8 +23,8 @@ public func asyncResult<Output, Failure: Error>(
 /// Awaits the `NativeSuspend` and returns the result.
 /// - Parameter nativeSuspend: The native suspend function to await.
 /// - Returns: The `Result` from the `nativeSuspend`.
-public func asyncResult<Unit, Failure: Error>(
-    for nativeSuspend: @escaping NativeSuspend<Unit, Failure, Unit>
+public func asyncResult<Failure: Error>(
+    for nativeSuspend: @escaping NativeSuspend<NativeUnit?, Failure>
 ) async -> Result<Void, Error> {
     do {
         return .success(try await asyncFunction(for: nativeSuspend))

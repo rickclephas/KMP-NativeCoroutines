@@ -36,9 +36,9 @@ class PublisherTests: XCTestCase {
             guard returnType == nil else { return { nil } }
             DispatchQueue.main.async {
                 for value in values {
-                    _ = itemCallback(value, {}, ())
+                    _ = itemCallback(value, { nil })
                 }
-                _ = completionCallback(nil, ())
+                _ = completionCallback(nil)
             }
             return { nil }
         }
@@ -64,7 +64,7 @@ class PublisherTests: XCTestCase {
         let error = NSError(domain: "Test", code: 0)
         let nativeFlow: NativeFlow<TestValue, NSError> = { returnType, _, completionCallback, _ in
             guard returnType == nil else { return { nil } }
-            _ = completionCallback(error, ())
+            _ = completionCallback(error)
             return { nil }
         }
         var completionCount = 0

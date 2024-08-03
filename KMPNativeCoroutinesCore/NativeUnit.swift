@@ -5,4 +5,6 @@
 //  Created by Rick Clephas on 20/08/2023.
 //
 
-public typealias NativeUnit = Any
+import Foundation
+
+public typealias NativeUnit = NSNull

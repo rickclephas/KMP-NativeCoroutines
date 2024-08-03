@@ -32,14 +32,14 @@ internal class NativeSuspendSubsriber<Output, Failure: Error>: Subscriber, Cance
     
     private let semaphore = DispatchSemaphore(value: 1)
     
-    private let onResult: NativeCallback<Output>
-    private let onError: NativeCallback<Error>
-    private let onCancelled: NativeCallback<Error>
+    private let onResult: NativeCallback1<Output>
+    private let onError: NativeCallback1<Error>
+    private let onCancelled: NativeCallback1<Error>
     
     init(
-        _ onResult: @escaping NativeCallback<Output>,
-        _ onError: @escaping NativeCallback<Error>,
-        _ onCancelled: @escaping NativeCallback<Error>
+        _ onResult: @escaping NativeCallback1<Output>,
+        _ onError: @escaping NativeCallback1<Error>,
+        _ onCancelled: @escaping NativeCallback1<Error>
     ) {
         self.onResult = onResult
         self.onError = onError
@@ -76,10 +76,10 @@ internal class NativeSuspendSubsriber<Output, Failure: Error>: Subscriber, Cance
             guard let result else {
                 fatalError("A NativeSuspend must receive a single value before completing")
             }
-            _ = onResult(result, ())
+            _ = onResult(result)
             break
         case let .failure(error):
-            _ = onError(error, ())
+            _ = onError(error)
             break
         }
     }
@@ -93,6 +93,6 @@ internal class NativeSuspendSubsriber<Output, Failure: Error>: Subscriber, Cance
         self.subscription = nil
         semaphore.signal()
         subscription.cancel()
-        _ = onCancelled(CancellationError(), ())
+        _ = onCancelled(CancellationError())
     }
 }

@@ -16,7 +16,7 @@ internal let RETURN_TYPE_SWIFT_ASYNC_SEQUENCE = "swift-async-sequence"
 public func asyncSequence<Output, Failure: Error>(
     for nativeFlow: @escaping NativeFlow<Output, Failure>
 ) -> AnyAsyncSequence<Output> {
-    if let sequence = nativeFlow(RETURN_TYPE_SWIFT_ASYNC_SEQUENCE, EmptyNativeCallback2, EmptyNativeCallback, EmptyNativeCallback)() {
+    if let sequence = nativeFlow(RETURN_TYPE_SWIFT_ASYNC_SEQUENCE, EmptyNativeCallback2, EmptyNativeCallback1, EmptyNativeCallback1)() {
         return sequence as! AnyAsyncSequence<Output>
     }
     return AnyAsyncSequence(NativeFlowAsyncSequence(nativeFlow: nativeFlow))
@@ -33,13 +33,13 @@ private struct NativeFlowAsyncSequence<Output, Failure: Error>: AsyncSequence {
         
         private let semaphore = DispatchSemaphore(value: 1)
         private var nativeCancellable: NativeCancellable?
-        private var item: (Output, () -> NativeUnit)? = nil
+        private var item: (Output, NativeCallback)? = nil
         private var result: Failure?? = Optional.none
         private var cancellationError: Failure? = nil
         private var continuation: UnsafeContinuation<Output?, Error>? = nil
         
         init(nativeFlow: NativeFlow<Output, Failure>) {
-            nativeCancellable = nativeFlow(nil, { item, next, unit in
+            nativeCancellable = nativeFlow(nil, { item, next in
                 self.semaphore.wait()
                 defer { self.semaphore.signal() }
                 if let continuation = self.continuation {
@@ -48,9 +48,9 @@ private struct NativeFlowAsyncSequence<Output, Failure: Error>: AsyncSequence {
                     return next()
                 } else {
                     self.item = (item, next)
-                    return unit
+                    return nil
                 }
-            }, { error, unit in
+            }, { error in
                 self.semaphore.wait()
                 defer { self.semaphore.signal() }
                 self.result = Optional.some(error)
@@ -63,8 +63,8 @@ private struct NativeFlowAsyncSequence<Output, Failure: Error>: AsyncSequence {
                     self.continuation = nil
                 }
                 self.nativeCancellable = nil
-                return unit
-            }, { cancellationError, unit in
+                return nil
+            }, { cancellationError in
                 self.semaphore.wait()
                 defer { self.semaphore.signal() }
                 self.cancellationError = cancellationError
@@ -73,7 +73,7 @@ private struct NativeFlowAsyncSequence<Output, Failure: Error>: AsyncSequence {
                     self.continuation = nil
                 }
                 self.nativeCancellable = nil
-                return unit
+                return nil
             })
         }
         

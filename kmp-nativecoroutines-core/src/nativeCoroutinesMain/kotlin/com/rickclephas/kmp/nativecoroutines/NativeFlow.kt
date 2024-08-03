@@ -21,9 +21,9 @@ internal const val RETURN_TYPE_KOTLIN_FLOW = "kotlin-flow"
  */
 public typealias NativeFlow<T> = (
     returnType: String?,
-    onItem: NativeCallback2<T, () -> NativeUnit>,
-    onComplete: NativeCallback<NativeError?>,
-    onCancelled: NativeCallback<NativeError>
+    onItem: NativeCallback2<T, NativeCallback>,
+    onComplete: NativeCallback1<NativeError?>,
+    onCancelled: NativeCallback1<NativeError>
 ) -> NativeCancellable
 
 /**
@@ -36,9 +36,9 @@ public typealias NativeFlow<T> = (
 public fun <T> Flow<T>.asNativeFlow(scope: CoroutineScope? = null): NativeFlow<T> {
     val coroutineScope = scope ?: defaultCoroutineScope
     return (collect@{ returnType: String?,
-                      onItem: NativeCallback2<T, () -> NativeUnit>,
-                      onComplete: NativeCallback<NativeError?>,
-                      onCancelled: NativeCallback<NativeError> ->
+                      onItem: NativeCallback2<T, NativeCallback>,
+                      onComplete: NativeCallback1<NativeError?>,
+                      onCancelled: NativeCallback1<NativeError> ->
         if (returnType == RETURN_TYPE_KOTLIN_FLOW) {
             return@collect { this }
         } else if (returnType != null) {
@@ -48,7 +48,10 @@ public fun <T> Flow<T>.asNativeFlow(scope: CoroutineScope? = null): NativeFlow<T
             try {
                 collect {
                     suspendCoroutine { cont ->
-                        onItem(it) { cont.resume(Unit) }
+                        onItem(it) {
+                            cont.resume(Unit)
+                            null
+                        }
                     }
                 }
                 onComplete(null)
@@ -75,7 +78,7 @@ public fun <T> Flow<T>.asNativeFlow(scope: CoroutineScope? = null): NativeFlow<T
  * @see callbackFlow
  */
 public fun <T> NativeFlow<T>.asFlow(): Flow<T> {
-    val flow = invoke(RETURN_TYPE_KOTLIN_FLOW, ::EmptyNativeCallback2, ::EmptyNativeCallback, ::EmptyNativeCallback)()
+    val flow = invoke(RETURN_TYPE_KOTLIN_FLOW, ::EmptyNativeCallback2, ::EmptyNativeCallback1, ::EmptyNativeCallback1)()
     if (flow != null) {
         @Suppress("UNCHECKED_CAST")
         return (flow as Flow<T>)
@@ -83,7 +86,7 @@ public fun <T> NativeFlow<T>.asFlow(): Flow<T> {
     return callbackFlow {
         val cancellable = invoke(
             null,
-            { value, next, unit ->
+            { value, next ->
                 launch(start = CoroutineStart.UNDISPATCHED) {
                     try {
                         send(value)
@@ -92,15 +95,15 @@ public fun <T> NativeFlow<T>.asFlow(): Flow<T> {
                         close(e)
                     }
                 }
-                unit
+                null
             },
-            { error, unit ->
+            { error ->
                 close(error?.asThrowable())
-                unit
+                null
             },
-            { error, unit ->
+            { error ->
                 cancel(error.asCancellationException())
-                unit
+                null
             }
         )
         awaitClose { cancellable() }

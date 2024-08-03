@@ -17,7 +17,7 @@ internal let RETURN_TYPE_SWIFT_ASYNC = "swift-async"
 public func asyncFunction<Result, Failure: Error>(
     for nativeSuspend: @escaping NativeSuspend<Result, Failure>
 ) async throws -> Result {
-    if let function = nativeSuspend(RETURN_TYPE_SWIFT_ASYNC, EmptyNativeCallback, EmptyNativeCallback, EmptyNativeCallback)() {
+    if let function = nativeSuspend(RETURN_TYPE_SWIFT_ASYNC, EmptyNativeCallback1, EmptyNativeCallback1, EmptyNativeCallback1)() {
         return try await (function as! (@Sendable () async throws -> Result))()
     }
     return try await AsyncFunctionTask(nativeSuspend: nativeSuspend).awaitResult()
@@ -26,8 +26,8 @@ public func asyncFunction<Result, Failure: Error>(
 /// Wraps the `NativeSuspend` in an async function.
 /// - Parameter nativeSuspend: The native suspend function to await.
 /// - Throws: Errors thrown by the `nativeSuspend`.
-public func asyncFunction<Unit, Failure: Error>(
-    for nativeSuspend: @escaping NativeSuspend<Unit, Failure, Unit>
+public func asyncFunction<Failure: Error>(
+    for nativeSuspend: @escaping NativeSuspend<NativeUnit?, Failure>
 ) async throws -> Void {
     _ = try await AsyncFunctionTask(nativeSuspend: nativeSuspend).awaitResult()
 }
@@ -42,7 +42,7 @@ private class AsyncFunctionTask<Result, Failure: Error>: @unchecked Sendable {
     private var continuation: UnsafeContinuation<Result, Error>? = nil
     
     init(nativeSuspend: NativeSuspend<Result, Failure>) {
-        nativeCancellable = nativeSuspend(nil, { result, unit in
+        nativeCancellable = nativeSuspend(nil, { result in
             self.semaphore.wait()
             defer { self.semaphore.signal() }
             self.result = result
@@ -51,8 +51,8 @@ private class AsyncFunctionTask<Result, Failure: Error>: @unchecked Sendable {
                 self.continuation = nil
             }
             self.nativeCancellable = nil
-            return unit
-        }, { error, unit in
+            return nil
+        }, { error in
             self.semaphore.wait()
             defer { self.semaphore.signal() }
             self.error = error
@@ -61,8 +61,8 @@ private class AsyncFunctionTask<Result, Failure: Error>: @unchecked Sendable {
                 self.continuation = nil
             }
             self.nativeCancellable = nil
-            return unit
-        }, { cancellationError, unit in
+            return nil
+        }, { cancellationError in
             self.semaphore.wait()
             defer { self.semaphore.signal() }
             self.cancellationError = cancellationError
@@ -71,7 +71,7 @@ private class AsyncFunctionTask<Result, Failure: Error>: @unchecked Sendable {
                 self.continuation = nil
             }
             self.nativeCancellable = nil
-            return unit
+            return nil
         })
     }
     

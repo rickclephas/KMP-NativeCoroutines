@@ -15,11 +15,13 @@ class NativeFlowTests {
         val nativeFlow = flow.asNativeFlow(this)
         var completionCount = 0
         var cancellationCount = 0
-        nativeFlow(null, { _, _, _ -> }, { error, _ ->
+        nativeFlow(null, ::EmptyNativeCallback2, { error ->
             assertNull(error, "Flow should complete without an error")
             completionCount++
-        }, { _, _ ->
+            null
+        }, { _ ->
             cancellationCount++
+            null
         })
         advanceUntilIdle()
         assertEquals(1, completionCount, "Completion callback should be called once")
@@ -33,13 +35,15 @@ class NativeFlowTests {
         val nativeFlow = flow.asNativeFlow(this)
         var completionCount = 0
         var cancellationCount = 0
-        nativeFlow(null,  { _, _, _ -> }, { error, _ ->
+        nativeFlow(null, ::EmptyNativeCallback2, { error ->
             assertNotNull(error, "Flow should complete with an error")
             val kotlinException = error.kotlinCause
             assertSame(exception, kotlinException, "Kotlin exception should be the same exception")
             completionCount++
-        }, { _, _ ->
+            null
+        }, { _ ->
             cancellationCount++
+            null
         })
         advanceUntilIdle()
         assertEquals(1, completionCount, "Completion callback should be called once")
@@ -52,11 +56,11 @@ class NativeFlowTests {
         val flow = flow { values.forEach { emit(it) } }
         val nativeFlow = flow.asNativeFlow(this)
         var receivedValueCount = 0
-        nativeFlow(null, { value, next, _ ->
+        nativeFlow(null, { value, next ->
             assertSame(values[receivedValueCount], value, "Received incorrect value")
             receivedValueCount++
             next()
-        }, { _, _ -> }, { _, _ -> })
+        }, ::EmptyNativeCallback1, ::EmptyNativeCallback1)
         advanceUntilIdle()
         assertEquals(
             values.size,
@@ -71,12 +75,14 @@ class NativeFlowTests {
         val nativeFlow = flow.asNativeFlow(this)
         var completionCount = 0
         var cancellationCount = 0
-        val cancel = nativeFlow(null, { _, _, _ -> }, { _, _ ->
+        val cancel = nativeFlow(null, ::EmptyNativeCallback2, { _ ->
             completionCount++
-        }, { error, _ ->
+            null
+        }, { error ->
             val exception = error.kotlinCause
             assertIs<CancellationException>(exception, "Error should contain CancellationException")
             cancellationCount++
+            null
         })
         delay(100) // Gives the collection some time to start
         cancel()
@@ -89,7 +95,7 @@ class NativeFlowTests {
     fun ensureFlowReturnTypeReturnsFlow() {
         val flow = MutableSharedFlow<RandomValue>()
         val nativeFlow = flow.asNativeFlow(UnsupportedCoroutineScope)
-        val cancellable = nativeFlow(RETURN_TYPE_KOTLIN_FLOW, ::EmptyNativeCallback2, ::EmptyNativeCallback, ::EmptyNativeCallback)
+        val cancellable = nativeFlow(RETURN_TYPE_KOTLIN_FLOW, ::EmptyNativeCallback2, ::EmptyNativeCallback1, ::EmptyNativeCallback1)
         assertSame(flow, cancellable())
     }
 
@@ -97,7 +103,7 @@ class NativeFlowTests {
     fun ensureUnknownReturnTypeReturnsNull() {
         val flow = MutableSharedFlow<RandomValue>()
         val nativeFlow = flow.asNativeFlow(UnsupportedCoroutineScope)
-        val cancellable = nativeFlow("unknown", ::EmptyNativeCallback2, ::EmptyNativeCallback, ::EmptyNativeCallback)
+        val cancellable = nativeFlow("unknown", ::EmptyNativeCallback2, ::EmptyNativeCallback1, ::EmptyNativeCallback1)
         assertNull(cancellable())
     }
 }

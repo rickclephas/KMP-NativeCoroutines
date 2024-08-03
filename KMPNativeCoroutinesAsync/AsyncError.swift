@@ -10,8 +10,8 @@ import KMPNativeCoroutinesCore
 /// Awaits the `NativeSuspend` and returns the optional error.
 /// - Parameter nativeSuspend: The native suspend function to await.
 /// - Returns: The `Error` from the `nativeSuspend`, or `nil`.
-public func asyncError<Unit, Failure: Error>(
-    for nativeSuspend: @escaping NativeSuspend<Unit, Failure, Unit>
+public func asyncError<Failure: Error>(
+    for nativeSuspend: @escaping NativeSuspend<NativeUnit?, Failure>
 ) async -> Error? {
     do {
         try await asyncFunction(for: nativeSuspend)

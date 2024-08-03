@@ -19,7 +19,7 @@ class AsyncFunctionTests: XCTestCase {
             guard returnType == nil else { return { nil } }
             return {
                 cancelCount += 1
-                _ = cancelCallback(NSError(domain: "Ignored", code: 0), ())
+                _ = cancelCallback(NSError(domain: "Ignored", code: 0))
                 return nil
             }
         }
@@ -41,7 +41,7 @@ class AsyncFunctionTests: XCTestCase {
         let value = TestValue()
         let nativeSuspend: NativeSuspend<TestValue, NSError> = { returnType, resultCallback, _, _ in
             guard returnType == nil else { return { nil } }
-            _ = resultCallback(value, ())
+            _ = resultCallback(value)
             return { nil }
         }
         do {
@@ -56,7 +56,7 @@ class AsyncFunctionTests: XCTestCase {
         let sendError = NSError(domain: "Test", code: 0)
         let nativeSuspend: NativeSuspend<TestValue, NSError> = { returnType, _, errorCallback, _ in
             guard returnType == nil else { return { nil } }
-            _ = errorCallback(sendError, ())
+            _ = errorCallback(sendError)
             return { nil }
         }
         do {

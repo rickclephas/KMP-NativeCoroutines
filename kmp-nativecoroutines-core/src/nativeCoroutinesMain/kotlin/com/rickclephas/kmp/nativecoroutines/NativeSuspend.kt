@@ -20,9 +20,9 @@ internal const val RETURN_TYPE_KOTLIN_SUSPEND = "kotlin-suspend"
  */
 public typealias NativeSuspend<T> = (
     returnType: String?,
-    onResult: NativeCallback<T>,
-    onError: NativeCallback<NativeError>,
-    onCancelled: NativeCallback<NativeError>
+    onResult: NativeCallback1<T>,
+    onError: NativeCallback1<NativeError>,
+    onCancelled: NativeCallback1<NativeError>
 ) -> NativeCancellable
 
 /**
@@ -34,9 +34,9 @@ public typealias NativeSuspend<T> = (
 public fun <T> nativeSuspend(scope: CoroutineScope? = null, block: suspend () -> T): NativeSuspend<T> {
     val coroutineScope = scope ?: defaultCoroutineScope
     return (collect@{ returnType: String?,
-                      onResult: NativeCallback<T>,
-                      onError: NativeCallback<NativeError>,
-                      onCancelled: NativeCallback<NativeError> ->
+                      onResult: NativeCallback1<T>,
+                      onError: NativeCallback1<NativeError>,
+                      onCancelled: NativeCallback1<NativeError> ->
         if (returnType == RETURN_TYPE_KOTLIN_SUSPEND) {
             return@collect { block }
         } else if (returnType != null) {
@@ -68,7 +68,7 @@ public fun <T> nativeSuspend(scope: CoroutineScope? = null, block: suspend () ->
  * @see suspendCancellableCoroutine
  */
 public suspend fun <T> NativeSuspend<T>.await(): T {
-    val block = invoke(RETURN_TYPE_KOTLIN_SUSPEND, ::EmptyNativeCallback, ::EmptyNativeCallback, ::EmptyNativeCallback)()
+    val block = invoke(RETURN_TYPE_KOTLIN_SUSPEND, ::EmptyNativeCallback1, ::EmptyNativeCallback1, ::EmptyNativeCallback1)()
     if (block != null) {
         @Suppress("UNCHECKED_CAST")
         return (block as (suspend () -> T))()
@@ -76,17 +76,17 @@ public suspend fun <T> NativeSuspend<T>.await(): T {
     return suspendCancellableCoroutine { cont ->
         val cancellable = invoke(
             null,
-            { result, unit ->
+            { result ->
                 cont.resume(result)
-                unit
+                null
             },
-            { error, unit ->
+            { error ->
                 cont.resumeWithException(error.asThrowable())
-                unit
+                null
             },
-            { error, unit ->
+            { error ->
                 cont.cancel(error.asCancellationException())
-                unit
+                null
             }
         )
         cont.invokeOnCancellation { cancellable() }

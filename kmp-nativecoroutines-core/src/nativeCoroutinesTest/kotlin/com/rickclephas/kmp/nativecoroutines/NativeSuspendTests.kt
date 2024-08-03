@@ -25,13 +25,16 @@ class NativeSuspendTests {
         var receivedResultCount = 0
         var receivedErrorCount = 0
         var receivedCancellationCount = 0
-        nativeSuspend(null, { receivedValue, _ ->
+        nativeSuspend(null, { receivedValue ->
             assertSame(value, receivedValue, "Received incorrect value")
             receivedResultCount++
-        }, { _, _ ->
+            null
+        }, { _ ->
             receivedErrorCount++
-        }, { _, _ ->
+            null
+        }, { _ ->
             receivedCancellationCount++
+            null
         })
         advanceUntilIdle()
         assertEquals(1, receivedResultCount, "Result callback should be called once")
@@ -46,14 +49,17 @@ class NativeSuspendTests {
         var receivedResultCount = 0
         var receivedErrorCount = 0
         var receivedCancellationCount = 0
-        nativeSuspend(null, { _, _ ->
+        nativeSuspend(null, { _ ->
             receivedResultCount++
-        }, { error, _ ->
+            null
+        }, { error ->
             val kotlinException = error.kotlinCause
             assertSame(exception, kotlinException, "Kotlin exception should be the same exception")
             receivedErrorCount++
-        }, { _, _ ->
+            null
+        }, { _ ->
             receivedCancellationCount++
+            null
         })
         advanceUntilIdle()
         assertEquals(1, receivedErrorCount, "Error callback should be called once")
@@ -67,14 +73,17 @@ class NativeSuspendTests {
         var receivedResultCount = 0
         var receivedErrorCount = 0
         var receivedCancellationCount = 0
-        val cancel = nativeSuspend(null, { _, _ ->
+        val cancel = nativeSuspend(null, { _ ->
             receivedResultCount++
-        }, { _, _ ->
+            null
+        }, { _ ->
             receivedErrorCount++
-        }, { error, _ ->
+            null
+        }, { error ->
             val exception = error.kotlinCause
             assertIs<CancellationException>(exception, "Error should contain CancellationException")
             receivedCancellationCount++
+            null
         })
         delay(100) // Gives the function some time to start
         cancel()
@@ -89,14 +98,14 @@ class NativeSuspendTests {
         val value = RandomValue()
         val block: (suspend () -> RandomValue) = { value }
         val nativeSuspend = nativeSuspend(UnsupportedCoroutineScope, block)
-        val cancellable = nativeSuspend(RETURN_TYPE_KOTLIN_SUSPEND, ::EmptyNativeCallback, ::EmptyNativeCallback, ::EmptyNativeCallback)
+        val cancellable = nativeSuspend(RETURN_TYPE_KOTLIN_SUSPEND, ::EmptyNativeCallback1, ::EmptyNativeCallback1, ::EmptyNativeCallback1)
         assertSame(block, cancellable())
     }
 
     @Test
     fun ensureUnknownReturnTypeReturnsNull() = runTest {
         val nativeSuspend = nativeSuspend(UnsupportedCoroutineScope) { RandomValue() }
-        val cancellable = nativeSuspend("unknown", ::EmptyNativeCallback, ::EmptyNativeCallback, ::EmptyNativeCallback)
+        val cancellable = nativeSuspend("unknown", ::EmptyNativeCallback1, ::EmptyNativeCallback1, ::EmptyNativeCallback1)
         assertNull(cancellable())
     }
 }

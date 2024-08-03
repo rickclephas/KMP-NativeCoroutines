@@ -14,7 +14,7 @@
 /// or `nil` if the requested type isn't supported by this `NativeSuspend`.
 public typealias NativeSuspend<Result, Failure: Error> = (
     _ returnType: String?,
-    _ onResult: @escaping NativeCallback<Result>,
-    _ onError: @escaping NativeCallback<Failure>,
-    _ onCancelled: @escaping NativeCallback<Failure>
+    _ onResult: @escaping NativeCallback1<Result>,
+    _ onError: @escaping NativeCallback1<Failure>,
+    _ onCancelled: @escaping NativeCallback1<Failure>
 ) -> NativeCancellable

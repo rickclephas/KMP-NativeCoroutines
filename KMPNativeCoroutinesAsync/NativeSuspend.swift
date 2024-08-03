@@ -25,12 +25,12 @@ public func nativeSuspend<Result>(
             do {
                 let result = try await operation()
                 try Task.checkCancellation()
-                _ = onResult(result, ())
+                _ = onResult(result)
             } catch {
                 if error is CancellationError {
-                    _ = onCancelled(error, ())
+                    _ = onCancelled(error)
                 } else {
-                    _ = onError(error, ())
+                    _ = onError(error)
                 }
             }
         }

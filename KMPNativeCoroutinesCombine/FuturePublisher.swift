@@ -22,8 +22,8 @@ public func createPublisher<Output, Failure: Error>(
 /// Creates an `AnyPublisher` for the provided `NativeSuspend` that returns a `NativeFlow`.
 /// - Parameter nativeSuspend: The native suspend function to await.
 /// - Returns: A publisher that publishes the collected values.
-public func createPublisher<Unit, Failure: Error>(
-    for nativeSuspend: @escaping NativeSuspend<NativeFlow<Unit, Failure, Unit>, Failure, Unit>
+public func createPublisher<Failure: Error>(
+    for nativeSuspend: @escaping NativeSuspend<NativeFlow<NativeUnit?, Failure>, Failure>
 ) -> AnyPublisher<Void, Failure> {
     return createFuture(for: nativeSuspend)
         .flatMap { createPublisher(for: $0) }

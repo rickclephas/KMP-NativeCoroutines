@@ -17,13 +17,13 @@ class NativeSuspendTests: XCTestCase {
         let value = TestValue()
         let operation: (@Sendable () async throws -> TestValue) = { value }
         let nativeSuspend = nativeSuspend(operation: operation)
-        let cancellable = nativeSuspend(RETURN_TYPE_SWIFT_ASYNC, EmptyNativeCallback, EmptyNativeCallback, EmptyNativeCallback)
+        let cancellable = nativeSuspend(RETURN_TYPE_SWIFT_ASYNC, EmptyNativeCallback1, EmptyNativeCallback1, EmptyNativeCallback1)
         XCTAssert(cancellable() is (@Sendable () async throws -> TestValue))
     }
     
     func testUnknownReturnTypeReturnsNil() {
         let nativeSuspend = nativeSuspend { }
-        let cancellable = nativeSuspend("unknown", EmptyNativeCallback, EmptyNativeCallback, EmptyNativeCallback)
+        let cancellable = nativeSuspend("unknown", EmptyNativeCallback1, EmptyNativeCallback1, EmptyNativeCallback1)
         XCTAssertNil(cancellable())
     }
     
@@ -35,16 +35,16 @@ class NativeSuspendTests: XCTestCase {
         errorExpectation.isInverted = true
         let cancellationExpectation = expectation(description: "Waiting for no cancellation")
         cancellationExpectation.isInverted = true
-        _ = nativeSuspend(nil, { receivedValue, unit in
+        _ = nativeSuspend(nil, { receivedValue in
             XCTAssertIdentical(receivedValue, value, "Received incorrect value")
             resultExpectation.fulfill()
-            return unit
-        }, { _, unit in
+            return nil
+        }, { _ in
             errorExpectation.fulfill()
-            return unit
-        }, { _, unit in
+            return nil
+        }, { _ in
             cancellationExpectation.fulfill()
-            return unit
+            return nil
         })
         wait(for: [resultExpectation, errorExpectation, cancellationExpectation], timeout: 4)
     }
@@ -57,16 +57,16 @@ class NativeSuspendTests: XCTestCase {
         let errorExpectation = expectation(description: "Waiting for error")
         let cancellationExpectation = expectation(description: "Waiting for no cancellation")
         cancellationExpectation.isInverted = true
-        _ = nativeSuspend(nil, { _, unit in
+        _ = nativeSuspend(nil, { _ in
             resultExpectation.fulfill()
-            return unit
-        }, { receivedError, unit in
+            return nil
+        }, { receivedError in
             XCTAssertEqual(receivedError as NSError, error)
             errorExpectation.fulfill()
-            return unit
-        }, { _, unit in
+            return nil
+        }, { _ in
             cancellationExpectation.fulfill()
-            return unit
+            return nil
         })
         wait(for: [resultExpectation, errorExpectation, cancellationExpectation], timeout: 4)
     }
@@ -83,16 +83,16 @@ class NativeSuspendTests: XCTestCase {
         let errorExpectation = expectation(description: "Waiting for no error")
         errorExpectation.isInverted = true
         let cancellationExpectation = expectation(description: "Waiting for cancellation")
-        let cancel = nativeSuspend(nil, { _, unit in
+        let cancel = nativeSuspend(nil, { _ in
             resultExpectation.fulfill()
-            return unit
-        }, { _, unit in
+            return nil
+        }, { _ in
             errorExpectation.fulfill()
-            return unit
-        }, { error, unit in
+            return nil
+        }, { error in
             XCTAssert(error is CancellationError, "Error should be a CancellationError")
             cancellationExpectation.fulfill()
-            return unit
+            return nil
         })
         wait(for: [runExpectation], timeout: 2)
         _ = cancel()

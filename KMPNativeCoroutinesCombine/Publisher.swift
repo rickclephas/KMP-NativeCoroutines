@@ -17,7 +17,7 @@ internal let RETURN_TYPE_COMBINE_PUBLISHER = "combine-publisher"
 public func createPublisher<Output, Failure: Error>(
     for nativeFlow: @escaping NativeFlow<Output, Failure>
 ) -> AnyPublisher<Output, Failure> {
-    if let publisher = nativeFlow(RETURN_TYPE_COMBINE_PUBLISHER, EmptyNativeCallback2, EmptyNativeCallback, EmptyNativeCallback)() {
+    if let publisher = nativeFlow(RETURN_TYPE_COMBINE_PUBLISHER, EmptyNativeCallback2, EmptyNativeCallback1, EmptyNativeCallback1)() {
         return publisher as! AnyPublisher<Output, Failure>
     }
     return NativeFlowPublisher(nativeFlow: nativeFlow).eraseToAnyPublisher()
@@ -26,8 +26,8 @@ public func createPublisher<Output, Failure: Error>(
 /// Creates an `AnyPublisher` for the provided `NativeFlow`.
 /// - Parameter nativeFlow: The native flow to collect.
 /// - Returns: A publisher that publishes the collected values.
-public func createPublisher<Unit, Failure: Error>(
-    for nativeFlow: @escaping NativeFlow<Unit, Failure, Unit>
+public func createPublisher<Failure: Error>(
+    for nativeFlow: @escaping NativeFlow<NativeUnit?, Failure>
 ) -> AnyPublisher<Void, Failure> {
     return NativeFlowPublisher(nativeFlow: nativeFlow)
         .map { _ in }
@@ -55,7 +55,7 @@ internal class NativeFlowSubscription<Output, Failure, S: Subscriber>: Subscript
     private var subscriber: S?
     private var demand: Subscribers.Demand = .none
     private var hasDemand: Bool { demand >= 1 }
-    private var next: (() -> NativeUnit)? = nil
+    private var next: NativeCallback? = nil
     
     init(nativeFlow: @escaping NativeFlow<Output, Failure>, subscriber: S) {
         self.nativeFlow = nativeFlow
@@ -79,8 +79,8 @@ internal class NativeFlowSubscription<Output, Failure, S: Subscriber>: Subscript
         }
         semaphore.signal()
         self.nativeFlow = nil
-        nativeCancellable = nativeFlow(nil, { item, next, unit in
-            guard let subscriber = self.subscriber else { return unit }
+        nativeCancellable = nativeFlow(nil, { item, next in
+            guard let subscriber = self.subscriber else { return nil }
             let demand = subscriber.receive(item)
             self.semaphore.wait()
             defer { self.semaphore.signal() }
@@ -90,18 +90,18 @@ internal class NativeFlowSubscription<Output, Failure, S: Subscriber>: Subscript
                 return next()
             } else {
                 self.next = next
-                return unit
+                return nil
             }
-        }, { error, unit in
+        }, { error in
             if let error = error {
                 self.subscriber?.receive(completion: .failure(error))
             } else {
                 self.subscriber?.receive(completion: .finished)
             }
-            return unit
-        }, { cancellationError, unit in
+            return nil
+        }, { cancellationError in
             self.subscriber?.receive(completion: .failure(cancellationError))
-            return unit
+            return nil
         })
     }
     

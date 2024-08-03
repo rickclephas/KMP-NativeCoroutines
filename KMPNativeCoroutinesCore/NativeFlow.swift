@@ -14,7 +14,7 @@
 /// or `nil` if the requested type isn't supported by this `NativeFlow`.
 public typealias NativeFlow<Output, Failure: Error> = (
     _ returnType: String?,
-    _ onItem: @escaping NativeCallback2<Output, () -> NativeUnit>,
-    _ onComplete: @escaping NativeCallback<Failure?>,
-    _ onCancelled: @escaping NativeCallback<Failure>
+    _ onItem: @escaping NativeCallback2<Output, NativeCallback>,
+    _ onComplete: @escaping NativeCallback1<Failure?>,
+    _ onCancelled: @escaping NativeCallback1<Failure>
 ) -> NativeCancellable

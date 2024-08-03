@@ -34,7 +34,7 @@ class FutureTests: XCTestCase {
         let value = TestValue()
         let nativeSuspend: NativeSuspend<TestValue, NSError> = { returnType, resultCallback, _, _ in
             guard returnType == nil else { return { nil } }
-            _ = resultCallback(value, ())
+            _ = resultCallback(value)
             return { nil }
         }
         var completionCount = 0
@@ -59,7 +59,7 @@ class FutureTests: XCTestCase {
         let error = NSError(domain: "Test", code: 0)
         let nativeSuspend: NativeSuspend<TestValue, NSError> = { returnType, _, errorCallback, _ in
             guard returnType == nil else { return { nil } }
-            _ = errorCallback(error, ())
+            _ = errorCallback(error)
             return { nil }
         }
         var completionCount = 0
