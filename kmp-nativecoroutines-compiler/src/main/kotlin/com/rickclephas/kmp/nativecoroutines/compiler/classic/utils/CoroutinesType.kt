@@ -1,6 +1,6 @@
 package com.rickclephas.kmp.nativecoroutines.compiler.classic.utils
 
-import com.rickclephas.kmp.nativecoroutines.compiler.utils.CoroutinesClassIds
+import com.rickclephas.kmp.nativecoroutines.compiler.utils.ClassIds
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.CoroutinesType
 import org.jetbrains.kotlin.builtins.*
 import org.jetbrains.kotlin.descriptors.CallableDescriptor
@@ -39,8 +39,8 @@ private fun KotlinType.getCoroutinesType(
 }
 
 private class CoroutinesTypeConstructors(module: ModuleDescriptor) {
-    val stateFlow: TypeConstructor = module.findTypeConstructor(CoroutinesClassIds.stateFlow)
-    val flow: TypeConstructor = module.findTypeConstructor(CoroutinesClassIds.flow)
+    val stateFlow: TypeConstructor = module.findTypeConstructor(ClassIds.stateFlow)
+    val flow: TypeConstructor = module.findTypeConstructor(ClassIds.flow)
 }
 
 private fun ModuleDescriptor.findTypeConstructor(classId: ClassId): TypeConstructor =
@@ -50,7 +50,7 @@ private fun ModuleDescriptor.findTypeConstructor(classId: ClassId): TypeConstruc
 internal val CallableDescriptor.isCoroutineScopeProperty: Boolean get() {
     if (this !is PropertyDescriptor) return false
     val returnType = returnTypeOrNothing
-    val coroutineScope = module.findTypeConstructor(CoroutinesClassIds.coroutineScope)
+    val coroutineScope = module.findTypeConstructor(ClassIds.coroutineScope)
     if (returnType.constructor == coroutineScope) return true
     return returnType.supertypes().any { it.constructor == coroutineScope }
 }

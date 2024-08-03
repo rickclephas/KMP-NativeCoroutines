@@ -1,6 +1,6 @@
 package com.rickclephas.kmp.nativecoroutines.compiler.fir.utils
 
-import com.rickclephas.kmp.nativecoroutines.compiler.utils.CoroutinesClassIds
+import com.rickclephas.kmp.nativecoroutines.compiler.utils.ClassIds
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.CoroutinesType
 import org.jetbrains.kotlin.builtins.functions.FunctionTypeKind
 import org.jetbrains.kotlin.fir.FirSession
@@ -27,8 +27,8 @@ internal fun ConeKotlinType.getCoroutinesType(session: FirSession): CoroutinesTy
     }
     val symbol = (this as? ConeClassLikeType)?.toSymbol(session)?.fullyExpandedClass(session) ?: return null
     val symbolLookupTag = symbol.toLookupTag()
-    val stateFlowLookupTag = CoroutinesClassIds.stateFlow.toLookupTag()
-    val flowLookupTag = CoroutinesClassIds.flow.toLookupTag()
+    val stateFlowLookupTag = ClassIds.stateFlow.toLookupTag()
+    val flowLookupTag = ClassIds.flow.toLookupTag()
     if (symbolLookupTag == stateFlowLookupTag) return CoroutinesType.Flow.State(false)
     if (symbolLookupTag == flowLookupTag) return CoroutinesType.Flow.Generic(false)
     if (symbol.isSubclassOf(stateFlowLookupTag, session, isStrict = true, lookupInterfaces = true))
@@ -41,5 +41,5 @@ internal fun ConeKotlinType.getCoroutinesType(session: FirSession): CoroutinesTy
 internal fun FirCallableDeclaration.isCoroutineScopeProperty(session: FirSession): Boolean {
     if (this !is FirProperty) return false
     val symbol = returnTypeRef.toClassLikeSymbol(session)?.fullyExpandedClass(session) ?: return false
-    return symbol.isSubclassOf(CoroutinesClassIds.coroutineScope.toLookupTag(), session, isStrict = false, lookupInterfaces = true)
+    return symbol.isSubclassOf(ClassIds.coroutineScope.toLookupTag(), session, isStrict = false, lookupInterfaces = true)
 }
