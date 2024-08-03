@@ -28,8 +28,8 @@ public func createObservable<Unit, Failure: Error>(
     return createObservableImpl(for: nativeFlow).map { _ in }
 }
 
-private func createObservableImpl<Output, Failure: Error, Unit>(
-    for nativeFlow: @escaping NativeFlow<Output, Failure, Unit>
+private func createObservableImpl<Output, Failure: Error>(
+    for nativeFlow: @escaping NativeFlow<Output, Failure>
 ) -> Observable<Output> {
     if let observable = nativeFlow(RETURN_TYPE_RXSWIFT_OBSERVABLE, EmptyNativeCallback2, EmptyNativeCallback, EmptyNativeCallback)() {
         return observable as! Observable<Output>

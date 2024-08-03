@@ -28,8 +28,8 @@ public func createSingle<Unit, Failure: Error>(
     return createSingleImpl(for: nativeSuspend).map { _ in }
 }
 
-private func createSingleImpl<Result, Failure: Error, Unit>(
-    for nativeSuspend: @escaping NativeSuspend<Result, Failure, Unit>
+private func createSingleImpl<Result, Failure: Error>(
+    for nativeSuspend: @escaping NativeSuspend<Result, Failure>
 ) -> Single<Result> {
     if let single = nativeSuspend(RETURN_TYPE_RXSWIFT_SINGLE, EmptyNativeCallback, EmptyNativeCallback, EmptyNativeCallback)() {
         return single as! Single<Result>
