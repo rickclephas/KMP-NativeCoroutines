@@ -38,18 +38,15 @@ import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativ
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.REDUNDANT_PRIVATE_COROUTINES_STATE
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.UNSUPPORTED_CLASS_EXTENSION_PROPERTY
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.UNSUPPORTED_INPUT_FLOW
-import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.getCoroutinesReturnType
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.getNativeCoroutinesAnnotations
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.hasImplicitReturnType
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.isRefined
-import com.rickclephas.kmp.nativecoroutines.compiler.utils.CoroutinesReturnType
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutines
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutineScope
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutinesIgnore
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutinesRefined
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutinesRefinedState
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutinesState
-import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesAnnotations
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.getCoroutinesType
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.isCoroutineScopeProperty
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.CoroutinesType
@@ -191,21 +188,8 @@ internal class FirKmpNativeCoroutinesDeclarationChecker(
         }
         //endregion
 
-        //region REDUNDANT_*
         //region INCOMPATIBLE_*
         if (isOverride) {
-            REDUNDANT_OVERRIDE_COROUTINES.reportOn(annotations.nativeCoroutines)
-            REDUNDANT_OVERRIDE_COROUTINES_IGNORE.reportOn(annotations.nativeCoroutinesIgnore)
-            REDUNDANT_OVERRIDE_COROUTINES_REFINED.reportOn(annotations.nativeCoroutinesRefined)
-            REDUNDANT_OVERRIDE_COROUTINES_REFINED_STATE.reportOn(annotations.nativeCoroutinesRefinedState)
-            REDUNDANT_OVERRIDE_COROUTINES_STATE.reportOn(annotations.nativeCoroutinesState)
-        }
-        if (!isPublic) {
-            REDUNDANT_PRIVATE_COROUTINES.reportOn(annotations.nativeCoroutines)
-            REDUNDANT_PRIVATE_COROUTINES_IGNORE.reportOn(annotations.nativeCoroutinesIgnore)
-            REDUNDANT_PRIVATE_COROUTINES_REFINED.reportOn(annotations.nativeCoroutinesRefined)
-            REDUNDANT_PRIVATE_COROUTINES_REFINED_STATE.reportOn(annotations.nativeCoroutinesRefinedState)
-            REDUNDANT_PRIVATE_COROUTINES_STATE.reportOn(annotations.nativeCoroutinesState)
             val containingClass = context.containingDeclarations.lastOrNull() as? FirClass
             if (containingClass != null) {
                 val firTypeScope = containingClass.unsubstitutedScope(context)

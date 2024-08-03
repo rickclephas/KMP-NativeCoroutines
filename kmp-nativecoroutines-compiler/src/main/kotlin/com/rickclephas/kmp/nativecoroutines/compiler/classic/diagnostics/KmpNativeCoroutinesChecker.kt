@@ -38,18 +38,15 @@ import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNati
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.REDUNDANT_PRIVATE_COROUTINES_REFINED_STATE
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.UNSUPPORTED_CLASS_EXTENSION_PROPERTY
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.UNSUPPORTED_INPUT_FLOW
-import com.rickclephas.kmp.nativecoroutines.compiler.classic.utils.coroutinesReturnType
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.utils.getNativeCoroutinesAnnotations
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.utils.hasImplicitReturnType
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.utils.isRefined
-import com.rickclephas.kmp.nativecoroutines.compiler.utils.CoroutinesReturnType
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutines
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutineScope
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutinesIgnore
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutinesRefined
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutinesRefinedState
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutinesState
-import com.rickclephas.kmp.nativecoroutines.compiler.classic.utils.NativeCoroutinesAnnotations
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.utils.coroutinesType
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.utils.isCoroutineScopeProperty
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.CoroutinesType
@@ -191,21 +188,8 @@ public class KmpNativeCoroutinesChecker(
         }
         //endregion
 
-        //region REDUNDANT_*
         //region INCOMPATIBLE_*
         if (isOverride) {
-            context.trace.report(REDUNDANT_OVERRIDE_COROUTINES, annotations.nativeCoroutines, declaration)
-            context.trace.report(REDUNDANT_OVERRIDE_COROUTINES_IGNORE, annotations.nativeCoroutinesIgnore, declaration)
-            context.trace.report(REDUNDANT_OVERRIDE_COROUTINES_REFINED, annotations.nativeCoroutinesRefined, declaration)
-            context.trace.report(REDUNDANT_OVERRIDE_COROUTINES_REFINED_STATE, annotations.nativeCoroutinesRefinedState, declaration)
-            context.trace.report(REDUNDANT_OVERRIDE_COROUTINES_STATE, annotations.nativeCoroutinesState, declaration)
-        }
-        if (!isPublic) {
-            context.trace.report(REDUNDANT_PRIVATE_COROUTINES, annotations.nativeCoroutines, declaration)
-            context.trace.report(REDUNDANT_PRIVATE_COROUTINES_IGNORE, annotations.nativeCoroutinesIgnore, declaration)
-            context.trace.report(REDUNDANT_PRIVATE_COROUTINES_REFINED, annotations.nativeCoroutinesRefined, declaration)
-            context.trace.report(REDUNDANT_PRIVATE_COROUTINES_REFINED_STATE, annotations.nativeCoroutinesRefinedState, declaration)
-            context.trace.report(REDUNDANT_PRIVATE_COROUTINES_STATE, annotations.nativeCoroutinesState, declaration)
             val overriddenAnnotations = descriptor.overriddenDescriptors.map(Annotated::getNativeCoroutinesAnnotations)
             val invalidAnnotations = annotations.filterKeys { annotation ->
                 overriddenAnnotations.any { !it.containsKey(annotation) }
