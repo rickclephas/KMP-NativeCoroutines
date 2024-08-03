@@ -2,9 +2,6 @@
 
 A library to use Kotlin Coroutines from Swift code in KMP apps.
 
-> [!IMPORTANT]
-> Looking to upgrade from the 0.x releases? Checkout the [migration steps](MIGRATING_TO_V1.md).
-
 ## Why this library?
 
 Both KMP and Kotlin Coroutines are amazing, but together they have some limitations.
@@ -26,21 +23,24 @@ This library solves both of these limitations 😄.
 
 ## Compatibility
 
-The latest version of the library uses Kotlin version `1.9.20`.  
+The latest version of the library uses Kotlin version `2.0.0`.  
 Compatibility versions for older and/or preview Kotlin versions are also available:
 
-| Version        | Version suffix      |   Kotlin    |    KSP     | Coroutines |
-|----------------|---------------------|:-----------:|:----------:|:----------:|
-| _latest_       | -kotlin-2.0.0-Beta1 | 2.0.0-Beta1 |   1.0.14   |   1.7.3    |
-| **_latest_**   | **_no suffix_**     | **1.9.20**  | **1.0.14** | **1.7.3**  |
-| 1.0.0-ALPHA-19 | _no suffix_         |   1.9.20    |   1.0.13   |   1.7.3    |
-| 1.0.0-ALPHA-18 | _no suffix_         |   1.9.10    |   1.0.13   |   1.7.3    |
-| 1.0.0-ALPHA-17 | _no suffix_         |    1.9.0    |   1.0.12   |   1.7.3    |
-| 1.0.0-ALPHA-13 | _no suffix_         |    1.9.0    |   1.0.11   |   1.7.2    |
-| 1.0.0-ALPHA-12 | _no suffix_         |   1.8.22    |   1.0.11   |   1.7.2    |
-| 1.0.0-ALPHA-10 | _no suffix_         |   1.8.21    |   1.0.11   |   1.7.1    |
-| 1.0.0-ALPHA-8  | _no suffix_         |   1.8.21    |   1.0.11   |   1.6.4    |
-| 1.0.0-ALPHA-7  | _no suffix_         |   1.8.20    |   1.0.10   |   1.6.4    |
+| Version        | Version suffix     |   Kotlin   |    KSP     | Coroutines |
+|----------------|--------------------|:----------:|:----------:|:----------:|
+| _latest_       | -kotlin-2.0.20-RC  | 2.0.20-RC  |   1.0.24   |  1.9.0-RC  |
+| _latest_       | -kotlin-2.0.10-RC2 | 2.0.10-RC2 |   1.0.24   |  1.9.0-RC  |
+| **_latest_**   | **_no suffix_**    | **2.0.0**  | **1.0.24** | **1.8.1**  |
+| 1.0.0-ALPHA-30 | _no suffix_        |   1.9.24   |   1.0.20   |   1.8.1    |
+| 1.0.0-ALPHA-28 | _no suffix_        |   1.9.23   |   1.0.20   |   1.8.0    |
+| 1.0.0-ALPHA-25 | _no suffix_        |   1.9.22   |   1.0.17   |   1.8.0    |
+| 1.0.0-ALPHA-23 | _no suffix_        |   1.9.21   |   1.0.16   |   1.7.3    |
+| 1.0.0-ALPHA-21 | _no suffix_        |   1.9.20   |   1.0.14   |   1.7.3    |
+| 1.0.0-ALPHA-18 | _no suffix_        |   1.9.10   |   1.0.13   |   1.7.3    |
+| 1.0.0-ALPHA-17 | _no suffix_        |   1.9.0    |   1.0.12   |   1.7.3    |
+| 1.0.0-ALPHA-12 | _no suffix_        |   1.8.22   |   1.0.11   |   1.7.2    |
+| 1.0.0-ALPHA-10 | _no suffix_        |   1.8.21   |   1.0.11   |   1.7.1    |
+| 1.0.0-ALPHA-7  | _no suffix_        |   1.8.20   |   1.0.10   |   1.6.4    |
 
 You can choose from a couple of Swift implementations.  
 Depending on the implementation you can support as low as iOS 9, macOS 10.9, tvOS 9 and watchOS 3:
@@ -64,8 +64,8 @@ Make sure to always use the same versions for all the libraries!
 For Kotlin just add the plugin to your `build.gradle.kts`:
 ```kotlin
 plugins {
-    id("com.google.devtools.ksp") version "1.9.20-1.0.14"
-    id("com.rickclephas.kmp.nativecoroutines") version "1.0.0-ALPHA-21"
+    id("com.google.devtools.ksp") version "2.0.0-1.0.24"
+    id("com.rickclephas.kmp.nativecoroutines") version "1.0.0-ALPHA-33"
 }
 ```
 and make sure to opt in to the experimental `@ObjCName` annotation:
@@ -81,7 +81,7 @@ The Swift implementations are available via the Swift Package Manager.
 Just add it to your `Package.swift` file:
 ```swift
 dependencies: [
-    .package(url: "https://github.com/rickclephas/KMP-NativeCoroutines.git", exact: "1.0.0-ALPHA-21")
+    .package(url: "https://github.com/rickclephas/KMP-NativeCoroutines.git", exact: "1.0.0-ALPHA-33")
 ],
 targets: [
     .target(
@@ -113,9 +113,9 @@ Or add it in Xcode by going to `File` > `Add Packages...` and providing the URL:
 
 If you use CocoaPods add one or more of the following libraries to your `Podfile`:
 ```ruby
-pod 'KMPNativeCoroutinesAsync', '1.0.0-ALPHA-21'    # Swift Concurrency implementation
-pod 'KMPNativeCoroutinesCombine', '1.0.0-ALPHA-21'  # Combine implementation
-pod 'KMPNativeCoroutinesRxSwift', '1.0.0-ALPHA-21'  # RxSwift implementation
+pod 'KMPNativeCoroutinesAsync', '1.0.0-ALPHA-33'    # Swift Concurrency implementation
+pod 'KMPNativeCoroutinesCombine', '1.0.0-ALPHA-33'  # Combine implementation
+pod 'KMPNativeCoroutinesRxSwift', '1.0.0-ALPHA-33'  # RxSwift implementation
 ```
 > [!NOTE]
 > The version for CocoaPods should not contain the Kotlin version suffix (e.g. `-new-mm` or `-kotlin-1.6.0`).
@@ -312,6 +312,15 @@ if case let .success(letters) = result {
 }
 ```
 
+for `Unit` returning functions there is also the `asyncError(for:)` function:
+```swift
+import KMPNativeCoroutinesAsync
+
+if let error = await asyncError(for: integrationTests.returnUnit()) {
+    print("Failed with error: \(error)")
+}
+```
+
 #### AsyncSequence
 
 For `Flow`s there is the `asyncSequence(for:)` function to get an `AsyncSequence`:
@@ -340,6 +349,9 @@ The Combine implementation provides a couple functions to get an `AnyPublisher` 
 > [!NOTE]
 > These functions create deferred `AnyPublisher`s.  
 > Meaning every subscription will trigger the collection of the `Flow` or execution of the suspend function.
+
+> [!NOTE]
+> You **must** keep a reference to the returned `Cancellable`s otherwise the collection will be cancelled immediately. 
 
 #### Publisher
 
@@ -495,8 +507,8 @@ internal val defaultCoroutineScope = CoroutineScope(SupervisorJob() + Dispatcher
 ```
 
 > [!NOTE]
-> KMP-NativeCoroutines has built-in support for [KMM-ViewModel](https://github.com/rickclephas/KMM-ViewModel).  
-> Coroutines inside your `KMMViewModel` will (by default) use the `CoroutineScope` from the `ViewModelScope`. 
+> KMP-NativeCoroutines has built-in support for [KMP-ObservableViewModel](https://github.com/rickclephas/KMP-ObservableViewModel).  
+> Coroutines inside your `ViewModel` will (by default) use the `CoroutineScope` from the `ViewModelScope`. 
 
 ### Ignoring declarations
 

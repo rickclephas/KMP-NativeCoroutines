@@ -14,17 +14,23 @@ import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativ
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.IGNORED_COROUTINES_REFINED
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.IGNORED_COROUTINES_REFINED_STATE
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.IGNORED_COROUTINES_STATE
+import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.IMPLICIT_RETURN_TYPE
+import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.INCOMPATIBLE_ACTUAL_COROUTINES
+import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.INCOMPATIBLE_ACTUAL_COROUTINES_IGNORE
+import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.INCOMPATIBLE_ACTUAL_COROUTINES_REFINED
+import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.INCOMPATIBLE_ACTUAL_COROUTINES_REFINED_STATE
+import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.INCOMPATIBLE_ACTUAL_COROUTINES_STATE
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.INVALID_COROUTINES
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.INVALID_COROUTINES_IGNORE
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.INVALID_COROUTINES_REFINED
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.INVALID_COROUTINES_REFINED_STATE
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.INVALID_COROUTINES_STATE
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.INVALID_COROUTINE_SCOPE
-import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.REDUNDANT_OVERRIDE_COROUTINES
-import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.REDUNDANT_OVERRIDE_COROUTINES_IGNORE
-import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.REDUNDANT_OVERRIDE_COROUTINES_REFINED
-import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.REDUNDANT_OVERRIDE_COROUTINES_REFINED_STATE
-import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.REDUNDANT_OVERRIDE_COROUTINES_STATE
+import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.INCOMPATIBLE_OVERRIDE_COROUTINES
+import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.INCOMPATIBLE_OVERRIDE_COROUTINES_IGNORE
+import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.INCOMPATIBLE_OVERRIDE_COROUTINES_REFINED
+import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.INCOMPATIBLE_OVERRIDE_COROUTINES_REFINED_STATE
+import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.INCOMPATIBLE_OVERRIDE_COROUTINES_STATE
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.REDUNDANT_PRIVATE_COROUTINES
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.REDUNDANT_PRIVATE_COROUTINES_IGNORE
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.REDUNDANT_PRIVATE_COROUTINES_REFINED
@@ -32,6 +38,17 @@ import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativ
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.REDUNDANT_PRIVATE_COROUTINES_STATE
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.UNSUPPORTED_CLASS_EXTENSION_PROPERTY
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.UNSUPPORTED_INPUT_FLOW
+import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.getCoroutinesReturnType
+import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.getNativeCoroutinesAnnotations
+import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.hasImplicitReturnType
+import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.isRefined
+import com.rickclephas.kmp.nativecoroutines.compiler.utils.CoroutinesReturnType
+import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutines
+import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutineScope
+import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutinesIgnore
+import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutinesRefined
+import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutinesRefinedState
+import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutinesState
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesAnnotations
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.getCoroutinesType
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.isCoroutineScopeProperty
@@ -43,21 +60,22 @@ import org.jetbrains.kotlin.AbstractKtSourceElement
 import org.jetbrains.kotlin.diagnostics.DiagnosticReporter
 import org.jetbrains.kotlin.diagnostics.KtDiagnosticFactory0
 import org.jetbrains.kotlin.diagnostics.reportOn
+import org.jetbrains.kotlin.fir.analysis.checkers.MppCheckerKind
 import org.jetbrains.kotlin.fir.analysis.checkers.context.CheckerContext
 import org.jetbrains.kotlin.fir.analysis.checkers.declaration.FirCallableDeclarationChecker
-import org.jetbrains.kotlin.fir.declarations.FirCallableDeclaration
-import org.jetbrains.kotlin.fir.declarations.FirFunction
-import org.jetbrains.kotlin.fir.declarations.FirProperty
-import org.jetbrains.kotlin.fir.declarations.FirSimpleFunction
-import org.jetbrains.kotlin.fir.declarations.utils.effectiveVisibility
-import org.jetbrains.kotlin.fir.declarations.utils.isExtension
-import org.jetbrains.kotlin.fir.declarations.utils.isOverride
-import org.jetbrains.kotlin.fir.declarations.utils.isSuspend
+import org.jetbrains.kotlin.fir.analysis.checkers.unsubstitutedScope
+import org.jetbrains.kotlin.fir.declarations.*
+import org.jetbrains.kotlin.fir.declarations.utils.*
 import org.jetbrains.kotlin.fir.expressions.FirAnnotation
+import org.jetbrains.kotlin.fir.scopes.getDirectOverriddenMembersWithBaseScope
+import java.nio.file.Path
+import kotlin.io.path.Path
 
 internal class FirKmpNativeCoroutinesDeclarationChecker(
-    exposedSeverity: ExposedSeverity
-): FirCallableDeclarationChecker() {
+    exposedSeverity: ExposedSeverity,
+    private val generatedSourceDirs: List<Path>,
+    private val isK2Mode: Boolean,
+): FirCallableDeclarationChecker(MppCheckerKind.Common) {
 
     private val exposedSuspendFunction = when (exposedSeverity) {
         ExposedSeverity.NONE -> null
@@ -96,9 +114,11 @@ internal class FirKmpNativeCoroutinesDeclarationChecker(
             reporter.reportOn(source, this, context)
         }
 
-        val annotations = NativeCoroutinesAnnotations(declaration, context.session)
+        val annotations = declaration.getNativeCoroutinesAnnotations(context.session)
+        val isRefined = declaration.isRefined(context.session)
         val isPublic = declaration.effectiveVisibility.publicApi
         val isOverride = declaration.isOverride
+        val isActual = declaration.isActual
         val isSuspend = declaration.isSuspend
         val coroutineReceiverParameter = declaration.receiverParameter?.let { parameter ->
             parameter.typeRef.getCoroutinesType(context.session)?.let { parameter to it }
@@ -109,21 +129,27 @@ internal class FirKmpNativeCoroutinesDeclarationChecker(
         val returnType = declaration.returnTypeRef.getCoroutinesType(context.session)
 
         //region CONFLICT_COROUTINES
-        val coroutinesAnnotations = listOf(
-            annotations.nativeCoroutines,
-            annotations.nativeCoroutinesRefined,
-            annotations.nativeCoroutinesRefinedState,
-            annotations.nativeCoroutinesState,
+        val coroutinesAnnotations = listOfNotNull(
+            annotations[NativeCoroutines],
+            annotations[NativeCoroutinesRefined],
+            annotations[NativeCoroutinesRefinedState],
+            annotations[NativeCoroutinesState],
         )
-        val annotationCount = coroutinesAnnotations.count { it != null }
-        if (annotationCount > 1) {
+        if (coroutinesAnnotations.size > 1) {
             coroutinesAnnotations.forEach { CONFLICT_COROUTINES.reportOn(it) }
         }
         //endregion
 
         //region EXPOSED_*
-        if (isPublic && !isOverride && annotationCount == 0 && annotations.nativeCoroutinesIgnore == null) {
-            if (isSuspend) exposedSuspendFunction.reportOn(declaration.source)
+        val hasAnnotation = coroutinesAnnotations.isNotEmpty()
+        val isIgnored = annotations.containsKey(NativeCoroutinesIgnore)
+        if (!isRefined && isPublic && !isOverride && !isActual && !hasAnnotation && !isIgnored) {
+            val isGenerated = context.containingFilePath?.let {
+                generatedSourceDirs.any(Path(it)::startsWith)
+            } ?: false
+            if (!isGenerated && isSuspend) {
+                exposedSuspendFunction.reportOn(declaration.source)
+            }
             coroutineReceiverParameter?.let { (param, type) ->
                 if (type.hasSuspend) exposedSuspendType.reportOn(param.source)
                 if (type.hasFlow) exposedFlowType.reportOn(param.source)
@@ -142,30 +168,31 @@ internal class FirKmpNativeCoroutinesDeclarationChecker(
         //endregion
 
         //region IGNORED_*
-        if (annotations.nativeCoroutinesIgnore != null) {
-            IGNORED_COROUTINES.reportOn(annotations.nativeCoroutines)
-            IGNORED_COROUTINES_REFINED.reportOn(annotations.nativeCoroutinesRefined)
-            IGNORED_COROUTINES_REFINED_STATE.reportOn(annotations.nativeCoroutinesRefinedState)
-            IGNORED_COROUTINES_STATE.reportOn(annotations.nativeCoroutinesState)
+        if (isIgnored) {
+            IGNORED_COROUTINES.reportOn(annotations[NativeCoroutines])
+            IGNORED_COROUTINES_REFINED.reportOn(annotations[NativeCoroutinesRefined])
+            IGNORED_COROUTINES_REFINED_STATE.reportOn(annotations[NativeCoroutinesRefinedState])
+            IGNORED_COROUTINES_STATE.reportOn(annotations[NativeCoroutinesState])
         }
         //endregion
 
         //region INVALID_*
         if (!declaration.isCoroutineScopeProperty(context.session)) {
-            INVALID_COROUTINE_SCOPE.reportOn(annotations.nativeCoroutineScope)
+            INVALID_COROUTINE_SCOPE.reportOn(annotations[NativeCoroutineScope])
         }
         if (!isSuspend && coroutineReceiverParameter == null && coroutineValueParameters.isEmpty() && returnType == null) {
-            INVALID_COROUTINES.reportOn(annotations.nativeCoroutines)
-            INVALID_COROUTINES_IGNORE.reportOn(annotations.nativeCoroutinesIgnore)
-            INVALID_COROUTINES_REFINED.reportOn(annotations.nativeCoroutinesRefined)
+            INVALID_COROUTINES.reportOn(annotations[NativeCoroutines])
+            INVALID_COROUTINES_IGNORE.reportOn(annotations[NativeCoroutinesIgnore])
+            INVALID_COROUTINES_REFINED.reportOn(annotations[NativeCoroutinesRefined])
         }
         if (declaration !is FirProperty || returnType !is CoroutinesType.Flow.State) {
-            INVALID_COROUTINES_REFINED_STATE.reportOn(annotations.nativeCoroutinesRefinedState)
-            INVALID_COROUTINES_STATE.reportOn(annotations.nativeCoroutinesState)
+            INVALID_COROUTINES_REFINED_STATE.reportOn(annotations[NativeCoroutinesRefinedState])
+            INVALID_COROUTINES_STATE.reportOn(annotations[NativeCoroutinesState])
         }
         //endregion
 
         //region REDUNDANT_*
+        //region INCOMPATIBLE_*
         if (isOverride) {
             REDUNDANT_OVERRIDE_COROUTINES.reportOn(annotations.nativeCoroutines)
             REDUNDANT_OVERRIDE_COROUTINES_IGNORE.reportOn(annotations.nativeCoroutinesIgnore)
@@ -179,6 +206,44 @@ internal class FirKmpNativeCoroutinesDeclarationChecker(
             REDUNDANT_PRIVATE_COROUTINES_REFINED.reportOn(annotations.nativeCoroutinesRefined)
             REDUNDANT_PRIVATE_COROUTINES_REFINED_STATE.reportOn(annotations.nativeCoroutinesRefinedState)
             REDUNDANT_PRIVATE_COROUTINES_STATE.reportOn(annotations.nativeCoroutinesState)
+            val containingClass = context.containingDeclarations.lastOrNull() as? FirClass
+            if (containingClass != null) {
+                val firTypeScope = containingClass.unsubstitutedScope(context)
+                val overriddenMemberSymbols = firTypeScope.getDirectOverriddenMembersWithBaseScope(declaration.symbol)
+                val overriddenAnnotations = overriddenMemberSymbols.map {
+                    it.member.getNativeCoroutinesAnnotations(context.session)
+                }
+                val invalidAnnotations = annotations.filterKeys { annotation ->
+                    overriddenAnnotations.any { !it.containsKey(annotation) }
+                }
+                INCOMPATIBLE_OVERRIDE_COROUTINES.reportOn(invalidAnnotations[NativeCoroutines])
+                INCOMPATIBLE_OVERRIDE_COROUTINES_IGNORE.reportOn(invalidAnnotations[NativeCoroutinesIgnore])
+                INCOMPATIBLE_OVERRIDE_COROUTINES_REFINED.reportOn(invalidAnnotations[NativeCoroutinesRefined])
+                INCOMPATIBLE_OVERRIDE_COROUTINES_REFINED_STATE.reportOn(invalidAnnotations[NativeCoroutinesRefinedState])
+                INCOMPATIBLE_OVERRIDE_COROUTINES_STATE.reportOn(invalidAnnotations[NativeCoroutinesState])
+            }
+        }
+        if (isActual) {
+            val expect = declaration.symbol.getSingleMatchedExpectForActualOrNull()
+            if (expect != null) {
+                val expectAnnotations = expect.getNativeCoroutinesAnnotations(context.session)
+                val invalidAnnotations = annotations.filterKeys { !expectAnnotations.containsKey(it) }
+                INCOMPATIBLE_ACTUAL_COROUTINES.reportOn(invalidAnnotations[NativeCoroutines])
+                INCOMPATIBLE_ACTUAL_COROUTINES_IGNORE.reportOn(invalidAnnotations[NativeCoroutinesIgnore])
+                INCOMPATIBLE_ACTUAL_COROUTINES_REFINED.reportOn(invalidAnnotations[NativeCoroutinesRefined])
+                INCOMPATIBLE_ACTUAL_COROUTINES_REFINED_STATE.reportOn(invalidAnnotations[NativeCoroutinesRefinedState])
+                INCOMPATIBLE_ACTUAL_COROUTINES_STATE.reportOn(invalidAnnotations[NativeCoroutinesState])
+            }
+        }
+        //endregion
+
+        //region REDUNDANT_*
+        if (!isOverride && !isPublic) {
+            REDUNDANT_PRIVATE_COROUTINES.reportOn(annotations[NativeCoroutines])
+            REDUNDANT_PRIVATE_COROUTINES_IGNORE.reportOn(annotations[NativeCoroutinesIgnore])
+            REDUNDANT_PRIVATE_COROUTINES_REFINED.reportOn(annotations[NativeCoroutinesRefined])
+            REDUNDANT_PRIVATE_COROUTINES_REFINED_STATE.reportOn(annotations[NativeCoroutinesRefinedState])
+            REDUNDANT_PRIVATE_COROUTINES_STATE.reportOn(annotations[NativeCoroutinesState])
         }
         //endregion
 
@@ -192,6 +257,12 @@ internal class FirKmpNativeCoroutinesDeclarationChecker(
             returnType.hasUnsupportedInputFlow(false)
         ) {
             coroutinesAnnotations.forEach { UNSUPPORTED_INPUT_FLOW.reportOn(it) }
+        }
+        //endregion
+
+        //region IMPLICIT_RETURN_TYPE
+        if (hasAnnotation && isK2Mode && declaration.hasImplicitReturnType()) {
+            IMPLICIT_RETURN_TYPE.reportOn(declaration.source)
         }
         //endregion
     }

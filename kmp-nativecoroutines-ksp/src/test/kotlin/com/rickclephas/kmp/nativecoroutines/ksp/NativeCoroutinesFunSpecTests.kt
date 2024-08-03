@@ -314,8 +314,8 @@ class NativeCoroutinesFunSpecTests: CompilationTests() {
         import kotlin.run
         
         @ObjCName(name = "returnReceiverValue")
-        public fun MyClass.returnReceiverValueNative(`receiver`: String): NativeSuspend<String> =
-            nativeSuspend(null) { run { `receiver`.returnReceiverValue() } }
+        public fun MyClass.returnReceiverValueNative(@ObjCName(swiftName = "_") `receiver`: String):
+            NativeSuspend<String> = nativeSuspend(null) { run { `receiver`.returnReceiverValue() } }
     """.trimIndent())
 
     @Test
@@ -388,7 +388,7 @@ class NativeCoroutinesFunSpecTests: CompilationTests() {
         
         @Deprecated(
           message = "it's old",
-          replaceWith = ReplaceWith(expression = "", imports = arrayOf()),
+          replaceWith = ReplaceWith(expression = ""),
           level = DeprecationLevel.WARNING,
         )
         @ObjCName(name = "returnSuspendValue")
@@ -490,5 +490,49 @@ class NativeCoroutinesFunSpecTests: CompilationTests() {
         @ObjCName(name = "getString")
         public fun getStringNative(@ObjCName(swiftName = "_") index: Int): NativeSuspend<String> =
             nativeSuspend(null) { getString(index) }
+    """.trimIndent())
+
+    @Test
+    fun overrideFunction() = runKspTest("""
+        import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
+        
+        interface MyInterface {
+            @NativeCoroutines
+            suspend fun returnSuspendValue(): String
+        }
+        
+        class MyClass: MyInterface {
+            @NativeCoroutines
+            override suspend fun returnSuspendValue(): String = TODO()
+        }
+    """.trimIndent(), """
+        import com.rickclephas.kmp.nativecoroutines.NativeSuspend
+        import com.rickclephas.kmp.nativecoroutines.nativeSuspend
+        import kotlin.String
+        import kotlin.native.ObjCName
+        
+        @ObjCName(name = "returnSuspendValue")
+        public fun MyInterface.returnSuspendValueNative(): NativeSuspend<String> = nativeSuspend(null) {
+            returnSuspendValue() }
+    """.trimIndent())
+
+    @Test
+    fun actualFunction() = runKspTest("""
+        import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
+        
+        @NativeCoroutines
+        expect suspend fun returnSuspendValue(): String
+        
+        @NativeCoroutines
+        actual suspend fun returnSuspendValue(): String = TODO()
+    """.trimIndent(), """
+        import com.rickclephas.kmp.nativecoroutines.NativeSuspend
+        import com.rickclephas.kmp.nativecoroutines.nativeSuspend
+        import kotlin.String
+        import kotlin.native.ObjCName
+        
+        @ObjCName(name = "returnSuspendValue")
+        public fun returnSuspendValueNative(): NativeSuspend<String> = nativeSuspend(null) {
+            returnSuspendValue() }
     """.trimIndent())
 }

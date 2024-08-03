@@ -1,9 +1,14 @@
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+import org.jetbrains.kotlin.gradle.plugin.KotlinCompilation
+import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     `kmp-nativecoroutines-publish`
 }
+
+val buildForCompilerTest = (findProperty("buildForCompilerTest") as String?)
+    ?.toBooleanStrictOrNull() ?: false
 
 kotlin {
     explicitApi()
@@ -14,6 +19,9 @@ kotlin {
         common {
             group("nativeCoroutines") {
                 group("apple")
+                if (buildForCompilerTest) {
+                    withJvm()
+                }
             }
         }
     }
@@ -31,7 +39,14 @@ kotlin {
     tvosArm64()
     tvosX64()
     tvosSimulatorArm64()
-    jvm()
+    jvm {
+        if (buildForCompilerTest) {
+            val mainCompilation = compilations.getByName(KotlinCompilation.MAIN_COMPILATION_NAME)
+            mainCompilation.defaultSourceSet.kotlin.srcDir("src/compilerTestMain/kotlin")
+            val testCompilation = compilations.getByName(KotlinCompilation.TEST_COMPILATION_NAME)
+            testCompilation.defaultSourceSet.kotlin.srcDir("src/compilerTestTest/kotlin")
+        }
+    }
     js {
         browser()
         nodejs()
@@ -39,11 +54,19 @@ kotlin {
     linuxArm64()
     linuxX64()
     mingwX64()
+    @OptIn(ExperimentalWasmDsl::class)
+    wasmJs {
+        browser()
+        nodejs()
+        d8()
+    }
 
     targets.all {
         compilations.all {
-            compilerOptions.configure {
-                freeCompilerArgs.add("-Xexpect-actual-classes")
+            compileTaskProvider.configure {
+                compilerOptions {
+                    freeCompilerArgs.add("-Xexpect-actual-classes")
+                }
             }
         }
     }

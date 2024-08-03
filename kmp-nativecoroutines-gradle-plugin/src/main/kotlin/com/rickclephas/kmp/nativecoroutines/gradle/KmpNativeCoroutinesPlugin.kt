@@ -46,8 +46,22 @@ public class KmpNativeCoroutinesPlugin: KotlinCompilerPluginSupportPlugin {
     override fun applyToCompilation(kotlinCompilation: KotlinCompilation<*>): Provider<List<SubpluginOption>> {
         val project = kotlinCompilation.target.project
         val extension = project.extensions.getByType(KmpNativeCoroutinesExtension::class.java)
+        if (!extension.k2Mode && !project.plugins.hasPlugin(kspPluginId)) {
+            project.logger.error("KMP-NativeCoroutines plugin applied without KSP plugin")
+        }
         return project.provider {
-            listOf(SubpluginOption("exposedSeverity", extension.exposedSeverity.name))
+            buildList {
+                add(SubpluginOption("exposedSeverity", extension.exposedSeverity.name))
+                extension.generatedSourceDirs.map { project.file(it).absolutePath }.distinct().forEach {
+                    add(SubpluginOption("generatedSourceDir", it))
+                }
+                add(SubpluginOption("suffix", extension.suffix))
+                extension.flowValueSuffix?.let { add(SubpluginOption("flowValueSuffix", it)) }
+                extension.flowReplayCacheSuffix?.let { add(SubpluginOption("flowReplayCacheSuffix", it)) }
+                add(SubpluginOption("stateSuffix", extension.stateSuffix))
+                extension.stateFlowSuffix?.let { add(SubpluginOption("stateFlowSuffix", it)) }
+                add(SubpluginOption("k2Mode", extension.k2Mode.toString()))
+            }
         }
     }
 

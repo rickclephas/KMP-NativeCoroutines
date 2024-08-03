@@ -1,0 +1,13 @@
+// Klib ABI Dump
+// Targets: [iosArm64, iosSimulatorArm64, iosX64, js, linuxArm64, linuxX64, macosArm64, macosX64, mingwX64, tvosArm64, tvosSimulatorArm64, tvosX64, wasmJs, watchosArm32, watchosArm64, watchosDeviceArm64, watchosSimulatorArm64, watchosX64]
+// Alias: apple => [iosArm64, iosSimulatorArm64, iosX64, macosArm64, macosX64, tvosArm64, tvosSimulatorArm64, tvosX64, watchosArm32, watchosArm64, watchosDeviceArm64, watchosSimulatorArm64, watchosX64]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <com.rickclephas.kmp:kmp-nativecoroutines-core>
+// Targets: [apple]
+final fun <#A: kotlin/Any?> (kotlinx.coroutines.flow/Flow<#A>).com.rickclephas.kmp.nativecoroutines/asNativeFlow(kotlinx.coroutines/CoroutineScope? = ...): kotlin/Function3<kotlin/Function3<#A, kotlin/Function0<kotlin/Unit>, kotlin/Unit, kotlin/Unit>, kotlin/Function2<platform.Foundation/NSError?, kotlin/Unit, kotlin/Unit>, kotlin/Function2<platform.Foundation/NSError, kotlin/Unit, kotlin/Unit>, kotlin/Function0<kotlin/Unit>> // com.rickclephas.kmp.nativecoroutines/asNativeFlow|asNativeFlow@kotlinx.coroutines.flow.Flow<0:0>(kotlinx.coroutines.CoroutineScope?){0§<kotlin.Any?>}[0]
+// Targets: [apple]
+final fun <#A: kotlin/Any?> com.rickclephas.kmp.nativecoroutines/nativeSuspend(kotlinx.coroutines/CoroutineScope? = ..., kotlin.coroutines/SuspendFunction0<#A>): kotlin/Function3<kotlin/Function2<#A, kotlin/Unit, kotlin/Unit>, kotlin/Function2<platform.Foundation/NSError, kotlin/Unit, kotlin/Unit>, kotlin/Function2<platform.Foundation/NSError, kotlin/Unit, kotlin/Unit>, kotlin/Function0<kotlin/Unit>> // com.rickclephas.kmp.nativecoroutines/nativeSuspend|nativeSuspend(kotlinx.coroutines.CoroutineScope?;kotlin.coroutines.SuspendFunction0<0:0>){0§<kotlin.Any?>}[0]

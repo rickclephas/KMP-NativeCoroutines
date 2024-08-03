@@ -16,6 +16,21 @@ internal let RETURN_TYPE_RXSWIFT_OBSERVABLE = "rxswift-observable"
 public func createObservable<Output, Failure: Error>(
     for nativeFlow: @escaping NativeFlow<Output, Failure>
 ) -> Observable<Output> {
+    return createObservableImpl(for: nativeFlow)
+}
+
+/// Creates an `Observable` for the provided `NativeFlow`.
+/// - Parameter nativeFlow: The native flow to collect.
+/// - Returns: An observable that publishes the collected values.
+public func createObservable<Unit, Failure: Error>(
+    for nativeFlow: @escaping NativeFlow<Unit, Failure, Unit>
+) -> Observable<Void> {
+    return createObservableImpl(for: nativeFlow).map { _ in }
+}
+
+private func createObservableImpl<Output, Failure: Error, Unit>(
+    for nativeFlow: @escaping NativeFlow<Output, Failure, Unit>
+) -> Observable<Output> {
     if let observable = nativeFlow(RETURN_TYPE_RXSWIFT_OBSERVABLE, EmptyNativeCallback2, EmptyNativeCallback, EmptyNativeCallback)() {
         return observable as! Observable<Output>
     }

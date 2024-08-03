@@ -49,7 +49,7 @@ private fun KSAnnotation.toObjCNameAnnotationSpec(objCName: String?): Annotation
 }
 
 @Suppress("FunctionName")
-private fun ObjCNameAnnotationSpec(name: String?, swiftName: String?): AnnotationSpec =
+internal fun ObjCNameAnnotationSpec(name: String?, swiftName: String?): AnnotationSpec =
     AnnotationSpec.builder(objCNameAnnotationClassName).apply {
         if (name != null)
             addMember("%N = %S", "name", name)

@@ -35,6 +35,14 @@ public open class KmpNativeCoroutinesExtension {
      * The severity of the exposed coroutines check.
      */
     public var exposedSeverity: ExposedSeverity = ExposedSeverity.WARNING
+    /**
+     * A list of generated source directories.
+     */
+    public val generatedSourceDirs: MutableList<Any> = mutableListOf("build/generated")
+    /**
+     * Indicates if the plugin should be run in K2 mode.
+     */
+    public var k2Mode: Boolean = false
 }
 
 public enum class ExposedSeverity {

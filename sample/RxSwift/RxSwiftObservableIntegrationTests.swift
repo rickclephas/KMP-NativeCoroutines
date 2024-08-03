@@ -184,4 +184,29 @@ class RxSwiftObservableIntegrationTests: XCTestCase {
         wait(for: [callbackExpectation, errorExpectation, completionExpectation, disposedExpectation], timeout: 2)
         XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
     }
+    
+    func testUnitValues() {
+        let integrationTests = FlowIntegrationTests()
+        let observable = createObservable(for: integrationTests.getUnitFlow(count: 2, delay: 100))
+        let valuesExpectation = expectation(description: "Waiting for values")
+        valuesExpectation.expectedFulfillmentCount = 2
+        let completionExpectation = expectation(description: "Waiting for completion")
+        let disposedExpectation = expectation(description: "Waiting for dispose")
+        var receivedValueCount = 0
+        let disposable = observable.subscribe(onNext: {
+            receivedValueCount += 1
+            valuesExpectation.fulfill()
+        }, onError: { _ in
+            XCTFail("Observable should complete without an error")
+        }, onCompleted: {
+            completionExpectation.fulfill()
+        }, onDisposed: {
+            disposedExpectation.fulfill()
+        })
+        _ = disposable // This is just to remove the unused variable warning
+        XCTAssertEqual(integrationTests.uncompletedJobCount, 1, "There should be 1 uncompleted job")
+        wait(for: [valuesExpectation, completionExpectation, disposedExpectation], timeout: 4)
+        delay(1) // Delay is needed else the job isn't completed yet
+        XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
+    }
 }

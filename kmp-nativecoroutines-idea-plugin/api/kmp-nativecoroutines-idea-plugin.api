@@ -1,0 +1,40 @@
+public final class com/rickclephas/kmp/nativecoroutines/idea/compiler/extensions/KmpNativeCoroutinesStorageComponentContainerContributor : org/jetbrains/kotlin/extensions/StorageComponentContainerContributor {
+	public fun <init> ()V
+	public fun registerModuleComponents (Lorg/jetbrains/kotlin/container/StorageComponentContainer;Lorg/jetbrains/kotlin/platform/TargetPlatform;Lorg/jetbrains/kotlin/descriptors/ModuleDescriptor;)V
+}
+
+public final class com/rickclephas/kmp/nativecoroutines/idea/gradle/KmpNativeCoroutinesGradleProjectImportHandler : org/jetbrains/kotlin/idea/gradleJava/compilerPlugin/AbstractCompilerPluginGradleImportHandler {
+	public fun <init> ()V
+	public fun getCompilerPluginId ()Ljava/lang/String;
+	public fun getModelKey ()Lcom/intellij/openapi/externalSystem/model/Key;
+	public synthetic fun getOptions (Ljava/lang/Object;)Ljava/util/List;
+	public fun getPluginJarFileFromIdea ()Ljava/lang/String;
+	public fun getPluginName ()Ljava/lang/String;
+}
+
+public abstract interface class com/rickclephas/kmp/nativecoroutines/idea/gradle/KmpNativeCoroutinesModel : java/io/Serializable {
+	public abstract fun getExposedSeverity ()Ljava/lang/String;
+	public abstract fun getGeneratedSourceDirs ()Ljava/util/List;
+	public abstract fun getK2Mode ()Z
+}
+
+public final class com/rickclephas/kmp/nativecoroutines/idea/gradle/KmpNativeCoroutinesModelBuilderService : org/jetbrains/plugins/gradle/tooling/AbstractModelBuilderService {
+	public fun <init> ()V
+	public fun buildAll (Ljava/lang/String;Lorg/gradle/api/Project;Lorg/jetbrains/plugins/gradle/tooling/ModelBuilderContext;)Lcom/rickclephas/kmp/nativecoroutines/idea/gradle/KmpNativeCoroutinesModel;
+	public synthetic fun buildAll (Ljava/lang/String;Lorg/gradle/api/Project;Lorg/jetbrains/plugins/gradle/tooling/ModelBuilderContext;)Ljava/lang/Object;
+	public fun canBuild (Ljava/lang/String;)Z
+	public fun getErrorMessageBuilder (Lorg/gradle/api/Project;Ljava/lang/Exception;)Lorg/jetbrains/plugins/gradle/tooling/ErrorMessageBuilder;
+}
+
+public final class com/rickclephas/kmp/nativecoroutines/idea/gradle/KmpNativeCoroutinesProjectResolverExtension : org/jetbrains/plugins/gradle/service/project/AbstractProjectResolverExtension {
+	public fun <init> ()V
+	public fun getExtraProjectModelClasses ()Ljava/util/Set;
+	public fun getToolingExtensionsClasses ()Ljava/util/Set;
+	public fun populateModuleExtraModels (Lorg/gradle/tooling/model/idea/IdeaModule;Lcom/intellij/openapi/externalSystem/model/DataNode;)V
+}
+
+public final class com/rickclephas/kmp/nativecoroutines/idea/quickfixes/KmpNativeCoroutinesQuickFixContributor : org/jetbrains/kotlin/idea/quickfix/QuickFixContributor {
+	public fun <init> ()V
+	public fun registerQuickFixes (Lorg/jetbrains/kotlin/idea/quickfix/QuickFixes;)V
+}
+

@@ -21,6 +21,7 @@ internal class KmpNativeCoroutinesSymbolProcessor(
     }
 
     override fun process(resolver: Resolver): List<KSAnnotated> {
+        if (options.k2Mode) return emptyList()
         coroutineScopeProvider.process(resolver)
         val deferredSymbols = mutableListOf<KSAnnotated>()
         resolver.getSymbolsWithAnnotation(nativeCoroutinesAnnotationName).forEach { symbol ->
@@ -69,6 +70,7 @@ internal class KmpNativeCoroutinesSymbolProcessor(
             logger.error("Property isn't contained in a source file", property)
             return true
         }
+        if (!property.shouldProcess) return true
         val propertySpecs = try {
             val scopeProperty = coroutineScopeProvider.getScopeProperty(property)
             property.toNativeCoroutinesPropertySpecs(scopeProperty, options, asState, shouldRefine)
@@ -97,6 +99,7 @@ internal class KmpNativeCoroutinesSymbolProcessor(
             logger.error("Function isn't contained in a source file", function)
             return true
         }
+        if (!function.shouldProcess) return true
         val funSpec = try {
             val scopeProperty = coroutineScopeProvider.getScopeProperty(function)
             function.toNativeCoroutinesFunSpec(scopeProperty, options, shouldRefine)
@@ -109,4 +112,7 @@ internal class KmpNativeCoroutinesSymbolProcessor(
 
     private fun processRefinedFunction(function: KSFunctionDeclaration): Boolean =
         processFunction(function, shouldRefine = true)
+
+    private val KSDeclaration.shouldProcess: Boolean
+        get() = !isActual && Modifier.OVERRIDE !in modifiers
 }

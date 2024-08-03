@@ -6,10 +6,12 @@ import org.jetbrains.kotlin.diagnostics.PositioningStrategies
 import org.jetbrains.kotlin.diagnostics.Severity
 import org.jetbrains.kotlin.psi.KtDeclaration
 import org.jetbrains.kotlin.psi.KtElement
+import org.jetbrains.kotlin.psi.KtNamedDeclaration
 
 public object KmpNativeCoroutinesErrors {
     @JvmField
     public val CONFLICT_COROUTINES: DiagnosticFactory0<KtElement> = DiagnosticFactory0.create(Severity.ERROR)
+
     @JvmField
     public val EXPOSED_FLOW_TYPE: DiagnosticFactory0<KtElement> = DiagnosticFactory0.create(Severity.WARNING, CustomPositioningStrategies.DECLARATION_RETURN_TYPE)
     @JvmField
@@ -22,6 +24,7 @@ public object KmpNativeCoroutinesErrors {
     public val EXPOSED_SUSPEND_FUNCTION: DiagnosticFactory0<KtDeclaration> = DiagnosticFactory0.create(Severity.WARNING, PositioningStrategies.SUSPEND_MODIFIER)
     @JvmField
     public val EXPOSED_SUSPEND_FUNCTION_ERROR: DiagnosticFactory0<KtDeclaration> = DiagnosticFactory0.create(Severity.ERROR, PositioningStrategies.SUSPEND_MODIFIER)
+
     @JvmField
     public val EXPOSED_SUSPEND_TYPE: DiagnosticFactory0<KtElement> = DiagnosticFactory0.create(Severity.WARNING, CustomPositioningStrategies.DECLARATION_RETURN_TYPE)
     @JvmField
@@ -34,6 +37,7 @@ public object KmpNativeCoroutinesErrors {
     public val IGNORED_COROUTINES_REFINED_STATE: DiagnosticFactory0<KtElement> = DiagnosticFactory0.create(Severity.ERROR)
     @JvmField
     public val IGNORED_COROUTINES_STATE: DiagnosticFactory0<KtElement> = DiagnosticFactory0.create(Severity.ERROR)
+
     @JvmField
     public val INVALID_COROUTINES: DiagnosticFactory0<KtElement> = DiagnosticFactory0.create(Severity.ERROR)
     @JvmField
@@ -46,18 +50,31 @@ public object KmpNativeCoroutinesErrors {
     public val INVALID_COROUTINES_STATE: DiagnosticFactory0<KtElement> = DiagnosticFactory0.create(Severity.ERROR)
     @JvmField
     public val INVALID_COROUTINE_SCOPE: DiagnosticFactory0<KtElement> = DiagnosticFactory0.create(Severity.ERROR)
+
     @JvmField
-    public val REDUNDANT_OVERRIDE_COROUTINES: DiagnosticFactory0<KtElement> = DiagnosticFactory0.create(Severity.WARNING)
+    public val INCOMPATIBLE_OVERRIDE_COROUTINES: DiagnosticFactory0<KtElement> = DiagnosticFactory0.create(Severity.ERROR)
     @JvmField
-    public val REDUNDANT_OVERRIDE_COROUTINES_IGNORE: DiagnosticFactory0<KtElement> = DiagnosticFactory0.create(Severity.ERROR)
+    public val INCOMPATIBLE_OVERRIDE_COROUTINES_IGNORE: DiagnosticFactory0<KtElement> = DiagnosticFactory0.create(Severity.ERROR)
     @JvmField
-    public val REDUNDANT_OVERRIDE_COROUTINES_REFINED: DiagnosticFactory0<KtElement> = DiagnosticFactory0.create(Severity.WARNING)
+    public val INCOMPATIBLE_OVERRIDE_COROUTINES_REFINED: DiagnosticFactory0<KtElement> = DiagnosticFactory0.create(Severity.ERROR)
     @JvmField
-    public val REDUNDANT_OVERRIDE_COROUTINES_REFINED_STATE: DiagnosticFactory0<KtElement> = DiagnosticFactory0.create(Severity.WARNING)
+    public val INCOMPATIBLE_OVERRIDE_COROUTINES_REFINED_STATE: DiagnosticFactory0<KtElement> = DiagnosticFactory0.create(Severity.ERROR)
     @JvmField
-    public val REDUNDANT_OVERRIDE_COROUTINES_STATE: DiagnosticFactory0<KtElement> = DiagnosticFactory0.create(Severity.WARNING)
+    public val INCOMPATIBLE_OVERRIDE_COROUTINES_STATE: DiagnosticFactory0<KtElement> = DiagnosticFactory0.create(Severity.ERROR)
+
     @JvmField
-    public  val REDUNDANT_PRIVATE_COROUTINES: DiagnosticFactory0<KtElement> = DiagnosticFactory0.create(Severity.ERROR)
+    public val INCOMPATIBLE_ACTUAL_COROUTINES: DiagnosticFactory0<KtElement> = DiagnosticFactory0.create(Severity.ERROR)
+    @JvmField
+    public val INCOMPATIBLE_ACTUAL_COROUTINES_IGNORE: DiagnosticFactory0<KtElement> = DiagnosticFactory0.create(Severity.ERROR)
+    @JvmField
+    public val INCOMPATIBLE_ACTUAL_COROUTINES_REFINED: DiagnosticFactory0<KtElement> = DiagnosticFactory0.create(Severity.ERROR)
+    @JvmField
+    public val INCOMPATIBLE_ACTUAL_COROUTINES_REFINED_STATE: DiagnosticFactory0<KtElement> = DiagnosticFactory0.create(Severity.ERROR)
+    @JvmField
+    public val INCOMPATIBLE_ACTUAL_COROUTINES_STATE: DiagnosticFactory0<KtElement> = DiagnosticFactory0.create(Severity.ERROR)
+
+    @JvmField
+    public val REDUNDANT_PRIVATE_COROUTINES: DiagnosticFactory0<KtElement> = DiagnosticFactory0.create(Severity.ERROR)
     @JvmField
     public val REDUNDANT_PRIVATE_COROUTINES_IGNORE: DiagnosticFactory0<KtElement> = DiagnosticFactory0.create(Severity.ERROR)
     @JvmField
@@ -66,10 +83,14 @@ public object KmpNativeCoroutinesErrors {
     public val REDUNDANT_PRIVATE_COROUTINES_REFINED_STATE: DiagnosticFactory0<KtElement> = DiagnosticFactory0.create(Severity.ERROR)
     @JvmField
     public val REDUNDANT_PRIVATE_COROUTINES_STATE: DiagnosticFactory0<KtElement> = DiagnosticFactory0.create(Severity.ERROR)
+
     @JvmField
     public val UNSUPPORTED_CLASS_EXTENSION_PROPERTY: DiagnosticFactory0<KtElement> = DiagnosticFactory0.create(Severity.ERROR)
     @JvmField
     public val UNSUPPORTED_INPUT_FLOW: DiagnosticFactory0<KtElement> = DiagnosticFactory0.create(Severity.ERROR)
+
+    @JvmField
+    public val IMPLICIT_RETURN_TYPE: DiagnosticFactory0<KtNamedDeclaration> = DiagnosticFactory0.create(Severity.ERROR, PositioningStrategies.DECLARATION_NAME)
 
     init {
         Errors.Initializer.initializeFactoryNamesAndDefaultErrorMessages(KmpNativeCoroutinesErrors::class.java, DefaultErrorMessages)

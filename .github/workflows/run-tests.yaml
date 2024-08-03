@@ -1,150 +1,31 @@
-name: Run tests
+name: Run Tests
 concurrency:
   group: run-tests-${{ github.ref }}
   cancel-in-progress: true
 on:
   workflow_dispatch:
   pull_request:
+    types: [opened, synchronize, ready_for_review, reopened]
     branches:
       - master
       - kotlin/**
-env:
-  GRADLE_OPTS: -Dorg.gradle.parallel=true -Dorg.gradle.caching=true
-  XCODEBUILD_DESTINATION_iOS: platform=iOS Simulator,name=iPhone 14 Pro
-  XCODEBUILD_DESTINATION_macOS: platform=OS X
-  XCODEBUILD_DESTINATION_tvOS: platform=tvOS Simulator,name=Apple TV 4K (3rd generation)
-  XCODEBUILD_DESTINATION_watchOS: platform=watchOS Simulator,name=Apple Watch Series 8 (45mm)
 jobs:
   run-kotlin-tests:
     if: github.event_name != 'pull_request' || github.event.pull_request.draft == false
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ macos-12 ]
-        xcode: [ 14.2 ]
-        java: [ 17 ]
-        module: [ core, ksp, compiler ]
-    name: ${{ format('{0} ({1}, Xcode {2}, JDK {3})', matrix.module, matrix.os, matrix.xcode, matrix.java) }}
-    runs-on: ${{ matrix.os }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Setup Xcode
-        uses: maxim-lobanov/setup-xcode@v1
-        with:
-          xcode-version: ${{ matrix.xcode }}
-      - name: Gradle Wrapper Validation
-        uses: gradle/wrapper-validation-action@v1
-      - name: Setup JDK
-        uses: actions/setup-java@v3
-        with:
-          distribution: zulu
-          java-version: ${{ matrix.java }}
-      - name: Setup Gradle
-        uses: gradle/gradle-build-action@v2
-      - name: Cache Konan
-        uses: ./.github/actions/cache-konan
-      - name: Run tests
-        env:
-          GRADLE_MODULE: ${{ format(':kmp-nativecoroutines-{0}', matrix.module) }}
-        run: ./gradlew $GRADLE_MODULE:check
-  run-idea-tests:
-    if: github.event_name != 'pull_request' || github.event.pull_request.draft == false
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Gradle Wrapper Validation
-        uses: gradle/wrapper-validation-action@v1
-      - name: Setup JDK
-        uses: actions/setup-java@v3
-        with:
-          distribution: zulu
-          java-version: 17
-      - name: Setup Gradle
-        uses: gradle/gradle-build-action@v2
-      - name: Verify plugin
-        run: ./gradlew :kmp-nativecoroutines-idea-plugin:verifyPlugin
-      - name: Run plugin verifier
-        run: ./gradlew :kmp-nativecoroutines-idea-plugin:runPluginVerifier
+    name: Kotlin Tests
+    uses: ./.github/workflows/run-kotlin-tests.yaml
   run-swift-tests:
     if: github.event_name != 'pull_request' || github.event.pull_request.draft == false
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ macos-12 ]
-        xcode: [ 14.2 ]
-        platform: [ iOS, macOS, tvOS, watchOS ]
-        implementation: [ Async, Combine, RxSwift ]
-    name: ${{ format('{0} {1} ({2}, Xcode {3})', matrix.implementation, matrix.platform, matrix.os, matrix.xcode) }}
-    runs-on: ${{ matrix.os }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Setup Xcode
-        uses: maxim-lobanov/setup-xcode@v1
-        with:
-          xcode-version: ${{ matrix.xcode }}
-      - name: Run tests
-        env:
-          XCODEBUILD_SCHEME: ${{ format('KMPNativeCoroutines{0}', matrix.implementation) }}
-          XCODEBUILD_DESTINATION: ${{ env[format('XCODEBUILD_DESTINATION_{0}', matrix.platform)] }}
-        run: >-
-          xcodebuild test
-          -project KMPNativeCoroutines.xcodeproj
-          -scheme "$XCODEBUILD_SCHEME"
-          -destination "$XCODEBUILD_DESTINATION"
+    name: Swift Tests
+    uses: ./.github/workflows/run-swift-tests.yaml
   run-integration-tests:
     if: github.event_name != 'pull_request' || github.event.pull_request.draft == false
+    name: Integration Tests
     needs:
       - run-kotlin-tests
       - run-swift-tests
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ macos-12 ]
-        xcode: [ 14.2 ]
-        java: [ 17 ]
-        platform: [ iOS, macOS, tvOS, watchOS ]
-        embeddable-compiler: [ true, false ]
-    name: ${{ format('{0} (embeddable {1}) ({2}, Xcode {3}, JDK {4})', matrix.platform, matrix.embeddable-compiler, matrix.os, matrix.xcode, matrix.java) }}
-    runs-on: ${{ matrix.os }}
-    env:
-      XCODEBUILD_SCHEME_iOS: iOS App
-      XCODEBUILD_SCHEME_macOS: macOS App
-      XCODEBUILD_SCHEME_tvOS: tvOS App
-      XCODEBUILD_SCHEME_watchOS: watchOS Tests
-    defaults:
-      run:
-        working-directory: sample
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Gradle Wrapper Validation
-        uses: gradle/wrapper-validation-action@v1
-      - name: Setup Xcode
-        uses: maxim-lobanov/setup-xcode@v1
-        with:
-          xcode-version: ${{ matrix.xcode }}
-      - name: Setup JDK
-        uses: actions/setup-java@v3
-        with:
-          distribution: zulu
-          java-version: ${{ matrix.java }}
-      - name: Setup Gradle
-        uses: gradle/gradle-build-action@v2
-      - name: Cache Konan
-        uses: ./.github/actions/cache-konan
-      - name: Set kotlin.native.useEmbeddableCompilerJar
-        env:
-          KOTLIN_NATIVE_EMBEDDABLE_COMPILER: ${{ matrix.embeddable-compiler }}
-        run: echo "kotlin.native.useEmbeddableCompilerJar=$KOTLIN_NATIVE_EMBEDDABLE_COMPILER" >> gradle.properties
-      - name: Run tests
-        env:
-          XCODEBUILD_SCHEME: ${{ env[format('XCODEBUILD_SCHEME_{0}', matrix.platform)] }}
-          XCODEBUILD_DESTINATION: ${{ env[format('XCODEBUILD_DESTINATION_{0}', matrix.platform)] }}
-        run: >-
-          xcodebuild test
-          -project KMPNativeCoroutinesSample.xcodeproj
-          -scheme "$XCODEBUILD_SCHEME"
-          -destination "$XCODEBUILD_DESTINATION"
+    uses: ./.github/workflows/run-integration-tests.yaml
+  run-idea-tests:
+    if: github.event_name != 'pull_request' || github.event.pull_request.draft == false
+    name: IDEA Tests
+    uses: ./.github/workflows/run-idea-tests.yaml

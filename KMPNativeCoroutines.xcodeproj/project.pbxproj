@@ -19,6 +19,7 @@
 		1D3A4B602B138CB000D7FBE2 /* NativeSuspendTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3A4B5F2B138CB000D7FBE2 /* NativeSuspendTests.swift */; };
 		1D3A4B622B1393A400D7FBE2 /* NativeFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3A4B612B1393A400D7FBE2 /* NativeFlowTests.swift */; };
 		1D3A4B642B1397A100D7FBE2 /* NativeSuspendTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3A4B632B1397A100D7FBE2 /* NativeSuspendTests.swift */; };
+		1D4D6C272BEFAC0200A5B3C9 /* AsyncError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4D6C262BEFAC0200A5B3C9 /* AsyncError.swift */; };
 		1D4E296A268A26B000C0D4EF /* FuturePublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4E2969268A26B000C0D4EF /* FuturePublisher.swift */; };
 		1D64DC202AA333FB006CC547 /* AnyAsyncSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D64DC1F2AA333FB006CC547 /* AnyAsyncSequence.swift */; };
 		1D64DC222AA338F4006CC547 /* Cancellable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D64DC212AA338F4006CC547 /* Cancellable.swift */; };
@@ -111,6 +112,7 @@
 		1D3A4B5F2B138CB000D7FBE2 /* NativeSuspendTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeSuspendTests.swift; sourceTree = "<group>"; };
 		1D3A4B612B1393A400D7FBE2 /* NativeFlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeFlowTests.swift; sourceTree = "<group>"; };
 		1D3A4B632B1397A100D7FBE2 /* NativeSuspendTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeSuspendTests.swift; sourceTree = "<group>"; };
+		1D4D6C262BEFAC0200A5B3C9 /* AsyncError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncError.swift; sourceTree = "<group>"; };
 		1D4E2969268A26B000C0D4EF /* FuturePublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuturePublisher.swift; sourceTree = "<group>"; };
 		1D64DC1F2AA333FB006CC547 /* AnyAsyncSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyAsyncSequence.swift; sourceTree = "<group>"; };
 		1D64DC212AA338F4006CC547 /* Cancellable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cancellable.swift; sourceTree = "<group>"; };
@@ -236,6 +238,7 @@
 			isa = PBXGroup;
 			children = (
 				1D64DC1F2AA333FB006CC547 /* AnyAsyncSequence.swift */,
+				1D4D6C262BEFAC0200A5B3C9 /* AsyncError.swift */,
 				1DA5DCFC26761404002448E3 /* AsyncFunction.swift */,
 				1DFC35FB268A2DE3008393FA /* AsyncResult.swift */,
 				1DFB127926A09796001BE321 /* AsyncSequence.swift */,
@@ -632,6 +635,7 @@
 				1D2583102AA649B00053360E /* NativeFlow.swift in Sources */,
 				1DFC35FC268A2DE3008393FA /* AsyncResult.swift in Sources */,
 				1DFB127A26A09796001BE321 /* AsyncSequence.swift in Sources */,
+				1D4D6C272BEFAC0200A5B3C9 /* AsyncError.swift in Sources */,
 				1D64DC242AA339B2006CC547 /* Task.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -990,7 +994,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				GENERATE_INFOPLIST_FILE = YES;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -1001,7 +1005,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
-				TVOS_DEPLOYMENT_TARGET = 11.0;
+				TVOS_DEPLOYMENT_TARGET = 12.0;
 				WATCHOS_DEPLOYMENT_TARGET = 4.0;
 			};
 			name = Debug;
@@ -1017,7 +1021,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				GENERATE_INFOPLIST_FILE = YES;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -1028,7 +1032,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
-				TVOS_DEPLOYMENT_TARGET = 11.0;
+				TVOS_DEPLOYMENT_TARGET = 12.0;
 				WATCHOS_DEPLOYMENT_TARGET = 4.0;
 			};
 			name = Release;
@@ -1040,7 +1044,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -1050,7 +1054,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.rickclephas.kmp.KMPNativeCoroutinesRxSwiftTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TVOS_DEPLOYMENT_TARGET = 11.0;
+				TVOS_DEPLOYMENT_TARGET = 12.0;
 				WATCHOS_DEPLOYMENT_TARGET = 4.0;
 			};
 			name = Debug;
@@ -1062,7 +1066,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -1072,7 +1076,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.rickclephas.kmp.KMPNativeCoroutinesRxSwiftTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TVOS_DEPLOYMENT_TARGET = 11.0;
+				TVOS_DEPLOYMENT_TARGET = 12.0;
 				WATCHOS_DEPLOYMENT_TARGET = 4.0;
 			};
 			name = Release;

@@ -614,7 +614,7 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         
         @Deprecated(
           message = "it's old",
-          replaceWith = ReplaceWith(expression = "", imports = arrayOf()),
+          replaceWith = ReplaceWith(expression = ""),
           level = DeprecationLevel.WARNING,
         )
         @ObjCName(name = "sharedFlow")
@@ -624,7 +624,7 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         
         @Deprecated(
           message = "it's old",
-          replaceWith = ReplaceWith(expression = "", imports = arrayOf()),
+          replaceWith = ReplaceWith(expression = ""),
           level = DeprecationLevel.WARNING,
         )
         public val sharedFlowReplayCache: List<String>
@@ -653,7 +653,7 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         
         @Deprecated(
           message = "it's old",
-          replaceWith = ReplaceWith(expression = "", imports = arrayOf()),
+          replaceWith = ReplaceWith(expression = ""),
           level = DeprecationLevel.WARNING,
         )
         @ObjCName(name = "stateFlow")
@@ -663,7 +663,7 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         
         @Deprecated(
           message = "it's old",
-          replaceWith = ReplaceWith(expression = "", imports = arrayOf()),
+          replaceWith = ReplaceWith(expression = ""),
           level = DeprecationLevel.WARNING,
         )
         public val stateFlowValue: String
@@ -884,5 +884,51 @@ class NativeCoroutinesPropertySpecsTests: CompilationTests() {
         @ShouldRefineInSwift
         public val globalStateValue: String
           get() = globalState.value
+    """.trimIndent())
+
+    @Test
+    fun overrideProperty() = runKspTest("""
+        import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
+        import kotlinx.coroutines.flow.Flow
+        
+        interface MyInterface {
+            @NativeCoroutines
+            val flow: Flow<String>
+        }
+        
+        class MyClass: MyInterface {
+            @NativeCoroutines
+            override val flow: Flow<String> get() = TODO()
+        }
+    """.trimIndent(), """
+        import com.rickclephas.kmp.nativecoroutines.NativeFlow
+        import com.rickclephas.kmp.nativecoroutines.asNativeFlow
+        import kotlin.String
+        import kotlin.native.ObjCName
+        
+        @ObjCName(name = "flow")
+        public val MyInterface.flowNative: NativeFlow<String>
+          get() = flow.asNativeFlow(null)
+    """.trimIndent())
+
+    @Test
+    fun actualProperty() = runKspTest("""
+        import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
+        import kotlinx.coroutines.flow.Flow
+        
+        @NativeCoroutines
+        expect val flow: Flow<String>
+        
+        @NativeCoroutines
+        actual val flow: Flow<String> get() = TODO()
+    """.trimIndent(), """
+        import com.rickclephas.kmp.nativecoroutines.NativeFlow
+        import com.rickclephas.kmp.nativecoroutines.asNativeFlow
+        import kotlin.String
+        import kotlin.native.ObjCName
+        
+        @ObjCName(name = "flow")
+        public val flowNative: NativeFlow<String>
+          get() = flow.asNativeFlow(null)
     """.trimIndent())
 }
