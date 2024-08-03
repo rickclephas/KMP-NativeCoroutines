@@ -21,7 +21,7 @@ class NativeSuspendTests {
     @Test
     fun ensureCorrectResultIsReceived() = runTest {
         val value = RandomValue()
-        val nativeSuspend = nativeSuspend(this) { delayAndReturn(100, value) }
+        val nativeSuspend = nativeSuspend<RandomValue>(this) { delayAndReturn(100, value) }
         var receivedResultCount = 0
         var receivedErrorCount = 0
         var receivedCancellationCount = 0
@@ -45,7 +45,7 @@ class NativeSuspendTests {
     @Test
     fun ensureExceptionsAreReceivedAsErrors() = runTest {
         val exception = RandomException()
-        val nativeSuspend = nativeSuspend(this) { delayAndThrow(100, exception) }
+        val nativeSuspend = nativeSuspend<RandomValue>(this) { delayAndThrow(100, exception) }
         var receivedResultCount = 0
         var receivedErrorCount = 0
         var receivedCancellationCount = 0
@@ -69,7 +69,7 @@ class NativeSuspendTests {
 
     @Test
     fun ensureFunctionIsCancelled() = runTest {
-        val nativeSuspend = nativeSuspend(this) { delayAndReturn(5_000, RandomValue()) }
+        val nativeSuspend = nativeSuspend<RandomValue>(this) { delayAndReturn(5_000, RandomValue()) }
         var receivedResultCount = 0
         var receivedErrorCount = 0
         var receivedCancellationCount = 0
@@ -104,7 +104,7 @@ class NativeSuspendTests {
 
     @Test
     fun ensureUnknownReturnTypeReturnsNull() = runTest {
-        val nativeSuspend = nativeSuspend(UnsupportedCoroutineScope) { RandomValue() }
+        val nativeSuspend = nativeSuspend<RandomValue>(UnsupportedCoroutineScope) { RandomValue() }
         val cancellable = nativeSuspend("unknown", ::EmptyNativeCallback1, ::EmptyNativeCallback1, ::EmptyNativeCallback1)
         assertNull(cancellable())
     }

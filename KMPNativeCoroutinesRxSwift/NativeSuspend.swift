@@ -30,3 +30,10 @@ public extension Single where Trait == SingleTrait {
         }
     }
 }
+
+public extension Single where Trait == SingleTrait, Element == Void {
+    /// Creates a `NativeSuspend` for this `Single`.
+    func asNativeSuspend() -> NativeSuspend<NativeUnit?, Error> {
+        map { nil }.asNativeSuspend()
+    }
+}

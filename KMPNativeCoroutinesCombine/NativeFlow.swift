@@ -25,6 +25,13 @@ public extension Publisher {
     }
 }
 
+public extension Publisher where Output == Void {
+    /// Creates a `NativeFlow` for this `Publisher`.
+    func asNativeFlow() -> NativeFlow<NativeUnit?, Error> {
+        map { nil }.asNativeFlow()
+    }
+}
+
 internal class NativeFlowSubsriber<Output, Failure: Error>: Subscriber, Cancellable {
     
     typealias Input = Output

@@ -63,6 +63,20 @@ public fun <T> nativeSuspend(scope: CoroutineScope? = null, block: suspend () ->
 }
 
 /**
+ * Creates a [NativeSuspend] for the provided suspend [block].
+ *
+ * @param scope the [CoroutineScope] to run the [block] in, or `null` to use the [defaultCoroutineScope].
+ * @param block the suspend-block to await.
+ */
+public inline fun nativeSuspend(
+    scope: CoroutineScope? = null,
+    crossinline block: suspend () -> Unit
+): NativeSuspend<NativeUnit?> = nativeSuspend<NativeUnit?>(scope) {
+    block()
+    null
+}
+
+/**
  * Invokes and awaits the result of this [NativeSuspend], converting it to a suspend function.
  *
  * @see suspendCancellableCoroutine
@@ -91,4 +105,13 @@ public suspend fun <T> NativeSuspend<T>.await(): T {
         )
         cont.invokeOnCancellation { cancellable() }
     }
+}
+
+/**
+ * Invokes and awaits the result of this [NativeSuspend], converting it to a suspend function.
+ *
+ * @see suspendCancellableCoroutine
+ */
+public suspend inline fun NativeSuspend<NativeUnit?>.await() {
+    await<NativeUnit?>()
 }

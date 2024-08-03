@@ -25,6 +25,13 @@ public extension Publisher {
     }
 }
 
+public extension Publisher where Output == Void {
+    /// Creates a `NativeSuspend` for this `Publisher`.
+    func asNativeSuspend() -> NativeSuspend<NativeUnit?, Error> {
+        map { nil }.asNativeSuspend()
+    }
+}
+
 internal class NativeSuspendSubsriber<Output, Failure: Error>: Subscriber, Cancellable {
     
     typealias Input = Output

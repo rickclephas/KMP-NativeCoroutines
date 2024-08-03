@@ -38,3 +38,10 @@ public extension Observable {
         }
     }
 }
+
+public extension Observable where Element == Void {
+    /// Creates a `NativeFlow` for this `Observable`.
+    func asNativeFlow() -> NativeFlow<NativeUnit?, Error> {
+        map { nil }.asNativeFlow()
+    }
+}

@@ -41,3 +41,11 @@ public extension AsyncSequence {
         }
     }
 }
+
+public extension AsyncSequence where Element == Void {
+    /// Creates a `NativeFlow` for this `AsyncSequence`.
+    /// - Parameter priority: The priority of the task collecting this `AsyncSequence`.
+    func asNativeFlow(priority: TaskPriority? = nil) -> NativeFlow<NativeUnit?, Error> {
+        map { nil }.asNativeFlow(priority: priority)
+    }
+}

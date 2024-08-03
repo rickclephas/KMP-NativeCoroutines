@@ -37,3 +37,17 @@ public func nativeSuspend<Result>(
         return task.asNativeCancellable()
     }
 }
+
+/// Creates a `NativeSuspend` for the provided async operation.
+/// - Parameters:
+///     - priority: The priority of the task executing the operation.
+///     - operation: The async operation to execute.
+public func nativeSuspend(
+    priority: TaskPriority? = nil,
+    operation: @escaping @Sendable () async throws -> Void
+) -> NativeSuspend<NativeUnit?, Error> {
+    nativeSuspend(priority: priority) {
+        try await operation()
+        return nil
+    }
+}

@@ -5,6 +5,7 @@ import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.map
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
@@ -73,6 +74,16 @@ public fun <T> Flow<T>.asNativeFlow(scope: CoroutineScope? = null): NativeFlow<T
 }
 
 /**
+ * Creates a [NativeFlow] for this [Flow].
+ *
+ * @param scope the [CoroutineScope] to use for the collection, or `null` to use the [defaultCoroutineScope].
+ * @receiver the [Flow] to collect.
+ * @see Flow.collect
+ */
+public inline fun Flow<Unit>.asNativeFlow(scope: CoroutineScope? = null): NativeFlow<NativeUnit?> =
+    map<Unit, NativeUnit?> { null }.asNativeFlow(scope)
+
+/**
  * Creates a cold [Flow] for this [NativeFlow].
  *
  * @see callbackFlow
@@ -109,3 +120,10 @@ public fun <T> NativeFlow<T>.asFlow(): Flow<T> {
         awaitClose { cancellable() }
     }
 }
+
+/**
+ * Creates a cold [Flow] for this [NativeFlow].
+ *
+ * @see callbackFlow
+ */
+public inline fun NativeFlow<NativeUnit?>.asFlow(): Flow<Unit> = asFlow<NativeUnit?>().map {  }
