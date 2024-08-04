@@ -1,6 +1,7 @@
 package com.rickclephas.kmp.nativecoroutines.compiler.fir.utils
 
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.CallableSignature
+import com.rickclephas.kmp.nativecoroutines.compiler.utils.CallableSignatureBuilder
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.ClassIds
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.orRaw
 import org.jetbrains.kotlin.builtins.functions.FunctionTypeKind
@@ -18,48 +19,10 @@ internal class FirCallableSignature(
 ) {
     fun getRawType(type: CallableSignature.Type): ConeKotlinType = rawTypes[type.rawTypeIndex]
 
-    class Builder(val session: FirSession) {
-        private val rawTypes = mutableListOf<ConeKotlinType>()
-
-        private val ConeKotlinType.rawTypeIndex: Int get() {
-            rawTypes.add(this)
-            return rawTypes.lastIndex
-        }
-
-        fun ConeKotlinType.asRawType(isInput: Boolean): CallableSignature.Type.Raw =
-            CallableSignature.Type.Raw(rawTypeIndex, isMarkedNullable, isInput)
-
-        fun ConeKotlinType.asSimpleFlow(
-            isInput: Boolean,
-            valueType: CallableSignature.Type,
-            isCustom: Boolean
-        ): CallableSignature.Type.Flow.Simple =
-            CallableSignature.Type.Flow.Simple(rawTypeIndex, isMarkedNullable, isInput, valueType, isCustom)
-
-        fun ConeKotlinType.asSharedFlow(
-            isInput: Boolean,
-            valueType: CallableSignature.Type
-        ): CallableSignature.Type.Flow.Shared =
-            CallableSignature.Type.Flow.Shared(rawTypeIndex, isMarkedNullable, isInput, valueType)
-
-        fun ConeKotlinType.asStateFlow(
-            isInput: Boolean,
-            valueType: CallableSignature.Type,
-            isMutable: Boolean
-        ): CallableSignature.Type.Flow.State =
-            CallableSignature.Type.Flow.State(rawTypeIndex, isMarkedNullable, isInput, valueType, isMutable)
-
-        fun ConeKotlinType.asFunction(
-            isInput: Boolean,
-            isSuspend: Boolean,
-            receiverType: CallableSignature.Type?,
-            valueTypes: List<CallableSignature.Type>,
-            returnType: CallableSignature.Type
-        ): CallableSignature.Type.Function =
-            CallableSignature.Type.Function(rawTypeIndex, isMarkedNullable, isInput, isSuspend, receiverType, valueTypes, returnType)
-
-        fun build(signature: CallableSignature): FirCallableSignature =
-            FirCallableSignature(signature, rawTypes)
+    class Builder(
+        val session: FirSession
+    ): CallableSignatureBuilder<ConeKotlinType, FirCallableSignature>(::FirCallableSignature) {
+        override val ConeKotlinType.isNullable: Boolean get() = isMarkedNullable
     }
 
     companion object {
