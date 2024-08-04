@@ -170,16 +170,16 @@ class MyGenericClass2<T : Any?> {
   }
 
   @ObjCName(name = "genericFlow")
-  val genericFlowNative: Function3<@ParameterName(name = "onItem") Function3<T, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>
-    get(): Function3<@ParameterName(name = "onItem") Function3<T, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+  val genericFlowNative: Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<T, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>>
+    get(): Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<T, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>> {
       val tmp_1: CoroutineScope? = null
       val tmp_2: Flow<T> = <this>.<get-genericFlow>()
       return tmp_2.asNativeFlow<T>(scope = tmp_1)
     }
 
   @ObjCName(name = "genericSharedFlow")
-  val genericSharedFlowNative: Function3<@ParameterName(name = "onItem") Function3<T, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>
-    get(): Function3<@ParameterName(name = "onItem") Function3<T, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+  val genericSharedFlowNative: Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<T, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>>
+    get(): Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<T, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>> {
       val tmp_3: CoroutineScope? = null
       val tmp_4: SharedFlow<T> = <this>.<get-genericSharedFlow>()
       return tmp_4.asNativeFlow<T>(scope = tmp_3)
@@ -192,8 +192,8 @@ class MyGenericClass2<T : Any?> {
     }
 
   @ObjCName(name = "genericStateFlow")
-  val genericStateFlowNative: Function3<@ParameterName(name = "onItem") Function3<T, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>
-    get(): Function3<@ParameterName(name = "onItem") Function3<T, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+  val genericStateFlowNative: Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<T, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>>
+    get(): Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<T, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>> {
       val tmp_6: CoroutineScope? = null
       val tmp_7: StateFlow<T> = <this>.<get-genericStateFlow>()
       return tmp_7.asNativeFlow<T>(scope = tmp_6)
@@ -209,8 +209,8 @@ class MyGenericClass2<T : Any?> {
 
 interface MyInterface28 {
   @ObjCName(name = "interfaceFlowValue")
-  final val interfaceFlowValueNative: Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>
-    final get(): Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+  final val interfaceFlowValueNative: Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<String, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>>
+    final get(): Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<String, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>> {
       val tmp_9: CoroutineScope? = null
       val tmp_10: Flow<String> = <this>.<get-interfaceFlowValue>()
       return tmp_10.asNativeFlow<String>(scope = tmp_9)
@@ -236,15 +236,15 @@ fun box(): String {
     $this$runBoxTest.values<String?>(values = <get-nullableSharedFlowValueReplayCache>())
     $this$runBoxTest.collect<String?>(nativeFlow = <get-nullableStateFlowValueNative>(), maxValues = 1)
     $this$runBoxTest.value<String?>(value = <get-nullableStateFlowValueValue>())
-    $this$runBoxTest.value<Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>?>(value = <get-nullableFlowNative>())
-    $this$runBoxTest.value<Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>?>(value = <get-nullableSharedFlowNative>())
+    $this$runBoxTest.value<Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<String, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>>?>(value = <get-nullableFlowNative>())
+    $this$runBoxTest.value<Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<String, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>>?>(value = <get-nullableSharedFlowNative>())
     $this$runBoxTest.value<List<String>?>(value = <get-nullableSharedFlowReplayCache>())
-    $this$runBoxTest.value<Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>?>(value = <get-nullableStateFlowPropertyNative>())
+    $this$runBoxTest.value<Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<String, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>>?>(value = <get-nullableStateFlowPropertyNative>())
     $this$runBoxTest.value<String?>(value = <get-nullableStateFlowPropertyValue>())
-    $this$runBoxTest.value<Function3<@ParameterName(name = "onItem") Function3<String?, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>?>(value = <get-nullableFlowAndValueNative>())
-    $this$runBoxTest.value<Function3<@ParameterName(name = "onItem") Function3<String?, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>?>(value = <get-nullableSharedFlowAndValueNative>())
+    $this$runBoxTest.value<Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<String?, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>>?>(value = <get-nullableFlowAndValueNative>())
+    $this$runBoxTest.value<Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<String?, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>>?>(value = <get-nullableSharedFlowAndValueNative>())
     $this$runBoxTest.value<List<String?>?>(value = <get-nullableSharedFlowAndValueReplayCache>())
-    $this$runBoxTest.value<Function3<@ParameterName(name = "onItem") Function3<String?, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>?>(value = <get-nullableStateFlowAndValueNative>())
+    $this$runBoxTest.value<Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<String?, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>>?>(value = <get-nullableStateFlowAndValueNative>())
     $this$runBoxTest.value<String?>(value = <get-nullableStateFlowAndValueValue>())
     $this$runBoxTest.collect<String>(nativeFlow = MyGenericClass1<String>(value = "OK14").<get-genericFlowNative><String>())
     $this$runBoxTest.collect<String>(nativeFlow = MyGenericClass1<String>(value = "OK15").<get-genericSharedFlowNative><String>(), maxValues = 1)
@@ -269,7 +269,7 @@ fun box(): String {
     $this$runBoxTest.value<String>(value = <get-refinedStateValue>())
     $this$runBoxTest.collect<String>(nativeFlow = <get-refinedStateFlow>(), maxValues = 1)
     $this$runBoxTest.value<String?>(value = <get-mutableNullableStatePropertyValue>())
-    $this$runBoxTest.collect<String>(nativeFlow = CHECK_NOT_NULL<Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>>(arg0 = <get-mutableNullableStatePropertyFlow>()), maxValues = 1)
+    $this$runBoxTest.collect<String>(nativeFlow = CHECK_NOT_NULL<Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<String, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>>>(arg0 = <get-mutableNullableStatePropertyFlow>()), maxValues = 1)
     $this$runBoxTest.collect<String>(nativeFlow = MyClass28().<get-interfaceFlowValueNative>())
     $this$runBoxTest.collect<String?>(nativeFlow = <get-customFlowValueNative>())
   }
@@ -382,24 +382,24 @@ var mutableStatePropertyValue: String
   }
 
 @ObjCName(name = "customFlowValue")
-val customFlowValueNative: Function3<@ParameterName(name = "onItem") Function3<String?, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>
-  get(): Function3<@ParameterName(name = "onItem") Function3<String?, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+val customFlowValueNative: Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<String?, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>>
+  get(): Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<String?, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>> {
     val tmp_2: CoroutineScope? = null
     val tmp_3: MyFlow29<Int, String> = <get-customFlowValue>()
     return tmp_3.asNativeFlow<String?>(scope = tmp_2)
   }
 
 @ObjCName(name = "extensionFlow")
-val String.extensionFlowNative: Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>
-  get(): Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+val String.extensionFlowNative: Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<String, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>>
+  get(): Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<String, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>> {
     val tmp_4: CoroutineScope? = null
     val tmp_5: Flow<String> = <this>.<get-extensionFlow>()
     return tmp_5.asNativeFlow<String>(scope = tmp_4)
   }
 
 @ObjCName(name = "extensionSharedFlow")
-val String.extensionSharedFlowNative: Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>
-  get(): Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+val String.extensionSharedFlowNative: Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<String, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>>
+  get(): Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<String, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>> {
     val tmp_6: CoroutineScope? = null
     val tmp_7: SharedFlow<String> = <this>.<get-extensionSharedFlow>()
     return tmp_7.asNativeFlow<String>(scope = tmp_6)
@@ -412,8 +412,8 @@ val String.extensionSharedFlowReplayCache: List<String>
   }
 
 @ObjCName(name = "extensionStateFlow")
-val String.extensionStateFlowNative: Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>
-  get(): Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+val String.extensionStateFlowNative: Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<String, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>>
+  get(): Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<String, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>> {
     val tmp_9: CoroutineScope? = null
     val tmp_10: StateFlow<String> = <this>.<get-extensionStateFlow>()
     return tmp_10.asNativeFlow<String>(scope = tmp_9)
@@ -426,16 +426,16 @@ val String.extensionStateFlowValue: String
   }
 
 @ObjCName(name = "genericFlow")
-val <T : Any?> MyGenericClass1<T>.genericFlowNative: Function3<@ParameterName(name = "onItem") Function3<T, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>
-  get(): Function3<@ParameterName(name = "onItem") Function3<T, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+val <T : Any?> MyGenericClass1<T>.genericFlowNative: Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<T, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>>
+  get(): Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<T, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>> {
     val tmp_12: CoroutineScope? = null
     val tmp_13: Flow<T> = <this>.<get-genericFlow><T>()
     return tmp_13.asNativeFlow<T>(scope = tmp_12)
   }
 
 @ObjCName(name = "genericSharedFlow")
-val <T : Any?> MyGenericClass1<T>.genericSharedFlowNative: Function3<@ParameterName(name = "onItem") Function3<T, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>
-  get(): Function3<@ParameterName(name = "onItem") Function3<T, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+val <T : Any?> MyGenericClass1<T>.genericSharedFlowNative: Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<T, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>>
+  get(): Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<T, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>> {
     val tmp_14: CoroutineScope? = null
     val tmp_15: SharedFlow<T> = <this>.<get-genericSharedFlow><T>()
     return tmp_15.asNativeFlow<T>(scope = tmp_14)
@@ -448,8 +448,8 @@ val <T : Any?> MyGenericClass1<T>.genericSharedFlowReplayCache: List<T>
   }
 
 @ObjCName(name = "genericStateFlow")
-val <T : Any?> MyGenericClass1<T>.genericStateFlowNative: Function3<@ParameterName(name = "onItem") Function3<T, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>
-  get(): Function3<@ParameterName(name = "onItem") Function3<T, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+val <T : Any?> MyGenericClass1<T>.genericStateFlowNative: Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<T, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>>
+  get(): Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<T, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>> {
     val tmp_17: CoroutineScope? = null
     val tmp_18: StateFlow<T> = <this>.<get-genericStateFlow><T>()
     return tmp_18.asNativeFlow<T>(scope = tmp_17)
@@ -461,8 +461,8 @@ val <T : Any?> MyGenericClass1<T>.genericStateFlowValue: T
     return tmp_19.<get-value>()
   }
 
-val mutableNullableStatePropertyFlow: Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>?
-  get(): Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>? {
+val mutableNullableStatePropertyFlow: Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<String, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>>?
+  get(): Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<String, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>>? {
     val tmp_20: CoroutineScope? = null
     val tmp_21: MutableStateFlow<String>? = <get-mutableNullableStateProperty>()
     return when {
@@ -481,16 +481,16 @@ val mutableNullableStatePropertyValue: String?
     }
   }
 
-val mutableStatePropertyFlow: Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>
-  get(): Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+val mutableStatePropertyFlow: Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<String, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>>
+  get(): Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<String, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>> {
     val tmp_23: CoroutineScope? = null
     val tmp_24: MutableStateFlow<String> = <get-mutableStateProperty>()
     return tmp_24.asNativeFlow<String>(scope = tmp_23)
   }
 
 @ObjCName(name = "nullableFlowAndValue")
-val nullableFlowAndValueNative: Function3<@ParameterName(name = "onItem") Function3<String?, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>?
-  get(): Function3<@ParameterName(name = "onItem") Function3<String?, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>? {
+val nullableFlowAndValueNative: Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<String?, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>>?
+  get(): Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<String?, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>>? {
     val tmp_25: CoroutineScope? = null
     val tmp_26: Flow<String?>? = <get-nullableFlowAndValue>()
     return when {
@@ -500,8 +500,8 @@ val nullableFlowAndValueNative: Function3<@ParameterName(name = "onItem") Functi
   }
 
 @ObjCName(name = "nullableFlow")
-val nullableFlowNative: Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>?
-  get(): Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>? {
+val nullableFlowNative: Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<String, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>>?
+  get(): Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<String, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>>? {
     val tmp_27: CoroutineScope? = null
     val tmp_28: Flow<String>? = <get-nullableFlow>()
     return when {
@@ -511,16 +511,16 @@ val nullableFlowNative: Function3<@ParameterName(name = "onItem") Function3<Stri
   }
 
 @ObjCName(name = "nullableFlowValue")
-val nullableFlowValueNative: Function3<@ParameterName(name = "onItem") Function3<String?, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>
-  get(): Function3<@ParameterName(name = "onItem") Function3<String?, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+val nullableFlowValueNative: Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<String?, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>>
+  get(): Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<String?, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>> {
     val tmp_29: CoroutineScope? = null
     val tmp_30: Flow<String?> = <get-nullableFlowValue>()
     return tmp_30.asNativeFlow<String?>(scope = tmp_29)
   }
 
 @ObjCName(name = "nullableSharedFlowAndValue")
-val nullableSharedFlowAndValueNative: Function3<@ParameterName(name = "onItem") Function3<String?, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>?
-  get(): Function3<@ParameterName(name = "onItem") Function3<String?, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>? {
+val nullableSharedFlowAndValueNative: Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<String?, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>>?
+  get(): Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<String?, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>>? {
     val tmp_31: CoroutineScope? = null
     val tmp_32: SharedFlow<String?>? = <get-nullableSharedFlowAndValue>()
     return when {
@@ -539,8 +539,8 @@ val nullableSharedFlowAndValueReplayCache: List<String?>?
   }
 
 @ObjCName(name = "nullableSharedFlow")
-val nullableSharedFlowNative: Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>?
-  get(): Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>? {
+val nullableSharedFlowNative: Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<String, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>>?
+  get(): Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<String, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>>? {
     val tmp_34: CoroutineScope? = null
     val tmp_35: SharedFlow<String>? = <get-nullableSharedFlow>()
     return when {
@@ -559,8 +559,8 @@ val nullableSharedFlowReplayCache: List<String>?
   }
 
 @ObjCName(name = "nullableSharedFlowValue")
-val nullableSharedFlowValueNative: Function3<@ParameterName(name = "onItem") Function3<String?, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>
-  get(): Function3<@ParameterName(name = "onItem") Function3<String?, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+val nullableSharedFlowValueNative: Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<String?, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>>
+  get(): Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<String?, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>> {
     val tmp_37: CoroutineScope? = null
     val tmp_38: SharedFlow<String?> = <get-nullableSharedFlowValue>()
     return tmp_38.asNativeFlow<String?>(scope = tmp_37)
@@ -573,8 +573,8 @@ val nullableSharedFlowValueReplayCache: List<String?>
   }
 
 @ObjCName(name = "nullableStateFlowAndValue")
-val nullableStateFlowAndValueNative: Function3<@ParameterName(name = "onItem") Function3<String?, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>?
-  get(): Function3<@ParameterName(name = "onItem") Function3<String?, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>? {
+val nullableStateFlowAndValueNative: Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<String?, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>>?
+  get(): Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<String?, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>>? {
     val tmp_40: CoroutineScope? = null
     val tmp_41: StateFlow<String?>? = <get-nullableStateFlowAndValue>()
     return when {
@@ -593,8 +593,8 @@ val nullableStateFlowAndValueValue: String?
   }
 
 @ObjCName(name = "nullableStateFlowProperty")
-val nullableStateFlowPropertyNative: Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>?
-  get(): Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>? {
+val nullableStateFlowPropertyNative: Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<String, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>>?
+  get(): Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<String, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>>? {
     val tmp_43: CoroutineScope? = null
     val tmp_44: StateFlow<String>? = <get-nullableStateFlowProperty>()
     return when {
@@ -613,8 +613,8 @@ val nullableStateFlowPropertyValue: String?
   }
 
 @ObjCName(name = "nullableStateFlowValue")
-val nullableStateFlowValueNative: Function3<@ParameterName(name = "onItem") Function3<String?, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>
-  get(): Function3<@ParameterName(name = "onItem") Function3<String?, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+val nullableStateFlowValueNative: Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<String?, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>>
+  get(): Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<String?, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>> {
     val tmp_46: CoroutineScope? = null
     val tmp_47: StateFlow<String?> = <get-nullableStateFlowValue>()
     return tmp_47.asNativeFlow<String?>(scope = tmp_46)
@@ -628,16 +628,16 @@ val nullableStateFlowValueValue: String?
 
 @ObjCName(name = "refinedFlow")
 @ShouldRefineInSwift
-val refinedFlowNative: Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>
-  get(): Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+val refinedFlowNative: Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<String, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>>
+  get(): Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<String, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>> {
     val tmp_49: CoroutineScope? = null
     val tmp_50: Flow<String> = <get-refinedFlow>()
     return tmp_50.asNativeFlow<String>(scope = tmp_49)
   }
 
 @ShouldRefineInSwift
-val refinedStateFlow: Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>
-  get(): Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+val refinedStateFlow: Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<String, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>>
+  get(): Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<String, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>> {
     val tmp_51: CoroutineScope? = null
     val tmp_52: StateFlow<String> = <get-refinedState>()
     return tmp_52.asNativeFlow<String>(scope = tmp_51)
@@ -651,8 +651,8 @@ val refinedStateValue: String
     return tmp_53.<get-value>()
   }
 
-val statePropertyFlow: Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>
-  get(): Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+val statePropertyFlow: Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<String, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>>
+  get(): Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<String, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>> {
     val tmp_54: CoroutineScope? = null
     val tmp_55: StateFlow<String> = <get-stateProperty>()
     return tmp_55.asNativeFlow<String>(scope = tmp_54)
@@ -666,24 +666,24 @@ val statePropertyValue: String
   }
 
 @ObjCName(name = "topLevelFlow")
-val topLevelFlowNative: Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>
-  get(): Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+val topLevelFlowNative: Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<String, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>>
+  get(): Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<String, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>> {
     val tmp_57: CoroutineScope? = null
     val tmp_58: Flow<String> = <get-topLevelFlow>()
     return tmp_58.asNativeFlow<String>(scope = tmp_57)
   }
 
 @ObjCName(name = "topLevelMutableStateFlow")
-val topLevelMutableStateFlowNative: Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>
-  get(): Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+val topLevelMutableStateFlowNative: Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<String, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>>
+  get(): Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<String, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>> {
     val tmp_59: CoroutineScope? = null
     val tmp_60: MutableStateFlow<String> = <get-topLevelMutableStateFlow>()
     return tmp_60.asNativeFlow<String>(scope = tmp_59)
   }
 
 @ObjCName(name = "topLevelSharedFlow")
-val topLevelSharedFlowNative: Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>
-  get(): Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+val topLevelSharedFlowNative: Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<String, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>>
+  get(): Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<String, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>> {
     val tmp_61: CoroutineScope? = null
     val tmp_62: SharedFlow<String> = <get-topLevelSharedFlow>()
     return tmp_62.asNativeFlow<String>(scope = tmp_61)
@@ -696,8 +696,8 @@ val topLevelSharedFlowReplayCache: List<String>
   }
 
 @ObjCName(name = "topLevelStateFlow")
-val topLevelStateFlowNative: Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>
-  get(): Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+val topLevelStateFlowNative: Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<String, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>>
+  get(): Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<String, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>> {
     val tmp_64: CoroutineScope? = null
     val tmp_65: StateFlow<String> = <get-topLevelStateFlow>()
     return tmp_65.asNativeFlow<String>(scope = tmp_64)
