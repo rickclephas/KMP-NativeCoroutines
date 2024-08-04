@@ -110,6 +110,28 @@ class MyClass22 : MyInterface22 {
 
 }
 
+class MyClass24 {
+  constructor() /* primary */ {
+    super/*Any*/()
+    /* <init>() */
+
+  }
+
+  @ObjCName(name = "returnSuspendUnit")
+  fun returnSuspendUnitNative(): Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onResult") Function1<Unit?, Unit?>, @ParameterName(name = "onError") Function1<Throwable, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>> {
+    val tmp_4: CoroutineScope? = null
+    return nativeSuspend(scope = tmp_4, block = local suspend fun <anonymous>() {
+      return <this>.returnSuspendUnit()
+    }
+)
+  }
+
+  @NativeCoroutines
+  suspend fun returnSuspendUnit() {
+  }
+
+}
+
 class MyClass8 {
   constructor() /* primary */ {
     super/*Any*/()
@@ -119,8 +141,8 @@ class MyClass8 {
 
   @ObjCName(name = "returnSuspendValue")
   fun returnSuspendValueNative(): Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onResult") Function1<String, Unit?>, @ParameterName(name = "onError") Function1<Throwable, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>> {
-    val tmp_4: CoroutineScope? = null
-    return nativeSuspend<String>(scope = tmp_4, block = local suspend fun <anonymous>(): String {
+    val tmp_5: CoroutineScope? = null
+    return nativeSuspend<String>(scope = tmp_5, block = local suspend fun <anonymous>(): String {
       return <this>.returnSuspendValue()
     }
 )
@@ -150,8 +172,8 @@ class MyFlow23<T1 : Any?, T2 : Any?> : Flow<T2> {
 interface MyInterface22 {
   @ObjCName(name = "returnInterfaceSuspendValue")
   final fun returnInterfaceSuspendValueNative(): Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onResult") Function1<String, Unit?>, @ParameterName(name = "onError") Function1<Throwable, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>> {
-    val tmp_5: CoroutineScope? = null
-    return nativeSuspend<String>(scope = tmp_5, block = local suspend fun <anonymous>(): String {
+    val tmp_6: CoroutineScope? = null
+    return nativeSuspend<String>(scope = tmp_6, block = local suspend fun <anonymous>(): String {
       return <this>.returnInterfaceSuspendValue()
     }
 )
@@ -191,6 +213,7 @@ fun box(): String {
     $this$runBoxTest.await<String?>(nativeSuspend = MyClass21<String>().returnGenericValueNative())
     $this$runBoxTest.await<String>(nativeSuspend = MyClass22().returnInterfaceSuspendValueNative())
     $this$runBoxTest.collect<String>(nativeFlow = returnCustomFlowValueNative())
+    $this$runBoxTest.await<Unit?>(nativeSuspend = MyClass24().returnSuspendUnitNative())
   }
 )
 }

@@ -21,6 +21,7 @@ internal object FqNames {
     val nativeCoroutines = FqName("com.rickclephas.kmp.nativecoroutines")
     val nativeFlow = FqName("com.rickclephas.kmp.nativecoroutines.NativeFlow")
     val nativeSuspend = FqName("com.rickclephas.kmp.nativecoroutines.NativeSuspend")
+    val nativeUnit = FqName("com.rickclephas.kmp.nativecoroutines.NativeUnit")
 
     val observableViewModel = FqName("com.rickclephas.kmp.observableviewmodel.ViewModel")
     val androidxViewModel = FqName("androidx.lifecycle.ViewModel")

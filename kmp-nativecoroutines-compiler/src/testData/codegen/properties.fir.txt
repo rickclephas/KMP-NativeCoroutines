@@ -179,6 +179,23 @@ FILE: properties.kt
         public get(): R|MyFlow29<kotlin/Int, kotlin/String>| {
             ^ R|/MyFlow29.MyFlow29|<R|kotlin/Int|, R|kotlin/String|>(Int(29), String(OK29))
         }
+    public final class MyClass30 : R|kotlin/Any| {
+        public constructor(): R|MyClass30| {
+            super<R|kotlin/Any|>()
+        }
+
+        @R|com/rickclephas/kmp/nativecoroutines/NativeCoroutines|() public final val unitFlowValue: R|kotlinx/coroutines/flow/Flow<kotlin/Unit>|
+            public get(): R|kotlinx/coroutines/flow/Flow<kotlin/Unit>| {
+                ^ R|kotlinx/coroutines/flow/flowOf|<R|kotlin/Unit|>(Q|kotlin/Unit|)
+            }
+
+        @R|kotlin/native/ObjCName|(name = String(unitFlowValue)) public final val unitFlowValueNative: R|com/rickclephas/kmp/nativecoroutines/NativeFlow<com/rickclephas/kmp/nativecoroutines/NativeUnit?>|
+            public get(): R|com/rickclephas/kmp/nativecoroutines/NativeFlow<com/rickclephas/kmp/nativecoroutines/NativeUnit?>| {
+                ::R|/MyClass30.unitFlowValue|
+                R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
+            }
+
+    }
     public final fun box(): R|kotlin/String| {
         ^box R|com/rickclephas/kmp/nativecoroutines/runBoxTest|(<L> = runBoxTest@fun R|com/rickclephas/kmp/nativecoroutines/BoxTest|.<anonymous>(): R|kotlin/Unit| <inline=NoInline>  {
             this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.collect|<R|kotlin/String|>(R|/topLevelFlowNative|)
@@ -229,6 +246,7 @@ FILE: properties.kt
             this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.collect|<R|kotlin/String|>(R|/mutableNullableStatePropertyFlow|!!, Int(1))
             this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.collect|<R|kotlin/String|>(R|/MyClass28.MyClass28|().R|/MyInterface28.interfaceFlowValueNative|)
             this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.collect|<R|kotlin/String?|>(R|/customFlowValueNative|)
+            this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.collect|<R|kotlin/Unit?|>(R|/MyClass30.MyClass30|().R|/MyClass30.unitFlowValueNative|)
         }
         )
     }

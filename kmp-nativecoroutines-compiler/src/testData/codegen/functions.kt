@@ -101,6 +101,11 @@ class MyFlow23<T1, T2>(
 @NativeCoroutines
 fun returnCustomFlowValue(): MyFlow23<Int, String> = MyFlow23(23, "OK23")
 
+class MyClass24 {
+    @NativeCoroutines
+    suspend fun returnSuspendUnit(): Unit {}
+}
+
 fun box() = runBoxTest {
     await(returnSuspendValueNative())
     await(returnNullableSuspendValueNative())
@@ -128,4 +133,5 @@ fun box() = runBoxTest {
     await(MyClass21<String>().returnGenericValueNative())
     await(MyClass22().returnInterfaceSuspendValueNative())
     collect(returnCustomFlowValueNative())
+    await(MyClass24().returnSuspendUnitNative())
 }

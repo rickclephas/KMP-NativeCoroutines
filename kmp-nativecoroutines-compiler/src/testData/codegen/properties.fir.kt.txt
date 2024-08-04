@@ -80,6 +80,29 @@ class MyClass28 : MyInterface28 {
 
 }
 
+class MyClass30 {
+  constructor() /* primary */ {
+    super/*Any*/()
+    /* <init>() */
+
+  }
+
+  @ObjCName(name = "unitFlowValue")
+  val unitFlowValueNative: Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<Unit?, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>>
+    get(): Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<Unit?, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>> {
+      val tmp_0: CoroutineScope? = null
+      val tmp_1: Flow<Unit> = <this>.<get-unitFlowValue>()
+      return tmp_1.asNativeFlow(scope = tmp_0)
+    }
+
+  @NativeCoroutines
+  val unitFlowValue: Flow<Unit>
+    get(): Flow<Unit> {
+      return flowOf<Unit>(value = Unit)
+    }
+
+}
+
 class MyFlow29<T1 : Any?, T2 : Any?> : Flow<T2?> {
   private /* final field */ val $$delegate_0: Flow<T2?> = flowOf<T2?>(value = null)
   constructor(value1: T1, value2: T2) /* primary */ {
@@ -120,9 +143,9 @@ data class MyGenericClass1<T : Any?> {
     when {
       other !is MyGenericClass1<T> -> return false
     }
-    val tmp_0: MyGenericClass1<T> = other as MyGenericClass1<T>
+    val tmp_2: MyGenericClass1<T> = other as MyGenericClass1<T>
     when {
-      EQEQ(arg0 = <this>.#value, arg1 = tmp_0.#value).not() -> return false
+      EQEQ(arg0 = <this>.#value, arg1 = tmp_2.#value).not() -> return false
     }
     return true
   }
@@ -172,37 +195,37 @@ class MyGenericClass2<T : Any?> {
   @ObjCName(name = "genericFlow")
   val genericFlowNative: Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<T, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>>
     get(): Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<T, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>> {
-      val tmp_1: CoroutineScope? = null
-      val tmp_2: Flow<T> = <this>.<get-genericFlow>()
-      return tmp_2.asNativeFlow<T>(scope = tmp_1)
+      val tmp_3: CoroutineScope? = null
+      val tmp_4: Flow<T> = <this>.<get-genericFlow>()
+      return tmp_4.asNativeFlow<T>(scope = tmp_3)
     }
 
   @ObjCName(name = "genericSharedFlow")
   val genericSharedFlowNative: Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<T, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>>
     get(): Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<T, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>> {
-      val tmp_3: CoroutineScope? = null
-      val tmp_4: SharedFlow<T> = <this>.<get-genericSharedFlow>()
-      return tmp_4.asNativeFlow<T>(scope = tmp_3)
+      val tmp_5: CoroutineScope? = null
+      val tmp_6: SharedFlow<T> = <this>.<get-genericSharedFlow>()
+      return tmp_6.asNativeFlow<T>(scope = tmp_5)
     }
 
   val genericSharedFlowReplayCache: List<T>
     get(): List<T> {
-      val tmp_5: SharedFlow<T> = <this>.<get-genericSharedFlow>()
-      return tmp_5.<get-replayCache>()
+      val tmp_7: SharedFlow<T> = <this>.<get-genericSharedFlow>()
+      return tmp_7.<get-replayCache>()
     }
 
   @ObjCName(name = "genericStateFlow")
   val genericStateFlowNative: Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<T, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>>
     get(): Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<T, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>> {
-      val tmp_6: CoroutineScope? = null
-      val tmp_7: StateFlow<T> = <this>.<get-genericStateFlow>()
-      return tmp_7.asNativeFlow<T>(scope = tmp_6)
+      val tmp_8: CoroutineScope? = null
+      val tmp_9: StateFlow<T> = <this>.<get-genericStateFlow>()
+      return tmp_9.asNativeFlow<T>(scope = tmp_8)
     }
 
   val genericStateFlowValue: T
     get(): T {
-      val tmp_8: StateFlow<T> = <this>.<get-genericStateFlow>()
-      return tmp_8.<get-value>()
+      val tmp_10: StateFlow<T> = <this>.<get-genericStateFlow>()
+      return tmp_10.<get-value>()
     }
 
 }
@@ -211,9 +234,9 @@ interface MyInterface28 {
   @ObjCName(name = "interfaceFlowValue")
   final val interfaceFlowValueNative: Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<String, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>>
     final get(): Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<String, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>> {
-      val tmp_9: CoroutineScope? = null
-      val tmp_10: Flow<String> = <this>.<get-interfaceFlowValue>()
-      return tmp_10.asNativeFlow<String>(scope = tmp_9)
+      val tmp_11: CoroutineScope? = null
+      val tmp_12: Flow<String> = <this>.<get-interfaceFlowValue>()
+      return tmp_12.asNativeFlow<String>(scope = tmp_11)
     }
 
   @NativeCoroutines
@@ -272,6 +295,7 @@ fun box(): String {
     $this$runBoxTest.collect<String>(nativeFlow = CHECK_NOT_NULL<Function4<@ParameterName(name = "returnType") String?, @ParameterName(name = "onItem") Function2<String, Function0<Unit?>, Unit?>, @ParameterName(name = "onComplete") Function1<Throwable?, Unit?>, @ParameterName(name = "onCancelled") Function1<Throwable, Unit?>, Function0<Any?>>>(arg0 = <get-mutableNullableStatePropertyFlow>()), maxValues = 1)
     $this$runBoxTest.collect<String>(nativeFlow = MyClass28().<get-interfaceFlowValueNative>())
     $this$runBoxTest.collect<String?>(nativeFlow = <get-customFlowValueNative>())
+    $this$runBoxTest.collect<Unit?>(nativeFlow = MyClass30().<get-unitFlowValueNative>())
   }
 )
 }

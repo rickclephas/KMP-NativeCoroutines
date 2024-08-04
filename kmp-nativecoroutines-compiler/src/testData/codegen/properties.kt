@@ -115,6 +115,11 @@ class MyFlow29<T1, T2>(
 @NativeCoroutines
 val customFlowValue: MyFlow29<Int, String> get() = MyFlow29(29, "OK29")
 
+class MyClass30 {
+    @NativeCoroutines
+    val unitFlowValue: Flow<Unit> get() = flowOf(Unit)
+}
+
 fun box() = runBoxTest {
     collect(topLevelFlowNative)
     collect(topLevelSharedFlowNative, maxValues = 1)
@@ -164,4 +169,5 @@ fun box() = runBoxTest {
     collect(mutableNullableStatePropertyFlow!!, maxValues = 1)
     collect(MyClass28().interfaceFlowValueNative)
     collect(customFlowValueNative)
+    collect(MyClass30().unitFlowValueNative)
 }
