@@ -1,4 +1,6 @@
 // FIR_IDENTICAL
+// K2_MODE
+
 // FILE: customStateFlow.kt
 
 import kotlinx.coroutines.flow.StateFlow
