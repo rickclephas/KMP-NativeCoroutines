@@ -2,7 +2,10 @@ package com.rickclephas.kmp.nativecoroutines.compiler.fir.utils
 
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.CallableSignature
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.ClassIds
+import com.rickclephas.kmp.nativecoroutines.compiler.utils.orRaw
+import org.jetbrains.kotlin.builtins.functions.FunctionTypeKind
 import org.jetbrains.kotlin.fir.FirSession
+import org.jetbrains.kotlin.fir.declarations.FirCallableDeclaration
 import org.jetbrains.kotlin.fir.resolve.*
 import org.jetbrains.kotlin.fir.symbols.impl.FirCallableSymbol
 import org.jetbrains.kotlin.fir.symbols.impl.FirFunctionSymbol
@@ -23,20 +26,37 @@ internal class FirCallableSignature(
             return rawTypes.lastIndex
         }
 
-        fun ConeKotlinType.asRawType(): CallableSignature.Type.Raw =
-            CallableSignature.Type.Raw(rawTypeIndex, isMarkedNullable)
+        fun ConeKotlinType.asRawType(isInput: Boolean): CallableSignature.Type.Raw =
+            CallableSignature.Type.Raw(rawTypeIndex, isMarkedNullable, isInput)
 
-        fun ConeKotlinType.asSimpleFlow(valueType: CallableSignature.Type): CallableSignature.Type.Flow.Simple =
-            CallableSignature.Type.Flow.Simple(rawTypeIndex, isMarkedNullable, valueType)
+        fun ConeKotlinType.asSimpleFlow(
+            isInput: Boolean,
+            valueType: CallableSignature.Type,
+            isCustom: Boolean
+        ): CallableSignature.Type.Flow.Simple =
+            CallableSignature.Type.Flow.Simple(rawTypeIndex, isMarkedNullable, isInput, valueType, isCustom)
 
-        fun ConeKotlinType.asSharedFlow(valueType: CallableSignature.Type): CallableSignature.Type.Flow.Shared =
-            CallableSignature.Type.Flow.Shared(rawTypeIndex, isMarkedNullable, valueType)
+        fun ConeKotlinType.asSharedFlow(
+            isInput: Boolean,
+            valueType: CallableSignature.Type
+        ): CallableSignature.Type.Flow.Shared =
+            CallableSignature.Type.Flow.Shared(rawTypeIndex, isMarkedNullable, isInput, valueType)
 
         fun ConeKotlinType.asStateFlow(
+            isInput: Boolean,
             valueType: CallableSignature.Type,
             isMutable: Boolean
         ): CallableSignature.Type.Flow.State =
-            CallableSignature.Type.Flow.State(rawTypeIndex, isMarkedNullable, valueType, isMutable)
+            CallableSignature.Type.Flow.State(rawTypeIndex, isMarkedNullable, isInput, valueType, isMutable)
+
+        fun ConeKotlinType.asFunction(
+            isInput: Boolean,
+            isSuspend: Boolean,
+            receiverType: CallableSignature.Type?,
+            valueTypes: List<CallableSignature.Type>,
+            returnType: CallableSignature.Type
+        ): CallableSignature.Type.Function =
+            CallableSignature.Type.Function(rawTypeIndex, isMarkedNullable, isInput, isSuspend, receiverType, valueTypes, returnType)
 
         fun build(signature: CallableSignature): FirCallableSignature =
             FirCallableSignature(signature, rawTypes)
@@ -49,49 +69,80 @@ internal class FirCallableSignature(
 }
 
 internal fun FirCallableSymbol<*>.getCallableSignature(session: FirSession): FirCallableSignature? {
-    val returnType = resolvedReturnTypeRefOrNull?.type?.fullyExpandedType(session) ?: return null
-    return FirCallableSignature(session) {
-        val valueParameters = when (this@getCallableSignature) {
-            is FirFunctionSymbol<*> -> valueParameterSymbols.map {
-                it.name to it.resolvedReturnType.asRawType()
-            }
-            else -> emptyList()
-        }
-        CallableSignature(
-            rawStatus.isSuspend,
-            valueParameters,
-            createType(returnType)
-        )
-    }
+    return getCallableSignature(session, resolvedReturnTypeRefOrNull?.type ?: return null)
 }
 
-private fun FirCallableSignature.Builder.createType(rawType: ConeKotlinType): CallableSignature.Type {
-    if (rawType !is ConeClassLikeType) return rawType.asRawType()
+internal fun FirCallableDeclaration.getCallableSignature(session: FirSession): FirCallableSignature {
+    return symbol.getCallableSignature(session, symbol.resolvedReturnTypeRef.type)
+}
+
+private fun FirCallableSymbol<*>.getCallableSignature(
+    session: FirSession,
+    returnType: ConeKotlinType
+): FirCallableSignature = FirCallableSignature(session) {
+    val valueTypes = when (this@getCallableSignature) {
+        is FirFunctionSymbol<*> -> valueParameterSymbols.map {
+            createType(it.resolvedReturnType, isInput = true)
+        }
+        else -> emptyList()
+    }
+    CallableSignature(
+        rawStatus.isSuspend,
+        resolvedReceiverTypeRef?.type?.let { createType(it, isInput = true) },
+        valueTypes,
+        createType(returnType, isInput = false)
+    )
+}
+
+private fun FirCallableSignature.Builder.createType(
+    rawType: ConeKotlinType,
+    isInput: Boolean
+): CallableSignature.Type {
+    val expandedType = rawType.fullyExpandedType(session)
+    createFunctionType(expandedType, isInput)?.let { return it }
+    if (expandedType !is ConeClassLikeType) return expandedType.asRawType(isInput)
     val types = sequence {
-        yield(rawType)
-        val symbol = rawType.lookupTag.toClassSymbol(session) ?: return@sequence
-        val substitutor = createSubstitutionForSupertype(rawType, session)
+        yield(expandedType)
+        val symbol = expandedType.lookupTag.toClassSymbol(session) ?: return@sequence
+        val substitutor = createSubstitutionForSupertype(expandedType, session)
         val superTypes = lookupSuperTypes(listOf(symbol), lookupInterfaces = true, deep = true, session, substituteTypes = true)
         yieldAll(superTypes.map { substitutor.substituteOrSelf(it) as ConeClassLikeType })
     }
-    for (type in types) {
+    types.forEachIndexed { index, type ->
         when (val classId = type.lookupTag.classId) {
             ClassIds.stateFlow, ClassIds.mutableStateFlow -> {
-                val valueType = type.flowValueType.asRawType()
-                val isMutable = classId == ClassIds.mutableStateFlow && !rawType.isMarkedNullable
-                return rawType.asStateFlow(valueType, isMutable)
+                val valueType = type.flowValueType.asRawType(isInput)
+                val isMutable = classId == ClassIds.mutableStateFlow && !expandedType.isMarkedNullable
+                return expandedType.asStateFlow(isInput, valueType, isMutable)
             }
             ClassIds.sharedFlow -> {
-                val valueType = type.flowValueType.asRawType()
-                return rawType.asSharedFlow(valueType)
+                val valueType = type.flowValueType.asRawType(isInput)
+                return expandedType.asSharedFlow(isInput, valueType)
             }
             ClassIds.flow -> {
-                val valueType = type.flowValueType.asRawType()
-                return rawType.asSimpleFlow(valueType)
+                val valueType = type.flowValueType.asRawType(isInput)
+                return expandedType.asSimpleFlow(isInput, valueType, isCustom = index != 0)
             }
         }
     }
-    return rawType.asRawType()
+    return expandedType.asRawType(isInput)
+}
+
+private fun FirCallableSignature.Builder.createFunctionType(
+    rawType: ConeKotlinType,
+    isInput: Boolean
+): CallableSignature.Type? {
+    val functionType = rawType.functionTypeKind(session) ?: return null
+    val isFunctionType = functionType == FunctionTypeKind.Function
+    val isSuspendFunctionType = functionType == FunctionTypeKind.SuspendFunction
+    if (!isFunctionType && !isSuspendFunctionType) return null
+    return rawType.asFunction(
+        isInput,
+        isSuspendFunctionType,
+        rawType.receiverType(session)?.let { createType(it, !isInput) },
+        rawType.valueParameterTypesWithoutReceivers(session).map { createType(it, !isInput) },
+        createType(rawType.returnType(session), isInput)
+    ).orRaw()
 }
 
 private val ConeKotlinType.flowValueType: ConeKotlinType

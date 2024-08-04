@@ -38,20 +38,18 @@ import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativ
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.REDUNDANT_PRIVATE_COROUTINES_STATE
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.UNSUPPORTED_CLASS_EXTENSION_PROPERTY
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.UNSUPPORTED_INPUT_FLOW
+import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.*
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.getNativeCoroutinesAnnotations
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.hasImplicitReturnType
+import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.isCoroutineScopeProperty
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.isRefined
+import com.rickclephas.kmp.nativecoroutines.compiler.utils.*
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutines
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutineScope
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutinesIgnore
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutinesRefined
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutinesRefinedState
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutinesState
-import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.getCoroutinesType
-import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.isCoroutineScopeProperty
-import com.rickclephas.kmp.nativecoroutines.compiler.utils.CoroutinesType
-import com.rickclephas.kmp.nativecoroutines.compiler.utils.hasFlow
-import com.rickclephas.kmp.nativecoroutines.compiler.utils.hasSuspend
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.hasUnsupportedInputFlow
 import org.jetbrains.kotlin.AbstractKtSourceElement
 import org.jetbrains.kotlin.diagnostics.DiagnosticReporter
@@ -111,19 +109,12 @@ internal class FirKmpNativeCoroutinesDeclarationChecker(
             reporter.reportOn(source, this, context)
         }
 
+        val callableSignature = declaration.getCallableSignature(context.session).signature.forK2Mode(isK2Mode).orNull()
         val annotations = declaration.getNativeCoroutinesAnnotations(context.session)
         val isRefined = declaration.isRefined(context.session)
         val isPublic = declaration.effectiveVisibility.publicApi
         val isOverride = declaration.isOverride
         val isActual = declaration.isActual
-        val isSuspend = declaration.isSuspend
-        val coroutineReceiverParameter = declaration.receiverParameter?.let { parameter ->
-            parameter.typeRef.getCoroutinesType(context.session)?.let { parameter to it }
-        }
-        val coroutineValueParameters = (declaration as? FirFunction)?.valueParameters?.mapNotNull { parameter ->
-            parameter.returnTypeRef.getCoroutinesType(context.session)?.let { parameter to it }
-        } ?: emptyList()
-        val returnType = declaration.returnTypeRef.getCoroutinesType(context.session)
 
         //region CONFLICT_COROUTINES
         val coroutinesAnnotations = listOfNotNull(
@@ -140,26 +131,33 @@ internal class FirKmpNativeCoroutinesDeclarationChecker(
         //region EXPOSED_*
         val hasAnnotation = coroutinesAnnotations.isNotEmpty()
         val isIgnored = annotations.containsKey(NativeCoroutinesIgnore)
-        if (!isRefined && isPublic && !isOverride && !isActual && !hasAnnotation && !isIgnored) {
+        val isExposed = isPublic && !isRefined && !hasAnnotation
+        if (callableSignature != null && isExposed && !isIgnored && !isOverride && !isActual) {
             val isGenerated = context.containingFilePath?.let {
                 generatedSourceDirs.any(Path(it)::startsWith)
             } ?: false
-            if (!isGenerated && isSuspend) {
-                exposedSuspendFunction.reportOn(declaration.source)
-            }
-            coroutineReceiverParameter?.let { (param, type) ->
-                if (type.hasSuspend) exposedSuspendType.reportOn(param.source)
-                if (type.hasFlow) exposedFlowType.reportOn(param.source)
-            }
-            coroutineValueParameters.forEach { (param, type) ->
-                if (type.hasSuspend) exposedSuspendType.reportOn(param.source)
-                if (type.hasFlow) exposedFlowType.reportOn(param.source)
-            }
-            if (declaration is FirProperty && returnType is CoroutinesType.Flow.State) {
-                exposedStateFlowProperty.reportOn(declaration.source)
-            } else if (returnType != null) {
-                if (returnType.hasSuspend) exposedSuspendType.reportOn(declaration.source)
-                if (returnType.hasFlow) exposedFlowType.reportOn(declaration.source)
+            if (!isGenerated) {
+                if (callableSignature.isSuspend) {
+                    exposedSuspendFunction.reportOn(declaration.source)
+                }
+                val receiverType = callableSignature.receiverType
+                if (receiverType != null) {
+                    val param = declaration.receiverParameter
+                    if (receiverType.isOrHasSuspend) exposedSuspendType.reportOn(param?.source)
+                    if (receiverType.isOrHasFlow) exposedFlowType.reportOn(param?.source)
+                }
+                callableSignature.valueTypes.forEachIndexed { index, type ->
+                    val param = (declaration as? FirFunction)?.valueParameters?.get(index)
+                    if (type.isOrHasSuspend) exposedSuspendType.reportOn(param?.source)
+                    if (type.isOrHasFlow) exposedFlowType.reportOn(param?.source)
+                }
+                val returnType = callableSignature.returnType
+                if (declaration is FirProperty && returnType is CallableSignature.Type.Flow.State) {
+                    exposedStateFlowProperty.reportOn(declaration.source)
+                } else {
+                    if (returnType.isOrHasSuspend) exposedSuspendType.reportOn(declaration.source)
+                    if (returnType.isOrHasFlow) exposedFlowType.reportOn(declaration.source)
+                }
             }
         }
         //endregion
@@ -177,12 +175,12 @@ internal class FirKmpNativeCoroutinesDeclarationChecker(
         if (!declaration.isCoroutineScopeProperty(context.session)) {
             INVALID_COROUTINE_SCOPE.reportOn(annotations[NativeCoroutineScope])
         }
-        if (!isSuspend && coroutineReceiverParameter == null && coroutineValueParameters.isEmpty() && returnType == null) {
+        if (callableSignature == null) {
             INVALID_COROUTINES.reportOn(annotations[NativeCoroutines])
             INVALID_COROUTINES_IGNORE.reportOn(annotations[NativeCoroutinesIgnore])
             INVALID_COROUTINES_REFINED.reportOn(annotations[NativeCoroutinesRefined])
         }
-        if (declaration !is FirProperty || returnType !is CoroutinesType.Flow.State) {
+        if (declaration !is FirProperty || callableSignature?.returnType !is CallableSignature.Type.Flow.State) {
             INVALID_COROUTINES_REFINED_STATE.reportOn(annotations[NativeCoroutinesRefinedState])
             INVALID_COROUTINES_STATE.reportOn(annotations[NativeCoroutinesState])
         }
@@ -235,11 +233,7 @@ internal class FirKmpNativeCoroutinesDeclarationChecker(
         if (declaration is FirProperty && declaration.dispatchReceiverType != null && declaration.isExtension) {
             coroutinesAnnotations.forEach { UNSUPPORTED_CLASS_EXTENSION_PROPERTY.reportOn(it) }
         }
-        if (
-            coroutineReceiverParameter?.second.hasUnsupportedInputFlow(true) ||
-            coroutineValueParameters.any { it.second.hasUnsupportedInputFlow(true) } ||
-            returnType.hasUnsupportedInputFlow(false)
-        ) {
+        if (callableSignature?.hasUnsupportedInputFlow == true) {
             coroutinesAnnotations.forEach { UNSUPPORTED_INPUT_FLOW.reportOn(it) }
         }
         //endregion
