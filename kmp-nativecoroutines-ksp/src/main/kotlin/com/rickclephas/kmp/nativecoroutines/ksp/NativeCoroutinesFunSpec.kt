@@ -50,16 +50,6 @@ internal fun KSFunctionDeclaration.toNativeCoroutinesFunSpec(
     val returnType = returnType?.getCoroutinesType(typeParameterResolver) ?: throw DeferSymbolException()
     val isSuspend = modifiers.contains(Modifier.SUSPEND)
 
-    var returnTypeName = when (returnType) {
-        is CoroutinesType.Flow -> nativeFlowClassName.parameterizedBy(returnType.valueType).copy(nullable = returnType.isNullable)
-        else -> returnType.typeReference.toTypeName(typeParameterResolver)
-    }
-    if (isSuspend) {
-        returnTypeName = nativeSuspendClassName.parameterizedBy(returnTypeName)
-    }
-    returnTypeName = returnTypeName.copy(annotations = returnType.typeReference.annotations.toAnnotationSpecs())
-    builder.returns(returnTypeName)
-
     val codeArgs = mutableListOf<Any>()
     var code = when (classDeclaration) {
         null -> {
@@ -83,17 +73,39 @@ internal fun KSFunctionDeclaration.toNativeCoroutinesFunSpec(
         codeArgs.add(1, receiverParameter)
         code = "%M { %N.$code }"
     }
+
+    var returnTypeName: TypeName
     if (returnType is CoroutinesType.Flow) {
+        val valueType = returnType.valueType.orNativeUnit
+        returnTypeName = nativeFlowClassName.parameterizedBy(valueType).copy(nullable = returnType.isNullable)
         codeArgs.add(asNativeFlowMemberName)
+        val genericParam = if (!valueType.isNativeUnit) {
+            codeArgs.add(valueType)
+            "<%T>"
+        } else {
+            ""
+        }
         scopeProperty.codeArg.let(codeArgs::addAll)
         if (returnType.isNullable) code += "?"
-        code = "$code.%M(${scopeProperty.code})"
+        code = "$code.%M$genericParam(${scopeProperty.code})"
+    } else {
+        returnTypeName = returnType.typeReference.toTypeName(typeParameterResolver)
     }
     if (isSuspend) {
+        val valueType = returnTypeName.orNativeUnit
+        returnTypeName = nativeSuspendClassName.parameterizedBy(valueType)
+        scopeProperty.codeArg.let { codeArgs.addAll(0, it) }
+        val genericParam = if (!valueType.isNativeUnit) {
+            codeArgs.add(0, valueType)
+            "<%T>"
+        } else {
+            ""
+        }
         codeArgs.add(0, nativeSuspendMemberName)
-        scopeProperty.codeArg.let { codeArgs.addAll(1, it) }
-        code = "%M(${scopeProperty.code}) { $code }"
+        code = "%M$genericParam(${scopeProperty.code}) { $code }"
     }
+    returnTypeName = returnTypeName.copy(annotations = returnType.typeReference.annotations.toAnnotationSpecs())
+    builder.returns(returnTypeName)
     code = "return $code"
     builder.addCode(code, *codeArgs.toTypedArray())
 

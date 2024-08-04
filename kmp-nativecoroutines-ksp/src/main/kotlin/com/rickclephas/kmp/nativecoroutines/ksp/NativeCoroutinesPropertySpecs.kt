@@ -35,15 +35,22 @@ private fun KSPropertyDeclaration.toPropertySpec(
     type: CoroutinesType.Flow,
     shouldRefine: Boolean
 ): PropertySpec? {
-    var typeName: TypeName = nativeFlowClassName.parameterizedBy(type.valueType).copy(nullable = type.isNullable)
+    val valueType = type.valueType.orNativeUnit
+    var typeName: TypeName = nativeFlowClassName.parameterizedBy(valueType).copy(nullable = type.isNullable)
     typeName = typeName.copy(annotations = type.typeReference.annotations.toAnnotationSpecs())
     val simpleName = simpleName.asString()
     val name = "$simpleName$nameSuffix"
     val objCName = if (setObjCName) simpleName else null
     return createPropertySpec(typeParameterResolver, name, objCName, typeName, shouldRefine, { code, codeArgs ->
         codeArgs.add(asNativeFlowMemberName)
+        val genericParam = if (!valueType.isNativeUnit) {
+            codeArgs.add(valueType)
+            "<%T>"
+        } else {
+            ""
+        }
         scopeProperty.codeArg.let(codeArgs::addAll)
-        addCode("return $code${if(type.isNullable) "?." else "."}%M(${scopeProperty.code})", *codeArgs.toTypedArray())
+        addCode("return $code${if(type.isNullable) "?." else "."}%M$genericParam(${scopeProperty.code})", *codeArgs.toTypedArray())
     })?.apply {
         scopeProperty.containingFile?.let(::addOriginatingKSFile)
     }?.build()
