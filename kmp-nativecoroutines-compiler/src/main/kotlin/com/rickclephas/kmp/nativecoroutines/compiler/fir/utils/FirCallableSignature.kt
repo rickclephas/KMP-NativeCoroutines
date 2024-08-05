@@ -63,7 +63,7 @@ private fun FirCallableSignature.Builder.createType(
 ): CallableSignature.Type {
     val expandedType = rawType.fullyExpandedType(session)
     createFunctionType(expandedType, isInput)?.let { return it }
-    if (expandedType !is ConeClassLikeType) return expandedType.asRawType(isInput)
+    if (expandedType !is ConeClassLikeType) return expandedType.asRawType()
     val types = sequence {
         yield(expandedType)
         val symbol = expandedType.lookupTag.toClassSymbol(session) ?: return@sequence
@@ -74,21 +74,24 @@ private fun FirCallableSignature.Builder.createType(
     types.forEachIndexed { index, type ->
         when (val classId = type.lookupTag.classId) {
             ClassIds.stateFlow, ClassIds.mutableStateFlow -> {
-                val valueType = type.flowValueType.asRawType(isInput)
+                if (isInput) return expandedType.asRawType()
+                val valueType = type.flowValueType.asRawType()
                 val isMutable = classId == ClassIds.mutableStateFlow && !expandedType.isMarkedNullable
-                return expandedType.asStateFlow(isInput, valueType, isMutable)
+                return expandedType.asStateFlow(valueType, isMutable)
             }
             ClassIds.sharedFlow -> {
-                val valueType = type.flowValueType.asRawType(isInput)
-                return expandedType.asSharedFlow(isInput, valueType)
+                if (isInput) return expandedType.asRawType()
+                val valueType = type.flowValueType.asRawType()
+                return expandedType.asSharedFlow(valueType)
             }
             ClassIds.flow -> {
-                val valueType = type.flowValueType.asRawType(isInput)
-                return expandedType.asSimpleFlow(isInput, valueType, isCustom = index != 0)
+                if (isInput && index != 0) return expandedType.asRawType()
+                val valueType = type.flowValueType.asRawType()
+                return expandedType.asSimpleFlow(valueType)
             }
         }
     }
-    return expandedType.asRawType(isInput)
+    return expandedType.asRawType()
 }
 
 private fun FirCallableSignature.Builder.createFunctionType(
@@ -100,7 +103,6 @@ private fun FirCallableSignature.Builder.createFunctionType(
     val isSuspendFunctionType = functionType == FunctionTypeKind.SuspendFunction
     if (!isFunctionType && !isSuspendFunctionType) return null
     return rawType.asFunction(
-        isInput,
         isSuspendFunctionType,
         rawType.receiverType(session)?.let { createType(it, !isInput) },
         rawType.valueParameterTypesWithoutReceivers(session).map { createType(it, !isInput) },

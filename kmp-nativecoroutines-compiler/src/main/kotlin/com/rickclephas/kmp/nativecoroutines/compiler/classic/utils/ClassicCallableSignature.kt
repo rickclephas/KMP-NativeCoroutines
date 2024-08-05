@@ -47,24 +47,28 @@ private fun ClassicCallableSignature.Builder.createType(
     types.forEachIndexed { index, type ->
         when {
             KotlinBuiltIns.isTypeConstructorForGivenClass(type.constructor, FqNames.stateFlow.toUnsafe()) -> {
-                val valueType = type.flowValueType.asRawType(isInput)
-                return rawType.asStateFlow(isInput, valueType, isMutable = false)
+                if (isInput) return rawType.asRawType()
+                val valueType = type.flowValueType.asRawType()
+                return rawType.asStateFlow(valueType, isMutable = false)
             }
             KotlinBuiltIns.isTypeConstructorForGivenClass(type.constructor, FqNames.mutableStateFlow.toUnsafe()) -> {
-                val valueType = type.flowValueType.asRawType(isInput)
-                return rawType.asStateFlow(isInput, valueType, isMutable = true)
+                if (isInput) return rawType.asRawType()
+                val valueType = type.flowValueType.asRawType()
+                return rawType.asStateFlow(valueType, isMutable = true)
             }
             KotlinBuiltIns.isTypeConstructorForGivenClass(type.constructor, FqNames.sharedFlow.toUnsafe()) -> {
-                val valueType = type.flowValueType.asRawType(isInput)
-                return rawType.asSharedFlow(isInput, valueType)
+                if (isInput) return rawType.asRawType()
+                val valueType = type.flowValueType.asRawType()
+                return rawType.asSharedFlow(valueType)
             }
             KotlinBuiltIns.isTypeConstructorForGivenClass(type.constructor, FqNames.flow.toUnsafe()) -> {
-                val valueType = type.flowValueType.asRawType(isInput)
-                return rawType.asSimpleFlow(isInput, valueType, isCustom = index != 0)
+                if (isInput && index != 0) return rawType.asRawType()
+                val valueType = type.flowValueType.asRawType()
+                return rawType.asSimpleFlow(valueType)
             }
         }
     }
-    return rawType.asRawType(isInput)
+    return rawType.asRawType()
 }
 
 private fun ClassicCallableSignature.Builder.createFunctionType(
@@ -75,7 +79,6 @@ private fun ClassicCallableSignature.Builder.createFunctionType(
     val isSuspendFunctionType = rawType.isSuspendFunctionType
     if (!isFunctionType && !isSuspendFunctionType) return null
     return rawType.asFunction(
-        isInput,
         isSuspendFunctionType,
         rawType.getReceiverTypeFromFunctionType()?.let { createType(it, !isInput) },
         rawType.getValueParameterTypesFromFunctionType().map { createType(it.type, !isInput) },

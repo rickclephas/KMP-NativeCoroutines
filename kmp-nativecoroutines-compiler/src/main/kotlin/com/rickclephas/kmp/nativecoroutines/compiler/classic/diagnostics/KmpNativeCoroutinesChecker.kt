@@ -37,7 +37,6 @@ import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNati
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.REDUNDANT_PRIVATE_COROUTINES_REFINED
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.REDUNDANT_PRIVATE_COROUTINES_REFINED_STATE
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.UNSUPPORTED_CLASS_EXTENSION_PROPERTY
-import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.UNSUPPORTED_INPUT_FLOW
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.utils.*
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.utils.getNativeCoroutinesAnnotations
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.utils.hasImplicitReturnType
@@ -50,7 +49,6 @@ import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnot
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutinesRefined
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutinesRefinedState
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutinesState
-import com.rickclephas.kmp.nativecoroutines.compiler.utils.hasUnsupportedInputFlow
 import org.jetbrains.kotlin.descriptors.*
 import org.jetbrains.kotlin.descriptors.annotations.Annotated
 import org.jetbrains.kotlin.descriptors.annotations.AnnotationDescriptor
@@ -227,11 +225,6 @@ public class KmpNativeCoroutinesChecker(
         if (descriptor is PropertyDescriptor && descriptor.dispatchReceiverParameter != null && descriptor.isExtension) {
             coroutinesAnnotations.forEach {
                 context.trace.report(UNSUPPORTED_CLASS_EXTENSION_PROPERTY, it, declaration)
-            }
-        }
-        if (callableSignature?.hasUnsupportedInputFlow == true) {
-            coroutinesAnnotations.forEach {
-                context.trace.report(UNSUPPORTED_INPUT_FLOW, it, declaration)
             }
         }
         //endregion

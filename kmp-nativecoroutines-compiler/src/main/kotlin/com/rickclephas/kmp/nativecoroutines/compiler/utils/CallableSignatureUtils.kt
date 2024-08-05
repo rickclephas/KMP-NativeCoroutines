@@ -34,31 +34,19 @@ internal fun CallableSignature.forK2Mode(k2Mode: Boolean): CallableSignature {
 
 private fun CallableSignature.Type.asRaw(): CallableSignature.Type.Raw {
     if (this is CallableSignature.Type.Raw) return this
-    return CallableSignature.Type.Raw(rawTypeIndex, isNullable, isInput)
+    return CallableSignature.Type.Raw(rawTypeIndex, isNullable)
 }
 
 private fun CallableSignature.Type.isOrHas(
-    predicate: CallableSignature.Type.(isInput: Boolean) -> Boolean
+    predicate: CallableSignature.Type.() -> Boolean
 ): Boolean = when (this) {
-    is CallableSignature.Type.Raw -> predicate(isInput)
-    is CallableSignature.Type.Flow -> predicate(isInput)
-    is CallableSignature.Type.Function -> predicate(isInput) ||
+    is CallableSignature.Type.Raw -> predicate()
+    is CallableSignature.Type.Flow -> predicate()
+    is CallableSignature.Type.Function -> predicate() ||
             receiverType?.isOrHas(predicate) == true ||
             valueTypes.any { it.isOrHas(predicate) } ||
             returnType.isOrHas(predicate)
 }
-
-internal val CallableSignature.Type.isUnsupportedInputFlow: Boolean get() = when (this) {
-    is CallableSignature.Type.Raw -> false
-    is CallableSignature.Type.Flow.Simple -> isCustom
-    is CallableSignature.Type.Flow -> true
-    is CallableSignature.Type.Function -> false
-}
-
-internal val CallableSignature.hasUnsupportedInputFlow: Boolean
-    get() = receiverType?.isOrHas { isInput && isUnsupportedInputFlow } == true ||
-            valueTypes.any { it.isOrHas { isInput && isUnsupportedInputFlow } } ||
-            returnType.isOrHas { isInput && isUnsupportedInputFlow }
 
 internal val CallableSignature.Type.isSuspend: Boolean get() = when (this) {
     is CallableSignature.Type.Raw -> false

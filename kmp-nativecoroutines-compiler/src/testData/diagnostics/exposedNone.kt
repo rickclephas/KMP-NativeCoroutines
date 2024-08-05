@@ -45,19 +45,7 @@ fun (suspend () -> Int).topLevelSuspendTypeExtensionFunction(): Int = 0
 
 fun topLevelFlowArgFunction(flow: Flow<Int>): Int = 0
 
-fun topLevelSharedFlowArgFunction(flow: SharedFlow<Int>): Int = 0
-
-fun topLevelStateFlowArgFunction(flow: StateFlow<Int>): Int = 0
-
-fun topLevelCustomFlowArgFunction(flow: CustomFlow<Int>): Int = 0
-
 fun Flow<Int>.topLevelFlowExtensionFunction(): Int = 0
-
-fun SharedFlow<Int>.topLevelSharedFlowExtensionFunction(): Int = 0
-
-fun StateFlow<Int>.topLevelStateFlowExtensionFunction(): Int = 0
-
-fun CustomFlow<Int>.topLevelCustomFlowExtensionFunction(): Int = 0
 
 fun topLevelFlowBlockFunction(block: () -> Flow<Int>): Int = 0
 

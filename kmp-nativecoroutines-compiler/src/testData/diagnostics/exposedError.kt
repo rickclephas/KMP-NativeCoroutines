@@ -45,19 +45,7 @@ fun <!EXPOSED_SUSPEND_TYPE_ERROR!>(suspend () -> Int)<!>.topLevelSuspendTypeExte
 
 fun topLevelFlowArgFunction(flow: <!EXPOSED_FLOW_TYPE_ERROR!>Flow<Int><!>): Int = 0
 
-fun topLevelSharedFlowArgFunction(flow: <!EXPOSED_FLOW_TYPE_ERROR!>SharedFlow<Int><!>): Int = 0
-
-fun topLevelStateFlowArgFunction(flow: <!EXPOSED_FLOW_TYPE_ERROR!>StateFlow<Int><!>): Int = 0
-
-fun topLevelCustomFlowArgFunction(flow: <!EXPOSED_FLOW_TYPE_ERROR!>CustomFlow<Int><!>): Int = 0
-
 fun <!EXPOSED_FLOW_TYPE_ERROR!>Flow<Int><!>.topLevelFlowExtensionFunction(): Int = 0
-
-fun <!EXPOSED_FLOW_TYPE_ERROR!>SharedFlow<Int><!>.topLevelSharedFlowExtensionFunction(): Int = 0
-
-fun <!EXPOSED_FLOW_TYPE_ERROR!>StateFlow<Int><!>.topLevelStateFlowExtensionFunction(): Int = 0
-
-fun <!EXPOSED_FLOW_TYPE_ERROR!>CustomFlow<Int><!>.topLevelCustomFlowExtensionFunction(): Int = 0
 
 fun topLevelFlowBlockFunction(block: <!EXPOSED_FLOW_TYPE_ERROR!>() -> Flow<Int><!>): Int = 0
 

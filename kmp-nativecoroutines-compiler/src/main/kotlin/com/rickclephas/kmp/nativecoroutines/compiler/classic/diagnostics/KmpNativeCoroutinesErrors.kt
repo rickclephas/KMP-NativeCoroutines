@@ -86,8 +86,6 @@ public object KmpNativeCoroutinesErrors {
 
     @JvmField
     public val UNSUPPORTED_CLASS_EXTENSION_PROPERTY: DiagnosticFactory0<KtElement> = DiagnosticFactory0.create(Severity.ERROR)
-    @JvmField
-    public val UNSUPPORTED_INPUT_FLOW: DiagnosticFactory0<KtElement> = DiagnosticFactory0.create(Severity.ERROR)
 
     @JvmField
     public val IMPLICIT_RETURN_TYPE: DiagnosticFactory0<KtNamedDeclaration> = DiagnosticFactory0.create(Severity.ERROR, PositioningStrategies.DECLARATION_NAME)

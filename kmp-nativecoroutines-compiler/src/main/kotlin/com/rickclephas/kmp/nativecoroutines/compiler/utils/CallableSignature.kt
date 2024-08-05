@@ -9,7 +9,6 @@ internal data class CallableSignature(
     sealed class Type {
         abstract val rawTypeIndex: Int
         abstract val isNullable: Boolean
-        abstract val isInput: Boolean
 
         sealed class Flow: Type() {
             abstract val valueType: Type
@@ -17,20 +16,16 @@ internal data class CallableSignature(
             data class Simple(
                 override val rawTypeIndex: Int,
                 override val isNullable: Boolean,
-                override val isInput: Boolean,
-                override val valueType: Type,
-                val isCustom: Boolean
+                override val valueType: Type
             ): Flow()
             data class Shared(
                 override val rawTypeIndex: Int,
                 override val isNullable: Boolean,
-                override val isInput: Boolean,
                 override val valueType: Type
             ): Flow()
             data class State(
                 override val rawTypeIndex: Int,
                 override val isNullable: Boolean,
-                override val isInput: Boolean,
                 override val valueType: Type,
                 val isMutable: Boolean
             ): Flow()
@@ -39,7 +34,6 @@ internal data class CallableSignature(
         data class Function(
             override val rawTypeIndex: Int,
             override val isNullable: Boolean,
-            override val isInput: Boolean,
             val isSuspend: Boolean,
             val receiverType: Type?,
             val valueTypes: List<Type>,
@@ -48,8 +42,7 @@ internal data class CallableSignature(
 
         data class Raw(
             override val rawTypeIndex: Int,
-            override val isNullable: Boolean,
-            override val isInput: Boolean
+            override val isNullable: Boolean
         ): Type()
     }
 }

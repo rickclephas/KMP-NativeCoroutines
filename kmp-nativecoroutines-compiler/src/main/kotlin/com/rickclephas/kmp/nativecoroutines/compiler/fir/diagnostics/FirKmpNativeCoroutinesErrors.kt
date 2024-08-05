@@ -50,7 +50,6 @@ public object FirKmpNativeCoroutinesErrors {
     public val REDUNDANT_PRIVATE_COROUTINES_STATE: KtDiagnosticFactory0 by error0<KtElement>()
 
     public val UNSUPPORTED_CLASS_EXTENSION_PROPERTY: KtDiagnosticFactory0 by error0<KtElement>()
-    public val UNSUPPORTED_INPUT_FLOW: KtDiagnosticFactory0 by error0<KtElement>()
 
     public val IMPLICIT_RETURN_TYPE: KtDiagnosticFactory0 by error0<KtElement>(SourceElementPositioningStrategies.DECLARATION_NAME)
 
