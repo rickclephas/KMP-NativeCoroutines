@@ -11,18 +11,18 @@ import org.jetbrains.kotlin.idea.quickfix.AddAnnotationFix
 import org.jetbrains.kotlin.idea.quickfix.KotlinIntentionActionsFactory
 import org.jetbrains.kotlin.idea.quickfix.QuickFixes
 import org.jetbrains.kotlin.psi.KtCallableDeclaration
-import org.jetbrains.kotlin.psi.KtDeclaration
+import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtModifierListOwner
 
 internal class AddAnnotationFixFactory(
-    private val diagnosticFactories: List<DiagnosticFactory0<KtDeclaration>>,
+    private val diagnosticFactories: List<DiagnosticFactory0<out KtElement>>,
     private val preferredAnnotation: NativeCoroutinesAnnotation,
     private val alternativeAnnotation: NativeCoroutinesAnnotation?
 ): KotlinIntentionActionsFactory() {
 
     internal companion object {
         fun QuickFixes.registerAddAnnotationFix(
-            diagnosticFactories: List<DiagnosticFactory0<KtDeclaration>>,
+            diagnosticFactories: List<DiagnosticFactory0<out KtElement>>,
             preferredAnnotation: NativeCoroutinesAnnotation,
             alternativeAnnotation: NativeCoroutinesAnnotation? = null
         ) {

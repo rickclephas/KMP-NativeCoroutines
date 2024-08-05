@@ -7,8 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1D2583082AA6427C0053360E /* NativeFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2583072AA6427C0053360E /* NativeFlow.swift */; };
+		1D25830A2AA643130053360E /* NativeSuspend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2583092AA643130053360E /* NativeSuspend.swift */; };
+		1D25830C2AA647D40053360E /* DisposedError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D25830B2AA647D40053360E /* DisposedError.swift */; };
+		1D25830E2AA6498C0053360E /* NativeSuspend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D25830D2AA6498C0053360E /* NativeSuspend.swift */; };
+		1D2583102AA649B00053360E /* NativeFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D25830F2AA649B00053360E /* NativeFlow.swift */; };
+		1D2583122AA64A230053360E /* NativeFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2583112AA64A230053360E /* NativeFlow.swift */; };
+		1D2583142AA64A4A0053360E /* NativeSuspend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2583132AA64A4A0053360E /* NativeSuspend.swift */; };
+		1D3A4B5C2B134FE700D7FBE2 /* NativeSuspendTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3A4B5B2B134FE700D7FBE2 /* NativeSuspendTests.swift */; };
+		1D3A4B5E2B13823F00D7FBE2 /* NativeFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3A4B5D2B13823F00D7FBE2 /* NativeFlowTests.swift */; };
+		1D3A4B602B138CB000D7FBE2 /* NativeSuspendTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3A4B5F2B138CB000D7FBE2 /* NativeSuspendTests.swift */; };
+		1D3A4B622B1393A400D7FBE2 /* NativeFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3A4B612B1393A400D7FBE2 /* NativeFlowTests.swift */; };
+		1D3A4B642B1397A100D7FBE2 /* NativeSuspendTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3A4B632B1397A100D7FBE2 /* NativeSuspendTests.swift */; };
 		1D4D6C272BEFAC0200A5B3C9 /* AsyncError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4D6C262BEFAC0200A5B3C9 /* AsyncError.swift */; };
 		1D4E296A268A26B000C0D4EF /* FuturePublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4E2969268A26B000C0D4EF /* FuturePublisher.swift */; };
+		1D64DC202AA333FB006CC547 /* AnyAsyncSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D64DC1F2AA333FB006CC547 /* AnyAsyncSequence.swift */; };
+		1D64DC222AA338F4006CC547 /* Cancellable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D64DC212AA338F4006CC547 /* Cancellable.swift */; };
+		1D64DC242AA339B2006CC547 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D64DC232AA339B2006CC547 /* Task.swift */; };
 		1D7175B7266FE9F800846F75 /* KMPNativeCoroutinesCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D717583266FE90400846F75 /* KMPNativeCoroutinesCore.framework */; };
 		1D7175BC266FF03200846F75 /* NativeCallback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2EC83C266D209600B118B0 /* NativeCallback.swift */; };
 		1D7175BD266FF03500846F75 /* NativeCancellable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2EC83E266D212F00B118B0 /* NativeCancellable.swift */; };
@@ -16,6 +31,8 @@
 		1D7175BF266FF03A00846F75 /* NativeSuspend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2EC840266D220900B118B0 /* NativeSuspend.swift */; };
 		1D7175C0266FF03F00846F75 /* Future.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2EC86C266D29E800B118B0 /* Future.swift */; };
 		1D7175C1266FF04200846F75 /* Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2EC86A266D290000B118B0 /* Publisher.swift */; };
+		1D74C6FA2B124DAB001CA21F /* NativeFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D74C6F92B124DAB001CA21F /* NativeFlowTests.swift */; };
+		1D74CCAF2A923D2B00FB4622 /* NativeUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D74CCAE2A923D2B00FB4622 /* NativeUnit.swift */; };
 		1D75A367272D4B3800CFF795 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1D75A366272D4B3800CFF795 /* RxSwift */; };
 		1D75A369272D4B4900CFF795 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1D75A368272D4B4900CFF795 /* RxSwift */; };
 		1DA5DCEF267613BB002448E3 /* KMPNativeCoroutinesAsync.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DA5DCE5267613BB002448E3 /* KMPNativeCoroutinesAsync.framework */; };
@@ -77,16 +94,33 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1D2583072AA6427C0053360E /* NativeFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeFlow.swift; sourceTree = "<group>"; };
+		1D2583092AA643130053360E /* NativeSuspend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeSuspend.swift; sourceTree = "<group>"; };
+		1D25830B2AA647D40053360E /* DisposedError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisposedError.swift; sourceTree = "<group>"; };
+		1D25830D2AA6498C0053360E /* NativeSuspend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeSuspend.swift; sourceTree = "<group>"; };
+		1D25830F2AA649B00053360E /* NativeFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeFlow.swift; sourceTree = "<group>"; };
+		1D2583112AA64A230053360E /* NativeFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeFlow.swift; sourceTree = "<group>"; };
+		1D2583132AA64A4A0053360E /* NativeSuspend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeSuspend.swift; sourceTree = "<group>"; };
 		1D2EC83A266D206700B118B0 /* NativeFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeFlow.swift; sourceTree = "<group>"; };
 		1D2EC83C266D209600B118B0 /* NativeCallback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeCallback.swift; sourceTree = "<group>"; };
 		1D2EC83E266D212F00B118B0 /* NativeCancellable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeCancellable.swift; sourceTree = "<group>"; };
 		1D2EC840266D220900B118B0 /* NativeSuspend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeSuspend.swift; sourceTree = "<group>"; };
 		1D2EC86A266D290000B118B0 /* Publisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Publisher.swift; sourceTree = "<group>"; };
 		1D2EC86C266D29E800B118B0 /* Future.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Future.swift; sourceTree = "<group>"; };
+		1D3A4B5B2B134FE700D7FBE2 /* NativeSuspendTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeSuspendTests.swift; sourceTree = "<group>"; };
+		1D3A4B5D2B13823F00D7FBE2 /* NativeFlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeFlowTests.swift; sourceTree = "<group>"; };
+		1D3A4B5F2B138CB000D7FBE2 /* NativeSuspendTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeSuspendTests.swift; sourceTree = "<group>"; };
+		1D3A4B612B1393A400D7FBE2 /* NativeFlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeFlowTests.swift; sourceTree = "<group>"; };
+		1D3A4B632B1397A100D7FBE2 /* NativeSuspendTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeSuspendTests.swift; sourceTree = "<group>"; };
 		1D4D6C262BEFAC0200A5B3C9 /* AsyncError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncError.swift; sourceTree = "<group>"; };
 		1D4E2969268A26B000C0D4EF /* FuturePublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuturePublisher.swift; sourceTree = "<group>"; };
+		1D64DC1F2AA333FB006CC547 /* AnyAsyncSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyAsyncSequence.swift; sourceTree = "<group>"; };
+		1D64DC212AA338F4006CC547 /* Cancellable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cancellable.swift; sourceTree = "<group>"; };
+		1D64DC232AA339B2006CC547 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		1D717583266FE90400846F75 /* KMPNativeCoroutinesCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KMPNativeCoroutinesCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D71759F266FE9B700846F75 /* KMPNativeCoroutinesCombine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KMPNativeCoroutinesCombine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D74C6F92B124DAB001CA21F /* NativeFlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeFlowTests.swift; sourceTree = "<group>"; };
+		1D74CCAE2A923D2B00FB4622 /* NativeUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeUnit.swift; sourceTree = "<group>"; };
 		1DA5DCE5267613BB002448E3 /* KMPNativeCoroutinesAsync.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KMPNativeCoroutinesAsync.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DA5DCEE267613BB002448E3 /* KMPNativeCoroutinesAsyncTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KMPNativeCoroutinesAsyncTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DA5DCF3267613BB002448E3 /* AsyncFunctionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncFunctionTests.swift; sourceTree = "<group>"; };
@@ -175,6 +209,7 @@
 				1D2EC83E266D212F00B118B0 /* NativeCancellable.swift */,
 				1D2EC83A266D206700B118B0 /* NativeFlow.swift */,
 				1D2EC840266D220900B118B0 /* NativeSuspend.swift */,
+				1D74CCAE2A923D2B00FB4622 /* NativeUnit.swift */,
 			);
 			path = KMPNativeCoroutinesCore;
 			sourceTree = "<group>";
@@ -182,9 +217,12 @@
 		1D7175A0266FE9B700846F75 /* KMPNativeCoroutinesCombine */ = {
 			isa = PBXGroup;
 			children = (
+				1D64DC212AA338F4006CC547 /* Cancellable.swift */,
 				1D2EC86C266D29E800B118B0 /* Future.swift */,
-				1D2EC86A266D290000B118B0 /* Publisher.swift */,
 				1D4E2969268A26B000C0D4EF /* FuturePublisher.swift */,
+				1D2583072AA6427C0053360E /* NativeFlow.swift */,
+				1D2583092AA643130053360E /* NativeSuspend.swift */,
+				1D2EC86A266D290000B118B0 /* Publisher.swift */,
 			);
 			path = KMPNativeCoroutinesCombine;
 			sourceTree = "<group>";
@@ -199,10 +237,14 @@
 		1DA5DCE6267613BB002448E3 /* KMPNativeCoroutinesAsync */ = {
 			isa = PBXGroup;
 			children = (
+				1D64DC1F2AA333FB006CC547 /* AnyAsyncSequence.swift */,
 				1D4D6C262BEFAC0200A5B3C9 /* AsyncError.swift */,
 				1DA5DCFC26761404002448E3 /* AsyncFunction.swift */,
 				1DFC35FB268A2DE3008393FA /* AsyncResult.swift */,
 				1DFB127926A09796001BE321 /* AsyncSequence.swift */,
+				1D25830F2AA649B00053360E /* NativeFlow.swift */,
+				1D25830D2AA6498C0053360E /* NativeSuspend.swift */,
+				1D64DC232AA339B2006CC547 /* Task.swift */,
 			);
 			path = KMPNativeCoroutinesAsync;
 			sourceTree = "<group>";
@@ -213,6 +255,8 @@
 				1DA5DCF3267613BB002448E3 /* AsyncFunctionTests.swift */,
 				1DFC35FD268A2FFE008393FA /* AsyncResultTests.swift */,
 				1DFB127B26A0A446001BE321 /* AsyncSequenceTests.swift */,
+				1D74C6F92B124DAB001CA21F /* NativeFlowTests.swift */,
+				1D3A4B5B2B134FE700D7FBE2 /* NativeSuspendTests.swift */,
 			);
 			path = KMPNativeCoroutinesAsyncTests;
 			sourceTree = "<group>";
@@ -221,6 +265,8 @@
 			isa = PBXGroup;
 			children = (
 				1DCA41A726753C640036C1A3 /* FutureTests.swift */,
+				1D3A4B5D2B13823F00D7FBE2 /* NativeFlowTests.swift */,
+				1D3A4B5F2B138CB000D7FBE2 /* NativeSuspendTests.swift */,
 				1DCA41B2267545600036C1A3 /* PublisherTests.swift */,
 			);
 			path = KMPNativeCoroutinesCombineTests;
@@ -229,6 +275,9 @@
 		1DF3F936269357FA004C21F2 /* KMPNativeCoroutinesRxSwift */ = {
 			isa = PBXGroup;
 			children = (
+				1D25830B2AA647D40053360E /* DisposedError.swift */,
+				1D2583112AA64A230053360E /* NativeFlow.swift */,
+				1D2583132AA64A4A0053360E /* NativeSuspend.swift */,
 				1DF3F94C2693586C004C21F2 /* Observable.swift */,
 				1DF3F95526935C7D004C21F2 /* Single.swift */,
 				1DF3F95726935E2A004C21F2 /* SingleObservable.swift */,
@@ -239,6 +288,8 @@
 		1DF3F941269357FB004C21F2 /* KMPNativeCoroutinesRxSwiftTests */ = {
 			isa = PBXGroup;
 			children = (
+				1D3A4B612B1393A400D7FBE2 /* NativeFlowTests.swift */,
+				1D3A4B632B1397A100D7FBE2 /* NativeSuspendTests.swift */,
 				1DF3F94E2693590D004C21F2 /* ObservableTests.swift */,
 				1DF3F959269362D0004C21F2 /* SingleTests.swift */,
 			);
@@ -557,6 +608,7 @@
 				1D7175BE266FF03700846F75 /* NativeFlow.swift in Sources */,
 				1D7175BD266FF03500846F75 /* NativeCancellable.swift in Sources */,
 				1D7175BF266FF03A00846F75 /* NativeSuspend.swift in Sources */,
+				1D74CCAF2A923D2B00FB4622 /* NativeUnit.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -565,8 +617,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				1D7175C1266FF04200846F75 /* Publisher.swift in Sources */,
+				1D25830A2AA643130053360E /* NativeSuspend.swift in Sources */,
 				1D7175C0266FF03F00846F75 /* Future.swift in Sources */,
 				1D4E296A268A26B000C0D4EF /* FuturePublisher.swift in Sources */,
+				1D64DC222AA338F4006CC547 /* Cancellable.swift in Sources */,
+				1D2583082AA6427C0053360E /* NativeFlow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -574,10 +629,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D64DC202AA333FB006CC547 /* AnyAsyncSequence.swift in Sources */,
+				1D25830E2AA6498C0053360E /* NativeSuspend.swift in Sources */,
 				1DA5DCFD26761404002448E3 /* AsyncFunction.swift in Sources */,
+				1D2583102AA649B00053360E /* NativeFlow.swift in Sources */,
 				1DFC35FC268A2DE3008393FA /* AsyncResult.swift in Sources */,
 				1DFB127A26A09796001BE321 /* AsyncSequence.swift in Sources */,
 				1D4D6C272BEFAC0200A5B3C9 /* AsyncError.swift in Sources */,
+				1D64DC242AA339B2006CC547 /* Task.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -587,6 +646,8 @@
 			files = (
 				1DA5DCF4267613BB002448E3 /* AsyncFunctionTests.swift in Sources */,
 				1DFB127C26A0A446001BE321 /* AsyncSequenceTests.swift in Sources */,
+				1D3A4B5C2B134FE700D7FBE2 /* NativeSuspendTests.swift in Sources */,
+				1D74C6FA2B124DAB001CA21F /* NativeFlowTests.swift in Sources */,
 				1DFC35FE268A2FFE008393FA /* AsyncResultTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -596,7 +657,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				1DCA41A826753C640036C1A3 /* FutureTests.swift in Sources */,
+				1D3A4B5E2B13823F00D7FBE2 /* NativeFlowTests.swift in Sources */,
 				1DCA41B3267545600036C1A3 /* PublisherTests.swift in Sources */,
+				1D3A4B602B138CB000D7FBE2 /* NativeSuspendTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -604,9 +667,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D2583122AA64A230053360E /* NativeFlow.swift in Sources */,
+				1D2583142AA64A4A0053360E /* NativeSuspend.swift in Sources */,
 				1DF3F9DF269369A3004C21F2 /* Observable.swift in Sources */,
 				1DF3F9E0269369A9004C21F2 /* Single.swift in Sources */,
 				1DF3F9E1269369AD004C21F2 /* SingleObservable.swift in Sources */,
+				1D25830C2AA647D40053360E /* DisposedError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -615,7 +681,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				1DF3F9E2269369B5004C21F2 /* ObservableTests.swift in Sources */,
+				1D3A4B622B1393A400D7FBE2 /* NativeFlowTests.swift in Sources */,
 				1DF3F9E3269369BA004C21F2 /* SingleTests.swift in Sources */,
+				1D3A4B642B1397A100D7FBE2 /* NativeSuspendTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

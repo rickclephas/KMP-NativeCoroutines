@@ -6,4 +6,4 @@
 //
 
 /// A function that cancels the coroutines job.
-public typealias NativeCancellable<Unit> = () -> Unit
+public typealias NativeCancellable = () -> Any?

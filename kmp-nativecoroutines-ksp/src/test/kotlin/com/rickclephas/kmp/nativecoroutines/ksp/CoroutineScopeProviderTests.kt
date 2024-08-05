@@ -23,8 +23,8 @@ class CoroutineScopeProviderTests: CompilationTests() {
         import kotlin.native.ObjCName
         
         @ObjCName(name = "returnSuspendValue")
-        public fun returnSuspendValueNative(): NativeSuspend<String> = nativeSuspend(coroutineScope) {
-            returnSuspendValue() }
+        public fun returnSuspendValueNative(): NativeSuspend<String> = nativeSuspend<String>(coroutineScope)
+            { returnSuspendValue() }
     """.trimIndent())
 
     @Test
@@ -48,7 +48,7 @@ class CoroutineScopeProviderTests: CompilationTests() {
         
         @ObjCName(name = "returnFlowValue")
         public fun returnFlowValueNative(): NativeFlow<String> =
-            returnFlowValue().asNativeFlow(coroutineScope)
+            returnFlowValue().asNativeFlow<String>(coroutineScope)
     """.trimIndent())
 
     @Test
@@ -74,7 +74,8 @@ class CoroutineScopeProviderTests: CompilationTests() {
         
         @ObjCName(name = "returnSuspendFlowValue")
         public fun returnSuspendFlowValueNative(): NativeSuspend<NativeFlow<String>> =
-            nativeSuspend(coroutineScope) { returnSuspendFlowValue().asNativeFlow(coroutineScope) }
+            nativeSuspend<NativeFlow<String>>(coroutineScope) {
+            returnSuspendFlowValue().asNativeFlow<String>(coroutineScope) }
     """.trimIndent())
 
     @Test
@@ -98,7 +99,7 @@ class CoroutineScopeProviderTests: CompilationTests() {
         
         @ObjCName(name = "globalFlow")
         public val globalFlowNative: NativeFlow<String>
-          get() = globalFlow.asNativeFlow(coroutineScope)
+          get() = globalFlow.asNativeFlow<String>(coroutineScope)
     """.trimIndent())
 
     @Test
@@ -122,8 +123,8 @@ class CoroutineScopeProviderTests: CompilationTests() {
         import kotlin.native.ObjCName
         
         @ObjCName(name = "returnSuspendValue")
-        public fun MyClass.returnSuspendValueNative(): NativeSuspend<String> = nativeSuspend(coroutineScope)
-            { returnSuspendValue() }
+        public fun MyClass.returnSuspendValueNative(): NativeSuspend<String> =
+            nativeSuspend<String>(coroutineScope) { returnSuspendValue() }
     """.trimIndent())
 
     @Test
@@ -149,8 +150,8 @@ class CoroutineScopeProviderTests: CompilationTests() {
         import kotlin.native.ObjCName
         
         @ObjCName(name = "returnSuspendValue")
-        public fun MyClass.returnSuspendValueNative(): NativeSuspend<String> = nativeSuspend(coroutineScope)
-            { returnSuspendValue() }
+        public fun MyClass.returnSuspendValueNative(): NativeSuspend<String> =
+            nativeSuspend<String>(coroutineScope) { returnSuspendValue() }
     """.trimIndent())
 
     @Test
@@ -179,7 +180,7 @@ class CoroutineScopeProviderTests: CompilationTests() {
         
         @ObjCName(name = "returnSuspendValue")
         public fun MyClass.returnSuspendValueNative(): NativeSuspend<String> =
-            nativeSuspend(myCoroutineScope) { returnSuspendValue() }
+            nativeSuspend<String>(myCoroutineScope) { returnSuspendValue() }
     """.trimIndent())
 
     @Test
@@ -203,8 +204,8 @@ class CoroutineScopeProviderTests: CompilationTests() {
         import kotlin.native.ObjCName
         
         @ObjCName(name = "returnSuspendValue")
-        public fun MyClass.returnSuspendValueNative(): NativeSuspend<String> = nativeSuspend(coroutineScope)
-            { returnSuspendValue() }
+        public fun MyClass.returnSuspendValueNative(): NativeSuspend<String> =
+            nativeSuspend<String>(coroutineScope) { returnSuspendValue() }
     """.trimIndent())
 
     @Test
@@ -232,6 +233,6 @@ class CoroutineScopeProviderTests: CompilationTests() {
         
         @ObjCName(name = "returnSuspendValue")
         public fun MyClass.returnSuspendValueNative(@ObjCName(swiftName = "_") `receiver`: MyOtherClass):
-            NativeSuspend<String> = nativeSuspend(null) { run { `receiver`.returnSuspendValue() } }
+            NativeSuspend<String> = nativeSuspend<String>(null) { run { `receiver`.returnSuspendValue() } }
     """.trimIndent())
 }

@@ -7,3 +7,9 @@ package com.rickclephas.kmp.nativecoroutines
  * it should only be used to test [asNativeError] logic.
  */
 internal expect val NativeError.kotlinCause: Throwable?
+
+/**
+ * Creates a new [NativeError] that can be used for testing.
+ */
+@Suppress("TestFunctionName")
+internal expect fun RandomNativeError(): NativeError

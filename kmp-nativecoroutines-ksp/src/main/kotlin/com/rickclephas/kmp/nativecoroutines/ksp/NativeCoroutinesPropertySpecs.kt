@@ -11,18 +11,18 @@ internal fun KSPropertyDeclaration.toNativeCoroutinesPropertySpecs(
     options: KmpNativeCoroutinesOptions,
     asState: Boolean,
     shouldRefine: Boolean
-): List<PropertySpec>? {
+): List<PropertySpec> {
     val typeParameterResolver = getTypeParameterResolver()
-    val type = type.getReturnType(typeParameterResolver) ?: return null
-    if (type !is ReturnType.Flow) return emptyList() // Only Flow properties are supported
+    val type = type.getCoroutinesType(typeParameterResolver)
+    if (type !is CoroutinesType.Flow) return emptyList() // Only Flow properties are supported
     return buildList {
         val flowSuffix = if (asState) options.stateFlowSuffix else options.suffix
         if (flowSuffix != null)
             toPropertySpec(scopeProperty, flowSuffix, !asState, typeParameterResolver, type, shouldRefine)?.let(::add)
         val valueSuffix = if (asState) options.stateSuffix else options.flowValueSuffix
-        if (type is ReturnType.Flow.State && valueSuffix != null)
+        if (type is CoroutinesType.Flow.State && valueSuffix != null)
             toValuePropertySpec(valueSuffix, asState, typeParameterResolver, type, shouldRefine)?.let(::add)
-        if (type is ReturnType.Flow.Shared && options.flowReplayCacheSuffix != null)
+        if (type is CoroutinesType.Flow.Shared && options.flowReplayCacheSuffix != null)
             toReplayCachePropertySpec(options.flowReplayCacheSuffix, typeParameterResolver, type, shouldRefine)?.let(::add)
     }
 }
@@ -32,18 +32,25 @@ private fun KSPropertyDeclaration.toPropertySpec(
     nameSuffix: String,
     setObjCName: Boolean,
     typeParameterResolver: TypeParameterResolver,
-    type: ReturnType.Flow,
+    type: CoroutinesType.Flow,
     shouldRefine: Boolean
 ): PropertySpec? {
-    var typeName: TypeName = nativeFlowClassName.parameterizedBy(type.valueType).copy(nullable = type.nullable)
+    val valueType = type.valueType.orNativeUnit
+    var typeName: TypeName = nativeFlowClassName.parameterizedBy(valueType).copy(nullable = type.isNullable)
     typeName = typeName.copy(annotations = type.typeReference.annotations.toAnnotationSpecs())
     val simpleName = simpleName.asString()
     val name = "$simpleName$nameSuffix"
     val objCName = if (setObjCName) simpleName else null
     return createPropertySpec(typeParameterResolver, name, objCName, typeName, shouldRefine, { code, codeArgs ->
         codeArgs.add(asNativeFlowMemberName)
+        val genericParam = if (!valueType.isNativeUnit) {
+            codeArgs.add(valueType)
+            "<%T>"
+        } else {
+            ""
+        }
         scopeProperty.codeArg.let(codeArgs::addAll)
-        addCode("return $code${if(type.nullable) "?." else "."}%M(${scopeProperty.code})", *codeArgs.toTypedArray())
+        addCode("return $code${if(type.isNullable) "?." else "."}%M$genericParam(${scopeProperty.code})", *codeArgs.toTypedArray())
     })?.apply {
         scopeProperty.containingFile?.let(::addOriginatingKSFile)
     }?.build()
@@ -53,20 +60,20 @@ private fun KSPropertyDeclaration.toValuePropertySpec(
     nameSuffix: String,
     setObjCName: Boolean,
     typeParameterResolver: TypeParameterResolver,
-    type: ReturnType.Flow.State,
+    type: CoroutinesType.Flow.State,
     shouldRefine: Boolean
 ): PropertySpec? {
     var typeName = type.valueType.copy(annotations = type.typeReference.annotations.toAnnotationSpecs())
-    if (type.nullable) typeName = typeName.copy(nullable = true)
+    if (type.isNullable) typeName = typeName.copy(nullable = true)
     val simpleName = simpleName.asString()
     val name = "$simpleName$nameSuffix"
     val objCName = if (setObjCName) simpleName else null
     return createPropertySpec(typeParameterResolver, name, objCName, typeName, shouldRefine, { code, codeArgs ->
-        addCode("return $code${if(type.nullable) "?." else "."}value", *codeArgs.toTypedArray())
+        addCode("return $code${if(type.isNullable) "?." else "."}value", *codeArgs.toTypedArray())
     }, when (type.mutable) {
         false -> null
         else -> { code, codeArgs ->
-            addCode("$code${if(type.nullable) "?." else "."}value = value", *codeArgs.toTypedArray())
+            addCode("$code${if(type.isNullable) "?." else "."}value = value", *codeArgs.toTypedArray())
         }
     })?.build()
 }
@@ -74,15 +81,15 @@ private fun KSPropertyDeclaration.toValuePropertySpec(
 private fun KSPropertyDeclaration.toReplayCachePropertySpec(
     nameSuffix: String,
     typeParameterResolver: TypeParameterResolver,
-    type: ReturnType.Flow.Shared,
+    type: CoroutinesType.Flow.Shared,
     shouldRefine: Boolean
 ): PropertySpec? {
-    var typeName: TypeName = LIST.parameterizedBy(type.valueType).copy(nullable = type.nullable)
+    var typeName: TypeName = LIST.parameterizedBy(type.valueType).copy(nullable = type.isNullable)
     typeName = typeName.copy(annotations = type.typeReference.annotations.toAnnotationSpecs())
     val simpleName = simpleName.asString()
     val name = "$simpleName$nameSuffix"
     return createPropertySpec(typeParameterResolver, name, null, typeName, shouldRefine, { code, codeArgs ->
-        addCode("return $code${if(type.nullable) "?." else "."}replayCache", *codeArgs.toTypedArray())
+        addCode("return $code${if(type.isNullable) "?." else "."}replayCache", *codeArgs.toTypedArray())
     })?.build()
 }
 

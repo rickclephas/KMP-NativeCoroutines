@@ -1,10 +1,9 @@
 package com.rickclephas.kmp.nativecoroutines.compiler.utils
 
-import org.jetbrains.kotlin.name.Name
-
 internal data class CallableSignature(
     val isSuspend: Boolean,
-    val valueParameters: List<Pair<Name, Type>>,
+    val receiverType: Type?,
+    val valueTypes: List<Type>,
     val returnType: Type
 ) {
     sealed class Type {
@@ -31,6 +30,15 @@ internal data class CallableSignature(
                 val isMutable: Boolean
             ): Flow()
         }
+
+        data class Function(
+            override val rawTypeIndex: Int,
+            override val isNullable: Boolean,
+            val isSuspend: Boolean,
+            val receiverType: Type?,
+            val valueTypes: List<Type>,
+            val returnType: Type
+        ): Type()
 
         data class Raw(
             override val rawTypeIndex: Int,
