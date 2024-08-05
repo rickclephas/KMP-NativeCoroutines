@@ -130,32 +130,28 @@ internal class FirKmpNativeCoroutinesDeclarationChecker(
         val hasAnnotation = coroutinesAnnotations.isNotEmpty()
         val isIgnored = annotations.containsKey(NativeCoroutinesIgnore)
         val isExposed = isPublic && !isRefined && !hasAnnotation
-        if (callableSignature != null && isExposed && !isIgnored && !isOverride && !isActual) {
-            val isGenerated = context.containingFilePath?.let {
-                generatedSourceDirs.any(Path(it)::startsWith)
-            } ?: false
-            if (!isGenerated) {
-                if (callableSignature.isSuspend) {
-                    exposedSuspendFunction.reportOn(declaration.source)
-                }
-                val receiverType = callableSignature.receiverType
-                if (receiverType != null) {
-                    val param = declaration.receiverParameter
-                    if (receiverType.isOrHasSuspend) exposedSuspendType.reportOn(param?.source)
-                    if (receiverType.isOrHasFlow) exposedFlowType.reportOn(param?.source)
-                }
-                callableSignature.valueTypes.forEachIndexed { index, type ->
-                    val param = (declaration as? FirFunction)?.valueParameters?.get(index)
-                    if (type.isOrHasSuspend) exposedSuspendType.reportOn(param?.source)
-                    if (type.isOrHasFlow) exposedFlowType.reportOn(param?.source)
-                }
-                val returnType = callableSignature.returnType
-                if (declaration is FirProperty && returnType is CallableSignature.Type.Flow.State) {
-                    exposedStateFlowProperty.reportOn(declaration.source)
-                } else {
-                    if (returnType.isOrHasSuspend) exposedSuspendType.reportOn(declaration.source)
-                    if (returnType.isOrHasFlow) exposedFlowType.reportOn(declaration.source)
-                }
+        val isBase = !isOverride && !isActual
+        if (callableSignature != null && isExposed && isBase && !isIgnored && !context.isGenerated) {
+            if (callableSignature.isSuspend) {
+                exposedSuspendFunction.reportOn(declaration.source)
+            }
+            val receiverType = callableSignature.receiverType
+            if (receiverType != null) {
+                val param = declaration.receiverParameter
+                if (receiverType.isOrHasSuspend) exposedSuspendType.reportOn(param?.source)
+                if (receiverType.isOrHasFlow) exposedFlowType.reportOn(param?.source)
+            }
+            callableSignature.valueTypes.forEachIndexed { index, type ->
+                val param = (declaration as? FirFunction)?.valueParameters?.get(index)
+                if (type.isOrHasSuspend) exposedSuspendType.reportOn(param?.source)
+                if (type.isOrHasFlow) exposedFlowType.reportOn(param?.source)
+            }
+            val returnType = callableSignature.returnType
+            if (declaration is FirProperty && returnType is CallableSignature.Type.Flow.State) {
+                exposedStateFlowProperty.reportOn(declaration.source)
+            } else {
+                if (returnType.isOrHasSuspend) exposedSuspendType.reportOn(declaration.source)
+                if (returnType.isOrHasFlow) exposedFlowType.reportOn(declaration.source)
             }
         }
         //endregion
@@ -239,4 +235,7 @@ internal class FirKmpNativeCoroutinesDeclarationChecker(
         }
         //endregion
     }
+
+    private val CheckerContext.isGenerated: Boolean
+        get() = containingFilePath?.let { generatedSourceDirs.any(Path(it)::startsWith) } ?: false
 }

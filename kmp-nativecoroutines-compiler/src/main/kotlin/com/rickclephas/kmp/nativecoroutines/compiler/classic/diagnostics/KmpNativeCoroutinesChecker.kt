@@ -130,33 +130,30 @@ public class KmpNativeCoroutinesChecker(
         val hasAnnotation = coroutinesAnnotations.isNotEmpty()
         val isIgnored = annotations.contains(NativeCoroutinesIgnore)
         val isExposed = isPublic && !isRefined && !hasAnnotation
-        if (callableSignature != null && isExposed && !isIgnored && !isOverride && !isActual) {
-            val isGenerated = generatedSourceDirs.any(Path(declaration.containingKtFile.virtualFilePath)::startsWith)
-            if (!isGenerated) {
-
-                if (callableSignature.isSuspend) {
-                    exposedSuspendFunction?.on(declaration)?.let(context.trace::report)
-                }
-                val receiverType = callableSignature.receiverType
-                if (receiverType != null) {
-                    val element = descriptor.extensionReceiverParameter?.let(::getSourceFromDescriptor) as? KtElement
-                        ?: declaration
-                    if (receiverType.isOrHasSuspend) exposedSuspendType?.on(element)?.let(context.trace::report)
-                    if (receiverType.isOrHasFlow) exposedFlowType?.on(element)?.let(context.trace::report)
-                }
-                callableSignature.valueTypes.forEachIndexed { index, type ->
-                    val element = descriptor.valueParameters[index].let(::getSourceFromDescriptor) as? KtElement
-                        ?: declaration
-                    if (type.isOrHasSuspend) exposedSuspendType?.on(element)?.let(context.trace::report)
-                    if (type.isOrHasFlow) exposedFlowType?.on(element)?.let(context.trace::report)
-                }
-                val returnType = callableSignature.returnType
-                if (descriptor is PropertyDescriptor && returnType is CallableSignature.Type.Flow.State) {
-                    exposedStateFlowProperty?.on(declaration)?.let(context.trace::report)
-                } else {
-                    if (returnType.isOrHasSuspend) exposedSuspendType?.on(declaration)?.let(context.trace::report)
-                    if (returnType.isOrHasFlow) exposedFlowType?.on(declaration)?.let(context.trace::report)
-                }
+        val isBase = !isOverride && !isActual
+        if (callableSignature != null && isExposed && isBase && !isIgnored && !declaration.isGenerated) {
+            if (callableSignature.isSuspend) {
+                exposedSuspendFunction?.on(declaration)?.let(context.trace::report)
+            }
+            val receiverType = callableSignature.receiverType
+            if (receiverType != null) {
+                val element = descriptor.extensionReceiverParameter?.let(::getSourceFromDescriptor) as? KtElement
+                    ?: declaration
+                if (receiverType.isOrHasSuspend) exposedSuspendType?.on(element)?.let(context.trace::report)
+                if (receiverType.isOrHasFlow) exposedFlowType?.on(element)?.let(context.trace::report)
+            }
+            callableSignature.valueTypes.forEachIndexed { index, type ->
+                val element = descriptor.valueParameters[index].let(::getSourceFromDescriptor) as? KtElement
+                    ?: declaration
+                if (type.isOrHasSuspend) exposedSuspendType?.on(element)?.let(context.trace::report)
+                if (type.isOrHasFlow) exposedFlowType?.on(element)?.let(context.trace::report)
+            }
+            val returnType = callableSignature.returnType
+            if (descriptor is PropertyDescriptor && returnType is CallableSignature.Type.Flow.State) {
+                exposedStateFlowProperty?.on(declaration)?.let(context.trace::report)
+            } else {
+                if (returnType.isOrHasSuspend) exposedSuspendType?.on(declaration)?.let(context.trace::report)
+                if (returnType.isOrHasFlow) exposedFlowType?.on(declaration)?.let(context.trace::report)
             }
         }
         //endregion
@@ -235,6 +232,9 @@ public class KmpNativeCoroutinesChecker(
         }
         //endregion
     }
+
+    private val KtDeclaration.isGenerated: Boolean
+        get() = generatedSourceDirs.any(Path(containingKtFile.virtualFilePath)::startsWith)
 
     private fun BindingTrace.report(
         diagnosticFactory: DiagnosticFactory0<KtElement>,
