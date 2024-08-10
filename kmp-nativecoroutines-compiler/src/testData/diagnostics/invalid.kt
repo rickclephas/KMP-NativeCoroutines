@@ -1,10 +1,8 @@
 // FIR_IDENTICAL
 // FILE: customStateFlow.kt
 
-import kotlinx.coroutines.ExperimentalForInheritanceCoroutinesApi
 import kotlinx.coroutines.flow.StateFlow
 
-@OptIn(ExperimentalForInheritanceCoroutinesApi::class)
 interface CustomStateFlow<out T>: StateFlow<T>
 
 // FILE: customCoroutineScope.kt
