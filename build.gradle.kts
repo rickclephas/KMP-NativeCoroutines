@@ -18,7 +18,7 @@ buildscript {
 
 allprojects {
     group = "com.rickclephas.kmp"
-    version = "1.0.0-ALPHA-31-kotlinx-1.9.0-RC"
+    version = "1.0.0-ALPHA-34"
 
     repositories {
         mavenCentral()
@@ -35,8 +35,8 @@ apiValidation {
 // TODO: Remove once default NodeJS version supports wasm
 plugins.withType<NodeJsRootPlugin> {
     extensions.configure(NodeJsRootExtension::class) {
-        nodeVersion = "21.0.0-v8-canary20231019bd785be450"
-        nodeDownloadBaseUrl = "https://nodejs.org/download/v8-canary"
+        version = "21.0.0-v8-canary20231019bd785be450"
+        downloadBaseUrl = "https://nodejs.org/download/v8-canary"
     }
     tasks.withType<KotlinNpmInstallTask> {
         args.add("--ignore-engines")

@@ -4,15 +4,18 @@
 
 // FILE: customFlows.kt
 
+import kotlinx.coroutines.ExperimentalForInheritanceCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.StateFlow
 
 interface CustomFlow<out T>: Flow<T>
 
+@OptIn(ExperimentalForInheritanceCoroutinesApi::class)
 interface CustomStateFlow<out T>: StateFlow<T>
 
 // FILE: test.kt
 
+import kotlin.experimental.ExperimentalObjCRefinement
 import kotlin.native.HiddenFromObjC
 import kotlin.native.ShouldRefineInSwift
 import kotlinx.coroutines.flow.Flow
@@ -31,6 +34,7 @@ fun topLevelCustomFlowFunction(): <!EXPOSED_FLOW_TYPE!>CustomFlow<Int><!> = thro
 
 <!EXPOSED_SUSPEND_FUNCTION!>suspend<!> fun topLevelSuspendFlowFunction(): <!EXPOSED_FLOW_TYPE!>Flow<Int><!> = throw Throwable()
 
+@OptIn(ExperimentalObjCRefinement::class)
 @HiddenFromObjC
 suspend fun topLevelRefinedSuspendFunction(): Int = 0
 
@@ -44,6 +48,7 @@ val topLevelCustomFlowProperty: <!EXPOSED_FLOW_TYPE!>CustomFlow<Int><!> get() = 
 
 val topLevelCustomStateFlowProperty: <!EXPOSED_STATE_FLOW_PROPERTY!>CustomStateFlow<Int><!> get() = throw Throwable()
 
+@OptIn(ExperimentalObjCRefinement::class)
 @ShouldRefineInSwift
 val topLevelRefinedFlowProperty: Flow<Int> get() = throw Throwable()
 

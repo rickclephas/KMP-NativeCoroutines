@@ -21,6 +21,7 @@ internal class KmpNativeCoroutinesSymbolProcessor(
     }
 
     override fun process(resolver: Resolver): List<KSAnnotated> {
+        if (options.k2Mode) return emptyList()
         coroutineScopeProvider.process(resolver)
         val deferredSymbols = mutableListOf<KSAnnotated>()
         resolver.getSymbolsWithAnnotation(nativeCoroutinesAnnotationName).forEach { symbol ->

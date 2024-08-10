@@ -49,6 +49,8 @@ public object FirKmpNativeCoroutinesErrors {
 
     public val UNSUPPORTED_CLASS_EXTENSION_PROPERTY: KtDiagnosticFactory0 by error0<KtElement>()
 
+    public val IMPLICIT_RETURN_TYPE: KtDiagnosticFactory0 by error0<KtElement>(SourceElementPositioningStrategies.DECLARATION_NAME)
+
     init {
         RootDiagnosticRendererFactory.registerFactory(FirDefaultErrorMessages)
     }

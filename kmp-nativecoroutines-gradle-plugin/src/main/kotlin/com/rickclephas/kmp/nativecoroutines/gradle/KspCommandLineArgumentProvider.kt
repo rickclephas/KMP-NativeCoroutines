@@ -11,6 +11,7 @@ internal class KspCommandLineArgumentProvider(
         nativeCoroutines.flowValueSuffix?.let { "nativeCoroutines.flowValueSuffix=$it" },
         nativeCoroutines.flowReplayCacheSuffix?.let { "nativeCoroutines.flowReplayCacheSuffix=$it" },
         "nativeCoroutines.stateSuffix=${nativeCoroutines.stateSuffix}",
-        nativeCoroutines.stateFlowSuffix?.let { "nativeCoroutines.stateFlowSuffix=$it" }
+        nativeCoroutines.stateFlowSuffix?.let { "nativeCoroutines.stateFlowSuffix=$it" },
+        "nativeCoroutines.k2Mode=${nativeCoroutines.k2Mode}",
     )
 }

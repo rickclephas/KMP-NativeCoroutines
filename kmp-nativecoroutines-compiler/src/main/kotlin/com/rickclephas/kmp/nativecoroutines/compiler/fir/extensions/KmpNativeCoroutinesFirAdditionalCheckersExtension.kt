@@ -2,6 +2,7 @@ package com.rickclephas.kmp.nativecoroutines.compiler.fir.extensions
 
 import com.rickclephas.kmp.nativecoroutines.compiler.config.EXPOSED_SEVERITY
 import com.rickclephas.kmp.nativecoroutines.compiler.config.GENERATED_SOURCE_DIR
+import com.rickclephas.kmp.nativecoroutines.compiler.config.K2_MODE
 import com.rickclephas.kmp.nativecoroutines.compiler.config.get
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesDeclarationChecker
 import org.jetbrains.kotlin.config.CompilerConfiguration
@@ -18,7 +19,8 @@ internal class KmpNativeCoroutinesFirAdditionalCheckersExtension(
         override val callableDeclarationCheckers = setOf(
             FirKmpNativeCoroutinesDeclarationChecker(
                 exposedSeverity = configuration[EXPOSED_SEVERITY],
-                generatedSourceDirs = configuration[GENERATED_SOURCE_DIR]
+                generatedSourceDirs = configuration[GENERATED_SOURCE_DIR],
+                isK2Mode = configuration[K2_MODE],
             )
         )
     }
