@@ -1,5 +1,7 @@
 package com.rickclephas.kmp.nativecoroutines.compiler.fir.codegen
 
+import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.FirCallableSignature
+import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.getNativeType
 import org.jetbrains.kotlin.KtFakeSourceElementKind
 import org.jetbrains.kotlin.fakeElement
 import org.jetbrains.kotlin.fir.declarations.FirDeclarationOrigin
@@ -12,15 +14,15 @@ import org.jetbrains.kotlin.fir.resolve.substitution.ConeSubstitutor
 import org.jetbrains.kotlin.fir.symbols.SymbolInternals
 import org.jetbrains.kotlin.fir.symbols.impl.FirFunctionSymbol
 import org.jetbrains.kotlin.fir.symbols.impl.FirValueParameterSymbol
-import org.jetbrains.kotlin.fir.types.coneType
 import org.jetbrains.kotlin.fir.types.toFirResolvedTypeRef
 
 internal fun FirExtension.buildValueParametersCopy(
     originalParameters: List<FirValueParameterSymbol>,
     containingFunctionSymbol: FirFunctionSymbol<*>,
     origin: FirDeclarationOrigin,
+    firCallableSignature: FirCallableSignature,
     substitutor: ConeSubstitutor,
-): List<FirValueParameter> = originalParameters.map { parameter ->
+): List<FirValueParameter> = originalParameters.mapIndexed { index, parameter ->
     buildValueParameter {
         resolvePhase = FirResolvePhase.BODY_RESOLVE
         moduleData = session.moduleData
@@ -38,7 +40,8 @@ internal fun FirExtension.buildValueParametersCopy(
 
         // TODO: support contextReceivers once exported to ObjC
 
-        returnTypeRef = parameter.resolvedReturnTypeRef.coneType
+        val valueType = firCallableSignature.signature.valueTypes[index]
+        returnTypeRef = firCallableSignature.getNativeType(valueType)
             .let(substitutor::substituteOrSelf)
             .toFirResolvedTypeRef()
 

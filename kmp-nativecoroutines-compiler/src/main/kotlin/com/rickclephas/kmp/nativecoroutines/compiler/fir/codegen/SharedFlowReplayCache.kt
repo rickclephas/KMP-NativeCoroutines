@@ -57,6 +57,7 @@ internal fun FirExtension.buildSharedFlowReplayCacheProperty(
 
         receiverParameter = buildReceiverParameterCopy(
             originalSymbol.receiverParameter,
+            firCallableSignature,
             typeParameters.substitutor
         )
 

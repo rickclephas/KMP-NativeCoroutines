@@ -55,6 +55,7 @@ internal fun FirExtension.buildNativeProperty(
 
         receiverParameter = buildReceiverParameterCopy(
             originalSymbol.receiverParameter,
+            firCallableSignature,
             typeParameters.substitutor
         )
 
