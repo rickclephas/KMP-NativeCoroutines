@@ -110,4 +110,4 @@ private fun FirAnnotation.getArguments(vararg names: Name): Map<Name, FirExpress
 }
 
 private inline fun <reified T> FirExpression.getLiteralValue(): T? =
-    (this as? FirLiteralExpression<*>)?.value as? T
+    (this as? FirLiteralExpression)?.value as? T
