@@ -6,7 +6,7 @@ FILE fqName:<root> fileName:/coroutinescope1.kt
       EXPRESSION_BODY
         CALL 'public final fun CoroutineScope (context: kotlin.coroutines.CoroutineContext): kotlinx.coroutines.CoroutineScope declared in kotlinx.coroutines' type=kotlinx.coroutines.CoroutineScope origin=null
           context: CALL 'public final fun <get-Default> (): kotlinx.coroutines.CoroutineDispatcher declared in kotlinx.coroutines.Dispatchers' type=kotlinx.coroutines.CoroutineDispatcher origin=GET_PROPERTY
-            $this: GET_OBJECT 'CLASS IR_EXTERNAL_DECLARATION_STUB OBJECT name:Dispatchers modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlinx.coroutines.Dispatchers
+            $this: GET_OBJECT 'CLASS OBJECT name:Dispatchers modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlinx.coroutines.Dispatchers
     FUN DEFAULT_PROPERTY_ACCESSOR name:<get-coroutineScope1> visibility:internal modality:FINAL <> () returnType:kotlinx.coroutines.CoroutineScope
       correspondingProperty: PROPERTY name:coroutineScope1 visibility:internal modality:FINAL [val]
       BLOCK_BODY
@@ -34,7 +34,7 @@ FILE fqName:<root> fileName:/coroutinescope1.kt
         EXPRESSION_BODY
           CALL 'public final fun CoroutineScope (context: kotlin.coroutines.CoroutineContext): kotlinx.coroutines.CoroutineScope declared in kotlinx.coroutines' type=kotlinx.coroutines.CoroutineScope origin=null
             context: CALL 'public final fun <get-Default> (): kotlinx.coroutines.CoroutineDispatcher declared in kotlinx.coroutines.Dispatchers' type=kotlinx.coroutines.CoroutineDispatcher origin=GET_PROPERTY
-              $this: GET_OBJECT 'CLASS IR_EXTERNAL_DECLARATION_STUB OBJECT name:Dispatchers modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlinx.coroutines.Dispatchers
+              $this: GET_OBJECT 'CLASS OBJECT name:Dispatchers modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlinx.coroutines.Dispatchers
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-coroutineScope2> visibility:protected modality:FINAL <> ($this:<root>.MyClass1) returnType:kotlinx.coroutines.CoroutineScope
         correspondingProperty: PROPERTY name:coroutineScope2 visibility:protected modality:FINAL [val]
         $this: VALUE_PARAMETER name:<this> type:<root>.MyClass1
@@ -134,7 +134,7 @@ FILE fqName:<root> fileName:/coroutinescope1.kt
       annotations:
         NativeCoroutineScope
       overridden:
-        protected final coroutineScope2: kotlinx.coroutines.CoroutineScope
+        protected final coroutineScope2: kotlinx.coroutines.CoroutineScope declared in <root>.MyClass1
       FUN FAKE_OVERRIDE name:<get-coroutineScope2> visibility:protected modality:FINAL <> ($this:<root>.MyClass1) returnType:kotlinx.coroutines.CoroutineScope [fake_override]
         correspondingProperty: PROPERTY FAKE_OVERRIDE name:coroutineScope2 visibility:protected modality:FINAL [fake_override,val]
         overridden:
@@ -167,7 +167,7 @@ FILE fqName:<root> fileName:/coroutinescope1.kt
         EXPRESSION_BODY
           CALL 'public final fun CoroutineScope (context: kotlin.coroutines.CoroutineContext): kotlinx.coroutines.CoroutineScope declared in kotlinx.coroutines' type=kotlinx.coroutines.CoroutineScope origin=null
             context: CALL 'public final fun <get-Default> (): kotlinx.coroutines.CoroutineDispatcher declared in kotlinx.coroutines.Dispatchers' type=kotlinx.coroutines.CoroutineDispatcher origin=GET_PROPERTY
-              $this: GET_OBJECT 'CLASS IR_EXTERNAL_DECLARATION_STUB OBJECT name:Dispatchers modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlinx.coroutines.Dispatchers
+              $this: GET_OBJECT 'CLASS OBJECT name:Dispatchers modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlinx.coroutines.Dispatchers
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-coroutineScope3> visibility:internal modality:FINAL <> ($this:<root>.MyClass3) returnType:kotlinx.coroutines.CoroutineScope
         correspondingProperty: PROPERTY name:coroutineScope3 visibility:internal modality:FINAL [val]
         $this: VALUE_PARAMETER name:<this> type:<root>.MyClass3
@@ -233,7 +233,7 @@ FILE fqName:<root> fileName:/coroutinescope1.kt
       annotations:
         NativeCoroutineScope
       overridden:
-        protected final coroutineScope2: kotlinx.coroutines.CoroutineScope
+        protected final coroutineScope2: kotlinx.coroutines.CoroutineScope declared in <root>.MyClass1
       FUN FAKE_OVERRIDE name:<get-coroutineScope2> visibility:protected modality:FINAL <> ($this:<root>.MyClass1) returnType:kotlinx.coroutines.CoroutineScope [fake_override]
         correspondingProperty: PROPERTY FAKE_OVERRIDE name:coroutineScope2 visibility:protected modality:FINAL [fake_override,val]
         overridden:
@@ -358,7 +358,7 @@ FILE fqName:<root> fileName:/coroutinescope2.kt
         EXPRESSION_BODY
           CALL 'public final fun CoroutineScope (context: kotlin.coroutines.CoroutineContext): kotlinx.coroutines.CoroutineScope declared in kotlinx.coroutines' type=kotlinx.coroutines.CoroutineScope origin=null
             context: CALL 'public final fun <get-Default> (): kotlinx.coroutines.CoroutineDispatcher declared in kotlinx.coroutines.Dispatchers' type=kotlinx.coroutines.CoroutineDispatcher origin=GET_PROPERTY
-              $this: GET_OBJECT 'CLASS IR_EXTERNAL_DECLARATION_STUB OBJECT name:Dispatchers modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlinx.coroutines.Dispatchers
+              $this: GET_OBJECT 'CLASS OBJECT name:Dispatchers modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlinx.coroutines.Dispatchers
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-coroutineScope4> visibility:private modality:FINAL <> ($this:<root>.MyClass6) returnType:kotlinx.coroutines.CoroutineScope
         correspondingProperty: PROPERTY name:coroutineScope4 visibility:private modality:FINAL [val]
         $this: VALUE_PARAMETER name:<this> type:<root>.MyClass6
