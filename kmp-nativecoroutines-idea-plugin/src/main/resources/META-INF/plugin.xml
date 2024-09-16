@@ -7,7 +7,7 @@
     <extensions defaultExtensionNs="org.jetbrains.kotlin">
         <gradleProjectImportHandler implementation="com.rickclephas.kmp.nativecoroutines.idea.gradle.KmpNativeCoroutinesGradleProjectImportHandler"/>
         <storageComponentContainerContributor implementation="com.rickclephas.kmp.nativecoroutines.idea.compiler.extensions.KmpNativeCoroutinesStorageComponentContainerContributor"/>
-        <quickFixContributor implementation="com.rickclephas.kmp.nativecoroutines.idea.quickfixes.KmpNativeCoroutinesQuickFixContributor"/>
+        <quickFixContributor implementation="com.rickclephas.kmp.nativecoroutines.idea.quickfixes.k1.KmpNativeCoroutinesQuickFixContributor"/>
     </extensions>
     <extensions defaultExtensionNs="org.jetbrains.plugins.gradle">
         <projectResolve implementation="com.rickclephas.kmp.nativecoroutines.idea.gradle.KmpNativeCoroutinesProjectResolverExtension" order="last"/>
