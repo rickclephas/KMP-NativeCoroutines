@@ -24,7 +24,7 @@ kotlin {
 
 dependencies {
     intellijPlatform {
-        intellijIdeaCommunity("2024.1")
+        intellijIdeaCommunity("2024.2.1")
 
         bundledPlugins("org.jetbrains.kotlin", "com.intellij.gradle")
 
@@ -52,8 +52,8 @@ intellijPlatform {
         """.trimIndent()
 
         ideaVersion {
-            sinceBuild = "241"
-            untilBuild = "242.*"
+            sinceBuild = "242"
+            untilBuild = "243.*"
         }
 
         vendor {
@@ -109,7 +109,7 @@ val runIntelliJUltimate by intellijPlatformTesting.runIde.registering {
 
 val runAndroidStudio by intellijPlatformTesting.runIde.registering {
     type = IntelliJPlatformType.AndroidStudio
-    version = "2024.1.1.11"
+    version = "2024.2.1.7"
 }
 
 tasks.withType(RunIdeTask::class) {
