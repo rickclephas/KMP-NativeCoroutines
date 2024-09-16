@@ -114,6 +114,8 @@ val runAndroidStudio by intellijPlatformTesting.runIde.registering {
 
 tasks.withType(RunIdeTask::class) {
     maxHeapSize = "4g"
+    jvmArguments.add("-Didea.kotlin.plugin.use.k2=true")
+    jvmArguments.add("-Dkotlin.k2.only.bundled.compiler.plugins.enabled=false")
 }
 
 tasks.withType(VerifyPluginTask::class) {
