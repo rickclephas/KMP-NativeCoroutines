@@ -1,6 +1,7 @@
 @file:Suppress("UnstableApiUsage")
 
 import org.jetbrains.intellij.platform.gradle.IntelliJPlatformType
+import org.jetbrains.intellij.platform.gradle.models.ProductRelease
 import org.jetbrains.intellij.platform.gradle.tasks.RunIdeTask
 import org.jetbrains.intellij.platform.gradle.tasks.VerifyPluginTask
 
@@ -81,6 +82,7 @@ intellijPlatform {
             if (verificationIde != null) {
                 val (platformType, build) = verificationIde.split('-', limit = 2)
                 select {
+                    channels = ProductRelease.Channel.values().toList()
                     types = listOf(IntelliJPlatformType.fromCode(platformType))
                     sinceBuild = build
                     untilBuild = "$build.*"
