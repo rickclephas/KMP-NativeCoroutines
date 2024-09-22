@@ -49,7 +49,7 @@ internal class FirCallableSignature(
 }
 
 internal fun FirCallableSymbol<*>.getCallableSignature(session: FirSession): FirCallableSignature? {
-    val returnType = resolvedReturnTypeRefOrNull?.type?.fullyExpandedType(session) ?: return null
+    val returnType = resolvedReturnTypeRefOrNull?.coneType?.fullyExpandedType(session) ?: return null
     return FirCallableSignature(session) {
         val valueParameters = when (this@getCallableSignature) {
             is FirFunctionSymbol<*> -> valueParameterSymbols.map {
