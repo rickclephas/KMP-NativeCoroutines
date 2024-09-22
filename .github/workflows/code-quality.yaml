@@ -1,9 +1,9 @@
 name: Qodana
 on:
   workflow_dispatch:
-  pull_request:
-    branches:
-      - master
+#  pull_request:
+#    branches:
+#      - master
 jobs:
   qodana:
     runs-on: ubuntu-latest
@@ -19,12 +19,10 @@ jobs:
           fetch-depth: 0
       - id: get-java-home-11
         run: echo "JAVA_HOME_11_X64=$JAVA_HOME_11_X64" >> $GITHUB_OUTPUT
-      - id: get-java-home-21
-        run: echo "JAVA_HOME_21_X64=$JAVA_HOME_21_X64" >> $GITHUB_OUTPUT
       - name: 'Qodana Scan'
         uses: JetBrains/qodana-action@v2024.1
         with:
-          args: -v,${{ steps.get-java-home-11.outputs.JAVA_HOME_11_X64 }}:/root/.jdks/jdk11,${{ steps.get-java-home-21.outputs.JAVA_HOME_21_X64 }}:/root/.jdks/jdk21
+          args: -v,${{ steps.get-java-home-11.outputs.JAVA_HOME_11_X64 }}:/root/.jdks/jdk11
           post-pr-comment: false
         env:
           QODANA_TOKEN: ${{ secrets.QODANA_TOKEN }}
