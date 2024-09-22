@@ -15,7 +15,7 @@ import org.jetbrains.kotlin.name.StandardClassIds
 internal fun FirSession.buildTodoCall(reason: String): FirFunctionCall = buildFunctionCall {
     val callableId = CallableIds.todo
     val todoSymbol = symbolProvider.getTopLevelFunctionSymbols(callableId.packageName, callableId.callableName)
-        .single { it.valueParameterSymbols.size == 1 }
+        .first { it.valueParameterSymbols.size == 1 } // we have 2 symbols in IDE (K/N and Gradle stdlib)
     coneTypeOrNull = StandardClassIds.Nothing.constructClassLikeType()
     @OptIn(SymbolInternals::class)
     val reasonParameter = todoSymbol.valueParameterSymbols.first().fir

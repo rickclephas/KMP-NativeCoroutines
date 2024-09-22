@@ -14,8 +14,13 @@ public final class com/rickclephas/kmp/nativecoroutines/idea/gradle/KmpNativeCor
 
 public abstract interface class com/rickclephas/kmp/nativecoroutines/idea/gradle/KmpNativeCoroutinesModel : java/io/Serializable {
 	public abstract fun getExposedSeverity ()Ljava/lang/String;
+	public abstract fun getFlowReplayCacheSuffix ()Ljava/lang/String;
+	public abstract fun getFlowValueSuffix ()Ljava/lang/String;
 	public abstract fun getGeneratedSourceDirs ()Ljava/util/List;
 	public abstract fun getK2Mode ()Z
+	public abstract fun getStateFlowSuffix ()Ljava/lang/String;
+	public abstract fun getStateSuffix ()Ljava/lang/String;
+	public abstract fun getSuffix ()Ljava/lang/String;
 }
 
 public final class com/rickclephas/kmp/nativecoroutines/idea/gradle/KmpNativeCoroutinesModelBuilderService : org/jetbrains/plugins/gradle/tooling/AbstractModelBuilderService {
@@ -33,7 +38,7 @@ public final class com/rickclephas/kmp/nativecoroutines/idea/gradle/KmpNativeCor
 	public fun populateModuleExtraModels (Lorg/gradle/tooling/model/idea/IdeaModule;Lcom/intellij/openapi/externalSystem/model/DataNode;)V
 }
 
-public final class com/rickclephas/kmp/nativecoroutines/idea/quickfixes/KmpNativeCoroutinesQuickFixContributor : org/jetbrains/kotlin/idea/quickfix/QuickFixContributor {
+public final class com/rickclephas/kmp/nativecoroutines/idea/quickfixes/k1/KmpNativeCoroutinesQuickFixContributor : org/jetbrains/kotlin/idea/quickfix/QuickFixContributor {
 	public fun <init> ()V
 	public fun registerQuickFixes (Lorg/jetbrains/kotlin/idea/quickfix/QuickFixes;)V
 }
