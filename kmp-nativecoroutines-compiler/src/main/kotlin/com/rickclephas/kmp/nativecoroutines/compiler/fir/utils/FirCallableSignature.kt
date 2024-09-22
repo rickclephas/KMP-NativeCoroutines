@@ -94,7 +94,7 @@ private fun FirCallableSignature.Builder.createType(rawType: ConeKotlinType): Ca
     return rawType.asRawType()
 }
 
-private val ConeKotlinType.flowValueType: ConeKotlinType
+private val ConeClassLikeType.flowValueType: ConeKotlinType
     get() = when (val argument = typeArguments.firstOrNull()) {
         is ConeKotlinTypeProjection -> argument.type
         is ConeStarProjection, null -> StandardClassIds.Any.constructClassLikeType(isNullable = true)
