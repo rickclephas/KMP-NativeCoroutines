@@ -19,7 +19,7 @@ repositories {
 
 kotlin {
     explicitApi()
-    jvmToolchain(17)
+    jvmToolchain(21)
 }
 
 dependencies {
