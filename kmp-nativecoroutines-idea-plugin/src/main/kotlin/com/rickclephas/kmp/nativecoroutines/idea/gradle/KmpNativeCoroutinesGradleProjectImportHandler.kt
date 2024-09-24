@@ -27,6 +27,11 @@ public class KmpNativeCoroutinesGradleProjectImportHandler: AbstractCompilerPlug
     override fun getOptions(
         model: KmpNativeCoroutinesModel
     ): List<PluginOption> = buildList {
+        add(SUFFIX, model.suffix)
+        model.flowValueSuffix?.let { add(FLOW_VALUE_SUFFIX, it) }
+        model.flowReplayCacheSuffix?.let { add(FLOW_REPLAY_CACHE_SUFFIX, it) }
+        add(STATE_SUFFIX, model.stateSuffix)
+        model.stateFlowSuffix?.let { add(STATE_FLOW_SUFFIX, it) }
         add(EXPOSED_SEVERITY, model.exposedSeverity)
         addAll(GENERATED_SOURCE_DIR, model.generatedSourceDirs)
         add(K2_MODE, model.k2Mode.toString())
