@@ -1,6 +1,7 @@
 @file:Suppress("UnstableApiUsage")
 
 import org.jetbrains.intellij.platform.gradle.IntelliJPlatformType
+import org.jetbrains.intellij.platform.gradle.models.ProductRelease
 import org.jetbrains.intellij.platform.gradle.tasks.RunIdeTask
 import org.jetbrains.intellij.platform.gradle.tasks.VerifyPluginTask
 
@@ -19,12 +20,12 @@ repositories {
 
 kotlin {
     explicitApi()
-    jvmToolchain(17)
+    jvmToolchain(21)
 }
 
 dependencies {
     intellijPlatform {
-        intellijIdeaCommunity("2024.1")
+        intellijIdeaCommunity("2024.2.1")
 
         bundledPlugins("org.jetbrains.kotlin", "com.intellij.gradle")
 
@@ -52,7 +53,7 @@ intellijPlatform {
         """.trimIndent()
 
         ideaVersion {
-            sinceBuild = "241"
+            sinceBuild = "242"
             untilBuild = "242.*"
         }
 
@@ -81,6 +82,7 @@ intellijPlatform {
             if (verificationIde != null) {
                 val (platformType, build) = verificationIde.split('-', limit = 2)
                 select {
+                    channels = ProductRelease.Channel.values().toList()
                     types = listOf(IntelliJPlatformType.fromCode(platformType))
                     sinceBuild = build
                     untilBuild = "$build.*"
@@ -109,11 +111,13 @@ val runIntelliJUltimate by intellijPlatformTesting.runIde.registering {
 
 val runAndroidStudio by intellijPlatformTesting.runIde.registering {
     type = IntelliJPlatformType.AndroidStudio
-    version = "2024.1.1.11"
+    version = "2024.2.1.7"
 }
 
 tasks.withType(RunIdeTask::class) {
     maxHeapSize = "4g"
+    jvmArguments.add("-Didea.kotlin.plugin.use.k2=true")
+    jvmArguments.add("-Dkotlin.k2.only.bundled.compiler.plugins.enabled=false")
 }
 
 tasks.withType(VerifyPluginTask::class) {

@@ -14,12 +14,22 @@ public class KmpNativeCoroutinesModelBuilderService: AbstractModelBuilderService
         if (project.plugins.findPlugin("com.rickclephas.kmp.nativecoroutines") == null) return null
         val extension = project.extensions.findByName("nativeCoroutines") ?: return null
 
+        val suffix = extension.get<String>("suffix") ?: "Native"
+        val flowValueSuffix = extension.get<String?>("flowValueSuffix")
+        val flowReplayCacheSuffix = extension.get<String?>("flowReplayCacheSuffix")
+        val stateSuffix = extension.get<String>("stateSuffix") ?: "Value"
+        val stateFlowSuffix = extension.get<String?>("stateFlowSuffix")
         val exposedSeverity = extension.get<Enum<*>>("exposedSeverity")?.name ?: "WARNING"
         val generatedSourceDirs = extension.get<List<Any>>("generatedSourceDirs").orEmpty()
             .map { project.file(it).absolutePath }.distinct()
         val k2Mode = extension.get<Boolean>("k2Mode") ?: false
 
         return KmpNativeCoroutinesModelImpl(
+            suffix = suffix,
+            flowValueSuffix = flowValueSuffix,
+            flowReplayCacheSuffix = flowReplayCacheSuffix,
+            stateSuffix = stateSuffix,
+            stateFlowSuffix = stateFlowSuffix,
             exposedSeverity = exposedSeverity,
             generatedSourceDirs = generatedSourceDirs,
             k2Mode = k2Mode

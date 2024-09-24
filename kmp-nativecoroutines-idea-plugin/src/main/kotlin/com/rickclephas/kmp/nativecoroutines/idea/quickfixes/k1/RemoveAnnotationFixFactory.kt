@@ -1,4 +1,4 @@
-package com.rickclephas.kmp.nativecoroutines.idea.quickfixes
+package com.rickclephas.kmp.nativecoroutines.idea.quickfixes.k1
 
 import com.intellij.codeInsight.intention.IntentionAction
 import org.jetbrains.kotlin.diagnostics.Diagnostic
