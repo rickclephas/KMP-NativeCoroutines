@@ -59,6 +59,7 @@ internal fun FirExtension.buildStateFlowValueProperty(
 
         receiverParameter = buildReceiverParameterCopy(
             originalSymbol.receiverParameter,
+            firCallableSignature,
             typeParameters.substitutor
         )
 

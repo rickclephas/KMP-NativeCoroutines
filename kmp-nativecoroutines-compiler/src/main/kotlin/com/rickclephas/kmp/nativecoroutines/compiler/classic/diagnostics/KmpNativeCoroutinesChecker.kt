@@ -20,6 +20,8 @@ import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNati
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.REDUNDANT_PRIVATE_COROUTINES_STATE
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.EXPOSED_STATE_FLOW_PROPERTY
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.EXPOSED_STATE_FLOW_PROPERTY_ERROR
+import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.EXPOSED_SUSPEND_TYPE
+import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.EXPOSED_SUSPEND_TYPE_ERROR
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.IGNORED_COROUTINES_REFINED
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.IGNORED_COROUTINES_REFINED_STATE
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.IMPLICIT_RETURN_TYPE
@@ -35,11 +37,12 @@ import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNati
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.REDUNDANT_PRIVATE_COROUTINES_REFINED
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.REDUNDANT_PRIVATE_COROUTINES_REFINED_STATE
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.UNSUPPORTED_CLASS_EXTENSION_PROPERTY
-import com.rickclephas.kmp.nativecoroutines.compiler.classic.utils.coroutinesReturnType
+import com.rickclephas.kmp.nativecoroutines.compiler.classic.utils.*
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.utils.getNativeCoroutinesAnnotations
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.utils.hasImplicitReturnType
+import com.rickclephas.kmp.nativecoroutines.compiler.classic.utils.isCoroutineScopeProperty
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.utils.isRefined
-import com.rickclephas.kmp.nativecoroutines.compiler.utils.CoroutinesReturnType
+import com.rickclephas.kmp.nativecoroutines.compiler.utils.*
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutines
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutineScope
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutinesIgnore
@@ -55,6 +58,7 @@ import org.jetbrains.kotlin.psi.KtDeclaration
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.resolve.BindingTrace
 import org.jetbrains.kotlin.resolve.DescriptorToSourceUtils.getSourceFromAnnotation
+import org.jetbrains.kotlin.resolve.DescriptorToSourceUtils.getSourceFromDescriptor
 import org.jetbrains.kotlin.resolve.checkers.DeclarationChecker
 import org.jetbrains.kotlin.resolve.checkers.DeclarationCheckerContext
 import org.jetbrains.kotlin.resolve.descriptorUtil.isEffectivelyPublicApi
@@ -73,6 +77,12 @@ public class KmpNativeCoroutinesChecker(
         ExposedSeverity.NONE -> null
         ExposedSeverity.WARNING -> EXPOSED_SUSPEND_FUNCTION
         ExposedSeverity.ERROR -> EXPOSED_SUSPEND_FUNCTION_ERROR
+    }
+
+    private val exposedSuspendType = when (exposedSeverity) {
+        ExposedSeverity.NONE -> null
+        ExposedSeverity.WARNING -> EXPOSED_SUSPEND_TYPE
+        ExposedSeverity.ERROR -> EXPOSED_SUSPEND_TYPE_ERROR
     }
 
     private val exposedFlowType = when (exposedSeverity) {
@@ -94,13 +104,13 @@ public class KmpNativeCoroutinesChecker(
     ) {
         if (descriptor !is CallableMemberDescriptor) return
         if (descriptor !is SimpleFunctionDescriptor && descriptor !is PropertyDescriptor) return
+
+        val callableSignature = descriptor.getCallableSignature().signature.forK2Mode(isK2Mode).orNull()
         val annotations = descriptor.getNativeCoroutinesAnnotations()
         val isRefined = descriptor.isRefined
         val isPublic = descriptor.isEffectivelyPublicApi
         val isOverride = descriptor.overriddenDescriptors.isNotEmpty()
         val isActual = descriptor.isActual
-        val isSuspend = descriptor is FunctionDescriptor && descriptor.isSuspend
-        val returnType = descriptor.coroutinesReturnType
 
         //region CONFLICT_COROUTINES
         val coroutinesAnnotations = listOfNotNull(
@@ -119,18 +129,31 @@ public class KmpNativeCoroutinesChecker(
         //region EXPOSED_*
         val hasAnnotation = coroutinesAnnotations.isNotEmpty()
         val isIgnored = annotations.contains(NativeCoroutinesIgnore)
-        if (!isRefined && isPublic && !isOverride && !isActual && !hasAnnotation && !isIgnored) {
-            val isGenerated = generatedSourceDirs.any(Path(declaration.containingKtFile.virtualFilePath)::startsWith)
-            if (!isGenerated && isSuspend) {
+        val isExposed = isPublic && !isRefined && !hasAnnotation
+        val isBase = !isOverride && !isActual
+        if (callableSignature != null && isExposed && isBase && !isIgnored && !declaration.isGenerated) {
+            if (callableSignature.isSuspend) {
                 exposedSuspendFunction?.on(declaration)?.let(context.trace::report)
             }
-            if (!isGenerated && returnType is CoroutinesReturnType.Flow) {
-                val diagnosticFactory = when {
-                    descriptor !is PropertyDescriptor -> exposedFlowType
-                    returnType != CoroutinesReturnType.Flow.State -> exposedFlowType
-                    else -> exposedStateFlowProperty
-                }
-                diagnosticFactory?.on(declaration)?.let(context.trace::report)
+            val receiverType = callableSignature.receiverType
+            if (receiverType != null) {
+                val element = descriptor.extensionReceiverParameter?.let(::getSourceFromDescriptor) as? KtElement
+                    ?: declaration
+                if (receiverType.isOrHasSuspend) exposedSuspendType?.on(element)?.let(context.trace::report)
+                if (receiverType.isOrHasFlow) exposedFlowType?.on(element)?.let(context.trace::report)
+            }
+            callableSignature.valueTypes.forEachIndexed { index, type ->
+                val element = descriptor.valueParameters[index].let(::getSourceFromDescriptor) as? KtElement
+                    ?: declaration
+                if (type.isOrHasSuspend) exposedSuspendType?.on(element)?.let(context.trace::report)
+                if (type.isOrHasFlow) exposedFlowType?.on(element)?.let(context.trace::report)
+            }
+            val returnType = callableSignature.returnType
+            if (descriptor is PropertyDescriptor && returnType is CallableSignature.Type.Flow.State) {
+                exposedStateFlowProperty?.on(declaration)?.let(context.trace::report)
+            } else {
+                if (returnType.isOrHasSuspend) exposedSuspendType?.on(declaration)?.let(context.trace::report)
+                if (returnType.isOrHasFlow) exposedFlowType?.on(declaration)?.let(context.trace::report)
             }
         }
         //endregion
@@ -145,15 +168,15 @@ public class KmpNativeCoroutinesChecker(
         //endregion
 
         //region INVALID_*
-        if (descriptor !is PropertyDescriptor || returnType != CoroutinesReturnType.CoroutineScope) {
+        if (!descriptor.isCoroutineScopeProperty) {
             context.trace.report(INVALID_COROUTINE_SCOPE, annotations[NativeCoroutineScope], declaration)
         }
-        if (!isSuspend && returnType !is CoroutinesReturnType.Flow) {
+        if (callableSignature == null) {
             context.trace.report(INVALID_COROUTINES, annotations[NativeCoroutines], declaration)
             context.trace.report(INVALID_COROUTINES_IGNORE, annotations[NativeCoroutinesIgnore], declaration)
             context.trace.report(INVALID_COROUTINES_REFINED, annotations[NativeCoroutinesRefined], declaration)
         }
-        if (descriptor !is PropertyDescriptor || returnType !is CoroutinesReturnType.Flow.State) {
+        if (descriptor !is PropertyDescriptor || callableSignature?.returnType !is CallableSignature.Type.Flow.State) {
             context.trace.report(INVALID_COROUTINES_REFINED_STATE, annotations[NativeCoroutinesRefinedState], declaration)
             context.trace.report(INVALID_COROUTINES_STATE, annotations[NativeCoroutinesState], declaration)
         }
@@ -209,6 +232,9 @@ public class KmpNativeCoroutinesChecker(
         }
         //endregion
     }
+
+    private val KtDeclaration.isGenerated: Boolean
+        get() = generatedSourceDirs.any(Path(containingKtFile.virtualFilePath)::startsWith)
 
     private fun BindingTrace.report(
         diagnosticFactory: DiagnosticFactory0<KtElement>,

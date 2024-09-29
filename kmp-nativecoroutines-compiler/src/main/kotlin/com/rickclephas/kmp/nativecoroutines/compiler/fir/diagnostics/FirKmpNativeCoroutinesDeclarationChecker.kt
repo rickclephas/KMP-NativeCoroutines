@@ -8,6 +8,8 @@ import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativ
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.EXPOSED_STATE_FLOW_PROPERTY_ERROR
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.EXPOSED_SUSPEND_FUNCTION
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.EXPOSED_SUSPEND_FUNCTION_ERROR
+import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.EXPOSED_SUSPEND_TYPE
+import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.EXPOSED_SUSPEND_TYPE_ERROR
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.IGNORED_COROUTINES
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.IGNORED_COROUTINES_REFINED
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.IGNORED_COROUTINES_REFINED_STATE
@@ -35,11 +37,12 @@ import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativ
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.REDUNDANT_PRIVATE_COROUTINES_REFINED_STATE
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.REDUNDANT_PRIVATE_COROUTINES_STATE
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.UNSUPPORTED_CLASS_EXTENSION_PROPERTY
-import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.getCoroutinesReturnType
+import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.*
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.getNativeCoroutinesAnnotations
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.hasImplicitReturnType
+import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.isCoroutineScopeProperty
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.isRefined
-import com.rickclephas.kmp.nativecoroutines.compiler.utils.CoroutinesReturnType
+import com.rickclephas.kmp.nativecoroutines.compiler.utils.*
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutines
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutineScope
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutinesIgnore
@@ -73,6 +76,12 @@ internal class FirKmpNativeCoroutinesDeclarationChecker(
         ExposedSeverity.ERROR -> EXPOSED_SUSPEND_FUNCTION_ERROR
     }
 
+    private val exposedSuspendType = when (exposedSeverity) {
+        ExposedSeverity.NONE -> null
+        ExposedSeverity.WARNING -> EXPOSED_SUSPEND_TYPE
+        ExposedSeverity.ERROR -> EXPOSED_SUSPEND_TYPE_ERROR
+    }
+
     private val exposedFlowType = when (exposedSeverity) {
         ExposedSeverity.NONE -> null
         ExposedSeverity.WARNING -> EXPOSED_FLOW_TYPE
@@ -98,13 +107,12 @@ internal class FirKmpNativeCoroutinesDeclarationChecker(
             reporter.reportOn(source, this, context)
         }
 
+        val callableSignature = declaration.getCallableSignature(context.session).signature.forK2Mode(isK2Mode).orNull()
         val annotations = declaration.getNativeCoroutinesAnnotations(context.session)
         val isRefined = declaration.isRefined(context.session)
         val isPublic = declaration.effectiveVisibility.publicApi
         val isOverride = declaration.isOverride
         val isActual = declaration.isActual
-        val isSuspend = declaration.isSuspend
-        val returnType = declaration.getCoroutinesReturnType(context.session)
 
         //region CONFLICT_COROUTINES
         val coroutinesAnnotations = listOfNotNull(
@@ -121,19 +129,29 @@ internal class FirKmpNativeCoroutinesDeclarationChecker(
         //region EXPOSED_*
         val hasAnnotation = coroutinesAnnotations.isNotEmpty()
         val isIgnored = annotations.containsKey(NativeCoroutinesIgnore)
-        if (!isRefined && isPublic && !isOverride && !isActual && !hasAnnotation && !isIgnored) {
-            val isGenerated = context.containingFilePath?.let {
-                generatedSourceDirs.any(Path(it)::startsWith)
-            } ?: false
-            if (!isGenerated && isSuspend) {
+        val isExposed = isPublic && !isRefined && !hasAnnotation
+        val isBase = !isOverride && !isActual
+        if (callableSignature != null && isExposed && isBase && !isIgnored && !context.isGenerated) {
+            if (callableSignature.isSuspend) {
                 exposedSuspendFunction.reportOn(declaration.source)
             }
-            if (!isGenerated && returnType is CoroutinesReturnType.Flow) {
-                val diagnosticFactory = when {
-                    declaration is FirProperty && returnType == CoroutinesReturnType.Flow.State -> exposedStateFlowProperty
-                    else -> exposedFlowType
-                }
-                diagnosticFactory.reportOn(declaration.source)
+            val receiverType = callableSignature.receiverType
+            if (receiverType != null) {
+                val param = declaration.receiverParameter
+                if (receiverType.isOrHasSuspend) exposedSuspendType.reportOn(param?.source)
+                if (receiverType.isOrHasFlow) exposedFlowType.reportOn(param?.source)
+            }
+            callableSignature.valueTypes.forEachIndexed { index, type ->
+                val param = (declaration as? FirFunction)?.valueParameters?.get(index)
+                if (type.isOrHasSuspend) exposedSuspendType.reportOn(param?.source)
+                if (type.isOrHasFlow) exposedFlowType.reportOn(param?.source)
+            }
+            val returnType = callableSignature.returnType
+            if (declaration is FirProperty && returnType is CallableSignature.Type.Flow.State) {
+                exposedStateFlowProperty.reportOn(declaration.source)
+            } else {
+                if (returnType.isOrHasSuspend) exposedSuspendType.reportOn(declaration.source)
+                if (returnType.isOrHasFlow) exposedFlowType.reportOn(declaration.source)
             }
         }
         //endregion
@@ -148,15 +166,15 @@ internal class FirKmpNativeCoroutinesDeclarationChecker(
         //endregion
 
         //region INVALID_*
-        if (declaration !is FirProperty || returnType != CoroutinesReturnType.CoroutineScope) {
+        if (!declaration.isCoroutineScopeProperty(context.session)) {
             INVALID_COROUTINE_SCOPE.reportOn(annotations[NativeCoroutineScope])
         }
-        if (!isSuspend && returnType !is CoroutinesReturnType.Flow) {
+        if (callableSignature == null) {
             INVALID_COROUTINES.reportOn(annotations[NativeCoroutines])
             INVALID_COROUTINES_IGNORE.reportOn(annotations[NativeCoroutinesIgnore])
             INVALID_COROUTINES_REFINED.reportOn(annotations[NativeCoroutinesRefined])
         }
-        if (declaration !is FirProperty || returnType !is CoroutinesReturnType.Flow.State) {
+        if (declaration !is FirProperty || callableSignature?.returnType !is CallableSignature.Type.Flow.State) {
             INVALID_COROUTINES_REFINED_STATE.reportOn(annotations[NativeCoroutinesRefinedState])
             INVALID_COROUTINES_STATE.reportOn(annotations[NativeCoroutinesState])
         }
@@ -217,4 +235,7 @@ internal class FirKmpNativeCoroutinesDeclarationChecker(
         }
         //endregion
     }
+
+    private val CheckerContext.isGenerated: Boolean
+        get() = containingFilePath?.let { generatedSourceDirs.any(Path(it)::startsWith) } ?: false
 }

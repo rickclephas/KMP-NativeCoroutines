@@ -18,6 +18,7 @@ internal object ClassIds {
 
     val nativeFlow = ClassId.topLevel(FqNames.nativeFlow)
     val nativeSuspend = ClassId.topLevel(FqNames.nativeSuspend)
+    val nativeUnit = ClassId.topLevel(FqNames.nativeUnit)
 
     val observableViewModel = ClassId.topLevel(FqNames.observableViewModel)
     val androidxViewModel = ClassId.topLevel(FqNames.androidxViewModel)
