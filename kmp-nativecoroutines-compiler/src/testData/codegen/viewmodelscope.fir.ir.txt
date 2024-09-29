@@ -26,7 +26,7 @@ FILE fqName:androidx.lifecycle fileName:/androidxviewmodel.kt
         RETURN type=kotlin.Nothing from='public final fun <get-viewModelScope> (): kotlinx.coroutines.CoroutineScope declared in androidx.lifecycle'
           CALL 'public final fun CoroutineScope (context: kotlin.coroutines.CoroutineContext): kotlinx.coroutines.CoroutineScope declared in kotlinx.coroutines' type=kotlinx.coroutines.CoroutineScope origin=null
             context: CALL 'public final fun <get-Default> (): kotlinx.coroutines.CoroutineDispatcher declared in kotlinx.coroutines.Dispatchers' type=kotlinx.coroutines.CoroutineDispatcher origin=GET_PROPERTY
-              $this: GET_OBJECT 'CLASS IR_EXTERNAL_DECLARATION_STUB OBJECT name:Dispatchers modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlinx.coroutines.Dispatchers
+              $this: GET_OBJECT 'CLASS OBJECT name:Dispatchers modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlinx.coroutines.Dispatchers
 FILE fqName:com.rickclephas.kmp.observableviewmodel fileName:/observableviewmodel.kt
   CLASS CLASS name:ViewModel modality:OPEN visibility:public superTypes:[androidx.lifecycle.ViewModel]
     $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:com.rickclephas.kmp.observableviewmodel.ViewModel
@@ -85,7 +85,7 @@ FILE fqName:com.rickclephas.kmp.observableviewmodel fileName:/observableviewmode
         RETURN type=kotlin.Nothing from='public final fun <get-coroutineScope> (): kotlinx.coroutines.CoroutineScope declared in com.rickclephas.kmp.observableviewmodel'
           CALL 'public final fun CoroutineScope (context: kotlin.coroutines.CoroutineContext): kotlinx.coroutines.CoroutineScope declared in kotlinx.coroutines' type=kotlinx.coroutines.CoroutineScope origin=null
             context: CALL 'public final fun <get-Default> (): kotlinx.coroutines.CoroutineDispatcher declared in kotlinx.coroutines.Dispatchers' type=kotlinx.coroutines.CoroutineDispatcher origin=GET_PROPERTY
-              $this: GET_OBJECT 'CLASS IR_EXTERNAL_DECLARATION_STUB OBJECT name:Dispatchers modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlinx.coroutines.Dispatchers
+              $this: GET_OBJECT 'CLASS OBJECT name:Dispatchers modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlinx.coroutines.Dispatchers
 FILE fqName:<root> fileName:/viewmodelscope.kt
   PROPERTY name:unusedCoroutineScope visibility:internal modality:FINAL [val]
     annotations:
@@ -94,7 +94,7 @@ FILE fqName:<root> fileName:/viewmodelscope.kt
       EXPRESSION_BODY
         CALL 'public final fun CoroutineScope (context: kotlin.coroutines.CoroutineContext): kotlinx.coroutines.CoroutineScope declared in kotlinx.coroutines' type=kotlinx.coroutines.CoroutineScope origin=null
           context: CALL 'public final fun <get-Default> (): kotlinx.coroutines.CoroutineDispatcher declared in kotlinx.coroutines.Dispatchers' type=kotlinx.coroutines.CoroutineDispatcher origin=GET_PROPERTY
-            $this: GET_OBJECT 'CLASS IR_EXTERNAL_DECLARATION_STUB OBJECT name:Dispatchers modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlinx.coroutines.Dispatchers
+            $this: GET_OBJECT 'CLASS OBJECT name:Dispatchers modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlinx.coroutines.Dispatchers
     FUN DEFAULT_PROPERTY_ACCESSOR name:<get-unusedCoroutineScope> visibility:internal modality:FINAL <> () returnType:kotlinx.coroutines.CoroutineScope
       correspondingProperty: PROPERTY name:unusedCoroutineScope visibility:internal modality:FINAL [val]
       BLOCK_BODY
@@ -153,7 +153,7 @@ FILE fqName:<root> fileName:/viewmodelscope.kt
         EXPRESSION_BODY
           CALL 'public final fun CoroutineScope (context: kotlin.coroutines.CoroutineContext): kotlinx.coroutines.CoroutineScope declared in kotlinx.coroutines' type=kotlinx.coroutines.CoroutineScope origin=null
             context: CALL 'public final fun <get-Default> (): kotlinx.coroutines.CoroutineDispatcher declared in kotlinx.coroutines.Dispatchers' type=kotlinx.coroutines.CoroutineDispatcher origin=GET_PROPERTY
-              $this: GET_OBJECT 'CLASS IR_EXTERNAL_DECLARATION_STUB OBJECT name:Dispatchers modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlinx.coroutines.Dispatchers
+              $this: GET_OBJECT 'CLASS OBJECT name:Dispatchers modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlinx.coroutines.Dispatchers
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-customCoroutineScope> visibility:internal modality:FINAL <> ($this:<root>.MyAndroidXViewModel2) returnType:kotlinx.coroutines.CoroutineScope
         correspondingProperty: PROPERTY name:customCoroutineScope visibility:internal modality:FINAL [val]
         $this: VALUE_PARAMETER name:<this> type:<root>.MyAndroidXViewModel2
@@ -250,7 +250,7 @@ FILE fqName:<root> fileName:/viewmodelscope.kt
           CONST String type=kotlin.String value="OK3"
     PROPERTY FAKE_OVERRIDE name:viewModelScope visibility:public modality:FINAL [fake_override,val]
       overridden:
-        public final viewModelScope: com.rickclephas.kmp.observableviewmodel.ViewModelScope
+        public final viewModelScope: com.rickclephas.kmp.observableviewmodel.ViewModelScope declared in com.rickclephas.kmp.observableviewmodel.ViewModel
       FUN FAKE_OVERRIDE name:<get-viewModelScope> visibility:public modality:FINAL <> ($this:com.rickclephas.kmp.observableviewmodel.ViewModel) returnType:com.rickclephas.kmp.observableviewmodel.ViewModelScope [fake_override]
         correspondingProperty: PROPERTY FAKE_OVERRIDE name:viewModelScope visibility:public modality:FINAL [fake_override,val]
         overridden:
@@ -265,7 +265,7 @@ FILE fqName:<root> fileName:/viewmodelscope.kt
         EXPRESSION_BODY
           CALL 'public final fun CoroutineScope (context: kotlin.coroutines.CoroutineContext): kotlinx.coroutines.CoroutineScope declared in kotlinx.coroutines' type=kotlinx.coroutines.CoroutineScope origin=null
             context: CALL 'public final fun <get-Default> (): kotlinx.coroutines.CoroutineDispatcher declared in kotlinx.coroutines.Dispatchers' type=kotlinx.coroutines.CoroutineDispatcher origin=GET_PROPERTY
-              $this: GET_OBJECT 'CLASS IR_EXTERNAL_DECLARATION_STUB OBJECT name:Dispatchers modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlinx.coroutines.Dispatchers
+              $this: GET_OBJECT 'CLASS OBJECT name:Dispatchers modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlinx.coroutines.Dispatchers
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-customCoroutineScope> visibility:internal modality:FINAL <> ($this:<root>.MyObservableViewModel2) returnType:kotlinx.coroutines.CoroutineScope
         correspondingProperty: PROPERTY name:customCoroutineScope visibility:internal modality:FINAL [val]
         $this: VALUE_PARAMETER name:<this> type:<root>.MyObservableViewModel2
@@ -317,7 +317,7 @@ FILE fqName:<root> fileName:/viewmodelscope.kt
           CONST String type=kotlin.String value="OK7"
     PROPERTY FAKE_OVERRIDE name:viewModelScope visibility:public modality:FINAL [fake_override,val]
       overridden:
-        public final viewModelScope: com.rickclephas.kmp.observableviewmodel.ViewModelScope
+        public final viewModelScope: com.rickclephas.kmp.observableviewmodel.ViewModelScope declared in com.rickclephas.kmp.observableviewmodel.ViewModel
       FUN FAKE_OVERRIDE name:<get-viewModelScope> visibility:public modality:FINAL <> ($this:com.rickclephas.kmp.observableviewmodel.ViewModel) returnType:com.rickclephas.kmp.observableviewmodel.ViewModelScope [fake_override]
         correspondingProperty: PROPERTY FAKE_OVERRIDE name:viewModelScope visibility:public modality:FINAL [fake_override,val]
         overridden:
