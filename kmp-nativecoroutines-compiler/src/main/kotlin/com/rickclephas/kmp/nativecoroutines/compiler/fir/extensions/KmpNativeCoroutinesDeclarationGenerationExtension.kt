@@ -5,8 +5,6 @@ import com.rickclephas.kmp.nativecoroutines.compiler.fir.codegen.buildNativeFunc
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.codegen.buildNativeProperty
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.codegen.buildSharedFlowReplayCacheProperty
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.codegen.buildStateFlowValueProperty
-import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.getFunctionSymbols
-import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.getPropertySymbols
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutines
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutinesIgnore
@@ -23,6 +21,9 @@ import org.jetbrains.kotlin.fir.declarations.utils.isOverride
 import org.jetbrains.kotlin.fir.extensions.*
 import org.jetbrains.kotlin.fir.extensions.predicate.LookupPredicate
 import org.jetbrains.kotlin.fir.resolve.providers.symbolProvider
+import org.jetbrains.kotlin.fir.scopes.getFunctions
+import org.jetbrains.kotlin.fir.scopes.getProperties
+import org.jetbrains.kotlin.fir.scopes.impl.declaredMemberScope
 import org.jetbrains.kotlin.fir.symbols.impl.*
 import org.jetbrains.kotlin.name.CallableId
 import org.jetbrains.kotlin.name.Name
@@ -109,6 +110,7 @@ internal class KmpNativeCoroutinesDeclarationGenerationExtension(
         context: MemberGenerationContext?
     ): List<FirNamedFunctionSymbol> = buildList {
         generateFunctions(
+            context?.owner,
             callableId, suffix,
             setOf(NativeCoroutines, NativeCoroutinesRefined)
         ) { symbol, annotation ->
@@ -117,13 +119,17 @@ internal class KmpNativeCoroutinesDeclarationGenerationExtension(
     }
 
     private fun MutableList<FirNamedFunctionSymbol>.generateFunctions(
+        owner: FirClassSymbol<*>?,
         callableId: CallableId,
         suffix: String?,
         annotations: Set<NativeCoroutinesAnnotation>,
         generateFunction: (FirNamedFunctionSymbol, NativeCoroutinesAnnotation) -> FirNamedFunctionSymbol?
     ) {
         val originalCallableName = callableId.callableName.withoutSuffix(suffix) ?: return
-        val symbols = session.symbolProvider.getFunctionSymbols(callableId.copy(originalCallableName))
+        val symbols = when (owner) {
+            null -> session.symbolProvider.getTopLevelFunctionSymbols(callableId.packageName, originalCallableName)
+            else -> owner.declaredMemberScope(session, null).getFunctions(originalCallableName)
+        }
         for (symbol in symbols) {
             val annotation = getAnnotationForSymbol(symbol) ?: continue
             if (annotation !in annotations) continue
@@ -136,30 +142,35 @@ internal class KmpNativeCoroutinesDeclarationGenerationExtension(
         context: MemberGenerationContext?
     ): List<FirPropertySymbol> = buildList {
         generateProperties(
+            context?.owner,
             callableId, suffix,
             setOf(NativeCoroutines, NativeCoroutinesRefined)
         ) { symbol, annotation ->
             buildNativeProperty(callableId, symbol, annotation, objCName = symbol.name.identifier)
         }
         generateProperties(
+            context?.owner,
             callableId, flowValueSuffix,
             setOf(NativeCoroutines, NativeCoroutinesRefined)
         ) { symbol, annotation ->
             buildStateFlowValueProperty(callableId, symbol, annotation, objCNameSuffix = flowValueSuffix)
         }
         generateProperties(
+            context?.owner,
             callableId, flowReplayCacheSuffix,
             setOf(NativeCoroutines, NativeCoroutinesRefined)
         ) { symbol, annotation ->
             buildSharedFlowReplayCacheProperty(callableId, symbol, annotation, flowReplayCacheSuffix)
         }
         generateProperties(
+            context?.owner,
             callableId, stateSuffix,
             setOf(NativeCoroutinesState, NativeCoroutinesRefinedState)
         ) { symbol, annotation ->
             buildStateFlowValueProperty(callableId, symbol, annotation, objCName = symbol.name.identifier)
         }
         generateProperties(
+            context?.owner,
             callableId, stateFlowSuffix,
             setOf(NativeCoroutinesState, NativeCoroutinesRefinedState)
         ) { symbol, annotation ->
@@ -168,13 +179,18 @@ internal class KmpNativeCoroutinesDeclarationGenerationExtension(
     }
 
     private fun MutableList<FirPropertySymbol>.generateProperties(
+        owner: FirClassSymbol<*>?,
         callableId: CallableId,
         suffix: String?,
         annotations: Set<NativeCoroutinesAnnotation>,
         generateProperty: (FirPropertySymbol, NativeCoroutinesAnnotation) -> FirPropertySymbol?
     ) {
         val originalCallableName = callableId.callableName.withoutSuffix(suffix) ?: return
-        val symbols = session.symbolProvider.getPropertySymbols(callableId.copy(originalCallableName))
+        val symbols = when (owner) {
+            null -> session.symbolProvider.getTopLevelPropertySymbols(callableId.packageName, originalCallableName)
+            else -> owner.declaredMemberScope(session, null)
+                .getProperties(originalCallableName).filterIsInstance<FirPropertySymbol>()
+        }
         for (symbol in symbols) {
             val annotation = getAnnotationForSymbol(symbol) ?: continue
             if (annotation !in annotations) continue

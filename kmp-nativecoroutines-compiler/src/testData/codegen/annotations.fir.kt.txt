@@ -114,7 +114,7 @@ var deprecatedProperty4Value: String
   }
   @Deprecated(message = "This is deprecated 7")
   set(value: String) {
-    return <get-deprecatedProperty4>().<set-value>(value = value)
+    return <get-deprecatedProperty4>().<set-value>(<set-?> = value)
   }
 
 @Deprecated(message = "This is deprecated 1")

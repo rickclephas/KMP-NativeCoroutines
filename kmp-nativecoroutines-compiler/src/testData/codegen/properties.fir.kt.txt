@@ -368,7 +368,7 @@ var topLevelMutableStateFlowValue: String
     return tmp_0.<get-value>()
   }
   set(value: String) {
-    return <get-topLevelMutableStateFlow>().<set-value>(value = value)
+    return <get-topLevelMutableStateFlow>().<set-value>(<set-?> = value)
   }
 
 @ObjCName(name = "mutableStateProperty")
@@ -378,7 +378,7 @@ var mutableStatePropertyValue: String
     return tmp_1.<get-value>()
   }
   set(value: String) {
-    return <get-mutableStateProperty>().<set-value>(value = value)
+    return <get-mutableStateProperty>().<set-value>(<set-?> = value)
   }
 
 @ObjCName(name = "customFlowValue")
