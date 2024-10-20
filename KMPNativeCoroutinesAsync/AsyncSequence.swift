@@ -8,31 +8,38 @@
 import Dispatch
 import KMPNativeCoroutinesCore
 
-/// Wraps the `NativeFlow` in a `NativeFlowAsyncSequence`.
+internal let RETURN_TYPE_SWIFT_ASYNC_SEQUENCE = "swift-async-sequence"
+
+/// Wraps the `NativeFlow` in an `AsyncSequence`.
 /// - Parameter nativeFlow: The native flow to collect.
-/// - Returns: A `NativeFlowAsyncSequence` that yields the collected values.
-public func asyncSequence<Output, Failure: Error, Unit>(
-    for nativeFlow: @escaping NativeFlow<Output, Failure, Unit>
-) -> NativeFlowAsyncSequence<Output, Error, Unit> {
-    return NativeFlowAsyncSequence(nativeFlow: nativeFlow)
+/// - Returns: An `AsyncSequence` that yields the collected values.
+public func asyncSequence<Output, Failure: Error>(
+    for nativeFlow: @escaping NativeFlow<Output, Failure>
+) -> AnyAsyncSequence<Output> {
+    if let sequence = nativeFlow(RETURN_TYPE_SWIFT_ASYNC_SEQUENCE, EmptyNativeCallback2, EmptyNativeCallback1, EmptyNativeCallback1)() {
+        return sequence as! AnyAsyncSequence<Output>
+    }
+    return AnyAsyncSequence(NativeFlowAsyncSequence(nativeFlow: nativeFlow))
 }
 
-public struct NativeFlowAsyncSequence<Output, Failure: Error, Unit>: AsyncSequence {
+private struct NativeFlowAsyncSequence<Output, Failure: Error>: AsyncSequence {
+    typealias AsyncIterator = Iterator
+    
     public typealias Element = Output
     
-    var nativeFlow: NativeFlow<Output, Failure, Unit>
+    var nativeFlow: NativeFlow<Output, Failure>
     
     public class Iterator: AsyncIteratorProtocol, @unchecked Sendable {
         
         private let semaphore = DispatchSemaphore(value: 1)
-        private var nativeCancellable: NativeCancellable<Unit>?
-        private var item: (Output, () -> Unit)? = nil
+        private var nativeCancellable: NativeCancellable?
+        private var item: (Output, NativeCallback)? = nil
         private var result: Failure?? = Optional.none
         private var cancellationError: Failure? = nil
         private var continuation: UnsafeContinuation<Output?, Error>? = nil
         
-        init(nativeFlow: NativeFlow<Output, Failure, Unit>) {
-            nativeCancellable = nativeFlow({ item, next, unit in
+        init(nativeFlow: NativeFlow<Output, Failure>) {
+            nativeCancellable = nativeFlow(nil, { item, next in
                 self.semaphore.wait()
                 defer { self.semaphore.signal() }
                 if let continuation = self.continuation {
@@ -41,9 +48,9 @@ public struct NativeFlowAsyncSequence<Output, Failure: Error, Unit>: AsyncSequen
                     return next()
                 } else {
                     self.item = (item, next)
-                    return unit
+                    return nil
                 }
-            }, { error, unit in
+            }, { error in
                 self.semaphore.wait()
                 defer { self.semaphore.signal() }
                 self.result = Optional.some(error)
@@ -56,8 +63,8 @@ public struct NativeFlowAsyncSequence<Output, Failure: Error, Unit>: AsyncSequen
                     self.continuation = nil
                 }
                 self.nativeCancellable = nil
-                return unit
-            }, { cancellationError, unit in
+                return nil
+            }, { cancellationError in
                 self.semaphore.wait()
                 defer { self.semaphore.signal() }
                 self.cancellationError = cancellationError
@@ -66,7 +73,7 @@ public struct NativeFlowAsyncSequence<Output, Failure: Error, Unit>: AsyncSequen
                     self.continuation = nil
                 }
                 self.nativeCancellable = nil
-                return unit
+                return nil
             })
         }
         
@@ -105,4 +112,3 @@ public struct NativeFlowAsyncSequence<Output, Failure: Error, Unit>: AsyncSequen
         return Iterator(nativeFlow: nativeFlow)
     }
 }
-

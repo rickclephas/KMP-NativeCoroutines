@@ -1,19 +1,31 @@
+@file:Suppress("OPTIONAL_DECLARATION_USAGE_IN_NON_COMMON_SOURCE")
+
 package com.rickclephas.kmp.nativecoroutines
 
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.suspendCancellableCoroutine
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
+import kotlin.jvm.JvmName
+
+internal const val RETURN_TYPE_KOTLIN_SUSPEND = "kotlin-suspend"
 
 /**
  * A function that awaits a suspend function via callbacks.
  *
  * The function takes an `onResult`, `onError` and `onCancelled` callback
  * and returns a cancellable that can be used to cancel the suspend function.
+ *
+ * When `returnType` isn't `null` the returned cancellable will return the requested type,
+ * or `null` if the requested type isn't supported by this [NativeSuspend].
  */
 public typealias NativeSuspend<T> = (
-    onResult: NativeCallback<T>,
-    onError: NativeCallback<NativeError>,
-    onCancelled: NativeCallback<NativeError>
+    returnType: String?,
+    onResult: NativeCallback1<T>,
+    onError: NativeCallback1<NativeError>,
+    onCancelled: NativeCallback1<NativeError>
 ) -> NativeCancellable
 
 /**
@@ -24,9 +36,15 @@ public typealias NativeSuspend<T> = (
  */
 public fun <T> nativeSuspend(scope: CoroutineScope? = null, block: suspend () -> T): NativeSuspend<T> {
     val coroutineScope = scope ?: defaultCoroutineScope
-    return (collect@{ onResult: NativeCallback<T>,
-                      onError: NativeCallback<NativeError>,
-                      onCancelled: NativeCallback<NativeError> ->
+    return (collect@{ returnType: String?,
+                      onResult: NativeCallback1<T>,
+                      onError: NativeCallback1<NativeError>,
+                      onCancelled: NativeCallback1<NativeError> ->
+        if (returnType == RETURN_TYPE_KOTLIN_SUSPEND) {
+            return@collect { block }
+        } else if (returnType != null) {
+            return@collect { null }
+        }
         val job = coroutineScope.launch {
             try {
                 onResult(block())
@@ -45,4 +63,60 @@ public fun <T> nativeSuspend(scope: CoroutineScope? = null, block: suspend () ->
         }
         return@collect job.asNativeCancellable()
     })
+}
+
+/**
+ * Creates a [NativeSuspend] for the provided suspend [block].
+ *
+ * @param scope the [CoroutineScope] to run the [block] in, or `null` to use the [defaultCoroutineScope].
+ * @param block the suspend-block to await.
+ */
+@JvmName("nativeSuspendUnit")
+public inline fun nativeSuspend(
+    scope: CoroutineScope? = null,
+    crossinline block: suspend () -> Unit
+): NativeSuspend<NativeUnit?> = nativeSuspend<NativeUnit?>(scope) {
+    block()
+    null
+}
+
+/**
+ * Invokes and awaits the result of this [NativeSuspend], converting it to a suspend function.
+ *
+ * @see suspendCancellableCoroutine
+ */
+public suspend fun <T> NativeSuspend<T>.await(): T {
+    val block = invoke(RETURN_TYPE_KOTLIN_SUSPEND, ::EmptyNativeCallback1, ::EmptyNativeCallback1, ::EmptyNativeCallback1)()
+    if (block != null) {
+        @Suppress("UNCHECKED_CAST")
+        return (block as (suspend () -> T))()
+    }
+    return suspendCancellableCoroutine { cont ->
+        val cancellable = invoke(
+            null,
+            { result ->
+                cont.resume(result)
+                null
+            },
+            { error ->
+                cont.resumeWithException(error.asThrowable())
+                null
+            },
+            { error ->
+                cont.cancel(error.asCancellationException())
+                null
+            }
+        )
+        cont.invokeOnCancellation { cancellable() }
+    }
+}
+
+/**
+ * Invokes and awaits the result of this [NativeSuspend], converting it to a suspend function.
+ *
+ * @see suspendCancellableCoroutine
+ */
+@JvmName("awaitUnit")
+public suspend inline fun NativeSuspend<NativeUnit?>.await() {
+    await<NativeUnit?>()
 }
