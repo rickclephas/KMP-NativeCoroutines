@@ -97,5 +97,5 @@ private fun FirCallableSignature.Builder.createType(rawType: ConeKotlinType): Ca
 private val ConeClassLikeType.flowValueType: ConeKotlinType
     get() = when (val argument = typeArguments.firstOrNull()) {
         is ConeKotlinTypeProjection -> argument.type
-        is ConeStarProjection, null -> StandardClassIds.Any.constructClassLikeType(isNullable = true)
+        is ConeStarProjection, null -> StandardClassIds.Any.constructClassLikeType(isMarkedNullable = true)
     }
