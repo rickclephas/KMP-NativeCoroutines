@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name       = 'KMPNativeCoroutinesCore'
-  s.version    = '1.0.0-ALPHA-36'
+  s.version    = '1.0.0-ALPHA-37'
   s.summary    = 'Swift library for Kotlin Coroutines'
 
   s.homepage   = 'https://github.com/rickclephas/KMP-NativeCoroutines'
@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
 
   s.swift_versions = ['5.0']
   s.ios.deployment_target = '9.0'
-  s.osx.deployment_target = '10.9'
+  s.osx.deployment_target = '10.13'
   s.watchos.deployment_target = '3.0'
   s.tvos.deployment_target = '9.0'
 
