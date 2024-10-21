@@ -41,8 +41,8 @@ import org.junit.jupiter.api.BeforeAll
 
 abstract class AbstractFirBaseCodegenTest(
     private val firParser: FirParser
-): AbstractJvmBlackBoxCodegenTestBase<FirOutputArtifact, IrBackendInput>(
-    FrontendKinds.FIR, TargetBackend.JVM_IR
+): AbstractJvmBlackBoxCodegenTestBase<FirOutputArtifact>(
+    FrontendKinds.FIR
 ) {
 
     companion object {
@@ -61,8 +61,6 @@ abstract class AbstractFirBaseCodegenTest(
         get() = ::FirFrontendFacade
     final override val frontendToBackendConverter: Constructor<Frontend2BackendConverter<FirOutputArtifact, IrBackendInput>>
         get() = ::Fir2IrResultsConverter
-    final override val backendFacade: Constructor<BackendFacade<IrBackendInput, BinaryArtifacts.Jvm>>
-        get() = ::JvmIrBackendFacade
 
     override fun configure(builder: TestConfigurationBuilder) = with(builder) {
         super.configure(builder)

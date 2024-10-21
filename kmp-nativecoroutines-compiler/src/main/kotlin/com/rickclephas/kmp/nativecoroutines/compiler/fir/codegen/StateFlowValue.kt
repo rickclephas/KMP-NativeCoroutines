@@ -64,7 +64,7 @@ internal fun FirExtension.buildStateFlowValueProperty(
 
         returnTypeRef = firCallableSignature.getNativeType(callableSignature.returnType.valueType)
             .applyIf(callableSignature.returnType.isNullable) {
-                withNullability(ConeNullability.NULLABLE, session.typeContext)
+                withNullability(true, session.typeContext)
             }
             .let(typeParameters.substitutor::substituteOrSelf)
             .toFirResolvedTypeRef()
