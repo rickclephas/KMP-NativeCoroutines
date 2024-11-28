@@ -1,6 +1,7 @@
 // FIR_IDENTICAL
 // DIAGNOSTICS: -NOT_A_MULTIPLATFORM_COMPILATION -EXPECT_AND_ACTUAL_IN_THE_SAME_MODULE
 // EXPOSED_SEVERITY: WARNING
+// K2_MODE
 
 // FILE: customFlows.kt
 
@@ -37,6 +38,22 @@ fun topLevelCustomFlowFunction(): <!EXPOSED_FLOW_TYPE!>CustomFlow<Int><!> = thro
 @OptIn(ExperimentalObjCRefinement::class)
 @HiddenFromObjC
 suspend fun topLevelRefinedSuspendFunction(): Int = 0
+
+fun topLevelSuspendTypeFunction(): <!EXPOSED_SUSPEND_TYPE!>(suspend () -> Int)<!> = throw Throwable()
+
+fun topLevelSuspendTypeArgFunction(block: <!EXPOSED_SUSPEND_TYPE!>suspend () -> Int<!>): Int = 0
+
+fun <!EXPOSED_SUSPEND_TYPE!>(suspend () -> Int)<!>.topLevelSuspendTypeExtensionFunction(): Int = 0
+
+fun topLevelFlowArgFunction(flow: <!EXPOSED_FLOW_TYPE!>Flow<Int><!>): Int = 0
+
+fun <!EXPOSED_FLOW_TYPE!>Flow<Int><!>.topLevelFlowExtensionFunction(): Int = 0
+
+fun topLevelFlowBlockFunction(block: <!EXPOSED_FLOW_TYPE!>() -> Flow<Int><!>): Int = 0
+
+fun topLevelFlowArgBlockFunction(block: <!EXPOSED_FLOW_TYPE!>(Flow<Int>) -> Int<!>): Int = 0
+
+fun topLevelFlowExtensionBlockFunction(block: <!EXPOSED_FLOW_TYPE!>Flow<Int>.() -> Int<!>): Int = 0
 
 val topLevelFlowProperty: <!EXPOSED_FLOW_TYPE!>Flow<Int><!> get() = throw Throwable()
 

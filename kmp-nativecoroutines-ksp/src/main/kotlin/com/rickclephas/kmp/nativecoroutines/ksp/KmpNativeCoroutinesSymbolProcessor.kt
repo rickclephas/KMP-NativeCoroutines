@@ -71,8 +71,13 @@ internal class KmpNativeCoroutinesSymbolProcessor(
             return true
         }
         if (!property.shouldProcess) return true
-        val scopeProperty = coroutineScopeProvider.getScopeProperty(property) ?: return false
-        val propertySpecs = property.toNativeCoroutinesPropertySpecs(scopeProperty, options, asState, shouldRefine) ?: return false
+        val propertySpecs = try {
+            val scopeProperty = coroutineScopeProvider.getScopeProperty(property)
+            property.toNativeCoroutinesPropertySpecs(scopeProperty, options, asState, shouldRefine)
+        } catch (_: DeferSymbolException) {
+            return false
+        }
+        if (propertySpecs.isEmpty()) return true
         val fileSpecBuilder = file.getFileSpecBuilder()
         propertySpecs.forEach(fileSpecBuilder::addProperty)
         return true
@@ -95,8 +100,12 @@ internal class KmpNativeCoroutinesSymbolProcessor(
             return true
         }
         if (!function.shouldProcess) return true
-        val scopeProperty = coroutineScopeProvider.getScopeProperty(function) ?: return false
-        val funSpec = function.toNativeCoroutinesFunSpec(scopeProperty, options, shouldRefine) ?: return false
+        val funSpec = try {
+            val scopeProperty = coroutineScopeProvider.getScopeProperty(function)
+            function.toNativeCoroutinesFunSpec(scopeProperty, options, shouldRefine)
+        } catch (_: DeferSymbolException) {
+            return false
+        }
         file.getFileSpecBuilder().addFunction(funSpec)
         return true
     }

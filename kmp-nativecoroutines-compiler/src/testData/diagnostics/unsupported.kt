@@ -1,4 +1,5 @@
 // FIR_IDENTICAL
+// K2_MODE
 
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesIgnore
