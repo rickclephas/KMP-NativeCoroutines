@@ -2,7 +2,7 @@
 kotlin = "2.1.0"
 kotlinx-coroutines = "1.9.0"
 kotlinx-binary-compatibility-validator = "0.16.3"
-ksp = "2.1.0-1.0.28"
+ksp = "2.1.0-1.0.29"
 kotlinpoet = "1.18.1"
 junit = "5.9.1"
 
