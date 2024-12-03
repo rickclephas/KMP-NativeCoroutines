@@ -1,8 +1,8 @@
 [versions]
-kotlin = "2.0.21"
+kotlin = "2.1.0"
 kotlinx-coroutines = "1.9.0"
 kotlinx-binary-compatibility-validator = "0.16.3"
-ksp = "2.0.21-1.0.28"
+ksp = "2.1.0-1.0.28"
 kotlinpoet = "1.18.1"
 junit = "5.9.1"
 
@@ -23,7 +23,7 @@ kotlin-script-runtime = { module = "org.jetbrains.kotlin:kotlin-script-runtime",
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
 kotlin-compiler-internalTestFramework = { module = "org.jetbrains.kotlin:kotlin-compiler-internal-test-framework", version.ref = "kotlin" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinx-coroutines" }
-kotlinCompileTesting-ksp = { module = "dev.zacsweers.kctfork:ksp", version = "0.3.2" }
+kotlinCompileTesting-ksp = { module = "dev.zacsweers.kctfork:ksp", version = "0.5.1" }
 junit = { module = "junit:junit", version = "4.13.2" }
 junit-bom = { module = "org.junit:junit-bom", version.ref = "junit" }
 junit-jupiter = { module = "org.junit.jupiter:junit-jupiter" }
