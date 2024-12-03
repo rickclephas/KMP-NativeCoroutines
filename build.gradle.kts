@@ -18,7 +18,7 @@ buildscript {
 
 allprojects {
     group = "com.rickclephas.kmp"
-    version = "1.0.0-ALPHA-36-idea-2024.3-EAP-16718.32"
+    version = "1.0.0-ALPHA-37-kotlin-2.1.0-RC2"
 
     repositories {
         mavenCentral()
@@ -29,16 +29,5 @@ apiValidation {
     @OptIn(ExperimentalBCVApi::class)
     klib {
         enabled = true
-    }
-}
-
-// TODO: Remove once default NodeJS version supports wasm
-plugins.withType<NodeJsRootPlugin> {
-    extensions.configure(NodeJsRootExtension::class) {
-        version = "21.0.0-v8-canary20231019bd785be450"
-        downloadBaseUrl = "https://nodejs.org/download/v8-canary"
-    }
-    tasks.withType<KotlinNpmInstallTask> {
-        args.add("--ignore-engines")
     }
 }
