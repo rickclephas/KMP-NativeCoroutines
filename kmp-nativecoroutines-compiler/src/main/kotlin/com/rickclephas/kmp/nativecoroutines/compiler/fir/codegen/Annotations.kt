@@ -37,7 +37,7 @@ internal fun buildAnnotation(
     arguments: Map<Name, FirExpression> = emptyMap()
 ) = buildAnnotation {
     annotationTypeRef = buildResolvedTypeRef {
-        type = classId.constructClassLikeType()
+        coneType = classId.constructClassLikeType()
     }
     argumentMapping = buildAnnotationArgumentMapping {
         mapping.putAll(arguments)
