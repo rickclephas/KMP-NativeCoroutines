@@ -6,14 +6,14 @@ on:
       - 'v[0-9]+.[0-9]+.[0-9]+-ALPHA-[0-9]+'
 jobs:
   publish-cocoapods-libraries:
-    runs-on: macos-12
+    runs-on: macos-14
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Setup Xcode
         uses: maxim-lobanov/setup-xcode@v1
         with:
-          xcode-version: '14.1'
+          xcode-version: '15.2'
       - name: Publish KMPNativeCoroutinesCore
         run: pod trunk push KMPNativeCoroutinesCore.podspec --synchronous
         env:

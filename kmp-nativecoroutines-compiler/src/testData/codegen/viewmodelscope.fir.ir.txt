@@ -399,3 +399,78 @@ FILE fqName:<root> fileName:/viewmodelscope.kt
     BLOCK_BODY
       RETURN type=kotlin.Nothing from='public final fun returnSuspendValue2 (): kotlin.String declared in <root>'
         CONST String type=kotlin.String value="OK8"
+FILE fqName:<root> fileName:__GENERATED DECLARATIONS__.kt
+  FUN GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:returnSuspendValue2Native visibility:public modality:FINAL <> ($receiver:<root>.MyAndroidXViewModel1) returnType:kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>
+    annotations:
+      ObjCName(name = "returnSuspendValue2", swiftName = <null>, exact = <null>)
+    $receiver: VALUE_PARAMETER name:<this> type:<root>.MyAndroidXViewModel1
+    BLOCK_BODY
+      VAR IR_TEMPORARY_VARIABLE name:tmp_0 type:kotlinx.coroutines.CoroutineScope [val]
+        CALL 'public final fun <get-viewModelScope> (): kotlinx.coroutines.CoroutineScope declared in androidx.lifecycle' type=kotlinx.coroutines.CoroutineScope origin=null
+          $receiver: GET_VAR '<this>: <root>.MyAndroidXViewModel1 declared in <root>.returnSuspendValue2Native' type=<root>.MyAndroidXViewModel1 origin=null
+      RETURN type=kotlin.Nothing from='public final fun returnSuspendValue2Native (): kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> declared in <root>'
+        CALL 'public final fun nativeSuspend <T> (scope: kotlinx.coroutines.CoroutineScope?, block: kotlin.coroutines.SuspendFunction0<T of com.rickclephas.kmp.nativecoroutines.nativeSuspend>): kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<T of com.rickclephas.kmp.nativecoroutines.nativeSuspend, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> declared in com.rickclephas.kmp.nativecoroutines' type=kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> origin=null
+          <T>: kotlin.String
+          scope: GET_VAR 'val tmp_0: kotlinx.coroutines.CoroutineScope declared in <root>.returnSuspendValue2Native' type=kotlinx.coroutines.CoroutineScope origin=null
+          block: FUN_EXPR type=kotlin.coroutines.SuspendFunction0<kotlin.String> origin=LAMBDA
+            FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> () returnType:kotlin.String [suspend]
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='local final fun <anonymous> (): kotlin.String declared in <root>.returnSuspendValue2Native'
+                  CALL 'public final fun returnSuspendValue2 (): kotlin.String declared in <root>' type=kotlin.String origin=null
+                    $receiver: GET_VAR '<this>: <root>.MyAndroidXViewModel1 declared in <root>.returnSuspendValue2Native' type=<root>.MyAndroidXViewModel1 origin=null
+  FUN GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:returnSuspendValue2Native visibility:public modality:FINAL <> ($receiver:<root>.MyAndroidXViewModel2) returnType:kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>
+    annotations:
+      ObjCName(name = "returnSuspendValue2", swiftName = <null>, exact = <null>)
+    $receiver: VALUE_PARAMETER name:<this> type:<root>.MyAndroidXViewModel2
+    BLOCK_BODY
+      VAR IR_TEMPORARY_VARIABLE name:tmp_1 type:kotlinx.coroutines.CoroutineScope [val]
+        CALL 'public final fun <get-viewModelScope> (): kotlinx.coroutines.CoroutineScope declared in androidx.lifecycle' type=kotlinx.coroutines.CoroutineScope origin=null
+          $receiver: GET_VAR '<this>: <root>.MyAndroidXViewModel2 declared in <root>.returnSuspendValue2Native' type=<root>.MyAndroidXViewModel2 origin=null
+      RETURN type=kotlin.Nothing from='public final fun returnSuspendValue2Native (): kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> declared in <root>'
+        CALL 'public final fun nativeSuspend <T> (scope: kotlinx.coroutines.CoroutineScope?, block: kotlin.coroutines.SuspendFunction0<T of com.rickclephas.kmp.nativecoroutines.nativeSuspend>): kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<T of com.rickclephas.kmp.nativecoroutines.nativeSuspend, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> declared in com.rickclephas.kmp.nativecoroutines' type=kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> origin=null
+          <T>: kotlin.String
+          scope: GET_VAR 'val tmp_1: kotlinx.coroutines.CoroutineScope declared in <root>.returnSuspendValue2Native' type=kotlinx.coroutines.CoroutineScope origin=null
+          block: FUN_EXPR type=kotlin.coroutines.SuspendFunction0<kotlin.String> origin=LAMBDA
+            FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> () returnType:kotlin.String [suspend]
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='local final fun <anonymous> (): kotlin.String declared in <root>.returnSuspendValue2Native'
+                  CALL 'public final fun returnSuspendValue2 (): kotlin.String declared in <root>' type=kotlin.String origin=null
+                    $receiver: GET_VAR '<this>: <root>.MyAndroidXViewModel2 declared in <root>.returnSuspendValue2Native' type=<root>.MyAndroidXViewModel2 origin=null
+  FUN GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:returnSuspendValue2Native visibility:public modality:FINAL <> ($receiver:<root>.MyObservableViewModel1) returnType:kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>
+    annotations:
+      ObjCName(name = "returnSuspendValue2", swiftName = <null>, exact = <null>)
+    $receiver: VALUE_PARAMETER name:<this> type:<root>.MyObservableViewModel1
+    BLOCK_BODY
+      VAR IR_TEMPORARY_VARIABLE name:tmp_2 type:kotlinx.coroutines.CoroutineScope [val]
+        CALL 'public final fun <get-coroutineScope> (): kotlinx.coroutines.CoroutineScope declared in com.rickclephas.kmp.observableviewmodel' type=kotlinx.coroutines.CoroutineScope origin=null
+          $receiver: CALL 'public final fun <get-viewModelScope> (): com.rickclephas.kmp.observableviewmodel.ViewModelScope declared in com.rickclephas.kmp.observableviewmodel.ViewModel' type=com.rickclephas.kmp.observableviewmodel.ViewModelScope origin=null
+            $this: GET_VAR '<this>: <root>.MyObservableViewModel1 declared in <root>.returnSuspendValue2Native' type=<root>.MyObservableViewModel1 origin=null
+      RETURN type=kotlin.Nothing from='public final fun returnSuspendValue2Native (): kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> declared in <root>'
+        CALL 'public final fun nativeSuspend <T> (scope: kotlinx.coroutines.CoroutineScope?, block: kotlin.coroutines.SuspendFunction0<T of com.rickclephas.kmp.nativecoroutines.nativeSuspend>): kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<T of com.rickclephas.kmp.nativecoroutines.nativeSuspend, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> declared in com.rickclephas.kmp.nativecoroutines' type=kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> origin=null
+          <T>: kotlin.String
+          scope: GET_VAR 'val tmp_2: kotlinx.coroutines.CoroutineScope declared in <root>.returnSuspendValue2Native' type=kotlinx.coroutines.CoroutineScope origin=null
+          block: FUN_EXPR type=kotlin.coroutines.SuspendFunction0<kotlin.String> origin=LAMBDA
+            FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> () returnType:kotlin.String [suspend]
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='local final fun <anonymous> (): kotlin.String declared in <root>.returnSuspendValue2Native'
+                  CALL 'public final fun returnSuspendValue2 (): kotlin.String declared in <root>' type=kotlin.String origin=null
+                    $receiver: GET_VAR '<this>: <root>.MyObservableViewModel1 declared in <root>.returnSuspendValue2Native' type=<root>.MyObservableViewModel1 origin=null
+  FUN GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:returnSuspendValue2Native visibility:public modality:FINAL <> ($receiver:<root>.MyObservableViewModel2) returnType:kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>
+    annotations:
+      ObjCName(name = "returnSuspendValue2", swiftName = <null>, exact = <null>)
+    $receiver: VALUE_PARAMETER name:<this> type:<root>.MyObservableViewModel2
+    BLOCK_BODY
+      VAR IR_TEMPORARY_VARIABLE name:tmp_3 type:kotlinx.coroutines.CoroutineScope [val]
+        CALL 'public final fun <get-coroutineScope> (): kotlinx.coroutines.CoroutineScope declared in com.rickclephas.kmp.observableviewmodel' type=kotlinx.coroutines.CoroutineScope origin=null
+          $receiver: CALL 'public final fun <get-viewModelScope> (): com.rickclephas.kmp.observableviewmodel.ViewModelScope declared in com.rickclephas.kmp.observableviewmodel.ViewModel' type=com.rickclephas.kmp.observableviewmodel.ViewModelScope origin=null
+            $this: GET_VAR '<this>: <root>.MyObservableViewModel2 declared in <root>.returnSuspendValue2Native' type=<root>.MyObservableViewModel2 origin=null
+      RETURN type=kotlin.Nothing from='public final fun returnSuspendValue2Native (): kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> declared in <root>'
+        CALL 'public final fun nativeSuspend <T> (scope: kotlinx.coroutines.CoroutineScope?, block: kotlin.coroutines.SuspendFunction0<T of com.rickclephas.kmp.nativecoroutines.nativeSuspend>): kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<T of com.rickclephas.kmp.nativecoroutines.nativeSuspend, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> declared in com.rickclephas.kmp.nativecoroutines' type=kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> origin=null
+          <T>: kotlin.String
+          scope: GET_VAR 'val tmp_3: kotlinx.coroutines.CoroutineScope declared in <root>.returnSuspendValue2Native' type=kotlinx.coroutines.CoroutineScope origin=null
+          block: FUN_EXPR type=kotlin.coroutines.SuspendFunction0<kotlin.String> origin=LAMBDA
+            FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> () returnType:kotlin.String [suspend]
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='local final fun <anonymous> (): kotlin.String declared in <root>.returnSuspendValue2Native'
+                  CALL 'public final fun returnSuspendValue2 (): kotlin.String declared in <root>' type=kotlin.String origin=null
+                    $receiver: GET_VAR '<this>: <root>.MyObservableViewModel2 declared in <root>.returnSuspendValue2Native' type=<root>.MyObservableViewModel2 origin=null
