@@ -25,11 +25,12 @@ open class CompilationTests {
         )
     ) {
         KotlinCompilation().apply {
+            languageVersion = "1.9"
             workingDir = temporaryFolder.root
             sources = listOf(SourceFile.new("Source.kt", "package test\n\n$inputContent"))
             inheritClassPath = true
-            symbolProcessorProviders = listOf(KmpNativeCoroutinesSymbolProcessorProvider())
-            this.kspArgs += kspArgs
+            symbolProcessorProviders += KmpNativeCoroutinesSymbolProcessorProvider()
+            kspProcessorOptions += kspArgs
             assertCompile()
             assertKspSourceFile("test/SourceNative.kt", "package test\n\n$outputContent")
         }
