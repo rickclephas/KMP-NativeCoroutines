@@ -4,7 +4,7 @@ FILE fqName:androidx.lifecycle fileName:/androidxviewmodel.kt
     CONSTRUCTOR visibility:public <> () returnType:androidx.lifecycle.ViewModel [primary]
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
-        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:ViewModel modality:OPEN visibility:public superTypes:[kotlin.Any]'
+        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:ViewModel modality:OPEN visibility:public superTypes:[kotlin.Any]' type=kotlin.Unit
     FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
       overridden:
         public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in kotlin.Any
@@ -44,7 +44,7 @@ FILE fqName:com.rickclephas.kmp.observableviewmodel fileName:/observableviewmode
     CONSTRUCTOR visibility:public <> () returnType:com.rickclephas.kmp.observableviewmodel.ViewModel [primary]
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in androidx.lifecycle.ViewModel'
-        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:ViewModel modality:OPEN visibility:public superTypes:[androidx.lifecycle.ViewModel]'
+        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:ViewModel modality:OPEN visibility:public superTypes:[androidx.lifecycle.ViewModel]' type=kotlin.Unit
     FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
       overridden:
         public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in androidx.lifecycle.ViewModel
@@ -63,7 +63,7 @@ FILE fqName:com.rickclephas.kmp.observableviewmodel fileName:/observableviewmode
     CONSTRUCTOR visibility:public <> () returnType:com.rickclephas.kmp.observableviewmodel.ViewModelScope [primary]
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
-        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:ViewModelScope modality:FINAL visibility:public superTypes:[kotlin.Any]'
+        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:ViewModelScope modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlin.Unit
     FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
       overridden:
         public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in kotlin.Any
@@ -105,7 +105,7 @@ FILE fqName:<root> fileName:/viewmodelscope.kt
     CONSTRUCTOR visibility:public <> () returnType:<root>.MyAndroidXViewModel1 [primary]
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in androidx.lifecycle.ViewModel'
-        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:MyAndroidXViewModel1 modality:FINAL visibility:public superTypes:[androidx.lifecycle.ViewModel]'
+        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:MyAndroidXViewModel1 modality:FINAL visibility:public superTypes:[androidx.lifecycle.ViewModel]' type=kotlin.Unit
     FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
       overridden:
         public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in androidx.lifecycle.ViewModel
@@ -164,7 +164,7 @@ FILE fqName:<root> fileName:/viewmodelscope.kt
     CONSTRUCTOR visibility:public <> () returnType:<root>.MyAndroidXViewModel2 [primary]
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in androidx.lifecycle.ViewModel'
-        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:MyAndroidXViewModel2 modality:FINAL visibility:public superTypes:[androidx.lifecycle.ViewModel]'
+        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:MyAndroidXViewModel2 modality:FINAL visibility:public superTypes:[androidx.lifecycle.ViewModel]' type=kotlin.Unit
     FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
       overridden:
         public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in androidx.lifecycle.ViewModel
@@ -208,7 +208,7 @@ FILE fqName:<root> fileName:/viewmodelscope.kt
     CONSTRUCTOR visibility:public <> () returnType:<root>.MyObservableViewModel1 [primary]
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in com.rickclephas.kmp.observableviewmodel.ViewModel'
-        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:MyObservableViewModel1 modality:FINAL visibility:public superTypes:[com.rickclephas.kmp.observableviewmodel.ViewModel]'
+        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:MyObservableViewModel1 modality:FINAL visibility:public superTypes:[com.rickclephas.kmp.observableviewmodel.ViewModel]' type=kotlin.Unit
     FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
       overridden:
         public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in com.rickclephas.kmp.observableviewmodel.ViewModel
@@ -276,7 +276,7 @@ FILE fqName:<root> fileName:/viewmodelscope.kt
     CONSTRUCTOR visibility:public <> () returnType:<root>.MyObservableViewModel2 [primary]
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in com.rickclephas.kmp.observableviewmodel.ViewModel'
-        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:MyObservableViewModel2 modality:FINAL visibility:public superTypes:[com.rickclephas.kmp.observableviewmodel.ViewModel]'
+        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:MyObservableViewModel2 modality:FINAL visibility:public superTypes:[com.rickclephas.kmp.observableviewmodel.ViewModel]' type=kotlin.Unit
     FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
       overridden:
         public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in com.rickclephas.kmp.observableviewmodel.ViewModel
