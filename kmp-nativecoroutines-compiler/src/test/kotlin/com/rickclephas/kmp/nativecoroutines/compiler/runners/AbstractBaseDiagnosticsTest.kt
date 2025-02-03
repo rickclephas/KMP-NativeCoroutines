@@ -29,7 +29,7 @@ abstract class AbstractBaseDiagnosticsTest<R : ResultingArtifact.FrontendOutput<
     abstract val frontend: Constructor<FrontendFacade<R>>
     abstract fun TestConfigurationBuilder.handlersSetup()
 
-    final override fun TestConfigurationBuilder.configuration() {
+    override fun configure(builder: TestConfigurationBuilder) = with(builder) {
         globalDefaults {
             frontend = targetFrontend
             targetPlatform = NativePlatforms.unspecifiedNativePlatform
