@@ -31,7 +31,6 @@ dependencies {
 
         pluginVerifier()
         zipSigner()
-        instrumentationTools()
     }
     implementation(project(":kmp-nativecoroutines-compiler"))
 }
