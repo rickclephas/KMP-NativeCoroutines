@@ -46,7 +46,7 @@ internal fun FirExtension.buildPropertySetter(
     valueParameters.add(
         buildDefaultSetterValueParameter {
             resolvePhase = FirResolvePhase.BODY_RESOLVE
-            containingFunctionSymbol = this@buildPropertyAccessor.symbol
+            containingDeclarationSymbol = this@buildPropertyAccessor.symbol
             moduleData = propertyBuilder.moduleData
             origin = propertyBuilder.origin
             returnTypeRef = propertyBuilder.returnTypeRef
