@@ -23,13 +23,14 @@ This library solves both of these limitations 😄.
 
 ## Compatibility
 
-The latest version of the library uses Kotlin version `2.1.0`.  
+The latest version of the library uses Kotlin version `2.1.10`.  
 Compatibility versions for older and/or preview Kotlin versions are also available:
 
 | Version        | Version suffix       |    Kotlin    |    KSP     | Coroutines |
 |----------------|----------------------|:------------:|:----------:|:----------:|
 | _latest_       | -kotlin-2.1.20-Beta1 | 2.1.20-Beta1 |   1.0.29   |   1.10.1   |
-| **_latest_**   | **_no suffix_**      |  **2.1.0**   | **1.0.29** | **1.9.0**  |
+| **_latest_**   | **_no suffix_**      |  **2.1.10**  | **1.0.29** | **1.10.1** |
+| 1.0.0-ALPHA-38 | _no suffix_          |    2.1.0     |   1.0.29   |   1.9.0    |
 | 1.0.0-ALPHA-37 | _no suffix_          |    2.0.21    |   1.0.25   |   1.9.0    |
 | 1.0.0-ALPHA-36 | _no suffix_          |    2.0.20    |   1.0.25   |   1.9.0    |
 | 1.0.0-ALPHA-35 | _no suffix_          |    2.0.20    |   1.0.24   |   1.8.1    |
@@ -68,8 +69,8 @@ Make sure to always use the same versions for all the libraries!
 For Kotlin just add the plugin to your `build.gradle.kts`:
 ```kotlin
 plugins {
-    id("com.google.devtools.ksp") version "2.1.0-1.0.29"
-    id("com.rickclephas.kmp.nativecoroutines") version "1.0.0-ALPHA-38"
+    id("com.google.devtools.ksp") version "2.1.10-1.0.29"
+    id("com.rickclephas.kmp.nativecoroutines") version "1.0.0-ALPHA-39"
 }
 ```
 and make sure to opt in to the experimental `@ObjCName` annotation:
@@ -85,7 +86,7 @@ The Swift implementations are available via the Swift Package Manager.
 Just add it to your `Package.swift` file:
 ```swift
 dependencies: [
-    .package(url: "https://github.com/rickclephas/KMP-NativeCoroutines.git", exact: "1.0.0-ALPHA-38")
+    .package(url: "https://github.com/rickclephas/KMP-NativeCoroutines.git", exact: "1.0.0-ALPHA-39")
 ],
 targets: [
     .target(
@@ -117,9 +118,9 @@ Or add it in Xcode by going to `File` > `Add Packages...` and providing the URL:
 
 If you use CocoaPods add one or more of the following libraries to your `Podfile`:
 ```ruby
-pod 'KMPNativeCoroutinesAsync', '1.0.0-ALPHA-38'    # Swift Concurrency implementation
-pod 'KMPNativeCoroutinesCombine', '1.0.0-ALPHA-38'  # Combine implementation
-pod 'KMPNativeCoroutinesRxSwift', '1.0.0-ALPHA-38'  # RxSwift implementation
+pod 'KMPNativeCoroutinesAsync', '1.0.0-ALPHA-39'    # Swift Concurrency implementation
+pod 'KMPNativeCoroutinesCombine', '1.0.0-ALPHA-39'  # Combine implementation
+pod 'KMPNativeCoroutinesRxSwift', '1.0.0-ALPHA-39'  # RxSwift implementation
 ```
 > [!NOTE]
 > The version for CocoaPods should not contain the Kotlin version suffix (e.g. `-new-mm` or `-kotlin-1.6.0`).
