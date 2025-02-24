@@ -55,6 +55,8 @@ internal fun FirExtension.buildNativeFunction(
 
         receiverParameter = buildReceiverParameterCopy(
             originalSymbol.receiverParameter,
+            symbol,
+            origin,
             typeParameters.substitutor
         )
         valueParameters.addAll(buildValueParametersCopy(
