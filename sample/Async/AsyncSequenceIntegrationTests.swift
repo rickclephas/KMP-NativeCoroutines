@@ -7,7 +7,8 @@
 
 import XCTest
 import KMPNativeCoroutinesAsync
-import NativeCoroutinesSampleShared
+import KMPNativeCoroutinesCore
+@preconcurrency import NativeCoroutinesSampleShared
 
 class AsyncSequenceIntegrationTests: XCTestCase {
     
@@ -33,25 +34,109 @@ class AsyncSequenceIntegrationTests: XCTestCase {
         await assertJobCompleted(integrationTests)
     }
     
-    func testValueBackPressure() async {
+    func testValueBackPressure() async throws {
         let integrationTests = FlowIntegrationTests()
         let sendValueCount: Int32 = 10
         let sequence = asyncSequence(for: integrationTests.getFlow(count: sendValueCount, delay: 100))
         do {
             var receivedValueCount: Int32 = 0
-            for try await _ in sequence {
-                let emittedCount = integrationTests.emittedCount
+            // This will emit a value and return on the same queue which is the expected behaviour of async streams
+            // Old implementation returned on cooporative queue making the consumption of the sample not block the emit. This is not expected for async streams.
+            var result: [String] = []
+            for try await value in sequence {
                 // Note the AsyncSequence buffers at most a single item
-                XCTAssert(emittedCount == receivedValueCount || emittedCount == receivedValueCount + 1, "Back pressure isn't applied")
-                delay(0.2)
+                result.append("\(value)")
+                delay(0.2) // This effectively blocks the emit as is expected for async streams. Due to the build in buffer policy of AysyncThrowing stream by default nothing is lost
                 receivedValueCount += 1
             }
-            XCTAssertEqual(receivedValueCount, sendValueCount, "Should have received all values")
+            XCTAssertEqual(result, [
+                "0",
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+            ], """
+            Should have received all values. You might notice that the middle, the emittedCount skips a beat.
+            This is normal als the delay here block the same caller queue until it is ready to receive another value.
+            When it is ready the AsyncThrowingStream emits a value from its, by default infinate, buffer. Hence effectively
+            allowing for all values to be passed into swift. This might not be abovious from just testing the emit count as that one skips a beat.
+            But in this case is the expected behaviour if you align with how streams behave in swift structured concurrency world.
+            """)
         } catch {
             XCTFail("Sequence should complete without an error")
         }
         await assertJobCompleted(integrationTests)
     }
+    
+    func testValueBackPressureDelibaratlyLoosesValues() async throws {
+        let integrationTests = FlowIntegrationTests()
+        let sendValueCount: Int32 = 10
+        // Delibarately disable buffer policy, sometimes wanted in real time data processing or when processing audio streams that have to be real time.
+        // In that case you would want buffers to be dropped when consumption is too slow. With AsyncThrowingStream you have that behaviour as an option
+        // with the older implementation `NativeFlowAsyncSequence` the result is returned on a cooparative queue making it async to the sample stream. Which
+        // you might not want.
+        let sequence = asyncSequence(for: integrationTests.getFlow(count: sendValueCount, delay: 100), bufferingPolicy: .bufferingNewest(0))
+        do {
+            // This will emit a value and return on the same queue which is the expected behaviour of async streams
+            // Old implementation returned on cooporative queue making the consumption of the sample not block the emit. This is not expected for async streams.
+            var result: [String] = []
+            for try await value in sequence {
+                // Note the AsyncSequence buffers at most a single item
+                result.append("\(value)")
+                delay(0.2) // This effectively blocks the emit as is expected for async streams. Due to the build in buffer policy of AysyncThrowing stream by default nothing is lost
+            }
+            
+            XCTAssertTrue(result.count < 10, """
+            This test shows that you have the option to force drops of items if consumption is too slow.
+            The values dropped are a bit random so a test with exact values is not possible. But it should be less then
+            10 values or the buffer is still active.
+            """)
+        } catch {
+            XCTFail("Sequence should complete without an error")
+        }
+        await assertJobCompleted(integrationTests)
+    }
+    
+    func testValueBackPressureWhenConsumptionIsAsync() async throws {
+        let integrationTests = FlowIntegrationTests()
+        let sendValueCount: Int32 = 10
+       
+        let sequence = asyncSequence(for: integrationTests.getFlow(count: sendValueCount, delay: 100), bufferingPolicy: .bufferingNewest(0))
+   
+        do {
+            var result: [String] = []
+            for try await value in sequence {
+                try await Task{
+                    result.append("\(value)")
+                    try await Task.sleep(nanoseconds: 200)
+                }.value
+            }
+            
+            XCTAssertEqual(result, [
+                "0",
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"], """
+            This will now correctly count for emit and not use the buffer policy but still have all the elements as 
+            consumption is async.
+            """)
+        } catch {
+            XCTFail("Sequence should complete without an error")
+        }
+        await assertJobCompleted(integrationTests)
+    }
+    
     
     func testNilValueReceived() async {
         let integrationTests = FlowIntegrationTests()
