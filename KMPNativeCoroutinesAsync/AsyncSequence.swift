@@ -26,7 +26,8 @@ public struct NativeFlowAsyncSequence<Output, Failure: Error, Unit>: AsyncSequen
         
         private let semaphore = DispatchSemaphore(value: 1)
         private var nativeCancellable: NativeCancellable<Unit>?
-        private var item: (Output, () -> Unit)? = nil
+        private var item: Output? = nil
+        private var next: (() -> Unit)? = nil
         private var result: Failure?? = Optional.none
         private var cancellationError: Failure? = nil
         private var continuation: UnsafeContinuation<Output?, Error>? = nil
@@ -38,11 +39,11 @@ public struct NativeFlowAsyncSequence<Output, Failure: Error, Unit>: AsyncSequen
                 if let continuation = self.continuation {
                     continuation.resume(returning: item)
                     self.continuation = nil
-                    return next()
                 } else {
-                    self.item = (item, next)
-                    return unit
+                    self.item = item
                 }
+                self.next = next
+                return unit
             }, { error, unit in
                 self.semaphore.wait()
                 defer { self.semaphore.signal() }
@@ -75,9 +76,8 @@ public struct NativeFlowAsyncSequence<Output, Failure: Error, Unit>: AsyncSequen
                 try await withUnsafeThrowingContinuation { continuation in
                     self.semaphore.wait()
                     defer { self.semaphore.signal() }
-                    if let (item, next) = self.item {
+                    if let item = self.item {
                         continuation.resume(returning: item)
-                        _ = next()
                         self.item = nil
                     } else if let result = self.result {
                         if let error = result {
@@ -92,6 +92,10 @@ public struct NativeFlowAsyncSequence<Output, Failure: Error, Unit>: AsyncSequen
                             fatalError("Concurrent calls to next aren't supported")
                         }
                         self.continuation = continuation
+                        if let next = self.next {
+                            _ = next()
+                            self.next = nil
+                        }
                     }
                 }
             } onCancel: {

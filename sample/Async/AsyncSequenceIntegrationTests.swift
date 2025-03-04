@@ -41,8 +41,7 @@ class AsyncSequenceIntegrationTests: XCTestCase {
             var receivedValueCount: Int32 = 0
             for try await _ in sequence {
                 let emittedCount = integrationTests.emittedCount
-                // Note the AsyncSequence buffers at most a single item
-                XCTAssert(emittedCount == receivedValueCount || emittedCount == receivedValueCount + 1, "Back pressure isn't applied")
+                XCTAssert(emittedCount == receivedValueCount, "Back pressure isn't applied")
                 delay(0.2)
                 receivedValueCount += 1
             }
