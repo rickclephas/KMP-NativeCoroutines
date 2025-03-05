@@ -13,7 +13,7 @@ class AsyncSequenceTests: XCTestCase {
     
     private class TestValue { }
 
-    func testCancellableInvoked() async {
+    func testCancellableInvoked() async throws {
         var cancelCount = 0
         let nativeFlow: NativeFlow<TestValue, Error, Void> = { _, _, cancelCallback in
             return {
@@ -25,6 +25,7 @@ class AsyncSequenceTests: XCTestCase {
             for try await _ in asyncSequence(for: nativeFlow) { }
         }
         XCTAssertEqual(cancelCount, 0, "Cancellable shouldn't be invoked yet")
+        try await Task.sleep(nanoseconds: 10_000_000) // Gives the sequence a moment to start
         handle.cancel()
         let result = await handle.result
         XCTAssertEqual(cancelCount, 1, "Cancellable should be invoked once")
@@ -65,8 +66,10 @@ class AsyncSequenceTests: XCTestCase {
     func testCompletionWithError() async {
         let sendError = NSError(domain: "Test", code: 0)
         let nativeFlow: NativeFlow<TestValue, NSError, Void> = { _, completionCallback, _ in
-            completionCallback(sendError, ())
-            return { }
+            let handle = Task {
+                completionCallback(sendError, ())
+            }
+            return { handle.cancel() }
         }
         var valueCount = 0
         do {
