@@ -29,7 +29,7 @@ public struct NativeFlowAsyncSequence<Output, Failure: Error, Unit>: AsyncSequen
             case producing(UnsafeContinuation<Output?, Error>)
             case consuming(() -> Unit)
             case completed(Failure?)
-            case cancelled(Failure)
+            case cancelled
         }
         
         private let semaphore = DispatchSemaphore(value: 1)
@@ -90,11 +90,11 @@ public struct NativeFlowAsyncSequence<Output, Failure: Error, Unit>: AsyncSequen
             case .new:
                 fatalError("onCancelled can't be called while in state new")
             case .producing(let continuation):
-                continuation.resume(returning: nil)
-                state = .cancelled(error)
+                continuation.resume(throwing: CancellationError())
+                state = .cancelled
                 return unit
             case .consuming:
-                state = .cancelled(error)
+                state = .cancelled
                 return unit
             case .completed:
                 return unit
@@ -128,8 +128,14 @@ public struct NativeFlowAsyncSequence<Output, Failure: Error, Unit>: AsyncSequen
                     }
                 }
             } onCancel: {
+                self.semaphore.wait()
+                if case .new = state {
+                    state = .cancelled
+                }
+                let nativeCancellable = self.nativeCancellable
+                self.nativeCancellable = nil
+                self.semaphore.signal()
                 _ = nativeCancellable?()
-                nativeCancellable = nil
             }
         }
     }
