@@ -24,51 +24,83 @@ public struct NativeFlowAsyncSequence<Output, Failure: Error, Unit>: AsyncSequen
     
     public class Iterator: AsyncIteratorProtocol, @unchecked Sendable {
         
-        private let semaphore = DispatchSemaphore(value: 1)
-        private var nativeCancellable: NativeCancellable<Unit>?
-        private var item: Output? = nil
-        private var next: (() -> Unit)? = nil
-        private var result: Failure?? = Optional.none
-        private var cancellationError: Failure? = nil
-        private var continuation: UnsafeContinuation<Output?, Error>? = nil
+        private enum State {
+            case new(NativeFlow<Output, Failure, Unit>)
+            case producing(UnsafeContinuation<Output?, Error>)
+            case consuming(() -> Unit)
+            case completed(Failure?)
+            case cancelled(Failure)
+        }
         
-        init(nativeFlow: NativeFlow<Output, Failure, Unit>) {
-            nativeCancellable = nativeFlow({ item, next, unit in
-                self.semaphore.wait()
-                defer { self.semaphore.signal() }
-                if let continuation = self.continuation {
-                    continuation.resume(returning: item)
-                    self.continuation = nil
+        private let semaphore = DispatchSemaphore(value: 1)
+        private var state: State
+        private var nativeCancellable: NativeCancellable<Unit>?
+        
+        init(nativeFlow: @escaping NativeFlow<Output, Failure, Unit>) {
+            state = .new(nativeFlow)
+        }
+        
+        private func onItem(item: Output, next: @escaping () -> Unit, unit: Unit) -> Unit {
+            semaphore.wait()
+            defer { semaphore.signal() }
+            switch state {
+            case .new:
+                fatalError("onItem can't be called while in state new")
+            case .producing(let continuation):
+                continuation.resume(returning: item)
+                state = .consuming(next)
+                return unit
+            case .consuming:
+                fatalError("onItem can't be called while in state consuming")
+            case .completed:
+                fatalError("onItem can't be called while in state completed")
+            case .cancelled:
+                fatalError("onItem can't be called while in state cancelled")
+            }
+        }
+        
+        private func onComplete(error: Failure?, unit: Unit) -> Unit {
+            semaphore.wait()
+            defer { semaphore.signal() }
+            switch state {
+            case .new:
+                fatalError("onComplete can't be called while in state new")
+            case .producing(let continuation):
+                if let error {
+                    continuation.resume(throwing: error)
                 } else {
-                    self.item = item
-                }
-                self.next = next
-                return unit
-            }, { error, unit in
-                self.semaphore.wait()
-                defer { self.semaphore.signal() }
-                self.result = Optional.some(error)
-                if let continuation = self.continuation {
-                    if let error = error {
-                        continuation.resume(throwing: error)
-                    } else {
-                        continuation.resume(returning: nil)
-                    }
-                    self.continuation = nil
-                }
-                self.nativeCancellable = nil
-                return unit
-            }, { cancellationError, unit in
-                self.semaphore.wait()
-                defer { self.semaphore.signal() }
-                self.cancellationError = cancellationError
-                if let continuation = self.continuation {
                     continuation.resume(returning: nil)
-                    self.continuation = nil
                 }
-                self.nativeCancellable = nil
+                state = .completed(error)
                 return unit
-            })
+            case .consuming:
+                state = .completed(error)
+                return unit
+            case .completed:
+                return unit
+            case .cancelled:
+                return unit
+            }
+        }
+        
+        private func onCancelled(error: Failure, unit: Unit) -> Unit {
+            semaphore.wait()
+            defer { semaphore.signal() }
+            switch state {
+            case .new:
+                fatalError("onCancelled can't be called while in state new")
+            case .producing(let continuation):
+                continuation.resume(returning: nil)
+                state = .cancelled(error)
+                return unit
+            case .consuming:
+                state = .cancelled(error)
+                return unit
+            case .completed:
+                return unit
+            case .cancelled:
+                return unit
+            }
         }
         
         public func next() async throws -> Output? {
@@ -76,26 +108,23 @@ public struct NativeFlowAsyncSequence<Output, Failure: Error, Unit>: AsyncSequen
                 try await withUnsafeThrowingContinuation { continuation in
                     self.semaphore.wait()
                     defer { self.semaphore.signal() }
-                    if let item = self.item {
-                        continuation.resume(returning: item)
-                        self.item = nil
-                    } else if let result = self.result {
-                        if let error = result {
+                    switch state {
+                    case .new(let nativeFlow):
+                        nativeCancellable = nativeFlow(onItem, onComplete, onCancelled)
+                        state = .producing(continuation)
+                    case .producing:
+                        fatalError("Concurrent calls to next aren't supported")
+                    case .consuming(let next):
+                        _ = next()
+                        state = .producing(continuation)
+                    case .completed(let error):
+                        if let error {
                             continuation.resume(throwing: error)
                         } else {
                             continuation.resume(returning: nil)
                         }
-                    } else if self.cancellationError != nil {
+                    case .cancelled:
                         continuation.resume(throwing: CancellationError())
-                    } else {
-                        guard self.continuation == nil else {
-                            fatalError("Concurrent calls to next aren't supported")
-                        }
-                        self.continuation = continuation
-                        if let next = self.next {
-                            _ = next()
-                            self.next = nil
-                        }
                     }
                 }
             } onCancel: {
