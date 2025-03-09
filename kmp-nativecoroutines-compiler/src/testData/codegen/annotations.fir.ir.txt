@@ -18,7 +18,7 @@ FILE fqName:<root> fileName:/annotations.kt
   PROPERTY name:deprecatedProperty2 visibility:public modality:FINAL [val]
     annotations:
       NativeCoroutines
-      Deprecated(message = "This is deprecated 5", replaceWith = <null>, level = GET_ENUM 'ENUM_ENTRY name:WARNING' type=kotlin.DeprecationLevel)
+      Deprecated(message = "This is deprecated 5", replaceWith = <null>, level = GET_ENUM 'ENUM_ENTRY IR_EXTERNAL_DECLARATION_STUB name:WARNING' type=kotlin.DeprecationLevel)
     FIELD PROPERTY_BACKING_FIELD name:deprecatedProperty2 type:kotlinx.coroutines.flow.Flow<kotlin.String> visibility:private [final,static]
       EXPRESSION_BODY
         CALL 'public final fun flowOf <T> (value: T of kotlinx.coroutines.flow.flowOf): kotlinx.coroutines.flow.Flow<T of kotlinx.coroutines.flow.flowOf> declared in kotlinx.coroutines.flow' type=kotlinx.coroutines.flow.Flow<kotlin.String> origin=null
@@ -32,7 +32,7 @@ FILE fqName:<root> fileName:/annotations.kt
   PROPERTY name:deprecatedProperty3 visibility:public modality:FINAL [val]
     annotations:
       NativeCoroutines
-      Deprecated(message = "This is deprecated 6", replaceWith = ReplaceWith(expression = "deprecatedProperty2", imports = [] type=kotlin.Array<out kotlin.String> varargElementType=kotlin.String), level = GET_ENUM 'ENUM_ENTRY name:ERROR' type=kotlin.DeprecationLevel)
+      Deprecated(message = "This is deprecated 6", replaceWith = ReplaceWith(expression = "deprecatedProperty2", imports = [] type=kotlin.Array<out kotlin.String> varargElementType=kotlin.String), level = GET_ENUM 'ENUM_ENTRY IR_EXTERNAL_DECLARATION_STUB name:ERROR' type=kotlin.DeprecationLevel)
     FIELD PROPERTY_BACKING_FIELD name:deprecatedProperty3 type:kotlinx.coroutines.flow.Flow<kotlin.String> visibility:private [final,static]
       EXPRESSION_BODY
         CALL 'public final fun flowOf <T> (value: T of kotlinx.coroutines.flow.flowOf): kotlinx.coroutines.flow.Flow<T of kotlinx.coroutines.flow.flowOf> declared in kotlinx.coroutines.flow' type=kotlinx.coroutines.flow.Flow<kotlin.String> origin=null
@@ -61,7 +61,7 @@ FILE fqName:<root> fileName:/annotations.kt
   PROPERTY name:objCNameProperty1 visibility:public modality:FINAL [val]
     annotations:
       NativeCoroutines
-      OptIn(markerClass = [CLASS_REFERENCE 'CLASS ANNOTATION_CLASS name:ExperimentalObjCName modality:OPEN visibility:public superTypes:[kotlin.Annotation]' type=kotlin.reflect.KClass<kotlin.experimental.ExperimentalObjCName>] type=kotlin.Array<out kotlin.reflect.KClass<out kotlin.Annotation>> varargElementType=kotlin.reflect.KClass<out kotlin.Annotation>)
+      OptIn(markerClass = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB ANNOTATION_CLASS name:ExperimentalObjCName modality:OPEN visibility:public superTypes:[kotlin.Annotation]' type=kotlin.reflect.KClass<kotlin.experimental.ExperimentalObjCName>] type=kotlin.Array<out kotlin.reflect.KClass<out kotlin.Annotation>> varargElementType=kotlin.reflect.KClass<out kotlin.Annotation>)
       ObjCName(name = "objCNameProperty1ObjC", swiftName = <null>, exact = <null>)
     FIELD PROPERTY_BACKING_FIELD name:objCNameProperty1 type:kotlinx.coroutines.flow.StateFlow<kotlin.String> visibility:private [final,static]
       EXPRESSION_BODY
@@ -76,7 +76,7 @@ FILE fqName:<root> fileName:/annotations.kt
   PROPERTY name:objCNameProperty2 visibility:public modality:FINAL [val]
     annotations:
       NativeCoroutinesState
-      OptIn(markerClass = [CLASS_REFERENCE 'CLASS ANNOTATION_CLASS name:ExperimentalObjCName modality:OPEN visibility:public superTypes:[kotlin.Annotation]' type=kotlin.reflect.KClass<kotlin.experimental.ExperimentalObjCName>] type=kotlin.Array<out kotlin.reflect.KClass<out kotlin.Annotation>> varargElementType=kotlin.reflect.KClass<out kotlin.Annotation>)
+      OptIn(markerClass = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB ANNOTATION_CLASS name:ExperimentalObjCName modality:OPEN visibility:public superTypes:[kotlin.Annotation]' type=kotlin.reflect.KClass<kotlin.experimental.ExperimentalObjCName>] type=kotlin.Array<out kotlin.reflect.KClass<out kotlin.Annotation>> varargElementType=kotlin.reflect.KClass<out kotlin.Annotation>)
       ObjCName(name = "objCNameProperty2ObjC", swiftName = <null>, exact = <null>)
     FIELD PROPERTY_BACKING_FIELD name:objCNameProperty2 type:kotlinx.coroutines.flow.StateFlow<kotlin.String> visibility:private [final,static]
       EXPRESSION_BODY
@@ -166,21 +166,21 @@ FILE fqName:<root> fileName:/annotations.kt
   FUN name:deprecatedFunction2 visibility:public modality:FINAL <> () returnType:kotlin.String [suspend]
     annotations:
       NativeCoroutines
-      Deprecated(message = "This is deprecated 2", replaceWith = <null>, level = GET_ENUM 'ENUM_ENTRY name:WARNING' type=kotlin.DeprecationLevel)
+      Deprecated(message = "This is deprecated 2", replaceWith = <null>, level = GET_ENUM 'ENUM_ENTRY IR_EXTERNAL_DECLARATION_STUB name:WARNING' type=kotlin.DeprecationLevel)
     BLOCK_BODY
       RETURN type=kotlin.Nothing from='public final fun deprecatedFunction2 (): kotlin.String declared in <root>'
         CONST String type=kotlin.String value="OK2"
   FUN name:deprecatedFunction3 visibility:public modality:FINAL <> () returnType:kotlin.String [suspend]
     annotations:
       NativeCoroutines
-      Deprecated(message = "This is deprecated 3", replaceWith = ReplaceWith(expression = "deprecatedFunction2()", imports = [] type=kotlin.Array<out kotlin.String> varargElementType=kotlin.String), level = GET_ENUM 'ENUM_ENTRY name:ERROR' type=kotlin.DeprecationLevel)
+      Deprecated(message = "This is deprecated 3", replaceWith = ReplaceWith(expression = "deprecatedFunction2()", imports = [] type=kotlin.Array<out kotlin.String> varargElementType=kotlin.String), level = GET_ENUM 'ENUM_ENTRY IR_EXTERNAL_DECLARATION_STUB name:ERROR' type=kotlin.DeprecationLevel)
     BLOCK_BODY
       RETURN type=kotlin.Nothing from='public final fun deprecatedFunction3 (): kotlin.String declared in <root>'
         CONST String type=kotlin.String value="OK3"
   FUN name:objCNameFunction1 visibility:public modality:FINAL <> () returnType:kotlin.String [suspend]
     annotations:
       NativeCoroutines
-      OptIn(markerClass = [CLASS_REFERENCE 'CLASS ANNOTATION_CLASS name:ExperimentalObjCName modality:OPEN visibility:public superTypes:[kotlin.Annotation]' type=kotlin.reflect.KClass<kotlin.experimental.ExperimentalObjCName>] type=kotlin.Array<out kotlin.reflect.KClass<out kotlin.Annotation>> varargElementType=kotlin.reflect.KClass<out kotlin.Annotation>)
+      OptIn(markerClass = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB ANNOTATION_CLASS name:ExperimentalObjCName modality:OPEN visibility:public superTypes:[kotlin.Annotation]' type=kotlin.reflect.KClass<kotlin.experimental.ExperimentalObjCName>] type=kotlin.Array<out kotlin.reflect.KClass<out kotlin.Annotation>> varargElementType=kotlin.reflect.KClass<out kotlin.Annotation>)
       ObjCName(name = "objCNameFunction1ObjC", swiftName = <null>, exact = <null>)
     BLOCK_BODY
       RETURN type=kotlin.Nothing from='public final fun objCNameFunction1 (): kotlin.String declared in <root>'
@@ -188,7 +188,7 @@ FILE fqName:<root> fileName:/annotations.kt
   FUN name:objCNameFunction2 visibility:public modality:FINAL <> () returnType:kotlin.String [suspend]
     annotations:
       NativeCoroutines
-      OptIn(markerClass = [CLASS_REFERENCE 'CLASS ANNOTATION_CLASS name:ExperimentalObjCName modality:OPEN visibility:public superTypes:[kotlin.Annotation]' type=kotlin.reflect.KClass<kotlin.experimental.ExperimentalObjCName>] type=kotlin.Array<out kotlin.reflect.KClass<out kotlin.Annotation>> varargElementType=kotlin.reflect.KClass<out kotlin.Annotation>)
+      OptIn(markerClass = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB ANNOTATION_CLASS name:ExperimentalObjCName modality:OPEN visibility:public superTypes:[kotlin.Annotation]' type=kotlin.reflect.KClass<kotlin.experimental.ExperimentalObjCName>] type=kotlin.Array<out kotlin.reflect.KClass<out kotlin.Annotation>> varargElementType=kotlin.reflect.KClass<out kotlin.Annotation>)
       ObjCName(name = <null>, swiftName = "objCNameFunction2Swift", exact = <null>)
     BLOCK_BODY
       RETURN type=kotlin.Nothing from='public final fun objCNameFunction2 (): kotlin.String declared in <root>'
@@ -196,7 +196,7 @@ FILE fqName:<root> fileName:/annotations.kt
   FUN name:objCNameFunction3 visibility:public modality:FINAL <> () returnType:kotlin.String [suspend]
     annotations:
       NativeCoroutines
-      OptIn(markerClass = [CLASS_REFERENCE 'CLASS ANNOTATION_CLASS name:ExperimentalObjCName modality:OPEN visibility:public superTypes:[kotlin.Annotation]' type=kotlin.reflect.KClass<kotlin.experimental.ExperimentalObjCName>] type=kotlin.Array<out kotlin.reflect.KClass<out kotlin.Annotation>> varargElementType=kotlin.reflect.KClass<out kotlin.Annotation>)
+      OptIn(markerClass = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB ANNOTATION_CLASS name:ExperimentalObjCName modality:OPEN visibility:public superTypes:[kotlin.Annotation]' type=kotlin.reflect.KClass<kotlin.experimental.ExperimentalObjCName>] type=kotlin.Array<out kotlin.reflect.KClass<out kotlin.Annotation>> varargElementType=kotlin.reflect.KClass<out kotlin.Annotation>)
       ObjCName(name = "objCNameFunction3ObjC", swiftName = "objCNameFunction3Swift", exact = <null>)
     BLOCK_BODY
       RETURN type=kotlin.Nothing from='public final fun objCNameFunction3 (): kotlin.String declared in <root>'
@@ -204,7 +204,7 @@ FILE fqName:<root> fileName:/annotations.kt
   FUN name:objCNameFunctionParameter visibility:public modality:FINAL <> (value:kotlin.String) returnType:kotlin.String [suspend]
     annotations:
       NativeCoroutines
-      OptIn(markerClass = [CLASS_REFERENCE 'CLASS ANNOTATION_CLASS name:ExperimentalObjCName modality:OPEN visibility:public superTypes:[kotlin.Annotation]' type=kotlin.reflect.KClass<kotlin.experimental.ExperimentalObjCName>] type=kotlin.Array<out kotlin.reflect.KClass<out kotlin.Annotation>> varargElementType=kotlin.reflect.KClass<out kotlin.Annotation>)
+      OptIn(markerClass = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB ANNOTATION_CLASS name:ExperimentalObjCName modality:OPEN visibility:public superTypes:[kotlin.Annotation]' type=kotlin.reflect.KClass<kotlin.experimental.ExperimentalObjCName>] type=kotlin.Array<out kotlin.reflect.KClass<out kotlin.Annotation>> varargElementType=kotlin.reflect.KClass<out kotlin.Annotation>)
     VALUE_PARAMETER name:value index:0 type:kotlin.String
       annotations:
         ObjCName(name = "valueObjC", swiftName = <null>, exact = <null>)
@@ -252,7 +252,7 @@ FILE fqName:<root> fileName:__GENERATED DECLARATIONS__.kt
                   CALL 'public final fun deprecatedFunction1 (): kotlin.String declared in <root>' type=kotlin.String origin=null
   FUN GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:deprecatedFunction2Native visibility:public modality:FINAL <> () returnType:kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>
     annotations:
-      Deprecated(message = "This is deprecated 2", replaceWith = <null>, level = GET_ENUM 'ENUM_ENTRY name:WARNING' type=kotlin.DeprecationLevel)
+      Deprecated(message = "This is deprecated 2", replaceWith = <null>, level = GET_ENUM 'ENUM_ENTRY IR_EXTERNAL_DECLARATION_STUB name:WARNING' type=kotlin.DeprecationLevel)
       ObjCName(name = "deprecatedFunction2", swiftName = <null>, exact = <null>)
     BLOCK_BODY
       VAR IR_TEMPORARY_VARIABLE name:tmp_2 type:kotlinx.coroutines.CoroutineScope? [val]
@@ -268,7 +268,7 @@ FILE fqName:<root> fileName:__GENERATED DECLARATIONS__.kt
                   CALL 'public final fun deprecatedFunction2 (): kotlin.String declared in <root>' type=kotlin.String origin=null
   FUN GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:deprecatedFunction3Native visibility:public modality:FINAL <> () returnType:kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>
     annotations:
-      Deprecated(message = "This is deprecated 3", replaceWith = <null>, level = GET_ENUM 'ENUM_ENTRY name:ERROR' type=kotlin.DeprecationLevel)
+      Deprecated(message = "This is deprecated 3", replaceWith = <null>, level = GET_ENUM 'ENUM_ENTRY IR_EXTERNAL_DECLARATION_STUB name:ERROR' type=kotlin.DeprecationLevel)
       ObjCName(name = "deprecatedFunction3", swiftName = <null>, exact = <null>)
     BLOCK_BODY
       VAR IR_TEMPORARY_VARIABLE name:tmp_3 type:kotlinx.coroutines.CoroutineScope? [val]
@@ -364,7 +364,7 @@ FILE fqName:<root> fileName:__GENERATED DECLARATIONS__.kt
             scope: GET_VAR 'val tmp_8: kotlinx.coroutines.CoroutineScope? declared in <root>.<get-deprecatedProperty1Native>' type=kotlinx.coroutines.CoroutineScope? origin=null
   PROPERTY GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:deprecatedProperty2Native visibility:public modality:FINAL [val]
     annotations:
-      Deprecated(message = "This is deprecated 5", replaceWith = <null>, level = GET_ENUM 'ENUM_ENTRY name:WARNING' type=kotlin.DeprecationLevel)
+      Deprecated(message = "This is deprecated 5", replaceWith = <null>, level = GET_ENUM 'ENUM_ENTRY IR_EXTERNAL_DECLARATION_STUB name:WARNING' type=kotlin.DeprecationLevel)
       ObjCName(name = "deprecatedProperty2", swiftName = <null>, exact = <null>)
     FUN GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:<get-deprecatedProperty2Native> visibility:public modality:FINAL <> () returnType:kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<kotlin.String, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>
       correspondingProperty: PROPERTY GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:deprecatedProperty2Native visibility:public modality:FINAL [val]
@@ -380,7 +380,7 @@ FILE fqName:<root> fileName:__GENERATED DECLARATIONS__.kt
             scope: GET_VAR 'val tmp_10: kotlinx.coroutines.CoroutineScope? declared in <root>.<get-deprecatedProperty2Native>' type=kotlinx.coroutines.CoroutineScope? origin=null
   PROPERTY GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:deprecatedProperty3Native visibility:public modality:FINAL [val]
     annotations:
-      Deprecated(message = "This is deprecated 6", replaceWith = <null>, level = GET_ENUM 'ENUM_ENTRY name:ERROR' type=kotlin.DeprecationLevel)
+      Deprecated(message = "This is deprecated 6", replaceWith = <null>, level = GET_ENUM 'ENUM_ENTRY IR_EXTERNAL_DECLARATION_STUB name:ERROR' type=kotlin.DeprecationLevel)
       ObjCName(name = "deprecatedProperty3", swiftName = <null>, exact = <null>)
     FUN GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:<get-deprecatedProperty3Native> visibility:public modality:FINAL <> () returnType:kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<kotlin.String, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>
       correspondingProperty: PROPERTY GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:deprecatedProperty3Native visibility:public modality:FINAL [val]
