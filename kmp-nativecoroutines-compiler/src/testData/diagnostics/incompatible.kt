@@ -2,7 +2,35 @@
 // DIAGNOSTICS: -INCOMPATIBLE_OBJC_REFINEMENT_OVERRIDE -NO_ACTUAL_FOR_EXPECT
 // EXPOSED_SEVERITY: NONE
 
-// MODULE: common
+// MODULE: coroutines
+// FILE: coroutinescope.kt
+
+package kotlinx.coroutines
+
+public interface CoroutineScope
+
+// FILE: flows.kt
+
+package kotlinx.coroutines.flow
+
+public interface Flow<out T>
+
+public interface SharedFlow<out T> : Flow<T>
+
+public interface StateFlow<out T> : SharedFlow<T>
+
+// MODULE: nativecoroutines
+// FILE: annotations.kt
+
+package com.rickclephas.kmp.nativecoroutines
+
+public annotation class NativeCoroutines
+public annotation class NativeCoroutinesIgnore
+public annotation class NativeCoroutinesRefined
+public annotation class NativeCoroutinesRefinedState
+public annotation class NativeCoroutinesState
+
+// MODULE: common(coroutines, nativecoroutines)
 // FILE: common.kt
 
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutines

@@ -17,7 +17,7 @@ import org.jetbrains.kotlin.fir.types.coneType
 
 internal fun FirExtension.buildValueParametersCopy(
     originalParameters: List<FirValueParameterSymbol>,
-    containingFunctionSymbol: FirFunctionSymbol<*>,
+    containingDeclarationSymbol: FirFunctionSymbol<*>,
     origin: FirDeclarationOrigin,
     substitutor: ConeSubstitutor,
 ): List<FirValueParameter> = originalParameters.map { parameter ->
@@ -30,7 +30,7 @@ internal fun FirExtension.buildValueParametersCopy(
 
         symbol = FirValueParameterSymbol(parameter.name)
         name = parameter.name
-        this.containingFunctionSymbol = containingFunctionSymbol
+        this.containingDeclarationSymbol = containingDeclarationSymbol
 
         isCrossinline = parameter.isCrossinline
         isNoinline = parameter.isNoinline
