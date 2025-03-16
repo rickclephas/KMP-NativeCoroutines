@@ -18,7 +18,7 @@ buildscript {
 
 allprojects {
     group = "com.rickclephas.kmp"
-    version = "1.0.0-ALPHA-40"
+    version = "1.0.0-ALPHA-40-idea-2025.1-EAP-23774.109"
 
     repositories {
         mavenCentral()
