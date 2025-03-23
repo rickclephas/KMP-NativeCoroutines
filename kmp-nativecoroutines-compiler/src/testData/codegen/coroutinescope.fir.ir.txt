@@ -6,7 +6,7 @@ FILE fqName:<root> fileName:/coroutinescope1.kt
       EXPRESSION_BODY
         CALL 'public final fun CoroutineScope (context: kotlin.coroutines.CoroutineContext): kotlinx.coroutines.CoroutineScope declared in kotlinx.coroutines' type=kotlinx.coroutines.CoroutineScope origin=null
           context: CALL 'public final fun <get-Default> (): kotlinx.coroutines.CoroutineDispatcher declared in kotlinx.coroutines.Dispatchers' type=kotlinx.coroutines.CoroutineDispatcher origin=GET_PROPERTY
-            $this: GET_OBJECT 'CLASS OBJECT name:Dispatchers modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlinx.coroutines.Dispatchers
+            $this: GET_OBJECT 'CLASS IR_EXTERNAL_DECLARATION_STUB OBJECT name:Dispatchers modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlinx.coroutines.Dispatchers
     FUN DEFAULT_PROPERTY_ACCESSOR name:<get-coroutineScope1> visibility:internal modality:FINAL <> () returnType:kotlinx.coroutines.CoroutineScope
       correspondingProperty: PROPERTY name:coroutineScope1 visibility:internal modality:FINAL [val]
       BLOCK_BODY
@@ -34,7 +34,7 @@ FILE fqName:<root> fileName:/coroutinescope1.kt
         EXPRESSION_BODY
           CALL 'public final fun CoroutineScope (context: kotlin.coroutines.CoroutineContext): kotlinx.coroutines.CoroutineScope declared in kotlinx.coroutines' type=kotlinx.coroutines.CoroutineScope origin=null
             context: CALL 'public final fun <get-Default> (): kotlinx.coroutines.CoroutineDispatcher declared in kotlinx.coroutines.Dispatchers' type=kotlinx.coroutines.CoroutineDispatcher origin=GET_PROPERTY
-              $this: GET_OBJECT 'CLASS OBJECT name:Dispatchers modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlinx.coroutines.Dispatchers
+              $this: GET_OBJECT 'CLASS IR_EXTERNAL_DECLARATION_STUB OBJECT name:Dispatchers modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlinx.coroutines.Dispatchers
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-coroutineScope2> visibility:protected modality:FINAL <> ($this:<root>.MyClass1) returnType:kotlinx.coroutines.CoroutineScope
         correspondingProperty: PROPERTY name:coroutineScope2 visibility:protected modality:FINAL [val]
         $this: VALUE_PARAMETER name:<this> type:<root>.MyClass1
@@ -45,7 +45,7 @@ FILE fqName:<root> fileName:/coroutinescope1.kt
     CONSTRUCTOR visibility:public <> () returnType:<root>.MyClass1 [primary]
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
-        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:MyClass1 modality:OPEN visibility:public superTypes:[kotlin.Any]'
+        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:MyClass1 modality:OPEN visibility:public superTypes:[kotlin.Any]' type=kotlin.Unit
     FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
       overridden:
         public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in kotlin.Any
@@ -104,7 +104,7 @@ FILE fqName:<root> fileName:/coroutinescope1.kt
     CONSTRUCTOR visibility:public <> () returnType:<root>.MyClass2 [primary]
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in <root>.MyClass1'
-        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:MyClass2 modality:FINAL visibility:public superTypes:[<root>.MyClass1]'
+        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:MyClass2 modality:FINAL visibility:public superTypes:[<root>.MyClass1]' type=kotlin.Unit
     FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
       overridden:
         public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in <root>.MyClass1
@@ -167,7 +167,7 @@ FILE fqName:<root> fileName:/coroutinescope1.kt
         EXPRESSION_BODY
           CALL 'public final fun CoroutineScope (context: kotlin.coroutines.CoroutineContext): kotlinx.coroutines.CoroutineScope declared in kotlinx.coroutines' type=kotlinx.coroutines.CoroutineScope origin=null
             context: CALL 'public final fun <get-Default> (): kotlinx.coroutines.CoroutineDispatcher declared in kotlinx.coroutines.Dispatchers' type=kotlinx.coroutines.CoroutineDispatcher origin=GET_PROPERTY
-              $this: GET_OBJECT 'CLASS OBJECT name:Dispatchers modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlinx.coroutines.Dispatchers
+              $this: GET_OBJECT 'CLASS IR_EXTERNAL_DECLARATION_STUB OBJECT name:Dispatchers modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlinx.coroutines.Dispatchers
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-coroutineScope3> visibility:internal modality:FINAL <> ($this:<root>.MyClass3) returnType:kotlinx.coroutines.CoroutineScope
         correspondingProperty: PROPERTY name:coroutineScope3 visibility:internal modality:FINAL [val]
         $this: VALUE_PARAMETER name:<this> type:<root>.MyClass3
@@ -178,7 +178,7 @@ FILE fqName:<root> fileName:/coroutinescope1.kt
     CONSTRUCTOR visibility:public <> () returnType:<root>.MyClass3 [primary]
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in <root>.MyClass1'
-        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:MyClass3 modality:FINAL visibility:public superTypes:[<root>.MyClass1]'
+        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:MyClass3 modality:FINAL visibility:public superTypes:[<root>.MyClass1]' type=kotlin.Unit
     FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
       overridden:
         public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in <root>.MyClass1
@@ -244,7 +244,7 @@ FILE fqName:<root> fileName:/coroutinescope1.kt
     CONSTRUCTOR visibility:public <> () returnType:<root>.MyClass4 [primary]
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
-        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:MyClass4 modality:FINAL visibility:public superTypes:[kotlin.Any]'
+        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:MyClass4 modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlin.Unit
     FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
       overridden:
         public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in kotlin.Any
@@ -308,7 +308,7 @@ FILE fqName:<root> fileName:/coroutinescope2.kt
     CONSTRUCTOR visibility:public <> () returnType:<root>.MyClass5 [primary]
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
-        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:MyClass5 modality:FINAL visibility:public superTypes:[kotlin.Any]'
+        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:MyClass5 modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlin.Unit
     FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
       overridden:
         public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in kotlin.Any
@@ -358,7 +358,7 @@ FILE fqName:<root> fileName:/coroutinescope2.kt
         EXPRESSION_BODY
           CALL 'public final fun CoroutineScope (context: kotlin.coroutines.CoroutineContext): kotlinx.coroutines.CoroutineScope declared in kotlinx.coroutines' type=kotlinx.coroutines.CoroutineScope origin=null
             context: CALL 'public final fun <get-Default> (): kotlinx.coroutines.CoroutineDispatcher declared in kotlinx.coroutines.Dispatchers' type=kotlinx.coroutines.CoroutineDispatcher origin=GET_PROPERTY
-              $this: GET_OBJECT 'CLASS OBJECT name:Dispatchers modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlinx.coroutines.Dispatchers
+              $this: GET_OBJECT 'CLASS IR_EXTERNAL_DECLARATION_STUB OBJECT name:Dispatchers modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlinx.coroutines.Dispatchers
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-coroutineScope4> visibility:private modality:FINAL <> ($this:<root>.MyClass6) returnType:kotlinx.coroutines.CoroutineScope
         correspondingProperty: PROPERTY name:coroutineScope4 visibility:private modality:FINAL [val]
         $this: VALUE_PARAMETER name:<this> type:<root>.MyClass6
@@ -369,7 +369,7 @@ FILE fqName:<root> fileName:/coroutinescope2.kt
     CONSTRUCTOR visibility:public <> () returnType:<root>.MyClass6 [primary]
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
-        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:MyClass6 modality:OPEN visibility:public superTypes:[kotlin.Any]'
+        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:MyClass6 modality:OPEN visibility:public superTypes:[kotlin.Any]' type=kotlin.Unit
     FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
       overridden:
         public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in kotlin.Any
@@ -413,7 +413,7 @@ FILE fqName:<root> fileName:/coroutinescope2.kt
     CONSTRUCTOR visibility:public <> () returnType:<root>.MyClass7 [primary]
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in <root>.MyClass6'
-        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:MyClass7 modality:FINAL visibility:public superTypes:[<root>.MyClass6]'
+        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:MyClass7 modality:FINAL visibility:public superTypes:[<root>.MyClass6]' type=kotlin.Unit
     FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
       overridden:
         public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in <root>.MyClass6
