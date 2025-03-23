@@ -8,6 +8,7 @@ import org.jetbrains.kotlin.ir.declarations.IrProperty
 import org.jetbrains.kotlin.ir.expressions.IrBlockBody
 import org.jetbrains.kotlin.ir.symbols.UnsafeDuringIrConstructionAPI
 import org.jetbrains.kotlin.ir.types.*
+import org.jetbrains.kotlin.ir.util.isNullable
 
 @UnsafeDuringIrConstructionAPI
 internal fun GeneratorContext.buildSharedFlowReplayCacheGetterBody(
