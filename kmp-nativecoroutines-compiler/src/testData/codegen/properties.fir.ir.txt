@@ -199,7 +199,7 @@ FILE fqName:<root> fileName:/properties.kt
     CONSTRUCTOR visibility:public <> () returnType:<root>.MyClass28 [primary]
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
-        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:MyClass28 modality:FINAL visibility:public superTypes:[<root>.MyInterface28]'
+        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:MyClass28 modality:FINAL visibility:public superTypes:[<root>.MyInterface28]' type=kotlin.Unit
     FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
       overridden:
         public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in <root>.MyInterface28
@@ -237,7 +237,7 @@ FILE fqName:<root> fileName:/properties.kt
       VALUE_PARAMETER name:value2 index:1 type:T2 of <root>.MyFlow29
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
-        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:MyFlow29 modality:FINAL visibility:public superTypes:[kotlinx.coroutines.flow.Flow<T2 of <root>.MyFlow29?>]'
+        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:MyFlow29 modality:FINAL visibility:public superTypes:[kotlinx.coroutines.flow.Flow<T2 of <root>.MyFlow29?>]' type=kotlin.Unit
     FUN DELEGATED_MEMBER name:collect visibility:public modality:OPEN <> ($this:<root>.MyFlow29<T1 of <root>.MyFlow29, T2 of <root>.MyFlow29>, collector:kotlinx.coroutines.flow.FlowCollector<T2 of <root>.MyFlow29?>) returnType:kotlin.Unit [suspend]
       overridden:
         public abstract fun collect (collector: kotlinx.coroutines.flow.FlowCollector<T of kotlinx.coroutines.flow.Flow>): kotlin.Unit declared in kotlinx.coroutines.flow.Flow
@@ -279,7 +279,7 @@ FILE fqName:<root> fileName:/properties.kt
       VALUE_PARAMETER name:value index:0 type:T of <root>.MyGenericClass1
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
-        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:MyGenericClass1 modality:FINAL visibility:public [data] superTypes:[kotlin.Any]'
+        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:MyGenericClass1 modality:FINAL visibility:public [data] superTypes:[kotlin.Any]' type=kotlin.Unit
     FUN GENERATED_DATA_CLASS_MEMBER name:component1 visibility:public modality:FINAL <> ($this:<root>.MyGenericClass1<T of <root>.MyGenericClass1>) returnType:T of <root>.MyGenericClass1 [operator]
       $this: VALUE_PARAMETER name:<this> type:<root>.MyGenericClass1<T of <root>.MyGenericClass1>
       BLOCK_BODY
@@ -437,7 +437,7 @@ FILE fqName:<root> fileName:/properties.kt
       VALUE_PARAMETER name:value index:0 type:T of <root>.MyGenericClass2
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
-        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:MyGenericClass2 modality:FINAL visibility:public superTypes:[kotlin.Any]'
+        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:MyGenericClass2 modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlin.Unit
     FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
       overridden:
         public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in kotlin.Any
