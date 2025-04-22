@@ -194,7 +194,7 @@ internal class KmpNativeCoroutinesDeclarationGenerationExtension(
         for (symbol in symbols) {
             val annotation = getAnnotationForSymbol(symbol) ?: continue
             if (annotation !in annotations) continue
-            if (symbol.receiverParameter != null && symbol.dispatchReceiverType != null) continue
+            if (symbol.receiverParameterSymbol != null && symbol.dispatchReceiverType != null) continue
             addIfNotNull(generateProperty(symbol, annotation))
         }
     }

@@ -54,7 +54,7 @@ internal fun FirExtension.buildNativeFunction(
         // TODO: support contextReceivers once exported to ObjC
 
         receiverParameter = buildReceiverParameterCopy(
-            originalSymbol.receiverParameter,
+            originalSymbol.receiverParameterSymbol,
             symbol,
             origin,
             typeParameters.substitutor

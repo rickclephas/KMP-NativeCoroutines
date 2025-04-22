@@ -12,10 +12,9 @@ import org.jetbrains.kotlin.fir.resolve.substitution.ConeSubstitutor
 import org.jetbrains.kotlin.fir.symbols.FirBasedSymbol
 import org.jetbrains.kotlin.fir.symbols.impl.FirReceiverParameterSymbol
 import org.jetbrains.kotlin.fir.toFirResolvedTypeRef
-import org.jetbrains.kotlin.fir.types.coneType
 
 internal fun FirExtension.buildReceiverParameterCopy(
-    originalParameter: FirReceiverParameter?,
+    originalParameter: FirReceiverParameterSymbol?,
     containingDeclarationSymbol: FirBasedSymbol<*>,
     origin: FirDeclarationOrigin,
     substitutor: ConeSubstitutor
@@ -31,7 +30,7 @@ internal fun FirExtension.buildReceiverParameterCopy(
         symbol = FirReceiverParameterSymbol()
         this.containingDeclarationSymbol = containingDeclarationSymbol
 
-        typeRef = originalParameter.typeRef.coneType
+        typeRef = originalParameter.resolvedType
             .let(substitutor::substituteOrSelf)
             .toFirResolvedTypeRef()
 
