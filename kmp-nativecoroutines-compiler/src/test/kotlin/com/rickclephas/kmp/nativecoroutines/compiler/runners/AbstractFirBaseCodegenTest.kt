@@ -72,7 +72,7 @@ abstract class AbstractFirBaseCodegenTest(
             +DUMP_IR
             +DUMP_KT_IR
             +IGNORE_DEXING
-            JVM_DEFAULT_MODE with JvmDefaultMode.ALL
+            JVM_DEFAULT_MODE with JvmDefaultMode.NO_COMPATIBILITY
             +KmpNativeCoroutinesDirectives.K2_MODE
             KmpNativeCoroutinesDirectives.SUFFIX with "Native"
             KmpNativeCoroutinesDirectives.FLOW_VALUE_SUFFIX with "Value"
