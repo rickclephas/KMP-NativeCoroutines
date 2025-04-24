@@ -53,7 +53,7 @@ intellijPlatform {
 
         ideaVersion {
             sinceBuild = "243"
-            untilBuild = "243.*"
+            untilBuild = "251.*"
         }
 
         vendor {
@@ -110,7 +110,7 @@ val runIntelliJUltimate by intellijPlatformTesting.runIde.registering {
 
 val runAndroidStudio by intellijPlatformTesting.runIde.registering {
     type = IntelliJPlatformType.AndroidStudio
-    version = "2024.2.1.7"
+    version = "2024.3.2.11"
 }
 
 tasks.withType(RunIdeTask::class) {
