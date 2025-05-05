@@ -57,7 +57,7 @@ import org.jetbrains.kotlin.fir.analysis.checkers.unsubstitutedScope
 import org.jetbrains.kotlin.fir.declarations.*
 import org.jetbrains.kotlin.fir.declarations.utils.*
 import org.jetbrains.kotlin.fir.expressions.FirAnnotation
-import org.jetbrains.kotlin.fir.scopes.getDirectOverriddenMembersWithBaseScope
+import org.jetbrains.kotlin.fir.scopes.getDirectOverriddenMembersWithBaseScopeSafe
 import java.nio.file.Path
 import kotlin.io.path.Path
 
@@ -168,7 +168,7 @@ internal class FirKmpNativeCoroutinesDeclarationChecker(
             val containingClass = context.containingDeclarations.lastOrNull() as? FirClass
             if (containingClass != null) {
                 val firTypeScope = containingClass.unsubstitutedScope(context)
-                val overriddenMemberSymbols = firTypeScope.getDirectOverriddenMembersWithBaseScope(declaration.symbol)
+                val overriddenMemberSymbols = firTypeScope.getDirectOverriddenMembersWithBaseScopeSafe(declaration.symbol)
                 val overriddenAnnotations = overriddenMemberSymbols.map {
                     it.member.getNativeCoroutinesAnnotations(context.session)
                 }
