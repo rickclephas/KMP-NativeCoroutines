@@ -16,6 +16,7 @@ import com.rickclephas.kmp.nativecoroutines.compiler.utils.withSuffix
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.withoutSuffix
 import org.jetbrains.kotlin.config.CompilerConfiguration
 import org.jetbrains.kotlin.fir.FirSession
+import org.jetbrains.kotlin.fir.declarations.DirectDeclarationsAccess
 import org.jetbrains.kotlin.fir.declarations.utils.isExpect
 import org.jetbrains.kotlin.fir.declarations.utils.isOverride
 import org.jetbrains.kotlin.fir.extensions.*
@@ -29,6 +30,7 @@ import org.jetbrains.kotlin.name.CallableId
 import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.utils.addIfNotNull
 
+@OptIn(DirectDeclarationsAccess::class)
 internal class KmpNativeCoroutinesDeclarationGenerationExtension(
     session: FirSession,
     configuration: CompilerConfiguration,
