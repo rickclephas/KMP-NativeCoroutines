@@ -34,6 +34,6 @@ internal fun FirExtension.buildReceiverParameterCopy(
             .let(substitutor::substituteOrSelf)
             .toFirResolvedTypeRef()
 
-        annotations.addAll(buildAnnotationsCopy(originalParameter.annotations))
+        annotations.addAll(buildAnnotationsCopy(originalParameter.resolvedAnnotationsWithClassIds))
     }
 }

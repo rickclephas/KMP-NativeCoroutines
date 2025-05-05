@@ -73,7 +73,7 @@ internal fun FirExtension.buildNativeProperty(
         @OptIn(SymbolInternals::class)
         deprecationsProvider = originalSymbol.fir.deprecationsProvider
 
-        annotations.addAll(buildAnnotationsCopy(originalSymbol.annotations, objCName, objCNameSuffix))
+        annotations.addAll(buildAnnotationsCopy(originalSymbol.resolvedAnnotationsWithClassIds, objCName, objCNameSuffix))
         if (annotation.shouldRefineInSwift) {
             annotations.add(buildAnnotation(ClassIds.shouldRefineInSwift))
         }
