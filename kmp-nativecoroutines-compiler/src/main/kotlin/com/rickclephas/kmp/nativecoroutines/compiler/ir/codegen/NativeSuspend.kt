@@ -19,7 +19,7 @@ internal fun IrBuilderWithScope.irCallNativeSuspend(
     val context = context as GeneratorContext
     val expressionType = blockExpression.type as IrSimpleType
     val lambdaType = context.nativeSuspendSymbol.owner.run {
-        valueParameters[1].type.substitute(typeParameters, listOf(expressionType))
+        parameters[1].type.substitute(typeParameters, listOf(expressionType))
     }
     val returnType = context.nativeSuspendSymbol.owner.run {
         returnType.substitute(typeParameters, listOf(expressionType))
@@ -29,9 +29,9 @@ internal fun IrBuilderWithScope.irCallNativeSuspend(
             +irReturn(irGet(blockExpression))
         }
         irCall(context.nativeSuspendSymbol, returnType).apply {
-            putTypeArgument(0, expressionType)
-            putValueArgument(0, irGet(coroutineScope))
-            putValueArgument(1, lambda)
+            typeArguments[0] = expressionType
+            arguments[0] = irGet(coroutineScope)
+            arguments[1] = lambda
         }
     }
 }
