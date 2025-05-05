@@ -14,7 +14,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        module: [ annotations, compiler, compiler-embeddable, core, gradle-plugin, ksp ]
+        module: [ annotations, compiler, compiler-embeddable, core, gradle-plugin ]
     name: ${{ matrix.module }}
     runs-on: macos-14
     steps:
