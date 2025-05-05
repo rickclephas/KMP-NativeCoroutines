@@ -8,7 +8,7 @@ on:
 env:
   GRADLE_OPTS: -Dorg.gradle.parallel=true -Dorg.gradle.caching=true
   JAVA_VERSION: '17'
-  XCODE_VERSION: '15.2'
+  XCODE_VERSION: '16.2'
 jobs:
   run-kotlin-tests:
     strategy:
