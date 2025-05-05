@@ -36,6 +36,7 @@ tasks.compileKotlin.configure {
     dependsOn(syncSources)
     compilerOptions {
         freeCompilerArgs.add("-Xjvm-default=all")
+        freeCompilerArgs.add("-Xcontext-parameters")
     }
 }
 

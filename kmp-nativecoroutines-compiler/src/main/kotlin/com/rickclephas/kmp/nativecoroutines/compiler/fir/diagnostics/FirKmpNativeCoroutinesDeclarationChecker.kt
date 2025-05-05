@@ -85,17 +85,18 @@ internal class FirKmpNativeCoroutinesDeclarationChecker(
         ExposedSeverity.ERROR -> EXPOSED_STATE_FLOW_PROPERTY_ERROR
     }
 
-    override fun check(declaration: FirCallableDeclaration, context: CheckerContext, reporter: DiagnosticReporter) {
+    context(context: CheckerContext, reporter: DiagnosticReporter)
+    override fun check(declaration: FirCallableDeclaration) {
         if (declaration !is FirSimpleFunction && declaration !is FirProperty) return
 
         fun KtDiagnosticFactory0.reportOn(annotation: FirAnnotation?) {
             if (annotation == null) return
-            reporter.reportOn(annotation.source, this, context)
+            reporter.reportOn(annotation.source, this)
         }
 
         fun KtDiagnosticFactory0?.reportOn(source: AbstractKtSourceElement?) {
             if (this == null) return
-            reporter.reportOn(source, this, context)
+            reporter.reportOn(source, this)
         }
 
         val annotations = declaration.getNativeCoroutinesAnnotations(context.session)

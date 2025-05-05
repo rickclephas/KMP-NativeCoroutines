@@ -62,6 +62,7 @@ java {
 tasks.compileKotlin.configure {
     compilerOptions {
         freeCompilerArgs.add("-Xjvm-default=all")
+        freeCompilerArgs.add("-Xcontext-parameters")
     }
 }
 
