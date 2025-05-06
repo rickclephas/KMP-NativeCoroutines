@@ -9,10 +9,10 @@ env:
   GRADLE_OPTS: -Dorg.gradle.parallel=true -Dorg.gradle.caching=true
   JAVA_VERSION: '17'
   XCODE_VERSION: '16.2'
-  XCODEBUILD_DESTINATION_iOS: platform=iOS Simulator,name=iPhone 15 Pro
+  XCODEBUILD_DESTINATION_iOS: platform=iOS Simulator,name=iPhone 16 Pro
   XCODEBUILD_DESTINATION_macOS: platform=OS X
   XCODEBUILD_DESTINATION_tvOS: platform=tvOS Simulator,name=Apple TV 4K (3rd generation)
-  XCODEBUILD_DESTINATION_watchOS: platform=watchOS Simulator,name=Apple Watch Series 9 (45mm)
+  XCODEBUILD_DESTINATION_watchOS: platform=watchOS Simulator,name=Apple Watch Series 10 (46mm)
 jobs:
   run-integration-tests:
     strategy:
@@ -22,7 +22,7 @@ jobs:
         embeddable-compiler: [ true, false ]
         ksp-mode: [ true, false ]
     name: ${{ format('{0} (embeddable {1}, KSP {2})', matrix.platform, matrix.embeddable-compiler, matrix.ksp-mode) }}
-    runs-on: macos-14
+    runs-on: macos-15
     env:
       XCODEBUILD_SCHEME_iOS: iOS App
       XCODEBUILD_SCHEME_macOS: macOS App
