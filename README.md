@@ -123,7 +123,7 @@ If you use CocoaPods add one or more of the following libraries to your `Podfile
 ```ruby
 pod 'KMPNativeCoroutinesAsync', '1.0.0-ALPHA-42'    # Swift Concurrency implementation
 pod 'KMPNativeCoroutinesCombine', '1.0.0-ALPHA-42'  # Combine implementation
-pod 'KMPNativeCoroutinesRxSwift', '1.0.0-ALPHA-42'  # RxSwift implementation
+pod 'KMPNativeCoroutinesRxSwift', git: 'https://github.com/rickclephas/KMP-NativeCoroutines.git', tag: 'v1.0.0-ALPHA-42' # RxSwift implementation
 ```
 > [!NOTE]
 > The version for CocoaPods should not contain the Kotlin version suffix (e.g. `-new-mm` or `-kotlin-1.6.0`).
