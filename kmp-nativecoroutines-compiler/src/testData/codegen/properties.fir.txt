@@ -97,15 +97,9 @@ FILE: properties.kt
                 R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
             }
 
-        @R|kotlin/native/ObjCName|(name = String(genericStateFlow)) public final val genericStateFlowNative: R|com/rickclephas/kmp/nativecoroutines/NativeFlow<T>|
+        @R|kotlin/native/ObjCName|(name = String(genericSharedFlow)) public final val genericSharedFlowNative: R|com/rickclephas/kmp/nativecoroutines/NativeFlow<T>|
             public get(): R|com/rickclephas/kmp/nativecoroutines/NativeFlow<T>| {
-                ::R|/MyGenericClass2.genericStateFlow|
-                R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
-            }
-
-        public final val genericStateFlowValue: R|T|
-            public get(): R|T| {
-                ::R|/MyGenericClass2.genericStateFlow|
+                ::R|/MyGenericClass2.genericSharedFlow|
                 R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
             }
 
@@ -115,9 +109,15 @@ FILE: properties.kt
                 R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
             }
 
-        @R|kotlin/native/ObjCName|(name = String(genericSharedFlow)) public final val genericSharedFlowNative: R|com/rickclephas/kmp/nativecoroutines/NativeFlow<T>|
+        @R|kotlin/native/ObjCName|(name = String(genericStateFlow)) public final val genericStateFlowNative: R|com/rickclephas/kmp/nativecoroutines/NativeFlow<T>|
             public get(): R|com/rickclephas/kmp/nativecoroutines/NativeFlow<T>| {
-                ::R|/MyGenericClass2.genericSharedFlow|
+                ::R|/MyGenericClass2.genericStateFlow|
+                R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
+            }
+
+        public final val genericStateFlowValue: R|T|
+            public get(): R|T| {
+                ::R|/MyGenericClass2.genericStateFlow|
                 R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
             }
 

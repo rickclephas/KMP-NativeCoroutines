@@ -57,7 +57,7 @@ internal fun FirExtension.buildSharedFlowReplayCacheProperty(
         // TODO: support contextReceivers once exported to ObjC
 
         receiverParameter = buildReceiverParameterCopy(
-            originalSymbol.receiverParameter,
+            originalSymbol.receiverParameterSymbol,
             symbol,
             origin,
             typeParameters.substitutor
@@ -77,7 +77,7 @@ internal fun FirExtension.buildSharedFlowReplayCacheProperty(
         @OptIn(SymbolInternals::class)
         deprecationsProvider = originalSymbol.fir.deprecationsProvider
 
-        annotations.addAll(buildAnnotationsCopy(originalSymbol.annotations, objCNameSuffix = objCNameSuffix))
+        annotations.addAll(buildAnnotationsCopy(originalSymbol.resolvedAnnotationsWithClassIds, objCNameSuffix = objCNameSuffix))
         if (annotation.shouldRefineInSwift) {
             annotations.add(buildAnnotation(ClassIds.shouldRefineInSwift))
         }
