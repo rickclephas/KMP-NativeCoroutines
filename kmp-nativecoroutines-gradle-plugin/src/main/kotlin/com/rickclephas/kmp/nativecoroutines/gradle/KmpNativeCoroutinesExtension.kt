@@ -42,7 +42,7 @@ public open class KmpNativeCoroutinesExtension {
     /**
      * Indicates if the plugin should be run in K2 mode.
      */
-    public var k2Mode: Boolean = false
+    public var k2Mode: Boolean = true
 }
 
 public enum class ExposedSeverity {
