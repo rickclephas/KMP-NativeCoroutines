@@ -46,9 +46,9 @@ internal class AddAnnotationFixFactory(
             else -> element.findParentOfType() ?: return@IntentionBased emptyList()
         }
         listOfNotNull(
-            HighPriorityAddAnnotationFix(declaration, preferredAnnotation),
-            alternativeAnnotation?.let { AddAnnotationFix(declaration, it.classId) },
-            LowPriorityAddAnnotationFix(declaration, NativeCoroutinesAnnotation.NativeCoroutinesIgnore)
+            HighPriorityAddAnnotationFix(declaration, preferredAnnotation).asIntention(),
+            alternativeAnnotation?.let { AddAnnotationFix(declaration, it.classId).asIntention() },
+            LowPriorityAddAnnotationFix(declaration, NativeCoroutinesAnnotation.NativeCoroutinesIgnore).asIntention()
         )
     }
 }
