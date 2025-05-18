@@ -16,7 +16,7 @@ jobs:
       matrix:
         module: [ annotations, compiler, compiler-embeddable, core, gradle-plugin, ksp ]
     name: ${{ matrix.module }}
-    runs-on: macos-15
+    runs-on: macos-14
     steps:
       - name: Checkout
         uses: actions/checkout@v4
