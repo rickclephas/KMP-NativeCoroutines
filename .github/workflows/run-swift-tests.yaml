@@ -7,10 +7,10 @@ on:
   workflow_call:
 env:
   XCODE_VERSION: '15.2'
-  XCODEBUILD_DESTINATION_iOS: platform=iOS Simulator,name=iPhone 15 Pro
+  XCODEBUILD_DESTINATION_iOS: platform=iOS Simulator,name=iPhone 16 Pro
   XCODEBUILD_DESTINATION_macOS: platform=OS X
   XCODEBUILD_DESTINATION_tvOS: platform=tvOS Simulator,name=Apple TV 4K (3rd generation)
-  XCODEBUILD_DESTINATION_watchOS: platform=watchOS Simulator,name=Apple Watch Series 9 (45mm)
+  XCODEBUILD_DESTINATION_watchOS: platform=watchOS Simulator,name=Apple Watch Series 10 (46mm)
 jobs:
   run-swift-tests:
     strategy:
