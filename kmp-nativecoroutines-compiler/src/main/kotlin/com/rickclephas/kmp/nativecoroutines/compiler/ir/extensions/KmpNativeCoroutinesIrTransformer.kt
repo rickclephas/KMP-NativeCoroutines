@@ -15,13 +15,13 @@ import org.jetbrains.kotlin.ir.symbols.IrSimpleFunctionSymbol
 import org.jetbrains.kotlin.ir.symbols.IrSymbol
 import org.jetbrains.kotlin.ir.symbols.UnsafeDuringIrConstructionAPI
 import org.jetbrains.kotlin.ir.util.statements
-import org.jetbrains.kotlin.ir.visitors.IrElementVisitorVoid
+import org.jetbrains.kotlin.ir.visitors.IrVisitorVoid
 import org.jetbrains.kotlin.ir.visitors.acceptChildrenVoid
 
 @OptIn(UnsafeDuringIrConstructionAPI::class)
 internal class KmpNativeCoroutinesIrTransformer(
     pluginContext: IrPluginContext,
-): IrElementVisitorVoid {
+): IrVisitorVoid() {
 
     private val context = GeneratorContext(pluginContext)
 
