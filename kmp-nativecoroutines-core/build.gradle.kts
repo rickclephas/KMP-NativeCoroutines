@@ -7,9 +7,6 @@ plugins {
     `kmp-nativecoroutines-publish`
 }
 
-val buildForCompilerTest = (findProperty("buildForCompilerTest") as String?)
-    ?.toBooleanStrictOrNull() ?: false
-
 kotlin {
     explicitApi()
     jvmToolchain(11)
@@ -19,7 +16,7 @@ kotlin {
         common {
             group("nativeCoroutines") {
                 group("apple")
-                if (buildForCompilerTest) {
+                if (buildType.orNull == BuildType.COMPILER_TESTS) {
                     withJvm()
                 }
             }
@@ -40,7 +37,7 @@ kotlin {
     tvosX64()
     tvosSimulatorArm64()
     jvm {
-        if (buildForCompilerTest) {
+        if (buildType.orNull == BuildType.COMPILER_TESTS) {
             val mainCompilation = compilations.getByName(KotlinCompilation.MAIN_COMPILATION_NAME)
             mainCompilation.defaultSourceSet.kotlin.srcDir("src/compilerTestMain/kotlin")
             val testCompilation = compilations.getByName(KotlinCompilation.TEST_COMPILATION_NAME)

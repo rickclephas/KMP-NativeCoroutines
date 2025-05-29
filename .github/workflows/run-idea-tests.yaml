@@ -6,8 +6,9 @@ on:
   workflow_dispatch:
   workflow_call:
 env:
-  GRADLE_OPTS: -Dorg.gradle.parallel=true -Dorg.gradle.caching=true
   JAVA_VERSION: '17'
+  ORG_GRADLE_PROJECT_buildType: IDE_PLUGIN
+  GRADLE_OPTS: -Dorg.gradle.parallel=true -Dorg.gradle.caching=true
 jobs:
   run-common-idea-tests:
     name: idea-plugin
@@ -58,5 +59,5 @@ jobs:
           cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
       - name: Verify plugin
         env:
-          VERIFICATION_IDE: ${{ format('{0}-{1}', matrix.ide, matrix.build) }}
-        run: ./gradlew :kmp-nativecoroutines-idea-plugin:verifyPlugin -PverificationIde=$VERIFICATION_IDE
+          ORG_GRADLE_PROJECT_verificationIde: ${{ format('{0}-{1}', matrix.ide, matrix.build) }}
+        run: ./gradlew :kmp-nativecoroutines-idea-plugin:verifyPlugin

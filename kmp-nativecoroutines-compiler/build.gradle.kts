@@ -9,6 +9,11 @@ plugins {
     `kmp-nativecoroutines-publish`
 }
 
+repositories {
+    mavenCentral()
+    maven("https://cache-redirector.jetbrains.com/intellij-dependencies")
+}
+
 sourceSets {
     test {
         java.srcDir("src/test/generated")
@@ -29,7 +34,13 @@ val jvmTestClasspath by configurations.creating {
 }
 
 dependencies {
-    compileOnly(libs.kotlin.compiler)
+    compileOnly(libs.kotlin.compiler) {
+        if (buildType.orNull == BuildType.IDE_PLUGIN) {
+            version {
+                strictly(libs.versions.kotlin.idea.get())
+            }
+        }
+    }
     testImplementation(libs.kotlin.compiler)
     testImplementation(libs.kotlin.compiler.internalTestFramework)
     testImplementation(libs.kotlin.reflect)
@@ -66,7 +77,10 @@ tasks.compileKotlin.configure {
     }
 }
 
+val requireCompilerTestsBuild by requireBuildType(BuildType.COMPILER_TESTS)
+
 tasks.test {
+    dependsOn(requireCompilerTestsBuild)
     dependsOn(nativeTestClasspath)
     dependsOn(jvmTestClasspath)
 

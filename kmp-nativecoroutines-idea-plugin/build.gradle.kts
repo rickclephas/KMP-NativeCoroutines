@@ -115,8 +115,6 @@ val runAndroidStudio by intellijPlatformTesting.runIde.registering {
 
 tasks.withType(RunIdeTask::class) {
     maxHeapSize = "4g"
-    jvmArguments.add("-Didea.kotlin.plugin.use.k2=true")
-    jvmArguments.add("-Dkotlin.k2.only.bundled.compiler.plugins.enabled=false")
 }
 
 tasks.withType(VerifyPluginTask::class) {
@@ -126,4 +124,10 @@ tasks.withType(VerifyPluginTask::class) {
         if (!hasIdes) logger.warn("::warning title=Skipped unknown IDE::Unknown IDE $verificationIde")
         hasIdes
     }
+}
+
+val requireIdePluginBuild by requireBuildType(BuildType.IDE_PLUGIN)
+
+tasks.compileKotlin {
+    dependsOn(requireIdePluginBuild)
 }
