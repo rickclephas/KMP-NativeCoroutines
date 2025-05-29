@@ -5,12 +5,6 @@ concurrency:
 on:
   workflow_dispatch:
   workflow_call:
-env:
-  XCODE_VERSION: '15.2'
-  XCODEBUILD_DESTINATION_iOS: platform=iOS Simulator,name=iPhone 16 Pro
-  XCODEBUILD_DESTINATION_macOS: platform=OS X
-  XCODEBUILD_DESTINATION_tvOS: platform=tvOS Simulator,name=Apple TV 4K (3rd generation)
-  XCODEBUILD_DESTINATION_watchOS: platform=watchOS Simulator,name=Apple Watch Series 10 (46mm)
 jobs:
   run-swift-tests:
     strategy:
@@ -18,6 +12,16 @@ jobs:
       matrix:
         platform: [ iOS, macOS, tvOS, watchOS ]
         implementation: [ Async, Combine, RxSwift ]
+        include:
+          - xcode: '15.2'
+          - platform: iOS
+            destination: platform=iOS Simulator,name=iPhone 16 Pro
+          - platform: macOS
+            destination: platform=OS X
+          - platform: tvOS
+            destination: platform=tvOS Simulator,name=Apple TV 4K (3rd generation)
+          - platform: watchOS
+            destination: platform=watchOS Simulator,name=Apple Watch Series 10 (46mm)
     name: ${{ format('{0} {1}', matrix.implementation, matrix.platform) }}
     runs-on: macos-14
     steps:
@@ -26,13 +30,10 @@ jobs:
       - name: Setup Xcode
         uses: maxim-lobanov/setup-xcode@v1
         with:
-          xcode-version: ${{ env.XCODE_VERSION }}
+          xcode-version: ${{ matrix.xcode }}
       - name: Run tests
-        env:
-          XCODEBUILD_SCHEME: ${{ format('KMPNativeCoroutines{0}', matrix.implementation) }}
-          XCODEBUILD_DESTINATION: ${{ env[format('XCODEBUILD_DESTINATION_{0}', matrix.platform)] }}
         run: >-
           xcodebuild test
           -project KMPNativeCoroutines.xcodeproj
-          -scheme "$XCODEBUILD_SCHEME"
-          -destination "$XCODEBUILD_DESTINATION"
+          -scheme "KMPNativeCoroutines${{ matrix.implementation }}"
+          -destination "${{ matrix.destination }}"

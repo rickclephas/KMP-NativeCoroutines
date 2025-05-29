@@ -6,6 +6,8 @@ on:
       - 'v[0-9]+.[0-9]+.[0-9]+-ALPHA-[0-9]+'
       - 'v[0-9]+.[0-9]+.[0-9]+-kotlin-[0-9]+.[0-9]+.[0-9]+'
       - 'v[0-9]+.[0-9]+.[0-9]+-ALPHA-[0-9]+-kotlin-[0-9]+.[0-9]+.[0-9]+'
+env:
+  JAVA_VERSION: '17'
 jobs:
   publish-kotlin-libraries:
     runs-on: macos-14
@@ -18,7 +20,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
-          java-version: '17'
+          java-version: ${{ env.JAVA_VERSION }}
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
         with:
