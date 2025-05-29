@@ -15,6 +15,9 @@ jobs:
       fail-fast: false
       matrix:
         module: [ annotations, compiler, compiler-embeddable, core, gradle-plugin, ksp ]
+        include:
+          - module: compiler
+            buildType: COMPILER_TESTS
     name: ${{ matrix.module }}
     runs-on: macos-14
     steps:
@@ -39,9 +42,8 @@ jobs:
         uses: ./.github/actions/cache-konan
       - name: Run tests
         env:
-          GRADLE_MODULE: ${{ format(':kmp-nativecoroutines-{0}', matrix.module) }}
-          IS_COMPILER_MODULE: ${{ matrix.module == 'compiler' }}
-        run: ./gradlew $GRADLE_MODULE:check -PbuildForCompilerTest=$IS_COMPILER_MODULE
+          ORG_GRADLE_PROJECT_buildType: ${{ matrix.buildType || '' }}
+        run: ./gradlew :kmp-nativecoroutines-${{ matrix.module }}:check
       - name: Archive reports
         if: failure()
         uses: actions/upload-artifact@v4

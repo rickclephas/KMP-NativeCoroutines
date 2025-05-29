@@ -65,7 +65,10 @@ tasks.compileKotlin.configure {
     }
 }
 
+val requireCompilerTestsBuild by requireBuildType(BuildType.COMPILER_TESTS)
+
 tasks.test {
+    dependsOn(requireCompilerTestsBuild)
     dependsOn(nativeTestClasspath)
     dependsOn(jvmTestClasspath)
 
