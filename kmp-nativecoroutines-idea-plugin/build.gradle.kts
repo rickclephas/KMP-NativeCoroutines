@@ -125,3 +125,9 @@ tasks.withType(VerifyPluginTask::class) {
         hasIdes
     }
 }
+
+val requireIdePluginBuild by requireBuildType(BuildType.IDE_PLUGIN)
+
+tasks.compileKotlin {
+    dependsOn(requireIdePluginBuild)
+}

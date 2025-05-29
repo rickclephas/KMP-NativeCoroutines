@@ -58,5 +58,6 @@ jobs:
           cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
       - name: Verify plugin
         env:
-          VERIFICATION_IDE: ${{ format('{0}-{1}', matrix.ide, matrix.build) }}
-        run: ./gradlew :kmp-nativecoroutines-idea-plugin:verifyPlugin -PverificationIde=$VERIFICATION_IDE
+          ORG_GRADLE_PROJECT_buildType: IDE_PLUGIN
+          ORG_GRADLE_PROJECT_verificationIde: ${{ format('{0}-{1}', matrix.ide, matrix.build) }}
+        run: ./gradlew :kmp-nativecoroutines-idea-plugin:verifyPlugin

@@ -3,7 +3,7 @@ import org.gradle.api.provider.Provider
 import org.gradle.kotlin.dsl.registering
 
 enum class BuildType {
-    COMPILER_TESTS
+    COMPILER_TESTS, IDE_PLUGIN
 }
 
 val Project.buildType: Provider<BuildType>
