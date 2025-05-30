@@ -59,7 +59,9 @@ jobs:
         env:
           NATIVE_COROUTINES_KSP_MODE: ${{ matrix.ksp-mode }}
         run: >-
+          set -o pipefail &&
           xcodebuild test
           -project KMPNativeCoroutinesSample.xcodeproj
           -scheme "${{ matrix.scheme }}"
           -destination "${{ matrix.destination }}"
+          | xcbeautify --renderer github-actions
