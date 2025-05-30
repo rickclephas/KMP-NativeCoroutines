@@ -33,7 +33,9 @@ jobs:
           xcode-version: ${{ matrix.xcode }}
       - name: Run tests
         run: >-
+          set -o pipefail &&
           xcodebuild test
           -project KMPNativeCoroutines.xcodeproj
           -scheme "KMPNativeCoroutines${{ matrix.implementation }}"
           -destination "${{ matrix.destination }}"
+          | xcbeautify --renderer github-actions
