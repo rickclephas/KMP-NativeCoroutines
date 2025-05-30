@@ -1,6 +1,6 @@
 [versions]
 kotlin = "2.1.21"
-kotlin-idea = "2.2.0-ij251-78"
+kotlin-idea = "2.1.20-dev-1411"
 kotlinx-coroutines = "1.10.1"
 kotlinx-binary-compatibility-validator = "0.16.3"
 ksp = "2.1.21-2.0.1"
