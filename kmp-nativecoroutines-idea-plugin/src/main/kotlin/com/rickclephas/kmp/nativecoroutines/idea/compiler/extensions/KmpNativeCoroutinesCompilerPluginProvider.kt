@@ -11,7 +11,7 @@ public class KmpNativeCoroutinesCompilerPluginProvider: KotlinBundledFirCompiler
 
     private val registrarClass = KmpNativeCoroutinesCompilerPluginRegistrar::class
 
-    override fun provideBundledPluginJar(project: Project, userSuppliedPluginJar: Path): Path? {
+    override fun provideBundledPluginJar(userSuppliedPluginJar: Path): Path? {
         val registrarContent = CompilerPluginRegistrarUtils.readRegistrarContent(userSuppliedPluginJar) ?: return null
         if (registrarContent.trim() != registrarClass.qualifiedName) return null
         return PathManager.getJarForClass(registrarClass.java)
