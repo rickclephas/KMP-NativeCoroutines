@@ -1,6 +1,5 @@
 package com.rickclephas.kmp.nativecoroutines.idea.quickfixes.k2
 
-import com.intellij.openapi.util.TextRange
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.CONFLICT_COROUTINES
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.EXPOSED_FLOW_TYPE
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.EXPOSED_FLOW_TYPE_ERROR
@@ -37,16 +36,12 @@ import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativ
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation
 import com.rickclephas.kmp.nativecoroutines.idea.quickfixes.k2.AddAnnotationFixFactory.Companion.registerAddAnnotationFix
 import com.rickclephas.kmp.nativecoroutines.idea.quickfixes.k2.RemoveAnnotationFixFactory.Companion.registerRemoveAnnotationFix
-import org.jetbrains.kotlin.analysis.api.diagnostics.KaSeverity
 import org.jetbrains.kotlin.analysis.api.fir.diagnostics.KaCompilerPluginDiagnostic0
-import org.jetbrains.kotlin.analysis.api.fir.diagnostics.KaFirDiagnostic
-import org.jetbrains.kotlin.analysis.api.lifetime.KaLifetimeToken
 import org.jetbrains.kotlin.idea.codeinsight.api.applicators.fixes.KotlinQuickFixFactory
 import org.jetbrains.kotlin.idea.codeinsight.api.applicators.fixes.KotlinQuickFixRegistrar
 import org.jetbrains.kotlin.idea.codeinsight.api.applicators.fixes.KotlinQuickFixesList
 import org.jetbrains.kotlin.idea.codeinsight.api.applicators.fixes.KtQuickFixesListBuilder
-import org.jetbrains.kotlin.idea.k2.codeinsight.fixes.SpecifyExplicitTypeFixFactories
-import org.jetbrains.kotlin.psi.KtDeclaration
+import org.jetbrains.kotlin.idea.quickfix.SpecifyTypeExplicitlyFix
 
 internal class KmpNativeCoroutinesQuickFixRegistrar: KotlinQuickFixRegistrar() {
     override val list: KotlinQuickFixesList = KtQuickFixesListBuilder.registerPsiQuickFix {
@@ -94,22 +89,9 @@ internal class KmpNativeCoroutinesQuickFixRegistrar: KotlinQuickFixRegistrar() {
             REDUNDANT_PRIVATE_COROUTINES_STATE,
         )
 
-        registerFactory(KotlinQuickFixFactory.ModCommandBased { diagnostic: KaCompilerPluginDiagnostic0 ->
-            if (diagnostic.factoryName != IMPLICIT_RETURN_TYPE.name) return@ModCommandBased emptyList()
-            with(SpecifyExplicitTypeFixFactories.noExplicitReturnTypeInApiMode) {
-                createQuickFixes(NoExplicitReturnTypeInApiModeImpl(diagnostic))
-            }
+        registerFactory(KotlinQuickFixFactory.IntentionBased { diagnostic: KaCompilerPluginDiagnostic0 ->
+            if (diagnostic.factoryName != IMPLICIT_RETURN_TYPE.name) return@IntentionBased emptyList()
+            listOf(SpecifyTypeExplicitlyFix())
         })
-    }
-
-    private class NoExplicitReturnTypeInApiModeImpl(
-        private val diagnostic: KaCompilerPluginDiagnostic0
-    ): KaFirDiagnostic.NoExplicitReturnTypeInApiMode {
-        override val psi: KtDeclaration get() = diagnostic.psi as KtDeclaration
-        override val textRanges: Collection<TextRange> get() = diagnostic.textRanges
-        override val defaultMessage: String get() = diagnostic.defaultMessage
-        override val factoryName: String get() = diagnostic.factoryName
-        override val severity: KaSeverity get() = diagnostic.severity
-        override val token: KaLifetimeToken get() = diagnostic.token
     }
 }
