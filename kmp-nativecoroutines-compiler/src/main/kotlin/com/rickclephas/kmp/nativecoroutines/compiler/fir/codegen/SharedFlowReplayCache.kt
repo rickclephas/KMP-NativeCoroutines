@@ -58,8 +58,6 @@ internal fun FirExtension.buildSharedFlowReplayCacheProperty(
 
         receiverParameter = buildReceiverParameterCopy(
             originalSymbol.receiverParameter,
-            symbol,
-            origin,
             typeParameters.substitutor
         )
 

@@ -59,8 +59,6 @@ internal fun FirExtension.buildStateFlowValueProperty(
 
         receiverParameter = buildReceiverParameterCopy(
             originalSymbol.receiverParameter,
-            symbol,
-            origin,
             typeParameters.substitutor
         )
 
