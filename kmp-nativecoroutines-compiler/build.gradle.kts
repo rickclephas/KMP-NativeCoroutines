@@ -73,6 +73,7 @@ java {
 tasks.compileKotlin.configure {
     compilerOptions {
         freeCompilerArgs.add("-Xjvm-default=all")
+        freeCompilerArgs.add("-Xcontext-parameters")
     }
 }
 
@@ -86,8 +87,7 @@ tasks.test {
     inputs.dir("src/testData")
     useJUnitPlatform()
 
-    // TODO: Remove workaround for https://youtrack.jetbrains.com/issue/KT-66929
-    val nativeCompilerDir =  NativeCompilerDownloader(project).apply { downloadIfNeeded() }.compilerDirectory
+    val nativeCompilerDir =  NativeCompilerDownloader(project).compilerDirectory
     systemProperty("kotlin.internal.native.test.nativeHome", nativeCompilerDir.absolutePath)
 
     val testRuntimeClasspathFiles = project.configurations.testRuntimeClasspath.map { it.files }

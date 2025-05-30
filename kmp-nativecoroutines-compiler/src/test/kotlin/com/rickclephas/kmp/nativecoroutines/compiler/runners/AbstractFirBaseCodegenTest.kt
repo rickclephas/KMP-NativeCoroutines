@@ -10,6 +10,7 @@ import org.jetbrains.kotlin.test.backend.handlers.IrPrettyKotlinDumpHandler
 import org.jetbrains.kotlin.test.backend.ir.IrBackendInput
 import org.jetbrains.kotlin.test.backend.ir.IrConstCheckerHandler
 import org.jetbrains.kotlin.test.backend.ir.IrDiagnosticsHandler
+import org.jetbrains.kotlin.test.backend.ir.JvmIrBackendFacade
 import org.jetbrains.kotlin.test.builders.TestConfigurationBuilder
 import org.jetbrains.kotlin.test.builders.configureFirHandlersStep
 import org.jetbrains.kotlin.test.builders.configureIrHandlersStep
@@ -59,6 +60,8 @@ abstract class AbstractFirBaseCodegenTest(
         get() = ::FirFrontendFacade
     final override val frontendToBackendConverter: Constructor<Frontend2BackendConverter<FirOutputArtifact, IrBackendInput>>
         get() = ::Fir2IrResultsConverter
+    final override val backendFacade: Constructor<BackendFacade<IrBackendInput, BinaryArtifacts.Jvm>>
+        get() = ::JvmIrBackendFacade
 
     override fun configure(builder: TestConfigurationBuilder) = with(builder) {
         super.configure(builder)
@@ -69,7 +72,7 @@ abstract class AbstractFirBaseCodegenTest(
             +DUMP_IR
             +DUMP_KT_IR
             +IGNORE_DEXING
-            JVM_DEFAULT_MODE with JvmDefaultMode.ALL
+            JVM_DEFAULT_MODE with JvmDefaultMode.NO_COMPATIBILITY
             +KmpNativeCoroutinesDirectives.K2_MODE
             KmpNativeCoroutinesDirectives.SUFFIX with "Native"
             KmpNativeCoroutinesDirectives.FLOW_VALUE_SUFFIX with "Value"
