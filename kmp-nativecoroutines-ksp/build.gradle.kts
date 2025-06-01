@@ -1,6 +1,6 @@
 plugins {
-    alias(libs.plugins.kotlin.jvm)
-    `kmp-nativecoroutines-publish`
+    id("kmp-nativecoroutines-kotlin-jvm")
+    id("kmp-nativecoroutines-publish")
 }
 
 dependencies {
@@ -18,21 +18,8 @@ kotlin {
     jvmToolchain(11)
 }
 
-java {
-    withJavadocJar()
-    withSourcesJar()
-}
-
 tasks.compileKotlin.configure {
     compilerOptions {
         freeCompilerArgs.add("-Xjvm-default=all")
-    }
-}
-
-publishing {
-    publications {
-        create<MavenPublication>("maven") {
-            from(components["java"])
-        }
     }
 }
