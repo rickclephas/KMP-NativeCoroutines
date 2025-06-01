@@ -2,9 +2,9 @@
 
 plugins {
     `java-gradle-plugin`
-    alias(libs.plugins.kotlin.jvm)
-    `kmp-nativecoroutines-publish`
+    id("kmp-nativecoroutines-kotlin-jvm")
     alias(libs.plugins.gradle.plugin.publish)
+    id("kmp-nativecoroutines-publish")
 }
 
 kotlin {
@@ -13,7 +13,6 @@ kotlin {
 }
 
 java {
-    withJavadocJar()
     withSourcesJar()
 }
 
