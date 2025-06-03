@@ -12,7 +12,7 @@ struct RootView: View {
     var body: some View {
         List {
             Section(header: Text("Combine")) {
-                NavigationLink(destination: ClockView(viewModel: ClockCombineViewModel())) {
+                NavigationLink(destination: ClockView(viewModel: ClockCombineViewModel(), gh219: GH219())) {
                     Text("Clock")
                 }
                 NavigationLink(destination: RandomLettersView(viewModel: RandomLettersCombineViewModel())) {
@@ -20,7 +20,7 @@ struct RootView: View {
                 }
             }
             Section(header: Text("RxSwift")) {
-                NavigationLink(destination: ClockView(viewModel: ClockRxSwiftViewModel())) {
+                NavigationLink(destination: ClockView(viewModel: ClockRxSwiftViewModel(), gh219: GH219())) {
                     Text("Clock")
                 }
                 NavigationLink(destination: RandomLettersView(viewModel: RandomLettersRxSwiftViewModel())) {
@@ -28,7 +28,7 @@ struct RootView: View {
                 }
             }
             Section(header: Text("Async/Await")) {
-                NavigationLink(destination: ClockView(viewModel: ClockAsyncViewModel())) {
+                NavigationLink(destination: ClockView(viewModel: ClockAsyncViewModel(), gh219: GH219())) {
                     Text("Clock")
                 }
                 NavigationLink(destination: RandomLettersView(viewModel: RandomLettersAsyncViewModel())) {
