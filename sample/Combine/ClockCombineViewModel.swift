@@ -26,6 +26,8 @@ class ClockCombineViewModel: ClockViewModel {
         didSet { isMonitoring = cancellable != nil }
     }
     
+    private let gh219: IGH219 = GH219()
+    
     func startMonitoring() {
         cancellable = createPublisher(for: clock.time)
             // Convert the seconds since EPOCH to a string in the format "HH:mm:ss"
@@ -49,6 +51,7 @@ class ClockCombineViewModel: ClockViewModel {
     }
     
     func updateTime() {
+        print("GH219? \(gh219.uiState)")
         // Convert the seconds since EPOCH to a string
         // in the format "HH:mm:ss" and update the UI
         let date = Date(timeIntervalSince1970: TimeInterval(clock.timeValue))
