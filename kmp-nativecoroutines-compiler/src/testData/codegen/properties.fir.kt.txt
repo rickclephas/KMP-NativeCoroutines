@@ -209,8 +209,8 @@ class MyGenericClass2<T : Any?> {
 
 interface MyInterface28 {
   @ObjCName(name = "interfaceFlowValue")
-  final val interfaceFlowValueNative: Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>
-    final get(): Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+  val interfaceFlowValueNative: Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>
+    get(): Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
       val tmp_9: CoroutineScope? = null
       val tmp_10: Flow<String> = <this>.<get-interfaceFlowValue>()
       return asNativeFlow<String>(/* <this> = tmp_10, */ scope = tmp_9)
