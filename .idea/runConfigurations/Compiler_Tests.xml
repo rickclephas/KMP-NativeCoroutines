@@ -4,7 +4,7 @@
       <option name="executionName" />
       <option name="externalProjectPath" value="$PROJECT_DIR$" />
       <option name="externalSystemIdString" value="GRADLE" />
-      <option name="scriptParameters" value="-PbuildForCompilerTest=true" />
+      <option name="scriptParameters" value="-PbuildType=COMPILER_TESTS" />
       <option name="taskDescriptions">
         <list />
       </option>
