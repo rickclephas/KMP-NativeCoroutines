@@ -5,8 +5,13 @@ import org.jetbrains.kotlin.gradle.utils.NativeCompilerDownloader
 import org.jetbrains.kotlin.konan.target.HostManager
 
 plugins {
-    alias(libs.plugins.kotlin.jvm)
-    `kmp-nativecoroutines-publish`
+    id("kmp-nativecoroutines-kotlin-jvm")
+    id("kmp-nativecoroutines-publish")
+}
+
+repositories {
+    mavenCentral()
+    maven("https://cache-redirector.jetbrains.com/intellij-dependencies")
 }
 
 sourceSets {
@@ -29,7 +34,13 @@ val jvmTestClasspath by configurations.creating {
 }
 
 dependencies {
-    compileOnly(libs.kotlin.compiler)
+    compileOnly(libs.kotlin.compiler) {
+        if (buildType.orNull == BuildType.IDE_PLUGIN) {
+            version {
+                strictly(libs.versions.kotlin.idea.get())
+            }
+        }
+    }
     testImplementation(libs.kotlin.compiler)
     testImplementation(libs.kotlin.compiler.internalTestFramework)
     testImplementation(libs.kotlin.reflect)
@@ -54,18 +65,16 @@ kotlin {
     jvmToolchain(11)
 }
 
-java {
-    withJavadocJar()
-    withSourcesJar()
-}
-
 tasks.compileKotlin.configure {
     compilerOptions {
         freeCompilerArgs.add("-Xjvm-default=all")
     }
 }
 
+val requireCompilerTestsBuild by requireBuildType(BuildType.COMPILER_TESTS)
+
 tasks.test {
+    dependsOn(requireCompilerTestsBuild)
     dependsOn(nativeTestClasspath)
     dependsOn(jvmTestClasspath)
 
@@ -105,12 +114,4 @@ val generateTests by tasks.registering(JavaExec::class) {
     dependsOn(deleteGeneratedTests)
     classpath = sourceSets.test.get().runtimeClasspath
     mainClass.set("com.rickclephas.kmp.nativecoroutines.compiler.GenerateTestsKt")
-}
-
-publishing {
-    publications {
-        create<MavenPublication>("maven") {
-            from(components["java"])
-        }
-    }
 }

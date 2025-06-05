@@ -1,3 +1,8 @@
+public final class com/rickclephas/kmp/nativecoroutines/idea/compiler/extensions/KmpNativeCoroutinesCompilerPluginProvider : org/jetbrains/kotlin/idea/fir/extensions/KotlinBundledFirCompilerPluginProvider {
+	public fun <init> ()V
+	public fun provideBundledPluginJar (Lcom/intellij/openapi/project/Project;Ljava/nio/file/Path;)Ljava/nio/file/Path;
+}
+
 public final class com/rickclephas/kmp/nativecoroutines/idea/compiler/extensions/KmpNativeCoroutinesStorageComponentContainerContributor : org/jetbrains/kotlin/extensions/StorageComponentContainerContributor {
 	public fun <init> ()V
 	public fun registerModuleComponents (Lorg/jetbrains/kotlin/container/StorageComponentContainer;Lorg/jetbrains/kotlin/platform/TargetPlatform;Lorg/jetbrains/kotlin/descriptors/ModuleDescriptor;)V
