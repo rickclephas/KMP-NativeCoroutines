@@ -7,7 +7,7 @@ import org.jetbrains.intellij.platform.gradle.tasks.VerifyPluginTask
 
 plugins {
     id("java")
-    alias(libs.plugins.kotlin.jvm)
+    id("kmp-nativecoroutines-kotlin-jvm")
     alias(libs.plugins.intellij.platform)
 }
 
