@@ -10,6 +10,7 @@
         <quickFixContributor implementation="com.rickclephas.kmp.nativecoroutines.idea.quickfixes.k1.KmpNativeCoroutinesQuickFixContributor"/>
 
         <supportsKotlinPluginMode supportsK2="true"/>
+        <bundledFirCompilerPluginProvider implementation="com.rickclephas.kmp.nativecoroutines.idea.compiler.extensions.KmpNativeCoroutinesCompilerPluginProvider" />
         <codeinsight.quickfix.registrar implementation="com.rickclephas.kmp.nativecoroutines.idea.quickfixes.k2.KmpNativeCoroutinesQuickFixRegistrar"/>
     </extensions>
     <extensions defaultExtensionNs="org.jetbrains.plugins.gradle">

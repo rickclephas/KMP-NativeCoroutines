@@ -7,14 +7,17 @@ on:
   workflow_call:
 env:
   GRADLE_OPTS: -Dorg.gradle.parallel=true -Dorg.gradle.caching=true
-  JAVA_VERSION: '17'
-  XCODE_VERSION: '15.2'
 jobs:
   run-kotlin-tests:
     strategy:
       fail-fast: false
       matrix:
         module: [ annotations, compiler, compiler-embeddable, core, gradle-plugin, ksp ]
+        include:
+          - java: '17'
+          - xcode: '15.2'
+          - module: compiler
+            buildType: COMPILER_TESTS
     name: ${{ matrix.module }}
     runs-on: macos-14
     steps:
@@ -23,25 +26,22 @@ jobs:
       - name: Setup Xcode
         uses: maxim-lobanov/setup-xcode@v1
         with:
-          xcode-version: ${{ env.XCODE_VERSION }}
-      - name: Gradle Wrapper Validation
-        uses: gradle/wrapper-validation-action@v2
+          xcode-version: ${{ matrix.xcode }}
       - name: Setup JDK
         uses: actions/setup-java@v4
         with:
           distribution: zulu
-          java-version: ${{ env.JAVA_VERSION }}
+          java-version: ${{ matrix.java }}
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3
+        uses: gradle/actions/setup-gradle@v4
         with:
           cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
       - name: Cache Konan
         uses: ./.github/actions/cache-konan
       - name: Run tests
         env:
-          GRADLE_MODULE: ${{ format(':kmp-nativecoroutines-{0}', matrix.module) }}
-          IS_COMPILER_MODULE: ${{ matrix.module == 'compiler' }}
-        run: ./gradlew $GRADLE_MODULE:check -PbuildForCompilerTest=$IS_COMPILER_MODULE
+          ORG_GRADLE_PROJECT_buildType: ${{ matrix.buildType || '' }}
+        run: ./gradlew :kmp-nativecoroutines-${{ matrix.module }}:check
       - name: Archive reports
         if: failure()
         uses: actions/upload-artifact@v4
