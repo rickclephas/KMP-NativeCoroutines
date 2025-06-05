@@ -151,7 +151,7 @@ FILE: properties.kt
         @R|com/rickclephas/kmp/nativecoroutines/NativeCoroutines|() public abstract val interfaceFlowValue: R|kotlinx/coroutines/flow/Flow<kotlin/String>|
             public get(): R|kotlinx/coroutines/flow/Flow<kotlin/String>|
 
-        @R|kotlin/native/ObjCName|(name = String(interfaceFlowValue)) public final val interfaceFlowValueNative: R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>|
+        @R|kotlin/native/ObjCName|(name = String(interfaceFlowValue)) public open val interfaceFlowValueNative: R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>|
             public get(): R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>| {
                 ::R|/MyInterface28.interfaceFlowValue|
                 R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))

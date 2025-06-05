@@ -28,7 +28,7 @@ Compatibility versions for older and/or preview Kotlin versions are also availab
 
 | Version        | Version suffix      |   Kotlin    |    KSP    | Coroutines |
 |----------------|---------------------|:-----------:|:---------:|:----------:|
-| _latest_       | -kotlin-2.2.0-Beta1 | 2.2.0-Beta1 |   2.0.0   |   1.10.1   |
+| _latest_       | -kotlin-2.2.0-RC    | 2.2.0-RC    |   2.0.1   |   1.10.1   |
 | **_latest_**   | **_no suffix_**     | **2.1.21**  | **2.0.1** | **1.10.1** |
 | 1.0.0-ALPHA-42 | _no suffix_         |   2.1.20    |   2.0.0   |   1.10.1   |
 | 1.0.0-ALPHA-41 | _no suffix_         |   2.1.10    |  1.0.31   |   1.10.1   |
@@ -73,7 +73,7 @@ For Kotlin just add the plugin to your `build.gradle.kts`:
 ```kotlin
 plugins {
     id("com.google.devtools.ksp") version "2.1.21-2.0.1"
-    id("com.rickclephas.kmp.nativecoroutines") version "1.0.0-ALPHA-43"
+    id("com.rickclephas.kmp.nativecoroutines") version "1.0.0-ALPHA-44"
 }
 ```
 and make sure to opt in to the experimental `@ObjCName` annotation:
@@ -89,7 +89,7 @@ The Swift implementations are available via the Swift Package Manager.
 Just add it to your `Package.swift` file:
 ```swift
 dependencies: [
-    .package(url: "https://github.com/rickclephas/KMP-NativeCoroutines.git", exact: "1.0.0-ALPHA-43")
+    .package(url: "https://github.com/rickclephas/KMP-NativeCoroutines.git", exact: "1.0.0-ALPHA-44")
 ],
 targets: [
     .target(
@@ -121,9 +121,9 @@ Or add it in Xcode by going to `File` > `Add Packages...` and providing the URL:
 
 If you use CocoaPods add one or more of the following libraries to your `Podfile`:
 ```ruby
-pod 'KMPNativeCoroutinesAsync', '1.0.0-ALPHA-43'    # Swift Concurrency implementation
-pod 'KMPNativeCoroutinesCombine', '1.0.0-ALPHA-43'  # Combine implementation
-pod 'KMPNativeCoroutinesRxSwift', git: 'https://github.com/rickclephas/KMP-NativeCoroutines.git', tag: 'v1.0.0-ALPHA-43' # RxSwift implementation
+pod 'KMPNativeCoroutinesAsync', '1.0.0-ALPHA-44'    # Swift Concurrency implementation
+pod 'KMPNativeCoroutinesCombine', '1.0.0-ALPHA-44'  # Combine implementation
+pod 'KMPNativeCoroutinesRxSwift', git: 'https://github.com/rickclephas/KMP-NativeCoroutines.git', tag: 'v1.0.0-ALPHA-44' # RxSwift implementation
 ```
 > [!NOTE]
 > The version for CocoaPods should not contain the Kotlin version suffix (e.g. `-new-mm` or `-kotlin-1.6.0`).
