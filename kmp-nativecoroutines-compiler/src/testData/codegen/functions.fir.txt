@@ -131,7 +131,7 @@ FILE: functions.kt
     public abstract interface MyInterface22 : R|kotlin/Any| {
         @R|com/rickclephas/kmp/nativecoroutines/NativeCoroutines|() public abstract suspend fun returnInterfaceSuspendValue(): R|kotlin/String|
 
-        @R|kotlin/native/ObjCName|(name = String(returnInterfaceSuspendValue)) public final fun returnInterfaceSuspendValueNative(): R|com/rickclephas/kmp/nativecoroutines/NativeSuspend<kotlin/String>| {
+        @R|kotlin/native/ObjCName|(name = String(returnInterfaceSuspendValue)) public open fun returnInterfaceSuspendValueNative(): R|com/rickclephas/kmp/nativecoroutines/NativeSuspend<kotlin/String>| {
             ::R|/MyInterface22.returnInterfaceSuspendValue|
             R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
         }

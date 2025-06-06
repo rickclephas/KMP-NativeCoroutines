@@ -64,4 +64,5 @@ jobs:
           -project KMPNativeCoroutinesSample.xcodeproj
           -scheme "${{ matrix.scheme }}"
           -destination "${{ matrix.destination }}"
+          'SWIFT_ACTIVE_COMPILATION_CONDITIONS=$(inherited) ${{ matrix.ksp-mode && 'NATIVE_COROUTINES_KSP_MODE' || '' }}'
           | xcbeautify --renderer github-actions
