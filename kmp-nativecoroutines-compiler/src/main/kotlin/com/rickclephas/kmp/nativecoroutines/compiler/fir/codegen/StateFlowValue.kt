@@ -58,7 +58,7 @@ internal fun FirExtension.buildStateFlowValueProperty(
         // TODO: support contextReceivers once exported to ObjC
 
         receiverParameter = buildReceiverParameterCopy(
-            originalSymbol.receiverParameter,
+            originalSymbol.receiverParameterSymbol,
             symbol,
             origin,
             typeParameters.substitutor
@@ -83,7 +83,7 @@ internal fun FirExtension.buildStateFlowValueProperty(
         @OptIn(SymbolInternals::class)
         deprecationsProvider = originalSymbol.fir.deprecationsProvider
 
-        annotations.addAll(buildAnnotationsCopy(originalSymbol.annotations, objCName, objCNameSuffix))
+        annotations.addAll(buildAnnotationsCopy(originalSymbol.resolvedAnnotationsWithClassIds, objCName, objCNameSuffix))
         if (annotation.shouldRefineInSwift) {
             annotations.add(buildAnnotation(ClassIds.shouldRefineInSwift))
         }

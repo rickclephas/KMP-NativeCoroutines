@@ -11,11 +11,9 @@ internal fun irCallOriginalFunction(
     function: IrSimpleFunction
 ) = IrBlockBodyExpression(originalFunction.returnType) {
     irCall(originalFunction).apply {
-        dispatchReceiver = function.dispatchReceiverParameter?.let { irGet(it) }
-        extensionReceiver = function.extensionReceiverParameter?.let { irGet(it) }
         passTypeArgumentsFrom(function)
-        function.valueParameters.forEachIndexed { index, parameter ->
-            putValueArgument(index, irGet(parameter))
+        function.parameters.forEachIndexed { index, parameter ->
+            arguments[index] = irGet(parameter)
         }
     }
 }
