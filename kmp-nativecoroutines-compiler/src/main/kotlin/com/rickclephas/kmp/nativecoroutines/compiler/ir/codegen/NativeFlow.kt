@@ -26,9 +26,9 @@ internal fun IrBuilderWithScope.irCallAsNativeFlow(
     return IrBlockBodyExpression(returnType) {
         val flow = irTemporary(irGet(flowExpression))
         var expression: IrExpression = irCall(context.asNativeFlowSymbol, nativeFlowType).apply {
-            putTypeArgument(0, valueTypeArg.typeOrFail)
-            extensionReceiver = irGet(flow)
-            putValueArgument(0, irGet(coroutineScope))
+            typeArguments[0] = valueTypeArg.typeOrFail
+            arguments[0] = irGet(flow)
+            arguments[1] = irGet(coroutineScope)
         }
         if (flowType.isNullable()) {
             expression = irIfNull(returnType, irGet(flow), irNull(returnType), expression)

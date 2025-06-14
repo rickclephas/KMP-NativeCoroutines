@@ -35,7 +35,7 @@ internal fun GeneratorContext.buildSharedFlowReplayCacheGetterBody(
             ?: error("Failed to find SharedFlow.replayCache getter")
         val flow = irTemporary(expression)
         expression = irCall(replayCacheGetter, valueType).apply {
-            dispatchReceiver = irGet(flow)
+            arguments[0] = irGet(flow)
         }
         if (flowType.isNullable()) {
             expression = irIfNull(returnType, irGet(flow), irNull(returnType), expression)
