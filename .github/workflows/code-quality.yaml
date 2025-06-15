@@ -22,6 +22,8 @@ jobs:
         with:
           cache-read-only: false
           cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
+      - name: Cache Konan
+        uses: ./.github/actions/cache-konan
       - name: 'Qodana Scan'
         uses: JetBrains/qodana-action@v2025.1
         with:
