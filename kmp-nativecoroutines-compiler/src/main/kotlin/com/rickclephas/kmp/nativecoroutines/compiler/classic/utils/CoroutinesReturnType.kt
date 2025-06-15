@@ -11,6 +11,7 @@ import org.jetbrains.kotlin.resolve.descriptorUtil.module
 import org.jetbrains.kotlin.types.TypeConstructor
 import org.jetbrains.kotlin.types.typeUtil.supertypes
 
+@Suppress("UnstableApiUsage")
 internal val CallableDescriptor.coroutinesReturnType: CoroutinesReturnType? get() {
     val returnType = returnTypeOrNothing
     val stateFlowConstructor = module.findTypeConstructor(ClassIds.stateFlow)

@@ -7,6 +7,7 @@ import org.jetbrains.kotlin.idea.fir.extensions.CompilerPluginRegistrarUtils
 import org.jetbrains.kotlin.idea.fir.extensions.KotlinBundledFirCompilerPluginProvider
 import java.nio.file.Path
 
+@Suppress("UnstableApiUsage")
 public class KmpNativeCoroutinesCompilerPluginProvider: KotlinBundledFirCompilerPluginProvider {
 
     private val registrarClass = KmpNativeCoroutinesCompilerPluginRegistrar::class
