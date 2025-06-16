@@ -29,5 +29,6 @@ jobs:
         with:
           args: --baseline,qodana.sarif.json
           post-pr-comment: false
+          upload-result: true
         env:
           QODANA_TOKEN: ${{ secrets.QODANA_TOKEN }}
