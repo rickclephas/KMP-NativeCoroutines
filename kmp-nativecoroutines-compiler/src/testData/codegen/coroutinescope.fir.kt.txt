@@ -55,7 +55,7 @@ class MyClass2 : MyClass1 {
     get(): Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
       val tmp_1: CoroutineScope = <this>.<get-coroutineScope2>()
       val tmp_2: Flow<String> = <this>.<get-flowProperty>()
-      return tmp_2.asNativeFlow<String>(scope = tmp_1)
+      return asNativeFlow<String>(/* <this> = tmp_2, */ scope = tmp_1)
     }
 
 }
@@ -99,7 +99,7 @@ class MyClass4 {
   fun MyClass1.returnExtSuspendValueNative(): Function3<@ParameterName(name = "onResult") Function2<String, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
     val tmp_4: CoroutineScope = <get-coroutineScope1>()
     return nativeSuspend<String>(scope = tmp_4, block = local suspend fun <anonymous>(): String {
-      return (<this>, <this>).returnExtSuspendValue()
+      return <this>.returnExtSuspendValue(/* <this> = <this> */)
     }
 )
   }
@@ -135,7 +135,7 @@ class MyClass5 {
   fun MyClass1.returnExtSuspendValueNative(): Function3<@ParameterName(name = "onResult") Function2<String, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
     val tmp_0: CoroutineScope? = null
     return nativeSuspend<String>(scope = tmp_0, block = local suspend fun <anonymous>(): String {
-      return (<this>, <this>).returnExtSuspendValue()
+      return <this>.returnExtSuspendValue(/* <this> = <this> */)
     }
 )
   }
@@ -205,18 +205,18 @@ fun box(): String {
     $this$runBoxTest.await<String>(nativeSuspend = MyClass1().returnSuspendValueNative())
     $this$runBoxTest.collect<String>(nativeFlow = MyClass2().<get-flowPropertyNative>())
     $this$runBoxTest.await<String>(nativeSuspend = MyClass3().returnOtherSuspendValueNative())
-    $this$runBoxTest.collect<String>(nativeFlow = MyClass3().<get-flowExtProperty1Native>())
+    $this$runBoxTest.collect<String>(nativeFlow = <get-flowExtProperty1Native>(/* <this> = MyClass3() */))
     with<MyClass4, Unit>(receiver = MyClass4(), block = local fun MyClass4.<anonymous>() {
-      $this$runBoxTest.await<String>(nativeSuspend = ($this$with, MyClass1()).returnExtSuspendValueNative())
+      $this$runBoxTest.await<String>(nativeSuspend = $this$with.returnExtSuspendValueNative(/* <this> = MyClass1() */))
     }
 )
-    $this$runBoxTest.collect<String>(nativeFlow = MyClass3().<get-flowExtProperty2Native>())
+    $this$runBoxTest.collect<String>(nativeFlow = <get-flowExtProperty2Native>(/* <this> = MyClass3() */))
     with<MyClass5, Unit>(receiver = MyClass5(), block = local fun MyClass5.<anonymous>() {
-      $this$runBoxTest.await<String>(nativeSuspend = ($this$with, MyClass1()).returnExtSuspendValueNative())
+      $this$runBoxTest.await<String>(nativeSuspend = $this$with.returnExtSuspendValueNative(/* <this> = MyClass1() */))
     }
 )
     $this$runBoxTest.await<String>(nativeSuspend = MyClass6().returnSuspendValueNative())
-    $this$runBoxTest.await<String>(nativeSuspend = MyClass6().returnExtSuspendValueNative())
+    $this$runBoxTest.await<String>(nativeSuspend = returnExtSuspendValueNative(/* <this> = MyClass6() */))
     $this$runBoxTest.await<String>(nativeSuspend = MyClass7().returnOtherSuspendValueNative())
   }
 )
@@ -239,7 +239,7 @@ val MyClass3.flowExtProperty2: Flow<String>
 fun MyClass6.returnExtSuspendValueNative(): Function3<@ParameterName(name = "onResult") Function2<String, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
   val tmp_0: CoroutineScope? = null
   return nativeSuspend<String>(scope = tmp_0, block = local suspend fun <anonymous>(): String {
-    return <this>.returnExtSuspendValue()
+    return returnExtSuspendValue(/* <this> = <this> */)
   }
 )
 }
@@ -257,16 +257,16 @@ fun returnSuspendValueNative(): Function3<@ParameterName(name = "onResult") Func
 val MyClass3.flowExtProperty1Native: Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>
   get(): Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
     val tmp_2: CoroutineScope = <get-coroutineScope1>()
-    val tmp_3: Flow<String> = <this>.<get-flowExtProperty1>()
-    return tmp_3.asNativeFlow<String>(scope = tmp_2)
+    val tmp_3: Flow<String> = <get-flowExtProperty1>(/* <this> = <this> */)
+    return asNativeFlow<String>(/* <this> = tmp_3, */ scope = tmp_2)
   }
 
 @ObjCName(name = "flowExtProperty2")
 val MyClass3.flowExtProperty2Native: Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>
   get(): Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
     val tmp_4: CoroutineScope = <this>.<get-coroutineScope3>()
-    val tmp_5: Flow<String> = <this>.<get-flowExtProperty2>()
-    return tmp_5.asNativeFlow<String>(scope = tmp_4)
+    val tmp_5: Flow<String> = <get-flowExtProperty2>(/* <this> = <this> */)
+    return asNativeFlow<String>(/* <this> = tmp_5, */ scope = tmp_4)
   }
 
 @ObjCName(name = "flowProperty")
@@ -274,5 +274,5 @@ val flowPropertyNative: Function3<@ParameterName(name = "onItem") Function3<Stri
   get(): Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
     val tmp_6: CoroutineScope = <get-coroutineScope1>()
     val tmp_7: Flow<String> = <get-flowProperty>()
-    return tmp_7.asNativeFlow<String>(scope = tmp_6)
+    return asNativeFlow<String>(/* <this> = tmp_7, */ scope = tmp_6)
   }
