@@ -54,7 +54,7 @@ internal fun FirExtension.buildNativeFunction(
         // TODO: support contextReceivers once exported to ObjC
 
         receiverParameter = buildReceiverParameterCopy(
-            originalSymbol.receiverParameter,
+            originalSymbol.receiverParameterSymbol,
             symbol,
             origin,
             typeParameters.substitutor
@@ -74,7 +74,7 @@ internal fun FirExtension.buildNativeFunction(
         @OptIn(SymbolInternals::class)
         deprecationsProvider = originalSymbol.fir.deprecationsProvider
 
-        annotations.addAll(buildAnnotationsCopy(originalSymbol.annotations, originalSymbol.name.identifier))
+        annotations.addAll(buildAnnotationsCopy(originalSymbol.resolvedAnnotationsWithClassIds, originalSymbol.name.identifier))
         if (annotation.shouldRefineInSwift) {
             annotations.add(buildAnnotation(ClassIds.shouldRefineInSwift))
         }
