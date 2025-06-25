@@ -57,7 +57,7 @@ import org.jetbrains.kotlin.fir.analysis.checkers.unsubstitutedScope
 import org.jetbrains.kotlin.fir.declarations.*
 import org.jetbrains.kotlin.fir.declarations.utils.*
 import org.jetbrains.kotlin.fir.expressions.FirAnnotation
-import org.jetbrains.kotlin.fir.scopes.getDirectOverriddenMembersWithBaseScope
+import org.jetbrains.kotlin.fir.scopes.getDirectOverriddenMembersWithBaseScopeSafe
 import java.nio.file.Path
 import kotlin.io.path.Path
 
@@ -85,17 +85,18 @@ internal class FirKmpNativeCoroutinesDeclarationChecker(
         ExposedSeverity.ERROR -> EXPOSED_STATE_FLOW_PROPERTY_ERROR
     }
 
-    override fun check(declaration: FirCallableDeclaration, context: CheckerContext, reporter: DiagnosticReporter) {
+    context(context: CheckerContext, reporter: DiagnosticReporter)
+    override fun check(declaration: FirCallableDeclaration) {
         if (declaration !is FirSimpleFunction && declaration !is FirProperty) return
 
         fun KtDiagnosticFactory0.reportOn(annotation: FirAnnotation?) {
             if (annotation == null) return
-            reporter.reportOn(annotation.source, this, context)
+            reporter.reportOn(annotation.source, this)
         }
 
         fun KtDiagnosticFactory0?.reportOn(source: AbstractKtSourceElement?) {
             if (this == null) return
-            reporter.reportOn(source, this, context)
+            reporter.reportOn(source, this)
         }
 
         val annotations = declaration.getNativeCoroutinesAnnotations(context.session)
@@ -167,7 +168,7 @@ internal class FirKmpNativeCoroutinesDeclarationChecker(
             val containingClass = context.containingDeclarations.lastOrNull() as? FirClass
             if (containingClass != null) {
                 val firTypeScope = containingClass.unsubstitutedScope(context)
-                val overriddenMemberSymbols = firTypeScope.getDirectOverriddenMembersWithBaseScope(declaration.symbol)
+                val overriddenMemberSymbols = firTypeScope.getDirectOverriddenMembersWithBaseScopeSafe(declaration.symbol)
                 val overriddenAnnotations = overriddenMemberSymbols.map {
                     it.member.getNativeCoroutinesAnnotations(context.session)
                 }

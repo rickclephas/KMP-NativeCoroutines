@@ -47,6 +47,6 @@ internal fun FirExtension.buildValueParametersCopy(
 
         // TODO: support defaultValue once exported to ObjC
 
-        annotations.addAll(buildAnnotationsCopy(parameter.annotations))
+        annotations.addAll(buildAnnotationsCopy(parameter.resolvedAnnotationsWithClassIds))
     }
 }
