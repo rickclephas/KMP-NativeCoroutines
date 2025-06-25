@@ -23,12 +23,12 @@ internal fun IrBuilderWithScope.irCallCoroutineScope(
         ?: return irCallViewModelScope(declaration, viewModelClass)
             ?: irNull(context.coroutineScopeSymbol.defaultType.makeNullable())
     val getter = property.getter ?: error("CoroutineScope property doesn't have a getter")
-    if (getter.extensionReceiverParameter != null) {
-        error("CoroutineScope property shouldn't have an extension receiver")
+    if (getter.parameters.any { it.kind != IrParameterKind.DispatchReceiver }) {
+        error("CoroutineScope property shouldn't have parameters other than dispatch")
     }
     return irCall(getter).apply {
-        if (getter.dispatchReceiverParameter != null) {
-            dispatchReceiver = irGet(declaration.dispatchOrExtensionReceiverParameter)
+        if (getter.parameters.firstOrNull()?.kind == IrParameterKind.DispatchReceiver) {
+            arguments[0] = irGet(declaration.dispatchOrExtensionReceiverParameter)
         }
     }
 }
@@ -41,7 +41,7 @@ private fun IrSimpleFunction.getCoroutineScopeProperty(classPropertyOnly: Boolea
     if (classPropertyOnly) return null
     fileOrNull?.getCoroutineScopeProperty(true)?.let { return it }
     if (parentClass != null) return null
-    val extensionClass = extensionReceiverParameter?.type?.getClass()
+    val extensionClass = parameters.firstOrNull { it.kind == IrParameterKind.ExtensionReceiver }?.type?.getClass()
     val extensionClassProperty = extensionClass?.getCoroutineScopeProperty(false)
     if (extensionClassProperty != null) return extensionClassProperty
     return null
@@ -65,12 +65,14 @@ private fun IrDeclarationWithVisibility.isVisible(
 }
 
 private val IrSimpleFunction.dispatchOrExtensionReceiverParameter: IrValueParameter
-    get() = dispatchReceiverParameter ?: extensionReceiverParameter ?: error("Missing dispatch receiver parameter")
+    get() = parameters.firstOrNull {
+        it.kind == IrParameterKind.DispatchReceiver || it.kind == IrParameterKind.ExtensionReceiver
+    } ?: error("Missing dispatch receiver parameter")
 
 @UnsafeDuringIrConstructionAPI
 private fun GeneratorContext.getViewModelClass(declaration: IrSimpleFunction): IrClass? {
     val parentClass = declaration.parentClassOrNull
-        ?: declaration.extensionReceiverParameter?.type?.getClass()
+        ?: declaration.parameters.firstOrNull { it.kind == IrParameterKind.ExtensionReceiver }?.type?.getClass()
         ?: return null
     val viewModelSymbols = listOf(observableViewModelSymbol, androidxViewModelSymbol)
     for (viewModelSymbol in viewModelSymbols) {
@@ -99,8 +101,8 @@ private fun IrBuilderWithScope.irCallObservableViewModelScope(declaration: IrSim
         error("Failed to find viewModelScope.coroutineScope getters")
     }
     return irCall(coroutineScopeGetter).apply {
-        extensionReceiver = irCall(viewModelScopeGetter).apply {
-            dispatchReceiver = irGet(declaration.dispatchOrExtensionReceiverParameter)
+        arguments[0] = irCall(viewModelScopeGetter).apply {
+            arguments[0] = irGet(declaration.dispatchOrExtensionReceiverParameter)
         }
     }
 }
@@ -111,6 +113,6 @@ private fun IrBuilderWithScope.irCallAndroidXViewModelScope(declaration: IrSimpl
     val viewModelScopeGetter = context.androidxViewModelScopeSymbol?.owner?.getter
         ?: error("Failed to find viewModelScope getter")
     return irCall(viewModelScopeGetter).apply {
-        extensionReceiver = irGet(declaration.dispatchOrExtensionReceiverParameter)
+        arguments[0] = irGet(declaration.dispatchOrExtensionReceiverParameter)
     }
 }

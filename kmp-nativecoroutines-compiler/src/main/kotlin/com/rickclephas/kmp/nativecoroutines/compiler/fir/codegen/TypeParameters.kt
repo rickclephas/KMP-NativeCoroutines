@@ -44,7 +44,7 @@ internal fun FirExtension.buildTypeParametersCopy(
 
             bounds.addAll(parameter.resolvedBounds)
 
-            annotations.addAll(buildAnnotationsCopy(parameter.annotations))
+            annotations.addAll(buildAnnotationsCopy(parameter.resolvedAnnotationsWithClassIds))
         }
     }
 
