@@ -26,7 +26,7 @@ internal fun FirExtension.buildPropertyGetter(
     symbol = FirPropertyAccessorSymbol()
     propertySymbol = propertyBuilder.symbol
     isGetter = true
-    annotations.addAll(buildAnnotationsCopy(originalGetter.annotations))
+    annotations.addAll(buildAnnotationsCopy(originalGetter.resolvedAnnotationsWithClassIds))
     body = session.buildCallableReferenceBlock(originalSymbol)
 }
 
@@ -54,5 +54,5 @@ internal fun FirExtension.buildPropertySetter(
         }
     )
     isGetter = false
-    annotations.addAll(buildAnnotationsCopy(originalGetter.annotations))
+    annotations.addAll(buildAnnotationsCopy(originalGetter.resolvedAnnotationsWithClassIds))
 }

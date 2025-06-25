@@ -4,6 +4,7 @@ import com.rickclephas.kmp.nativecoroutines.compiler.ir.utils.IrBlockBodyExpress
 import com.rickclephas.kmp.nativecoroutines.compiler.ir.utils.getFlowValueTypeArg
 import org.jetbrains.kotlin.backend.common.lower.DeclarationIrBuilder
 import org.jetbrains.kotlin.ir.builders.*
+import org.jetbrains.kotlin.ir.declarations.IrParameterKind
 import org.jetbrains.kotlin.ir.declarations.IrProperty
 import org.jetbrains.kotlin.ir.expressions.IrBlockBody
 import org.jetbrains.kotlin.ir.symbols.UnsafeDuringIrConstructionAPI
@@ -32,7 +33,7 @@ internal fun GeneratorContext.buildStateFlowValueGetterBody(
             ?: error("Failed to find StateFlow.value getter")
         val flow = irTemporary(expression)
         expression = irCall(valueGetter, valueType).apply {
-            dispatchReceiver = irGet(flow)
+            arguments[0] = irGet(flow)
         }
         if (flowType.isNullable()) {
             expression = irIfNull(returnType, irGet(flow), irNull(returnType), expression)
@@ -58,8 +59,8 @@ internal fun GeneratorContext.buildStateFlowValueSetterBody(
         val valueSetter = mutableStateFlowValueSymbol.owner.setter?.symbol
             ?: error("Failed to find MutableStateFlow.value setter")
         expression = irCall(valueSetter).apply {
-            dispatchReceiver = expression
-            putValueArgument(0, irGet(setter.valueParameters.first()))
+            arguments[0] = expression
+            arguments[1] = irGet(setter.parameters.first { it.kind == IrParameterKind.Regular })
         }
         +irReturn(expression)
     }

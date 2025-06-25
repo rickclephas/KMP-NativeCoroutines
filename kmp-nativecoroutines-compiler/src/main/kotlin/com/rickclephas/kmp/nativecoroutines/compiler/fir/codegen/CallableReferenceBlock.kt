@@ -36,7 +36,7 @@ private fun FirCallableSymbol<*>.getReferenceConeType(): ConeKotlinType = when (
 
 private fun FirNamedFunctionSymbol.getReferenceConeType(): ConeKotlinType {
     val typeArguments = buildList {
-        addIfNotNull(receiverParameter?.typeRef?.coneType)
+        addIfNotNull(resolvedReceiverType)
         addAll(valueParameterSymbols.map { it.resolvedReturnType })
         add(resolvedReturnType)
     }
@@ -48,7 +48,7 @@ private fun FirNamedFunctionSymbol.getReferenceConeType(): ConeKotlinType {
 private fun FirPropertySymbol.getReferenceConeType(): ConeKotlinType {
     val isVar = isVar
     val isMember = dispatchReceiverType != null
-    val isExtension = receiverParameter != null
+    val isExtension = receiverParameterSymbol != null
     val classId = when {
         isMember && isExtension -> throw UnsupportedOperationException("Member-extension properties aren't supported")
         isMember || isExtension -> if (isVar) StandardClassIds.KMutableProperty1 else StandardClassIds.KProperty1
@@ -56,7 +56,7 @@ private fun FirPropertySymbol.getReferenceConeType(): ConeKotlinType {
     }
     val typeArguments = buildList {
         addIfNotNull(dispatchReceiverType)
-        addIfNotNull(receiverParameter?.typeRef?.coneType)
+        addIfNotNull(resolvedReceiverType)
     }
     return classId.constructClassLikeType(typeArguments.toTypedArray())
 }
