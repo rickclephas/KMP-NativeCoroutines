@@ -11,8 +11,8 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 public class KmpNativeCoroutinesPlugin: KotlinCompilerPluginSupportPlugin {
     private companion object {
 
-        const val kotlinPluginId = "org.jetbrains.kotlin.multiplatform"
-        const val kspPluginId = "com.google.devtools.ksp"
+        const val KOTLIN_PLUGIN_ID = "org.jetbrains.kotlin.multiplatform"
+        const val KSP_PLUGIN_ID = "com.google.devtools.ksp"
 
         val KotlinTarget.isKmpNativeCoroutinesTarget: Boolean
             get() = this is KotlinNativeTarget && konanTarget.family.isAppleFamily
@@ -21,14 +21,14 @@ public class KmpNativeCoroutinesPlugin: KotlinCompilerPluginSupportPlugin {
     override fun apply(target: Project) {
         target.extensions.create("nativeCoroutines", KmpNativeCoroutinesExtension::class.java)
         val nativeCoroutines = target.extensions.getByType(KmpNativeCoroutinesExtension::class.java)
-        target.pluginManager.withPlugin(kotlinPluginId) {
+        target.pluginManager.withPlugin(KOTLIN_PLUGIN_ID) {
             val kotlin = target.extensions.getByType(KotlinMultiplatformExtension::class.java)
             val commonMainSourceSet = kotlin.sourceSets.getByName(KotlinSourceSet.COMMON_MAIN_SOURCE_SET_NAME)
             target.configurations.getByName(commonMainSourceSet.implementationConfigurationName).dependencies.apply {
                 add(target.dependencies.create("com.rickclephas.kmp:kmp-nativecoroutines-core:$VERSION"))
                 add(target.dependencies.create("com.rickclephas.kmp:kmp-nativecoroutines-annotations:$VERSION"))
             }
-            target.pluginManager.withPlugin(kspPluginId) {
+            target.pluginManager.withPlugin(KSP_PLUGIN_ID) {
                 kotlin.targets.configureEach { kotlinTarget ->
                     if (!kotlinTarget.isKmpNativeCoroutinesTarget) return@configureEach
                     val kspConfigName = "ksp${kotlinTarget.targetName.replaceFirstChar { it.uppercaseChar() }}"
@@ -46,7 +46,7 @@ public class KmpNativeCoroutinesPlugin: KotlinCompilerPluginSupportPlugin {
     override fun applyToCompilation(kotlinCompilation: KotlinCompilation<*>): Provider<List<SubpluginOption>> {
         val project = kotlinCompilation.target.project
         val extension = project.extensions.getByType(KmpNativeCoroutinesExtension::class.java)
-        if (!extension.k2Mode && !project.plugins.hasPlugin(kspPluginId)) {
+        if (!extension.k2Mode && !project.plugins.hasPlugin(KSP_PLUGIN_ID)) {
             project.logger.error("KMP-NativeCoroutines plugin applied without KSP plugin")
         }
         return project.provider {

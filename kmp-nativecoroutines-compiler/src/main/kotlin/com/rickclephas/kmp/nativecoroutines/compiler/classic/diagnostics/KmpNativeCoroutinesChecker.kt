@@ -63,6 +63,7 @@ import org.jetbrains.kotlin.resolve.multiplatform.findExpects
 import java.nio.file.Path
 import kotlin.io.path.Path
 
+@Suppress("UnstableApiUsage")
 public class KmpNativeCoroutinesChecker(
     exposedSeverity: ExposedSeverity,
     private val generatedSourceDirs: List<Path>,
