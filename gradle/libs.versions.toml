@@ -1,9 +1,9 @@
 [versions]
-kotlin = "2.2.0"
+kotlin = "2.2.10-RC"
 kotlin-idea = "2.2.0-ij251-78"
 kotlinx-coroutines = "1.10.1"
 kotlinx-binary-compatibility-validator = "0.16.3"
-ksp = "2.2.0-2.0.2"
+ksp = "2.2.10-RC-2.0.2"
 kotlinpoet = "1.18.1"
 junit = "5.9.1"
 
