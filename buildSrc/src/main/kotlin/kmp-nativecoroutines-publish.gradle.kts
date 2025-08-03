@@ -1,7 +1,6 @@
 @file:Suppress("UnstableApiUsage")
 
 import com.vanniktech.maven.publish.SonatypeHost
-import gradle.kotlin.dsl.accessors._8edd1b0c1852f0ac869e9c414c462ba9.mavenPublishing
 
 plugins {
     id("com.vanniktech.maven.publish.base")
