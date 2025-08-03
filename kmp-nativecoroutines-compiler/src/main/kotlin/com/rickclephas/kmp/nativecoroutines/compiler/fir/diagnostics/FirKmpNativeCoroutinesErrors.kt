@@ -1,13 +1,14 @@
 package com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics
 
 import org.jetbrains.kotlin.diagnostics.KtDiagnosticFactory0
+import org.jetbrains.kotlin.diagnostics.KtDiagnosticsContainer
 import org.jetbrains.kotlin.diagnostics.SourceElementPositioningStrategies
 import org.jetbrains.kotlin.diagnostics.error0
-import org.jetbrains.kotlin.diagnostics.rendering.RootDiagnosticRendererFactory
+import org.jetbrains.kotlin.diagnostics.rendering.BaseDiagnosticRendererFactory
 import org.jetbrains.kotlin.diagnostics.warning0
 import org.jetbrains.kotlin.psi.KtElement
 
-public object FirKmpNativeCoroutinesErrors {
+public object FirKmpNativeCoroutinesErrors: KtDiagnosticsContainer() {
     public val CONFLICT_COROUTINES: KtDiagnosticFactory0 by error0<KtElement>()
 
     public val EXPOSED_FLOW_TYPE: KtDiagnosticFactory0 by warning0<KtElement>(SourceElementPositioningStrategies.DECLARATION_RETURN_TYPE)
@@ -51,7 +52,5 @@ public object FirKmpNativeCoroutinesErrors {
 
     public val IMPLICIT_RETURN_TYPE: KtDiagnosticFactory0 by error0<KtElement>(SourceElementPositioningStrategies.DECLARATION_NAME)
 
-    init {
-        RootDiagnosticRendererFactory.registerFactory(FirDefaultErrorMessages)
-    }
+    override fun getRendererFactory(): BaseDiagnosticRendererFactory = FirDefaultErrorMessages
 }
