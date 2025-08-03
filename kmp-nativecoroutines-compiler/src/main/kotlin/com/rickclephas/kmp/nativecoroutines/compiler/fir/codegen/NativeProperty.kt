@@ -68,7 +68,6 @@ internal fun FirExtension.buildNativeProperty(
         isVar = false
         getter = buildPropertyGetter(this, originalSymbol)
 
-        isLocal = false
         bodyResolveState = FirPropertyBodyResolveState.ALL_BODIES_RESOLVED
 
         @OptIn(SymbolInternals::class)

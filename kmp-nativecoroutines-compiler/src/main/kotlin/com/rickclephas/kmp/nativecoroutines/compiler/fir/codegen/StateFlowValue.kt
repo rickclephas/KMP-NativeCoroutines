@@ -78,7 +78,6 @@ internal fun FirExtension.buildStateFlowValueProperty(
             setter = buildPropertySetter(this, originalSymbol)
         }
 
-        isLocal = false
         bodyResolveState = FirPropertyBodyResolveState.ALL_BODIES_RESOLVED
 
         @OptIn(SymbolInternals::class)
