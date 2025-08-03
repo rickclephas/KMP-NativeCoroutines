@@ -101,7 +101,7 @@ internal class KmpNativeCoroutinesDeclarationGenerationExtension(
     }
 
     private fun getAnnotationForSymbol(symbol: FirCallableSymbol<*>): NativeCoroutinesAnnotation? {
-        if (symbol.isOverride || symbol.isExpect) return null
+        if (symbol.rawStatus.isOverride || symbol.isExpect) return null
         return predicates.entries.singleOrNull { (_, predicate) ->
             session.predicateBasedProvider.matches(predicate, symbol)
         }?.key
