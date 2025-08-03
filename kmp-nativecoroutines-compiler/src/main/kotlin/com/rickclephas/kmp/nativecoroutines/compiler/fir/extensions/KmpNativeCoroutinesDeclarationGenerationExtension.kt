@@ -65,7 +65,7 @@ internal class KmpNativeCoroutinesDeclarationGenerationExtension(
         val callableIds = mutableSetOf<CallableId>()
         for (symbol in symbols) {
             if (symbol !is FirCallableSymbol) continue
-            val callableId = symbol.callableId
+            val callableId = symbol.callableId ?: continue
             if (callableId.className != null) continue
             val callableNames = getCallableNamesForSymbol(symbol)
             callableIds.addAll(callableNames.map(callableId::copy))
@@ -81,7 +81,7 @@ internal class KmpNativeCoroutinesDeclarationGenerationExtension(
 
     private fun getCallableNamesForSymbol(symbol: FirCallableSymbol<*>): Set<Name> {
         val annotation = getAnnotationForSymbol(symbol) ?: return emptySet()
-        val callableName = symbol.callableId.callableName
+        val callableName = symbol.callableId?.callableName ?: return emptySet()
         val isProperty = symbol is FirVariableSymbol
         return when (annotation) {
             NativeCoroutines, NativeCoroutinesRefined -> setOfNotNull(
