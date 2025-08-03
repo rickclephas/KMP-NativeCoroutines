@@ -50,7 +50,7 @@ internal fun FirExtension.buildPropertySetter(
             moduleData = propertyBuilder.moduleData
             origin = propertyBuilder.origin
             returnTypeRef = propertyBuilder.returnTypeRef
-            symbol = FirValueParameterSymbol(StandardNames.DEFAULT_VALUE_PARAMETER)
+            symbol = FirValueParameterSymbol()
         }
     )
     isGetter = false
