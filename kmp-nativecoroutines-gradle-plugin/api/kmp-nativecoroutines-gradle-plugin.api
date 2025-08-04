@@ -29,8 +29,8 @@ public class com/rickclephas/kmp/nativecoroutines/gradle/KmpNativeCoroutinesExte
 }
 
 public final class com/rickclephas/kmp/nativecoroutines/gradle/KmpNativeCoroutinesPlugin : org/jetbrains/kotlin/gradle/plugin/KotlinCompilerPluginSupportPlugin {
-	public static final field kotlinPluginId Ljava/lang/String;
-	public static final field kspPluginId Ljava/lang/String;
+	public static final field KOTLIN_PLUGIN_ID Ljava/lang/String;
+	public static final field KSP_PLUGIN_ID Ljava/lang/String;
 	public fun <init> ()V
 	public synthetic fun apply (Ljava/lang/Object;)V
 	public fun apply (Lorg/gradle/api/Project;)V
