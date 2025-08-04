@@ -25,7 +25,7 @@ kotlin {
 
 dependencies {
     intellijPlatform {
-        intellijIdeaCommunity("252.19874.12")
+        intellijIdeaCommunity("2025.2")
 
         bundledPlugins("org.jetbrains.kotlin", "com.intellij.gradle")
 
