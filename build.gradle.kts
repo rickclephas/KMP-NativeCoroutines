@@ -13,7 +13,7 @@ buildscript {
 
 allprojects {
     group = "com.rickclephas.kmp"
-    version = "1.0.0-ALPHA-45-kotlin-2.2.20-Beta1"
+    version = "1.0.0-ALPHA-45-idea-2025.2"
 }
 
 apiValidation {
