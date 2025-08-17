@@ -1,12 +1,12 @@
 name: Qodana
 on:
   workflow_dispatch:
-#  pull_request:
-#    branches:
-#      - master
+  pull_request:
+    branches:
+      - master
 jobs:
   qodana:
-    runs-on: ubuntu-latest
+    runs-on: macos-14
     permissions:
       contents: write
       pull-requests: write
@@ -17,12 +17,18 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: 0
-      - id: get-java-home-11
-        run: echo "JAVA_HOME_11_X64=$JAVA_HOME_11_X64" >> $GITHUB_OUTPUT
-      - name: 'Qodana Scan'
-        uses: JetBrains/qodana-action@v2024.1
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
         with:
-          args: -v,${{ steps.get-java-home-11.outputs.JAVA_HOME_11_X64 }}:/root/.jdks/jdk11
+          cache-read-only: false
+          cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
+      - name: Cache Konan
+        uses: ./.github/actions/cache-konan
+      - name: 'Qodana Scan'
+        uses: JetBrains/qodana-action@v2025.1
+        with:
+          args: --baseline,qodana.sarif.json
           post-pr-comment: false
+          upload-result: true
         env:
           QODANA_TOKEN: ${{ secrets.QODANA_TOKEN }}

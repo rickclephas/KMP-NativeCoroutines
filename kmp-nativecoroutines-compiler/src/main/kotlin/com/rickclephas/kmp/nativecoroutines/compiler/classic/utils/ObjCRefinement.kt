@@ -10,6 +10,7 @@ internal val DeclarationDescriptor.isRefined: Boolean
         !annotation.isNativeCoroutinesAnnotation && annotation.isRefinementAnnotation
     }
 
+@Suppress("UnstableApiUsage")
 private val AnnotationDescriptor.isRefinementAnnotation: Boolean
     get() = annotationClass?.annotations?.any { metaAnnotation ->
         val fqName = metaAnnotation.fqName
