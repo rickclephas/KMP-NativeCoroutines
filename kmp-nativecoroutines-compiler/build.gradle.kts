@@ -20,14 +20,14 @@ sourceSets {
     }
 }
 
-val nativeTestClasspath by configurations.creating {
+val nativeTestClasspath: Configuration by configurations.creating {
     attributes {
         attribute(KotlinPlatformType.attribute, KotlinPlatformType.native)
         attribute(KotlinNativeTarget.konanTargetAttribute, HostManager.hostName)
         attribute(Usage.USAGE_ATTRIBUTE, objects.named(KotlinUsages.KOTLIN_API))
     }
 }
-val jvmTestClasspath by configurations.creating {
+val jvmTestClasspath: Configuration by configurations.creating {
     attributes {
         attribute(KotlinPlatformType.attribute, KotlinPlatformType.jvm)
     }
