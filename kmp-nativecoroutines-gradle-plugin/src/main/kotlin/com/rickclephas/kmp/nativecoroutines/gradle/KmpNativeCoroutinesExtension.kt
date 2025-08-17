@@ -21,14 +21,12 @@ public open class KmpNativeCoroutinesExtension {
      */
     public var flowReplayCacheSuffix: String? = "ReplayCache"
     /**
-     * The suffix used to generate the native state property names.
-     * @see com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState
+     * The suffix used to generate the `StateFlow` value property names.
      */
     public var stateSuffix: String = "Value"
     /**
      * The suffix used to generate the `StateFlow` flow property names,
      * or `null` to remove the flow properties.
-     * @see com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState
      */
     public var stateFlowSuffix: String? = "Flow"
     /**
