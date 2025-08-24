@@ -15,6 +15,7 @@ import org.jetbrains.kotlin.fir.extensions.FirExtension
 import org.jetbrains.kotlin.fir.moduleData
 import org.jetbrains.kotlin.fir.symbols.SymbolInternals
 import org.jetbrains.kotlin.fir.symbols.impl.FirPropertySymbol
+import org.jetbrains.kotlin.fir.symbols.impl.FirRegularPropertySymbol
 import org.jetbrains.kotlin.fir.toFirResolvedTypeRef
 import org.jetbrains.kotlin.fir.types.*
 import org.jetbrains.kotlin.name.CallableId
@@ -40,7 +41,7 @@ internal fun FirExtension.buildSharedFlowReplayCacheProperty(
 
         source = originalSymbol.source?.fakeElement(KtFakeSourceElementKind.PluginGenerated)
 
-        symbol = FirPropertySymbol(callableId)
+        symbol = FirRegularPropertySymbol(callableId)
         name = callableId.callableName
 
         status = originalSymbol.getGeneratedDeclarationStatus(session) ?: return null
@@ -71,7 +72,6 @@ internal fun FirExtension.buildSharedFlowReplayCacheProperty(
         isVar = false
         getter = buildPropertyGetter(this, originalSymbol)
 
-        isLocal = false
         bodyResolveState = FirPropertyBodyResolveState.ALL_BODIES_RESOLVED
 
         @OptIn(SymbolInternals::class)

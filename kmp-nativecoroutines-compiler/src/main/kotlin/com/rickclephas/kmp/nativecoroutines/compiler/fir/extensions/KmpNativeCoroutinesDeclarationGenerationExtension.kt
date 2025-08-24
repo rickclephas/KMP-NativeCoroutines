@@ -18,7 +18,6 @@ import org.jetbrains.kotlin.config.CompilerConfiguration
 import org.jetbrains.kotlin.fir.FirSession
 import org.jetbrains.kotlin.fir.declarations.DirectDeclarationsAccess
 import org.jetbrains.kotlin.fir.declarations.utils.isExpect
-import org.jetbrains.kotlin.fir.declarations.utils.isOverride
 import org.jetbrains.kotlin.fir.extensions.*
 import org.jetbrains.kotlin.fir.extensions.predicate.LookupPredicate
 import org.jetbrains.kotlin.fir.resolve.providers.symbolProvider
@@ -65,7 +64,7 @@ internal class KmpNativeCoroutinesDeclarationGenerationExtension(
         val callableIds = mutableSetOf<CallableId>()
         for (symbol in symbols) {
             if (symbol !is FirCallableSymbol) continue
-            val callableId = symbol.callableId
+            val callableId = symbol.callableId ?: continue
             if (callableId.className != null) continue
             val callableNames = getCallableNamesForSymbol(symbol)
             callableIds.addAll(callableNames.map(callableId::copy))
@@ -81,7 +80,7 @@ internal class KmpNativeCoroutinesDeclarationGenerationExtension(
 
     private fun getCallableNamesForSymbol(symbol: FirCallableSymbol<*>): Set<Name> {
         val annotation = getAnnotationForSymbol(symbol) ?: return emptySet()
-        val callableName = symbol.callableId.callableName
+        val callableName = symbol.callableId?.callableName ?: return emptySet()
         val isProperty = symbol is FirVariableSymbol
         return when (annotation) {
             NativeCoroutines, NativeCoroutinesRefined -> setOfNotNull(
@@ -101,7 +100,7 @@ internal class KmpNativeCoroutinesDeclarationGenerationExtension(
     }
 
     private fun getAnnotationForSymbol(symbol: FirCallableSymbol<*>): NativeCoroutinesAnnotation? {
-        if (symbol.isOverride || symbol.isExpect) return null
+        if (symbol.rawStatus.isOverride || symbol.isExpect) return null
         return predicates.entries.singleOrNull { (_, predicate) ->
             session.predicateBasedProvider.matches(predicate, symbol)
         }?.key
