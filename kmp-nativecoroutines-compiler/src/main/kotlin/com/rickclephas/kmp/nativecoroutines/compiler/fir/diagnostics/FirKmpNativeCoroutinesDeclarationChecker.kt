@@ -58,6 +58,7 @@ import org.jetbrains.kotlin.fir.declarations.*
 import org.jetbrains.kotlin.fir.declarations.utils.*
 import org.jetbrains.kotlin.fir.expressions.FirAnnotation
 import org.jetbrains.kotlin.fir.scopes.getDirectOverriddenMembersWithBaseScopeSafe
+import org.jetbrains.kotlin.fir.symbols.impl.FirClassSymbol
 import java.nio.file.Path
 import kotlin.io.path.Path
 
@@ -165,7 +166,7 @@ internal class FirKmpNativeCoroutinesDeclarationChecker(
 
         //region INCOMPATIBLE_*
         if (isOverride) {
-            val containingClass = context.containingDeclarations.lastOrNull() as? FirClass
+            val containingClass = context.containingDeclarations.lastOrNull() as? FirClassSymbol<*>
             if (containingClass != null) {
                 val firTypeScope = containingClass.unsubstitutedScope(context)
                 val overriddenMemberSymbols = firTypeScope.getDirectOverriddenMembersWithBaseScopeSafe(declaration.symbol)

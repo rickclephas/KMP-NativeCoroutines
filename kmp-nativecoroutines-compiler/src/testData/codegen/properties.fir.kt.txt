@@ -120,7 +120,7 @@ data class MyGenericClass1<T : Any?> {
     when {
       other !is MyGenericClass1<T> -> return false
     }
-    val tmp_0: MyGenericClass1<T> = other as MyGenericClass1<T>
+    val tmp_0: MyGenericClass1<T> = other /*as MyGenericClass1<T> */
     when {
       EQEQ(arg0 = <this>.#value, arg1 = tmp_0.#value).not() -> return false
     }

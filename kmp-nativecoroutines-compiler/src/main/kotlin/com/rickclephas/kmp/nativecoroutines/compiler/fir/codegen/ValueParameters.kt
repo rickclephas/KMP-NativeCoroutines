@@ -27,7 +27,7 @@ internal fun FirExtension.buildValueParametersCopy(
 
         source = parameter.source?.fakeElement(KtFakeSourceElementKind.PluginGenerated)
 
-        symbol = FirValueParameterSymbol(parameter.name)
+        symbol = FirValueParameterSymbol()
         name = parameter.name
         this.containingDeclarationSymbol = containingDeclarationSymbol
 

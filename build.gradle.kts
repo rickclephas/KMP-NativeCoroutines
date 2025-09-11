@@ -13,7 +13,7 @@ buildscript {
 
 allprojects {
     group = "com.rickclephas.kmp"
-    version = "1.0.0-ALPHA-46"
+    version = "1.0.0-ALPHA-47"
 }
 
 apiValidation {

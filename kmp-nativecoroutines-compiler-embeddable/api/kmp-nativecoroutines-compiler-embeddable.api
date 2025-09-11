@@ -106,7 +106,7 @@ public final class com/rickclephas/kmp/nativecoroutines/compiler/config/Suffixes
 	public static final fun getSUFFIX ()Lcom/rickclephas/kmp/nativecoroutines/compiler/config/ConfigOptionWithDefault;
 }
 
-public final class com/rickclephas/kmp/nativecoroutines/compiler/fir/diagnostics/FirKmpNativeCoroutinesErrors {
+public final class com/rickclephas/kmp/nativecoroutines/compiler/fir/diagnostics/FirKmpNativeCoroutinesErrors : org/jetbrains/kotlin/diagnostics/KtDiagnosticsContainer {
 	public static final field INSTANCE Lcom/rickclephas/kmp/nativecoroutines/compiler/fir/diagnostics/FirKmpNativeCoroutinesErrors;
 	public final fun getCONFLICT_COROUTINES ()Lorg/jetbrains/kotlin/diagnostics/KtDiagnosticFactory0;
 	public final fun getEXPOSED_FLOW_TYPE ()Lorg/jetbrains/kotlin/diagnostics/KtDiagnosticFactory0;
@@ -141,6 +141,7 @@ public final class com/rickclephas/kmp/nativecoroutines/compiler/fir/diagnostics
 	public final fun getREDUNDANT_PRIVATE_COROUTINES_REFINED ()Lorg/jetbrains/kotlin/diagnostics/KtDiagnosticFactory0;
 	public final fun getREDUNDANT_PRIVATE_COROUTINES_REFINED_STATE ()Lorg/jetbrains/kotlin/diagnostics/KtDiagnosticFactory0;
 	public final fun getREDUNDANT_PRIVATE_COROUTINES_STATE ()Lorg/jetbrains/kotlin/diagnostics/KtDiagnosticFactory0;
+	public fun getRendererFactory ()Lorg/jetbrains/kotlin/diagnostics/rendering/BaseDiagnosticRendererFactory;
 	public final fun getUNSUPPORTED_CLASS_EXTENSION_PROPERTY ()Lorg/jetbrains/kotlin/diagnostics/KtDiagnosticFactory0;
 }
 
