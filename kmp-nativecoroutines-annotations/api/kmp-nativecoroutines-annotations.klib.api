@@ -9,18 +9,23 @@
 open annotation class com.rickclephas.kmp.nativecoroutines/NativeCoroutineScope : kotlin/Annotation { // com.rickclephas.kmp.nativecoroutines/NativeCoroutineScope|null[0]
     constructor <init>() // com.rickclephas.kmp.nativecoroutines/NativeCoroutineScope.<init>|<init>(){}[0]
 }
+
 open annotation class com.rickclephas.kmp.nativecoroutines/NativeCoroutines : kotlin/Annotation { // com.rickclephas.kmp.nativecoroutines/NativeCoroutines|null[0]
     constructor <init>() // com.rickclephas.kmp.nativecoroutines/NativeCoroutines.<init>|<init>(){}[0]
 }
+
 open annotation class com.rickclephas.kmp.nativecoroutines/NativeCoroutinesIgnore : kotlin/Annotation { // com.rickclephas.kmp.nativecoroutines/NativeCoroutinesIgnore|null[0]
     constructor <init>() // com.rickclephas.kmp.nativecoroutines/NativeCoroutinesIgnore.<init>|<init>(){}[0]
 }
+
 open annotation class com.rickclephas.kmp.nativecoroutines/NativeCoroutinesRefined : kotlin/Annotation { // com.rickclephas.kmp.nativecoroutines/NativeCoroutinesRefined|null[0]
     constructor <init>() // com.rickclephas.kmp.nativecoroutines/NativeCoroutinesRefined.<init>|<init>(){}[0]
 }
+
 open annotation class com.rickclephas.kmp.nativecoroutines/NativeCoroutinesRefinedState : kotlin/Annotation { // com.rickclephas.kmp.nativecoroutines/NativeCoroutinesRefinedState|null[0]
     constructor <init>() // com.rickclephas.kmp.nativecoroutines/NativeCoroutinesRefinedState.<init>|<init>(){}[0]
 }
+
 open annotation class com.rickclephas.kmp.nativecoroutines/NativeCoroutinesState : kotlin/Annotation { // com.rickclephas.kmp.nativecoroutines/NativeCoroutinesState|null[0]
     constructor <init>() // com.rickclephas.kmp.nativecoroutines/NativeCoroutinesState.<init>|<init>(){}[0]
 }
