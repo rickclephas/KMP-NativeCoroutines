@@ -26,6 +26,6 @@ internal class RemoveAnnotationFixFactory(
         val diagnosticFactory = diagnosticFactories.firstOrNull { it == diagnostic.factory } ?: return null
         val annotationEntry = diagnosticFactory.cast(diagnostic).psiElement as? KtAnnotationEntry ?: return null
         val annotationName = annotationEntry.shortName?.identifierOrNullIfSpecial ?: return null
-        return RemoveAnnotationFix("Remove @$annotationName annotation", annotationEntry)
+        return RemoveAnnotationFix("Remove @$annotationName annotation", annotationEntry).asIntention()
     }
 }
