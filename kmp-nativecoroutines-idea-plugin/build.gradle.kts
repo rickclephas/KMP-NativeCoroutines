@@ -25,7 +25,7 @@ kotlin {
 
 dependencies {
     intellijPlatform {
-        intellijIdeaCommunity("2025.2")
+        intellijIdea("253.20558.43")
 
         bundledPlugins("org.jetbrains.kotlin", "com.intellij.gradle")
 
@@ -52,8 +52,8 @@ intellijPlatform {
         """.trimIndent()
 
         ideaVersion {
-            sinceBuild = "252"
-            untilBuild = "252.*"
+            sinceBuild = "253"
+            untilBuild = "253.*"
         }
 
         vendor {
