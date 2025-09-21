@@ -90,8 +90,7 @@ intellijPlatform {
                 recommended()
                 select {
                     types = listOf(
-                        IntelliJPlatformType.IntellijIdeaCommunity,
-                        IntelliJPlatformType.IntellijIdeaUltimate,
+                        IntelliJPlatformType.IntellijIdea,
                         IntelliJPlatformType.AndroidStudio,
                     )
                 }
@@ -100,12 +99,8 @@ intellijPlatform {
     }
 }
 
-val runIntelliJCommunity by intellijPlatformTesting.runIde.registering {
-    type = IntelliJPlatformType.IntellijIdeaCommunity
-}
-
-val runIntelliJUltimate by intellijPlatformTesting.runIde.registering {
-    type = IntelliJPlatformType.IntellijIdeaUltimate
+val runIntelliJ by intellijPlatformTesting.runIde.registering {
+    type = IntelliJPlatformType.IntellijIdea
 }
 
 val runAndroidStudio by intellijPlatformTesting.runIde.registering {
