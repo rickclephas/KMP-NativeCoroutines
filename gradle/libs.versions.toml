@@ -25,7 +25,7 @@ kotlin-script-runtime = { module = "org.jetbrains.kotlin:kotlin-script-runtime",
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
 kotlin-compiler-internalTestFramework = { module = "org.jetbrains.kotlin:kotlin-compiler-internal-test-framework", version.ref = "kotlin" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinx-coroutines" }
-kotlinCompileTesting-ksp = { module = "dev.zacsweers.kctfork:ksp", version = "0.7.1" }
+kotlinCompileTesting-ksp = { module = "dev.zacsweers.kctfork:ksp", version = "0.9.0" }
 junit = { module = "junit:junit", version = "4.13.2" }
 junit-bom = { module = "org.junit:junit-bom", version.ref = "junit" }
 junit-jupiter = { module = "org.junit.jupiter:junit-jupiter" }
