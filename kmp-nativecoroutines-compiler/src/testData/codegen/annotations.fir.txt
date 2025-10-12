@@ -52,7 +52,7 @@ FILE: annotations.kt
         }
         )
     }
-FILE: __GENERATED DECLARATIONS__.kt
+FILE: /__GENERATED__CALLABLES__.kt
     @R|kotlin/Deprecated|(message = String(This is deprecated 1)) @R|kotlin/native/ObjCName|(name = String(deprecatedFunction1)) public final fun deprecatedFunction1Native(): R|com/rickclephas/kmp/nativecoroutines/NativeSuspend<kotlin/String>| {
         ::R|/deprecatedFunction1|
         R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))

@@ -232,7 +232,7 @@ FILE: properties.kt
         }
         )
     }
-FILE: __GENERATED DECLARATIONS__.kt
+FILE: /__GENERATED__CALLABLES__.kt
     @R|kotlin/native/ObjCName|(name = String(topLevelFlow)) public final val topLevelFlowNative: R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>|
         public get(): R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>| {
             ::R|/topLevelFlow|
