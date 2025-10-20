@@ -22,7 +22,7 @@ class RandomLettersCombineViewModel: RandomLettersViewModel {
     func loadRandomLetters(throwException: Bool) {
         isLoading = true
         result = nil
-        createFuture(for: randomLettersGenerator.getRandomLetters(throwException: throwException))
+        createFuture { try await self.randomLettersGenerator.getRandomLetters(throwException: throwException) }
             // Update the UI on the main thread
             .receive(on: DispatchQueue.main)
             .sink { [weak self] completion in
