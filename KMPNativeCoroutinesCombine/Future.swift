@@ -11,11 +11,33 @@ import KMPNativeCoroutinesCore
 /// Creates an `AnyPublisher` for the provided `NativeSuspend`.
 /// - Parameter nativeSuspend: The native suspend function to await.
 /// - Returns: A publisher that either finishes with a single value or fails with an error.
+@available(*, deprecated)
 public func createFuture<Result, Failure: Error, Unit>(
     for nativeSuspend: @escaping NativeSuspend<Result, Failure, Unit>
 ) -> AnyPublisher<Result, Failure> {
     return NativeSuspendFuture(nativeSuspend: nativeSuspend)
         .eraseToAnyPublisher()
+}
+
+public func createFuture<Result, Failure: Error, Unit>(
+    for nativeSuspend: @escaping () -> NativeSuspend<Result, Failure, Unit>
+) -> AnyPublisher<Result, Failure> {
+    return NativeSuspendFuture(nativeSuspend: nativeSuspend())
+        .eraseToAnyPublisher()
+}
+
+@available(*, deprecated)
+public func createFuture<Result>(for result: @escaping () async throws -> Result) -> AnyPublisher<Result, Error> {
+    Future<Result, Error> { promise in
+        Task {
+            do {
+                promise(.success(try await result()))
+            } catch {
+                promise(.failure(error))
+            }
+        }
+        // TODO: Support cancellation
+    }.eraseToAnyPublisher()
 }
 
 /// Creates an `AnyPublisher` for the provided `NativeSuspend`.

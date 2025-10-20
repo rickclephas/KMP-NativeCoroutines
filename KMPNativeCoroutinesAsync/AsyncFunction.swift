@@ -18,6 +18,11 @@ public func asyncFunction<Result, Failure: Error, Unit>(
     try await AsyncFunctionTask(nativeSuspend: nativeSuspend).awaitResult()
 }
 
+@available(*, deprecated)
+public func asyncFunction<Result>(for result: Result) async -> Result {
+    return result
+}
+
 /// Wraps the `NativeSuspend` in an async function.
 /// - Parameter nativeSuspend: The native suspend function to await.
 /// - Throws: Errors thrown by the `nativeSuspend`.
@@ -25,6 +30,11 @@ public func asyncFunction<Unit, Failure: Error>(
     for nativeSuspend: @escaping NativeSuspend<Unit, Failure, Unit>
 ) async throws -> Void {
     _ = try await AsyncFunctionTask(nativeSuspend: nativeSuspend).awaitResult()
+}
+
+@available(*, deprecated)
+public func asyncFunction(for void: Void) async -> Void {
+    
 }
 
 private class AsyncFunctionTask<Result, Failure: Error, Unit>: @unchecked Sendable {

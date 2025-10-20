@@ -20,6 +20,15 @@ public func asyncResult<Output, Failure: Error, Unit>(
     }
 }
 
+@available(*, deprecated)
+public func asyncResult<Output>(for output: @autoclosure () async throws -> Output) async -> Result<Output, Error> {
+    do {
+        return .success(try await output())
+    } catch {
+        return .failure(error)
+    }
+}
+
 /// Awaits the `NativeSuspend` and returns the result.
 /// - Parameter nativeSuspend: The native suspend function to await.
 /// - Returns: The `Result` from the `nativeSuspend`.

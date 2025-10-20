@@ -11,10 +11,33 @@ import KMPNativeCoroutinesCore
 /// Creates a `Single` for the provided `NativeSuspend`.
 /// - Parameter nativeSuspend: The native suspend function to await.
 /// - Returns: A single that either finishes with a single value or fails with an error.
+@available(*, deprecated)
 public func createSingle<Result, Failure: Error, Unit>(
     for nativeSuspend: @escaping NativeSuspend<Result, Failure, Unit>
 ) -> Single<Result> {
     return createSingleImpl(for: nativeSuspend)
+}
+
+public func createSingle<Result, Failure: Error, Unit>(
+    for nativeSuspend: @escaping () -> NativeSuspend<Result, Failure, Unit>
+) -> Single<Result> {
+    return createSingleImpl(for: nativeSuspend())
+}
+
+@available(*, deprecated)
+public func createSingle<Result>(for result: @escaping () async throws -> Result) -> Single<Result> {
+    return Single.deferred {
+        return Single.create { observer in
+            let handle = Task {
+                do {
+                    observer(.success(try await result()))
+                } catch {
+                    observer(.failure(error))
+                }
+            }
+            return Disposables.create { handle.cancel() }
+        }
+    }
 }
 
 /// Creates a `Single` for the provided `NativeSuspend`.
