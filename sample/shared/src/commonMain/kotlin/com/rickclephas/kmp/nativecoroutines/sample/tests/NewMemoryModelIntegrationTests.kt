@@ -21,6 +21,7 @@ public class NewMemoryModelIntegrationTests: IntegrationTests() {
     }
 
 //    @NativeCoroutines
+    @Throws(Exception::class)
     public suspend fun generateRandomMutableData(): MutableData {
         val data = MutableData()
         withContext(Dispatchers.Main) {

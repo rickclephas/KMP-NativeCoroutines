@@ -8,6 +8,7 @@ import kotlin.time.Duration.Companion.seconds
 public object RandomLettersGenerator {
 
 //    @NativeCoroutines
+    @Throws(Exception::class)
     public suspend fun getRandomLetters(throwException: Boolean): String {
         delay(2.seconds)
         if (throwException) {

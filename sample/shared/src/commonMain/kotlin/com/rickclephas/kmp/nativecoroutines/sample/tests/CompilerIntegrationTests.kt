@@ -9,16 +9,19 @@ import kotlinx.coroutines.flow.flow
 public class CompilerIntegrationTests<V>: IntegrationTests() {
 
 //    @NativeCoroutines
+    @Throws(Exception::class)
     public suspend fun returnGenericClassValue(value: V): V {
         return value
     }
 
 //    @NativeCoroutines
+    @Throws(Exception::class)
     public suspend fun returnDefaultValue(value: Int = 1): Int {
         return value
     }
 
 //    @NativeCoroutines
+    @Throws(Exception::class)
     public suspend fun <T> returnGenericValue(value: T): T {
         return value
     }
@@ -26,21 +29,25 @@ public class CompilerIntegrationTests<V>: IntegrationTests() {
     public fun returnAppendable(value: String): Appendable = StringBuilder(value)
 
 //    @NativeCoroutines
+    @Throws(Exception::class)
     public suspend fun <T: Appendable> returnConstrainedGenericValue(value: T): T {
         return value
     }
 
 //    @NativeCoroutines
+    @Throws(Exception::class)
     public suspend fun <T> returnGenericValues(values: List<T>): List<T> {
         return values
     }
 
 //    @NativeCoroutines
+    @Throws(Exception::class)
     public suspend fun <T> returnGenericVarargValues(vararg values: T): Array<out T> {
         return values
     }
 
 //    @NativeCoroutines
+    @Throws(Exception::class)
     @Suppress("UnusedReceiverParameter")
     public suspend fun <T> List<T>.returnGenericValueFromExtension(value: T): T {
         return value
