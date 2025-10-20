@@ -7,6 +7,6 @@ import org.jetbrains.kotlin.ir.visitors.acceptVoid
 
 internal class KmpNativeCoroutinesIrGenerationExtension: IrGenerationExtension {
     override fun generate(moduleFragment: IrModuleFragment, pluginContext: IrPluginContext) {
-        moduleFragment.acceptVoid(KmpNativeCoroutinesIrTransformer(pluginContext))
+//        moduleFragment.acceptVoid(KmpNativeCoroutinesIrTransformer(pluginContext))
     }
 }

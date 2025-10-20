@@ -11,7 +11,7 @@ internal class KmpNativeCoroutinesFirExtensionRegistrar(
     override fun ExtensionRegistrarContext.configurePlugin() {
         +::KmpNativeCoroutinesFirAdditionalCheckersExtension.bind(configuration)
         if (configuration[K2_MODE]) {
-            +::KmpNativeCoroutinesDeclarationGenerationExtension.bind(configuration)
+//            +::KmpNativeCoroutinesDeclarationGenerationExtension.bind(configuration)
         }
     }
 }
