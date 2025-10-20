@@ -27,20 +27,20 @@ class ClockCombineViewModel: ClockViewModel {
     }
     
     func startMonitoring() {
-        cancellable = createPublisher(for: clock.time)
-            // Convert the seconds since EPOCH to a string in the format "HH:mm:ss"
-            .map { [weak self] time -> String in
-                guard let self = self else { return "" }
-                let date = Date(timeIntervalSince1970: time.doubleValue)
-                return self.formatter.string(from: date)
-            }
-            // Replace any errors with a text message :)
-            .replaceError(with: "Ohno error!")
-            // Update the UI on the main thread
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] time in
-                self?.time = time
-            }
+//        cancellable = createPublisher(for: clock.time)
+//            // Convert the seconds since EPOCH to a string in the format "HH:mm:ss"
+//            .map { [weak self] time -> String in
+//                guard let self = self else { return "" }
+//                let date = Date(timeIntervalSince1970: time.doubleValue)
+//                return self.formatter.string(from: date)
+//            }
+//            // Replace any errors with a text message :)
+//            .replaceError(with: "Ohno error!")
+//            // Update the UI on the main thread
+//            .receive(on: DispatchQueue.main)
+//            .sink { [weak self] time in
+//                self?.time = time
+//            }
     }
     
     func stopMonitoring() {
@@ -51,7 +51,7 @@ class ClockCombineViewModel: ClockViewModel {
     func updateTime() {
         // Convert the seconds since EPOCH to a string
         // in the format "HH:mm:ss" and update the UI
-        let date = Date(timeIntervalSince1970: TimeInterval(clock.timeValue))
-        time = formatter.string(from: date)
+//        let date = Date(timeIntervalSince1970: TimeInterval(clock.timeValue))
+//        time = formatter.string(from: date)
     }
 }
