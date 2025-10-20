@@ -20,7 +20,7 @@ public class NewMemoryModelIntegrationTests: IntegrationTests() {
         return chars.joinToString("")
     }
 
-    @NativeCoroutines
+//    @NativeCoroutines
     public suspend fun generateRandomMutableData(): MutableData {
         val data = MutableData()
         withContext(Dispatchers.Main) {

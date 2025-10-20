@@ -8,39 +8,39 @@ import kotlinx.coroutines.flow.flow
 @Suppress("RedundantSuspendModifier")
 public class CompilerIntegrationTests<V>: IntegrationTests() {
 
-    @NativeCoroutines
+//    @NativeCoroutines
     public suspend fun returnGenericClassValue(value: V): V {
         return value
     }
 
-    @NativeCoroutines
+//    @NativeCoroutines
     public suspend fun returnDefaultValue(value: Int = 1): Int {
         return value
     }
 
-    @NativeCoroutines
+//    @NativeCoroutines
     public suspend fun <T> returnGenericValue(value: T): T {
         return value
     }
 
     public fun returnAppendable(value: String): Appendable = StringBuilder(value)
 
-    @NativeCoroutines
+//    @NativeCoroutines
     public suspend fun <T: Appendable> returnConstrainedGenericValue(value: T): T {
         return value
     }
 
-    @NativeCoroutines
+//    @NativeCoroutines
     public suspend fun <T> returnGenericValues(values: List<T>): List<T> {
         return values
     }
 
-    @NativeCoroutines
+//    @NativeCoroutines
     public suspend fun <T> returnGenericVarargValues(vararg values: T): Array<out T> {
         return values
     }
 
-    @NativeCoroutines
+//    @NativeCoroutines
     @Suppress("UnusedReceiverParameter")
     public suspend fun <T> List<T>.returnGenericValueFromExtension(value: T): T {
         return value
@@ -51,7 +51,7 @@ public class CompilerIntegrationTests<V>: IntegrationTests() {
         emit(value)
     }
 
-    @NativeCoroutinesIgnore
+//    @NativeCoroutinesIgnore
     public suspend fun returnIgnoredValue(value: Int): Int {
         return value
     }
