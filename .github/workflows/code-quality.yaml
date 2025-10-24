@@ -25,7 +25,7 @@ jobs:
       - name: Cache Konan
         uses: ./.github/actions/cache-konan
       - name: 'Qodana Scan'
-        uses: JetBrains/qodana-action@v2025.1
+        uses: JetBrains/qodana-action@v2025.2
         with:
           args: --baseline,qodana.sarif.json
           post-pr-comment: false
