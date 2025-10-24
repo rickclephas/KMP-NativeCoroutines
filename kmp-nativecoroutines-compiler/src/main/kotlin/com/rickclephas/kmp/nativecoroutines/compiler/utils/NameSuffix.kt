@@ -11,5 +11,5 @@ internal fun Name.withoutSuffix(suffix: String?): Name? {
     if (suffix == null) return null
     val identifier = identifier
     if (!identifier.endsWith(suffix)) return null
-    return Name.identifier(identifier.substring(0, identifier.length - suffix.length))
+    return Name.identifier(identifier.dropLast(suffix.length))
 }
