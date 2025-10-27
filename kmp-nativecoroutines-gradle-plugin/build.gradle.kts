@@ -54,5 +54,4 @@ gradlePlugin {
 
 dependencies {
     implementation(libs.kotlin.gradle.plugin)
-    implementation(libs.ksp.gradle.plugin)
 }

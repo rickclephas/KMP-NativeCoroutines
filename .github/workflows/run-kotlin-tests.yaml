@@ -12,7 +12,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        module: [ annotations, compiler, compiler-embeddable, core, gradle-plugin, ksp ]
+        module: [ annotations, compiler, compiler-embeddable, core, gradle-plugin ]
         include:
           - java: '17'
           - xcode: '15.2'
