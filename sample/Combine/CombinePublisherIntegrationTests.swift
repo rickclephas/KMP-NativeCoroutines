@@ -11,6 +11,7 @@ import NativeCoroutinesSampleShared
 
 class CombinePublisherIntegrationTests: XCTestCase {
     
+    #if !NATIVE_COROUTINES_SWIFT_EXPORT
     func testValuesReceived() {
         let integrationTests = FlowIntegrationTests()
         let sendValueCount = randomInt(min: 5, max: 20)
@@ -35,7 +36,9 @@ class CombinePublisherIntegrationTests: XCTestCase {
         delay(1) // Delay is needed else the job isn't completed yet
         XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
     }
+    #endif
     
+    #if !NATIVE_COROUTINES_SWIFT_EXPORT
     @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
     func testValueBackPressure() async {
         let integrationTests = FlowIntegrationTests()
@@ -56,7 +59,9 @@ class CombinePublisherIntegrationTests: XCTestCase {
         }
         await assertJobCompleted(integrationTests)
     }
+    #endif
     
+    #if !NATIVE_COROUTINES_SWIFT_EXPORT
     func testNilValueReceived() {
         let integrationTests = FlowIntegrationTests()
         let sendValueCount = randomInt(min: 5, max: 20)
@@ -86,7 +91,9 @@ class CombinePublisherIntegrationTests: XCTestCase {
         delay(1) // Delay is needed else the job isn't completed yet
         XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
     }
+    #endif
     
+    #if !NATIVE_COROUTINES_SWIFT_EXPORT
     func testExceptionReceived() {
         let integrationTests = FlowIntegrationTests()
         let sendValueCount = randomInt(min: 5, max: 20)
@@ -115,7 +122,9 @@ class CombinePublisherIntegrationTests: XCTestCase {
         delay(1) // Delay is needed else the job isn't completed yet
         XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
     }
+    #endif
     
+    #if !NATIVE_COROUTINES_SWIFT_EXPORT
     func testErrorReceived() {
         let integrationTests = FlowIntegrationTests()
         let sendValueCount = randomInt(min: 5, max: 20)
@@ -144,7 +153,9 @@ class CombinePublisherIntegrationTests: XCTestCase {
         delay(1) // Delay is needed else the job isn't completed yet
         XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
     }
+    #endif
     
+    #if !NATIVE_COROUTINES_SWIFT_EXPORT
     func testNotOnMainThread() {
         let integrationTests = FlowIntegrationTests()
         let publisher = createPublisher(for: integrationTests.getFlow(count: 1, delay: 1000))
@@ -161,7 +172,9 @@ class CombinePublisherIntegrationTests: XCTestCase {
         _ = cancellable // This is just to remove the unused variable warning
         wait(for: [valueExpectation, completionExpectation], timeout: 3)
     }
+    #endif
     
+    #if !NATIVE_COROUTINES_SWIFT_EXPORT
     func testCancellation() {
         let integrationTests = FlowIntegrationTests()
         let callbackExpectation = expectation(description: "Waiting for callback not to get called")
@@ -186,7 +199,9 @@ class CombinePublisherIntegrationTests: XCTestCase {
         wait(for: [callbackExpectation, completionExpectation], timeout: 2)
         XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
     }
+    #endif
     
+    #if !NATIVE_COROUTINES_SWIFT_EXPORT
     func testThreadLock() {
         let integrationTests = ThreadLockIntegrationTests()
         let publisher = createPublisher(for: integrationTests.stateFlow)
@@ -198,7 +213,9 @@ class CombinePublisherIntegrationTests: XCTestCase {
         wait(for: [valuesExpectation], timeout: 6)
         cancellable.cancel()
     }
+    #endif
     
+    #if !NATIVE_COROUTINES_SWIFT_EXPORT
     func testUnitValues() {
         let integrationTests = FlowIntegrationTests()
         let publisher = createPublisher(for: integrationTests.getUnitFlow(count: 2, delay: 100))
@@ -221,4 +238,5 @@ class CombinePublisherIntegrationTests: XCTestCase {
         delay(1) // Delay is needed else the job isn't completed yet
         XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
     }
+    #endif
 }

@@ -11,6 +11,7 @@ import NativeCoroutinesSampleShared
 
 class RxSwiftObservableIntegrationTests: XCTestCase {
     
+    #if !NATIVE_COROUTINES_SWIFT_EXPORT
     func testValuesReceived() {
         let integrationTests = FlowIntegrationTests()
         let sendValueCount = randomInt(min: 5, max: 20)
@@ -37,7 +38,9 @@ class RxSwiftObservableIntegrationTests: XCTestCase {
         delay(1) // Delay is needed else the job isn't completed yet
         XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
     }
+    #endif
     
+    #if !NATIVE_COROUTINES_SWIFT_EXPORT
     func testNilValueReceived() {
         let integrationTests = FlowIntegrationTests()
         let sendValueCount = randomInt(min: 5, max: 20)
@@ -69,7 +72,9 @@ class RxSwiftObservableIntegrationTests: XCTestCase {
         delay(1) // Delay is needed else the job isn't completed yet
         XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
     }
+    #endif
     
+    #if !NATIVE_COROUTINES_SWIFT_EXPORT
     func testExceptionReceived() {
         let integrationTests = FlowIntegrationTests()
         let sendValueCount = randomInt(min: 5, max: 20)
@@ -100,7 +105,9 @@ class RxSwiftObservableIntegrationTests: XCTestCase {
         wait(for: [valuesExpectation, errorExpectation, completionExpectation, disposedExpectation], timeout: 4)
         XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
     }
+    #endif
     
+    #if !NATIVE_COROUTINES_SWIFT_EXPORT
     func testErrorReceived() {
         let integrationTests = FlowIntegrationTests()
         let sendValueCount = randomInt(min: 5, max: 20)
@@ -131,7 +138,9 @@ class RxSwiftObservableIntegrationTests: XCTestCase {
         wait(for: [valuesExpectation, errorExpectation, completionExpectation, disposedExpectation], timeout: 4)
         XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
     }
+    #endif
     
+    #if !NATIVE_COROUTINES_SWIFT_EXPORT
     func testNotOnMainThread() {
         let integrationTests = FlowIntegrationTests()
         let observable = createObservable(for: integrationTests.getFlow(count: 1, delay: 1000))
@@ -152,7 +161,9 @@ class RxSwiftObservableIntegrationTests: XCTestCase {
         _ = disposable // This is just to remove the unused variable warning
         wait(for: [valueExpectation, completionExpectation, disposedExpectation], timeout: 3)
     }
+    #endif
     
+    #if !NATIVE_COROUTINES_SWIFT_EXPORT
     func testCancellation() {
         let integrationTests = FlowIntegrationTests()
         let callbackExpectation = expectation(description: "Waiting for callback not to get called")
@@ -184,7 +195,9 @@ class RxSwiftObservableIntegrationTests: XCTestCase {
         wait(for: [callbackExpectation, errorExpectation, completionExpectation, disposedExpectation], timeout: 2)
         XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
     }
+    #endif
     
+    #if !NATIVE_COROUTINES_SWIFT_EXPORT
     func testUnitValues() {
         let integrationTests = FlowIntegrationTests()
         let observable = createObservable(for: integrationTests.getUnitFlow(count: 2, delay: 100))
@@ -209,4 +222,5 @@ class RxSwiftObservableIntegrationTests: XCTestCase {
         delay(1) // Delay is needed else the job isn't completed yet
         XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
     }
+    #endif
 }

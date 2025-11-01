@@ -21,6 +21,7 @@ class RandomLettersRxSwiftViewModel: RandomLettersViewModel {
     func loadRandomLetters(throwException: Bool) {
         isLoading = true
         result = nil
+        #if !NATIVE_COROUTINES_SWIFT_EXPORT
         _ = createSingle(for: randomLettersGenerator.getRandomLetters(throwException: throwException))
             // Update the UI on the main thread
             .observe(on: MainScheduler.instance)
@@ -31,5 +32,6 @@ class RandomLettersRxSwiftViewModel: RandomLettersViewModel {
             }, onDisposed: { [weak self] in
                 self?.isLoading = false
             })
+        #endif
     }
 }

@@ -147,6 +147,14 @@
 		1DBD717A2D776AC7000BE3B5 /* GH206Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DBD71782D776A59000BE3B5 /* GH206Tests.swift */; };
 		1DBD717B2D776AC7000BE3B5 /* GH206Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DBD71782D776A59000BE3B5 /* GH206Tests.swift */; };
 		1DBD717C2D776AC7000BE3B5 /* GH206Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DBD71782D776A59000BE3B5 /* GH206Tests.swift */; };
+		1DEEC4532EB65A6E008777F8 /* KotlinTypeAliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DEEC4522EB65A58008777F8 /* KotlinTypeAliases.swift */; };
+		1DEEC4542EB65A6E008777F8 /* KotlinTypeAliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DEEC4522EB65A58008777F8 /* KotlinTypeAliases.swift */; };
+		1DEEC4552EB65A6E008777F8 /* KotlinTypeAliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DEEC4522EB65A58008777F8 /* KotlinTypeAliases.swift */; };
+		1DEEC4562EB65A6E008777F8 /* KotlinTypeAliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DEEC4522EB65A58008777F8 /* KotlinTypeAliases.swift */; };
+		1DEEC4572EB65A6E008777F8 /* KotlinTypeAliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DEEC4522EB65A58008777F8 /* KotlinTypeAliases.swift */; };
+		1DEEC4582EB65A6E008777F8 /* KotlinTypeAliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DEEC4522EB65A58008777F8 /* KotlinTypeAliases.swift */; };
+		1DEEC4592EB65A6E008777F8 /* KotlinTypeAliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DEEC4522EB65A58008777F8 /* KotlinTypeAliases.swift */; };
+		1DEEC45A2EB65A6E008777F8 /* KotlinTypeAliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DEEC4522EB65A58008777F8 /* KotlinTypeAliases.swift */; };
 		1DF1A66C2671448500945FF9 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF1A66B2671448500945FF9 /* RootView.swift */; };
 		1DF1A66D2671448500945FF9 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF1A66B2671448500945FF9 /* RootView.swift */; };
 		1DF1A66F2671494800945FF9 /* NavigationBarTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF1A66E2671494800945FF9 /* NavigationBarTitle.swift */; };
@@ -295,6 +303,7 @@
 		1D81B1592677EDE600EEC34D /* CombinePublisherIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombinePublisherIntegrationTests.swift; sourceTree = "<group>"; };
 		1DA5DD0526764810002448E3 /* RandomLettersAsyncViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomLettersAsyncViewModel.swift; sourceTree = "<group>"; };
 		1DBD71782D776A59000BE3B5 /* GH206Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GH206Tests.swift; sourceTree = "<group>"; };
+		1DEEC4522EB65A58008777F8 /* KotlinTypeAliases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KotlinTypeAliases.swift; sourceTree = "<group>"; };
 		1DF1A66B2671448500945FF9 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		1DF1A66E2671494800945FF9 /* NavigationBarTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarTitle.swift; sourceTree = "<group>"; };
 		1DF1A67126714EEC00945FF9 /* RandomLettersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomLettersViewModel.swift; sourceTree = "<group>"; };
@@ -424,6 +433,7 @@
 		1D04AED6266E966900920D20 = {
 			isa = PBXGroup;
 			children = (
+				1DEEC4522EB65A58008777F8 /* KotlinTypeAliases.swift */,
 				1DBD71772D776A4E000BE3B5 /* Issues */,
 				1D75A330272C85BA00CFF795 /* Packages */,
 				1DA5DD04267647F6002448E3 /* Async */,
@@ -1180,6 +1190,7 @@
 				1D63BF6226E3E242003363BE /* RandomLettersCombineViewModel.swift in Sources */,
 				1D4F36C226E5031500F7C772 /* SwiftUIAsyncTest.swift in Sources */,
 				1D63BF6E26E3E266003363BE /* RandomLettersView.swift in Sources */,
+				1DEEC4572EB65A6E008777F8 /* KotlinTypeAliases.swift in Sources */,
 				1D63BF6526E3E24A003363BE /* ClockRxSwiftViewModel.swift in Sources */,
 				1D63BF6A26E3E25B003363BE /* ClockViewModel.swift in Sources */,
 			);
@@ -1196,6 +1207,7 @@
 				1D63BF6726E3E24F003363BE /* RxSwiftSingleIntegrationTests.swift in Sources */,
 				1DBD717B2D776AC7000BE3B5 /* GH206Tests.swift in Sources */,
 				1D4F36C526E5032400F7C772 /* AsyncSequenceIntegrationTests.swift in Sources */,
+				1DEEC4582EB65A6E008777F8 /* KotlinTypeAliases.swift in Sources */,
 				1D4F36BF26E5030600F7C772 /* TestUtils.swift in Sources */,
 				1D103F152747FFBB001567CA /* AsyncTestUtils.swift in Sources */,
 				1D4F36BE26E5030400F7C772 /* CompilerIntegrationTests.swift in Sources */,
@@ -1209,6 +1221,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1DEEC4592EB65A6E008777F8 /* KotlinTypeAliases.swift in Sources */,
 				1D4F36B326E5001200F7C772 /* RandomLettersAsyncViewModel.swift in Sources */,
 				1D63BF9126E4F009003363BE /* ComplicationController.swift in Sources */,
 				1D63BFCC26E4F0F1003363BE /* NavigationBarTitle.swift in Sources */,
@@ -1239,6 +1252,7 @@
 				1DF2860327370061004DD6D2 /* NewMemoryModelIntegrationTests.swift in Sources */,
 				1DBD717C2D776AC7000BE3B5 /* GH206Tests.swift in Sources */,
 				1D63BFC826E4F0E5003363BE /* RxSwiftObservableIntegrationTests.swift in Sources */,
+				1DEEC45A2EB65A6E008777F8 /* KotlinTypeAliases.swift in Sources */,
 				1D63BFC426E4F0D8003363BE /* CombinePublisherIntegrationTests.swift in Sources */,
 				1D103F162747FFBB001567CA /* AsyncTestUtils.swift in Sources */,
 				1D63BFC726E4F0E2003363BE /* RxSwiftSingleIntegrationTests.swift in Sources */,
@@ -1264,6 +1278,7 @@
 				1D5DAF802698C3C30059D4B8 /* RandomLettersRxSwiftViewModel.swift in Sources */,
 				1DF82A77267939F70024886B /* SwiftUIAsyncTest.swift in Sources */,
 				1DF1A66C2671448500945FF9 /* RootView.swift in Sources */,
+				1DEEC4532EB65A6E008777F8 /* KotlinTypeAliases.swift in Sources */,
 				1DF1A67526714FBD00945FF9 /* RandomLettersView.swift in Sources */,
 				1D5DAF7D2698B5EB0059D4B8 /* ClockRxSwiftViewModel.swift in Sources */,
 			);
@@ -1278,6 +1293,7 @@
 				1D5DAF812698C3C30059D4B8 /* RandomLettersRxSwiftViewModel.swift in Sources */,
 				1D717616267009E700846F75 /* AppDelegate.swift in Sources */,
 				1DF1A6702671494800945FF9 /* NavigationBarTitle.swift in Sources */,
+				1DEEC4542EB65A6E008777F8 /* KotlinTypeAliases.swift in Sources */,
 				1DF1A67626714FBD00945FF9 /* RandomLettersView.swift in Sources */,
 				1D71763126700A6E00846F75 /* ClockView.swift in Sources */,
 				1DF1A6792671535200945FF9 /* RandomLettersCombineViewModel.swift in Sources */,
@@ -1302,6 +1318,7 @@
 				1D0CA84D2677F6DB0000D612 /* AsyncFunctionIntegrationTests.swift in Sources */,
 				1DBD71792D776AC7000BE3B5 /* GH206Tests.swift in Sources */,
 				1D81B15A2677EDE600EEC34D /* CombinePublisherIntegrationTests.swift in Sources */,
+				1DEEC4552EB65A6E008777F8 /* KotlinTypeAliases.swift in Sources */,
 				1DF2860027370061004DD6D2 /* NewMemoryModelIntegrationTests.swift in Sources */,
 				1D103F132747FFBB001567CA /* AsyncTestUtils.swift in Sources */,
 				1D5DAF862698CA040059D4B8 /* RxSwiftObservableIntegrationTests.swift in Sources */,
@@ -1322,6 +1339,7 @@
 				1D0CA84E2677F6DB0000D612 /* AsyncFunctionIntegrationTests.swift in Sources */,
 				1DBD717A2D776AC7000BE3B5 /* GH206Tests.swift in Sources */,
 				1D81B15B2677EDE600EEC34D /* CombinePublisherIntegrationTests.swift in Sources */,
+				1DEEC4562EB65A6E008777F8 /* KotlinTypeAliases.swift in Sources */,
 				1DF2860127370061004DD6D2 /* NewMemoryModelIntegrationTests.swift in Sources */,
 				1D103F142747FFBB001567CA /* AsyncTestUtils.swift in Sources */,
 				1D5DAF872698CA040059D4B8 /* RxSwiftObservableIntegrationTests.swift in Sources */,

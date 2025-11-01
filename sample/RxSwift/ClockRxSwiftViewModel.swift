@@ -27,6 +27,7 @@ class ClockRxSwiftViewModel: ClockViewModel {
     }
     
     func startMonitoring() {
+        #if !NATIVE_COROUTINES_SWIFT_EXPORT
         disposable = createObservable(for: clock.time)
             // Convert the seconds since EPOCH to a string in the format "HH:mm:ss"
             .map { [weak self] time -> String in
@@ -42,6 +43,7 @@ class ClockRxSwiftViewModel: ClockViewModel {
                 // Replace any errors with a text message :)
                 self?.time = "Ohno error!"
             })
+        #endif
     }
     
     func stopMonitoring() {

@@ -18,6 +18,7 @@ class RandomLettersAsyncViewModel: RandomLettersViewModel {
     private let randomLettersGenerator = RandomLettersGenerator()
     
     func loadRandomLetters(throwException: Bool) {
+        #if !NATIVE_COROUTINES_SWIFT_EXPORT
         Task {
             isLoading = true
             result = nil
@@ -29,5 +30,6 @@ class RandomLettersAsyncViewModel: RandomLettersViewModel {
             }
             isLoading = false
         }
+        #endif
     }
 }

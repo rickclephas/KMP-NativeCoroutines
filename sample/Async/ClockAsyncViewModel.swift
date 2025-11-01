@@ -27,6 +27,7 @@ class ClockAsyncViewModel: ClockViewModel {
     
     func startMonitoring() {
         let clock = clock
+        #if !NATIVE_COROUTINES_SWIFT_EXPORT
         task = Task { [weak self] in
             let timeSequence = asyncSequence(for: clock.time)
                 .map { [weak self] time -> String in
@@ -44,6 +45,7 @@ class ClockAsyncViewModel: ClockViewModel {
             }
             self?.task = nil
         }
+        #endif
     }
     
     func stopMonitoring() {

@@ -11,6 +11,7 @@ import NativeCoroutinesSampleShared
 
 class CombineFutureIntegrationTests: XCTestCase {
     
+    #if !NATIVE_COROUTINES_SWIFT_EXPORT
     func testValueReceived() {
         let integrationTests = SuspendIntegrationTests()
         let sendValue = randomInt()
@@ -32,7 +33,9 @@ class CombineFutureIntegrationTests: XCTestCase {
         delay(1) // Delay is needed else the job isn't completed yet
         XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
     }
+    #endif
     
+    #if !NATIVE_COROUTINES_SWIFT_EXPORT
     func testNilValueReceived() {
         let integrationTests = SuspendIntegrationTests()
         let future = createFuture(for: integrationTests.returnNull(delay: 1000))
@@ -53,7 +56,9 @@ class CombineFutureIntegrationTests: XCTestCase {
         delay(1) // Delay is needed else the job isn't completed yet
         XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
     }
+    #endif
     
+    #if !NATIVE_COROUTINES_SWIFT_EXPORT
     func testExceptionReceived() {
         let integrationTests = SuspendIntegrationTests()
         let sendMessage = randomString()
@@ -79,7 +84,9 @@ class CombineFutureIntegrationTests: XCTestCase {
         wait(for: [valueExpectation, completionExpectation], timeout: 3)
         XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
     }
+    #endif
     
+    #if !NATIVE_COROUTINES_SWIFT_EXPORT
     func testErrorReceived() {
         let integrationTests = SuspendIntegrationTests()
         let sendMessage = randomString()
@@ -105,7 +112,9 @@ class CombineFutureIntegrationTests: XCTestCase {
         wait(for: [valueExpectation, completionExpectation], timeout: 3)
         XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
     }
+    #endif
     
+    #if !NATIVE_COROUTINES_SWIFT_EXPORT
     func testNotOnMainThread() {
         let integrationTests = SuspendIntegrationTests()
         let future = createFuture(for: integrationTests.returnValue(value: 1, delay: 1000))
@@ -122,7 +131,9 @@ class CombineFutureIntegrationTests: XCTestCase {
         _ = cancellable // This is just to remove the unused variable warning
         wait(for: [valueExpectation, completionExpectation], timeout: 3)
     }
+    #endif
     
+    #if !NATIVE_COROUTINES_SWIFT_EXPORT
     func testCancellation() {
         let integrationTests = SuspendIntegrationTests()
         let callbackExpectation = expectation(description: "Waiting for callback not to get called")
@@ -148,7 +159,9 @@ class CombineFutureIntegrationTests: XCTestCase {
         wait(for: [callbackExpectation, valueExpectation, completionExpectation], timeout: 3)
         XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
     }
+    #endif
     
+    #if !NATIVE_COROUTINES_SWIFT_EXPORT
     func testValuesReceived() {
         let integrationTests = SuspendIntegrationTests()
         let sendValueCount = randomInt(min: 5, max: 20)
@@ -173,7 +186,9 @@ class CombineFutureIntegrationTests: XCTestCase {
         delay(1) // Delay is needed else the job isn't completed yet
         XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
     }
+    #endif
     
+    #if !NATIVE_COROUTINES_SWIFT_EXPORT
     func testUnitReturnType() {
         let integrationTests = SuspendIntegrationTests()
         let future = createFuture(for: integrationTests.returnUnit(delay: 100))
@@ -193,4 +208,5 @@ class CombineFutureIntegrationTests: XCTestCase {
         delay(1) // Delay is needed else the job isn't completed yet
         XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
     }
+    #endif
 }

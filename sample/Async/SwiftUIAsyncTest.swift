@@ -19,20 +19,24 @@ struct SwiftUIAsyncTest: View {
             
         }.refreshable {
             print("Refreshable started")
+            #if !NATIVE_COROUTINES_SWIFT_EXPORT
             do {
                 let result = try await asyncFunction(for: tests.returnValue(value: 20, delay: 10000))
                 print("Refreshable result: \(result)")
             } catch {
                 print("Refreshable error: \(error)")
             }
+            #endif
         }.task {
             print("Task started")
+            #if !NATIVE_COROUTINES_SWIFT_EXPORT
             do {
                 let result = try await asyncFunction(for: tests.returnValue(value: 2, delay: 10000))
                 print("Task result: \(result)")
             } catch {
                 print("Task error: \(error)")
             }
+            #endif
         }
     }
     

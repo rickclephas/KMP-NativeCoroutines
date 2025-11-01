@@ -27,6 +27,7 @@ class ClockCombineViewModel: ClockViewModel {
     }
     
     func startMonitoring() {
+        #if !NATIVE_COROUTINES_SWIFT_EXPORT
         cancellable = createPublisher(for: clock.time)
             // Convert the seconds since EPOCH to a string in the format "HH:mm:ss"
             .map { [weak self] time -> String in
@@ -41,6 +42,7 @@ class ClockCombineViewModel: ClockViewModel {
             .sink { [weak self] time in
                 self?.time = time
             }
+        #endif
     }
     
     func stopMonitoring() {
