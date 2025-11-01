@@ -14,7 +14,6 @@ jobs:
       matrix:
         platform: [ iOS, macOS, tvOS, watchOS ]
         embeddable-compiler: [ true, false ]
-        ksp-mode: [ true, false ]
         include:
           - java: '17'
           - xcode: '15.2'
@@ -30,7 +29,7 @@ jobs:
           - platform: watchOS
             scheme: watchOS Tests
             destination: platform=watchOS Simulator,name=Apple Watch Series 10 (46mm)
-    name: ${{ format('{0} (embeddable {1}, KSP {2})', matrix.platform, matrix.embeddable-compiler, matrix.ksp-mode) }}
+    name: ${{ format('{0} (embeddable {1})', matrix.platform, matrix.embeddable-compiler) }}
     runs-on: macos-14
     defaults:
       run:
@@ -56,13 +55,10 @@ jobs:
       - name: Set kotlin.native.useEmbeddableCompilerJar
         run: echo "kotlin.native.useEmbeddableCompilerJar=${{ matrix.embeddable-compiler }}" >> gradle.properties
       - name: Run tests
-        env:
-          NATIVE_COROUTINES_KSP_MODE: ${{ matrix.ksp-mode }}
         run: >-
           set -o pipefail &&
           xcodebuild test
           -project KMPNativeCoroutinesSample.xcodeproj
           -scheme "${{ matrix.scheme }}"
           -destination "${{ matrix.destination }}"
-          'SWIFT_ACTIVE_COMPILATION_CONDITIONS=$(inherited) ${{ matrix.ksp-mode && 'NATIVE_COROUTINES_KSP_MODE' || '' }}'
           | xcbeautify --renderer github-actions

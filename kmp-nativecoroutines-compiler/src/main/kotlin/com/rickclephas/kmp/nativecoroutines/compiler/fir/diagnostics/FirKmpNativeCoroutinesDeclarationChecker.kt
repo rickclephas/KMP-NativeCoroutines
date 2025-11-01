@@ -65,7 +65,6 @@ import kotlin.io.path.Path
 internal class FirKmpNativeCoroutinesDeclarationChecker(
     exposedSeverity: ExposedSeverity,
     private val generatedSourceDirs: List<Path>,
-    private val isK2Mode: Boolean,
 ): FirCallableDeclarationChecker(MppCheckerKind.Common) {
 
     private val exposedSuspendFunction = when (exposedSeverity) {
@@ -214,7 +213,7 @@ internal class FirKmpNativeCoroutinesDeclarationChecker(
         //endregion
 
         //region IMPLICIT_RETURN_TYPE
-        if (hasAnnotation && isK2Mode && declaration.hasImplicitReturnType()) {
+        if (hasAnnotation && declaration.hasImplicitReturnType()) {
             IMPLICIT_RETURN_TYPE.reportOn(declaration.source)
         }
         //endregion
