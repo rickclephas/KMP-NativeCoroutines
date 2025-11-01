@@ -16,7 +16,7 @@ class RandomLettersRxSwiftViewModel: RandomLettersViewModel {
     @Published private(set) var result: Result<String, Error>? = nil
     @Published private(set) var isLoading: Bool = false
     
-    private let randomLettersGenerator = RandomLettersGenerator()
+    private let randomLettersGenerator = RandomLettersGenerator.shared
     
     func loadRandomLetters(throwException: Bool) {
         isLoading = true

@@ -21,7 +21,7 @@ class ClockCombineViewModel: ClockViewModel {
         formatter.setLocalizedDateFormatFromTemplate("HH:mm:ss")
         return formatter
     }()
-    private let clock = Clock()
+    private let clock = Clock.shared
     private var cancellable: AnyCancellable? = nil {
         didSet { isMonitoring = cancellable != nil }
     }

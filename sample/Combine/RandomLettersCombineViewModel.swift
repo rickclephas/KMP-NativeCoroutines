@@ -16,7 +16,7 @@ class RandomLettersCombineViewModel: RandomLettersViewModel {
     @Published private(set) var result: Result<String, Error>? = nil
     @Published private(set) var isLoading: Bool = false
     
-    private let randomLettersGenerator = RandomLettersGenerator()
+    private let randomLettersGenerator = RandomLettersGenerator.shared
     private var cancellables = Set<AnyCancellable>()
     
     func loadRandomLetters(throwException: Bool) {

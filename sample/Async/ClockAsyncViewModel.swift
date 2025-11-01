@@ -20,7 +20,7 @@ class ClockAsyncViewModel: ClockViewModel {
         formatter.setLocalizedDateFormatFromTemplate("HH:mm:ss")
         return formatter
     }()
-    private let clock = Clock()
+    private let clock = Clock.shared
     private var task: Task<(), Never>? = nil {
         didSet { isMonitoring = task != nil }
     }

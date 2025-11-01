@@ -21,7 +21,7 @@ class ClockRxSwiftViewModel: ClockViewModel {
         formatter.setLocalizedDateFormatFromTemplate("HH:mm:ss")
         return formatter
     }()
-    private let clock = Clock()
+    private let clock = Clock.shared
     private var disposable: Disposable? = nil {
         didSet { isMonitoring = disposable != nil }
     }
