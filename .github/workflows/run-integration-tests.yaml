@@ -16,7 +16,7 @@ jobs:
         embeddable-compiler: [ true, false ]
         include:
           - java: '17'
-          - xcode: '15.2'
+          - xcode: '16.4'
           - platform: iOS
             scheme: iOS App
             destination: platform=iOS Simulator,name=iPhone 16 Pro
@@ -30,7 +30,7 @@ jobs:
             scheme: watchOS Tests
             destination: platform=watchOS Simulator,name=Apple Watch Series 10 (46mm)
     name: ${{ format('{0} (embeddable {1})', matrix.platform, matrix.embeddable-compiler) }}
-    runs-on: macos-14
+    runs-on: macos-15
     defaults:
       run:
         working-directory: sample

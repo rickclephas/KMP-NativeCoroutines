@@ -15,11 +15,11 @@ jobs:
         module: [ annotations, compiler, compiler-embeddable, core, gradle-plugin ]
         include:
           - java: '17'
-          - xcode: '15.2'
+          - xcode: '16.4'
           - module: compiler
             buildType: COMPILER_TESTS
     name: ${{ matrix.module }}
-    runs-on: macos-14
+    runs-on: macos-15
     steps:
       - name: Checkout
         uses: actions/checkout@v4

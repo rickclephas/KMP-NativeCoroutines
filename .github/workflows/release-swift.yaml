@@ -5,10 +5,10 @@ on:
       - 'v[0-9]+.[0-9]+.[0-9]+'
       - 'v[0-9]+.[0-9]+.[0-9]+-ALPHA-[0-9]+'
 env:
-  XCODE_VERSION: '15.2'
+  XCODE_VERSION: '16.4'
 jobs:
   publish-cocoapods-libraries:
-    runs-on: macos-14
+    runs-on: macos-15
     steps:
       - name: Checkout
         uses: actions/checkout@v4
