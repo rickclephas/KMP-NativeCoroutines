@@ -52,3 +52,7 @@ kotlin {
         flattenPackage = "com.rickclephas.kmp.nativecoroutines.sample"
     }
 }
+
+nativeCoroutines {
+    swiftExport = System.getenv("NATIVE_COROUTINES_SWIFT_EXPORT")?.toBooleanStrictOrNull() == true
+}

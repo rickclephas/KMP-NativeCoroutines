@@ -102,6 +102,17 @@ public final class com/rickclephas/kmp/nativecoroutines/compiler/config/Suffixes
 	public static final fun getSUFFIX ()Lcom/rickclephas/kmp/nativecoroutines/compiler/config/ConfigOptionWithDefault;
 }
 
+public final class com/rickclephas/kmp/nativecoroutines/compiler/config/SwiftExport : java/lang/Enum {
+	public static final field NO_FUNC_RETURN_TYPES Lcom/rickclephas/kmp/nativecoroutines/compiler/config/SwiftExport;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/rickclephas/kmp/nativecoroutines/compiler/config/SwiftExport;
+	public static fun values ()[Lcom/rickclephas/kmp/nativecoroutines/compiler/config/SwiftExport;
+}
+
+public final class com/rickclephas/kmp/nativecoroutines/compiler/config/SwiftExportKt {
+	public static final fun getSWIFT_EXPORT ()Lcom/rickclephas/kmp/nativecoroutines/compiler/config/ConfigOptionWithDefault;
+}
+
 public final class com/rickclephas/kmp/nativecoroutines/compiler/fir/diagnostics/FirKmpNativeCoroutinesErrors : org/jetbrains/kotlin/diagnostics/KtDiagnosticsContainer {
 	public static final field INSTANCE Lcom/rickclephas/kmp/nativecoroutines/compiler/fir/diagnostics/FirKmpNativeCoroutinesErrors;
 	public final fun getCONFLICT_COROUTINES ()Lorg/jetbrains/kotlin/diagnostics/KtDiagnosticFactory0;
