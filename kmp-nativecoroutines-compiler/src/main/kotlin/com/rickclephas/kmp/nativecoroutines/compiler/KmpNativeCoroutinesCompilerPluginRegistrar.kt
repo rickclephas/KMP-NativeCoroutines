@@ -20,6 +20,6 @@ public class KmpNativeCoroutinesCompilerPluginRegistrar: CompilerPluginRegistrar
         StorageComponentContainerContributor.registerExtension(
             KmpNativeCoroutinesStorageComponentContainerContributor(configuration)
         )
-        IrGenerationExtension.registerExtension(KmpNativeCoroutinesIrGenerationExtension())
+        IrGenerationExtension.registerExtension(KmpNativeCoroutinesIrGenerationExtension(configuration))
     }
 }

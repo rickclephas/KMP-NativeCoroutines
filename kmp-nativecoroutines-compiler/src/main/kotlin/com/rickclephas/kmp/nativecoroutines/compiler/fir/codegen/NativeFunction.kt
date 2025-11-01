@@ -1,5 +1,6 @@
 package com.rickclephas.kmp.nativecoroutines.compiler.fir.codegen
 
+import com.rickclephas.kmp.nativecoroutines.compiler.config.SwiftExport
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.*
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.ClassIds
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation
@@ -21,7 +22,8 @@ import org.jetbrains.kotlin.name.CallableId
 internal fun FirExtension.buildNativeFunction(
     callableId: CallableId,
     originalSymbol: FirNamedFunctionSymbol,
-    annotation: NativeCoroutinesAnnotation
+    annotation: NativeCoroutinesAnnotation,
+    swiftExport: Set<SwiftExport>,
 ): FirNamedFunctionSymbol? {
     val firCallableSignature = originalSymbol.getCallableSignature(session) ?: return null
     val callableSignature = firCallableSignature.signature
@@ -40,6 +42,9 @@ internal fun FirExtension.buildNativeFunction(
 
         status = originalSymbol.getGeneratedDeclarationStatus(session)
             ?.copy(isInline = originalSymbol.isInline) ?: return null
+        if (SwiftExport.NO_FUNC_RETURN_TYPES in swiftExport) {
+            status = status.copy(isSuspend = callableSignature.isSuspend)
+        }
 
         dispatchReceiverType = originalSymbol.dispatchReceiverType
 
@@ -68,6 +73,7 @@ internal fun FirExtension.buildNativeFunction(
 
         returnTypeRef = firCallableSignature.getNativeType(
             callableSignature.returnType,
+            swiftExport,
             callableSignature.isSuspend
         ).let(typeParameters.substitutor::substituteOrSelf).toFirResolvedTypeRef()
 

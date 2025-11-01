@@ -1,11 +1,13 @@
 package com.rickclephas.kmp.nativecoroutines.compiler.ir.extensions
 
+import com.rickclephas.kmp.nativecoroutines.compiler.config.*
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey
 import com.rickclephas.kmp.nativecoroutines.compiler.ir.codegen.*
 import com.rickclephas.kmp.nativecoroutines.compiler.ir.codegen.GeneratorContext
 import com.rickclephas.kmp.nativecoroutines.compiler.ir.codegen.buildNativeFunctionBody
 import com.rickclephas.kmp.nativecoroutines.compiler.ir.codegen.buildStateFlowValueGetterBody
 import org.jetbrains.kotlin.backend.common.extensions.IrPluginContext
+import org.jetbrains.kotlin.config.CompilerConfiguration
 import org.jetbrains.kotlin.ir.IrElement
 import org.jetbrains.kotlin.ir.declarations.*
 import org.jetbrains.kotlin.ir.expressions.IrCallableReference
@@ -21,9 +23,11 @@ import org.jetbrains.kotlin.ir.visitors.acceptChildrenVoid
 @OptIn(UnsafeDuringIrConstructionAPI::class)
 internal class KmpNativeCoroutinesIrTransformer(
     pluginContext: IrPluginContext,
+    configuration: CompilerConfiguration,
 ): IrVisitorVoid() {
 
     private val context = GeneratorContext(pluginContext)
+    private val swiftExport = configuration[SWIFT_EXPORT]
 
     private val IrDeclaration.nativeCoroutinesDeclarationKey: NativeCoroutinesDeclarationKey? get() {
         val origin = origin
@@ -54,7 +58,8 @@ internal class KmpNativeCoroutinesIrTransformer(
             NativeCoroutinesDeclarationKey.Type.NATIVE -> context.buildNativeFunctionBody(
                 function = declaration,
                 originalFunction = function.owner,
-                callableSignature = declarationKey.callableSignature
+                callableSignature = declarationKey.callableSignature,
+                swiftExport = swiftExport,
             )
             else -> error("Unsupported type $type for native coroutines function")
         }
@@ -69,7 +74,8 @@ internal class KmpNativeCoroutinesIrTransformer(
             NativeCoroutinesDeclarationKey.Type.NATIVE -> context.buildNativePropertyGetterBody(
                 function = getter,
                 originalProperty = property.owner,
-                callableSignature = declarationKey.callableSignature
+                callableSignature = declarationKey.callableSignature,
+                swiftExport = swiftExport,
             )
             NativeCoroutinesDeclarationKey.Type.STATE_FLOW_VALUE -> context.buildStateFlowValueGetterBody(
                 property = declaration,
