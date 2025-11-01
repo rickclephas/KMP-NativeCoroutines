@@ -643,7 +643,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1D63BF5E26E3E1DD003363BE /* Build configuration list for PBXNativeTarget "tvOS App" */;
 			buildPhases = (
-				1DB9CD1D275E935100E13AFD /* ShellScript */,
+				1DB9CD1D275E935100E13AFD /* Build shared Kotlin module */,
 				1D63BF2F26E3E1DB003363BE /* Sources */,
 				1D63BF3026E3E1DB003363BE /* Frameworks */,
 				1D63BF3126E3E1DB003363BE /* Resources */,
@@ -667,7 +667,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1D63BF5F26E3E1DD003363BE /* Build configuration list for PBXNativeTarget "tvOS Tests" */;
 			buildPhases = (
-				1DB9CD21275E95D200E13AFD /* ShellScript */,
+				1DB9CD21275E95D200E13AFD /* Build shared Kotlin module */,
 				1D63BF4226E3E1DD003363BE /* Sources */,
 				1D63BF4326E3E1DD003363BE /* Frameworks */,
 				1D63BF4426E3E1DD003363BE /* Resources */,
@@ -728,7 +728,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1D63BFBA26E4F00A003363BE /* Build configuration list for PBXNativeTarget "watchOS App WatchKit Extension" */;
 			buildPhases = (
-				1DB9CD1E275E937500E13AFD /* ShellScript */,
+				1DB9CD1E275E937500E13AFD /* Build shared Kotlin module */,
 				1D63BF8126E4F009003363BE /* Sources */,
 				1D63BF8226E4F009003363BE /* Frameworks */,
 				1D63BF8326E4F009003363BE /* Resources */,
@@ -752,7 +752,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1D63BFBD26E4F00A003363BE /* Build configuration list for PBXNativeTarget "watchOS Tests" */;
 			buildPhases = (
-				1DB9CD22275E95DA00E13AFD /* ShellScript */,
+				1DB9CD22275E95DA00E13AFD /* Build shared Kotlin module */,
 				1D63BF9826E4F00A003363BE /* Sources */,
 				1D63BF9926E4F00A003363BE /* Frameworks */,
 				1D63BF9A26E4F00A003363BE /* Resources */,
@@ -777,7 +777,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1D71760C267009C600846F75 /* Build configuration list for PBXNativeTarget "macOS App" */;
 			buildPhases = (
-				1D5CF257275E887D002389EE /* ShellScript */,
+				1D5CF257275E887D002389EE /* Build shared Kotlin module */,
 				1D7175F8267009C500846F75 /* Sources */,
 				1D7175F9267009C500846F75 /* Frameworks */,
 				1D7175FA267009C500846F75 /* Resources */,
@@ -825,7 +825,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1D81B1422677B72200EEC34D /* Build configuration list for PBXNativeTarget "macOS Tests" */;
 			buildPhases = (
-				1DB9CD20275E95CA00E13AFD /* ShellScript */,
+				1DB9CD20275E95CA00E13AFD /* Build shared Kotlin module */,
 				1D81B1372677B72200EEC34D /* Sources */,
 				1D81B1382677B72200EEC34D /* Frameworks */,
 				1D81B1392677B72200EEC34D /* Resources */,
@@ -850,7 +850,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1D81B1502677B7C000EEC34D /* Build configuration list for PBXNativeTarget "iOS Tests" */;
 			buildPhases = (
-				1DB9CD1F275E95A800E13AFD /* ShellScript */,
+				1DB9CD1F275E95A800E13AFD /* Build shared Kotlin module */,
 				1D81B1452677B7C000EEC34D /* Sources */,
 				1D81B1462677B7C000EEC34D /* Frameworks */,
 				1D81B1472677B7C000EEC34D /* Resources */,
@@ -1026,7 +1026,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1D5CF257275E887D002389EE /* ShellScript */ = {
+		1D5CF257275E887D002389EE /* Build shared Kotlin module */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -1036,13 +1036,14 @@
 			);
 			inputPaths = (
 			);
+			name = "Build shared Kotlin module";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd \"$SRCROOT\"\n./gradlew :shared:embedAndSignAppleFrameworkForXcode\n";
+			shellScript = "cd \"$SRCROOT\"\nif [ \"$NATIVE_COROUTINES_SWIFT_EXPORT\" == \"true\" ]; then\n./gradlew :shared:embedSwiftExportForXcode\nelse\n./gradlew :shared:embedAndSignAppleFrameworkForXcode\nfi\n";
 		};
 		1D5CF258275E8992002389EE /* Build shared Kotlin module */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1063,7 +1064,7 @@
 			shellPath = /bin/sh;
 			shellScript = "cd \"$SRCROOT\"\nif [ \"$NATIVE_COROUTINES_SWIFT_EXPORT\" == \"true\" ]; then\n./gradlew :shared:embedSwiftExportForXcode\nelse\n./gradlew :shared:embedAndSignAppleFrameworkForXcode\nfi\n";
 		};
-		1DB9CD1D275E935100E13AFD /* ShellScript */ = {
+		1DB9CD1D275E935100E13AFD /* Build shared Kotlin module */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -1073,15 +1074,16 @@
 			);
 			inputPaths = (
 			);
+			name = "Build shared Kotlin module";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd \"$SRCROOT\"\n./gradlew :shared:embedAndSignAppleFrameworkForXcode\n";
+			shellScript = "cd \"$SRCROOT\"\nif [ \"$NATIVE_COROUTINES_SWIFT_EXPORT\" == \"true\" ]; then\n./gradlew :shared:embedSwiftExportForXcode\nelse\n./gradlew :shared:embedAndSignAppleFrameworkForXcode\nfi\n";
 		};
-		1DB9CD1E275E937500E13AFD /* ShellScript */ = {
+		1DB9CD1E275E937500E13AFD /* Build shared Kotlin module */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -1091,15 +1093,16 @@
 			);
 			inputPaths = (
 			);
+			name = "Build shared Kotlin module";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd \"$SRCROOT\"\n./gradlew :shared:embedAndSignAppleFrameworkForXcode\n";
+			shellScript = "cd \"$SRCROOT\"\nif [ \"$NATIVE_COROUTINES_SWIFT_EXPORT\" == \"true\" ]; then\n./gradlew :shared:embedSwiftExportForXcode\nelse\n./gradlew :shared:embedAndSignAppleFrameworkForXcode\nfi\n";
 		};
-		1DB9CD1F275E95A800E13AFD /* ShellScript */ = {
+		1DB9CD1F275E95A800E13AFD /* Build shared Kotlin module */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -1109,15 +1112,16 @@
 			);
 			inputPaths = (
 			);
+			name = "Build shared Kotlin module";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd \"$SRCROOT\"\n./gradlew :shared:embedAndSignAppleFrameworkForXcode\n";
+			shellScript = "cd \"$SRCROOT\"\nif [ \"$NATIVE_COROUTINES_SWIFT_EXPORT\" == \"true\" ]; then\n./gradlew :shared:embedSwiftExportForXcode\nelse\n./gradlew :shared:embedAndSignAppleFrameworkForXcode\nfi\n";
 		};
-		1DB9CD20275E95CA00E13AFD /* ShellScript */ = {
+		1DB9CD20275E95CA00E13AFD /* Build shared Kotlin module */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -1127,15 +1131,16 @@
 			);
 			inputPaths = (
 			);
+			name = "Build shared Kotlin module";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd \"$SRCROOT\"\n./gradlew :shared:embedAndSignAppleFrameworkForXcode\n";
+			shellScript = "cd \"$SRCROOT\"\nif [ \"$NATIVE_COROUTINES_SWIFT_EXPORT\" == \"true\" ]; then\n./gradlew :shared:embedSwiftExportForXcode\nelse\n./gradlew :shared:embedAndSignAppleFrameworkForXcode\nfi\n";
 		};
-		1DB9CD21275E95D200E13AFD /* ShellScript */ = {
+		1DB9CD21275E95D200E13AFD /* Build shared Kotlin module */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -1145,15 +1150,16 @@
 			);
 			inputPaths = (
 			);
+			name = "Build shared Kotlin module";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd \"$SRCROOT\"\n./gradlew :shared:embedAndSignAppleFrameworkForXcode\n";
+			shellScript = "cd \"$SRCROOT\"\nif [ \"$NATIVE_COROUTINES_SWIFT_EXPORT\" == \"true\" ]; then\n./gradlew :shared:embedSwiftExportForXcode\nelse\n./gradlew :shared:embedAndSignAppleFrameworkForXcode\nfi\n";
 		};
-		1DB9CD22275E95DA00E13AFD /* ShellScript */ = {
+		1DB9CD22275E95DA00E13AFD /* Build shared Kotlin module */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -1163,13 +1169,14 @@
 			);
 			inputPaths = (
 			);
+			name = "Build shared Kotlin module";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd \"$SRCROOT\"\n./gradlew :shared:embedAndSignAppleFrameworkForXcode\n";
+			shellScript = "cd \"$SRCROOT\"\nif [ \"$NATIVE_COROUTINES_SWIFT_EXPORT\" == \"true\" ]; then\n./gradlew :shared:embedSwiftExportForXcode\nelse\n./gradlew :shared:embedAndSignAppleFrameworkForXcode\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
