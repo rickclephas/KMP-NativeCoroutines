@@ -1,0 +1,434 @@
+// FILE: functions.kt
+
+class MyClass14<T : Any?> {
+  private val value: T
+    field = value
+    private get
+
+  constructor(value: T) /* primary */ {
+    super/*Any*/()
+    /* <init>() */
+
+  }
+
+  @ObjCName(name = "returnGenericSuspendValue")
+  suspend fun returnGenericSuspendValueNative(): T {
+    val tmp_0: CoroutineScope? = null
+    return <this>.returnGenericSuspendValue()
+  }
+
+  @NativeCoroutines
+  suspend fun returnGenericSuspendValue(): T {
+    return <this>.<get-value>()
+  }
+
+}
+
+class MyClass16 {
+  constructor() /* primary */ {
+    super/*Any*/()
+    /* <init>() */
+
+  }
+
+  @ObjCName(name = "functionWithGenericValues")
+  suspend fun <T1 : Any?, T2 : T1> functionWithGenericValuesNative(value1: T1, value2: T2): String {
+    val tmp_1: CoroutineScope? = null
+    return <this>.functionWithGenericValues<T1, T2>(value1 = value1, value2 = value2)
+  }
+
+  @NativeCoroutines
+  suspend fun <T1 : Any?, T2 : T1> functionWithGenericValues(value1: T1, value2: T2): String {
+    return toString(/* <this> = value1 */).plus(other = toString(/* <this> = value2 */))
+  }
+
+}
+
+class MyClass20 {
+  constructor() /* primary */ {
+    super/*Any*/()
+    /* <init>() */
+
+  }
+
+  @ObjCName(name = "returnClassExtensionValue")
+  suspend fun String.returnClassExtensionValueNative(): String {
+    val tmp_2: CoroutineScope? = null
+    return <this>.returnClassExtensionValue(/* <this> = <this> */)
+  }
+
+  @NativeCoroutines
+  suspend fun String.returnClassExtensionValue(): String {
+    return <this>
+  }
+
+}
+
+class MyClass21<out T : Any?> {
+  constructor() /* primary */ {
+    super/*Any*/()
+    /* <init>() */
+
+  }
+
+  @ObjCName(name = "returnGenericValue")
+  suspend fun returnGenericValueNative(): T? {
+    val tmp_3: CoroutineScope? = null
+    return <this>.returnGenericValue()
+  }
+
+  @NativeCoroutines
+  suspend fun returnGenericValue(): T? {
+    return null
+  }
+
+}
+
+class MyClass22 : MyInterface22 {
+  constructor() /* primary */ {
+    super/*Any*/()
+    /* <init>() */
+
+  }
+
+  @NativeCoroutines
+  override suspend fun returnInterfaceSuspendValue(): String {
+    return "OK22"
+  }
+
+}
+
+class MyClass8 {
+  constructor() /* primary */ {
+    super/*Any*/()
+    /* <init>() */
+
+  }
+
+  @ObjCName(name = "returnSuspendValue")
+  suspend fun returnSuspendValueNative(): String {
+    val tmp_4: CoroutineScope? = null
+    return <this>.returnSuspendValue()
+  }
+
+  @NativeCoroutines
+  suspend fun returnSuspendValue(): String {
+    return "OK8"
+  }
+
+}
+
+class MyFlow23<T1 : Any?, T2 : Any?> : Flow<T2> {
+  private /* final field */ val $$delegate_0: Flow<T2> = flowOf<T2>(value = value2)
+  constructor(value1: T1, value2: T2) /* primary */ {
+    super/*Any*/()
+    /* <init>() */
+
+  }
+
+  override suspend fun collect(collector: FlowCollector<T2>) {
+    <this>.#$$delegate_0.collect(collector = collector)
+  }
+
+}
+
+interface MyInterface22 {
+  @ObjCName(name = "returnInterfaceSuspendValue")
+  suspend fun returnInterfaceSuspendValueNative(): String {
+    val tmp_5: CoroutineScope? = null
+    return <this>.returnInterfaceSuspendValue()
+  }
+
+  @NativeCoroutines
+  abstract suspend fun returnInterfaceSuspendValue(): String
+
+}
+
+fun box(): String {
+  return runBoxTest(action = local suspend fun BoxTest.<anonymous>() {
+    $this$runBoxTest.await<String>(result = local suspend fun <anonymous>(): String {
+      return returnSuspendValueNative()
+    }
+)
+    $this$runBoxTest.await<String?>(result = local suspend fun <anonymous>(): String? {
+      return returnNullableSuspendValueNative()
+    }
+)
+    $this$runBoxTest.collect<String>(flow = returnFlowValueNative())
+    $this$runBoxTest.collect<String?>(flow = returnNullableFlowValueNative())
+    $this$runBoxTest.value<Flow<String>?>(value = returnNullableFlowNative())
+    $this$runBoxTest.value<Flow<String?>?>(value = returnNullableFlowAndValueNative())
+    $this$runBoxTest.collect<String>(flow = returnStateFlowValueNative(), maxValues = 1)
+    $this$runBoxTest.await<String>(result = local suspend fun <anonymous>(): String {
+      return MyClass8().returnSuspendValueNative()
+    }
+)
+    $this$runBoxTest.await<String>(result = local suspend fun <anonymous>(): String {
+      return returnSuspendParameterValueNative(value = "OK9")
+    }
+)
+    $this$runBoxTest.await<Int>(result = local suspend fun <anonymous>(): Int {
+      return returnSuspendParameterValueNative(value = 9)
+    }
+)
+    $this$runBoxTest.await<String>(result = local suspend fun <anonymous>(): String {
+      return returnThrowsSuspendValueNative()
+    }
+)
+    $this$runBoxTest.await<String>(result = local suspend fun <anonymous>(): String {
+      return returnSuspendVarargValueNative(values = ["OK11"])
+    }
+)
+    $this$runBoxTest.await<String>(result = local suspend fun <anonymous>(): String {
+      return MyClass14<String>(value = "OK12").returnGenericSuspendValueNative()
+    }
+)
+    $this$runBoxTest.await<String>(result = local suspend fun <anonymous>(): String {
+      return returnRefinedSuspendValueNative()
+    }
+)
+    $this$runBoxTest.awaitAndCollect<String>(flow = local suspend fun <anonymous>(): Flow<String> {
+      return returnSuspendFlowValueNative()
+    }
+)
+    $this$runBoxTest.await<String>(result = local suspend fun <anonymous>(): String {
+      return returnGenericSuspendValueNative<String>(value = "OK15")
+    }
+)
+    $this$runBoxTest.await<String>(result = local suspend fun <anonymous>(): String {
+      return MyClass16().functionWithGenericValuesNative<CharSequence, String>(value1 = "OK", value2 = "16")
+    }
+)
+    $this$runBoxTest.await<String>(result = local suspend fun <anonymous>(): String {
+      return returnInlineSuspendValueNative<String>(value = "OK17")
+    }
+)
+    $this$runBoxTest.awaitAndCollectNull<String>(flow = local suspend fun <anonymous>(): Flow<String>? {
+      return returnNullableSuspendFlowNative()
+    }
+)
+    $this$runBoxTest.await<String>(result = local suspend fun <anonymous>(): String {
+      return returnExtensionValueNative(/* <this> = "OK19" */)
+    }
+)
+    with<MyClass20, Unit>(receiver = MyClass20(), block = local fun MyClass20.<anonymous>() {
+      $this$runBoxTest.await<String>(result = local suspend fun <anonymous>(): String {
+        return $this$with.returnClassExtensionValueNative(/* <this> = "OK20" */)
+      }
+)
+    }
+)
+    $this$runBoxTest.await<String?>(result = local suspend fun <anonymous>(): String? {
+      return MyClass21<String>().returnGenericValueNative()
+    }
+)
+    $this$runBoxTest.await<String>(result = local suspend fun <anonymous>(): String {
+      return MyClass22().returnInterfaceSuspendValueNative()
+    }
+)
+    $this$runBoxTest.collect<String>(flow = returnCustomFlowValueNative())
+  }
+)
+}
+
+@NativeCoroutines
+fun returnCustomFlowValue(): MyFlow23<Int, String> {
+  return MyFlow23<Int, String>(value1 = 23, value2 = "OK23")
+}
+
+@NativeCoroutines
+suspend fun String.returnExtensionValue(): String {
+  return <this>
+}
+
+@NativeCoroutines
+fun returnFlowValue(): Flow<String> {
+  return flowOf<String>(value = "OK3")
+}
+
+@NativeCoroutines
+suspend fun <T : Any?> returnGenericSuspendValue(value: T): T {
+  return value
+}
+
+@NativeCoroutines
+suspend inline fun <reified T : Any?> returnInlineSuspendValue(value: T): T {
+  return value
+}
+
+@NativeCoroutines
+fun returnNullableFlow(): Flow<String>? {
+  return null
+}
+
+@NativeCoroutines
+fun returnNullableFlowAndValue(): Flow<String?>? {
+  return null
+}
+
+@NativeCoroutines
+fun returnNullableFlowValue(): Flow<String?> {
+  return flowOf<String?>(value = null)
+}
+
+@NativeCoroutines
+suspend fun returnNullableSuspendFlow(): Flow<String>? {
+  return null
+}
+
+@NativeCoroutines
+suspend fun returnNullableSuspendValue(): String? {
+  return null
+}
+
+@NativeCoroutinesRefined
+suspend fun returnRefinedSuspendValue(): String {
+  return "OK13"
+}
+
+@NativeCoroutines
+fun returnStateFlowValue(): StateFlow<String> {
+  return MutableStateFlow<String>(value = "OK7")
+}
+
+@NativeCoroutinesRefined
+suspend fun returnSuspendFlowValue(): Flow<String> {
+  return flowOf<String>(value = "OK14")
+}
+
+@NativeCoroutines
+suspend fun returnSuspendParameterValue(value: Int): Int {
+  return value
+}
+
+@NativeCoroutines
+suspend fun returnSuspendParameterValue(value: String): String {
+  return value
+}
+
+@NativeCoroutines
+suspend fun returnSuspendValue(): String {
+  return "OK1"
+}
+
+@NativeCoroutines
+suspend fun returnSuspendVarargValue(vararg values: String): String {
+  return values.get(index = 0)
+}
+
+@NativeCoroutines
+suspend fun returnThrowsSuspendValue(): String {
+  return "OK10"
+}
+
+// FILE: __GENERATED DECLARATIONS__.kt
+
+@ObjCName(name = "returnCustomFlowValue")
+fun returnCustomFlowValueNative(): MyFlow23<Int, String> {
+  val tmp_0: CoroutineScope? = null
+  return returnCustomFlowValue()
+}
+
+@ObjCName(name = "returnExtensionValue")
+suspend fun String.returnExtensionValueNative(): String {
+  val tmp_1: CoroutineScope? = null
+  return returnExtensionValue(/* <this> = <this> */)
+}
+
+@ObjCName(name = "returnFlowValue")
+fun returnFlowValueNative(): Flow<String> {
+  val tmp_2: CoroutineScope? = null
+  return returnFlowValue()
+}
+
+@ObjCName(name = "returnGenericSuspendValue")
+suspend fun <T : Any?> returnGenericSuspendValueNative(value: T): T {
+  val tmp_3: CoroutineScope? = null
+  return returnGenericSuspendValue<T>(value = value)
+}
+
+@ObjCName(name = "returnInlineSuspendValue")
+suspend inline fun <reified T : Any?> returnInlineSuspendValueNative(value: T): T {
+  val tmp_4: CoroutineScope? = null
+  return returnInlineSuspendValue<T>(value = value)
+}
+
+@ObjCName(name = "returnNullableFlowAndValue")
+fun returnNullableFlowAndValueNative(): Flow<String?>? {
+  val tmp_5: CoroutineScope? = null
+  return returnNullableFlowAndValue()
+}
+
+@ObjCName(name = "returnNullableFlow")
+fun returnNullableFlowNative(): Flow<String>? {
+  val tmp_6: CoroutineScope? = null
+  return returnNullableFlow()
+}
+
+@ObjCName(name = "returnNullableFlowValue")
+fun returnNullableFlowValueNative(): Flow<String?> {
+  val tmp_7: CoroutineScope? = null
+  return returnNullableFlowValue()
+}
+
+@ObjCName(name = "returnNullableSuspendFlow")
+suspend fun returnNullableSuspendFlowNative(): Flow<String>? {
+  val tmp_8: CoroutineScope? = null
+  return returnNullableSuspendFlow()
+}
+
+@ObjCName(name = "returnNullableSuspendValue")
+suspend fun returnNullableSuspendValueNative(): String? {
+  val tmp_9: CoroutineScope? = null
+  return returnNullableSuspendValue()
+}
+
+@ObjCName(name = "returnRefinedSuspendValue")
+@ShouldRefineInSwift
+suspend fun returnRefinedSuspendValueNative(): String {
+  val tmp_10: CoroutineScope? = null
+  return returnRefinedSuspendValue()
+}
+
+@ObjCName(name = "returnStateFlowValue")
+fun returnStateFlowValueNative(): StateFlow<String> {
+  val tmp_11: CoroutineScope? = null
+  return returnStateFlowValue()
+}
+
+@ObjCName(name = "returnSuspendFlowValue")
+@ShouldRefineInSwift
+suspend fun returnSuspendFlowValueNative(): Flow<String> {
+  val tmp_12: CoroutineScope? = null
+  return returnSuspendFlowValue()
+}
+
+@ObjCName(name = "returnSuspendParameterValue")
+suspend fun returnSuspendParameterValueNative(value: Int): Int {
+  val tmp_13: CoroutineScope? = null
+  return returnSuspendParameterValue(value = value)
+}
+
+@ObjCName(name = "returnSuspendParameterValue")
+suspend fun returnSuspendParameterValueNative(value: String): String {
+  val tmp_14: CoroutineScope? = null
+  return returnSuspendParameterValue(value = value)
+}
+
+@ObjCName(name = "returnSuspendValue")
+suspend fun returnSuspendValueNative(): String {
+  val tmp_15: CoroutineScope? = null
+  return returnSuspendValue()
+}
+
+@ObjCName(name = "returnSuspendVarargValue")
+suspend fun returnSuspendVarargValueNative(vararg values: String): String {
+  val tmp_16: CoroutineScope? = null
+  return returnSuspendVarargValue(values = values)
+}
+
+@ObjCName(name = "returnThrowsSuspendValue")
+suspend fun returnThrowsSuspendValueNative(): String {
+  val tmp_17: CoroutineScope? = null
+  return returnThrowsSuspendValue()
+}

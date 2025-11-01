@@ -102,30 +102,30 @@ class MyFlow23<T1, T2>(
 fun returnCustomFlowValue(): MyFlow23<Int, String> = MyFlow23(23, "OK23")
 
 fun box() = runBoxTest {
-    await(returnSuspendValueNative())
-    await(returnNullableSuspendValueNative())
+    await<String> { returnSuspendValueNative() }
+    await<String?> { returnNullableSuspendValueNative() }
     collect(returnFlowValueNative())
     collect(returnNullableFlowValueNative())
     value(returnNullableFlowNative())
     value(returnNullableFlowAndValueNative())
     collect(returnStateFlowValueNative(), maxValues = 1)
-    await(MyClass8().returnSuspendValueNative())
-    await(returnSuspendParameterValueNative("OK9"))
-    await(returnSuspendParameterValueNative(9))
-    await(returnThrowsSuspendValueNative())
-    await(returnSuspendVarargValueNative("OK11"))
-    await(MyClass14("OK12").returnGenericSuspendValueNative())
-    await(returnRefinedSuspendValueNative())
-    awaitAndCollect(returnSuspendFlowValueNative())
-    await(returnGenericSuspendValueNative("OK15"))
-    await(MyClass16().functionWithGenericValuesNative<CharSequence, String>("OK", "16"))
-    await(returnInlineSuspendValueNative("OK17"))
-    await(returnNullableSuspendFlowNative())
-    await("OK19".returnExtensionValueNative())
+    await<String> { MyClass8().returnSuspendValueNative() }
+    await<String> { returnSuspendParameterValueNative("OK9") }
+    await<Int> { returnSuspendParameterValueNative(9) }
+    await<String> { returnThrowsSuspendValueNative() }
+    await<String> { returnSuspendVarargValueNative("OK11") }
+    await<String> { MyClass14("OK12").returnGenericSuspendValueNative() }
+    await<String> { returnRefinedSuspendValueNative() }
+    awaitAndCollect<String> { returnSuspendFlowValueNative() }
+    await<String> { returnGenericSuspendValueNative("OK15") }
+    await<String> { MyClass16().functionWithGenericValuesNative<CharSequence, String>("OK", "16") }
+    await<String> { returnInlineSuspendValueNative("OK17") }
+    awaitAndCollectNull<String> { returnNullableSuspendFlowNative() }
+    await<String> { "OK19".returnExtensionValueNative() }
     with(MyClass20()) {
-        await("OK20".returnClassExtensionValueNative())
+        await<String> { "OK20".returnClassExtensionValueNative() }
     }
-    await(MyClass21<String>().returnGenericValueNative())
-    await(MyClass22().returnInterfaceSuspendValueNative())
+    await<String?> { MyClass21<String>().returnGenericValueNative() }
+    await<String> { MyClass22().returnInterfaceSuspendValueNative() }
     collect(returnCustomFlowValueNative())
 }

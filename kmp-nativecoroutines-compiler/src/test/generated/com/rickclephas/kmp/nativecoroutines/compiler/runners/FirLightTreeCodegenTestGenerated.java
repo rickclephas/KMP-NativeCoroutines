@@ -6,6 +6,7 @@ import com.intellij.testFramework.TestDataPath;
 import org.jetbrains.kotlin.test.util.KtTestUtil;
 import org.jetbrains.kotlin.test.TargetBackend;
 import org.jetbrains.kotlin.test.TestMetadata;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -49,5 +50,45 @@ public class FirLightTreeCodegenTestGenerated extends AbstractFirLightTreeCodege
   @TestMetadata("viewmodelscope.kt")
   public void testViewmodelscope() {
     runTest("src/testData/codegen/viewmodelscope.kt");
+  }
+
+  @Nested
+  @TestMetadata("src/testData/codegen/swift1")
+  @TestDataPath("$PROJECT_ROOT")
+  public class Swift1 {
+    @Test
+    public void testAllFilesPresentInSwift1() {
+      KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("src/testData/codegen/swift1"), Pattern.compile("^(.+)\\.kt$"), Pattern.compile("^(.+)\\.fir\\.kt$"), TargetBackend.JVM_IR, true);
+    }
+
+    @Test
+    @TestMetadata("annotations.kt")
+    public void testAnnotations() {
+      runTest("src/testData/codegen/swift1/annotations.kt");
+    }
+
+    @Test
+    @TestMetadata("coroutinescope.kt")
+    public void testCoroutinescope() {
+      runTest("src/testData/codegen/swift1/coroutinescope.kt");
+    }
+
+    @Test
+    @TestMetadata("functions.kt")
+    public void testFunctions() {
+      runTest("src/testData/codegen/swift1/functions.kt");
+    }
+
+    @Test
+    @TestMetadata("properties.kt")
+    public void testProperties() {
+      runTest("src/testData/codegen/swift1/properties.kt");
+    }
+
+    @Test
+    @TestMetadata("viewmodelscope.kt")
+    public void testViewmodelscope() {
+      runTest("src/testData/codegen/swift1/viewmodelscope.kt");
+    }
   }
 }

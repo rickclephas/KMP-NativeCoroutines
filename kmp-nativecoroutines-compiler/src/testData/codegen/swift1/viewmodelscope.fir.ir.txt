@@ -1,0 +1,452 @@
+FILE fqName:androidx.lifecycle fileName:/androidxviewmodel.kt
+  CLASS CLASS name:ViewModel modality:OPEN visibility:public superTypes:[kotlin.Any]
+    thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:androidx.lifecycle.ViewModel
+    CONSTRUCTOR visibility:public returnType:androidx.lifecycle.ViewModel [primary]
+      BLOCK_BODY
+        DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
+        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:ViewModel modality:OPEN visibility:public superTypes:[kotlin.Any]' type=kotlin.Unit
+    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN returnType:kotlin.Boolean [fake_override,operator]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
+      overridden:
+        public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in kotlin.Any
+    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN returnType:kotlin.Int [fake_override]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      overridden:
+        public open fun hashCode (): kotlin.Int declared in kotlin.Any
+    FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN returnType:kotlin.String [fake_override]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      overridden:
+        public open fun toString (): kotlin.String declared in kotlin.Any
+  PROPERTY name:viewModelScope visibility:public modality:FINAL [val]
+    FUN name:<get-viewModelScope> visibility:public modality:FINAL returnType:kotlinx.coroutines.CoroutineScope
+      VALUE_PARAMETER kind:ExtensionReceiver name:<this> index:0 type:androidx.lifecycle.ViewModel
+      correspondingProperty: PROPERTY name:viewModelScope visibility:public modality:FINAL [val]
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public final fun <get-viewModelScope> (<this>: androidx.lifecycle.ViewModel): kotlinx.coroutines.CoroutineScope declared in androidx.lifecycle'
+          CALL 'public final fun CoroutineScope (context: kotlin.coroutines.CoroutineContext): kotlinx.coroutines.CoroutineScope declared in kotlinx.coroutines' type=kotlinx.coroutines.CoroutineScope origin=null
+            ARG context: CALL 'public final fun <get-Default> (): kotlinx.coroutines.CoroutineDispatcher declared in kotlinx.coroutines.Dispatchers' type=kotlinx.coroutines.CoroutineDispatcher origin=GET_PROPERTY
+              ARG <this>: GET_OBJECT 'CLASS IR_EXTERNAL_DECLARATION_STUB OBJECT name:Dispatchers modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlinx.coroutines.Dispatchers
+FILE fqName:com.rickclephas.kmp.observableviewmodel fileName:/observableviewmodel.kt
+  CLASS CLASS name:ViewModel modality:OPEN visibility:public superTypes:[androidx.lifecycle.ViewModel]
+    thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:com.rickclephas.kmp.observableviewmodel.ViewModel
+    PROPERTY name:viewModelScope visibility:public modality:FINAL [val]
+      FIELD PROPERTY_BACKING_FIELD name:viewModelScope type:com.rickclephas.kmp.observableviewmodel.ViewModelScope visibility:private [final]
+        EXPRESSION_BODY
+          CONSTRUCTOR_CALL 'public constructor <init> () declared in com.rickclephas.kmp.observableviewmodel.ViewModelScope' type=com.rickclephas.kmp.observableviewmodel.ViewModelScope origin=null
+      FUN DEFAULT_PROPERTY_ACCESSOR name:<get-viewModelScope> visibility:public modality:FINAL returnType:com.rickclephas.kmp.observableviewmodel.ViewModelScope
+        VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:com.rickclephas.kmp.observableviewmodel.ViewModel
+        correspondingProperty: PROPERTY name:viewModelScope visibility:public modality:FINAL [val]
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='public final fun <get-viewModelScope> (): com.rickclephas.kmp.observableviewmodel.ViewModelScope declared in com.rickclephas.kmp.observableviewmodel.ViewModel'
+            GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:viewModelScope type:com.rickclephas.kmp.observableviewmodel.ViewModelScope visibility:private [final]' type=com.rickclephas.kmp.observableviewmodel.ViewModelScope origin=null
+              receiver: GET_VAR '<this>: com.rickclephas.kmp.observableviewmodel.ViewModel declared in com.rickclephas.kmp.observableviewmodel.ViewModel.<get-viewModelScope>' type=com.rickclephas.kmp.observableviewmodel.ViewModel origin=null
+    CONSTRUCTOR visibility:public returnType:com.rickclephas.kmp.observableviewmodel.ViewModel [primary]
+      BLOCK_BODY
+        DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in androidx.lifecycle.ViewModel'
+        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:ViewModel modality:OPEN visibility:public superTypes:[androidx.lifecycle.ViewModel]' type=kotlin.Unit
+    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN returnType:kotlin.Boolean [fake_override,operator]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
+      overridden:
+        public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in androidx.lifecycle.ViewModel
+    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN returnType:kotlin.Int [fake_override]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      overridden:
+        public open fun hashCode (): kotlin.Int declared in androidx.lifecycle.ViewModel
+    FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN returnType:kotlin.String [fake_override]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      overridden:
+        public open fun toString (): kotlin.String declared in androidx.lifecycle.ViewModel
+  CLASS CLASS name:ViewModelScope modality:FINAL visibility:public superTypes:[kotlin.Any]
+    thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:com.rickclephas.kmp.observableviewmodel.ViewModelScope
+    CONSTRUCTOR visibility:public returnType:com.rickclephas.kmp.observableviewmodel.ViewModelScope [primary]
+      BLOCK_BODY
+        DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
+        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:ViewModelScope modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlin.Unit
+    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN returnType:kotlin.Boolean [fake_override,operator]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
+      overridden:
+        public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in kotlin.Any
+    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN returnType:kotlin.Int [fake_override]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      overridden:
+        public open fun hashCode (): kotlin.Int declared in kotlin.Any
+    FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN returnType:kotlin.String [fake_override]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      overridden:
+        public open fun toString (): kotlin.String declared in kotlin.Any
+  PROPERTY name:coroutineScope visibility:public modality:FINAL [val]
+    FUN name:<get-coroutineScope> visibility:public modality:FINAL returnType:kotlinx.coroutines.CoroutineScope
+      VALUE_PARAMETER kind:ExtensionReceiver name:<this> index:0 type:com.rickclephas.kmp.observableviewmodel.ViewModelScope
+      correspondingProperty: PROPERTY name:coroutineScope visibility:public modality:FINAL [val]
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public final fun <get-coroutineScope> (<this>: com.rickclephas.kmp.observableviewmodel.ViewModelScope): kotlinx.coroutines.CoroutineScope declared in com.rickclephas.kmp.observableviewmodel'
+          CALL 'public final fun CoroutineScope (context: kotlin.coroutines.CoroutineContext): kotlinx.coroutines.CoroutineScope declared in kotlinx.coroutines' type=kotlinx.coroutines.CoroutineScope origin=null
+            ARG context: CALL 'public final fun <get-Default> (): kotlinx.coroutines.CoroutineDispatcher declared in kotlinx.coroutines.Dispatchers' type=kotlinx.coroutines.CoroutineDispatcher origin=GET_PROPERTY
+              ARG <this>: GET_OBJECT 'CLASS IR_EXTERNAL_DECLARATION_STUB OBJECT name:Dispatchers modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlinx.coroutines.Dispatchers
+FILE fqName:<root> fileName:/viewmodelscope.kt
+  PROPERTY name:unusedCoroutineScope visibility:internal modality:FINAL [val]
+    annotations:
+      NativeCoroutineScope
+    FIELD PROPERTY_BACKING_FIELD name:unusedCoroutineScope type:kotlinx.coroutines.CoroutineScope visibility:private [final,static]
+      EXPRESSION_BODY
+        CALL 'public final fun CoroutineScope (context: kotlin.coroutines.CoroutineContext): kotlinx.coroutines.CoroutineScope declared in kotlinx.coroutines' type=kotlinx.coroutines.CoroutineScope origin=null
+          ARG context: CALL 'public final fun <get-Default> (): kotlinx.coroutines.CoroutineDispatcher declared in kotlinx.coroutines.Dispatchers' type=kotlinx.coroutines.CoroutineDispatcher origin=GET_PROPERTY
+            ARG <this>: GET_OBJECT 'CLASS IR_EXTERNAL_DECLARATION_STUB OBJECT name:Dispatchers modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlinx.coroutines.Dispatchers
+    FUN DEFAULT_PROPERTY_ACCESSOR name:<get-unusedCoroutineScope> visibility:internal modality:FINAL returnType:kotlinx.coroutines.CoroutineScope
+      correspondingProperty: PROPERTY name:unusedCoroutineScope visibility:internal modality:FINAL [val]
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='internal final fun <get-unusedCoroutineScope> (): kotlinx.coroutines.CoroutineScope declared in <root>'
+          GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:unusedCoroutineScope type:kotlinx.coroutines.CoroutineScope visibility:private [final,static]' type=kotlinx.coroutines.CoroutineScope origin=null
+  CLASS CLASS name:MyAndroidXViewModel1 modality:FINAL visibility:public superTypes:[androidx.lifecycle.ViewModel]
+    thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:<root>.MyAndroidXViewModel1
+    CONSTRUCTOR visibility:public returnType:<root>.MyAndroidXViewModel1 [primary]
+      BLOCK_BODY
+        DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in androidx.lifecycle.ViewModel'
+        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:MyAndroidXViewModel1 modality:FINAL visibility:public superTypes:[androidx.lifecycle.ViewModel]' type=kotlin.Unit
+    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN returnType:kotlin.Boolean [fake_override,operator]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
+      overridden:
+        public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in androidx.lifecycle.ViewModel
+    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN returnType:kotlin.Int [fake_override]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      overridden:
+        public open fun hashCode (): kotlin.Int declared in androidx.lifecycle.ViewModel
+    FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN returnType:kotlin.String [fake_override]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      overridden:
+        public open fun toString (): kotlin.String declared in androidx.lifecycle.ViewModel
+    FUN GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:returnSuspendValue1Native visibility:public modality:FINAL returnType:kotlin.String [suspend]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.MyAndroidXViewModel1
+      annotations:
+        ObjCName(name = "returnSuspendValue1", swiftName = <null>, exact = <null>)
+      BLOCK_BODY
+        VAR IR_TEMPORARY_VARIABLE name:tmp_0 type:kotlinx.coroutines.CoroutineScope [val]
+          CALL 'public final fun <get-viewModelScope> (<this>: androidx.lifecycle.ViewModel): kotlinx.coroutines.CoroutineScope declared in androidx.lifecycle' type=kotlinx.coroutines.CoroutineScope origin=null
+            ARG <this>: GET_VAR '<this>: <root>.MyAndroidXViewModel1 declared in <root>.MyAndroidXViewModel1.returnSuspendValue1Native' type=<root>.MyAndroidXViewModel1 origin=null
+        RETURN type=kotlin.Nothing from='public final fun returnSuspendValue1Native (): kotlin.String declared in <root>.MyAndroidXViewModel1'
+          CALL 'public final fun returnSuspendValue1 (): kotlin.String declared in <root>.MyAndroidXViewModel1' type=kotlin.String origin=null
+            ARG <this>: GET_VAR '<this>: <root>.MyAndroidXViewModel1 declared in <root>.MyAndroidXViewModel1.returnSuspendValue1Native' type=<root>.MyAndroidXViewModel1 origin=null
+    FUN name:returnSuspendValue1 visibility:public modality:FINAL returnType:kotlin.String [suspend]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.MyAndroidXViewModel1
+      annotations:
+        NativeCoroutines
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public final fun returnSuspendValue1 (): kotlin.String declared in <root>.MyAndroidXViewModel1'
+          CONST String type=kotlin.String value="OK1"
+  CLASS CLASS name:MyAndroidXViewModel2 modality:FINAL visibility:public superTypes:[androidx.lifecycle.ViewModel]
+    thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:<root>.MyAndroidXViewModel2
+    PROPERTY name:customCoroutineScope visibility:internal modality:FINAL [val]
+      annotations:
+        NativeCoroutineScope
+      FIELD PROPERTY_BACKING_FIELD name:customCoroutineScope type:kotlinx.coroutines.CoroutineScope visibility:private [final]
+        EXPRESSION_BODY
+          CALL 'public final fun CoroutineScope (context: kotlin.coroutines.CoroutineContext): kotlinx.coroutines.CoroutineScope declared in kotlinx.coroutines' type=kotlinx.coroutines.CoroutineScope origin=null
+            ARG context: CALL 'public final fun <get-Default> (): kotlinx.coroutines.CoroutineDispatcher declared in kotlinx.coroutines.Dispatchers' type=kotlinx.coroutines.CoroutineDispatcher origin=GET_PROPERTY
+              ARG <this>: GET_OBJECT 'CLASS IR_EXTERNAL_DECLARATION_STUB OBJECT name:Dispatchers modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlinx.coroutines.Dispatchers
+      FUN DEFAULT_PROPERTY_ACCESSOR name:<get-customCoroutineScope> visibility:internal modality:FINAL returnType:kotlinx.coroutines.CoroutineScope
+        VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.MyAndroidXViewModel2
+        correspondingProperty: PROPERTY name:customCoroutineScope visibility:internal modality:FINAL [val]
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='internal final fun <get-customCoroutineScope> (): kotlinx.coroutines.CoroutineScope declared in <root>.MyAndroidXViewModel2'
+            GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:customCoroutineScope type:kotlinx.coroutines.CoroutineScope visibility:private [final]' type=kotlinx.coroutines.CoroutineScope origin=null
+              receiver: GET_VAR '<this>: <root>.MyAndroidXViewModel2 declared in <root>.MyAndroidXViewModel2.<get-customCoroutineScope>' type=<root>.MyAndroidXViewModel2 origin=null
+    CONSTRUCTOR visibility:public returnType:<root>.MyAndroidXViewModel2 [primary]
+      BLOCK_BODY
+        DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in androidx.lifecycle.ViewModel'
+        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:MyAndroidXViewModel2 modality:FINAL visibility:public superTypes:[androidx.lifecycle.ViewModel]' type=kotlin.Unit
+    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN returnType:kotlin.Boolean [fake_override,operator]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
+      overridden:
+        public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in androidx.lifecycle.ViewModel
+    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN returnType:kotlin.Int [fake_override]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      overridden:
+        public open fun hashCode (): kotlin.Int declared in androidx.lifecycle.ViewModel
+    FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN returnType:kotlin.String [fake_override]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      overridden:
+        public open fun toString (): kotlin.String declared in androidx.lifecycle.ViewModel
+    FUN GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:returnSuspendValue1Native visibility:public modality:FINAL returnType:kotlin.String [suspend]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.MyAndroidXViewModel2
+      annotations:
+        ObjCName(name = "returnSuspendValue1", swiftName = <null>, exact = <null>)
+      BLOCK_BODY
+        VAR IR_TEMPORARY_VARIABLE name:tmp_1 type:kotlinx.coroutines.CoroutineScope [val]
+          CALL 'internal final fun <get-customCoroutineScope> (): kotlinx.coroutines.CoroutineScope declared in <root>.MyAndroidXViewModel2' type=kotlinx.coroutines.CoroutineScope origin=null
+            ARG <this>: GET_VAR '<this>: <root>.MyAndroidXViewModel2 declared in <root>.MyAndroidXViewModel2.returnSuspendValue1Native' type=<root>.MyAndroidXViewModel2 origin=null
+        RETURN type=kotlin.Nothing from='public final fun returnSuspendValue1Native (): kotlin.String declared in <root>.MyAndroidXViewModel2'
+          CALL 'public final fun returnSuspendValue1 (): kotlin.String declared in <root>.MyAndroidXViewModel2' type=kotlin.String origin=null
+            ARG <this>: GET_VAR '<this>: <root>.MyAndroidXViewModel2 declared in <root>.MyAndroidXViewModel2.returnSuspendValue1Native' type=<root>.MyAndroidXViewModel2 origin=null
+    FUN name:returnSuspendValue1 visibility:public modality:FINAL returnType:kotlin.String [suspend]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.MyAndroidXViewModel2
+      annotations:
+        NativeCoroutines
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public final fun returnSuspendValue1 (): kotlin.String declared in <root>.MyAndroidXViewModel2'
+          CONST String type=kotlin.String value="OK5"
+  CLASS CLASS name:MyObservableViewModel1 modality:FINAL visibility:public superTypes:[com.rickclephas.kmp.observableviewmodel.ViewModel]
+    thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:<root>.MyObservableViewModel1
+    CONSTRUCTOR visibility:public returnType:<root>.MyObservableViewModel1 [primary]
+      BLOCK_BODY
+        DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in com.rickclephas.kmp.observableviewmodel.ViewModel'
+        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:MyObservableViewModel1 modality:FINAL visibility:public superTypes:[com.rickclephas.kmp.observableviewmodel.ViewModel]' type=kotlin.Unit
+    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN returnType:kotlin.Boolean [fake_override,operator]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
+      overridden:
+        public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in com.rickclephas.kmp.observableviewmodel.ViewModel
+    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN returnType:kotlin.Int [fake_override]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      overridden:
+        public open fun hashCode (): kotlin.Int declared in com.rickclephas.kmp.observableviewmodel.ViewModel
+    FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN returnType:kotlin.String [fake_override]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      overridden:
+        public open fun toString (): kotlin.String declared in com.rickclephas.kmp.observableviewmodel.ViewModel
+    FUN GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:returnSuspendValue1Native visibility:public modality:FINAL returnType:kotlin.String [suspend]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.MyObservableViewModel1
+      annotations:
+        ObjCName(name = "returnSuspendValue1", swiftName = <null>, exact = <null>)
+      BLOCK_BODY
+        VAR IR_TEMPORARY_VARIABLE name:tmp_2 type:kotlinx.coroutines.CoroutineScope [val]
+          CALL 'public final fun <get-coroutineScope> (<this>: com.rickclephas.kmp.observableviewmodel.ViewModelScope): kotlinx.coroutines.CoroutineScope declared in com.rickclephas.kmp.observableviewmodel' type=kotlinx.coroutines.CoroutineScope origin=null
+            ARG <this>: CALL 'public final fun <get-viewModelScope> (): com.rickclephas.kmp.observableviewmodel.ViewModelScope declared in com.rickclephas.kmp.observableviewmodel.ViewModel' type=com.rickclephas.kmp.observableviewmodel.ViewModelScope origin=null
+              ARG <this>: GET_VAR '<this>: <root>.MyObservableViewModel1 declared in <root>.MyObservableViewModel1.returnSuspendValue1Native' type=<root>.MyObservableViewModel1 origin=null
+        RETURN type=kotlin.Nothing from='public final fun returnSuspendValue1Native (): kotlin.String declared in <root>.MyObservableViewModel1'
+          CALL 'public final fun returnSuspendValue1 (): kotlin.String declared in <root>.MyObservableViewModel1' type=kotlin.String origin=null
+            ARG <this>: GET_VAR '<this>: <root>.MyObservableViewModel1 declared in <root>.MyObservableViewModel1.returnSuspendValue1Native' type=<root>.MyObservableViewModel1 origin=null
+    FUN name:returnSuspendValue1 visibility:public modality:FINAL returnType:kotlin.String [suspend]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.MyObservableViewModel1
+      annotations:
+        NativeCoroutines
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public final fun returnSuspendValue1 (): kotlin.String declared in <root>.MyObservableViewModel1'
+          CONST String type=kotlin.String value="OK3"
+    PROPERTY FAKE_OVERRIDE name:viewModelScope visibility:public modality:FINAL [fake_override,val]
+      overridden:
+        public final viewModelScope: com.rickclephas.kmp.observableviewmodel.ViewModelScope declared in com.rickclephas.kmp.observableviewmodel.ViewModel
+      FUN FAKE_OVERRIDE name:<get-viewModelScope> visibility:public modality:FINAL returnType:com.rickclephas.kmp.observableviewmodel.ViewModelScope [fake_override]
+        VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:com.rickclephas.kmp.observableviewmodel.ViewModel
+        correspondingProperty: PROPERTY FAKE_OVERRIDE name:viewModelScope visibility:public modality:FINAL [fake_override,val]
+        overridden:
+          public final fun <get-viewModelScope> (): com.rickclephas.kmp.observableviewmodel.ViewModelScope declared in com.rickclephas.kmp.observableviewmodel.ViewModel
+  CLASS CLASS name:MyObservableViewModel2 modality:FINAL visibility:public superTypes:[com.rickclephas.kmp.observableviewmodel.ViewModel]
+    thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:<root>.MyObservableViewModel2
+    PROPERTY name:customCoroutineScope visibility:internal modality:FINAL [val]
+      annotations:
+        NativeCoroutineScope
+      FIELD PROPERTY_BACKING_FIELD name:customCoroutineScope type:kotlinx.coroutines.CoroutineScope visibility:private [final]
+        EXPRESSION_BODY
+          CALL 'public final fun CoroutineScope (context: kotlin.coroutines.CoroutineContext): kotlinx.coroutines.CoroutineScope declared in kotlinx.coroutines' type=kotlinx.coroutines.CoroutineScope origin=null
+            ARG context: CALL 'public final fun <get-Default> (): kotlinx.coroutines.CoroutineDispatcher declared in kotlinx.coroutines.Dispatchers' type=kotlinx.coroutines.CoroutineDispatcher origin=GET_PROPERTY
+              ARG <this>: GET_OBJECT 'CLASS IR_EXTERNAL_DECLARATION_STUB OBJECT name:Dispatchers modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlinx.coroutines.Dispatchers
+      FUN DEFAULT_PROPERTY_ACCESSOR name:<get-customCoroutineScope> visibility:internal modality:FINAL returnType:kotlinx.coroutines.CoroutineScope
+        VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.MyObservableViewModel2
+        correspondingProperty: PROPERTY name:customCoroutineScope visibility:internal modality:FINAL [val]
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='internal final fun <get-customCoroutineScope> (): kotlinx.coroutines.CoroutineScope declared in <root>.MyObservableViewModel2'
+            GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:customCoroutineScope type:kotlinx.coroutines.CoroutineScope visibility:private [final]' type=kotlinx.coroutines.CoroutineScope origin=null
+              receiver: GET_VAR '<this>: <root>.MyObservableViewModel2 declared in <root>.MyObservableViewModel2.<get-customCoroutineScope>' type=<root>.MyObservableViewModel2 origin=null
+    CONSTRUCTOR visibility:public returnType:<root>.MyObservableViewModel2 [primary]
+      BLOCK_BODY
+        DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in com.rickclephas.kmp.observableviewmodel.ViewModel'
+        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:MyObservableViewModel2 modality:FINAL visibility:public superTypes:[com.rickclephas.kmp.observableviewmodel.ViewModel]' type=kotlin.Unit
+    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN returnType:kotlin.Boolean [fake_override,operator]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
+      overridden:
+        public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in com.rickclephas.kmp.observableviewmodel.ViewModel
+    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN returnType:kotlin.Int [fake_override]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      overridden:
+        public open fun hashCode (): kotlin.Int declared in com.rickclephas.kmp.observableviewmodel.ViewModel
+    FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN returnType:kotlin.String [fake_override]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      overridden:
+        public open fun toString (): kotlin.String declared in com.rickclephas.kmp.observableviewmodel.ViewModel
+    FUN GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:returnSuspendValue1Native visibility:public modality:FINAL returnType:kotlin.String [suspend]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.MyObservableViewModel2
+      annotations:
+        ObjCName(name = "returnSuspendValue1", swiftName = <null>, exact = <null>)
+      BLOCK_BODY
+        VAR IR_TEMPORARY_VARIABLE name:tmp_3 type:kotlinx.coroutines.CoroutineScope [val]
+          CALL 'internal final fun <get-customCoroutineScope> (): kotlinx.coroutines.CoroutineScope declared in <root>.MyObservableViewModel2' type=kotlinx.coroutines.CoroutineScope origin=null
+            ARG <this>: GET_VAR '<this>: <root>.MyObservableViewModel2 declared in <root>.MyObservableViewModel2.returnSuspendValue1Native' type=<root>.MyObservableViewModel2 origin=null
+        RETURN type=kotlin.Nothing from='public final fun returnSuspendValue1Native (): kotlin.String declared in <root>.MyObservableViewModel2'
+          CALL 'public final fun returnSuspendValue1 (): kotlin.String declared in <root>.MyObservableViewModel2' type=kotlin.String origin=null
+            ARG <this>: GET_VAR '<this>: <root>.MyObservableViewModel2 declared in <root>.MyObservableViewModel2.returnSuspendValue1Native' type=<root>.MyObservableViewModel2 origin=null
+    FUN name:returnSuspendValue1 visibility:public modality:FINAL returnType:kotlin.String [suspend]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.MyObservableViewModel2
+      annotations:
+        NativeCoroutines
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public final fun returnSuspendValue1 (): kotlin.String declared in <root>.MyObservableViewModel2'
+          CONST String type=kotlin.String value="OK7"
+    PROPERTY FAKE_OVERRIDE name:viewModelScope visibility:public modality:FINAL [fake_override,val]
+      overridden:
+        public final viewModelScope: com.rickclephas.kmp.observableviewmodel.ViewModelScope declared in com.rickclephas.kmp.observableviewmodel.ViewModel
+      FUN FAKE_OVERRIDE name:<get-viewModelScope> visibility:public modality:FINAL returnType:com.rickclephas.kmp.observableviewmodel.ViewModelScope [fake_override]
+        VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:com.rickclephas.kmp.observableviewmodel.ViewModel
+        correspondingProperty: PROPERTY FAKE_OVERRIDE name:viewModelScope visibility:public modality:FINAL [fake_override,val]
+        overridden:
+          public final fun <get-viewModelScope> (): com.rickclephas.kmp.observableviewmodel.ViewModelScope declared in com.rickclephas.kmp.observableviewmodel.ViewModel
+  FUN name:box visibility:public modality:FINAL returnType:kotlin.String
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in <root>'
+        CALL 'public final fun runBoxTest (action: @[ExtensionFunctionType] kotlin.coroutines.SuspendFunction1<com.rickclephas.kmp.nativecoroutines.BoxTest, kotlin.Unit>): kotlin.String declared in com.rickclephas.kmp.nativecoroutines' type=kotlin.String origin=null
+          ARG action: FUN_EXPR type=@[ExtensionFunctionType] kotlin.coroutines.SuspendFunction1<com.rickclephas.kmp.nativecoroutines.BoxTest, kotlin.Unit> origin=LAMBDA
+            FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:kotlin.Unit [suspend]
+              VALUE_PARAMETER kind:ExtensionReceiver name:$this$runBoxTest index:0 type:com.rickclephas.kmp.nativecoroutines.BoxTest
+              BLOCK_BODY
+                CALL 'public final fun await <T> (result: kotlin.coroutines.SuspendFunction0<T of com.rickclephas.kmp.nativecoroutines.BoxTest.await>): kotlin.Unit declared in com.rickclephas.kmp.nativecoroutines.BoxTest' type=kotlin.Unit origin=null
+                  TYPE_ARG T: kotlin.String
+                  ARG <this>: GET_VAR '$this$runBoxTest: com.rickclephas.kmp.nativecoroutines.BoxTest declared in <root>.box.<anonymous>' type=com.rickclephas.kmp.nativecoroutines.BoxTest origin=IMPLICIT_ARGUMENT
+                  ARG result: FUN_EXPR type=kotlin.coroutines.SuspendFunction0<kotlin.String> origin=LAMBDA
+                    FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:kotlin.String [suspend]
+                      BLOCK_BODY
+                        RETURN type=kotlin.Nothing from='local final fun <anonymous> (): kotlin.String declared in <root>.box.<anonymous>'
+                          CALL 'public final fun returnSuspendValue1Native (): kotlin.String declared in <root>.MyAndroidXViewModel1' type=kotlin.String origin=null
+                            ARG <this>: CONSTRUCTOR_CALL 'public constructor <init> () declared in <root>.MyAndroidXViewModel1' type=<root>.MyAndroidXViewModel1 origin=null
+                CALL 'public final fun await <T> (result: kotlin.coroutines.SuspendFunction0<T of com.rickclephas.kmp.nativecoroutines.BoxTest.await>): kotlin.Unit declared in com.rickclephas.kmp.nativecoroutines.BoxTest' type=kotlin.Unit origin=null
+                  TYPE_ARG T: kotlin.String
+                  ARG <this>: GET_VAR '$this$runBoxTest: com.rickclephas.kmp.nativecoroutines.BoxTest declared in <root>.box.<anonymous>' type=com.rickclephas.kmp.nativecoroutines.BoxTest origin=IMPLICIT_ARGUMENT
+                  ARG result: FUN_EXPR type=kotlin.coroutines.SuspendFunction0<kotlin.String> origin=LAMBDA
+                    FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:kotlin.String [suspend]
+                      BLOCK_BODY
+                        RETURN type=kotlin.Nothing from='local final fun <anonymous> (): kotlin.String declared in <root>.box.<anonymous>'
+                          CALL 'public final fun returnSuspendValue2Native (<this>: <root>.MyAndroidXViewModel1): kotlin.String declared in <root>' type=kotlin.String origin=null
+                            ARG <this>: CONSTRUCTOR_CALL 'public constructor <init> () declared in <root>.MyAndroidXViewModel1' type=<root>.MyAndroidXViewModel1 origin=null
+                CALL 'public final fun await <T> (result: kotlin.coroutines.SuspendFunction0<T of com.rickclephas.kmp.nativecoroutines.BoxTest.await>): kotlin.Unit declared in com.rickclephas.kmp.nativecoroutines.BoxTest' type=kotlin.Unit origin=null
+                  TYPE_ARG T: kotlin.String
+                  ARG <this>: GET_VAR '$this$runBoxTest: com.rickclephas.kmp.nativecoroutines.BoxTest declared in <root>.box.<anonymous>' type=com.rickclephas.kmp.nativecoroutines.BoxTest origin=IMPLICIT_ARGUMENT
+                  ARG result: FUN_EXPR type=kotlin.coroutines.SuspendFunction0<kotlin.String> origin=LAMBDA
+                    FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:kotlin.String [suspend]
+                      BLOCK_BODY
+                        RETURN type=kotlin.Nothing from='local final fun <anonymous> (): kotlin.String declared in <root>.box.<anonymous>'
+                          CALL 'public final fun returnSuspendValue1Native (): kotlin.String declared in <root>.MyObservableViewModel1' type=kotlin.String origin=null
+                            ARG <this>: CONSTRUCTOR_CALL 'public constructor <init> () declared in <root>.MyObservableViewModel1' type=<root>.MyObservableViewModel1 origin=null
+                CALL 'public final fun await <T> (result: kotlin.coroutines.SuspendFunction0<T of com.rickclephas.kmp.nativecoroutines.BoxTest.await>): kotlin.Unit declared in com.rickclephas.kmp.nativecoroutines.BoxTest' type=kotlin.Unit origin=null
+                  TYPE_ARG T: kotlin.String
+                  ARG <this>: GET_VAR '$this$runBoxTest: com.rickclephas.kmp.nativecoroutines.BoxTest declared in <root>.box.<anonymous>' type=com.rickclephas.kmp.nativecoroutines.BoxTest origin=IMPLICIT_ARGUMENT
+                  ARG result: FUN_EXPR type=kotlin.coroutines.SuspendFunction0<kotlin.String> origin=LAMBDA
+                    FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:kotlin.String [suspend]
+                      BLOCK_BODY
+                        RETURN type=kotlin.Nothing from='local final fun <anonymous> (): kotlin.String declared in <root>.box.<anonymous>'
+                          CALL 'public final fun returnSuspendValue2Native (<this>: <root>.MyObservableViewModel1): kotlin.String declared in <root>' type=kotlin.String origin=null
+                            ARG <this>: CONSTRUCTOR_CALL 'public constructor <init> () declared in <root>.MyObservableViewModel1' type=<root>.MyObservableViewModel1 origin=null
+                CALL 'public final fun await <T> (result: kotlin.coroutines.SuspendFunction0<T of com.rickclephas.kmp.nativecoroutines.BoxTest.await>): kotlin.Unit declared in com.rickclephas.kmp.nativecoroutines.BoxTest' type=kotlin.Unit origin=null
+                  TYPE_ARG T: kotlin.String
+                  ARG <this>: GET_VAR '$this$runBoxTest: com.rickclephas.kmp.nativecoroutines.BoxTest declared in <root>.box.<anonymous>' type=com.rickclephas.kmp.nativecoroutines.BoxTest origin=IMPLICIT_ARGUMENT
+                  ARG result: FUN_EXPR type=kotlin.coroutines.SuspendFunction0<kotlin.String> origin=LAMBDA
+                    FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:kotlin.String [suspend]
+                      BLOCK_BODY
+                        RETURN type=kotlin.Nothing from='local final fun <anonymous> (): kotlin.String declared in <root>.box.<anonymous>'
+                          CALL 'public final fun returnSuspendValue1Native (): kotlin.String declared in <root>.MyAndroidXViewModel2' type=kotlin.String origin=null
+                            ARG <this>: CONSTRUCTOR_CALL 'public constructor <init> () declared in <root>.MyAndroidXViewModel2' type=<root>.MyAndroidXViewModel2 origin=null
+                CALL 'public final fun await <T> (result: kotlin.coroutines.SuspendFunction0<T of com.rickclephas.kmp.nativecoroutines.BoxTest.await>): kotlin.Unit declared in com.rickclephas.kmp.nativecoroutines.BoxTest' type=kotlin.Unit origin=null
+                  TYPE_ARG T: kotlin.String
+                  ARG <this>: GET_VAR '$this$runBoxTest: com.rickclephas.kmp.nativecoroutines.BoxTest declared in <root>.box.<anonymous>' type=com.rickclephas.kmp.nativecoroutines.BoxTest origin=IMPLICIT_ARGUMENT
+                  ARG result: FUN_EXPR type=kotlin.coroutines.SuspendFunction0<kotlin.String> origin=LAMBDA
+                    FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:kotlin.String [suspend]
+                      BLOCK_BODY
+                        RETURN type=kotlin.Nothing from='local final fun <anonymous> (): kotlin.String declared in <root>.box.<anonymous>'
+                          CALL 'public final fun returnSuspendValue2Native (<this>: <root>.MyAndroidXViewModel2): kotlin.String declared in <root>' type=kotlin.String origin=null
+                            ARG <this>: CONSTRUCTOR_CALL 'public constructor <init> () declared in <root>.MyAndroidXViewModel2' type=<root>.MyAndroidXViewModel2 origin=null
+                CALL 'public final fun await <T> (result: kotlin.coroutines.SuspendFunction0<T of com.rickclephas.kmp.nativecoroutines.BoxTest.await>): kotlin.Unit declared in com.rickclephas.kmp.nativecoroutines.BoxTest' type=kotlin.Unit origin=null
+                  TYPE_ARG T: kotlin.String
+                  ARG <this>: GET_VAR '$this$runBoxTest: com.rickclephas.kmp.nativecoroutines.BoxTest declared in <root>.box.<anonymous>' type=com.rickclephas.kmp.nativecoroutines.BoxTest origin=IMPLICIT_ARGUMENT
+                  ARG result: FUN_EXPR type=kotlin.coroutines.SuspendFunction0<kotlin.String> origin=LAMBDA
+                    FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:kotlin.String [suspend]
+                      BLOCK_BODY
+                        RETURN type=kotlin.Nothing from='local final fun <anonymous> (): kotlin.String declared in <root>.box.<anonymous>'
+                          CALL 'public final fun returnSuspendValue1Native (): kotlin.String declared in <root>.MyObservableViewModel2' type=kotlin.String origin=null
+                            ARG <this>: CONSTRUCTOR_CALL 'public constructor <init> () declared in <root>.MyObservableViewModel2' type=<root>.MyObservableViewModel2 origin=null
+                CALL 'public final fun await <T> (result: kotlin.coroutines.SuspendFunction0<T of com.rickclephas.kmp.nativecoroutines.BoxTest.await>): kotlin.Unit declared in com.rickclephas.kmp.nativecoroutines.BoxTest' type=kotlin.Unit origin=null
+                  TYPE_ARG T: kotlin.String
+                  ARG <this>: GET_VAR '$this$runBoxTest: com.rickclephas.kmp.nativecoroutines.BoxTest declared in <root>.box.<anonymous>' type=com.rickclephas.kmp.nativecoroutines.BoxTest origin=IMPLICIT_ARGUMENT
+                  ARG result: FUN_EXPR type=kotlin.coroutines.SuspendFunction0<kotlin.String> origin=LAMBDA
+                    FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:kotlin.String [suspend]
+                      BLOCK_BODY
+                        RETURN type=kotlin.Nothing from='local final fun <anonymous> (): kotlin.String declared in <root>.box.<anonymous>'
+                          CALL 'public final fun returnSuspendValue2Native (<this>: <root>.MyObservableViewModel2): kotlin.String declared in <root>' type=kotlin.String origin=null
+                            ARG <this>: CONSTRUCTOR_CALL 'public constructor <init> () declared in <root>.MyObservableViewModel2' type=<root>.MyObservableViewModel2 origin=null
+  FUN name:returnSuspendValue2 visibility:public modality:FINAL returnType:kotlin.String [suspend]
+    VALUE_PARAMETER kind:ExtensionReceiver name:<this> index:0 type:<root>.MyAndroidXViewModel1
+    annotations:
+      NativeCoroutines
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun returnSuspendValue2 (<this>: <root>.MyAndroidXViewModel1): kotlin.String declared in <root>'
+        CONST String type=kotlin.String value="OK2"
+  FUN name:returnSuspendValue2 visibility:public modality:FINAL returnType:kotlin.String [suspend]
+    VALUE_PARAMETER kind:ExtensionReceiver name:<this> index:0 type:<root>.MyAndroidXViewModel2
+    annotations:
+      NativeCoroutines
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun returnSuspendValue2 (<this>: <root>.MyAndroidXViewModel2): kotlin.String declared in <root>'
+        CONST String type=kotlin.String value="OK6"
+  FUN name:returnSuspendValue2 visibility:public modality:FINAL returnType:kotlin.String [suspend]
+    VALUE_PARAMETER kind:ExtensionReceiver name:<this> index:0 type:<root>.MyObservableViewModel1
+    annotations:
+      NativeCoroutines
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun returnSuspendValue2 (<this>: <root>.MyObservableViewModel1): kotlin.String declared in <root>'
+        CONST String type=kotlin.String value="OK4"
+  FUN name:returnSuspendValue2 visibility:public modality:FINAL returnType:kotlin.String [suspend]
+    VALUE_PARAMETER kind:ExtensionReceiver name:<this> index:0 type:<root>.MyObservableViewModel2
+    annotations:
+      NativeCoroutines
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun returnSuspendValue2 (<this>: <root>.MyObservableViewModel2): kotlin.String declared in <root>'
+        CONST String type=kotlin.String value="OK8"
+FILE fqName:<root> fileName:__GENERATED DECLARATIONS__.kt
+  FUN GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:returnSuspendValue2Native visibility:public modality:FINAL returnType:kotlin.String [suspend]
+    VALUE_PARAMETER kind:ExtensionReceiver name:<this> index:0 type:<root>.MyAndroidXViewModel1
+    annotations:
+      ObjCName(name = "returnSuspendValue2", swiftName = <null>, exact = <null>)
+    BLOCK_BODY
+      VAR IR_TEMPORARY_VARIABLE name:tmp_0 type:kotlinx.coroutines.CoroutineScope [val]
+        CALL 'public final fun <get-viewModelScope> (<this>: androidx.lifecycle.ViewModel): kotlinx.coroutines.CoroutineScope declared in androidx.lifecycle' type=kotlinx.coroutines.CoroutineScope origin=null
+          ARG <this>: GET_VAR '<this>: <root>.MyAndroidXViewModel1 declared in <root>.returnSuspendValue2Native' type=<root>.MyAndroidXViewModel1 origin=null
+      RETURN type=kotlin.Nothing from='public final fun returnSuspendValue2Native (<this>: <root>.MyAndroidXViewModel1): kotlin.String declared in <root>'
+        CALL 'public final fun returnSuspendValue2 (<this>: <root>.MyAndroidXViewModel1): kotlin.String declared in <root>' type=kotlin.String origin=null
+          ARG <this>: GET_VAR '<this>: <root>.MyAndroidXViewModel1 declared in <root>.returnSuspendValue2Native' type=<root>.MyAndroidXViewModel1 origin=null
+  FUN GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:returnSuspendValue2Native visibility:public modality:FINAL returnType:kotlin.String [suspend]
+    VALUE_PARAMETER kind:ExtensionReceiver name:<this> index:0 type:<root>.MyAndroidXViewModel2
+    annotations:
+      ObjCName(name = "returnSuspendValue2", swiftName = <null>, exact = <null>)
+    BLOCK_BODY
+      VAR IR_TEMPORARY_VARIABLE name:tmp_1 type:kotlinx.coroutines.CoroutineScope [val]
+        CALL 'public final fun <get-viewModelScope> (<this>: androidx.lifecycle.ViewModel): kotlinx.coroutines.CoroutineScope declared in androidx.lifecycle' type=kotlinx.coroutines.CoroutineScope origin=null
+          ARG <this>: GET_VAR '<this>: <root>.MyAndroidXViewModel2 declared in <root>.returnSuspendValue2Native' type=<root>.MyAndroidXViewModel2 origin=null
+      RETURN type=kotlin.Nothing from='public final fun returnSuspendValue2Native (<this>: <root>.MyAndroidXViewModel2): kotlin.String declared in <root>'
+        CALL 'public final fun returnSuspendValue2 (<this>: <root>.MyAndroidXViewModel2): kotlin.String declared in <root>' type=kotlin.String origin=null
+          ARG <this>: GET_VAR '<this>: <root>.MyAndroidXViewModel2 declared in <root>.returnSuspendValue2Native' type=<root>.MyAndroidXViewModel2 origin=null
+  FUN GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:returnSuspendValue2Native visibility:public modality:FINAL returnType:kotlin.String [suspend]
+    VALUE_PARAMETER kind:ExtensionReceiver name:<this> index:0 type:<root>.MyObservableViewModel1
+    annotations:
+      ObjCName(name = "returnSuspendValue2", swiftName = <null>, exact = <null>)
+    BLOCK_BODY
+      VAR IR_TEMPORARY_VARIABLE name:tmp_2 type:kotlinx.coroutines.CoroutineScope [val]
+        CALL 'public final fun <get-coroutineScope> (<this>: com.rickclephas.kmp.observableviewmodel.ViewModelScope): kotlinx.coroutines.CoroutineScope declared in com.rickclephas.kmp.observableviewmodel' type=kotlinx.coroutines.CoroutineScope origin=null
+          ARG <this>: CALL 'public final fun <get-viewModelScope> (): com.rickclephas.kmp.observableviewmodel.ViewModelScope declared in com.rickclephas.kmp.observableviewmodel.ViewModel' type=com.rickclephas.kmp.observableviewmodel.ViewModelScope origin=null
+            ARG <this>: GET_VAR '<this>: <root>.MyObservableViewModel1 declared in <root>.returnSuspendValue2Native' type=<root>.MyObservableViewModel1 origin=null
+      RETURN type=kotlin.Nothing from='public final fun returnSuspendValue2Native (<this>: <root>.MyObservableViewModel1): kotlin.String declared in <root>'
+        CALL 'public final fun returnSuspendValue2 (<this>: <root>.MyObservableViewModel1): kotlin.String declared in <root>' type=kotlin.String origin=null
+          ARG <this>: GET_VAR '<this>: <root>.MyObservableViewModel1 declared in <root>.returnSuspendValue2Native' type=<root>.MyObservableViewModel1 origin=null
+  FUN GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:returnSuspendValue2Native visibility:public modality:FINAL returnType:kotlin.String [suspend]
+    VALUE_PARAMETER kind:ExtensionReceiver name:<this> index:0 type:<root>.MyObservableViewModel2
+    annotations:
+      ObjCName(name = "returnSuspendValue2", swiftName = <null>, exact = <null>)
+    BLOCK_BODY
+      VAR IR_TEMPORARY_VARIABLE name:tmp_3 type:kotlinx.coroutines.CoroutineScope [val]
+        CALL 'public final fun <get-coroutineScope> (<this>: com.rickclephas.kmp.observableviewmodel.ViewModelScope): kotlinx.coroutines.CoroutineScope declared in com.rickclephas.kmp.observableviewmodel' type=kotlinx.coroutines.CoroutineScope origin=null
+          ARG <this>: CALL 'public final fun <get-viewModelScope> (): com.rickclephas.kmp.observableviewmodel.ViewModelScope declared in com.rickclephas.kmp.observableviewmodel.ViewModel' type=com.rickclephas.kmp.observableviewmodel.ViewModelScope origin=null
+            ARG <this>: GET_VAR '<this>: <root>.MyObservableViewModel2 declared in <root>.returnSuspendValue2Native' type=<root>.MyObservableViewModel2 origin=null
+      RETURN type=kotlin.Nothing from='public final fun returnSuspendValue2Native (<this>: <root>.MyObservableViewModel2): kotlin.String declared in <root>'
+        CALL 'public final fun returnSuspendValue2 (<this>: <root>.MyObservableViewModel2): kotlin.String declared in <root>' type=kotlin.String origin=null
+          ARG <this>: GET_VAR '<this>: <root>.MyObservableViewModel2 declared in <root>.returnSuspendValue2Native' type=<root>.MyObservableViewModel2 origin=null

@@ -41,20 +41,38 @@ val objCNameProperty2: StateFlow<String>
 
 fun box(): String {
   return runBoxTest(action = local suspend fun BoxTest.<anonymous>() {
-    $this$runBoxTest.await<String>(nativeSuspend = deprecatedFunction1Native())
-    $this$runBoxTest.await<String>(nativeSuspend = deprecatedFunction2Native())
+    $this$runBoxTest.await<String>(nativeSuspend = local fun <anonymous>(): Function3<@ParameterName(name = "onResult") Function2<String, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+      return deprecatedFunction1Native()
+    }
+)
+    $this$runBoxTest.await<String>(nativeSuspend = local fun <anonymous>(): Function3<@ParameterName(name = "onResult") Function2<String, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+      return deprecatedFunction2Native()
+    }
+)
     $this$runBoxTest.collect<String>(nativeFlow = <get-deprecatedProperty1Native>())
     $this$runBoxTest.collect<String>(nativeFlow = <get-deprecatedProperty2Native>())
     $this$runBoxTest.collect<String>(nativeFlow = <get-deprecatedProperty4Native>(), maxValues = 1)
     $this$runBoxTest.value<String>(value = <get-deprecatedProperty4Value>())
-    $this$runBoxTest.await<String>(nativeSuspend = objCNameFunction1Native())
-    $this$runBoxTest.await<String>(nativeSuspend = objCNameFunction2Native())
-    $this$runBoxTest.await<String>(nativeSuspend = objCNameFunction3Native())
+    $this$runBoxTest.await<String>(nativeSuspend = local fun <anonymous>(): Function3<@ParameterName(name = "onResult") Function2<String, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+      return objCNameFunction1Native()
+    }
+)
+    $this$runBoxTest.await<String>(nativeSuspend = local fun <anonymous>(): Function3<@ParameterName(name = "onResult") Function2<String, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+      return objCNameFunction2Native()
+    }
+)
+    $this$runBoxTest.await<String>(nativeSuspend = local fun <anonymous>(): Function3<@ParameterName(name = "onResult") Function2<String, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+      return objCNameFunction3Native()
+    }
+)
     $this$runBoxTest.collect<String>(nativeFlow = <get-objCNameProperty1Native>(), maxValues = 1)
     $this$runBoxTest.value<String>(value = <get-objCNameProperty1Value>())
     $this$runBoxTest.collect<String>(nativeFlow = <get-objCNameProperty2Flow>(), maxValues = 1)
     $this$runBoxTest.value<String>(value = <get-objCNameProperty2Value>())
-    $this$runBoxTest.await<String>(nativeSuspend = objCNameFunctionParameterNative(value = "OK13"))
+    $this$runBoxTest.await<String>(nativeSuspend = local fun <anonymous>(): Function3<@ParameterName(name = "onResult") Function2<String, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+      return objCNameFunctionParameterNative(value = "OK13")
+    }
+)
   }
 )
 }

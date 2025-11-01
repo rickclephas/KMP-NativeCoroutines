@@ -200,24 +200,48 @@ class MyClass7 : MyClass6 {
 
 fun box(): String {
   return runBoxTest(action = local suspend fun BoxTest.<anonymous>() {
-    $this$runBoxTest.await<String>(nativeSuspend = returnSuspendValueNative())
+    $this$runBoxTest.await<String>(nativeSuspend = local fun <anonymous>(): Function3<@ParameterName(name = "onResult") Function2<String, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+      return returnSuspendValueNative()
+    }
+)
     $this$runBoxTest.collect<String>(nativeFlow = <get-flowPropertyNative>())
-    $this$runBoxTest.await<String>(nativeSuspend = MyClass1().returnSuspendValueNative())
+    $this$runBoxTest.await<String>(nativeSuspend = local fun <anonymous>(): Function3<@ParameterName(name = "onResult") Function2<String, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+      return MyClass1().returnSuspendValueNative()
+    }
+)
     $this$runBoxTest.collect<String>(nativeFlow = MyClass2().<get-flowPropertyNative>())
-    $this$runBoxTest.await<String>(nativeSuspend = MyClass3().returnOtherSuspendValueNative())
+    $this$runBoxTest.await<String>(nativeSuspend = local fun <anonymous>(): Function3<@ParameterName(name = "onResult") Function2<String, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+      return MyClass3().returnOtherSuspendValueNative()
+    }
+)
     $this$runBoxTest.collect<String>(nativeFlow = <get-flowExtProperty1Native>(/* <this> = MyClass3() */))
     with<MyClass4, Unit>(receiver = MyClass4(), block = local fun MyClass4.<anonymous>() {
-      $this$runBoxTest.await<String>(nativeSuspend = $this$with.returnExtSuspendValueNative(/* <this> = MyClass1() */))
+      $this$runBoxTest.await<String>(nativeSuspend = local fun <anonymous>(): Function3<@ParameterName(name = "onResult") Function2<String, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+        return $this$with.returnExtSuspendValueNative(/* <this> = MyClass1() */)
+      }
+)
     }
 )
     $this$runBoxTest.collect<String>(nativeFlow = <get-flowExtProperty2Native>(/* <this> = MyClass3() */))
     with<MyClass5, Unit>(receiver = MyClass5(), block = local fun MyClass5.<anonymous>() {
-      $this$runBoxTest.await<String>(nativeSuspend = $this$with.returnExtSuspendValueNative(/* <this> = MyClass1() */))
+      $this$runBoxTest.await<String>(nativeSuspend = local fun <anonymous>(): Function3<@ParameterName(name = "onResult") Function2<String, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+        return $this$with.returnExtSuspendValueNative(/* <this> = MyClass1() */)
+      }
+)
     }
 )
-    $this$runBoxTest.await<String>(nativeSuspend = MyClass6().returnSuspendValueNative())
-    $this$runBoxTest.await<String>(nativeSuspend = returnExtSuspendValueNative(/* <this> = MyClass6() */))
-    $this$runBoxTest.await<String>(nativeSuspend = MyClass7().returnOtherSuspendValueNative())
+    $this$runBoxTest.await<String>(nativeSuspend = local fun <anonymous>(): Function3<@ParameterName(name = "onResult") Function2<String, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+      return MyClass6().returnSuspendValueNative()
+    }
+)
+    $this$runBoxTest.await<String>(nativeSuspend = local fun <anonymous>(): Function3<@ParameterName(name = "onResult") Function2<String, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+      return returnExtSuspendValueNative(/* <this> = MyClass6() */)
+    }
+)
+    $this$runBoxTest.await<String>(nativeSuspend = local fun <anonymous>(): Function3<@ParameterName(name = "onResult") Function2<String, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+      return MyClass7().returnOtherSuspendValueNative()
+    }
+)
   }
 )
 }
