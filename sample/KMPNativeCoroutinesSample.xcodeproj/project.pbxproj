@@ -791,7 +791,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1D717624267009E800846F75 /* Build configuration list for PBXNativeTarget "iOS App" */;
 			buildPhases = (
-				1D5CF258275E8992002389EE /* ShellScript */,
+				1D5CF258275E8992002389EE /* Build shared Kotlin module */,
 				1D71760F267009E700846F75 /* Sources */,
 				1D717610267009E700846F75 /* Frameworks */,
 				1D717611267009E700846F75 /* Resources */,
@@ -1034,7 +1034,7 @@
 			shellPath = /bin/sh;
 			shellScript = "cd \"$SRCROOT\"\n./gradlew :shared:embedAndSignAppleFrameworkForXcode\n";
 		};
-		1D5CF258275E8992002389EE /* ShellScript */ = {
+		1D5CF258275E8992002389EE /* Build shared Kotlin module */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -1044,13 +1044,14 @@
 			);
 			inputPaths = (
 			);
+			name = "Build shared Kotlin module";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd \"$SRCROOT\"\n./gradlew :shared:embedAndSignAppleFrameworkForXcode\n";
+			shellScript = "cd \"$SRCROOT\"\nif [ \"$NATIVE_COROUTINES_SWIFT_EXPORT\" == \"true\" ]; then\n./gradlew :shared:embedSwiftExportForXcode\nelse\n./gradlew :shared:embedAndSignAppleFrameworkForXcode\nfi\n";
 		};
 		1DB9CD1D275E935100E13AFD /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;

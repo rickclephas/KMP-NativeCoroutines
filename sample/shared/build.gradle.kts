@@ -47,4 +47,8 @@ kotlin {
             }
         }
     }
+    swiftExport {
+        moduleName = "NativeCoroutinesSampleShared"
+        flattenPackage = "com.rickclephas.kmp.nativecoroutines.sample"
+    }
 }
