@@ -12,6 +12,7 @@ class MyClass14<T : Any?> {
   }
 
   @ObjCName(name = "returnGenericSuspendValue")
+  @Throws(exceptionClasses = [Exception::class])
   suspend fun returnGenericSuspendValueNative(): T {
     val tmp_0: CoroutineScope? = null
     return <this>.returnGenericSuspendValue()
@@ -32,6 +33,7 @@ class MyClass16 {
   }
 
   @ObjCName(name = "functionWithGenericValues")
+  @Throws(exceptionClasses = [Exception::class])
   suspend fun <T1 : Any?, T2 : T1> functionWithGenericValuesNative(value1: T1, value2: T2): String {
     val tmp_1: CoroutineScope? = null
     return <this>.functionWithGenericValues<T1, T2>(value1 = value1, value2 = value2)
@@ -52,6 +54,7 @@ class MyClass20 {
   }
 
   @ObjCName(name = "returnClassExtensionValue")
+  @Throws(exceptionClasses = [Exception::class])
   suspend fun String.returnClassExtensionValueNative(): String {
     val tmp_2: CoroutineScope? = null
     return <this>.returnClassExtensionValue(/* <this> = <this> */)
@@ -72,6 +75,7 @@ class MyClass21<out T : Any?> {
   }
 
   @ObjCName(name = "returnGenericValue")
+  @Throws(exceptionClasses = [Exception::class])
   suspend fun returnGenericValueNative(): T? {
     val tmp_3: CoroutineScope? = null
     return <this>.returnGenericValue()
@@ -106,6 +110,7 @@ class MyClass8 {
   }
 
   @ObjCName(name = "returnSuspendValue")
+  @Throws(exceptionClasses = [Exception::class])
   suspend fun returnSuspendValueNative(): String {
     val tmp_4: CoroutineScope? = null
     return <this>.returnSuspendValue()
@@ -134,6 +139,7 @@ class MyFlow23<T1 : Any?, T2 : Any?> : Flow<T2> {
 
 interface MyInterface22 {
   @ObjCName(name = "returnInterfaceSuspendValue")
+  @Throws(exceptionClasses = [Exception::class])
   suspend fun returnInterfaceSuspendValueNative(): String {
     val tmp_5: CoroutineScope? = null
     return <this>.returnInterfaceSuspendValue()
@@ -330,6 +336,7 @@ fun returnCustomFlowValueNative(): MyFlow23<Int, String> {
 }
 
 @ObjCName(name = "returnExtensionValue")
+@Throws(exceptionClasses = [Exception::class])
 suspend fun String.returnExtensionValueNative(): String {
   val tmp_1: CoroutineScope? = null
   return returnExtensionValue(/* <this> = <this> */)
@@ -342,12 +349,14 @@ fun returnFlowValueNative(): Flow<String> {
 }
 
 @ObjCName(name = "returnGenericSuspendValue")
+@Throws(exceptionClasses = [Exception::class])
 suspend fun <T : Any?> returnGenericSuspendValueNative(value: T): T {
   val tmp_3: CoroutineScope? = null
   return returnGenericSuspendValue<T>(value = value)
 }
 
 @ObjCName(name = "returnInlineSuspendValue")
+@Throws(exceptionClasses = [Exception::class])
 suspend inline fun <reified T : Any?> returnInlineSuspendValueNative(value: T): T {
   val tmp_4: CoroutineScope? = null
   return returnInlineSuspendValue<T>(value = value)
@@ -372,12 +381,14 @@ fun returnNullableFlowValueNative(): Flow<String?> {
 }
 
 @ObjCName(name = "returnNullableSuspendFlow")
+@Throws(exceptionClasses = [Exception::class])
 suspend fun returnNullableSuspendFlowNative(): Flow<String>? {
   val tmp_8: CoroutineScope? = null
   return returnNullableSuspendFlow()
 }
 
 @ObjCName(name = "returnNullableSuspendValue")
+@Throws(exceptionClasses = [Exception::class])
 suspend fun returnNullableSuspendValueNative(): String? {
   val tmp_9: CoroutineScope? = null
   return returnNullableSuspendValue()
@@ -385,6 +396,7 @@ suspend fun returnNullableSuspendValueNative(): String? {
 
 @ObjCName(name = "returnRefinedSuspendValue")
 @ShouldRefineInSwift
+@Throws(exceptionClasses = [Exception::class])
 suspend fun returnRefinedSuspendValueNative(): String {
   val tmp_10: CoroutineScope? = null
   return returnRefinedSuspendValue()
@@ -398,36 +410,42 @@ fun returnStateFlowValueNative(): StateFlow<String> {
 
 @ObjCName(name = "returnSuspendFlowValue")
 @ShouldRefineInSwift
+@Throws(exceptionClasses = [Exception::class])
 suspend fun returnSuspendFlowValueNative(): Flow<String> {
   val tmp_12: CoroutineScope? = null
   return returnSuspendFlowValue()
 }
 
 @ObjCName(name = "returnSuspendParameterValue")
+@Throws(exceptionClasses = [Exception::class])
 suspend fun returnSuspendParameterValueNative(value: Int): Int {
   val tmp_13: CoroutineScope? = null
   return returnSuspendParameterValue(value = value)
 }
 
 @ObjCName(name = "returnSuspendParameterValue")
+@Throws(exceptionClasses = [Exception::class])
 suspend fun returnSuspendParameterValueNative(value: String): String {
   val tmp_14: CoroutineScope? = null
   return returnSuspendParameterValue(value = value)
 }
 
 @ObjCName(name = "returnSuspendValue")
+@Throws(exceptionClasses = [Exception::class])
 suspend fun returnSuspendValueNative(): String {
   val tmp_15: CoroutineScope? = null
   return returnSuspendValue()
 }
 
 @ObjCName(name = "returnSuspendVarargValue")
+@Throws(exceptionClasses = [Exception::class])
 suspend fun returnSuspendVarargValueNative(vararg values: String): String {
   val tmp_16: CoroutineScope? = null
   return returnSuspendVarargValue(values = values)
 }
 
 @ObjCName(name = "returnThrowsSuspendValue")
+@Throws(exceptionClasses = [Exception::class])
 suspend fun returnThrowsSuspendValueNative(): String {
   val tmp_17: CoroutineScope? = null
   return returnThrowsSuspendValue()

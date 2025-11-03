@@ -6,6 +6,8 @@ internal object FqNames {
     val kotlin = FqName("kotlin")
 
     val deprecated = FqName("kotlin.Deprecated")
+    val exception = FqName("kotlin.Exception")
+    val throws = FqName("kotlin.Throws")
 
     val hidesFromObjC = FqName("kotlin.native.HidesFromObjC")
     val objCName = FqName("kotlin.native.ObjCName")

@@ -84,6 +84,9 @@ internal fun FirExtension.buildNativeFunction(
         if (annotation.shouldRefineInSwift) {
             annotations.add(buildAnnotation(ClassIds.shouldRefineInSwift))
         }
+        if (SwiftExport.NO_FUNC_RETURN_TYPES in swiftExport && callableSignature.isSuspend) {
+            annotations.add(buildThrowsAnnotation(ClassIds.exception))
+        }
 
         body = session.buildCallableReferenceBlock(originalSymbol)
     }.symbol

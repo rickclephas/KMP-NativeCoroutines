@@ -123,6 +123,7 @@ FILE fqName:<root> fileName:/viewmodelscope.kt
       VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.MyAndroidXViewModel1
       annotations:
         ObjCName(name = "returnSuspendValue1", swiftName = <null>, exact = <null>)
+        Throws(exceptionClasses = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_JAVA_DECLARATION_STUB CLASS name:Exception modality:OPEN visibility:public superTypes:[kotlin.Throwable]' type=kotlin.reflect.KClass<java.lang.Exception>] type=kotlin.Array<out kotlin.Throwable> varargElementType=kotlin.Throwable)
       BLOCK_BODY
         VAR IR_TEMPORARY_VARIABLE name:tmp_0 type:kotlinx.coroutines.CoroutineScope [val]
           CALL 'public final fun <get-viewModelScope> (<this>: androidx.lifecycle.ViewModel): kotlinx.coroutines.CoroutineScope declared in androidx.lifecycle' type=kotlinx.coroutines.CoroutineScope origin=null
@@ -175,6 +176,7 @@ FILE fqName:<root> fileName:/viewmodelscope.kt
       VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.MyAndroidXViewModel2
       annotations:
         ObjCName(name = "returnSuspendValue1", swiftName = <null>, exact = <null>)
+        Throws(exceptionClasses = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_JAVA_DECLARATION_STUB CLASS name:Exception modality:OPEN visibility:public superTypes:[kotlin.Throwable]' type=kotlin.reflect.KClass<java.lang.Exception>] type=kotlin.Array<out kotlin.Throwable> varargElementType=kotlin.Throwable)
       BLOCK_BODY
         VAR IR_TEMPORARY_VARIABLE name:tmp_1 type:kotlinx.coroutines.CoroutineScope [val]
           CALL 'internal final fun <get-customCoroutineScope> (): kotlinx.coroutines.CoroutineScope declared in <root>.MyAndroidXViewModel2' type=kotlinx.coroutines.CoroutineScope origin=null
@@ -212,6 +214,7 @@ FILE fqName:<root> fileName:/viewmodelscope.kt
       VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.MyObservableViewModel1
       annotations:
         ObjCName(name = "returnSuspendValue1", swiftName = <null>, exact = <null>)
+        Throws(exceptionClasses = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_JAVA_DECLARATION_STUB CLASS name:Exception modality:OPEN visibility:public superTypes:[kotlin.Throwable]' type=kotlin.reflect.KClass<java.lang.Exception>] type=kotlin.Array<out kotlin.Throwable> varargElementType=kotlin.Throwable)
       BLOCK_BODY
         VAR IR_TEMPORARY_VARIABLE name:tmp_2 type:kotlinx.coroutines.CoroutineScope [val]
           CALL 'public final fun <get-coroutineScope> (<this>: com.rickclephas.kmp.observableviewmodel.ViewModelScope): kotlinx.coroutines.CoroutineScope declared in com.rickclephas.kmp.observableviewmodel' type=kotlinx.coroutines.CoroutineScope origin=null
@@ -273,6 +276,7 @@ FILE fqName:<root> fileName:/viewmodelscope.kt
       VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.MyObservableViewModel2
       annotations:
         ObjCName(name = "returnSuspendValue1", swiftName = <null>, exact = <null>)
+        Throws(exceptionClasses = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_JAVA_DECLARATION_STUB CLASS name:Exception modality:OPEN visibility:public superTypes:[kotlin.Throwable]' type=kotlin.reflect.KClass<java.lang.Exception>] type=kotlin.Array<out kotlin.Throwable> varargElementType=kotlin.Throwable)
       BLOCK_BODY
         VAR IR_TEMPORARY_VARIABLE name:tmp_3 type:kotlinx.coroutines.CoroutineScope [val]
           CALL 'internal final fun <get-customCoroutineScope> (): kotlinx.coroutines.CoroutineScope declared in <root>.MyObservableViewModel2' type=kotlinx.coroutines.CoroutineScope origin=null
@@ -408,6 +412,7 @@ FILE fqName:<root> fileName:__GENERATED DECLARATIONS__.kt
     VALUE_PARAMETER kind:ExtensionReceiver name:<this> index:0 type:<root>.MyAndroidXViewModel1
     annotations:
       ObjCName(name = "returnSuspendValue2", swiftName = <null>, exact = <null>)
+      Throws(exceptionClasses = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_JAVA_DECLARATION_STUB CLASS name:Exception modality:OPEN visibility:public superTypes:[kotlin.Throwable]' type=kotlin.reflect.KClass<java.lang.Exception>] type=kotlin.Array<out kotlin.Throwable> varargElementType=kotlin.Throwable)
     BLOCK_BODY
       VAR IR_TEMPORARY_VARIABLE name:tmp_0 type:kotlinx.coroutines.CoroutineScope [val]
         CALL 'public final fun <get-viewModelScope> (<this>: androidx.lifecycle.ViewModel): kotlinx.coroutines.CoroutineScope declared in androidx.lifecycle' type=kotlinx.coroutines.CoroutineScope origin=null
@@ -419,6 +424,7 @@ FILE fqName:<root> fileName:__GENERATED DECLARATIONS__.kt
     VALUE_PARAMETER kind:ExtensionReceiver name:<this> index:0 type:<root>.MyAndroidXViewModel2
     annotations:
       ObjCName(name = "returnSuspendValue2", swiftName = <null>, exact = <null>)
+      Throws(exceptionClasses = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_JAVA_DECLARATION_STUB CLASS name:Exception modality:OPEN visibility:public superTypes:[kotlin.Throwable]' type=kotlin.reflect.KClass<java.lang.Exception>] type=kotlin.Array<out kotlin.Throwable> varargElementType=kotlin.Throwable)
     BLOCK_BODY
       VAR IR_TEMPORARY_VARIABLE name:tmp_1 type:kotlinx.coroutines.CoroutineScope [val]
         CALL 'public final fun <get-viewModelScope> (<this>: androidx.lifecycle.ViewModel): kotlinx.coroutines.CoroutineScope declared in androidx.lifecycle' type=kotlinx.coroutines.CoroutineScope origin=null
@@ -430,6 +436,7 @@ FILE fqName:<root> fileName:__GENERATED DECLARATIONS__.kt
     VALUE_PARAMETER kind:ExtensionReceiver name:<this> index:0 type:<root>.MyObservableViewModel1
     annotations:
       ObjCName(name = "returnSuspendValue2", swiftName = <null>, exact = <null>)
+      Throws(exceptionClasses = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_JAVA_DECLARATION_STUB CLASS name:Exception modality:OPEN visibility:public superTypes:[kotlin.Throwable]' type=kotlin.reflect.KClass<java.lang.Exception>] type=kotlin.Array<out kotlin.Throwable> varargElementType=kotlin.Throwable)
     BLOCK_BODY
       VAR IR_TEMPORARY_VARIABLE name:tmp_2 type:kotlinx.coroutines.CoroutineScope [val]
         CALL 'public final fun <get-coroutineScope> (<this>: com.rickclephas.kmp.observableviewmodel.ViewModelScope): kotlinx.coroutines.CoroutineScope declared in com.rickclephas.kmp.observableviewmodel' type=kotlinx.coroutines.CoroutineScope origin=null
@@ -442,6 +449,7 @@ FILE fqName:<root> fileName:__GENERATED DECLARATIONS__.kt
     VALUE_PARAMETER kind:ExtensionReceiver name:<this> index:0 type:<root>.MyObservableViewModel2
     annotations:
       ObjCName(name = "returnSuspendValue2", swiftName = <null>, exact = <null>)
+      Throws(exceptionClasses = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_JAVA_DECLARATION_STUB CLASS name:Exception modality:OPEN visibility:public superTypes:[kotlin.Throwable]' type=kotlin.reflect.KClass<java.lang.Exception>] type=kotlin.Array<out kotlin.Throwable> varargElementType=kotlin.Throwable)
     BLOCK_BODY
       VAR IR_TEMPORARY_VARIABLE name:tmp_3 type:kotlinx.coroutines.CoroutineScope [val]
         CALL 'public final fun <get-coroutineScope> (<this>: com.rickclephas.kmp.observableviewmodel.ViewModelScope): kotlinx.coroutines.CoroutineScope declared in com.rickclephas.kmp.observableviewmodel' type=kotlinx.coroutines.CoroutineScope origin=null
