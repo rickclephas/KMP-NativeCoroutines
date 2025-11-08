@@ -80,12 +80,12 @@ abstract class AbstractFirBaseCodegenTest(
             KmpNativeCoroutinesDirectives.STATE_SUFFIX with "Value"
             KmpNativeCoroutinesDirectives.STATE_FLOW_SUFFIX with "Flow"
         }
-        listOf(
-            "1", // Kotlin 2.2.21
+        listOf<Long>(
+            0b1, // Kotlin 2.2.21
         ).forEach { version ->
             forTestsMatching("swift$version/*") {
                 defaultDirectives {
-                    KmpNativeCoroutinesDirectives.SWIFT_EXPORT with SWIFT_EXPORT.parse(version)
+                    KmpNativeCoroutinesDirectives.SWIFT_EXPORT with SWIFT_EXPORT.parse(version.toString())
                 }
             }
         }
