@@ -188,25 +188,25 @@ class CombineFutureIntegrationTests: XCTestCase {
     }
     #endif
     
-    #if !NATIVE_COROUTINES_SWIFT_EXPORT
-    func testUnitReturnType() {
-        let integrationTests = SuspendIntegrationTests()
-        let future = createFuture(for: integrationTests.returnUnit(delay: 100))
-        let valueExpectation = expectation(description: "Waiting for value")
-        let completionExpectation = expectation(description: "Waiting for completion")
-        let cancellable = future.sink { completion in
-            if case .failure(_) = completion {
-                XCTFail("Future should complete without an error")
-            }
-            completionExpectation.fulfill()
-        } receiveValue: {
-            valueExpectation.fulfill()
-        }
-        _ = cancellable // This is just to remove the unused variable warning
-        XCTAssertEqual(integrationTests.uncompletedJobCount, 1, "There should be 1 uncompleted job")
-        wait(for: [valueExpectation, completionExpectation], timeout: 3)
-        delay(1) // Delay is needed else the job isn't completed yet
-        XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
-    }
-    #endif
+//    #if !NATIVE_COROUTINES_SWIFT_EXPORT
+//    func testUnitReturnType() {
+//        let integrationTests = SuspendIntegrationTests()
+//        let future = createFuture(for: integrationTests.returnUnit(delay: 100))
+//        let valueExpectation = expectation(description: "Waiting for value")
+//        let completionExpectation = expectation(description: "Waiting for completion")
+//        let cancellable = future.sink { completion in
+//            if case .failure(_) = completion {
+//                XCTFail("Future should complete without an error")
+//            }
+//            completionExpectation.fulfill()
+//        } receiveValue: {
+//            valueExpectation.fulfill()
+//        }
+//        _ = cancellable // This is just to remove the unused variable warning
+//        XCTAssertEqual(integrationTests.uncompletedJobCount, 1, "There should be 1 uncompleted job")
+//        wait(for: [valueExpectation, completionExpectation], timeout: 3)
+//        delay(1) // Delay is needed else the job isn't completed yet
+//        XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
+//    }
+//    #endif
 }

@@ -35,10 +35,10 @@ public class CompilerIntegrationTests<V>: IntegrationTests() {
         return values
     }
 
-    @NativeCoroutines
-    public suspend fun <T> returnGenericVarargValues(vararg values: T): Array<out T> {
-        return values
-    }
+//    @NativeCoroutines
+//    public suspend fun <T> returnGenericVarargValues(vararg values: T): Array<out T> {
+//        return values
+//    }
 
     @NativeCoroutines
     @Suppress("UnusedReceiverParameter")

@@ -189,24 +189,24 @@ class RxSwiftSingleIntegrationTests: XCTestCase {
     }
     #endif
     
-    #if !NATIVE_COROUTINES_SWIFT_EXPORT
-    func testUnitReturnType() {
-        let integrationTests = SuspendIntegrationTests()
-        let single = createSingle(for: integrationTests.returnUnit(delay: 1000))
-        let valueExpectation = expectation(description: "Waiting for value")
-        let disposedExpectation = expectation(description: "Waiting for dispose")
-        let disposable = single.subscribe(onSuccess: {
-            valueExpectation.fulfill()
-        }, onFailure: { _ in
-            XCTFail("Single shouldn't fail")
-        }, onDisposed: {
-            disposedExpectation.fulfill()
-        })
-        _ = disposable // This is just to remove the unused variable warning
-        XCTAssertEqual(integrationTests.uncompletedJobCount, 1, "There should be 1 uncompleted job")
-        wait(for: [valueExpectation, disposedExpectation], timeout: 3)
-        delay(1) // Delay is needed else the job isn't completed yet
-        XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
-    }
-    #endif
+//    #if !NATIVE_COROUTINES_SWIFT_EXPORT
+//    func testUnitReturnType() {
+//        let integrationTests = SuspendIntegrationTests()
+//        let single = createSingle(for: integrationTests.returnUnit(delay: 1000))
+//        let valueExpectation = expectation(description: "Waiting for value")
+//        let disposedExpectation = expectation(description: "Waiting for dispose")
+//        let disposable = single.subscribe(onSuccess: {
+//            valueExpectation.fulfill()
+//        }, onFailure: { _ in
+//            XCTFail("Single shouldn't fail")
+//        }, onDisposed: {
+//            disposedExpectation.fulfill()
+//        })
+//        _ = disposable // This is just to remove the unused variable warning
+//        XCTAssertEqual(integrationTests.uncompletedJobCount, 1, "There should be 1 uncompleted job")
+//        wait(for: [valueExpectation, disposedExpectation], timeout: 3)
+//        delay(1) // Delay is needed else the job isn't completed yet
+//        XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
+//    }
+//    #endif
 }

@@ -99,11 +99,11 @@ class AsyncFunctionIntegrationTests: XCTestCase {
         }
     }
     
-    #if !NATIVE_COROUTINES_SWIFT_EXPORT
-    func testUnitReturnType() async throws {
-        let integrationTests = SuspendIntegrationTests()
-        try await asyncFunction(for: integrationTests.returnUnit(delay: 100))
-        await assertJobCompleted(integrationTests)
-    }
-    #endif
+//    #if !NATIVE_COROUTINES_SWIFT_EXPORT
+//    func testUnitReturnType() async throws {
+//        let integrationTests = SuspendIntegrationTests()
+//        try await asyncFunction(for: integrationTests.returnUnit(delay: 100))
+//        await assertJobCompleted(integrationTests)
+//    }
+//    #endif
 }

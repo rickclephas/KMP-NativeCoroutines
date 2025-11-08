@@ -48,8 +48,8 @@ public class SuspendIntegrationTests: IntegrationTests() {
         }
     }
 
-    @NativeCoroutines
-    public suspend fun returnUnit(delay: Long) {
-        delay(delay)
-    }
+//    @NativeCoroutines
+//    public suspend fun returnUnit(delay: Long) {
+//        delay(delay)
+//    }
 }

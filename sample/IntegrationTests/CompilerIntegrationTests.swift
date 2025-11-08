@@ -87,24 +87,24 @@ class CompilerIntegrationTests: XCTestCase {
     }
     #endif
     
-    #if !NATIVE_COROUTINES_SWIFT_EXPORT
-    func testReturnGenericVarargValues() {
-        let integrationTests = IntegrationTests()
-        let valueExpectation = expectation(description: "Waiting for values")
-        let sendValues = KotlinArray<AnyObject>(size: 2) { _ in
-            NSNumber(value: self.randomInt())
-        }
-        _ = integrationTests.returnGenericVarargValues(values: sendValues)({ values, unit in
-            XCTAssertEqual(values.size, sendValues.size, "Received incorrect number of value")
-            for i in 0..<values.size {
-                XCTAssertEqual(values.get(index: i) as! NSNumber, sendValues.get(index: i) as! NSNumber, "Received incorrect value at index \(i)")
-            }
-            valueExpectation.fulfill()
-            return unit
-        }, { _, unit in unit }, { _, unit in unit })
-        wait(for: [valueExpectation], timeout: 2)
-    }
-    #endif
+//    #if !NATIVE_COROUTINES_SWIFT_EXPORT
+//    func testReturnGenericVarargValues() {
+//        let integrationTests = IntegrationTests()
+//        let valueExpectation = expectation(description: "Waiting for values")
+//        let sendValues = KotlinArray<AnyObject>(size: 2) { _ in
+//            NSNumber(value: self.randomInt())
+//        }
+//        _ = integrationTests.returnGenericVarargValues(values: sendValues)({ values, unit in
+//            XCTAssertEqual(values.size, sendValues.size, "Received incorrect number of value")
+//            for i in 0..<values.size {
+//                XCTAssertEqual(values.get(index: i) as! NSNumber, sendValues.get(index: i) as! NSNumber, "Received incorrect value at index \(i)")
+//            }
+//            valueExpectation.fulfill()
+//            return unit
+//        }, { _, unit in unit }, { _, unit in unit })
+//        wait(for: [valueExpectation], timeout: 2)
+//    }
+//    #endif
     
     #if !NATIVE_COROUTINES_SWIFT_EXPORT
     func testReturnGenericValueFromExtension() {

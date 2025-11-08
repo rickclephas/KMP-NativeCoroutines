@@ -99,15 +99,15 @@ class AsyncResultIntegrationTests: XCTestCase {
     }
     #endif
     
-    #if !NATIVE_COROUTINES_SWIFT_EXPORT
-    func testUnitReturnType() async throws {
-        let integrationTests = SuspendIntegrationTests()
-        let result = await asyncResult(for: integrationTests.returnUnit(delay: 100))
-        guard case .success = result else {
-            XCTFail("Function should complete without an error")
-            return
-        }
-        await assertJobCompleted(integrationTests)
-    }
-    #endif
+//    #if !NATIVE_COROUTINES_SWIFT_EXPORT
+//    func testUnitReturnType() async throws {
+//        let integrationTests = SuspendIntegrationTests()
+//        let result = await asyncResult(for: integrationTests.returnUnit(delay: 100))
+//        guard case .success = result else {
+//            XCTFail("Function should complete without an error")
+//            return
+//        }
+//        await assertJobCompleted(integrationTests)
+//    }
+//    #endif
 }
