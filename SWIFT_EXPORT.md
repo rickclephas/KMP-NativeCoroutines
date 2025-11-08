@@ -5,7 +5,7 @@ Starting with Kotlin 2.2.20 you can use the (experimental)
 
 > [!WARNING]
 > Swift export is still experimental and actively being developed! It doesn't yet support all language features,
-> might still contain bugs, and it's behaviour could change in future versions.
+> might still contain bugs, and its behaviour could change in future versions.
 > It is NOT recommended to use Swift export in production just yet!
 
 Once Swift export is complete and stable it'll likely completely remove the need for KMP-NativeCoroutines.
