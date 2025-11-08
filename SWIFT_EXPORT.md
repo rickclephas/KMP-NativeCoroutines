@@ -25,11 +25,11 @@ These are the known limitations with Swift export and KMP-NativeCoroutines.
 
 At the moment Swift export doesn't support functional return types yet.
 
-Unfortunately KMP-NativeCoroutines heavily relies on functional return types making it incompatible with Swift Export.
+Unfortunately KMP-NativeCoroutines heavily relies on functional return types, making it incompatible with Swift Export.
 For now the plugin just clones your original functions and properties to prevent your Kotlin builds from failing.
 
 **Temporary workaround:**  
-You should disable any relevant code in Swift if you would like try Swift export.
+You should disable any relevant code in Swift if you would like to try Swift export.
 
 ## ⚠️ `@ObjCName` is ignored
 
