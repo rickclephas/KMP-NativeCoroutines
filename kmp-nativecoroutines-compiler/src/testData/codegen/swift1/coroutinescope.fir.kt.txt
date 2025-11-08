@@ -1,3 +1,40 @@
+// FILE: __GENERATED__CALLABLES__.kt
+
+@ObjCName(name = "returnExtSuspendValue")
+@Throws(exceptionClasses = [Exception::class])
+suspend fun MyClass6.returnExtSuspendValueNative(): String {
+  val tmp_0: CoroutineScope? = null
+  return returnExtSuspendValue(/* <this> = <this> */)
+}
+
+@ObjCName(name = "returnSuspendValue")
+@Throws(exceptionClasses = [Exception::class])
+suspend fun returnSuspendValueNative(): String {
+  val tmp_1: CoroutineScope = <get-coroutineScope1>()
+  return returnSuspendValue()
+}
+
+@ObjCName(name = "flowExtProperty1")
+val MyClass3.flowExtProperty1Native: Flow<String>
+  get(): Flow<String> {
+    val tmp_2: CoroutineScope = <get-coroutineScope1>()
+    return <get-flowExtProperty1>(/* <this> = <this> */)
+  }
+
+@ObjCName(name = "flowExtProperty2")
+val MyClass3.flowExtProperty2Native: Flow<String>
+  get(): Flow<String> {
+    val tmp_3: CoroutineScope = <this>.<get-coroutineScope3>()
+    return <get-flowExtProperty2>(/* <this> = <this> */)
+  }
+
+@ObjCName(name = "flowProperty")
+val flowPropertyNative: Flow<String>
+  get(): Flow<String> {
+    val tmp_4: CoroutineScope = <get-coroutineScope1>()
+    return <get-flowProperty>()
+  }
+
 // FILE: coroutinescope1.kt
 
 @NativeCoroutineScope
@@ -242,41 +279,4 @@ suspend fun MyClass6.returnExtSuspendValue(): String {
 val MyClass3.flowExtProperty2: Flow<String>
   get(): Flow<String> {
     return flowOf<String>(value = "OK8")
-  }
-
-// FILE: __GENERATED DECLARATIONS__.kt
-
-@ObjCName(name = "returnExtSuspendValue")
-@Throws(exceptionClasses = [Exception::class])
-suspend fun MyClass6.returnExtSuspendValueNative(): String {
-  val tmp_0: CoroutineScope? = null
-  return returnExtSuspendValue(/* <this> = <this> */)
-}
-
-@ObjCName(name = "returnSuspendValue")
-@Throws(exceptionClasses = [Exception::class])
-suspend fun returnSuspendValueNative(): String {
-  val tmp_1: CoroutineScope = <get-coroutineScope1>()
-  return returnSuspendValue()
-}
-
-@ObjCName(name = "flowExtProperty1")
-val MyClass3.flowExtProperty1Native: Flow<String>
-  get(): Flow<String> {
-    val tmp_2: CoroutineScope = <get-coroutineScope1>()
-    return <get-flowExtProperty1>(/* <this> = <this> */)
-  }
-
-@ObjCName(name = "flowExtProperty2")
-val MyClass3.flowExtProperty2Native: Flow<String>
-  get(): Flow<String> {
-    val tmp_3: CoroutineScope = <this>.<get-coroutineScope3>()
-    return <get-flowExtProperty2>(/* <this> = <this> */)
-  }
-
-@ObjCName(name = "flowProperty")
-val flowPropertyNative: Flow<String>
-  get(): Flow<String> {
-    val tmp_4: CoroutineScope = <get-coroutineScope1>()
-    return <get-flowProperty>()
   }

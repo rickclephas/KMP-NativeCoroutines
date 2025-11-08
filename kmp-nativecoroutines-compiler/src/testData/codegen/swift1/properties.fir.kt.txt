@@ -1,3 +1,306 @@
+// FILE: __GENERATED__CALLABLES__.kt
+
+var topLevelMutableStateFlowValue: String
+  get(): String {
+    val tmp_0: MutableStateFlow<String> = <get-topLevelMutableStateFlow>()
+    return tmp_0.<get-value>()
+  }
+  set(value: String) {
+    return <get-topLevelMutableStateFlow>().<set-value>(<set-?> = value)
+  }
+
+@ObjCName(name = "mutableStateProperty")
+var mutableStatePropertyValue: String
+  get(): String {
+    val tmp_1: MutableStateFlow<String> = <get-mutableStateProperty>()
+    return tmp_1.<get-value>()
+  }
+  set(value: String) {
+    return <get-mutableStateProperty>().<set-value>(<set-?> = value)
+  }
+
+@ObjCName(name = "customFlowValue")
+val customFlowValueNative: MyFlow29<Int, String>
+  get(): MyFlow29<Int, String> {
+    val tmp_2: CoroutineScope? = null
+    return <get-customFlowValue>()
+  }
+
+@ObjCName(name = "extensionFlow")
+val String.extensionFlowNative: Flow<String>
+  get(): Flow<String> {
+    val tmp_3: CoroutineScope? = null
+    return <get-extensionFlow>(/* <this> = <this> */)
+  }
+
+@ObjCName(name = "extensionSharedFlow")
+val String.extensionSharedFlowNative: SharedFlow<String>
+  get(): SharedFlow<String> {
+    val tmp_4: CoroutineScope? = null
+    return <get-extensionSharedFlow>(/* <this> = <this> */)
+  }
+
+val String.extensionSharedFlowReplayCache: List<String>
+  get(): List<String> {
+    val tmp_5: SharedFlow<String> = <get-extensionSharedFlow>(/* <this> = <this> */)
+    return tmp_5.<get-replayCache>()
+  }
+
+@ObjCName(name = "extensionStateFlow")
+val String.extensionStateFlowNative: StateFlow<String>
+  get(): StateFlow<String> {
+    val tmp_6: CoroutineScope? = null
+    return <get-extensionStateFlow>(/* <this> = <this> */)
+  }
+
+val String.extensionStateFlowValue: String
+  get(): String {
+    val tmp_7: StateFlow<String> = <get-extensionStateFlow>(/* <this> = <this> */)
+    return tmp_7.<get-value>()
+  }
+
+@ObjCName(name = "genericFlow")
+val <T : Any?> MyGenericClass1<T>.genericFlowNative: Flow<T>
+  get(): Flow<T> {
+    val tmp_8: CoroutineScope? = null
+    return <get-genericFlow><T>(/* <this> = <this> */)
+  }
+
+@ObjCName(name = "genericSharedFlow")
+val <T : Any?> MyGenericClass1<T>.genericSharedFlowNative: SharedFlow<T>
+  get(): SharedFlow<T> {
+    val tmp_9: CoroutineScope? = null
+    return <get-genericSharedFlow><T>(/* <this> = <this> */)
+  }
+
+val <T : Any?> MyGenericClass1<T>.genericSharedFlowReplayCache: List<T>
+  get(): List<T> {
+    val tmp_10: SharedFlow<T> = <get-genericSharedFlow><T>(/* <this> = <this> */)
+    return tmp_10.<get-replayCache>()
+  }
+
+@ObjCName(name = "genericStateFlow")
+val <T : Any?> MyGenericClass1<T>.genericStateFlowNative: StateFlow<T>
+  get(): StateFlow<T> {
+    val tmp_11: CoroutineScope? = null
+    return <get-genericStateFlow><T>(/* <this> = <this> */)
+  }
+
+val <T : Any?> MyGenericClass1<T>.genericStateFlowValue: T
+  get(): T {
+    val tmp_12: StateFlow<T> = <get-genericStateFlow><T>(/* <this> = <this> */)
+    return tmp_12.<get-value>()
+  }
+
+val mutableNullableStatePropertyFlow: MutableStateFlow<String>?
+  get(): MutableStateFlow<String>? {
+    val tmp_13: CoroutineScope? = null
+    return <get-mutableNullableStateProperty>()
+  }
+
+@ObjCName(name = "mutableNullableStateProperty")
+val mutableNullableStatePropertyValue: String?
+  get(): String? {
+    val tmp_14: MutableStateFlow<String>? = <get-mutableNullableStateProperty>()
+    return when {
+      EQEQ(arg0 = tmp_14, arg1 = null) -> null
+      else -> tmp_14.<get-value>()
+    }
+  }
+
+val mutableStatePropertyFlow: MutableStateFlow<String>
+  get(): MutableStateFlow<String> {
+    val tmp_15: CoroutineScope? = null
+    return <get-mutableStateProperty>()
+  }
+
+@ObjCName(name = "nullableFlowAndValue")
+val nullableFlowAndValueNative: Flow<String?>?
+  get(): Flow<String?>? {
+    val tmp_16: CoroutineScope? = null
+    return <get-nullableFlowAndValue>()
+  }
+
+@ObjCName(name = "nullableFlow")
+val nullableFlowNative: Flow<String>?
+  get(): Flow<String>? {
+    val tmp_17: CoroutineScope? = null
+    return <get-nullableFlow>()
+  }
+
+@ObjCName(name = "nullableFlowValue")
+val nullableFlowValueNative: Flow<String?>
+  get(): Flow<String?> {
+    val tmp_18: CoroutineScope? = null
+    return <get-nullableFlowValue>()
+  }
+
+@ObjCName(name = "nullableSharedFlowAndValue")
+val nullableSharedFlowAndValueNative: SharedFlow<String?>?
+  get(): SharedFlow<String?>? {
+    val tmp_19: CoroutineScope? = null
+    return <get-nullableSharedFlowAndValue>()
+  }
+
+val nullableSharedFlowAndValueReplayCache: List<String?>?
+  get(): List<String?>? {
+    val tmp_20: SharedFlow<String?>? = <get-nullableSharedFlowAndValue>()
+    return when {
+      EQEQ(arg0 = tmp_20, arg1 = null) -> null
+      else -> tmp_20.<get-replayCache>()
+    }
+  }
+
+@ObjCName(name = "nullableSharedFlow")
+val nullableSharedFlowNative: SharedFlow<String>?
+  get(): SharedFlow<String>? {
+    val tmp_21: CoroutineScope? = null
+    return <get-nullableSharedFlow>()
+  }
+
+val nullableSharedFlowReplayCache: List<String>?
+  get(): List<String>? {
+    val tmp_22: SharedFlow<String>? = <get-nullableSharedFlow>()
+    return when {
+      EQEQ(arg0 = tmp_22, arg1 = null) -> null
+      else -> tmp_22.<get-replayCache>()
+    }
+  }
+
+@ObjCName(name = "nullableSharedFlowValue")
+val nullableSharedFlowValueNative: SharedFlow<String?>
+  get(): SharedFlow<String?> {
+    val tmp_23: CoroutineScope? = null
+    return <get-nullableSharedFlowValue>()
+  }
+
+val nullableSharedFlowValueReplayCache: List<String?>
+  get(): List<String?> {
+    val tmp_24: SharedFlow<String?> = <get-nullableSharedFlowValue>()
+    return tmp_24.<get-replayCache>()
+  }
+
+@ObjCName(name = "nullableStateFlowAndValue")
+val nullableStateFlowAndValueNative: StateFlow<String?>?
+  get(): StateFlow<String?>? {
+    val tmp_25: CoroutineScope? = null
+    return <get-nullableStateFlowAndValue>()
+  }
+
+val nullableStateFlowAndValueValue: String?
+  get(): String? {
+    val tmp_26: StateFlow<String?>? = <get-nullableStateFlowAndValue>()
+    return when {
+      EQEQ(arg0 = tmp_26, arg1 = null) -> null
+      else -> tmp_26.<get-value>()
+    }
+  }
+
+@ObjCName(name = "nullableStateFlowProperty")
+val nullableStateFlowPropertyNative: StateFlow<String>?
+  get(): StateFlow<String>? {
+    val tmp_27: CoroutineScope? = null
+    return <get-nullableStateFlowProperty>()
+  }
+
+val nullableStateFlowPropertyValue: String?
+  get(): String? {
+    val tmp_28: StateFlow<String>? = <get-nullableStateFlowProperty>()
+    return when {
+      EQEQ(arg0 = tmp_28, arg1 = null) -> null
+      else -> tmp_28.<get-value>()
+    }
+  }
+
+@ObjCName(name = "nullableStateFlowValue")
+val nullableStateFlowValueNative: StateFlow<String?>
+  get(): StateFlow<String?> {
+    val tmp_29: CoroutineScope? = null
+    return <get-nullableStateFlowValue>()
+  }
+
+val nullableStateFlowValueValue: String?
+  get(): String? {
+    val tmp_30: StateFlow<String?> = <get-nullableStateFlowValue>()
+    return tmp_30.<get-value>()
+  }
+
+@ObjCName(name = "refinedFlow")
+@ShouldRefineInSwift
+val refinedFlowNative: Flow<String>
+  get(): Flow<String> {
+    val tmp_31: CoroutineScope? = null
+    return <get-refinedFlow>()
+  }
+
+@ShouldRefineInSwift
+val refinedStateFlow: StateFlow<String>
+  get(): StateFlow<String> {
+    val tmp_32: CoroutineScope? = null
+    return <get-refinedState>()
+  }
+
+@ObjCName(name = "refinedState")
+@ShouldRefineInSwift
+val refinedStateValue: String
+  get(): String {
+    val tmp_33: StateFlow<String> = <get-refinedState>()
+    return tmp_33.<get-value>()
+  }
+
+val statePropertyFlow: StateFlow<String>
+  get(): StateFlow<String> {
+    val tmp_34: CoroutineScope? = null
+    return <get-stateProperty>()
+  }
+
+@ObjCName(name = "stateProperty")
+val statePropertyValue: String
+  get(): String {
+    val tmp_35: StateFlow<String> = <get-stateProperty>()
+    return tmp_35.<get-value>()
+  }
+
+@ObjCName(name = "topLevelFlow")
+val topLevelFlowNative: Flow<String>
+  get(): Flow<String> {
+    val tmp_36: CoroutineScope? = null
+    return <get-topLevelFlow>()
+  }
+
+@ObjCName(name = "topLevelMutableStateFlow")
+val topLevelMutableStateFlowNative: MutableStateFlow<String>
+  get(): MutableStateFlow<String> {
+    val tmp_37: CoroutineScope? = null
+    return <get-topLevelMutableStateFlow>()
+  }
+
+@ObjCName(name = "topLevelSharedFlow")
+val topLevelSharedFlowNative: SharedFlow<String>
+  get(): SharedFlow<String> {
+    val tmp_38: CoroutineScope? = null
+    return <get-topLevelSharedFlow>()
+  }
+
+val topLevelSharedFlowReplayCache: List<String>
+  get(): List<String> {
+    val tmp_39: SharedFlow<String> = <get-topLevelSharedFlow>()
+    return tmp_39.<get-replayCache>()
+  }
+
+@ObjCName(name = "topLevelStateFlow")
+val topLevelStateFlowNative: StateFlow<String>
+  get(): StateFlow<String> {
+    val tmp_40: CoroutineScope? = null
+    return <get-topLevelStateFlow>()
+  }
+
+val topLevelStateFlowValue: String
+  get(): String {
+    val tmp_41: StateFlow<String> = <get-topLevelStateFlow>()
+    return tmp_41.<get-value>()
+  }
+
 // FILE: properties.kt
 
 @NativeCoroutines
@@ -354,307 +657,4 @@ val nullableStateFlowAndValue: StateFlow<String?>?
 val nullableStateFlowProperty: StateFlow<String>?
   get(): StateFlow<String>? {
     return null
-  }
-
-// FILE: __GENERATED DECLARATIONS__.kt
-
-var topLevelMutableStateFlowValue: String
-  get(): String {
-    val tmp_0: MutableStateFlow<String> = <get-topLevelMutableStateFlow>()
-    return tmp_0.<get-value>()
-  }
-  set(value: String) {
-    return <get-topLevelMutableStateFlow>().<set-value>(<set-?> = value)
-  }
-
-@ObjCName(name = "mutableStateProperty")
-var mutableStatePropertyValue: String
-  get(): String {
-    val tmp_1: MutableStateFlow<String> = <get-mutableStateProperty>()
-    return tmp_1.<get-value>()
-  }
-  set(value: String) {
-    return <get-mutableStateProperty>().<set-value>(<set-?> = value)
-  }
-
-@ObjCName(name = "customFlowValue")
-val customFlowValueNative: MyFlow29<Int, String>
-  get(): MyFlow29<Int, String> {
-    val tmp_2: CoroutineScope? = null
-    return <get-customFlowValue>()
-  }
-
-@ObjCName(name = "extensionFlow")
-val String.extensionFlowNative: Flow<String>
-  get(): Flow<String> {
-    val tmp_3: CoroutineScope? = null
-    return <get-extensionFlow>(/* <this> = <this> */)
-  }
-
-@ObjCName(name = "extensionSharedFlow")
-val String.extensionSharedFlowNative: SharedFlow<String>
-  get(): SharedFlow<String> {
-    val tmp_4: CoroutineScope? = null
-    return <get-extensionSharedFlow>(/* <this> = <this> */)
-  }
-
-val String.extensionSharedFlowReplayCache: List<String>
-  get(): List<String> {
-    val tmp_5: SharedFlow<String> = <get-extensionSharedFlow>(/* <this> = <this> */)
-    return tmp_5.<get-replayCache>()
-  }
-
-@ObjCName(name = "extensionStateFlow")
-val String.extensionStateFlowNative: StateFlow<String>
-  get(): StateFlow<String> {
-    val tmp_6: CoroutineScope? = null
-    return <get-extensionStateFlow>(/* <this> = <this> */)
-  }
-
-val String.extensionStateFlowValue: String
-  get(): String {
-    val tmp_7: StateFlow<String> = <get-extensionStateFlow>(/* <this> = <this> */)
-    return tmp_7.<get-value>()
-  }
-
-@ObjCName(name = "genericFlow")
-val <T : Any?> MyGenericClass1<T>.genericFlowNative: Flow<T>
-  get(): Flow<T> {
-    val tmp_8: CoroutineScope? = null
-    return <get-genericFlow><T>(/* <this> = <this> */)
-  }
-
-@ObjCName(name = "genericSharedFlow")
-val <T : Any?> MyGenericClass1<T>.genericSharedFlowNative: SharedFlow<T>
-  get(): SharedFlow<T> {
-    val tmp_9: CoroutineScope? = null
-    return <get-genericSharedFlow><T>(/* <this> = <this> */)
-  }
-
-val <T : Any?> MyGenericClass1<T>.genericSharedFlowReplayCache: List<T>
-  get(): List<T> {
-    val tmp_10: SharedFlow<T> = <get-genericSharedFlow><T>(/* <this> = <this> */)
-    return tmp_10.<get-replayCache>()
-  }
-
-@ObjCName(name = "genericStateFlow")
-val <T : Any?> MyGenericClass1<T>.genericStateFlowNative: StateFlow<T>
-  get(): StateFlow<T> {
-    val tmp_11: CoroutineScope? = null
-    return <get-genericStateFlow><T>(/* <this> = <this> */)
-  }
-
-val <T : Any?> MyGenericClass1<T>.genericStateFlowValue: T
-  get(): T {
-    val tmp_12: StateFlow<T> = <get-genericStateFlow><T>(/* <this> = <this> */)
-    return tmp_12.<get-value>()
-  }
-
-val mutableNullableStatePropertyFlow: MutableStateFlow<String>?
-  get(): MutableStateFlow<String>? {
-    val tmp_13: CoroutineScope? = null
-    return <get-mutableNullableStateProperty>()
-  }
-
-@ObjCName(name = "mutableNullableStateProperty")
-val mutableNullableStatePropertyValue: String?
-  get(): String? {
-    val tmp_14: MutableStateFlow<String>? = <get-mutableNullableStateProperty>()
-    return when {
-      EQEQ(arg0 = tmp_14, arg1 = null) -> null
-      else -> tmp_14.<get-value>()
-    }
-  }
-
-val mutableStatePropertyFlow: MutableStateFlow<String>
-  get(): MutableStateFlow<String> {
-    val tmp_15: CoroutineScope? = null
-    return <get-mutableStateProperty>()
-  }
-
-@ObjCName(name = "nullableFlowAndValue")
-val nullableFlowAndValueNative: Flow<String?>?
-  get(): Flow<String?>? {
-    val tmp_16: CoroutineScope? = null
-    return <get-nullableFlowAndValue>()
-  }
-
-@ObjCName(name = "nullableFlow")
-val nullableFlowNative: Flow<String>?
-  get(): Flow<String>? {
-    val tmp_17: CoroutineScope? = null
-    return <get-nullableFlow>()
-  }
-
-@ObjCName(name = "nullableFlowValue")
-val nullableFlowValueNative: Flow<String?>
-  get(): Flow<String?> {
-    val tmp_18: CoroutineScope? = null
-    return <get-nullableFlowValue>()
-  }
-
-@ObjCName(name = "nullableSharedFlowAndValue")
-val nullableSharedFlowAndValueNative: SharedFlow<String?>?
-  get(): SharedFlow<String?>? {
-    val tmp_19: CoroutineScope? = null
-    return <get-nullableSharedFlowAndValue>()
-  }
-
-val nullableSharedFlowAndValueReplayCache: List<String?>?
-  get(): List<String?>? {
-    val tmp_20: SharedFlow<String?>? = <get-nullableSharedFlowAndValue>()
-    return when {
-      EQEQ(arg0 = tmp_20, arg1 = null) -> null
-      else -> tmp_20.<get-replayCache>()
-    }
-  }
-
-@ObjCName(name = "nullableSharedFlow")
-val nullableSharedFlowNative: SharedFlow<String>?
-  get(): SharedFlow<String>? {
-    val tmp_21: CoroutineScope? = null
-    return <get-nullableSharedFlow>()
-  }
-
-val nullableSharedFlowReplayCache: List<String>?
-  get(): List<String>? {
-    val tmp_22: SharedFlow<String>? = <get-nullableSharedFlow>()
-    return when {
-      EQEQ(arg0 = tmp_22, arg1 = null) -> null
-      else -> tmp_22.<get-replayCache>()
-    }
-  }
-
-@ObjCName(name = "nullableSharedFlowValue")
-val nullableSharedFlowValueNative: SharedFlow<String?>
-  get(): SharedFlow<String?> {
-    val tmp_23: CoroutineScope? = null
-    return <get-nullableSharedFlowValue>()
-  }
-
-val nullableSharedFlowValueReplayCache: List<String?>
-  get(): List<String?> {
-    val tmp_24: SharedFlow<String?> = <get-nullableSharedFlowValue>()
-    return tmp_24.<get-replayCache>()
-  }
-
-@ObjCName(name = "nullableStateFlowAndValue")
-val nullableStateFlowAndValueNative: StateFlow<String?>?
-  get(): StateFlow<String?>? {
-    val tmp_25: CoroutineScope? = null
-    return <get-nullableStateFlowAndValue>()
-  }
-
-val nullableStateFlowAndValueValue: String?
-  get(): String? {
-    val tmp_26: StateFlow<String?>? = <get-nullableStateFlowAndValue>()
-    return when {
-      EQEQ(arg0 = tmp_26, arg1 = null) -> null
-      else -> tmp_26.<get-value>()
-    }
-  }
-
-@ObjCName(name = "nullableStateFlowProperty")
-val nullableStateFlowPropertyNative: StateFlow<String>?
-  get(): StateFlow<String>? {
-    val tmp_27: CoroutineScope? = null
-    return <get-nullableStateFlowProperty>()
-  }
-
-val nullableStateFlowPropertyValue: String?
-  get(): String? {
-    val tmp_28: StateFlow<String>? = <get-nullableStateFlowProperty>()
-    return when {
-      EQEQ(arg0 = tmp_28, arg1 = null) -> null
-      else -> tmp_28.<get-value>()
-    }
-  }
-
-@ObjCName(name = "nullableStateFlowValue")
-val nullableStateFlowValueNative: StateFlow<String?>
-  get(): StateFlow<String?> {
-    val tmp_29: CoroutineScope? = null
-    return <get-nullableStateFlowValue>()
-  }
-
-val nullableStateFlowValueValue: String?
-  get(): String? {
-    val tmp_30: StateFlow<String?> = <get-nullableStateFlowValue>()
-    return tmp_30.<get-value>()
-  }
-
-@ObjCName(name = "refinedFlow")
-@ShouldRefineInSwift
-val refinedFlowNative: Flow<String>
-  get(): Flow<String> {
-    val tmp_31: CoroutineScope? = null
-    return <get-refinedFlow>()
-  }
-
-@ShouldRefineInSwift
-val refinedStateFlow: StateFlow<String>
-  get(): StateFlow<String> {
-    val tmp_32: CoroutineScope? = null
-    return <get-refinedState>()
-  }
-
-@ObjCName(name = "refinedState")
-@ShouldRefineInSwift
-val refinedStateValue: String
-  get(): String {
-    val tmp_33: StateFlow<String> = <get-refinedState>()
-    return tmp_33.<get-value>()
-  }
-
-val statePropertyFlow: StateFlow<String>
-  get(): StateFlow<String> {
-    val tmp_34: CoroutineScope? = null
-    return <get-stateProperty>()
-  }
-
-@ObjCName(name = "stateProperty")
-val statePropertyValue: String
-  get(): String {
-    val tmp_35: StateFlow<String> = <get-stateProperty>()
-    return tmp_35.<get-value>()
-  }
-
-@ObjCName(name = "topLevelFlow")
-val topLevelFlowNative: Flow<String>
-  get(): Flow<String> {
-    val tmp_36: CoroutineScope? = null
-    return <get-topLevelFlow>()
-  }
-
-@ObjCName(name = "topLevelMutableStateFlow")
-val topLevelMutableStateFlowNative: MutableStateFlow<String>
-  get(): MutableStateFlow<String> {
-    val tmp_37: CoroutineScope? = null
-    return <get-topLevelMutableStateFlow>()
-  }
-
-@ObjCName(name = "topLevelSharedFlow")
-val topLevelSharedFlowNative: SharedFlow<String>
-  get(): SharedFlow<String> {
-    val tmp_38: CoroutineScope? = null
-    return <get-topLevelSharedFlow>()
-  }
-
-val topLevelSharedFlowReplayCache: List<String>
-  get(): List<String> {
-    val tmp_39: SharedFlow<String> = <get-topLevelSharedFlow>()
-    return tmp_39.<get-replayCache>()
-  }
-
-@ObjCName(name = "topLevelStateFlow")
-val topLevelStateFlowNative: StateFlow<String>
-  get(): StateFlow<String> {
-    val tmp_40: CoroutineScope? = null
-    return <get-topLevelStateFlow>()
-  }
-
-val topLevelStateFlowValue: String
-  get(): String {
-    val tmp_41: StateFlow<String> = <get-topLevelStateFlow>()
-    return tmp_41.<get-value>()
   }

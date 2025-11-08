@@ -1,3 +1,178 @@
+FILE fqName:<root> fileName:/__GENERATED__CALLABLES__.kt
+  FUN GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:returnCustomFlowValueNative visibility:public modality:FINAL returnType:<root>.MyFlow23<kotlin.Int, kotlin.String>
+    annotations:
+      ObjCName(name = "returnCustomFlowValue", swiftName = <null>, exact = <null>)
+    BLOCK_BODY
+      VAR IR_TEMPORARY_VARIABLE name:tmp_0 type:kotlinx.coroutines.CoroutineScope? [val]
+        CONST Null type=kotlinx.coroutines.CoroutineScope? value=null
+      RETURN type=kotlin.Nothing from='public final fun returnCustomFlowValueNative (): <root>.MyFlow23<kotlin.Int, kotlin.String> declared in <root>'
+        CALL 'public final fun returnCustomFlowValue (): <root>.MyFlow23<kotlin.Int, kotlin.String> declared in <root>' type=<root>.MyFlow23<kotlin.Int, kotlin.String> origin=null
+  FUN GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:returnExtensionValueNative visibility:public modality:FINAL returnType:kotlin.String [suspend]
+    VALUE_PARAMETER kind:ExtensionReceiver name:<this> index:0 type:kotlin.String
+    annotations:
+      ObjCName(name = "returnExtensionValue", swiftName = <null>, exact = <null>)
+      Throws(exceptionClasses = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_JAVA_DECLARATION_STUB CLASS name:Exception modality:OPEN visibility:public superTypes:[kotlin.Throwable]' type=kotlin.reflect.KClass<java.lang.Exception>] type=kotlin.Array<out kotlin.Throwable> varargElementType=kotlin.Throwable)
+    BLOCK_BODY
+      VAR IR_TEMPORARY_VARIABLE name:tmp_1 type:kotlinx.coroutines.CoroutineScope? [val]
+        CONST Null type=kotlinx.coroutines.CoroutineScope? value=null
+      RETURN type=kotlin.Nothing from='public final fun returnExtensionValueNative (<this>: kotlin.String): kotlin.String declared in <root>'
+        CALL 'public final fun returnExtensionValue (<this>: kotlin.String): kotlin.String declared in <root>' type=kotlin.String origin=null
+          ARG <this>: GET_VAR '<this>: kotlin.String declared in <root>.returnExtensionValueNative' type=kotlin.String origin=null
+  FUN GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:returnFlowValueNative visibility:public modality:FINAL returnType:kotlinx.coroutines.flow.Flow<kotlin.String>
+    annotations:
+      ObjCName(name = "returnFlowValue", swiftName = <null>, exact = <null>)
+    BLOCK_BODY
+      VAR IR_TEMPORARY_VARIABLE name:tmp_2 type:kotlinx.coroutines.CoroutineScope? [val]
+        CONST Null type=kotlinx.coroutines.CoroutineScope? value=null
+      RETURN type=kotlin.Nothing from='public final fun returnFlowValueNative (): kotlinx.coroutines.flow.Flow<kotlin.String> declared in <root>'
+        CALL 'public final fun returnFlowValue (): kotlinx.coroutines.flow.Flow<kotlin.String> declared in <root>' type=kotlinx.coroutines.flow.Flow<kotlin.String> origin=null
+  FUN GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:returnGenericSuspendValueNative visibility:public modality:FINAL returnType:T of <root>.returnGenericSuspendValueNative [suspend]
+    TYPE_PARAMETER GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:T index:0 variance: superTypes:[kotlin.Any?] reified:false
+    VALUE_PARAMETER GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] kind:Regular name:value index:0 type:T of <root>.returnGenericSuspendValueNative
+    annotations:
+      ObjCName(name = "returnGenericSuspendValue", swiftName = <null>, exact = <null>)
+      Throws(exceptionClasses = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_JAVA_DECLARATION_STUB CLASS name:Exception modality:OPEN visibility:public superTypes:[kotlin.Throwable]' type=kotlin.reflect.KClass<java.lang.Exception>] type=kotlin.Array<out kotlin.Throwable> varargElementType=kotlin.Throwable)
+    BLOCK_BODY
+      VAR IR_TEMPORARY_VARIABLE name:tmp_3 type:kotlinx.coroutines.CoroutineScope? [val]
+        CONST Null type=kotlinx.coroutines.CoroutineScope? value=null
+      RETURN type=kotlin.Nothing from='public final fun returnGenericSuspendValueNative <T> (value: T of <root>.returnGenericSuspendValueNative): T of <root>.returnGenericSuspendValueNative declared in <root>'
+        CALL 'public final fun returnGenericSuspendValue <T> (value: T of <root>.returnGenericSuspendValue): T of <root>.returnGenericSuspendValue declared in <root>' type=T of <root>.returnGenericSuspendValue origin=null
+          TYPE_ARG T: T of <root>.returnGenericSuspendValueNative
+          ARG value: GET_VAR 'value: T of <root>.returnGenericSuspendValueNative declared in <root>.returnGenericSuspendValueNative' type=T of <root>.returnGenericSuspendValueNative origin=null
+  FUN GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:returnInlineSuspendValueNative visibility:public modality:FINAL returnType:T of <root>.returnInlineSuspendValueNative [inline,suspend]
+    TYPE_PARAMETER GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:T index:0 variance: superTypes:[kotlin.Any?] reified:true
+    VALUE_PARAMETER GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] kind:Regular name:value index:0 type:T of <root>.returnInlineSuspendValueNative
+    annotations:
+      ObjCName(name = "returnInlineSuspendValue", swiftName = <null>, exact = <null>)
+      Throws(exceptionClasses = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_JAVA_DECLARATION_STUB CLASS name:Exception modality:OPEN visibility:public superTypes:[kotlin.Throwable]' type=kotlin.reflect.KClass<java.lang.Exception>] type=kotlin.Array<out kotlin.Throwable> varargElementType=kotlin.Throwable)
+    BLOCK_BODY
+      VAR IR_TEMPORARY_VARIABLE name:tmp_4 type:kotlinx.coroutines.CoroutineScope? [val]
+        CONST Null type=kotlinx.coroutines.CoroutineScope? value=null
+      RETURN type=kotlin.Nothing from='public final fun returnInlineSuspendValueNative <T> (value: T of <root>.returnInlineSuspendValueNative): T of <root>.returnInlineSuspendValueNative declared in <root>'
+        CALL 'public final fun returnInlineSuspendValue <T> (value: T of <root>.returnInlineSuspendValue): T of <root>.returnInlineSuspendValue declared in <root>' type=T of <root>.returnInlineSuspendValue origin=null
+          TYPE_ARG T: T of <root>.returnInlineSuspendValueNative
+          ARG value: GET_VAR 'value: T of <root>.returnInlineSuspendValueNative declared in <root>.returnInlineSuspendValueNative' type=T of <root>.returnInlineSuspendValueNative origin=null
+  FUN GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:returnNullableFlowAndValueNative visibility:public modality:FINAL returnType:kotlinx.coroutines.flow.Flow<kotlin.String?>?
+    annotations:
+      ObjCName(name = "returnNullableFlowAndValue", swiftName = <null>, exact = <null>)
+    BLOCK_BODY
+      VAR IR_TEMPORARY_VARIABLE name:tmp_5 type:kotlinx.coroutines.CoroutineScope? [val]
+        CONST Null type=kotlinx.coroutines.CoroutineScope? value=null
+      RETURN type=kotlin.Nothing from='public final fun returnNullableFlowAndValueNative (): kotlinx.coroutines.flow.Flow<kotlin.String?>? declared in <root>'
+        CALL 'public final fun returnNullableFlowAndValue (): kotlinx.coroutines.flow.Flow<kotlin.String?>? declared in <root>' type=kotlinx.coroutines.flow.Flow<kotlin.String?>? origin=null
+  FUN GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:returnNullableFlowNative visibility:public modality:FINAL returnType:kotlinx.coroutines.flow.Flow<kotlin.String>?
+    annotations:
+      ObjCName(name = "returnNullableFlow", swiftName = <null>, exact = <null>)
+    BLOCK_BODY
+      VAR IR_TEMPORARY_VARIABLE name:tmp_6 type:kotlinx.coroutines.CoroutineScope? [val]
+        CONST Null type=kotlinx.coroutines.CoroutineScope? value=null
+      RETURN type=kotlin.Nothing from='public final fun returnNullableFlowNative (): kotlinx.coroutines.flow.Flow<kotlin.String>? declared in <root>'
+        CALL 'public final fun returnNullableFlow (): kotlinx.coroutines.flow.Flow<kotlin.String>? declared in <root>' type=kotlinx.coroutines.flow.Flow<kotlin.String>? origin=null
+  FUN GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:returnNullableFlowValueNative visibility:public modality:FINAL returnType:kotlinx.coroutines.flow.Flow<kotlin.String?>
+    annotations:
+      ObjCName(name = "returnNullableFlowValue", swiftName = <null>, exact = <null>)
+    BLOCK_BODY
+      VAR IR_TEMPORARY_VARIABLE name:tmp_7 type:kotlinx.coroutines.CoroutineScope? [val]
+        CONST Null type=kotlinx.coroutines.CoroutineScope? value=null
+      RETURN type=kotlin.Nothing from='public final fun returnNullableFlowValueNative (): kotlinx.coroutines.flow.Flow<kotlin.String?> declared in <root>'
+        CALL 'public final fun returnNullableFlowValue (): kotlinx.coroutines.flow.Flow<kotlin.String?> declared in <root>' type=kotlinx.coroutines.flow.Flow<kotlin.String?> origin=null
+  FUN GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:returnNullableSuspendFlowNative visibility:public modality:FINAL returnType:kotlinx.coroutines.flow.Flow<kotlin.String>? [suspend]
+    annotations:
+      ObjCName(name = "returnNullableSuspendFlow", swiftName = <null>, exact = <null>)
+      Throws(exceptionClasses = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_JAVA_DECLARATION_STUB CLASS name:Exception modality:OPEN visibility:public superTypes:[kotlin.Throwable]' type=kotlin.reflect.KClass<java.lang.Exception>] type=kotlin.Array<out kotlin.Throwable> varargElementType=kotlin.Throwable)
+    BLOCK_BODY
+      VAR IR_TEMPORARY_VARIABLE name:tmp_8 type:kotlinx.coroutines.CoroutineScope? [val]
+        CONST Null type=kotlinx.coroutines.CoroutineScope? value=null
+      RETURN type=kotlin.Nothing from='public final fun returnNullableSuspendFlowNative (): kotlinx.coroutines.flow.Flow<kotlin.String>? declared in <root>'
+        CALL 'public final fun returnNullableSuspendFlow (): kotlinx.coroutines.flow.Flow<kotlin.String>? declared in <root>' type=kotlinx.coroutines.flow.Flow<kotlin.String>? origin=null
+  FUN GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:returnNullableSuspendValueNative visibility:public modality:FINAL returnType:kotlin.String? [suspend]
+    annotations:
+      ObjCName(name = "returnNullableSuspendValue", swiftName = <null>, exact = <null>)
+      Throws(exceptionClasses = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_JAVA_DECLARATION_STUB CLASS name:Exception modality:OPEN visibility:public superTypes:[kotlin.Throwable]' type=kotlin.reflect.KClass<java.lang.Exception>] type=kotlin.Array<out kotlin.Throwable> varargElementType=kotlin.Throwable)
+    BLOCK_BODY
+      VAR IR_TEMPORARY_VARIABLE name:tmp_9 type:kotlinx.coroutines.CoroutineScope? [val]
+        CONST Null type=kotlinx.coroutines.CoroutineScope? value=null
+      RETURN type=kotlin.Nothing from='public final fun returnNullableSuspendValueNative (): kotlin.String? declared in <root>'
+        CALL 'public final fun returnNullableSuspendValue (): kotlin.String? declared in <root>' type=kotlin.String? origin=null
+  FUN GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:returnRefinedSuspendValueNative visibility:public modality:FINAL returnType:kotlin.String [suspend]
+    annotations:
+      ObjCName(name = "returnRefinedSuspendValue", swiftName = <null>, exact = <null>)
+      ShouldRefineInSwift
+      Throws(exceptionClasses = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_JAVA_DECLARATION_STUB CLASS name:Exception modality:OPEN visibility:public superTypes:[kotlin.Throwable]' type=kotlin.reflect.KClass<java.lang.Exception>] type=kotlin.Array<out kotlin.Throwable> varargElementType=kotlin.Throwable)
+    BLOCK_BODY
+      VAR IR_TEMPORARY_VARIABLE name:tmp_10 type:kotlinx.coroutines.CoroutineScope? [val]
+        CONST Null type=kotlinx.coroutines.CoroutineScope? value=null
+      RETURN type=kotlin.Nothing from='public final fun returnRefinedSuspendValueNative (): kotlin.String declared in <root>'
+        CALL 'public final fun returnRefinedSuspendValue (): kotlin.String declared in <root>' type=kotlin.String origin=null
+  FUN GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:returnStateFlowValueNative visibility:public modality:FINAL returnType:kotlinx.coroutines.flow.StateFlow<kotlin.String>
+    annotations:
+      ObjCName(name = "returnStateFlowValue", swiftName = <null>, exact = <null>)
+    BLOCK_BODY
+      VAR IR_TEMPORARY_VARIABLE name:tmp_11 type:kotlinx.coroutines.CoroutineScope? [val]
+        CONST Null type=kotlinx.coroutines.CoroutineScope? value=null
+      RETURN type=kotlin.Nothing from='public final fun returnStateFlowValueNative (): kotlinx.coroutines.flow.StateFlow<kotlin.String> declared in <root>'
+        CALL 'public final fun returnStateFlowValue (): kotlinx.coroutines.flow.StateFlow<kotlin.String> declared in <root>' type=kotlinx.coroutines.flow.StateFlow<kotlin.String> origin=null
+  FUN GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:returnSuspendFlowValueNative visibility:public modality:FINAL returnType:kotlinx.coroutines.flow.Flow<kotlin.String> [suspend]
+    annotations:
+      ObjCName(name = "returnSuspendFlowValue", swiftName = <null>, exact = <null>)
+      ShouldRefineInSwift
+      Throws(exceptionClasses = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_JAVA_DECLARATION_STUB CLASS name:Exception modality:OPEN visibility:public superTypes:[kotlin.Throwable]' type=kotlin.reflect.KClass<java.lang.Exception>] type=kotlin.Array<out kotlin.Throwable> varargElementType=kotlin.Throwable)
+    BLOCK_BODY
+      VAR IR_TEMPORARY_VARIABLE name:tmp_12 type:kotlinx.coroutines.CoroutineScope? [val]
+        CONST Null type=kotlinx.coroutines.CoroutineScope? value=null
+      RETURN type=kotlin.Nothing from='public final fun returnSuspendFlowValueNative (): kotlinx.coroutines.flow.Flow<kotlin.String> declared in <root>'
+        CALL 'public final fun returnSuspendFlowValue (): kotlinx.coroutines.flow.Flow<kotlin.String> declared in <root>' type=kotlinx.coroutines.flow.Flow<kotlin.String> origin=null
+  FUN GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:returnSuspendParameterValueNative visibility:public modality:FINAL returnType:kotlin.Int [suspend]
+    VALUE_PARAMETER GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] kind:Regular name:value index:0 type:kotlin.Int
+    annotations:
+      ObjCName(name = "returnSuspendParameterValue", swiftName = <null>, exact = <null>)
+      Throws(exceptionClasses = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_JAVA_DECLARATION_STUB CLASS name:Exception modality:OPEN visibility:public superTypes:[kotlin.Throwable]' type=kotlin.reflect.KClass<java.lang.Exception>] type=kotlin.Array<out kotlin.Throwable> varargElementType=kotlin.Throwable)
+    BLOCK_BODY
+      VAR IR_TEMPORARY_VARIABLE name:tmp_13 type:kotlinx.coroutines.CoroutineScope? [val]
+        CONST Null type=kotlinx.coroutines.CoroutineScope? value=null
+      RETURN type=kotlin.Nothing from='public final fun returnSuspendParameterValueNative (value: kotlin.Int): kotlin.Int declared in <root>'
+        CALL 'public final fun returnSuspendParameterValue (value: kotlin.Int): kotlin.Int declared in <root>' type=kotlin.Int origin=null
+          ARG value: GET_VAR 'value: kotlin.Int declared in <root>.returnSuspendParameterValueNative' type=kotlin.Int origin=null
+  FUN GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:returnSuspendParameterValueNative visibility:public modality:FINAL returnType:kotlin.String [suspend]
+    VALUE_PARAMETER GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] kind:Regular name:value index:0 type:kotlin.String
+    annotations:
+      ObjCName(name = "returnSuspendParameterValue", swiftName = <null>, exact = <null>)
+      Throws(exceptionClasses = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_JAVA_DECLARATION_STUB CLASS name:Exception modality:OPEN visibility:public superTypes:[kotlin.Throwable]' type=kotlin.reflect.KClass<java.lang.Exception>] type=kotlin.Array<out kotlin.Throwable> varargElementType=kotlin.Throwable)
+    BLOCK_BODY
+      VAR IR_TEMPORARY_VARIABLE name:tmp_14 type:kotlinx.coroutines.CoroutineScope? [val]
+        CONST Null type=kotlinx.coroutines.CoroutineScope? value=null
+      RETURN type=kotlin.Nothing from='public final fun returnSuspendParameterValueNative (value: kotlin.String): kotlin.String declared in <root>'
+        CALL 'public final fun returnSuspendParameterValue (value: kotlin.String): kotlin.String declared in <root>' type=kotlin.String origin=null
+          ARG value: GET_VAR 'value: kotlin.String declared in <root>.returnSuspendParameterValueNative' type=kotlin.String origin=null
+  FUN GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:returnSuspendValueNative visibility:public modality:FINAL returnType:kotlin.String [suspend]
+    annotations:
+      ObjCName(name = "returnSuspendValue", swiftName = <null>, exact = <null>)
+      Throws(exceptionClasses = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_JAVA_DECLARATION_STUB CLASS name:Exception modality:OPEN visibility:public superTypes:[kotlin.Throwable]' type=kotlin.reflect.KClass<java.lang.Exception>] type=kotlin.Array<out kotlin.Throwable> varargElementType=kotlin.Throwable)
+    BLOCK_BODY
+      VAR IR_TEMPORARY_VARIABLE name:tmp_15 type:kotlinx.coroutines.CoroutineScope? [val]
+        CONST Null type=kotlinx.coroutines.CoroutineScope? value=null
+      RETURN type=kotlin.Nothing from='public final fun returnSuspendValueNative (): kotlin.String declared in <root>'
+        CALL 'public final fun returnSuspendValue (): kotlin.String declared in <root>' type=kotlin.String origin=null
+  FUN GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:returnSuspendVarargValueNative visibility:public modality:FINAL returnType:kotlin.String [suspend]
+    VALUE_PARAMETER GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] kind:Regular name:values index:0 type:kotlin.Array<out kotlin.String> varargElementType:kotlin.String [vararg]
+    annotations:
+      ObjCName(name = "returnSuspendVarargValue", swiftName = <null>, exact = <null>)
+      Throws(exceptionClasses = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_JAVA_DECLARATION_STUB CLASS name:Exception modality:OPEN visibility:public superTypes:[kotlin.Throwable]' type=kotlin.reflect.KClass<java.lang.Exception>] type=kotlin.Array<out kotlin.Throwable> varargElementType=kotlin.Throwable)
+    BLOCK_BODY
+      VAR IR_TEMPORARY_VARIABLE name:tmp_16 type:kotlinx.coroutines.CoroutineScope? [val]
+        CONST Null type=kotlinx.coroutines.CoroutineScope? value=null
+      RETURN type=kotlin.Nothing from='public final fun returnSuspendVarargValueNative (vararg values: kotlin.String): kotlin.String declared in <root>'
+        CALL 'public final fun returnSuspendVarargValue (vararg values: kotlin.String): kotlin.String declared in <root>' type=kotlin.String origin=null
+          ARG values: GET_VAR 'values: kotlin.Array<out kotlin.String> declared in <root>.returnSuspendVarargValueNative' type=kotlin.Array<out kotlin.String> origin=null
+  FUN GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:returnThrowsSuspendValueNative visibility:public modality:FINAL returnType:kotlin.String [suspend]
+    annotations:
+      ObjCName(name = "returnThrowsSuspendValue", swiftName = <null>, exact = <null>)
+      Throws(exceptionClasses = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_JAVA_DECLARATION_STUB CLASS name:Exception modality:OPEN visibility:public superTypes:[kotlin.Throwable]' type=kotlin.reflect.KClass<java.lang.Exception>] type=kotlin.Array<out kotlin.Throwable> varargElementType=kotlin.Throwable)
+    BLOCK_BODY
+      VAR IR_TEMPORARY_VARIABLE name:tmp_17 type:kotlinx.coroutines.CoroutineScope? [val]
+        CONST Null type=kotlinx.coroutines.CoroutineScope? value=null
+      RETURN type=kotlin.Nothing from='public final fun returnThrowsSuspendValueNative (): kotlin.String declared in <root>'
+        CALL 'public final fun returnThrowsSuspendValue (): kotlin.String declared in <root>' type=kotlin.String origin=null
 FILE fqName:<root> fileName:/functions.kt
   CLASS CLASS name:MyClass14 modality:FINAL visibility:public superTypes:[kotlin.Any]
     thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:<root>.MyClass14<T of <root>.MyClass14>
@@ -659,178 +834,3 @@ FILE fqName:<root> fileName:/functions.kt
     BLOCK_BODY
       RETURN type=kotlin.Nothing from='public final fun returnThrowsSuspendValue (): kotlin.String declared in <root>'
         CONST String type=kotlin.String value="OK10"
-FILE fqName:<root> fileName:__GENERATED DECLARATIONS__.kt
-  FUN GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:returnCustomFlowValueNative visibility:public modality:FINAL returnType:<root>.MyFlow23<kotlin.Int, kotlin.String>
-    annotations:
-      ObjCName(name = "returnCustomFlowValue", swiftName = <null>, exact = <null>)
-    BLOCK_BODY
-      VAR IR_TEMPORARY_VARIABLE name:tmp_0 type:kotlinx.coroutines.CoroutineScope? [val]
-        CONST Null type=kotlinx.coroutines.CoroutineScope? value=null
-      RETURN type=kotlin.Nothing from='public final fun returnCustomFlowValueNative (): <root>.MyFlow23<kotlin.Int, kotlin.String> declared in <root>'
-        CALL 'public final fun returnCustomFlowValue (): <root>.MyFlow23<kotlin.Int, kotlin.String> declared in <root>' type=<root>.MyFlow23<kotlin.Int, kotlin.String> origin=null
-  FUN GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:returnExtensionValueNative visibility:public modality:FINAL returnType:kotlin.String [suspend]
-    VALUE_PARAMETER kind:ExtensionReceiver name:<this> index:0 type:kotlin.String
-    annotations:
-      ObjCName(name = "returnExtensionValue", swiftName = <null>, exact = <null>)
-      Throws(exceptionClasses = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_JAVA_DECLARATION_STUB CLASS name:Exception modality:OPEN visibility:public superTypes:[kotlin.Throwable]' type=kotlin.reflect.KClass<java.lang.Exception>] type=kotlin.Array<out kotlin.Throwable> varargElementType=kotlin.Throwable)
-    BLOCK_BODY
-      VAR IR_TEMPORARY_VARIABLE name:tmp_1 type:kotlinx.coroutines.CoroutineScope? [val]
-        CONST Null type=kotlinx.coroutines.CoroutineScope? value=null
-      RETURN type=kotlin.Nothing from='public final fun returnExtensionValueNative (<this>: kotlin.String): kotlin.String declared in <root>'
-        CALL 'public final fun returnExtensionValue (<this>: kotlin.String): kotlin.String declared in <root>' type=kotlin.String origin=null
-          ARG <this>: GET_VAR '<this>: kotlin.String declared in <root>.returnExtensionValueNative' type=kotlin.String origin=null
-  FUN GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:returnFlowValueNative visibility:public modality:FINAL returnType:kotlinx.coroutines.flow.Flow<kotlin.String>
-    annotations:
-      ObjCName(name = "returnFlowValue", swiftName = <null>, exact = <null>)
-    BLOCK_BODY
-      VAR IR_TEMPORARY_VARIABLE name:tmp_2 type:kotlinx.coroutines.CoroutineScope? [val]
-        CONST Null type=kotlinx.coroutines.CoroutineScope? value=null
-      RETURN type=kotlin.Nothing from='public final fun returnFlowValueNative (): kotlinx.coroutines.flow.Flow<kotlin.String> declared in <root>'
-        CALL 'public final fun returnFlowValue (): kotlinx.coroutines.flow.Flow<kotlin.String> declared in <root>' type=kotlinx.coroutines.flow.Flow<kotlin.String> origin=null
-  FUN GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:returnGenericSuspendValueNative visibility:public modality:FINAL returnType:T of <root>.returnGenericSuspendValueNative [suspend]
-    TYPE_PARAMETER GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:T index:0 variance: superTypes:[kotlin.Any?] reified:false
-    VALUE_PARAMETER GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] kind:Regular name:value index:0 type:T of <root>.returnGenericSuspendValueNative
-    annotations:
-      ObjCName(name = "returnGenericSuspendValue", swiftName = <null>, exact = <null>)
-      Throws(exceptionClasses = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_JAVA_DECLARATION_STUB CLASS name:Exception modality:OPEN visibility:public superTypes:[kotlin.Throwable]' type=kotlin.reflect.KClass<java.lang.Exception>] type=kotlin.Array<out kotlin.Throwable> varargElementType=kotlin.Throwable)
-    BLOCK_BODY
-      VAR IR_TEMPORARY_VARIABLE name:tmp_3 type:kotlinx.coroutines.CoroutineScope? [val]
-        CONST Null type=kotlinx.coroutines.CoroutineScope? value=null
-      RETURN type=kotlin.Nothing from='public final fun returnGenericSuspendValueNative <T> (value: T of <root>.returnGenericSuspendValueNative): T of <root>.returnGenericSuspendValueNative declared in <root>'
-        CALL 'public final fun returnGenericSuspendValue <T> (value: T of <root>.returnGenericSuspendValue): T of <root>.returnGenericSuspendValue declared in <root>' type=T of <root>.returnGenericSuspendValue origin=null
-          TYPE_ARG T: T of <root>.returnGenericSuspendValueNative
-          ARG value: GET_VAR 'value: T of <root>.returnGenericSuspendValueNative declared in <root>.returnGenericSuspendValueNative' type=T of <root>.returnGenericSuspendValueNative origin=null
-  FUN GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:returnInlineSuspendValueNative visibility:public modality:FINAL returnType:T of <root>.returnInlineSuspendValueNative [inline,suspend]
-    TYPE_PARAMETER GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:T index:0 variance: superTypes:[kotlin.Any?] reified:true
-    VALUE_PARAMETER GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] kind:Regular name:value index:0 type:T of <root>.returnInlineSuspendValueNative
-    annotations:
-      ObjCName(name = "returnInlineSuspendValue", swiftName = <null>, exact = <null>)
-      Throws(exceptionClasses = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_JAVA_DECLARATION_STUB CLASS name:Exception modality:OPEN visibility:public superTypes:[kotlin.Throwable]' type=kotlin.reflect.KClass<java.lang.Exception>] type=kotlin.Array<out kotlin.Throwable> varargElementType=kotlin.Throwable)
-    BLOCK_BODY
-      VAR IR_TEMPORARY_VARIABLE name:tmp_4 type:kotlinx.coroutines.CoroutineScope? [val]
-        CONST Null type=kotlinx.coroutines.CoroutineScope? value=null
-      RETURN type=kotlin.Nothing from='public final fun returnInlineSuspendValueNative <T> (value: T of <root>.returnInlineSuspendValueNative): T of <root>.returnInlineSuspendValueNative declared in <root>'
-        CALL 'public final fun returnInlineSuspendValue <T> (value: T of <root>.returnInlineSuspendValue): T of <root>.returnInlineSuspendValue declared in <root>' type=T of <root>.returnInlineSuspendValue origin=null
-          TYPE_ARG T: T of <root>.returnInlineSuspendValueNative
-          ARG value: GET_VAR 'value: T of <root>.returnInlineSuspendValueNative declared in <root>.returnInlineSuspendValueNative' type=T of <root>.returnInlineSuspendValueNative origin=null
-  FUN GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:returnNullableFlowAndValueNative visibility:public modality:FINAL returnType:kotlinx.coroutines.flow.Flow<kotlin.String?>?
-    annotations:
-      ObjCName(name = "returnNullableFlowAndValue", swiftName = <null>, exact = <null>)
-    BLOCK_BODY
-      VAR IR_TEMPORARY_VARIABLE name:tmp_5 type:kotlinx.coroutines.CoroutineScope? [val]
-        CONST Null type=kotlinx.coroutines.CoroutineScope? value=null
-      RETURN type=kotlin.Nothing from='public final fun returnNullableFlowAndValueNative (): kotlinx.coroutines.flow.Flow<kotlin.String?>? declared in <root>'
-        CALL 'public final fun returnNullableFlowAndValue (): kotlinx.coroutines.flow.Flow<kotlin.String?>? declared in <root>' type=kotlinx.coroutines.flow.Flow<kotlin.String?>? origin=null
-  FUN GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:returnNullableFlowNative visibility:public modality:FINAL returnType:kotlinx.coroutines.flow.Flow<kotlin.String>?
-    annotations:
-      ObjCName(name = "returnNullableFlow", swiftName = <null>, exact = <null>)
-    BLOCK_BODY
-      VAR IR_TEMPORARY_VARIABLE name:tmp_6 type:kotlinx.coroutines.CoroutineScope? [val]
-        CONST Null type=kotlinx.coroutines.CoroutineScope? value=null
-      RETURN type=kotlin.Nothing from='public final fun returnNullableFlowNative (): kotlinx.coroutines.flow.Flow<kotlin.String>? declared in <root>'
-        CALL 'public final fun returnNullableFlow (): kotlinx.coroutines.flow.Flow<kotlin.String>? declared in <root>' type=kotlinx.coroutines.flow.Flow<kotlin.String>? origin=null
-  FUN GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:returnNullableFlowValueNative visibility:public modality:FINAL returnType:kotlinx.coroutines.flow.Flow<kotlin.String?>
-    annotations:
-      ObjCName(name = "returnNullableFlowValue", swiftName = <null>, exact = <null>)
-    BLOCK_BODY
-      VAR IR_TEMPORARY_VARIABLE name:tmp_7 type:kotlinx.coroutines.CoroutineScope? [val]
-        CONST Null type=kotlinx.coroutines.CoroutineScope? value=null
-      RETURN type=kotlin.Nothing from='public final fun returnNullableFlowValueNative (): kotlinx.coroutines.flow.Flow<kotlin.String?> declared in <root>'
-        CALL 'public final fun returnNullableFlowValue (): kotlinx.coroutines.flow.Flow<kotlin.String?> declared in <root>' type=kotlinx.coroutines.flow.Flow<kotlin.String?> origin=null
-  FUN GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:returnNullableSuspendFlowNative visibility:public modality:FINAL returnType:kotlinx.coroutines.flow.Flow<kotlin.String>? [suspend]
-    annotations:
-      ObjCName(name = "returnNullableSuspendFlow", swiftName = <null>, exact = <null>)
-      Throws(exceptionClasses = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_JAVA_DECLARATION_STUB CLASS name:Exception modality:OPEN visibility:public superTypes:[kotlin.Throwable]' type=kotlin.reflect.KClass<java.lang.Exception>] type=kotlin.Array<out kotlin.Throwable> varargElementType=kotlin.Throwable)
-    BLOCK_BODY
-      VAR IR_TEMPORARY_VARIABLE name:tmp_8 type:kotlinx.coroutines.CoroutineScope? [val]
-        CONST Null type=kotlinx.coroutines.CoroutineScope? value=null
-      RETURN type=kotlin.Nothing from='public final fun returnNullableSuspendFlowNative (): kotlinx.coroutines.flow.Flow<kotlin.String>? declared in <root>'
-        CALL 'public final fun returnNullableSuspendFlow (): kotlinx.coroutines.flow.Flow<kotlin.String>? declared in <root>' type=kotlinx.coroutines.flow.Flow<kotlin.String>? origin=null
-  FUN GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:returnNullableSuspendValueNative visibility:public modality:FINAL returnType:kotlin.String? [suspend]
-    annotations:
-      ObjCName(name = "returnNullableSuspendValue", swiftName = <null>, exact = <null>)
-      Throws(exceptionClasses = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_JAVA_DECLARATION_STUB CLASS name:Exception modality:OPEN visibility:public superTypes:[kotlin.Throwable]' type=kotlin.reflect.KClass<java.lang.Exception>] type=kotlin.Array<out kotlin.Throwable> varargElementType=kotlin.Throwable)
-    BLOCK_BODY
-      VAR IR_TEMPORARY_VARIABLE name:tmp_9 type:kotlinx.coroutines.CoroutineScope? [val]
-        CONST Null type=kotlinx.coroutines.CoroutineScope? value=null
-      RETURN type=kotlin.Nothing from='public final fun returnNullableSuspendValueNative (): kotlin.String? declared in <root>'
-        CALL 'public final fun returnNullableSuspendValue (): kotlin.String? declared in <root>' type=kotlin.String? origin=null
-  FUN GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:returnRefinedSuspendValueNative visibility:public modality:FINAL returnType:kotlin.String [suspend]
-    annotations:
-      ObjCName(name = "returnRefinedSuspendValue", swiftName = <null>, exact = <null>)
-      ShouldRefineInSwift
-      Throws(exceptionClasses = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_JAVA_DECLARATION_STUB CLASS name:Exception modality:OPEN visibility:public superTypes:[kotlin.Throwable]' type=kotlin.reflect.KClass<java.lang.Exception>] type=kotlin.Array<out kotlin.Throwable> varargElementType=kotlin.Throwable)
-    BLOCK_BODY
-      VAR IR_TEMPORARY_VARIABLE name:tmp_10 type:kotlinx.coroutines.CoroutineScope? [val]
-        CONST Null type=kotlinx.coroutines.CoroutineScope? value=null
-      RETURN type=kotlin.Nothing from='public final fun returnRefinedSuspendValueNative (): kotlin.String declared in <root>'
-        CALL 'public final fun returnRefinedSuspendValue (): kotlin.String declared in <root>' type=kotlin.String origin=null
-  FUN GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:returnStateFlowValueNative visibility:public modality:FINAL returnType:kotlinx.coroutines.flow.StateFlow<kotlin.String>
-    annotations:
-      ObjCName(name = "returnStateFlowValue", swiftName = <null>, exact = <null>)
-    BLOCK_BODY
-      VAR IR_TEMPORARY_VARIABLE name:tmp_11 type:kotlinx.coroutines.CoroutineScope? [val]
-        CONST Null type=kotlinx.coroutines.CoroutineScope? value=null
-      RETURN type=kotlin.Nothing from='public final fun returnStateFlowValueNative (): kotlinx.coroutines.flow.StateFlow<kotlin.String> declared in <root>'
-        CALL 'public final fun returnStateFlowValue (): kotlinx.coroutines.flow.StateFlow<kotlin.String> declared in <root>' type=kotlinx.coroutines.flow.StateFlow<kotlin.String> origin=null
-  FUN GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:returnSuspendFlowValueNative visibility:public modality:FINAL returnType:kotlinx.coroutines.flow.Flow<kotlin.String> [suspend]
-    annotations:
-      ObjCName(name = "returnSuspendFlowValue", swiftName = <null>, exact = <null>)
-      ShouldRefineInSwift
-      Throws(exceptionClasses = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_JAVA_DECLARATION_STUB CLASS name:Exception modality:OPEN visibility:public superTypes:[kotlin.Throwable]' type=kotlin.reflect.KClass<java.lang.Exception>] type=kotlin.Array<out kotlin.Throwable> varargElementType=kotlin.Throwable)
-    BLOCK_BODY
-      VAR IR_TEMPORARY_VARIABLE name:tmp_12 type:kotlinx.coroutines.CoroutineScope? [val]
-        CONST Null type=kotlinx.coroutines.CoroutineScope? value=null
-      RETURN type=kotlin.Nothing from='public final fun returnSuspendFlowValueNative (): kotlinx.coroutines.flow.Flow<kotlin.String> declared in <root>'
-        CALL 'public final fun returnSuspendFlowValue (): kotlinx.coroutines.flow.Flow<kotlin.String> declared in <root>' type=kotlinx.coroutines.flow.Flow<kotlin.String> origin=null
-  FUN GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:returnSuspendParameterValueNative visibility:public modality:FINAL returnType:kotlin.Int [suspend]
-    VALUE_PARAMETER GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] kind:Regular name:value index:0 type:kotlin.Int
-    annotations:
-      ObjCName(name = "returnSuspendParameterValue", swiftName = <null>, exact = <null>)
-      Throws(exceptionClasses = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_JAVA_DECLARATION_STUB CLASS name:Exception modality:OPEN visibility:public superTypes:[kotlin.Throwable]' type=kotlin.reflect.KClass<java.lang.Exception>] type=kotlin.Array<out kotlin.Throwable> varargElementType=kotlin.Throwable)
-    BLOCK_BODY
-      VAR IR_TEMPORARY_VARIABLE name:tmp_13 type:kotlinx.coroutines.CoroutineScope? [val]
-        CONST Null type=kotlinx.coroutines.CoroutineScope? value=null
-      RETURN type=kotlin.Nothing from='public final fun returnSuspendParameterValueNative (value: kotlin.Int): kotlin.Int declared in <root>'
-        CALL 'public final fun returnSuspendParameterValue (value: kotlin.Int): kotlin.Int declared in <root>' type=kotlin.Int origin=null
-          ARG value: GET_VAR 'value: kotlin.Int declared in <root>.returnSuspendParameterValueNative' type=kotlin.Int origin=null
-  FUN GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:returnSuspendParameterValueNative visibility:public modality:FINAL returnType:kotlin.String [suspend]
-    VALUE_PARAMETER GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] kind:Regular name:value index:0 type:kotlin.String
-    annotations:
-      ObjCName(name = "returnSuspendParameterValue", swiftName = <null>, exact = <null>)
-      Throws(exceptionClasses = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_JAVA_DECLARATION_STUB CLASS name:Exception modality:OPEN visibility:public superTypes:[kotlin.Throwable]' type=kotlin.reflect.KClass<java.lang.Exception>] type=kotlin.Array<out kotlin.Throwable> varargElementType=kotlin.Throwable)
-    BLOCK_BODY
-      VAR IR_TEMPORARY_VARIABLE name:tmp_14 type:kotlinx.coroutines.CoroutineScope? [val]
-        CONST Null type=kotlinx.coroutines.CoroutineScope? value=null
-      RETURN type=kotlin.Nothing from='public final fun returnSuspendParameterValueNative (value: kotlin.String): kotlin.String declared in <root>'
-        CALL 'public final fun returnSuspendParameterValue (value: kotlin.String): kotlin.String declared in <root>' type=kotlin.String origin=null
-          ARG value: GET_VAR 'value: kotlin.String declared in <root>.returnSuspendParameterValueNative' type=kotlin.String origin=null
-  FUN GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:returnSuspendValueNative visibility:public modality:FINAL returnType:kotlin.String [suspend]
-    annotations:
-      ObjCName(name = "returnSuspendValue", swiftName = <null>, exact = <null>)
-      Throws(exceptionClasses = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_JAVA_DECLARATION_STUB CLASS name:Exception modality:OPEN visibility:public superTypes:[kotlin.Throwable]' type=kotlin.reflect.KClass<java.lang.Exception>] type=kotlin.Array<out kotlin.Throwable> varargElementType=kotlin.Throwable)
-    BLOCK_BODY
-      VAR IR_TEMPORARY_VARIABLE name:tmp_15 type:kotlinx.coroutines.CoroutineScope? [val]
-        CONST Null type=kotlinx.coroutines.CoroutineScope? value=null
-      RETURN type=kotlin.Nothing from='public final fun returnSuspendValueNative (): kotlin.String declared in <root>'
-        CALL 'public final fun returnSuspendValue (): kotlin.String declared in <root>' type=kotlin.String origin=null
-  FUN GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:returnSuspendVarargValueNative visibility:public modality:FINAL returnType:kotlin.String [suspend]
-    VALUE_PARAMETER GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] kind:Regular name:values index:0 type:kotlin.Array<out kotlin.String> varargElementType:kotlin.String [vararg]
-    annotations:
-      ObjCName(name = "returnSuspendVarargValue", swiftName = <null>, exact = <null>)
-      Throws(exceptionClasses = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_JAVA_DECLARATION_STUB CLASS name:Exception modality:OPEN visibility:public superTypes:[kotlin.Throwable]' type=kotlin.reflect.KClass<java.lang.Exception>] type=kotlin.Array<out kotlin.Throwable> varargElementType=kotlin.Throwable)
-    BLOCK_BODY
-      VAR IR_TEMPORARY_VARIABLE name:tmp_16 type:kotlinx.coroutines.CoroutineScope? [val]
-        CONST Null type=kotlinx.coroutines.CoroutineScope? value=null
-      RETURN type=kotlin.Nothing from='public final fun returnSuspendVarargValueNative (vararg values: kotlin.String): kotlin.String declared in <root>'
-        CALL 'public final fun returnSuspendVarargValue (vararg values: kotlin.String): kotlin.String declared in <root>' type=kotlin.String origin=null
-          ARG values: GET_VAR 'values: kotlin.Array<out kotlin.String> declared in <root>.returnSuspendVarargValueNative' type=kotlin.Array<out kotlin.String> origin=null
-  FUN GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:returnThrowsSuspendValueNative visibility:public modality:FINAL returnType:kotlin.String [suspend]
-    annotations:
-      ObjCName(name = "returnThrowsSuspendValue", swiftName = <null>, exact = <null>)
-      Throws(exceptionClasses = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_JAVA_DECLARATION_STUB CLASS name:Exception modality:OPEN visibility:public superTypes:[kotlin.Throwable]' type=kotlin.reflect.KClass<java.lang.Exception>] type=kotlin.Array<out kotlin.Throwable> varargElementType=kotlin.Throwable)
-    BLOCK_BODY
-      VAR IR_TEMPORARY_VARIABLE name:tmp_17 type:kotlinx.coroutines.CoroutineScope? [val]
-        CONST Null type=kotlinx.coroutines.CoroutineScope? value=null
-      RETURN type=kotlin.Nothing from='public final fun returnThrowsSuspendValueNative (): kotlin.String declared in <root>'
-        CALL 'public final fun returnThrowsSuspendValue (): kotlin.String declared in <root>' type=kotlin.String origin=null

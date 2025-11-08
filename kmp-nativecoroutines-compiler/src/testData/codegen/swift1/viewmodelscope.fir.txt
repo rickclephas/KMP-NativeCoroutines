@@ -151,7 +151,7 @@ FILE: viewmodelscope.kt
         }
         )
     }
-FILE: __GENERATED DECLARATIONS__.kt
+FILE: /__GENERATED__CALLABLES__.kt
     @R|kotlin/native/ObjCName|(name = String(returnSuspendValue2)) @R|kotlin/Throws|(exceptionClasses = vararg(<getClass>(Q|kotlin/Exception|))) public final suspend fun R|MyAndroidXViewModel1|.returnSuspendValue2Native(): R|kotlin/String| {
         ::R|/returnSuspendValue2|
         R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
