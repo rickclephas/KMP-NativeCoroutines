@@ -4,6 +4,7 @@ import org.jetbrains.kotlin.utils.filterToSetOrEmpty
 
 public enum class SwiftExport {
     NO_FUNC_RETURN_TYPES,
+    NO_THROWS_SUSPEND_FUNC,
 }
 
 public val SWIFT_EXPORT: ConfigOptionWithDefault<Set<SwiftExport>> =
