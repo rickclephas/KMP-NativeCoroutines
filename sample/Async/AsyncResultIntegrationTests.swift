@@ -11,24 +11,33 @@ import NativeCoroutinesSampleShared
 
 class AsyncResultIntegrationTests: XCTestCase {
     
-    #if !NATIVE_COROUTINES_SWIFT_EXPORT
     func testValueReceived() async {
-        let integrationTests = SuspendIntegrationTests()
+        let integrationTests = KotlinSuspendIntegrationTests()
         let sendValue = randomInt()
+        #if NATIVE_COROUTINES_SWIFT_EXPORT
+        let result = await asyncResult(for: await integrationTests.returnValueNative(value: sendValue, delay: 1000))
+        #else
         let result = await asyncResult(for: integrationTests.returnValue(value: sendValue, delay: 1000))
+        #endif
         guard case let .success(value) = result else {
             XCTFail("Function should complete without an error")
             return
         }
+        #if NATIVE_COROUTINES_SWIFT_EXPORT
+        XCTAssertEqual(value, sendValue, "Received incorrect value")
+        #else
         XCTAssertEqual(value.int32Value, sendValue, "Received incorrect value")
+        #endif
         await assertJobCompleted(integrationTests)
     }
-    #endif
     
-    #if !NATIVE_COROUTINES_SWIFT_EXPORT
     func testNilValueReceived() async {
-        let integrationTests = SuspendIntegrationTests()
+        let integrationTests = KotlinSuspendIntegrationTests()
+        #if NATIVE_COROUTINES_SWIFT_EXPORT
+        let result = await asyncResult(for: await integrationTests.returnNullNative(delay: 1000))
+        #else
         let result = await asyncResult(for: integrationTests.returnNull(delay: 1000))
+        #endif
         guard case let .success(value) = result else {
             XCTFail("Function should complete without an error")
             return
@@ -36,9 +45,9 @@ class AsyncResultIntegrationTests: XCTestCase {
         XCTAssertNil(value, "Value should be nil")
         await assertJobCompleted(integrationTests)
     }
-    #endif
     
     #if !NATIVE_COROUTINES_SWIFT_EXPORT
+    /// Exception throwing isn't supported yet, see https://youtrack.jetbrains.com/issue/KT-80971
     func testExceptionReceived() async {
         let integrationTests = SuspendIntegrationTests()
         let sendMessage = randomString()
@@ -56,6 +65,7 @@ class AsyncResultIntegrationTests: XCTestCase {
     #endif
     
     #if !NATIVE_COROUTINES_SWIFT_EXPORT
+    /// Exception throwing isn't supported yet, see https://youtrack.jetbrains.com/issue/KT-80971
     func testErrorReceived() async {
         let integrationTests = SuspendIntegrationTests()
         let sendMessage = randomString()
@@ -73,6 +83,7 @@ class AsyncResultIntegrationTests: XCTestCase {
     #endif
     
     #if !NATIVE_COROUTINES_SWIFT_EXPORT
+    /// Cancellation isn't supported yet, see https://youtrack.jetbrains.com/issue/KT-80970
     func testCancellation() async {
         let integrationTests = SuspendIntegrationTests()
         let handle = Task {
@@ -100,6 +111,7 @@ class AsyncResultIntegrationTests: XCTestCase {
     #endif
     
     #if !NATIVE_COROUTINES_SWIFT_EXPORT
+    /// Suspend functions returning Unit aren't supported yet, see https://youtrack.jetbrains.com/issue/KT-81593
     func testUnitReturnType() async throws {
         let integrationTests = SuspendIntegrationTests()
         let result = await asyncResult(for: integrationTests.returnUnit(delay: 100))
