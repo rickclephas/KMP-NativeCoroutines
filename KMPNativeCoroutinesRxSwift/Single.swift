@@ -21,6 +21,7 @@ public func createSingle<Result, Failure: Error, Unit>(
 ///
 /// You should migrate away from this function once you have fully migrated to Swift export.
 @available(*, deprecated, message: "Kotlin Coroutines are supported by Swift export")
+@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public func createSingle<Result>(
     for operation: @escaping () async throws -> Result
 ) -> Single<Result> {
