@@ -17,6 +17,28 @@ public func createSingle<Result, Failure: Error, Unit>(
     return createSingleImpl(for: nativeSuspend)
 }
 
+/// This function provides source compatibility during the migration to Swift export.
+///
+/// You should migrate away from this function once you have fully migrated to Swift export.
+@available(*, deprecated, message: "Kotlin Coroutines are supported by Swift export")
+public func createSingle<Result>(
+    for operation: @escaping () async throws -> Result
+) -> Single<Result> {
+    return Single.deferred {
+        return Single.create { observer in
+            let task = Task {
+                do {
+                    let result = try await operation()
+                    observer(.success(result))
+                } catch {
+                    observer(.failure(error))
+                }
+            }
+            return Disposables.create { task.cancel() }
+        }
+    }
+}
+
 /// Creates a `Single` for the provided `NativeSuspend`.
 /// - Parameter nativeSuspend: The native suspend function to await.
 /// - Returns: A single that either finishes with a single value or fails with an error.
