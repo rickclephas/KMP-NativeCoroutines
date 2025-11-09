@@ -50,7 +50,7 @@ public class SuspendIntegrationTests: IntegrationTests() {
     }
 
     @NativeCoroutines
-    @NativeCoroutinesObjCExport
+    @NativeCoroutinesObjCExport // https://youtrack.jetbrains.com/issue/KT-81593
     public suspend fun returnUnit(delay: Long) {
         delay(delay)
     }

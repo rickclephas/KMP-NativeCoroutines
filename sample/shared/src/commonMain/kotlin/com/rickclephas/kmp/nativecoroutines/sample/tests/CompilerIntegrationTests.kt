@@ -37,7 +37,7 @@ public class CompilerIntegrationTests<V>: IntegrationTests() {
     }
 
     @NativeCoroutines
-    @NativeCoroutinesObjCExport
+    @NativeCoroutinesObjCExport // https://youtrack.jetbrains.com/issue/KT-82282
     public suspend fun <T> returnGenericVarargValues(vararg values: T): Array<out T> {
         return values
     }
