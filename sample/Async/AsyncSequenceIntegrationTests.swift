@@ -147,4 +147,22 @@ class AsyncSequenceIntegrationTests: XCTestCase {
         await handle.value
         await assertJobCompleted(integrationTests)
     }
+    
+    func testImplicitCancellation() async {
+        let integrationTests = FlowIntegrationTests()
+        let handle = Task<Void, Never> {
+            do {
+                let sequence = asyncSequence(for: integrationTests.getFlowWithCallback(count: 5, callbackIndex: 2, delay: 1000) {
+                    XCTFail("The callback shouldn't be called")
+                })
+                let iterator = sequence.makeAsyncIterator()
+                let _ = try await iterator.next()
+                XCTAssertEqual(integrationTests.uncompletedJobCount, 1, "There should be 1 uncompleted job")
+            } catch {
+                XCTFail("Sequence should be cancelled without an error")
+            }
+        }
+        await handle.value
+        await assertJobCompleted(integrationTests)
+    }
 }

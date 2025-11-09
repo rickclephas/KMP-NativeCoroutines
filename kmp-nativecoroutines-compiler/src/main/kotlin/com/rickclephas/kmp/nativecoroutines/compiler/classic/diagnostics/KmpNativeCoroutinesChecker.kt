@@ -67,7 +67,6 @@ import kotlin.io.path.Path
 public class KmpNativeCoroutinesChecker(
     exposedSeverity: ExposedSeverity,
     private val generatedSourceDirs: List<Path>,
-    private val isK2Mode: Boolean,
 ): DeclarationChecker {
 
     private val exposedSuspendFunction = when (exposedSeverity) {
@@ -205,7 +204,7 @@ public class KmpNativeCoroutinesChecker(
         //endregion
 
         //region IMPLICIT_RETURN_TYPE
-        if (hasAnnotation && isK2Mode && (declaration as? KtCallableDeclaration)?.hasImplicitReturnType() == true) {
+        if (hasAnnotation && (declaration as? KtCallableDeclaration)?.hasImplicitReturnType() == true) {
             context.trace.report(IMPLICIT_RETURN_TYPE.on(declaration))
         }
         //endregion
