@@ -1,6 +1,7 @@
 package com.rickclephas.kmp.nativecoroutines.sample.tests
 
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
+import com.rickclephas.kmp.nativecoroutines.sample.NativeCoroutinesObjCExport
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -48,8 +49,9 @@ public class SuspendIntegrationTests: IntegrationTests() {
         }
     }
 
-//    @NativeCoroutines
-//    public suspend fun returnUnit(delay: Long) {
-//        delay(delay)
-//    }
+    @NativeCoroutines
+    @NativeCoroutinesObjCExport
+    public suspend fun returnUnit(delay: Long) {
+        delay(delay)
+    }
 }

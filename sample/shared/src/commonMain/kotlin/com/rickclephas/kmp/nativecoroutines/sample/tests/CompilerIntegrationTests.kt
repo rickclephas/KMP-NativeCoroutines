@@ -2,6 +2,7 @@ package com.rickclephas.kmp.nativecoroutines.sample.tests
 
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesIgnore
+import com.rickclephas.kmp.nativecoroutines.sample.NativeCoroutinesObjCExport
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
@@ -35,10 +36,11 @@ public class CompilerIntegrationTests<V>: IntegrationTests() {
         return values
     }
 
-//    @NativeCoroutines
-//    public suspend fun <T> returnGenericVarargValues(vararg values: T): Array<out T> {
-//        return values
-//    }
+    @NativeCoroutines
+    @NativeCoroutinesObjCExport
+    public suspend fun <T> returnGenericVarargValues(vararg values: T): Array<out T> {
+        return values
+    }
 
     @NativeCoroutines
     @Suppress("UnusedReceiverParameter")
