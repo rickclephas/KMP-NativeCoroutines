@@ -87,7 +87,7 @@ internal class FirKmpNativeCoroutinesDeclarationChecker(
 
     context(context: CheckerContext, reporter: DiagnosticReporter)
     override fun check(declaration: FirCallableDeclaration) {
-        if (declaration !is FirSimpleFunction && declaration !is FirProperty) return
+        if (declaration !is FirNamedFunction && declaration !is FirProperty) return
 
         fun KtDiagnosticFactory0.reportOn(annotation: FirAnnotation?) {
             if (annotation == null) return

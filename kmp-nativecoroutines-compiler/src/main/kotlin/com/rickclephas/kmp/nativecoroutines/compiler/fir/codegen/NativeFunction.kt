@@ -8,7 +8,7 @@ import org.jetbrains.kotlin.KtFakeSourceElementKind
 import org.jetbrains.kotlin.fakeElement
 import org.jetbrains.kotlin.fir.copy
 import org.jetbrains.kotlin.fir.declarations.FirResolvePhase
-import org.jetbrains.kotlin.fir.declarations.builder.buildSimpleFunction
+import org.jetbrains.kotlin.fir.declarations.builder.buildNamedFunction
 import org.jetbrains.kotlin.fir.declarations.origin
 import org.jetbrains.kotlin.fir.declarations.utils.isInline
 import org.jetbrains.kotlin.fir.extensions.FirExtension
@@ -25,7 +25,7 @@ internal fun FirExtension.buildNativeFunction(
 ): FirNamedFunctionSymbol? {
     val firCallableSignature = originalSymbol.getCallableSignature(session) ?: return null
     val callableSignature = firCallableSignature.signature
-    return buildSimpleFunction {
+    return buildNamedFunction {
         resolvePhase = FirResolvePhase.BODY_RESOLVE
         moduleData = session.moduleData
         origin = NativeCoroutinesDeclarationKey(
