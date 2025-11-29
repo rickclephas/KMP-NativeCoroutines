@@ -4,6 +4,7 @@ dependencyResolutionManagement {
     repositories {
         mavenCentral()
         gradlePluginPortal()
+        maven("https://redirector.kotlinlang.org/maven/dev")
     }
     versionCatalogs {
         create("libs") {

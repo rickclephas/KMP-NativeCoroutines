@@ -4,12 +4,14 @@ pluginManagement {
     repositories {
         mavenCentral()
         gradlePluginPortal()
+        maven("https://redirector.kotlinlang.org/maven/dev")
     }
 }
 
 dependencyResolutionManagement {
     repositories {
         mavenCentral()
+        maven("https://redirector.kotlinlang.org/maven/dev")
     }
 }
 
