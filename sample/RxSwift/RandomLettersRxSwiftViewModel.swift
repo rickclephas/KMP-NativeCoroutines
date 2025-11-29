@@ -16,14 +16,18 @@ class RandomLettersRxSwiftViewModel: RandomLettersViewModel {
     @Published private(set) var result: Result<String, Error>? = nil
     @Published private(set) var isLoading: Bool = false
     
-    private let randomLettersGenerator = RandomLettersGenerator()
+    private let randomLettersGenerator = RandomLettersGenerator.shared
     
     func loadRandomLetters(throwException: Bool) {
         isLoading = true
         result = nil
-        _ = createSingle(for: randomLettersGenerator.getRandomLetters(throwException: throwException))
+        #if NATIVE_COROUTINES_SWIFT_EXPORT
+        let single = createSingle(for: { await self.randomLettersGenerator.getRandomLettersNative(throwException: throwException) })
+        #else
+        let single = createSingle(for: randomLettersGenerator.getRandomLetters(throwException: throwException))
+        #endif
             // Update the UI on the main thread
-            .observe(on: MainScheduler.instance)
+        _ = single.observe(on: MainScheduler.instance)
             .subscribe(onSuccess: { [weak self] word in
                 self?.result = .success(word)
             }, onFailure: { [weak self] error in

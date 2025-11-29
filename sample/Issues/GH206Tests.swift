@@ -11,6 +11,7 @@ import NativeCoroutinesSampleShared
 
 class GH206Tests: XCTestCase {
     
+    #if !NATIVE_COROUTINES_SWIFT_EXPORT
     func testReturnFlowValue() {
         let valueExpectation = expectation(description: "Waiting for value")
         _ = GH206().property({ value, next, _ in
@@ -20,4 +21,5 @@ class GH206Tests: XCTestCase {
         }, { _, unit in unit }, { _, unit in unit })
         wait(for: [valueExpectation], timeout: 2)
     }
+    #endif
 }

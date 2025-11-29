@@ -4,8 +4,8 @@ package com.rickclephas.kmp.nativecoroutines.compiler.runners;
 
 import com.intellij.testFramework.TestDataPath;
 import org.jetbrains.kotlin.test.util.KtTestUtil;
-import org.jetbrains.kotlin.test.TargetBackend;
 import org.jetbrains.kotlin.test.TestMetadata;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
 public class FirPsiCodegenTestGenerated extends AbstractFirPsiCodegenTest {
   @Test
   public void testAllFilesPresentInCodegen() {
-    KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("src/testData/codegen"), Pattern.compile("^(.+)\\.kt$"), Pattern.compile("^(.+)\\.fir\\.kt$"), TargetBackend.JVM_IR, true);
+    KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("src/testData/codegen"), Pattern.compile("^(.+)\\.kt$"), Pattern.compile("^(.+)\\.fir\\.kt$"), true);
   }
 
   @Test
@@ -49,5 +49,85 @@ public class FirPsiCodegenTestGenerated extends AbstractFirPsiCodegenTest {
   @TestMetadata("viewmodelscope.kt")
   public void testViewmodelscope() {
     runTest("src/testData/codegen/viewmodelscope.kt");
+  }
+
+  @Nested
+  @TestMetadata("src/testData/codegen/swift1")
+  @TestDataPath("$PROJECT_ROOT")
+  public class Swift1 {
+    @Test
+    public void testAllFilesPresentInSwift1() {
+      KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("src/testData/codegen/swift1"), Pattern.compile("^(.+)\\.kt$"), Pattern.compile("^(.+)\\.fir\\.kt$"), true);
+    }
+
+    @Test
+    @TestMetadata("annotations.kt")
+    public void testAnnotations() {
+      runTest("src/testData/codegen/swift1/annotations.kt");
+    }
+
+    @Test
+    @TestMetadata("coroutinescope.kt")
+    public void testCoroutinescope() {
+      runTest("src/testData/codegen/swift1/coroutinescope.kt");
+    }
+
+    @Test
+    @TestMetadata("functions.kt")
+    public void testFunctions() {
+      runTest("src/testData/codegen/swift1/functions.kt");
+    }
+
+    @Test
+    @TestMetadata("properties.kt")
+    public void testProperties() {
+      runTest("src/testData/codegen/swift1/properties.kt");
+    }
+
+    @Test
+    @TestMetadata("viewmodelscope.kt")
+    public void testViewmodelscope() {
+      runTest("src/testData/codegen/swift1/viewmodelscope.kt");
+    }
+  }
+
+  @Nested
+  @TestMetadata("src/testData/codegen/swift3")
+  @TestDataPath("$PROJECT_ROOT")
+  public class Swift3 {
+    @Test
+    public void testAllFilesPresentInSwift3() {
+      KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("src/testData/codegen/swift3"), Pattern.compile("^(.+)\\.kt$"), Pattern.compile("^(.+)\\.fir\\.kt$"), true);
+    }
+
+    @Test
+    @TestMetadata("annotations.kt")
+    public void testAnnotations() {
+      runTest("src/testData/codegen/swift3/annotations.kt");
+    }
+
+    @Test
+    @TestMetadata("coroutinescope.kt")
+    public void testCoroutinescope() {
+      runTest("src/testData/codegen/swift3/coroutinescope.kt");
+    }
+
+    @Test
+    @TestMetadata("functions.kt")
+    public void testFunctions() {
+      runTest("src/testData/codegen/swift3/functions.kt");
+    }
+
+    @Test
+    @TestMetadata("properties.kt")
+    public void testProperties() {
+      runTest("src/testData/codegen/swift3/properties.kt");
+    }
+
+    @Test
+    @TestMetadata("viewmodelscope.kt")
+    public void testViewmodelscope() {
+      runTest("src/testData/codegen/swift3/viewmodelscope.kt");
+    }
   }
 }

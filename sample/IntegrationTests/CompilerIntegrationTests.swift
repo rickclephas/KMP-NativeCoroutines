@@ -11,8 +11,13 @@ import NativeCoroutinesSampleShared
 
 class CompilerIntegrationTests: XCTestCase {
     
-    private typealias IntegrationTests = NativeCoroutinesSampleShared.CompilerIntegrationTests<NSNumber>
+    #if NATIVE_COROUTINES_SWIFT_EXPORT
+    private typealias IntegrationTests = KotlinCompilerIntegrationTests
+    #else
+    private typealias IntegrationTests = KotlinCompilerIntegrationTests<NSNumber>
+    #endif
     
+    #if !NATIVE_COROUTINES_SWIFT_EXPORT
     func testReturnGenericClassValue() {
         let integrationTests = IntegrationTests()
         let valueExpectation = expectation(description: "Waiting for value")
@@ -24,7 +29,9 @@ class CompilerIntegrationTests: XCTestCase {
         }, { _, unit in unit }, { _, unit in unit })
         wait(for: [valueExpectation], timeout: 2)
     }
+    #endif
     
+    #if !NATIVE_COROUTINES_SWIFT_EXPORT
     func testReturnDefaultValue() {
         let integrationTests = IntegrationTests()
         let valueExpectation = expectation(description: "Waiting for value")
@@ -36,7 +43,9 @@ class CompilerIntegrationTests: XCTestCase {
         }, { _, unit in unit }, { _, unit in unit })
         wait(for: [valueExpectation], timeout: 2)
     }
+    #endif
     
+    #if !NATIVE_COROUTINES_SWIFT_EXPORT
     func testReturnGenericValue() {
         let integrationTests = IntegrationTests()
         let valueExpectation = expectation(description: "Waiting for value")
@@ -48,7 +57,9 @@ class CompilerIntegrationTests: XCTestCase {
         }, { _, unit in unit }, { _, unit in unit })
         wait(for: [valueExpectation], timeout: 2)
     }
+    #endif
     
+    #if !NATIVE_COROUTINES_SWIFT_EXPORT
     func testReturnConstrainedGenericValue() {
         let integrationTests = IntegrationTests()
         let valueExpectation = expectation(description: "Waiting for value")
@@ -60,7 +71,9 @@ class CompilerIntegrationTests: XCTestCase {
         }, { _, unit in unit }, { _, unit in unit })
         wait(for: [valueExpectation], timeout: 2)
     }
+    #endif
     
+    #if !NATIVE_COROUTINES_SWIFT_EXPORT
     func testReturnGenericValues() {
         let integrationTests = IntegrationTests()
         let valueExpectation = expectation(description: "Waiting for values")
@@ -72,7 +85,9 @@ class CompilerIntegrationTests: XCTestCase {
         }, { _, unit in unit }, { _, unit in unit })
         wait(for: [valueExpectation], timeout: 2)
     }
+    #endif
     
+    #if !NATIVE_COROUTINES_SWIFT_EXPORT
     func testReturnGenericVarargValues() {
         let integrationTests = IntegrationTests()
         let valueExpectation = expectation(description: "Waiting for values")
@@ -89,7 +104,9 @@ class CompilerIntegrationTests: XCTestCase {
         }, { _, unit in unit }, { _, unit in unit })
         wait(for: [valueExpectation], timeout: 2)
     }
+    #endif
     
+    #if !NATIVE_COROUTINES_SWIFT_EXPORT
     func testReturnGenericValueFromExtension() {
         let integrationTests = IntegrationTests()
         let valueExpectation = expectation(description: "Waiting for value")
@@ -101,7 +118,9 @@ class CompilerIntegrationTests: XCTestCase {
         }, { _, unit in unit }, { _, unit in unit })
         wait(for: [valueExpectation], timeout: 2)
     }
+    #endif
     
+    #if !NATIVE_COROUTINES_SWIFT_EXPORT
     func testReturnGenericFlow() {
         let integrationTests = IntegrationTests()
         let valueExpectation = expectation(description: "Waiting for value")
@@ -113,4 +132,5 @@ class CompilerIntegrationTests: XCTestCase {
         }, { _, unit in unit }, { _, unit in unit })
         wait(for: [valueExpectation], timeout: 2)
     }
+    #endif
 }

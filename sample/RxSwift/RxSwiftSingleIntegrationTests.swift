@@ -12,13 +12,21 @@ import NativeCoroutinesSampleShared
 class RxSwiftSingleIntegrationTests: XCTestCase {
     
     func testValueReceived() {
-        let integrationTests = SuspendIntegrationTests()
+        let integrationTests = KotlinSuspendIntegrationTests()
         let sendValue = randomInt()
+        #if NATIVE_COROUTINES_SWIFT_EXPORT
+        let single = createSingle(for: { await integrationTests.returnValueNative(value: sendValue, delay: 1000) })
+        #else
         let single = createSingle(for: integrationTests.returnValue(value: sendValue, delay: 1000))
+        #endif
         let valueExpectation = expectation(description: "Waiting for value")
         let disposedExpectation = expectation(description: "Waiting for dispose")
         let disposable = single.subscribe(onSuccess: { value in
+            #if NATIVE_COROUTINES_SWIFT_EXPORT
+            XCTAssertEqual(value, sendValue, "Received incorrect value")
+            #else
             XCTAssertEqual(value.int32Value, sendValue, "Received incorrect value")
+            #endif
             valueExpectation.fulfill()
         }, onFailure: { _ in
             XCTFail("Single shouldn't fail")
@@ -26,15 +34,21 @@ class RxSwiftSingleIntegrationTests: XCTestCase {
             disposedExpectation.fulfill()
         })
         _ = disposable // This is just to remove the unused variable warning
+        #if !NATIVE_COROUTINES_SWIFT_EXPORT
         XCTAssertEqual(integrationTests.uncompletedJobCount, 1, "There should be 1 uncompleted job")
+        #endif
         wait(for: [valueExpectation, disposedExpectation], timeout: 3)
         delay(1) // Delay is needed else the job isn't completed yet
         XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
     }
     
     func testNilValueReceived() {
-        let integrationTests = SuspendIntegrationTests()
+        let integrationTests = KotlinSuspendIntegrationTests()
+        #if NATIVE_COROUTINES_SWIFT_EXPORT
+        let single = createSingle(for: { await integrationTests.returnNullNative(delay: 1000) })
+        #else
         let single = createSingle(for: integrationTests.returnNull(delay: 1000))
+        #endif
         let valueExpectation = expectation(description: "Waiting for value")
         let disposedExpectation = expectation(description: "Waiting for dispose")
         let disposable = single.subscribe(onSuccess: { value in
@@ -46,12 +60,16 @@ class RxSwiftSingleIntegrationTests: XCTestCase {
             disposedExpectation.fulfill()
         })
         _ = disposable // This is just to remove the unused variable warning
+        #if !NATIVE_COROUTINES_SWIFT_EXPORT
         XCTAssertEqual(integrationTests.uncompletedJobCount, 1, "There should be 1 uncompleted job")
+        #endif
         wait(for: [valueExpectation, disposedExpectation], timeout: 3)
         delay(1) // Delay is needed else the job isn't completed yet
         XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
     }
     
+    #if !NATIVE_COROUTINES_SWIFT_EXPORT
+    /// Exception throwing isn't supported yet, see https://youtrack.jetbrains.com/issue/KT-80971
     func testExceptionReceived() {
         let integrationTests = SuspendIntegrationTests()
         let sendMessage = randomString()
@@ -76,7 +94,10 @@ class RxSwiftSingleIntegrationTests: XCTestCase {
         wait(for: [valueExpectation, errorExpectation, disposedExpectation], timeout: 3)
         XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
     }
+    #endif
     
+    #if !NATIVE_COROUTINES_SWIFT_EXPORT
+    /// Exception throwing isn't supported yet, see https://youtrack.jetbrains.com/issue/KT-80971
     func testErrorReceived() {
         let integrationTests = SuspendIntegrationTests()
         let sendMessage = randomString()
@@ -101,10 +122,15 @@ class RxSwiftSingleIntegrationTests: XCTestCase {
         wait(for: [valueExpectation, errorExpectation, disposedExpectation], timeout: 3)
         XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
     }
+    #endif
     
     func testNotOnMainThread() {
-        let integrationTests = SuspendIntegrationTests()
+        let integrationTests = KotlinSuspendIntegrationTests()
+        #if NATIVE_COROUTINES_SWIFT_EXPORT
+        let single = createSingle(for: { await integrationTests.returnValueNative(value: 1, delay: 1000) })
+        #else
         let single = createSingle(for: integrationTests.returnValue(value: 1, delay: 1000))
+        #endif
         let valueExpectation = expectation(description: "Waiting for value")
         let disposedExpectation = expectation(description: "Waiting for dispose")
         XCTAssertTrue(Thread.isMainThread, "Test should run on the main thread")
@@ -119,6 +145,8 @@ class RxSwiftSingleIntegrationTests: XCTestCase {
         wait(for: [valueExpectation, disposedExpectation], timeout: 3)
     }
     
+    #if !NATIVE_COROUTINES_SWIFT_EXPORT
+    /// Cancellation isn't supported yet, see https://youtrack.jetbrains.com/issue/KT-80970
     func testCancellation() {
         let integrationTests = SuspendIntegrationTests()
         let callbackExpectation = expectation(description: "Waiting for callback not to get called")
@@ -147,7 +175,9 @@ class RxSwiftSingleIntegrationTests: XCTestCase {
         wait(for: [callbackExpectation, valueExpectation, errorExpectation, disposedExpectation], timeout: 3)
         XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
     }
+    #endif
     
+    #if !NATIVE_COROUTINES_SWIFT_EXPORT
     func testValuesReceived() {
         let integrationTests = SuspendIntegrationTests()
         let sendValueCount = randomInt(min: 5, max: 20)
@@ -174,7 +204,10 @@ class RxSwiftSingleIntegrationTests: XCTestCase {
         delay(1) // Delay is needed else the job isn't completed yet
         XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
     }
+    #endif
     
+    #if !NATIVE_COROUTINES_SWIFT_EXPORT
+    /// Suspend functions returning Unit aren't supported yet, see https://youtrack.jetbrains.com/issue/KT-81593
     func testUnitReturnType() {
         let integrationTests = SuspendIntegrationTests()
         let single = createSingle(for: integrationTests.returnUnit(delay: 1000))
@@ -193,4 +226,5 @@ class RxSwiftSingleIntegrationTests: XCTestCase {
         delay(1) // Delay is needed else the job isn't completed yet
         XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
     }
+    #endif
 }

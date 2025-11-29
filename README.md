@@ -21,6 +21,10 @@ So all the `Flow` interfaces lose their generic value type which make them hard 
 
 This library solves both of these limitations 😄.
 
+> [!NOTE]
+> Looking to try Swift export?
+> Read about its current state and limitations in [SWIFT_EXPORT.md](SWIFT_EXPORT.md). 
+
 ## Compatibility
 
 The latest version of the library uses Kotlin version `2.2.21`.  

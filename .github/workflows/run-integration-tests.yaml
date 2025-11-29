@@ -14,6 +14,7 @@ jobs:
       matrix:
         platform: [ iOS, macOS, tvOS, watchOS ]
         embeddable-compiler: [ true, false ]
+        swift-export: [ true, false ]
         include:
           - java: '17'
           - xcode: '16.4'
@@ -29,7 +30,7 @@ jobs:
           - platform: watchOS
             scheme: watchOS Tests
             destination: platform=watchOS Simulator,name=Apple Watch Series 10 (46mm)
-    name: ${{ format('{0} (embeddable {1})', matrix.platform, matrix.embeddable-compiler) }}
+    name: ${{ format('{0} (embeddable {1}, swiftExport {2})', matrix.platform, matrix.embeddable-compiler, matrix.swift-export) }}
     runs-on: macos-15
     defaults:
       run:
@@ -55,10 +56,13 @@ jobs:
       - name: Set kotlin.native.useEmbeddableCompilerJar
         run: echo "kotlin.native.useEmbeddableCompilerJar=${{ matrix.embeddable-compiler }}" >> gradle.properties
       - name: Run tests
+        env:
+          NATIVE_COROUTINES_SWIFT_EXPORT: ${{ matrix.swift-export }}
         run: >-
           set -o pipefail &&
           xcodebuild test
           -project KMPNativeCoroutinesSample.xcodeproj
           -scheme "${{ matrix.scheme }}"
           -destination "${{ matrix.destination }}"
+          'SWIFT_ACTIVE_COMPILATION_CONDITIONS=$(inherited) ${{ matrix.swift-export && 'NATIVE_COROUTINES_SWIFT_EXPORT' || '' }}'
           | xcbeautify --renderer github-actions
