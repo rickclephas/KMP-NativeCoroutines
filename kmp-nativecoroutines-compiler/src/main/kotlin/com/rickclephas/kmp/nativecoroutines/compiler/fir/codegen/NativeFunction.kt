@@ -40,6 +40,7 @@ internal fun FirExtension.buildNativeFunction(
 
         status = originalSymbol.getGeneratedDeclarationStatus(session)
             ?.copy(isInline = originalSymbol.isInline) ?: return null
+        isLocal = originalSymbol.isLocal
 
         dispatchReceiverType = originalSymbol.dispatchReceiverType
 
