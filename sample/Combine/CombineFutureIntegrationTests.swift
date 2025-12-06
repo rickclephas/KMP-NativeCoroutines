@@ -15,7 +15,7 @@ class CombineFutureIntegrationTests: XCTestCase {
         let integrationTests = KotlinSuspendIntegrationTests()
         let sendValue = randomInt()
         #if NATIVE_COROUTINES_SWIFT_EXPORT
-        let future = createFuture(for: { await integrationTests.returnValueNative(value: sendValue, delay: 1000) })
+        let future = createFuture(for: { try await integrationTests.returnValueNative(value: sendValue, delay: 1000) })
         #else
         let future = createFuture(for: integrationTests.returnValue(value: sendValue, delay: 1000))
         #endif
@@ -46,7 +46,7 @@ class CombineFutureIntegrationTests: XCTestCase {
     func testNilValueReceived() {
         let integrationTests = KotlinSuspendIntegrationTests()
         #if NATIVE_COROUTINES_SWIFT_EXPORT
-        let future = createFuture(for: { await integrationTests.returnNullNative(delay: 1000) })
+        let future = createFuture(for: { try await integrationTests.returnNullNative(delay: 1000) })
         #else
         let future = createFuture(for: integrationTests.returnNull(delay: 1000))
         #endif
@@ -131,7 +131,7 @@ class CombineFutureIntegrationTests: XCTestCase {
     func testNotOnMainThread() {
         let integrationTests = KotlinSuspendIntegrationTests()
         #if NATIVE_COROUTINES_SWIFT_EXPORT
-        let future = createFuture(for: { await integrationTests.returnValueNative(value: 1, delay: 1000) })
+        let future = createFuture(for: { try await integrationTests.returnValueNative(value: 1, delay: 1000) })
         #else
         let future = createFuture(for: integrationTests.returnValue(value: 1, delay: 1000))
         #endif

@@ -15,7 +15,7 @@ class AsyncResultIntegrationTests: XCTestCase {
         let integrationTests = KotlinSuspendIntegrationTests()
         let sendValue = randomInt()
         #if NATIVE_COROUTINES_SWIFT_EXPORT
-        let result = await asyncResult(for: await integrationTests.returnValueNative(value: sendValue, delay: 1000))
+        let result = await asyncResult(for: try await integrationTests.returnValueNative(value: sendValue, delay: 1000))
         #else
         let result = await asyncResult(for: integrationTests.returnValue(value: sendValue, delay: 1000))
         #endif
@@ -34,7 +34,7 @@ class AsyncResultIntegrationTests: XCTestCase {
     func testNilValueReceived() async {
         let integrationTests = KotlinSuspendIntegrationTests()
         #if NATIVE_COROUTINES_SWIFT_EXPORT
-        let result = await asyncResult(for: await integrationTests.returnNullNative(delay: 1000))
+        let result = await asyncResult(for: try await integrationTests.returnNullNative(delay: 1000))
         #else
         let result = await asyncResult(for: integrationTests.returnNull(delay: 1000))
         #endif
