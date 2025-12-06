@@ -149,16 +149,21 @@ class CombineFutureIntegrationTests: XCTestCase {
         wait(for: [valueExpectation, completionExpectation], timeout: 3)
     }
     
-    #if !NATIVE_COROUTINES_SWIFT_EXPORT
-    /// Cancellation isn't supported yet, see https://youtrack.jetbrains.com/issue/KT-80970
     func testCancellation() {
-        let integrationTests = SuspendIntegrationTests()
+        let integrationTests = KotlinSuspendIntegrationTests()
         let callbackExpectation = expectation(description: "Waiting for callback not to get called")
         callbackExpectation.isInverted = true
+        #if NATIVE_COROUTINES_SWIFT_EXPORT
+        let future = createFuture(for: { try await integrationTests.returnFromCallbackNative(delay: 3000) {
+            callbackExpectation.fulfill()
+            return 1
+        }})
+        #else
         let future = createFuture(for: integrationTests.returnFromCallback(delay: 3000) {
             callbackExpectation.fulfill()
             return KotlinInt(int: 1)
         })
+        #endif
         let valueExpectation = expectation(description: "Waiting for value")
         valueExpectation.isInverted = true
         let completionExpectation = expectation(description: "Waiting for completion")
@@ -168,15 +173,18 @@ class CombineFutureIntegrationTests: XCTestCase {
         } receiveValue: { _ in
             valueExpectation.fulfill()
         }
+        #if !NATIVE_COROUTINES_SWIFT_EXPORT
         XCTAssertEqual(integrationTests.uncompletedJobCount, 1, "There should be 1 uncompleted job")
+        #endif
         delay(1)
+        #if !NATIVE_COROUTINES_SWIFT_EXPORT
         XCTAssertEqual(integrationTests.activeJobCount, 1, "There should be 1 active job")
+        #endif
         cancellable.cancel()
         XCTAssertEqual(integrationTests.activeJobCount, 0, "The job shouldn't be active anymore")
         wait(for: [callbackExpectation, valueExpectation, completionExpectation], timeout: 3)
         XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
     }
-    #endif
     
     #if !NATIVE_COROUTINES_SWIFT_EXPORT
     func testValuesReceived() {

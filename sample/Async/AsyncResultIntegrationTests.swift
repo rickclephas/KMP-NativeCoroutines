@@ -82,18 +82,25 @@ class AsyncResultIntegrationTests: XCTestCase {
     }
     #endif
     
-    #if !NATIVE_COROUTINES_SWIFT_EXPORT
-    /// Cancellation isn't supported yet, see https://youtrack.jetbrains.com/issue/KT-80970
     func testCancellation() async {
-        let integrationTests = SuspendIntegrationTests()
+        let integrationTests = KotlinSuspendIntegrationTests()
         let handle = Task {
+            #if NATIVE_COROUTINES_SWIFT_EXPORT
+            return await asyncResult(for: try await integrationTests.returnFromCallbackNative(delay: 3000) {
+                XCTFail("Callback shouldn't be invoked")
+                return 1
+            })
+            #else
             return await asyncResult(for: integrationTests.returnFromCallback(delay: 3000) {
                 XCTFail("Callback shouldn't be invoked")
                 return KotlinInt(int: 1)
             })
+            #endif
         }
         DispatchQueue.global().asyncAfter(deadline: .now() + 1) {
+            #if !NATIVE_COROUTINES_SWIFT_EXPORT
             XCTAssertEqual(integrationTests.activeJobCount, 1, "There should be 1 active job")
+            #endif
             handle.cancel()
         }
         let handleResult = await handle.result
@@ -108,7 +115,6 @@ class AsyncResultIntegrationTests: XCTestCase {
             XCTFail("Function should fail with an error")
         }
     }
-    #endif
     
     #if !NATIVE_COROUTINES_SWIFT_EXPORT
     /// Suspend functions returning Unit aren't supported yet, see https://youtrack.jetbrains.com/issue/KT-81593

@@ -71,8 +71,6 @@ class AsyncFunctionIntegrationTests: XCTestCase {
     }
     #endif
     
-    #if !NATIVE_COROUTINES_SWIFT_EXPORT
-    /// Cancellation isn't supported yet, see https://youtrack.jetbrains.com/issue/KT-80970
     func testCancellation() async {
         let integrationTests = KotlinSuspendIntegrationTests()
         let handle = Task {
@@ -102,7 +100,6 @@ class AsyncFunctionIntegrationTests: XCTestCase {
             XCTFail("Function should fail with an error")
         }
     }
-    #endif
     
     #if !NATIVE_COROUTINES_SWIFT_EXPORT
     /// Suspend functions returning Unit aren't supported yet, see https://youtrack.jetbrains.com/issue/KT-81593
