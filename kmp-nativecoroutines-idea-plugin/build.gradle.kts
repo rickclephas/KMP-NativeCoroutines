@@ -25,7 +25,7 @@ kotlin {
 
 dependencies {
     intellijPlatform {
-        intellijIdea("253.20558.43")
+        intellijIdea("2025.3")
 
         bundledPlugins("org.jetbrains.kotlin", "com.intellij.gradle")
 
@@ -103,9 +103,9 @@ val runIntelliJ by intellijPlatformTesting.runIde.registering {
     type = IntelliJPlatformType.IntellijIdea
 }
 
-val runAndroidStudio by intellijPlatformTesting.runIde.registering {
-    type = IntelliJPlatformType.AndroidStudio
-}
+//val runAndroidStudio by intellijPlatformTesting.runIde.registering {
+//    type = IntelliJPlatformType.AndroidStudio
+//}
 
 tasks.withType(RunIdeTask::class) {
     maxHeapSize = "4g"

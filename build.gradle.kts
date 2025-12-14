@@ -13,7 +13,7 @@ buildscript {
 
 allprojects {
     group = "com.rickclephas.kmp"
-    version = "1.0.0-ALPHA-47-idea-2025.3-EAP-20558.43"
+    version = "1.0.0-ALPHA-47-idea-2025.3"
 }
 
 apiValidation {
