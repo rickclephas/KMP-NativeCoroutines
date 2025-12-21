@@ -7,12 +7,13 @@ public final class com/rickclephas/kmp/nativecoroutines/compiler/KmpNativeCorout
 
 public final class com/rickclephas/kmp/nativecoroutines/compiler/KmpNativeCoroutinesCompilerPluginRegistrar : org/jetbrains/kotlin/compiler/plugin/CompilerPluginRegistrar {
 	public fun <init> ()V
+	public fun getPluginId ()Ljava/lang/String;
 	public fun getSupportsK2 ()Z
 	public fun registerExtensions (Lorg/jetbrains/kotlin/compiler/plugin/CompilerPluginRegistrar$ExtensionStorage;Lorg/jetbrains/kotlin/config/CompilerConfiguration;)V
 }
 
 public final class com/rickclephas/kmp/nativecoroutines/compiler/classic/diagnostics/KmpNativeCoroutinesChecker : org/jetbrains/kotlin/resolve/checkers/DeclarationChecker {
-	public fun <init> (Lcom/rickclephas/kmp/nativecoroutines/compiler/config/ExposedSeverity;Ljava/util/List;Z)V
+	public fun <init> (Lcom/rickclephas/kmp/nativecoroutines/compiler/config/ExposedSeverity;Ljava/util/List;)V
 	public fun check (Lorg/jetbrains/kotlin/psi/KtDeclaration;Lorg/jetbrains/kotlin/descriptors/DeclarationDescriptor;Lorg/jetbrains/kotlin/resolve/checkers/DeclarationCheckerContext;)V
 }
 
@@ -92,10 +93,6 @@ public final class com/rickclephas/kmp/nativecoroutines/compiler/config/ExposedS
 
 public final class com/rickclephas/kmp/nativecoroutines/compiler/config/GeneratedSourceDirKt {
 	public static final fun getGENERATED_SOURCE_DIR ()Lcom/rickclephas/kmp/nativecoroutines/compiler/config/ConfigListOption;
-}
-
-public final class com/rickclephas/kmp/nativecoroutines/compiler/config/K2ModeKt {
-	public static final fun getK2_MODE ()Lcom/rickclephas/kmp/nativecoroutines/compiler/config/ConfigOptionWithDefault;
 }
 
 public final class com/rickclephas/kmp/nativecoroutines/compiler/config/SuffixesKt {

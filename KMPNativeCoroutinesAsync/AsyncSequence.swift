@@ -32,7 +32,8 @@ public struct NativeFlowAsyncSequence<Output, Failure: Error, Unit>: AsyncSequen
         private var continuation: UnsafeContinuation<Output?, Error>? = nil
         
         init(nativeFlow: NativeFlow<Output, Failure, Unit>) {
-            nativeCancellable = nativeFlow({ item, next, unit in
+            nativeCancellable = nativeFlow({ [weak self] item, next, unit  in
+                guard let self else { return unit }
                 self.semaphore.wait()
                 defer { self.semaphore.signal() }
                 if let continuation = self.continuation {
@@ -43,7 +44,8 @@ public struct NativeFlowAsyncSequence<Output, Failure: Error, Unit>: AsyncSequen
                     self.item = (item, next)
                     return unit
                 }
-            }, { error, unit in
+            }, { [weak self] error, unit in
+                guard let self else { return unit }
                 self.semaphore.wait()
                 defer { self.semaphore.signal() }
                 self.result = Optional.some(error)
@@ -57,7 +59,8 @@ public struct NativeFlowAsyncSequence<Output, Failure: Error, Unit>: AsyncSequen
                 }
                 self.nativeCancellable = nil
                 return unit
-            }, { cancellationError, unit in
+            }, { [weak self] cancellationError, unit in
+                guard let self else { return unit }
                 self.semaphore.wait()
                 defer { self.semaphore.signal() }
                 self.cancellationError = cancellationError
@@ -98,6 +101,11 @@ public struct NativeFlowAsyncSequence<Output, Failure: Error, Unit>: AsyncSequen
                 _ = nativeCancellable?()
                 nativeCancellable = nil
             }
+        }
+        
+        deinit {
+            _ = nativeCancellable?()
+            nativeCancellable = nil
         }
     }
     

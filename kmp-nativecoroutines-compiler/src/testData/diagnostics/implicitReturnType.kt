@@ -6,7 +6,7 @@ import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState
 import kotlinx.coroutines.flow.MutableStateFlow
 
 @NativeCoroutines
-suspend fun implicitReturnTypeFunction() = 0
+suspend fun <!IMPLICIT_RETURN_TYPE!>implicitReturnTypeFunction<!>() = 0
 
 @NativeCoroutines
 suspend fun explicitReturnTypeFunction(): Int = 0
@@ -18,7 +18,7 @@ suspend fun implicitUnitReturnTypeFunction() { }
 suspend fun ignoredImplicitReturnTypeFunction() = 0
 
 @NativeCoroutinesState
-val implicitReturnTypeProperty = MutableStateFlow(0)
+val <!IMPLICIT_RETURN_TYPE!>implicitReturnTypeProperty<!> = MutableStateFlow(0)
 
 @NativeCoroutinesState
 val explicitReturnTypeProperty: MutableStateFlow<Int> = MutableStateFlow(0)

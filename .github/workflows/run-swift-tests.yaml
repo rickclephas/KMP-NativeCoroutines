@@ -13,7 +13,7 @@ jobs:
         platform: [ iOS, macOS, tvOS, watchOS ]
         implementation: [ Async, Combine, RxSwift ]
         include:
-          - xcode: '15.2'
+          - xcode: '16.4'
           - platform: iOS
             destination: platform=iOS Simulator,name=iPhone 16 Pro
           - platform: macOS
@@ -23,7 +23,7 @@ jobs:
           - platform: watchOS
             destination: platform=watchOS Simulator,name=Apple Watch Series 10 (46mm)
     name: ${{ format('{0} {1}', matrix.implementation, matrix.platform) }}
-    runs-on: macos-14
+    runs-on: macos-15
     steps:
       - name: Checkout
         uses: actions/checkout@v4
