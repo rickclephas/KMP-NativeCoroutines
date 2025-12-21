@@ -1,3 +1,168 @@
+// FILE: __GENERATED__CALLABLES__.kt
+
+@ObjCName(name = "returnCustomFlowValue")
+fun returnCustomFlowValueNative(): Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+  val tmp_0: CoroutineScope? = null
+  val tmp_1: MyFlow23<Int, String> = returnCustomFlowValue()
+  return asNativeFlow<String>(/* <this> = tmp_1, */ scope = tmp_0)
+}
+
+@ObjCName(name = "returnExtensionValue")
+fun String.returnExtensionValueNative(): Function3<@ParameterName(name = "onResult") Function2<String, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+  val tmp_2: CoroutineScope? = null
+  return nativeSuspend<String>(scope = tmp_2, block = local suspend fun <anonymous>(): String {
+    return returnExtensionValue(/* <this> = <this> */)
+  }
+)
+}
+
+@ObjCName(name = "returnFlowValue")
+fun returnFlowValueNative(): Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+  val tmp_3: CoroutineScope? = null
+  val tmp_4: Flow<String> = returnFlowValue()
+  return asNativeFlow<String>(/* <this> = tmp_4, */ scope = tmp_3)
+}
+
+@ObjCName(name = "returnGenericSuspendValue")
+fun <T : Any?> returnGenericSuspendValueNative(value: T): Function3<@ParameterName(name = "onResult") Function2<T, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+  val tmp_5: CoroutineScope? = null
+  return nativeSuspend<T>(scope = tmp_5, block = local suspend fun <anonymous>(): T {
+    return returnGenericSuspendValue<T>(value = value)
+  }
+)
+}
+
+@ObjCName(name = "returnInlineSuspendValue")
+inline fun <reified T : Any?> returnInlineSuspendValueNative(value: T): Function3<@ParameterName(name = "onResult") Function2<T, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+  val tmp_6: CoroutineScope? = null
+  return nativeSuspend<T>(scope = tmp_6, block = local suspend fun <anonymous>(): T {
+    return returnInlineSuspendValue<T>(value = value)
+  }
+)
+}
+
+@ObjCName(name = "returnNullableFlowAndValue")
+fun returnNullableFlowAndValueNative(): Function3<@ParameterName(name = "onItem") Function3<String?, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>? {
+  val tmp_7: CoroutineScope? = null
+  val tmp_8: Flow<String?>? = returnNullableFlowAndValue()
+  return when {
+    EQEQ(arg0 = tmp_8, arg1 = null) -> null
+    else -> asNativeFlow<String?>(/* <this> = tmp_8, */ scope = tmp_7)
+  }
+}
+
+@ObjCName(name = "returnNullableFlow")
+fun returnNullableFlowNative(): Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>? {
+  val tmp_9: CoroutineScope? = null
+  val tmp_10: Flow<String>? = returnNullableFlow()
+  return when {
+    EQEQ(arg0 = tmp_10, arg1 = null) -> null
+    else -> asNativeFlow<String>(/* <this> = tmp_10, */ scope = tmp_9)
+  }
+}
+
+@ObjCName(name = "returnNullableFlowValue")
+fun returnNullableFlowValueNative(): Function3<@ParameterName(name = "onItem") Function3<String?, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+  val tmp_11: CoroutineScope? = null
+  val tmp_12: Flow<String?> = returnNullableFlowValue()
+  return asNativeFlow<String?>(/* <this> = tmp_12, */ scope = tmp_11)
+}
+
+@ObjCName(name = "returnNullableSuspendFlow")
+fun returnNullableSuspendFlowNative(): Function3<@ParameterName(name = "onResult") Function2<Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>?, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+  val tmp_13: CoroutineScope? = null
+  return nativeSuspend<Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>?>(scope = tmp_13, block = local suspend fun <anonymous>(): Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>? {
+    val tmp_14: Flow<String>? = returnNullableSuspendFlow()
+    return when {
+      EQEQ(arg0 = tmp_14, arg1 = null) -> null
+      else -> asNativeFlow<String>(/* <this> = tmp_14, */ scope = tmp_13)
+    }
+  }
+)
+}
+
+@ObjCName(name = "returnNullableSuspendValue")
+fun returnNullableSuspendValueNative(): Function3<@ParameterName(name = "onResult") Function2<String?, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+  val tmp_15: CoroutineScope? = null
+  return nativeSuspend<String?>(scope = tmp_15, block = local suspend fun <anonymous>(): String? {
+    return returnNullableSuspendValue()
+  }
+)
+}
+
+@ObjCName(name = "returnRefinedSuspendValue")
+@ShouldRefineInSwift
+fun returnRefinedSuspendValueNative(): Function3<@ParameterName(name = "onResult") Function2<String, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+  val tmp_16: CoroutineScope? = null
+  return nativeSuspend<String>(scope = tmp_16, block = local suspend fun <anonymous>(): String {
+    return returnRefinedSuspendValue()
+  }
+)
+}
+
+@ObjCName(name = "returnStateFlowValue")
+fun returnStateFlowValueNative(): Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+  val tmp_17: CoroutineScope? = null
+  val tmp_18: StateFlow<String> = returnStateFlowValue()
+  return asNativeFlow<String>(/* <this> = tmp_18, */ scope = tmp_17)
+}
+
+@ObjCName(name = "returnSuspendFlowValue")
+@ShouldRefineInSwift
+fun returnSuspendFlowValueNative(): Function3<@ParameterName(name = "onResult") Function2<Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+  val tmp_19: CoroutineScope? = null
+  return nativeSuspend<Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>>(scope = tmp_19, block = local suspend fun <anonymous>(): Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+    val tmp_20: Flow<String> = returnSuspendFlowValue()
+    return asNativeFlow<String>(/* <this> = tmp_20, */ scope = tmp_19)
+  }
+)
+}
+
+@ObjCName(name = "returnSuspendParameterValue")
+fun returnSuspendParameterValueNative(value: Int): Function3<@ParameterName(name = "onResult") Function2<Int, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+  val tmp_21: CoroutineScope? = null
+  return nativeSuspend<Int>(scope = tmp_21, block = local suspend fun <anonymous>(): Int {
+    return returnSuspendParameterValue(value = value)
+  }
+)
+}
+
+@ObjCName(name = "returnSuspendParameterValue")
+fun returnSuspendParameterValueNative(value: String): Function3<@ParameterName(name = "onResult") Function2<String, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+  val tmp_22: CoroutineScope? = null
+  return nativeSuspend<String>(scope = tmp_22, block = local suspend fun <anonymous>(): String {
+    return returnSuspendParameterValue(value = value)
+  }
+)
+}
+
+@ObjCName(name = "returnSuspendValue")
+fun returnSuspendValueNative(): Function3<@ParameterName(name = "onResult") Function2<String, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+  val tmp_23: CoroutineScope? = null
+  return nativeSuspend<String>(scope = tmp_23, block = local suspend fun <anonymous>(): String {
+    return returnSuspendValue()
+  }
+)
+}
+
+@ObjCName(name = "returnSuspendVarargValue")
+fun returnSuspendVarargValueNative(vararg values: String): Function3<@ParameterName(name = "onResult") Function2<String, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+  val tmp_24: CoroutineScope? = null
+  return nativeSuspend<String>(scope = tmp_24, block = local suspend fun <anonymous>(): String {
+    return returnSuspendVarargValue(values = values)
+  }
+)
+}
+
+@ObjCName(name = "returnThrowsSuspendValue")
+fun returnThrowsSuspendValueNative(): Function3<@ParameterName(name = "onResult") Function2<String, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+  val tmp_25: CoroutineScope? = null
+  return nativeSuspend<String>(scope = tmp_25, block = local suspend fun <anonymous>(): String {
+    return returnThrowsSuspendValue()
+  }
+)
+}
+
 // FILE: functions.kt
 
 class MyClass14<T : Any?> {
@@ -337,169 +502,4 @@ suspend fun returnSuspendVarargValue(vararg values: String): String {
 @NativeCoroutines
 suspend fun returnThrowsSuspendValue(): String {
   return "OK10"
-}
-
-// FILE: __GENERATED DECLARATIONS__.kt
-
-@ObjCName(name = "returnCustomFlowValue")
-fun returnCustomFlowValueNative(): Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
-  val tmp_0: CoroutineScope? = null
-  val tmp_1: MyFlow23<Int, String> = returnCustomFlowValue()
-  return asNativeFlow<String>(/* <this> = tmp_1, */ scope = tmp_0)
-}
-
-@ObjCName(name = "returnExtensionValue")
-fun String.returnExtensionValueNative(): Function3<@ParameterName(name = "onResult") Function2<String, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
-  val tmp_2: CoroutineScope? = null
-  return nativeSuspend<String>(scope = tmp_2, block = local suspend fun <anonymous>(): String {
-    return returnExtensionValue(/* <this> = <this> */)
-  }
-)
-}
-
-@ObjCName(name = "returnFlowValue")
-fun returnFlowValueNative(): Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
-  val tmp_3: CoroutineScope? = null
-  val tmp_4: Flow<String> = returnFlowValue()
-  return asNativeFlow<String>(/* <this> = tmp_4, */ scope = tmp_3)
-}
-
-@ObjCName(name = "returnGenericSuspendValue")
-fun <T : Any?> returnGenericSuspendValueNative(value: T): Function3<@ParameterName(name = "onResult") Function2<T, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
-  val tmp_5: CoroutineScope? = null
-  return nativeSuspend<T>(scope = tmp_5, block = local suspend fun <anonymous>(): T {
-    return returnGenericSuspendValue<T>(value = value)
-  }
-)
-}
-
-@ObjCName(name = "returnInlineSuspendValue")
-inline fun <reified T : Any?> returnInlineSuspendValueNative(value: T): Function3<@ParameterName(name = "onResult") Function2<T, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
-  val tmp_6: CoroutineScope? = null
-  return nativeSuspend<T>(scope = tmp_6, block = local suspend fun <anonymous>(): T {
-    return returnInlineSuspendValue<T>(value = value)
-  }
-)
-}
-
-@ObjCName(name = "returnNullableFlowAndValue")
-fun returnNullableFlowAndValueNative(): Function3<@ParameterName(name = "onItem") Function3<String?, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>? {
-  val tmp_7: CoroutineScope? = null
-  val tmp_8: Flow<String?>? = returnNullableFlowAndValue()
-  return when {
-    EQEQ(arg0 = tmp_8, arg1 = null) -> null
-    else -> asNativeFlow<String?>(/* <this> = tmp_8, */ scope = tmp_7)
-  }
-}
-
-@ObjCName(name = "returnNullableFlow")
-fun returnNullableFlowNative(): Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>? {
-  val tmp_9: CoroutineScope? = null
-  val tmp_10: Flow<String>? = returnNullableFlow()
-  return when {
-    EQEQ(arg0 = tmp_10, arg1 = null) -> null
-    else -> asNativeFlow<String>(/* <this> = tmp_10, */ scope = tmp_9)
-  }
-}
-
-@ObjCName(name = "returnNullableFlowValue")
-fun returnNullableFlowValueNative(): Function3<@ParameterName(name = "onItem") Function3<String?, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
-  val tmp_11: CoroutineScope? = null
-  val tmp_12: Flow<String?> = returnNullableFlowValue()
-  return asNativeFlow<String?>(/* <this> = tmp_12, */ scope = tmp_11)
-}
-
-@ObjCName(name = "returnNullableSuspendFlow")
-fun returnNullableSuspendFlowNative(): Function3<@ParameterName(name = "onResult") Function2<Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>?, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
-  val tmp_13: CoroutineScope? = null
-  return nativeSuspend<Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>?>(scope = tmp_13, block = local suspend fun <anonymous>(): Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>? {
-    val tmp_14: Flow<String>? = returnNullableSuspendFlow()
-    return when {
-      EQEQ(arg0 = tmp_14, arg1 = null) -> null
-      else -> asNativeFlow<String>(/* <this> = tmp_14, */ scope = tmp_13)
-    }
-  }
-)
-}
-
-@ObjCName(name = "returnNullableSuspendValue")
-fun returnNullableSuspendValueNative(): Function3<@ParameterName(name = "onResult") Function2<String?, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
-  val tmp_15: CoroutineScope? = null
-  return nativeSuspend<String?>(scope = tmp_15, block = local suspend fun <anonymous>(): String? {
-    return returnNullableSuspendValue()
-  }
-)
-}
-
-@ObjCName(name = "returnRefinedSuspendValue")
-@ShouldRefineInSwift
-fun returnRefinedSuspendValueNative(): Function3<@ParameterName(name = "onResult") Function2<String, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
-  val tmp_16: CoroutineScope? = null
-  return nativeSuspend<String>(scope = tmp_16, block = local suspend fun <anonymous>(): String {
-    return returnRefinedSuspendValue()
-  }
-)
-}
-
-@ObjCName(name = "returnStateFlowValue")
-fun returnStateFlowValueNative(): Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
-  val tmp_17: CoroutineScope? = null
-  val tmp_18: StateFlow<String> = returnStateFlowValue()
-  return asNativeFlow<String>(/* <this> = tmp_18, */ scope = tmp_17)
-}
-
-@ObjCName(name = "returnSuspendFlowValue")
-@ShouldRefineInSwift
-fun returnSuspendFlowValueNative(): Function3<@ParameterName(name = "onResult") Function2<Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
-  val tmp_19: CoroutineScope? = null
-  return nativeSuspend<Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>>(scope = tmp_19, block = local suspend fun <anonymous>(): Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
-    val tmp_20: Flow<String> = returnSuspendFlowValue()
-    return asNativeFlow<String>(/* <this> = tmp_20, */ scope = tmp_19)
-  }
-)
-}
-
-@ObjCName(name = "returnSuspendParameterValue")
-fun returnSuspendParameterValueNative(value: Int): Function3<@ParameterName(name = "onResult") Function2<Int, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
-  val tmp_21: CoroutineScope? = null
-  return nativeSuspend<Int>(scope = tmp_21, block = local suspend fun <anonymous>(): Int {
-    return returnSuspendParameterValue(value = value)
-  }
-)
-}
-
-@ObjCName(name = "returnSuspendParameterValue")
-fun returnSuspendParameterValueNative(value: String): Function3<@ParameterName(name = "onResult") Function2<String, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
-  val tmp_22: CoroutineScope? = null
-  return nativeSuspend<String>(scope = tmp_22, block = local suspend fun <anonymous>(): String {
-    return returnSuspendParameterValue(value = value)
-  }
-)
-}
-
-@ObjCName(name = "returnSuspendValue")
-fun returnSuspendValueNative(): Function3<@ParameterName(name = "onResult") Function2<String, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
-  val tmp_23: CoroutineScope? = null
-  return nativeSuspend<String>(scope = tmp_23, block = local suspend fun <anonymous>(): String {
-    return returnSuspendValue()
-  }
-)
-}
-
-@ObjCName(name = "returnSuspendVarargValue")
-fun returnSuspendVarargValueNative(vararg values: String): Function3<@ParameterName(name = "onResult") Function2<String, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
-  val tmp_24: CoroutineScope? = null
-  return nativeSuspend<String>(scope = tmp_24, block = local suspend fun <anonymous>(): String {
-    return returnSuspendVarargValue(values = values)
-  }
-)
-}
-
-@ObjCName(name = "returnThrowsSuspendValue")
-fun returnThrowsSuspendValueNative(): Function3<@ParameterName(name = "onResult") Function2<String, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
-  val tmp_25: CoroutineScope? = null
-  return nativeSuspend<String>(scope = tmp_25, block = local suspend fun <anonymous>(): String {
-    return returnThrowsSuspendValue()
-  }
-)
 }

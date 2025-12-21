@@ -1,241 +1,4 @@
-FILE fqName:<root> fileName:/annotations.kt
-  annotations:
-    Suppress(names = ["OPTIONAL_DECLARATION_USAGE_IN_NON_COMMON_SOURCE"] type=kotlin.Array<out kotlin.String> varargElementType=kotlin.String)
-  PROPERTY name:deprecatedProperty1 visibility:public modality:FINAL [val]
-    annotations:
-      NativeCoroutines
-      Deprecated(message = "This is deprecated 4", replaceWith = <null>, level = <null>)
-    FIELD PROPERTY_BACKING_FIELD name:deprecatedProperty1 type:kotlinx.coroutines.flow.Flow<kotlin.String> visibility:private [final,static]
-      EXPRESSION_BODY
-        CALL 'public final fun flowOf <T> (value: T of kotlinx.coroutines.flow.flowOf): kotlinx.coroutines.flow.Flow<T of kotlinx.coroutines.flow.flowOf> declared in kotlinx.coroutines.flow' type=kotlinx.coroutines.flow.Flow<kotlin.String> origin=null
-          TYPE_ARG T: kotlin.String
-          ARG value: CONST String type=kotlin.String value="OK4"
-    FUN DEFAULT_PROPERTY_ACCESSOR name:<get-deprecatedProperty1> visibility:public modality:FINAL returnType:kotlinx.coroutines.flow.Flow<kotlin.String>
-      correspondingProperty: PROPERTY name:deprecatedProperty1 visibility:public modality:FINAL [val]
-      BLOCK_BODY
-        RETURN type=kotlin.Nothing from='public final fun <get-deprecatedProperty1> (): kotlinx.coroutines.flow.Flow<kotlin.String> declared in <root>'
-          GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:deprecatedProperty1 type:kotlinx.coroutines.flow.Flow<kotlin.String> visibility:private [final,static]' type=kotlinx.coroutines.flow.Flow<kotlin.String> origin=null
-  PROPERTY name:deprecatedProperty2 visibility:public modality:FINAL [val]
-    annotations:
-      NativeCoroutines
-      Deprecated(message = "This is deprecated 5", replaceWith = <null>, level = GET_ENUM 'ENUM_ENTRY IR_EXTERNAL_DECLARATION_STUB name:WARNING' type=kotlin.DeprecationLevel)
-    FIELD PROPERTY_BACKING_FIELD name:deprecatedProperty2 type:kotlinx.coroutines.flow.Flow<kotlin.String> visibility:private [final,static]
-      EXPRESSION_BODY
-        CALL 'public final fun flowOf <T> (value: T of kotlinx.coroutines.flow.flowOf): kotlinx.coroutines.flow.Flow<T of kotlinx.coroutines.flow.flowOf> declared in kotlinx.coroutines.flow' type=kotlinx.coroutines.flow.Flow<kotlin.String> origin=null
-          TYPE_ARG T: kotlin.String
-          ARG value: CONST String type=kotlin.String value="OK5"
-    FUN DEFAULT_PROPERTY_ACCESSOR name:<get-deprecatedProperty2> visibility:public modality:FINAL returnType:kotlinx.coroutines.flow.Flow<kotlin.String>
-      correspondingProperty: PROPERTY name:deprecatedProperty2 visibility:public modality:FINAL [val]
-      BLOCK_BODY
-        RETURN type=kotlin.Nothing from='public final fun <get-deprecatedProperty2> (): kotlinx.coroutines.flow.Flow<kotlin.String> declared in <root>'
-          GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:deprecatedProperty2 type:kotlinx.coroutines.flow.Flow<kotlin.String> visibility:private [final,static]' type=kotlinx.coroutines.flow.Flow<kotlin.String> origin=null
-  PROPERTY name:deprecatedProperty3 visibility:public modality:FINAL [val]
-    annotations:
-      NativeCoroutines
-      Deprecated(message = "This is deprecated 6", replaceWith = ReplaceWith(expression = "deprecatedProperty2", imports = [] type=kotlin.Array<out kotlin.String> varargElementType=kotlin.String), level = GET_ENUM 'ENUM_ENTRY IR_EXTERNAL_DECLARATION_STUB name:ERROR' type=kotlin.DeprecationLevel)
-    FIELD PROPERTY_BACKING_FIELD name:deprecatedProperty3 type:kotlinx.coroutines.flow.Flow<kotlin.String> visibility:private [final,static]
-      EXPRESSION_BODY
-        CALL 'public final fun flowOf <T> (value: T of kotlinx.coroutines.flow.flowOf): kotlinx.coroutines.flow.Flow<T of kotlinx.coroutines.flow.flowOf> declared in kotlinx.coroutines.flow' type=kotlinx.coroutines.flow.Flow<kotlin.String> origin=null
-          TYPE_ARG T: kotlin.String
-          ARG value: CONST String type=kotlin.String value="OK6"
-    FUN DEFAULT_PROPERTY_ACCESSOR name:<get-deprecatedProperty3> visibility:public modality:FINAL returnType:kotlinx.coroutines.flow.Flow<kotlin.String>
-      correspondingProperty: PROPERTY name:deprecatedProperty3 visibility:public modality:FINAL [val]
-      BLOCK_BODY
-        RETURN type=kotlin.Nothing from='public final fun <get-deprecatedProperty3> (): kotlinx.coroutines.flow.Flow<kotlin.String> declared in <root>'
-          GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:deprecatedProperty3 type:kotlinx.coroutines.flow.Flow<kotlin.String> visibility:private [final,static]' type=kotlinx.coroutines.flow.Flow<kotlin.String> origin=null
-  PROPERTY name:deprecatedProperty4 visibility:public modality:FINAL [val]
-    annotations:
-      NativeCoroutines
-    FIELD PROPERTY_BACKING_FIELD name:deprecatedProperty4 type:kotlinx.coroutines.flow.MutableStateFlow<kotlin.String> visibility:private [final,static]
-      EXPRESSION_BODY
-        CALL 'public final fun MutableStateFlow <T> (value: T of kotlinx.coroutines.flow.MutableStateFlow): kotlinx.coroutines.flow.MutableStateFlow<T of kotlinx.coroutines.flow.MutableStateFlow> declared in kotlinx.coroutines.flow' type=kotlinx.coroutines.flow.MutableStateFlow<kotlin.String> origin=null
-          TYPE_ARG T: kotlin.String
-          ARG value: CONST String type=kotlin.String value="OK7"
-    FUN DEFAULT_PROPERTY_ACCESSOR name:<get-deprecatedProperty4> visibility:public modality:FINAL returnType:kotlinx.coroutines.flow.MutableStateFlow<kotlin.String>
-      annotations:
-        Deprecated(message = "This is deprecated 7", replaceWith = <null>, level = <null>)
-      correspondingProperty: PROPERTY name:deprecatedProperty4 visibility:public modality:FINAL [val]
-      BLOCK_BODY
-        RETURN type=kotlin.Nothing from='public final fun <get-deprecatedProperty4> (): kotlinx.coroutines.flow.MutableStateFlow<kotlin.String> declared in <root>'
-          GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:deprecatedProperty4 type:kotlinx.coroutines.flow.MutableStateFlow<kotlin.String> visibility:private [final,static]' type=kotlinx.coroutines.flow.MutableStateFlow<kotlin.String> origin=null
-  PROPERTY name:objCNameProperty1 visibility:public modality:FINAL [val]
-    annotations:
-      NativeCoroutines
-      OptIn(markerClass = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB ANNOTATION_CLASS name:ExperimentalObjCName modality:OPEN visibility:public superTypes:[kotlin.Annotation]' type=kotlin.reflect.KClass<kotlin.experimental.ExperimentalObjCName>] type=kotlin.Array<out kotlin.reflect.KClass<out kotlin.Annotation>> varargElementType=kotlin.reflect.KClass<out kotlin.Annotation>)
-      ObjCName(name = "objCNameProperty1ObjC", swiftName = <null>, exact = <null>)
-    FIELD PROPERTY_BACKING_FIELD name:objCNameProperty1 type:kotlinx.coroutines.flow.StateFlow<kotlin.String> visibility:private [final,static]
-      EXPRESSION_BODY
-        CALL 'public final fun MutableStateFlow <T> (value: T of kotlinx.coroutines.flow.MutableStateFlow): kotlinx.coroutines.flow.MutableStateFlow<T of kotlinx.coroutines.flow.MutableStateFlow> declared in kotlinx.coroutines.flow' type=kotlinx.coroutines.flow.MutableStateFlow<kotlin.String> origin=null
-          TYPE_ARG T: kotlin.String
-          ARG value: CONST String type=kotlin.String value="OK11"
-    FUN DEFAULT_PROPERTY_ACCESSOR name:<get-objCNameProperty1> visibility:public modality:FINAL returnType:kotlinx.coroutines.flow.StateFlow<kotlin.String>
-      correspondingProperty: PROPERTY name:objCNameProperty1 visibility:public modality:FINAL [val]
-      BLOCK_BODY
-        RETURN type=kotlin.Nothing from='public final fun <get-objCNameProperty1> (): kotlinx.coroutines.flow.StateFlow<kotlin.String> declared in <root>'
-          GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:objCNameProperty1 type:kotlinx.coroutines.flow.StateFlow<kotlin.String> visibility:private [final,static]' type=kotlinx.coroutines.flow.StateFlow<kotlin.String> origin=null
-  PROPERTY name:objCNameProperty2 visibility:public modality:FINAL [val]
-    annotations:
-      NativeCoroutinesState
-      OptIn(markerClass = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB ANNOTATION_CLASS name:ExperimentalObjCName modality:OPEN visibility:public superTypes:[kotlin.Annotation]' type=kotlin.reflect.KClass<kotlin.experimental.ExperimentalObjCName>] type=kotlin.Array<out kotlin.reflect.KClass<out kotlin.Annotation>> varargElementType=kotlin.reflect.KClass<out kotlin.Annotation>)
-      ObjCName(name = "objCNameProperty2ObjC", swiftName = <null>, exact = <null>)
-    FIELD PROPERTY_BACKING_FIELD name:objCNameProperty2 type:kotlinx.coroutines.flow.StateFlow<kotlin.String> visibility:private [final,static]
-      EXPRESSION_BODY
-        CALL 'public final fun MutableStateFlow <T> (value: T of kotlinx.coroutines.flow.MutableStateFlow): kotlinx.coroutines.flow.MutableStateFlow<T of kotlinx.coroutines.flow.MutableStateFlow> declared in kotlinx.coroutines.flow' type=kotlinx.coroutines.flow.MutableStateFlow<kotlin.String> origin=null
-          TYPE_ARG T: kotlin.String
-          ARG value: CONST String type=kotlin.String value="OK12"
-    FUN DEFAULT_PROPERTY_ACCESSOR name:<get-objCNameProperty2> visibility:public modality:FINAL returnType:kotlinx.coroutines.flow.StateFlow<kotlin.String>
-      correspondingProperty: PROPERTY name:objCNameProperty2 visibility:public modality:FINAL [val]
-      BLOCK_BODY
-        RETURN type=kotlin.Nothing from='public final fun <get-objCNameProperty2> (): kotlinx.coroutines.flow.StateFlow<kotlin.String> declared in <root>'
-          GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:objCNameProperty2 type:kotlinx.coroutines.flow.StateFlow<kotlin.String> visibility:private [final,static]' type=kotlinx.coroutines.flow.StateFlow<kotlin.String> origin=null
-  FUN name:box visibility:public modality:FINAL returnType:kotlin.String
-    BLOCK_BODY
-      RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in <root>'
-        CALL 'public final fun runBoxTest (action: @[ExtensionFunctionType] kotlin.coroutines.SuspendFunction1<com.rickclephas.kmp.nativecoroutines.BoxTest, kotlin.Unit>): kotlin.String declared in com.rickclephas.kmp.nativecoroutines' type=kotlin.String origin=null
-          ARG action: FUN_EXPR type=@[ExtensionFunctionType] kotlin.coroutines.SuspendFunction1<com.rickclephas.kmp.nativecoroutines.BoxTest, kotlin.Unit> origin=LAMBDA
-            FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:kotlin.Unit [suspend]
-              VALUE_PARAMETER kind:ExtensionReceiver name:$this$runBoxTest index:0 type:com.rickclephas.kmp.nativecoroutines.BoxTest
-              BLOCK_BODY
-                CALL 'public final fun await <T> (nativeSuspend: kotlin.Function0<kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<T of com.rickclephas.kmp.nativecoroutines.BoxTest.await, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>>): kotlin.Unit declared in com.rickclephas.kmp.nativecoroutines.BoxTest' type=kotlin.Unit origin=null
-                  TYPE_ARG T: kotlin.String
-                  ARG <this>: GET_VAR '$this$runBoxTest: com.rickclephas.kmp.nativecoroutines.BoxTest declared in <root>.box.<anonymous>' type=com.rickclephas.kmp.nativecoroutines.BoxTest origin=IMPLICIT_ARGUMENT
-                  ARG nativeSuspend: FUN_EXPR type=kotlin.Function0<kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>> origin=LAMBDA
-                    FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>
-                      BLOCK_BODY
-                        RETURN type=kotlin.Nothing from='local final fun <anonymous> (): kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> declared in <root>.box.<anonymous>'
-                          CALL 'public final fun deprecatedFunction1Native (): kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> declared in <root>' type=kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> origin=null
-                CALL 'public final fun await <T> (nativeSuspend: kotlin.Function0<kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<T of com.rickclephas.kmp.nativecoroutines.BoxTest.await, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>>): kotlin.Unit declared in com.rickclephas.kmp.nativecoroutines.BoxTest' type=kotlin.Unit origin=null
-                  TYPE_ARG T: kotlin.String
-                  ARG <this>: GET_VAR '$this$runBoxTest: com.rickclephas.kmp.nativecoroutines.BoxTest declared in <root>.box.<anonymous>' type=com.rickclephas.kmp.nativecoroutines.BoxTest origin=IMPLICIT_ARGUMENT
-                  ARG nativeSuspend: FUN_EXPR type=kotlin.Function0<kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>> origin=LAMBDA
-                    FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>
-                      BLOCK_BODY
-                        RETURN type=kotlin.Nothing from='local final fun <anonymous> (): kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> declared in <root>.box.<anonymous>'
-                          CALL 'public final fun deprecatedFunction2Native (): kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> declared in <root>' type=kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> origin=null
-                CALL 'public final fun collect <T> (nativeFlow: kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<T of com.rickclephas.kmp.nativecoroutines.BoxTest.collect, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>, maxValues: kotlin.Int?): kotlin.Unit declared in com.rickclephas.kmp.nativecoroutines.BoxTest' type=kotlin.Unit origin=null
-                  TYPE_ARG T: kotlin.String
-                  ARG <this>: GET_VAR '$this$runBoxTest: com.rickclephas.kmp.nativecoroutines.BoxTest declared in <root>.box.<anonymous>' type=com.rickclephas.kmp.nativecoroutines.BoxTest origin=IMPLICIT_ARGUMENT
-                  ARG nativeFlow: CALL 'public final fun <get-deprecatedProperty1Native> (): kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<kotlin.String, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> declared in <root>' type=kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<kotlin.String, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> origin=GET_PROPERTY
-                CALL 'public final fun collect <T> (nativeFlow: kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<T of com.rickclephas.kmp.nativecoroutines.BoxTest.collect, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>, maxValues: kotlin.Int?): kotlin.Unit declared in com.rickclephas.kmp.nativecoroutines.BoxTest' type=kotlin.Unit origin=null
-                  TYPE_ARG T: kotlin.String
-                  ARG <this>: GET_VAR '$this$runBoxTest: com.rickclephas.kmp.nativecoroutines.BoxTest declared in <root>.box.<anonymous>' type=com.rickclephas.kmp.nativecoroutines.BoxTest origin=IMPLICIT_ARGUMENT
-                  ARG nativeFlow: CALL 'public final fun <get-deprecatedProperty2Native> (): kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<kotlin.String, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> declared in <root>' type=kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<kotlin.String, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> origin=GET_PROPERTY
-                CALL 'public final fun collect <T> (nativeFlow: kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<T of com.rickclephas.kmp.nativecoroutines.BoxTest.collect, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>, maxValues: kotlin.Int?): kotlin.Unit declared in com.rickclephas.kmp.nativecoroutines.BoxTest' type=kotlin.Unit origin=null
-                  TYPE_ARG T: kotlin.String
-                  ARG <this>: GET_VAR '$this$runBoxTest: com.rickclephas.kmp.nativecoroutines.BoxTest declared in <root>.box.<anonymous>' type=com.rickclephas.kmp.nativecoroutines.BoxTest origin=IMPLICIT_ARGUMENT
-                  ARG nativeFlow: CALL 'public final fun <get-deprecatedProperty4Native> (): kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<kotlin.String, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> declared in <root>' type=kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<kotlin.String, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> origin=GET_PROPERTY
-                  ARG maxValues: CONST Int type=kotlin.Int value=1
-                CALL 'public final fun value <T> (value: T of com.rickclephas.kmp.nativecoroutines.BoxTest.value): kotlin.Unit declared in com.rickclephas.kmp.nativecoroutines.BoxTest' type=kotlin.Unit origin=null
-                  TYPE_ARG T: kotlin.String
-                  ARG <this>: GET_VAR '$this$runBoxTest: com.rickclephas.kmp.nativecoroutines.BoxTest declared in <root>.box.<anonymous>' type=com.rickclephas.kmp.nativecoroutines.BoxTest origin=IMPLICIT_ARGUMENT
-                  ARG value: CALL 'public final fun <get-deprecatedProperty4Value> (): kotlin.String declared in <root>' type=kotlin.String origin=GET_PROPERTY
-                CALL 'public final fun await <T> (nativeSuspend: kotlin.Function0<kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<T of com.rickclephas.kmp.nativecoroutines.BoxTest.await, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>>): kotlin.Unit declared in com.rickclephas.kmp.nativecoroutines.BoxTest' type=kotlin.Unit origin=null
-                  TYPE_ARG T: kotlin.String
-                  ARG <this>: GET_VAR '$this$runBoxTest: com.rickclephas.kmp.nativecoroutines.BoxTest declared in <root>.box.<anonymous>' type=com.rickclephas.kmp.nativecoroutines.BoxTest origin=IMPLICIT_ARGUMENT
-                  ARG nativeSuspend: FUN_EXPR type=kotlin.Function0<kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>> origin=LAMBDA
-                    FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>
-                      BLOCK_BODY
-                        RETURN type=kotlin.Nothing from='local final fun <anonymous> (): kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> declared in <root>.box.<anonymous>'
-                          CALL 'public final fun objCNameFunction1Native (): kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> declared in <root>' type=kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> origin=null
-                CALL 'public final fun await <T> (nativeSuspend: kotlin.Function0<kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<T of com.rickclephas.kmp.nativecoroutines.BoxTest.await, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>>): kotlin.Unit declared in com.rickclephas.kmp.nativecoroutines.BoxTest' type=kotlin.Unit origin=null
-                  TYPE_ARG T: kotlin.String
-                  ARG <this>: GET_VAR '$this$runBoxTest: com.rickclephas.kmp.nativecoroutines.BoxTest declared in <root>.box.<anonymous>' type=com.rickclephas.kmp.nativecoroutines.BoxTest origin=IMPLICIT_ARGUMENT
-                  ARG nativeSuspend: FUN_EXPR type=kotlin.Function0<kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>> origin=LAMBDA
-                    FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>
-                      BLOCK_BODY
-                        RETURN type=kotlin.Nothing from='local final fun <anonymous> (): kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> declared in <root>.box.<anonymous>'
-                          CALL 'public final fun objCNameFunction2Native (): kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> declared in <root>' type=kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> origin=null
-                CALL 'public final fun await <T> (nativeSuspend: kotlin.Function0<kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<T of com.rickclephas.kmp.nativecoroutines.BoxTest.await, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>>): kotlin.Unit declared in com.rickclephas.kmp.nativecoroutines.BoxTest' type=kotlin.Unit origin=null
-                  TYPE_ARG T: kotlin.String
-                  ARG <this>: GET_VAR '$this$runBoxTest: com.rickclephas.kmp.nativecoroutines.BoxTest declared in <root>.box.<anonymous>' type=com.rickclephas.kmp.nativecoroutines.BoxTest origin=IMPLICIT_ARGUMENT
-                  ARG nativeSuspend: FUN_EXPR type=kotlin.Function0<kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>> origin=LAMBDA
-                    FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>
-                      BLOCK_BODY
-                        RETURN type=kotlin.Nothing from='local final fun <anonymous> (): kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> declared in <root>.box.<anonymous>'
-                          CALL 'public final fun objCNameFunction3Native (): kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> declared in <root>' type=kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> origin=null
-                CALL 'public final fun collect <T> (nativeFlow: kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<T of com.rickclephas.kmp.nativecoroutines.BoxTest.collect, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>, maxValues: kotlin.Int?): kotlin.Unit declared in com.rickclephas.kmp.nativecoroutines.BoxTest' type=kotlin.Unit origin=null
-                  TYPE_ARG T: kotlin.String
-                  ARG <this>: GET_VAR '$this$runBoxTest: com.rickclephas.kmp.nativecoroutines.BoxTest declared in <root>.box.<anonymous>' type=com.rickclephas.kmp.nativecoroutines.BoxTest origin=IMPLICIT_ARGUMENT
-                  ARG nativeFlow: CALL 'public final fun <get-objCNameProperty1Native> (): kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<kotlin.String, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> declared in <root>' type=kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<kotlin.String, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> origin=GET_PROPERTY
-                  ARG maxValues: CONST Int type=kotlin.Int value=1
-                CALL 'public final fun value <T> (value: T of com.rickclephas.kmp.nativecoroutines.BoxTest.value): kotlin.Unit declared in com.rickclephas.kmp.nativecoroutines.BoxTest' type=kotlin.Unit origin=null
-                  TYPE_ARG T: kotlin.String
-                  ARG <this>: GET_VAR '$this$runBoxTest: com.rickclephas.kmp.nativecoroutines.BoxTest declared in <root>.box.<anonymous>' type=com.rickclephas.kmp.nativecoroutines.BoxTest origin=IMPLICIT_ARGUMENT
-                  ARG value: CALL 'public final fun <get-objCNameProperty1Value> (): kotlin.String declared in <root>' type=kotlin.String origin=GET_PROPERTY
-                CALL 'public final fun collect <T> (nativeFlow: kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<T of com.rickclephas.kmp.nativecoroutines.BoxTest.collect, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>, maxValues: kotlin.Int?): kotlin.Unit declared in com.rickclephas.kmp.nativecoroutines.BoxTest' type=kotlin.Unit origin=null
-                  TYPE_ARG T: kotlin.String
-                  ARG <this>: GET_VAR '$this$runBoxTest: com.rickclephas.kmp.nativecoroutines.BoxTest declared in <root>.box.<anonymous>' type=com.rickclephas.kmp.nativecoroutines.BoxTest origin=IMPLICIT_ARGUMENT
-                  ARG nativeFlow: CALL 'public final fun <get-objCNameProperty2Flow> (): kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<kotlin.String, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> declared in <root>' type=kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<kotlin.String, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> origin=GET_PROPERTY
-                  ARG maxValues: CONST Int type=kotlin.Int value=1
-                CALL 'public final fun value <T> (value: T of com.rickclephas.kmp.nativecoroutines.BoxTest.value): kotlin.Unit declared in com.rickclephas.kmp.nativecoroutines.BoxTest' type=kotlin.Unit origin=null
-                  TYPE_ARG T: kotlin.String
-                  ARG <this>: GET_VAR '$this$runBoxTest: com.rickclephas.kmp.nativecoroutines.BoxTest declared in <root>.box.<anonymous>' type=com.rickclephas.kmp.nativecoroutines.BoxTest origin=IMPLICIT_ARGUMENT
-                  ARG value: CALL 'public final fun <get-objCNameProperty2Value> (): kotlin.String declared in <root>' type=kotlin.String origin=GET_PROPERTY
-                CALL 'public final fun await <T> (nativeSuspend: kotlin.Function0<kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<T of com.rickclephas.kmp.nativecoroutines.BoxTest.await, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>>): kotlin.Unit declared in com.rickclephas.kmp.nativecoroutines.BoxTest' type=kotlin.Unit origin=null
-                  TYPE_ARG T: kotlin.String
-                  ARG <this>: GET_VAR '$this$runBoxTest: com.rickclephas.kmp.nativecoroutines.BoxTest declared in <root>.box.<anonymous>' type=com.rickclephas.kmp.nativecoroutines.BoxTest origin=IMPLICIT_ARGUMENT
-                  ARG nativeSuspend: FUN_EXPR type=kotlin.Function0<kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>> origin=LAMBDA
-                    FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>
-                      BLOCK_BODY
-                        RETURN type=kotlin.Nothing from='local final fun <anonymous> (): kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> declared in <root>.box.<anonymous>'
-                          CALL 'public final fun objCNameFunctionParameterNative (value: kotlin.String): kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> declared in <root>' type=kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> origin=null
-                            ARG value: CONST String type=kotlin.String value="OK13"
-  FUN name:deprecatedFunction1 visibility:public modality:FINAL returnType:kotlin.String [suspend]
-    annotations:
-      NativeCoroutines
-      Deprecated(message = "This is deprecated 1", replaceWith = <null>, level = <null>)
-    BLOCK_BODY
-      RETURN type=kotlin.Nothing from='public final fun deprecatedFunction1 (): kotlin.String declared in <root>'
-        CONST String type=kotlin.String value="OK1"
-  FUN name:deprecatedFunction2 visibility:public modality:FINAL returnType:kotlin.String [suspend]
-    annotations:
-      NativeCoroutines
-      Deprecated(message = "This is deprecated 2", replaceWith = <null>, level = GET_ENUM 'ENUM_ENTRY IR_EXTERNAL_DECLARATION_STUB name:WARNING' type=kotlin.DeprecationLevel)
-    BLOCK_BODY
-      RETURN type=kotlin.Nothing from='public final fun deprecatedFunction2 (): kotlin.String declared in <root>'
-        CONST String type=kotlin.String value="OK2"
-  FUN name:deprecatedFunction3 visibility:public modality:FINAL returnType:kotlin.String [suspend]
-    annotations:
-      NativeCoroutines
-      Deprecated(message = "This is deprecated 3", replaceWith = ReplaceWith(expression = "deprecatedFunction2()", imports = [] type=kotlin.Array<out kotlin.String> varargElementType=kotlin.String), level = GET_ENUM 'ENUM_ENTRY IR_EXTERNAL_DECLARATION_STUB name:ERROR' type=kotlin.DeprecationLevel)
-    BLOCK_BODY
-      RETURN type=kotlin.Nothing from='public final fun deprecatedFunction3 (): kotlin.String declared in <root>'
-        CONST String type=kotlin.String value="OK3"
-  FUN name:objCNameFunction1 visibility:public modality:FINAL returnType:kotlin.String [suspend]
-    annotations:
-      NativeCoroutines
-      OptIn(markerClass = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB ANNOTATION_CLASS name:ExperimentalObjCName modality:OPEN visibility:public superTypes:[kotlin.Annotation]' type=kotlin.reflect.KClass<kotlin.experimental.ExperimentalObjCName>] type=kotlin.Array<out kotlin.reflect.KClass<out kotlin.Annotation>> varargElementType=kotlin.reflect.KClass<out kotlin.Annotation>)
-      ObjCName(name = "objCNameFunction1ObjC", swiftName = <null>, exact = <null>)
-    BLOCK_BODY
-      RETURN type=kotlin.Nothing from='public final fun objCNameFunction1 (): kotlin.String declared in <root>'
-        CONST String type=kotlin.String value="OK8"
-  FUN name:objCNameFunction2 visibility:public modality:FINAL returnType:kotlin.String [suspend]
-    annotations:
-      NativeCoroutines
-      OptIn(markerClass = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB ANNOTATION_CLASS name:ExperimentalObjCName modality:OPEN visibility:public superTypes:[kotlin.Annotation]' type=kotlin.reflect.KClass<kotlin.experimental.ExperimentalObjCName>] type=kotlin.Array<out kotlin.reflect.KClass<out kotlin.Annotation>> varargElementType=kotlin.reflect.KClass<out kotlin.Annotation>)
-      ObjCName(name = <null>, swiftName = "objCNameFunction2Swift", exact = <null>)
-    BLOCK_BODY
-      RETURN type=kotlin.Nothing from='public final fun objCNameFunction2 (): kotlin.String declared in <root>'
-        CONST String type=kotlin.String value="OK9"
-  FUN name:objCNameFunction3 visibility:public modality:FINAL returnType:kotlin.String [suspend]
-    annotations:
-      NativeCoroutines
-      OptIn(markerClass = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB ANNOTATION_CLASS name:ExperimentalObjCName modality:OPEN visibility:public superTypes:[kotlin.Annotation]' type=kotlin.reflect.KClass<kotlin.experimental.ExperimentalObjCName>] type=kotlin.Array<out kotlin.reflect.KClass<out kotlin.Annotation>> varargElementType=kotlin.reflect.KClass<out kotlin.Annotation>)
-      ObjCName(name = "objCNameFunction3ObjC", swiftName = "objCNameFunction3Swift", exact = <null>)
-    BLOCK_BODY
-      RETURN type=kotlin.Nothing from='public final fun objCNameFunction3 (): kotlin.String declared in <root>'
-        CONST String type=kotlin.String value="OK10"
-  FUN name:objCNameFunctionParameter visibility:public modality:FINAL returnType:kotlin.String [suspend]
-    VALUE_PARAMETER kind:Regular name:value index:0 type:kotlin.String
-      annotations:
-        ObjCName(name = "valueObjC", swiftName = <null>, exact = <null>)
-    annotations:
-      NativeCoroutines
-      OptIn(markerClass = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB ANNOTATION_CLASS name:ExperimentalObjCName modality:OPEN visibility:public superTypes:[kotlin.Annotation]' type=kotlin.reflect.KClass<kotlin.experimental.ExperimentalObjCName>] type=kotlin.Array<out kotlin.reflect.KClass<out kotlin.Annotation>> varargElementType=kotlin.reflect.KClass<out kotlin.Annotation>)
-    BLOCK_BODY
-      RETURN type=kotlin.Nothing from='public final fun objCNameFunctionParameter (value: kotlin.String): kotlin.String declared in <root>'
-        GET_VAR 'value: kotlin.String declared in <root>.objCNameFunctionParameter' type=kotlin.String origin=null
-FILE fqName:<root> fileName:__GENERATED DECLARATIONS__.kt
+FILE fqName:<root> fileName:/__GENERATED__CALLABLES__.kt
   PROPERTY GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:deprecatedProperty4Value visibility:public modality:FINAL [var]
     FIELD PROPERTY_BACKING_FIELD name:deprecatedProperty4Value type:kotlin.String visibility:private [static]
     FUN GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:<get-deprecatedProperty4Value> visibility:public modality:FINAL returnType:kotlin.String
@@ -487,3 +250,216 @@ FILE fqName:<root> fileName:__GENERATED DECLARATIONS__.kt
         RETURN type=kotlin.Nothing from='public final fun <get-objCNameProperty2Value> (): kotlin.String declared in <root>'
           CALL 'public abstract fun <get-value> (): T of kotlinx.coroutines.flow.StateFlow declared in kotlinx.coroutines.flow.StateFlow' type=kotlin.String origin=null
             ARG <this>: GET_VAR 'val tmp_21: kotlinx.coroutines.flow.StateFlow<kotlin.String> declared in <root>.<get-objCNameProperty2Value>' type=kotlinx.coroutines.flow.StateFlow<kotlin.String> origin=null
+FILE fqName:<root> fileName:/annotations.kt
+  annotations:
+    Suppress(names = ["OPTIONAL_DECLARATION_USAGE_IN_NON_COMMON_SOURCE"] type=kotlin.Array<out kotlin.String> varargElementType=kotlin.String)
+  PROPERTY name:deprecatedProperty1 visibility:public modality:FINAL [val]
+    annotations:
+      NativeCoroutines
+      Deprecated(message = "This is deprecated 4", replaceWith = <null>, level = <null>)
+    FIELD PROPERTY_BACKING_FIELD name:deprecatedProperty1 type:kotlinx.coroutines.flow.Flow<kotlin.String> visibility:private [final,static]
+      EXPRESSION_BODY
+        CALL 'public final fun flowOf <T> (value: T of kotlinx.coroutines.flow.flowOf): kotlinx.coroutines.flow.Flow<T of kotlinx.coroutines.flow.flowOf> declared in kotlinx.coroutines.flow' type=kotlinx.coroutines.flow.Flow<kotlin.String> origin=null
+          TYPE_ARG T: kotlin.String
+          ARG value: CONST String type=kotlin.String value="OK4"
+    FUN DEFAULT_PROPERTY_ACCESSOR name:<get-deprecatedProperty1> visibility:public modality:FINAL returnType:kotlinx.coroutines.flow.Flow<kotlin.String>
+      correspondingProperty: PROPERTY name:deprecatedProperty1 visibility:public modality:FINAL [val]
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public final fun <get-deprecatedProperty1> (): kotlinx.coroutines.flow.Flow<kotlin.String> declared in <root>'
+          GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:deprecatedProperty1 type:kotlinx.coroutines.flow.Flow<kotlin.String> visibility:private [final,static]' type=kotlinx.coroutines.flow.Flow<kotlin.String> origin=null
+  PROPERTY name:deprecatedProperty2 visibility:public modality:FINAL [val]
+    annotations:
+      NativeCoroutines
+      Deprecated(message = "This is deprecated 5", replaceWith = <null>, level = GET_ENUM 'ENUM_ENTRY IR_EXTERNAL_DECLARATION_STUB name:WARNING' type=kotlin.DeprecationLevel)
+    FIELD PROPERTY_BACKING_FIELD name:deprecatedProperty2 type:kotlinx.coroutines.flow.Flow<kotlin.String> visibility:private [final,static]
+      EXPRESSION_BODY
+        CALL 'public final fun flowOf <T> (value: T of kotlinx.coroutines.flow.flowOf): kotlinx.coroutines.flow.Flow<T of kotlinx.coroutines.flow.flowOf> declared in kotlinx.coroutines.flow' type=kotlinx.coroutines.flow.Flow<kotlin.String> origin=null
+          TYPE_ARG T: kotlin.String
+          ARG value: CONST String type=kotlin.String value="OK5"
+    FUN DEFAULT_PROPERTY_ACCESSOR name:<get-deprecatedProperty2> visibility:public modality:FINAL returnType:kotlinx.coroutines.flow.Flow<kotlin.String>
+      correspondingProperty: PROPERTY name:deprecatedProperty2 visibility:public modality:FINAL [val]
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public final fun <get-deprecatedProperty2> (): kotlinx.coroutines.flow.Flow<kotlin.String> declared in <root>'
+          GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:deprecatedProperty2 type:kotlinx.coroutines.flow.Flow<kotlin.String> visibility:private [final,static]' type=kotlinx.coroutines.flow.Flow<kotlin.String> origin=null
+  PROPERTY name:deprecatedProperty3 visibility:public modality:FINAL [val]
+    annotations:
+      NativeCoroutines
+      Deprecated(message = "This is deprecated 6", replaceWith = ReplaceWith(expression = "deprecatedProperty2", imports = [] type=kotlin.Array<out kotlin.String> varargElementType=kotlin.String), level = GET_ENUM 'ENUM_ENTRY IR_EXTERNAL_DECLARATION_STUB name:ERROR' type=kotlin.DeprecationLevel)
+    FIELD PROPERTY_BACKING_FIELD name:deprecatedProperty3 type:kotlinx.coroutines.flow.Flow<kotlin.String> visibility:private [final,static]
+      EXPRESSION_BODY
+        CALL 'public final fun flowOf <T> (value: T of kotlinx.coroutines.flow.flowOf): kotlinx.coroutines.flow.Flow<T of kotlinx.coroutines.flow.flowOf> declared in kotlinx.coroutines.flow' type=kotlinx.coroutines.flow.Flow<kotlin.String> origin=null
+          TYPE_ARG T: kotlin.String
+          ARG value: CONST String type=kotlin.String value="OK6"
+    FUN DEFAULT_PROPERTY_ACCESSOR name:<get-deprecatedProperty3> visibility:public modality:FINAL returnType:kotlinx.coroutines.flow.Flow<kotlin.String>
+      correspondingProperty: PROPERTY name:deprecatedProperty3 visibility:public modality:FINAL [val]
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public final fun <get-deprecatedProperty3> (): kotlinx.coroutines.flow.Flow<kotlin.String> declared in <root>'
+          GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:deprecatedProperty3 type:kotlinx.coroutines.flow.Flow<kotlin.String> visibility:private [final,static]' type=kotlinx.coroutines.flow.Flow<kotlin.String> origin=null
+  PROPERTY name:deprecatedProperty4 visibility:public modality:FINAL [val]
+    annotations:
+      NativeCoroutines
+    FIELD PROPERTY_BACKING_FIELD name:deprecatedProperty4 type:kotlinx.coroutines.flow.MutableStateFlow<kotlin.String> visibility:private [final,static]
+      EXPRESSION_BODY
+        CALL 'public final fun MutableStateFlow <T> (value: T of kotlinx.coroutines.flow.MutableStateFlow): kotlinx.coroutines.flow.MutableStateFlow<T of kotlinx.coroutines.flow.MutableStateFlow> declared in kotlinx.coroutines.flow' type=kotlinx.coroutines.flow.MutableStateFlow<kotlin.String> origin=null
+          TYPE_ARG T: kotlin.String
+          ARG value: CONST String type=kotlin.String value="OK7"
+    FUN DEFAULT_PROPERTY_ACCESSOR name:<get-deprecatedProperty4> visibility:public modality:FINAL returnType:kotlinx.coroutines.flow.MutableStateFlow<kotlin.String>
+      annotations:
+        Deprecated(message = "This is deprecated 7", replaceWith = <null>, level = <null>)
+      correspondingProperty: PROPERTY name:deprecatedProperty4 visibility:public modality:FINAL [val]
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public final fun <get-deprecatedProperty4> (): kotlinx.coroutines.flow.MutableStateFlow<kotlin.String> declared in <root>'
+          GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:deprecatedProperty4 type:kotlinx.coroutines.flow.MutableStateFlow<kotlin.String> visibility:private [final,static]' type=kotlinx.coroutines.flow.MutableStateFlow<kotlin.String> origin=null
+  PROPERTY name:objCNameProperty1 visibility:public modality:FINAL [val]
+    annotations:
+      NativeCoroutines
+      OptIn(markerClass = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB ANNOTATION_CLASS name:ExperimentalObjCName modality:OPEN visibility:public superTypes:[kotlin.Annotation]' type=kotlin.reflect.KClass<kotlin.experimental.ExperimentalObjCName>] type=kotlin.Array<out kotlin.reflect.KClass<out kotlin.Annotation>> varargElementType=kotlin.reflect.KClass<out kotlin.Annotation>)
+      ObjCName(name = "objCNameProperty1ObjC", swiftName = <null>, exact = <null>)
+    FIELD PROPERTY_BACKING_FIELD name:objCNameProperty1 type:kotlinx.coroutines.flow.StateFlow<kotlin.String> visibility:private [final,static]
+      EXPRESSION_BODY
+        CALL 'public final fun MutableStateFlow <T> (value: T of kotlinx.coroutines.flow.MutableStateFlow): kotlinx.coroutines.flow.MutableStateFlow<T of kotlinx.coroutines.flow.MutableStateFlow> declared in kotlinx.coroutines.flow' type=kotlinx.coroutines.flow.MutableStateFlow<kotlin.String> origin=null
+          TYPE_ARG T: kotlin.String
+          ARG value: CONST String type=kotlin.String value="OK11"
+    FUN DEFAULT_PROPERTY_ACCESSOR name:<get-objCNameProperty1> visibility:public modality:FINAL returnType:kotlinx.coroutines.flow.StateFlow<kotlin.String>
+      correspondingProperty: PROPERTY name:objCNameProperty1 visibility:public modality:FINAL [val]
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public final fun <get-objCNameProperty1> (): kotlinx.coroutines.flow.StateFlow<kotlin.String> declared in <root>'
+          GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:objCNameProperty1 type:kotlinx.coroutines.flow.StateFlow<kotlin.String> visibility:private [final,static]' type=kotlinx.coroutines.flow.StateFlow<kotlin.String> origin=null
+  PROPERTY name:objCNameProperty2 visibility:public modality:FINAL [val]
+    annotations:
+      NativeCoroutinesState
+      OptIn(markerClass = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB ANNOTATION_CLASS name:ExperimentalObjCName modality:OPEN visibility:public superTypes:[kotlin.Annotation]' type=kotlin.reflect.KClass<kotlin.experimental.ExperimentalObjCName>] type=kotlin.Array<out kotlin.reflect.KClass<out kotlin.Annotation>> varargElementType=kotlin.reflect.KClass<out kotlin.Annotation>)
+      ObjCName(name = "objCNameProperty2ObjC", swiftName = <null>, exact = <null>)
+    FIELD PROPERTY_BACKING_FIELD name:objCNameProperty2 type:kotlinx.coroutines.flow.StateFlow<kotlin.String> visibility:private [final,static]
+      EXPRESSION_BODY
+        CALL 'public final fun MutableStateFlow <T> (value: T of kotlinx.coroutines.flow.MutableStateFlow): kotlinx.coroutines.flow.MutableStateFlow<T of kotlinx.coroutines.flow.MutableStateFlow> declared in kotlinx.coroutines.flow' type=kotlinx.coroutines.flow.MutableStateFlow<kotlin.String> origin=null
+          TYPE_ARG T: kotlin.String
+          ARG value: CONST String type=kotlin.String value="OK12"
+    FUN DEFAULT_PROPERTY_ACCESSOR name:<get-objCNameProperty2> visibility:public modality:FINAL returnType:kotlinx.coroutines.flow.StateFlow<kotlin.String>
+      correspondingProperty: PROPERTY name:objCNameProperty2 visibility:public modality:FINAL [val]
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public final fun <get-objCNameProperty2> (): kotlinx.coroutines.flow.StateFlow<kotlin.String> declared in <root>'
+          GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:objCNameProperty2 type:kotlinx.coroutines.flow.StateFlow<kotlin.String> visibility:private [final,static]' type=kotlinx.coroutines.flow.StateFlow<kotlin.String> origin=null
+  FUN name:box visibility:public modality:FINAL returnType:kotlin.String
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in <root>'
+        CALL 'public final fun runBoxTest (action: @[ExtensionFunctionType] kotlin.coroutines.SuspendFunction1<com.rickclephas.kmp.nativecoroutines.BoxTest, kotlin.Unit>): kotlin.String declared in com.rickclephas.kmp.nativecoroutines' type=kotlin.String origin=null
+          ARG action: FUN_EXPR type=@[ExtensionFunctionType] kotlin.coroutines.SuspendFunction1<com.rickclephas.kmp.nativecoroutines.BoxTest, kotlin.Unit> origin=LAMBDA
+            FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:kotlin.Unit [suspend]
+              VALUE_PARAMETER kind:ExtensionReceiver name:$this$runBoxTest index:0 type:com.rickclephas.kmp.nativecoroutines.BoxTest
+              BLOCK_BODY
+                CALL 'public final fun await <T> (nativeSuspend: kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<T of com.rickclephas.kmp.nativecoroutines.BoxTest.await, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>): kotlin.Unit declared in com.rickclephas.kmp.nativecoroutines.BoxTest' type=kotlin.Unit origin=null
+                  TYPE_ARG T: kotlin.String
+                  ARG <this>: GET_VAR '$this$runBoxTest: com.rickclephas.kmp.nativecoroutines.BoxTest declared in <root>.box.<anonymous>' type=com.rickclephas.kmp.nativecoroutines.BoxTest origin=IMPLICIT_ARGUMENT
+                  ARG nativeSuspend: CALL 'public final fun deprecatedFunction1Native (): kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> declared in <root>' type=kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> origin=null
+                CALL 'public final fun await <T> (nativeSuspend: kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<T of com.rickclephas.kmp.nativecoroutines.BoxTest.await, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>): kotlin.Unit declared in com.rickclephas.kmp.nativecoroutines.BoxTest' type=kotlin.Unit origin=null
+                  TYPE_ARG T: kotlin.String
+                  ARG <this>: GET_VAR '$this$runBoxTest: com.rickclephas.kmp.nativecoroutines.BoxTest declared in <root>.box.<anonymous>' type=com.rickclephas.kmp.nativecoroutines.BoxTest origin=IMPLICIT_ARGUMENT
+                  ARG nativeSuspend: CALL 'public final fun deprecatedFunction2Native (): kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> declared in <root>' type=kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> origin=null
+                CALL 'public final fun collect <T> (nativeFlow: kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<T of com.rickclephas.kmp.nativecoroutines.BoxTest.collect, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>, maxValues: kotlin.Int?): kotlin.Unit declared in com.rickclephas.kmp.nativecoroutines.BoxTest' type=kotlin.Unit origin=null
+                  TYPE_ARG T: kotlin.String
+                  ARG <this>: GET_VAR '$this$runBoxTest: com.rickclephas.kmp.nativecoroutines.BoxTest declared in <root>.box.<anonymous>' type=com.rickclephas.kmp.nativecoroutines.BoxTest origin=IMPLICIT_ARGUMENT
+                  ARG nativeFlow: CALL 'public final fun <get-deprecatedProperty1Native> (): kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<kotlin.String, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> declared in <root>' type=kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<kotlin.String, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> origin=GET_PROPERTY
+                CALL 'public final fun collect <T> (nativeFlow: kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<T of com.rickclephas.kmp.nativecoroutines.BoxTest.collect, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>, maxValues: kotlin.Int?): kotlin.Unit declared in com.rickclephas.kmp.nativecoroutines.BoxTest' type=kotlin.Unit origin=null
+                  TYPE_ARG T: kotlin.String
+                  ARG <this>: GET_VAR '$this$runBoxTest: com.rickclephas.kmp.nativecoroutines.BoxTest declared in <root>.box.<anonymous>' type=com.rickclephas.kmp.nativecoroutines.BoxTest origin=IMPLICIT_ARGUMENT
+                  ARG nativeFlow: CALL 'public final fun <get-deprecatedProperty2Native> (): kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<kotlin.String, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> declared in <root>' type=kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<kotlin.String, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> origin=GET_PROPERTY
+                CALL 'public final fun collect <T> (nativeFlow: kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<T of com.rickclephas.kmp.nativecoroutines.BoxTest.collect, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>, maxValues: kotlin.Int?): kotlin.Unit declared in com.rickclephas.kmp.nativecoroutines.BoxTest' type=kotlin.Unit origin=null
+                  TYPE_ARG T: kotlin.String
+                  ARG <this>: GET_VAR '$this$runBoxTest: com.rickclephas.kmp.nativecoroutines.BoxTest declared in <root>.box.<anonymous>' type=com.rickclephas.kmp.nativecoroutines.BoxTest origin=IMPLICIT_ARGUMENT
+                  ARG nativeFlow: CALL 'public final fun <get-deprecatedProperty4Native> (): kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<kotlin.String, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> declared in <root>' type=kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<kotlin.String, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> origin=GET_PROPERTY
+                  ARG maxValues: CONST Int type=kotlin.Int value=1
+                CALL 'public final fun value <T> (value: T of com.rickclephas.kmp.nativecoroutines.BoxTest.value): kotlin.Unit declared in com.rickclephas.kmp.nativecoroutines.BoxTest' type=kotlin.Unit origin=null
+                  TYPE_ARG T: kotlin.String
+                  ARG <this>: GET_VAR '$this$runBoxTest: com.rickclephas.kmp.nativecoroutines.BoxTest declared in <root>.box.<anonymous>' type=com.rickclephas.kmp.nativecoroutines.BoxTest origin=IMPLICIT_ARGUMENT
+                  ARG value: CALL 'public final fun <get-deprecatedProperty4Value> (): kotlin.String declared in <root>' type=kotlin.String origin=GET_PROPERTY
+                CALL 'public final fun await <T> (nativeSuspend: kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<T of com.rickclephas.kmp.nativecoroutines.BoxTest.await, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>): kotlin.Unit declared in com.rickclephas.kmp.nativecoroutines.BoxTest' type=kotlin.Unit origin=null
+                  TYPE_ARG T: kotlin.String
+                  ARG <this>: GET_VAR '$this$runBoxTest: com.rickclephas.kmp.nativecoroutines.BoxTest declared in <root>.box.<anonymous>' type=com.rickclephas.kmp.nativecoroutines.BoxTest origin=IMPLICIT_ARGUMENT
+                  ARG nativeSuspend: CALL 'public final fun objCNameFunction1Native (): kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> declared in <root>' type=kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> origin=null
+                CALL 'public final fun await <T> (nativeSuspend: kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<T of com.rickclephas.kmp.nativecoroutines.BoxTest.await, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>): kotlin.Unit declared in com.rickclephas.kmp.nativecoroutines.BoxTest' type=kotlin.Unit origin=null
+                  TYPE_ARG T: kotlin.String
+                  ARG <this>: GET_VAR '$this$runBoxTest: com.rickclephas.kmp.nativecoroutines.BoxTest declared in <root>.box.<anonymous>' type=com.rickclephas.kmp.nativecoroutines.BoxTest origin=IMPLICIT_ARGUMENT
+                  ARG nativeSuspend: CALL 'public final fun objCNameFunction2Native (): kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> declared in <root>' type=kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> origin=null
+                CALL 'public final fun await <T> (nativeSuspend: kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<T of com.rickclephas.kmp.nativecoroutines.BoxTest.await, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>): kotlin.Unit declared in com.rickclephas.kmp.nativecoroutines.BoxTest' type=kotlin.Unit origin=null
+                  TYPE_ARG T: kotlin.String
+                  ARG <this>: GET_VAR '$this$runBoxTest: com.rickclephas.kmp.nativecoroutines.BoxTest declared in <root>.box.<anonymous>' type=com.rickclephas.kmp.nativecoroutines.BoxTest origin=IMPLICIT_ARGUMENT
+                  ARG nativeSuspend: CALL 'public final fun objCNameFunction3Native (): kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> declared in <root>' type=kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> origin=null
+                CALL 'public final fun collect <T> (nativeFlow: kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<T of com.rickclephas.kmp.nativecoroutines.BoxTest.collect, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>, maxValues: kotlin.Int?): kotlin.Unit declared in com.rickclephas.kmp.nativecoroutines.BoxTest' type=kotlin.Unit origin=null
+                  TYPE_ARG T: kotlin.String
+                  ARG <this>: GET_VAR '$this$runBoxTest: com.rickclephas.kmp.nativecoroutines.BoxTest declared in <root>.box.<anonymous>' type=com.rickclephas.kmp.nativecoroutines.BoxTest origin=IMPLICIT_ARGUMENT
+                  ARG nativeFlow: CALL 'public final fun <get-objCNameProperty1Native> (): kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<kotlin.String, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> declared in <root>' type=kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<kotlin.String, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> origin=GET_PROPERTY
+                  ARG maxValues: CONST Int type=kotlin.Int value=1
+                CALL 'public final fun value <T> (value: T of com.rickclephas.kmp.nativecoroutines.BoxTest.value): kotlin.Unit declared in com.rickclephas.kmp.nativecoroutines.BoxTest' type=kotlin.Unit origin=null
+                  TYPE_ARG T: kotlin.String
+                  ARG <this>: GET_VAR '$this$runBoxTest: com.rickclephas.kmp.nativecoroutines.BoxTest declared in <root>.box.<anonymous>' type=com.rickclephas.kmp.nativecoroutines.BoxTest origin=IMPLICIT_ARGUMENT
+                  ARG value: CALL 'public final fun <get-objCNameProperty1Value> (): kotlin.String declared in <root>' type=kotlin.String origin=GET_PROPERTY
+                CALL 'public final fun collect <T> (nativeFlow: kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<T of com.rickclephas.kmp.nativecoroutines.BoxTest.collect, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>, maxValues: kotlin.Int?): kotlin.Unit declared in com.rickclephas.kmp.nativecoroutines.BoxTest' type=kotlin.Unit origin=null
+                  TYPE_ARG T: kotlin.String
+                  ARG <this>: GET_VAR '$this$runBoxTest: com.rickclephas.kmp.nativecoroutines.BoxTest declared in <root>.box.<anonymous>' type=com.rickclephas.kmp.nativecoroutines.BoxTest origin=IMPLICIT_ARGUMENT
+                  ARG nativeFlow: CALL 'public final fun <get-objCNameProperty2Flow> (): kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<kotlin.String, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> declared in <root>' type=kotlin.Function3<@[ParameterName(name = "onItem")] kotlin.Function3<kotlin.String, kotlin.Function0<kotlin.Unit>, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onComplete")] kotlin.Function2<kotlin.Throwable?, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> origin=GET_PROPERTY
+                  ARG maxValues: CONST Int type=kotlin.Int value=1
+                CALL 'public final fun value <T> (value: T of com.rickclephas.kmp.nativecoroutines.BoxTest.value): kotlin.Unit declared in com.rickclephas.kmp.nativecoroutines.BoxTest' type=kotlin.Unit origin=null
+                  TYPE_ARG T: kotlin.String
+                  ARG <this>: GET_VAR '$this$runBoxTest: com.rickclephas.kmp.nativecoroutines.BoxTest declared in <root>.box.<anonymous>' type=com.rickclephas.kmp.nativecoroutines.BoxTest origin=IMPLICIT_ARGUMENT
+                  ARG value: CALL 'public final fun <get-objCNameProperty2Value> (): kotlin.String declared in <root>' type=kotlin.String origin=GET_PROPERTY
+                CALL 'public final fun await <T> (nativeSuspend: kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<T of com.rickclephas.kmp.nativecoroutines.BoxTest.await, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>>): kotlin.Unit declared in com.rickclephas.kmp.nativecoroutines.BoxTest' type=kotlin.Unit origin=null
+                  TYPE_ARG T: kotlin.String
+                  ARG <this>: GET_VAR '$this$runBoxTest: com.rickclephas.kmp.nativecoroutines.BoxTest declared in <root>.box.<anonymous>' type=com.rickclephas.kmp.nativecoroutines.BoxTest origin=IMPLICIT_ARGUMENT
+                  ARG nativeSuspend: CALL 'public final fun objCNameFunctionParameterNative (value: kotlin.String): kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> declared in <root>' type=kotlin.Function3<@[ParameterName(name = "onResult")] kotlin.Function2<kotlin.String, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onError")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, @[ParameterName(name = "onCancelled")] kotlin.Function2<kotlin.Throwable, kotlin.Unit, kotlin.Unit>, kotlin.Function0<kotlin.Unit>> origin=null
+                    ARG value: CONST String type=kotlin.String value="OK13"
+  FUN name:deprecatedFunction1 visibility:public modality:FINAL returnType:kotlin.String [suspend]
+    annotations:
+      NativeCoroutines
+      Deprecated(message = "This is deprecated 1", replaceWith = <null>, level = <null>)
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun deprecatedFunction1 (): kotlin.String declared in <root>'
+        CONST String type=kotlin.String value="OK1"
+  FUN name:deprecatedFunction2 visibility:public modality:FINAL returnType:kotlin.String [suspend]
+    annotations:
+      NativeCoroutines
+      Deprecated(message = "This is deprecated 2", replaceWith = <null>, level = GET_ENUM 'ENUM_ENTRY IR_EXTERNAL_DECLARATION_STUB name:WARNING' type=kotlin.DeprecationLevel)
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun deprecatedFunction2 (): kotlin.String declared in <root>'
+        CONST String type=kotlin.String value="OK2"
+  FUN name:deprecatedFunction3 visibility:public modality:FINAL returnType:kotlin.String [suspend]
+    annotations:
+      NativeCoroutines
+      Deprecated(message = "This is deprecated 3", replaceWith = ReplaceWith(expression = "deprecatedFunction2()", imports = [] type=kotlin.Array<out kotlin.String> varargElementType=kotlin.String), level = GET_ENUM 'ENUM_ENTRY IR_EXTERNAL_DECLARATION_STUB name:ERROR' type=kotlin.DeprecationLevel)
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun deprecatedFunction3 (): kotlin.String declared in <root>'
+        CONST String type=kotlin.String value="OK3"
+  FUN name:objCNameFunction1 visibility:public modality:FINAL returnType:kotlin.String [suspend]
+    annotations:
+      NativeCoroutines
+      OptIn(markerClass = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB ANNOTATION_CLASS name:ExperimentalObjCName modality:OPEN visibility:public superTypes:[kotlin.Annotation]' type=kotlin.reflect.KClass<kotlin.experimental.ExperimentalObjCName>] type=kotlin.Array<out kotlin.reflect.KClass<out kotlin.Annotation>> varargElementType=kotlin.reflect.KClass<out kotlin.Annotation>)
+      ObjCName(name = "objCNameFunction1ObjC", swiftName = <null>, exact = <null>)
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun objCNameFunction1 (): kotlin.String declared in <root>'
+        CONST String type=kotlin.String value="OK8"
+  FUN name:objCNameFunction2 visibility:public modality:FINAL returnType:kotlin.String [suspend]
+    annotations:
+      NativeCoroutines
+      OptIn(markerClass = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB ANNOTATION_CLASS name:ExperimentalObjCName modality:OPEN visibility:public superTypes:[kotlin.Annotation]' type=kotlin.reflect.KClass<kotlin.experimental.ExperimentalObjCName>] type=kotlin.Array<out kotlin.reflect.KClass<out kotlin.Annotation>> varargElementType=kotlin.reflect.KClass<out kotlin.Annotation>)
+      ObjCName(name = <null>, swiftName = "objCNameFunction2Swift", exact = <null>)
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun objCNameFunction2 (): kotlin.String declared in <root>'
+        CONST String type=kotlin.String value="OK9"
+  FUN name:objCNameFunction3 visibility:public modality:FINAL returnType:kotlin.String [suspend]
+    annotations:
+      NativeCoroutines
+      OptIn(markerClass = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB ANNOTATION_CLASS name:ExperimentalObjCName modality:OPEN visibility:public superTypes:[kotlin.Annotation]' type=kotlin.reflect.KClass<kotlin.experimental.ExperimentalObjCName>] type=kotlin.Array<out kotlin.reflect.KClass<out kotlin.Annotation>> varargElementType=kotlin.reflect.KClass<out kotlin.Annotation>)
+      ObjCName(name = "objCNameFunction3ObjC", swiftName = "objCNameFunction3Swift", exact = <null>)
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun objCNameFunction3 (): kotlin.String declared in <root>'
+        CONST String type=kotlin.String value="OK10"
+  FUN name:objCNameFunctionParameter visibility:public modality:FINAL returnType:kotlin.String [suspend]
+    VALUE_PARAMETER kind:Regular name:value index:0 type:kotlin.String
+      annotations:
+        ObjCName(name = "valueObjC", swiftName = <null>, exact = <null>)
+    annotations:
+      NativeCoroutines
+      OptIn(markerClass = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_DECLARATION_STUB ANNOTATION_CLASS name:ExperimentalObjCName modality:OPEN visibility:public superTypes:[kotlin.Annotation]' type=kotlin.reflect.KClass<kotlin.experimental.ExperimentalObjCName>] type=kotlin.Array<out kotlin.reflect.KClass<out kotlin.Annotation>> varargElementType=kotlin.reflect.KClass<out kotlin.Annotation>)
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun objCNameFunctionParameter (value: kotlin.String): kotlin.String declared in <root>'
+        GET_VAR 'value: kotlin.String declared in <root>.objCNameFunctionParameter' type=kotlin.String origin=null
