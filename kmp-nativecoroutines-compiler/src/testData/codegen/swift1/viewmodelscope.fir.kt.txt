@@ -1,3 +1,33 @@
+// FILE: __GENERATED__CALLABLES__.kt
+
+@ObjCName(name = "returnSuspendValue2")
+@Throws(exceptionClasses = [Exception::class])
+suspend fun MyAndroidXViewModel1.returnSuspendValue2Native(): String {
+  val tmp_0: CoroutineScope = <get-viewModelScope>(/* <this> = <this> */)
+  return returnSuspendValue2(/* <this> = <this> */)
+}
+
+@ObjCName(name = "returnSuspendValue2")
+@Throws(exceptionClasses = [Exception::class])
+suspend fun MyAndroidXViewModel2.returnSuspendValue2Native(): String {
+  val tmp_1: CoroutineScope = <get-viewModelScope>(/* <this> = <this> */)
+  return returnSuspendValue2(/* <this> = <this> */)
+}
+
+@ObjCName(name = "returnSuspendValue2")
+@Throws(exceptionClasses = [Exception::class])
+suspend fun MyObservableViewModel1.returnSuspendValue2Native(): String {
+  val tmp_2: CoroutineScope = <get-coroutineScope>(/* <this> = <this>.<get-viewModelScope>() */)
+  return returnSuspendValue2(/* <this> = <this> */)
+}
+
+@ObjCName(name = "returnSuspendValue2")
+@Throws(exceptionClasses = [Exception::class])
+suspend fun MyObservableViewModel2.returnSuspendValue2Native(): String {
+  val tmp_3: CoroutineScope = <get-coroutineScope>(/* <this> = <this>.<get-viewModelScope>() */)
+  return returnSuspendValue2(/* <this> = <this> */)
+}
+
 // FILE: androidxviewmodel.kt
 package androidx.lifecycle
 
@@ -202,34 +232,4 @@ suspend fun MyObservableViewModel1.returnSuspendValue2(): String {
 @NativeCoroutines
 suspend fun MyObservableViewModel2.returnSuspendValue2(): String {
   return "OK8"
-}
-
-// FILE: __GENERATED DECLARATIONS__.kt
-
-@ObjCName(name = "returnSuspendValue2")
-@Throws(exceptionClasses = [Exception::class])
-suspend fun MyAndroidXViewModel1.returnSuspendValue2Native(): String {
-  val tmp_0: CoroutineScope = <get-viewModelScope>(/* <this> = <this> */)
-  return returnSuspendValue2(/* <this> = <this> */)
-}
-
-@ObjCName(name = "returnSuspendValue2")
-@Throws(exceptionClasses = [Exception::class])
-suspend fun MyAndroidXViewModel2.returnSuspendValue2Native(): String {
-  val tmp_1: CoroutineScope = <get-viewModelScope>(/* <this> = <this> */)
-  return returnSuspendValue2(/* <this> = <this> */)
-}
-
-@ObjCName(name = "returnSuspendValue2")
-@Throws(exceptionClasses = [Exception::class])
-suspend fun MyObservableViewModel1.returnSuspendValue2Native(): String {
-  val tmp_2: CoroutineScope = <get-coroutineScope>(/* <this> = <this>.<get-viewModelScope>() */)
-  return returnSuspendValue2(/* <this> = <this> */)
-}
-
-@ObjCName(name = "returnSuspendValue2")
-@Throws(exceptionClasses = [Exception::class])
-suspend fun MyObservableViewModel2.returnSuspendValue2Native(): String {
-  val tmp_3: CoroutineScope = <get-coroutineScope>(/* <this> = <this>.<get-viewModelScope>() */)
-  return returnSuspendValue2(/* <this> = <this> */)
 }

@@ -244,7 +244,7 @@ FILE: functions.kt
         }
         )
     }
-FILE: __GENERATED DECLARATIONS__.kt
+FILE: /__GENERATED__CALLABLES__.kt
     @R|kotlin/native/ObjCName|(name = String(returnSuspendValue)) @R|kotlin/Throws|(exceptionClasses = vararg(<getClass>(Q|kotlin/Exception|))) public final suspend fun returnSuspendValueNative(): R|kotlin/String| {
         ::R|/returnSuspendValue|
         R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
