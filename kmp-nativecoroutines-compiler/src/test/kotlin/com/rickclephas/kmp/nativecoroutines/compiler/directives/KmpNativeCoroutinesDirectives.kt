@@ -7,7 +7,7 @@ import com.rickclephas.kmp.nativecoroutines.compiler.config.FLOW_VALUE_SUFFIX as
 import com.rickclephas.kmp.nativecoroutines.compiler.config.FLOW_REPLAY_CACHE_SUFFIX as FLOW_REPLAY_CACHE_SUFFIX_CONFIG
 import com.rickclephas.kmp.nativecoroutines.compiler.config.STATE_SUFFIX as STATE_SUFFIX_CONFIG
 import com.rickclephas.kmp.nativecoroutines.compiler.config.STATE_FLOW_SUFFIX as STATE_FLOW_SUFFIX_CONFIG
-import com.rickclephas.kmp.nativecoroutines.compiler.config.K2_MODE as K2_MODE_CONFIG
+import com.rickclephas.kmp.nativecoroutines.compiler.config.SWIFT_EXPORT as SWIFT_EXPORT_CONFIG
 import org.jetbrains.kotlin.test.directives.model.DirectiveApplicability
 import org.jetbrains.kotlin.test.directives.model.SimpleDirective
 import org.jetbrains.kotlin.test.directives.model.SimpleDirectivesContainer
@@ -31,5 +31,5 @@ internal object KmpNativeCoroutinesDirectives: SimpleDirectivesContainer() {
     val FLOW_REPLAY_CACHE_SUFFIX by valueDirective(FLOW_REPLAY_CACHE_SUFFIX_CONFIG)
     val STATE_SUFFIX by valueDirective(STATE_SUFFIX_CONFIG)
     val STATE_FLOW_SUFFIX by valueDirective(STATE_FLOW_SUFFIX_CONFIG)
-    val K2_MODE by directive(K2_MODE_CONFIG)
+    val SWIFT_EXPORT by valueDirective(SWIFT_EXPORT_CONFIG)
 }

@@ -1,6 +1,7 @@
 public final class com/rickclephas/kmp/nativecoroutines/idea/compiler/extensions/KmpNativeCoroutinesCompilerPluginProvider : org/jetbrains/kotlin/idea/fir/extensions/KotlinBundledFirCompilerPluginProvider {
 	public fun <init> ()V
 	public fun provideBundledPluginJar (Lcom/intellij/openapi/project/Project;Ljava/nio/file/Path;)Ljava/nio/file/Path;
+	public fun provideBundledPluginJar (Ljava/nio/file/Path;)Ljava/nio/file/Path;
 }
 
 public final class com/rickclephas/kmp/nativecoroutines/idea/compiler/extensions/KmpNativeCoroutinesStorageComponentContainerContributor : org/jetbrains/kotlin/extensions/StorageComponentContainerContributor {
@@ -22,10 +23,11 @@ public abstract interface class com/rickclephas/kmp/nativecoroutines/idea/gradle
 	public abstract fun getFlowReplayCacheSuffix ()Ljava/lang/String;
 	public abstract fun getFlowValueSuffix ()Ljava/lang/String;
 	public abstract fun getGeneratedSourceDirs ()Ljava/util/List;
-	public abstract fun getK2Mode ()Z
 	public abstract fun getStateFlowSuffix ()Ljava/lang/String;
 	public abstract fun getStateSuffix ()Ljava/lang/String;
 	public abstract fun getSuffix ()Ljava/lang/String;
+	public abstract fun getSwiftExport ()Z
+	public abstract fun getSwiftExportVersion ()J
 }
 
 public final class com/rickclephas/kmp/nativecoroutines/idea/gradle/KmpNativeCoroutinesModelBuilderService : org/jetbrains/plugins/gradle/tooling/AbstractModelBuilderService {

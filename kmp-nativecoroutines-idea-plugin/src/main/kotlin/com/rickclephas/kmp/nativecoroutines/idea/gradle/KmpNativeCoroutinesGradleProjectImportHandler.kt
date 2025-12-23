@@ -34,6 +34,7 @@ public class KmpNativeCoroutinesGradleProjectImportHandler: AbstractCompilerPlug
         model.stateFlowSuffix?.let { add(STATE_FLOW_SUFFIX, it) }
         add(EXPOSED_SEVERITY, model.exposedSeverity)
         addAll(GENERATED_SOURCE_DIR, model.generatedSourceDirs)
-        add(K2_MODE, model.k2Mode.toString())
+        val swiftExport = model.swiftExportVersion.takeIf { model.swiftExport } ?: 0
+        add(SWIFT_EXPORT, swiftExport.toString())
     }
 }

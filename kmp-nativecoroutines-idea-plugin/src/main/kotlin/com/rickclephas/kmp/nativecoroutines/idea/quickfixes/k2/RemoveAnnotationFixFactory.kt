@@ -24,6 +24,6 @@ internal class RemoveAnnotationFixFactory(
         if (diagnosticFactories.none { it.name == diagnostic.factoryName }) return@IntentionBased emptyList()
         val annotationEntry = diagnostic.psi as? KtAnnotationEntry ?: return@IntentionBased emptyList()
         val annotationName = annotationEntry.shortName?.identifierOrNullIfSpecial ?: return@IntentionBased emptyList()
-        listOf(RemoveAnnotationFix("Remove @$annotationName annotation", annotationEntry))
+        listOf(RemoveAnnotationFix("Remove @$annotationName annotation", annotationEntry).asIntention())
     }
 }

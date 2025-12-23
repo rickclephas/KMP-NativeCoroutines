@@ -11,8 +11,9 @@ import NativeCoroutinesSampleShared
 
 class NewMemoryModelIntegrationTests: XCTestCase {
     
-    private typealias IntegrationTests = NativeCoroutinesSampleShared.NewMemoryModelIntegrationTests
+    private typealias IntegrationTests = KotlinNewMemoryModelIntegrationTests
     
+    #if !NATIVE_COROUTINES_SWIFT_EXPORT
     func testReturnMutableData() {
         let integrationTests = IntegrationTests()
         let valueExpectation = expectation(description: "Waiting for value")
@@ -31,4 +32,5 @@ class NewMemoryModelIntegrationTests: XCTestCase {
         }, { _, unit in unit }, { _, unit in unit })
         wait(for: [valueExpectation], timeout: 1)
     }
+    #endif
 }

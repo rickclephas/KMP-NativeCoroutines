@@ -57,15 +57,9 @@ public class ClassicDiagnosticsTestGenerated extends AbstractClassicDiagnosticsT
   }
 
   @Test
-  @TestMetadata("implicitReturnTypeK2.kt")
-  public void testImplicitReturnTypeK2() {
-    runTest("src/testData/diagnostics/implicitReturnTypeK2.kt");
-  }
-
-  @Test
-  @TestMetadata("implicitReturnTypeKSP.kt")
-  public void testImplicitReturnTypeKSP() {
-    runTest("src/testData/diagnostics/implicitReturnTypeKSP.kt");
+  @TestMetadata("implicitReturnType.kt")
+  public void testImplicitReturnType() {
+    runTest("src/testData/diagnostics/implicitReturnType.kt");
   }
 
   @Test

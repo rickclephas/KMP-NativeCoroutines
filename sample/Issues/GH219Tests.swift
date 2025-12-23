@@ -10,12 +10,10 @@ import NativeCoroutinesSampleShared
 
 class GH219Tests: XCTestCase {
     
+    #if !NATIVE_COROUTINES_SWIFT_EXPORT
     func testReturnStateFlowValue() {
         let gh219 = GH219Kt.createGH219()
-        #if NATIVE_COROUTINES_KSP_MODE
-        XCTAssertEqual(GH219NativeKt.state(gh219), "GH219")
-        #else
         XCTAssertEqual(gh219.state, "GH219")
-        #endif
     }
+    #endif
 }

@@ -38,9 +38,13 @@ public open class KmpNativeCoroutinesExtension {
      */
     public val generatedSourceDirs: MutableList<Any> = mutableListOf("build/generated")
     /**
-     * Indicates if the plugin should be run in K2 mode.
+     * Indicates if the plugin should run in Swift export compatibility mode.
      */
-    public var k2Mode: Boolean = true
+    public var swiftExport: Boolean = false
+    /**
+     * The compatibility version of Swift export used by the plugin.
+     */
+    public val swiftExportVersion: Long = 0b11
 }
 
 public enum class ExposedSeverity {

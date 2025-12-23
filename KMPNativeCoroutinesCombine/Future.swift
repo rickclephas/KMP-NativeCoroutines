@@ -18,6 +18,17 @@ public func createFuture<Result, Failure: Error, Unit>(
         .eraseToAnyPublisher()
 }
 
+/// This function provides source compatibility during the migration to Swift export.
+///
+/// You should migrate away from this function once you have fully migrated to Swift export.
+@available(*, deprecated, message: "Kotlin Coroutines are supported by Swift export")
+public func createFuture<Result>(
+    for operation: @escaping () async throws -> Result
+) -> AnyPublisher<Result, Error> {
+    return TaskFuture(operation: operation)
+        .eraseToAnyPublisher()
+}
+
 /// Creates an `AnyPublisher` for the provided `NativeSuspend`.
 /// - Parameter nativeSuspend: The native suspend function to await.
 /// - Returns: A publisher that either finishes with a single value or fails with an error.
@@ -76,5 +87,53 @@ internal class NativeSuspendSubscription<Result, Failure, Unit, S: Subscriber>: 
         nativeSuspend = nil
         _ = nativeCancellable?()
         nativeCancellable = nil
+    }
+}
+
+internal struct TaskFuture<Result>: Publisher {
+    
+    typealias Output = Result
+    typealias Failure = Error
+    
+    let operation: () async throws -> Result
+    
+    func receive<S>(subscriber: S) where S : Subscriber, any Failure == S.Failure, Result == S.Input {
+        let subscription = TaskSubscription(operation: operation, subscriber: subscriber)
+        subscriber.receive(subscription: subscription)
+    }
+}
+
+internal class TaskSubscription<Result, S: Subscriber>: Subscription where S.Input == Result, S.Failure == Error {
+    
+    private var operation: (() async throws -> Result)?
+    private var task: Task<Void, Never>? = nil
+    private var subscriber: S?
+    
+    init(operation: @escaping () async throws -> Result, subscriber: S) {
+        self.operation = operation
+        self.subscriber = subscriber
+    }
+    
+    func request(_ demand: Subscribers.Demand) {
+        guard let operation = operation, demand >= 1 else { return }
+        self.operation = nil
+        task = Task {
+            do {
+                let result = try await operation()
+                if let subscriber = self.subscriber {
+                    _ = subscriber.receive(result)
+                    subscriber.receive(completion: .finished)
+                }
+            } catch {
+                self.subscriber?.receive(completion: .failure(error))
+            }
+        }
+    }
+    
+    func cancel() {
+        subscriber = nil
+        operation = nil
+        task?.cancel()
+        task = nil
     }
 }

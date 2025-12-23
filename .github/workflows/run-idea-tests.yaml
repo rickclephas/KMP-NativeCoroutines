@@ -37,8 +37,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        ide: [ IC, IU, AI ]
-        build: [ 251 ]
+        ide: [ IU, AI ]
+        build: [ 253 ]
     name: ${{ format('{0}-{1}', matrix.ide, matrix.build) }}
     runs-on: ubuntu-latest
     steps:
