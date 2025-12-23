@@ -16,15 +16,19 @@ class RandomLettersCombineViewModel: RandomLettersViewModel {
     @Published private(set) var result: Result<String, Error>? = nil
     @Published private(set) var isLoading: Bool = false
     
-    private let randomLettersGenerator = RandomLettersGenerator()
+    private let randomLettersGenerator = RandomLettersGenerator.shared
     private var cancellables = Set<AnyCancellable>()
     
     func loadRandomLetters(throwException: Bool) {
         isLoading = true
         result = nil
-        createFuture(for: randomLettersGenerator.getRandomLetters(throwException: throwException))
+        #if NATIVE_COROUTINES_SWIFT_EXPORT
+        let future = createFuture(for: { await self.randomLettersGenerator.getRandomLettersNative(throwException: throwException) })
+        #else
+        let future = createFuture(for: randomLettersGenerator.getRandomLetters(throwException: throwException))
+        #endif
             // Update the UI on the main thread
-            .receive(on: DispatchQueue.main)
+        future.receive(on: DispatchQueue.main)
             .sink { [weak self] completion in
                 if case let .failure(error) = completion {
                     self?.result = .failure(error)

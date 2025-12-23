@@ -22,7 +22,8 @@ public class KmpNativeCoroutinesModelBuilderService: AbstractModelBuilderService
         val exposedSeverity = extension.get<Enum<*>>("exposedSeverity")?.name ?: "WARNING"
         val generatedSourceDirs = extension.get<List<Any>>("generatedSourceDirs").orEmpty()
             .map { project.file(it).absolutePath }.distinct()
-        val k2Mode = extension.get<Boolean>("k2Mode") ?: false
+        val swiftExport = extension.get<Boolean>("swiftExport") ?: false
+        val swiftExportVersion = extension.get<Long>("swiftExportVersion") ?: 0
 
         return KmpNativeCoroutinesModelImpl(
             suffix = suffix,
@@ -32,7 +33,8 @@ public class KmpNativeCoroutinesModelBuilderService: AbstractModelBuilderService
             stateFlowSuffix = stateFlowSuffix,
             exposedSeverity = exposedSeverity,
             generatedSourceDirs = generatedSourceDirs,
-            k2Mode = k2Mode
+            swiftExport = swiftExport,
+            swiftExportVersion = swiftExportVersion,
         )
     }
 

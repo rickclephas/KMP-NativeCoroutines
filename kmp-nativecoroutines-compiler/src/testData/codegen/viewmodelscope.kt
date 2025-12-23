@@ -78,12 +78,12 @@ class MyObservableViewModel2: com.rickclephas.kmp.observableviewmodel.ViewModel(
 suspend fun MyObservableViewModel2.returnSuspendValue2(): String = "OK8"
 
 fun box() = runBoxTest {
-    await(MyAndroidXViewModel1().returnSuspendValue1Native())
-    await(MyAndroidXViewModel1().returnSuspendValue2Native())
-    await(MyObservableViewModel1().returnSuspendValue1Native())
-    await(MyObservableViewModel1().returnSuspendValue2Native())
-    await(MyAndroidXViewModel2().returnSuspendValue1Native())
-    await(MyAndroidXViewModel2().returnSuspendValue2Native())
-    await(MyObservableViewModel2().returnSuspendValue1Native())
-    await(MyObservableViewModel2().returnSuspendValue2Native())
+    await<String> { MyAndroidXViewModel1().returnSuspendValue1Native() }
+    await<String> { MyAndroidXViewModel1().returnSuspendValue2Native() }
+    await<String> { MyObservableViewModel1().returnSuspendValue1Native() }
+    await<String> { MyObservableViewModel1().returnSuspendValue2Native() }
+    await<String> { MyAndroidXViewModel2().returnSuspendValue1Native() }
+    await<String> { MyAndroidXViewModel2().returnSuspendValue2Native() }
+    await<String> { MyObservableViewModel2().returnSuspendValue1Native() }
+    await<String> { MyObservableViewModel2().returnSuspendValue2Native() }
 }

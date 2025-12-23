@@ -29,9 +29,8 @@ public class KmpNativeCoroutinesStorageComponentContainerContributor: StorageCom
         val pluginOptions = kotlinFacet.configuration.settings.compilerArguments?.pluginOptions ?: emptyArray()
         val exposedSeverity = pluginOptions.getPluginOption(EXPOSED_SEVERITY) ?: return
         val generatedSourceDirs = pluginOptions.getPluginOption(GENERATED_SOURCE_DIR)
-        val isK2Mode = pluginOptions.getPluginOption(K2_MODE) ?: return
 
-        container.useInstance(KmpNativeCoroutinesChecker(exposedSeverity, generatedSourceDirs, isK2Mode))
+        container.useInstance(KmpNativeCoroutinesChecker(exposedSeverity, generatedSourceDirs))
     }
 
     private fun TargetPlatform.hasApple(): Boolean = isNotEmpty() && any {
