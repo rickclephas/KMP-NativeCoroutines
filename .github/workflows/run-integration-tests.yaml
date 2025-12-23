@@ -18,6 +18,8 @@ jobs:
         include:
           - java: '17'
           - xcode: '16.4'
+          - xcode: '26.0'
+            swift-export: true
           - platform: iOS
             scheme: iOS App
             destination: platform=iOS Simulator,name=iPhone 16 Pro
