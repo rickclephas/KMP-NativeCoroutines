@@ -1,5 +1,6 @@
 package com.rickclephas.kmp.nativecoroutines.compiler.fir.codegen
 
+import com.rickclephas.kmp.nativecoroutines.compiler.config.SwiftExport
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.*
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.CallableSignature
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.ClassIds
@@ -27,6 +28,7 @@ internal fun FirExtension.buildStateFlowValueProperty(
     annotation: NativeCoroutinesAnnotation,
     objCName: String? = null,
     objCNameSuffix: String? = null,
+    swiftExport: Set<SwiftExport>,
 ): FirPropertySymbol? {
     val firCallableSignature = originalSymbol.getCallableSignature(session) ?: return null
     val callableSignature = firCallableSignature.signature
@@ -65,7 +67,7 @@ internal fun FirExtension.buildStateFlowValueProperty(
             typeParameters.substitutor
         )
 
-        returnTypeRef = firCallableSignature.getNativeType(callableSignature.returnType.valueType)
+        returnTypeRef = firCallableSignature.getNativeType(callableSignature.returnType.valueType, swiftExport)
             .applyIf(callableSignature.returnType.isNullable) {
                 withNullability(true, session.typeContext)
             }

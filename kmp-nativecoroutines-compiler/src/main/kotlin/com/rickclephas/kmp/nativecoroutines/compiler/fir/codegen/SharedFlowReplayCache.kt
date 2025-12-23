@@ -1,5 +1,6 @@
 package com.rickclephas.kmp.nativecoroutines.compiler.fir.codegen
 
+import com.rickclephas.kmp.nativecoroutines.compiler.config.SwiftExport
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.*
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.CallableSignature
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.ClassIds
@@ -25,7 +26,8 @@ internal fun FirExtension.buildSharedFlowReplayCacheProperty(
     callableId: CallableId,
     originalSymbol: FirPropertySymbol,
     annotation: NativeCoroutinesAnnotation,
-    objCNameSuffix: String?
+    objCNameSuffix: String?,
+    swiftExport: Set<SwiftExport>,
 ): FirPropertySymbol? {
     val firCallableSignature = originalSymbol.getCallableSignature(session) ?: return null
     val callableSignature = firCallableSignature.signature
@@ -65,7 +67,7 @@ internal fun FirExtension.buildSharedFlowReplayCacheProperty(
         )
 
         returnTypeRef = StandardClassIds.List.constructClassLikeType(
-            arrayOf(firCallableSignature.getNativeType(callableSignature.returnType.valueType)),
+            arrayOf(firCallableSignature.getNativeType(callableSignature.returnType.valueType, swiftExport)),
             callableSignature.returnType.isNullable
         ).let(typeParameters.substitutor::substituteOrSelf).toFirResolvedTypeRef()
 

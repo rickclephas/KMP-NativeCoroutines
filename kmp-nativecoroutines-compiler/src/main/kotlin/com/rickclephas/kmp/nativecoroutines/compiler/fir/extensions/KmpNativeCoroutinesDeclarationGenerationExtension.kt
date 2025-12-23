@@ -5,6 +5,7 @@ import com.rickclephas.kmp.nativecoroutines.compiler.fir.codegen.buildNativeFunc
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.codegen.buildNativeProperty
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.codegen.buildSharedFlowReplayCacheProperty
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.codegen.buildStateFlowValueProperty
+import com.rickclephas.kmp.nativecoroutines.compiler.utils.FqNames
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutines
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutinesIgnore
@@ -19,6 +20,7 @@ import org.jetbrains.kotlin.fir.FirSession
 import org.jetbrains.kotlin.fir.declarations.DirectDeclarationsAccess
 import org.jetbrains.kotlin.fir.declarations.utils.isExpect
 import org.jetbrains.kotlin.fir.extensions.*
+import org.jetbrains.kotlin.fir.extensions.predicate.DeclarationPredicate
 import org.jetbrains.kotlin.fir.extensions.predicate.LookupPredicate
 import org.jetbrains.kotlin.fir.resolve.providers.symbolProvider
 import org.jetbrains.kotlin.fir.scopes.getFunctions
@@ -41,9 +43,13 @@ internal class KmpNativeCoroutinesDeclarationGenerationExtension(
     private val lookupPredicate = LookupPredicate.AnnotatedWith(
         NativeCoroutinesAnnotation.entries.map { it.fqName }.toSet()
     )
+    private val objcExportPredicate = DeclarationPredicate.AnnotatedWith(
+        setOf(FqNames.nativeCoroutinesObjCExport)
+    )
 
     override fun FirDeclarationPredicateRegistrar.registerPredicates() {
         register(lookupPredicate)
+        register(objcExportPredicate)
     }
 
     override fun getCallableNamesForClass(
@@ -77,6 +83,7 @@ internal class KmpNativeCoroutinesDeclarationGenerationExtension(
     private val flowReplayCacheSuffix = configuration[FLOW_REPLAY_CACHE_SUFFIX]
     private val stateSuffix = configuration[STATE_SUFFIX]
     private val stateFlowSuffix = configuration[STATE_FLOW_SUFFIX]
+    private val swiftExport = configuration[SWIFT_EXPORT]
 
     private fun getCallableNamesForSymbol(symbol: FirCallableSymbol<*>): Set<Name> {
         val annotation = getAnnotationForSymbol(symbol) ?: return emptySet()
@@ -101,6 +108,7 @@ internal class KmpNativeCoroutinesDeclarationGenerationExtension(
 
     private fun getAnnotationForSymbol(symbol: FirCallableSymbol<*>): NativeCoroutinesAnnotation? {
         if (symbol.rawStatus.isOverride || symbol.isExpect) return null
+        if (swiftExport.isNotEmpty() && session.predicateBasedProvider.matches(objcExportPredicate, symbol)) return null
         return predicates.entries.singleOrNull { (_, predicate) ->
             session.predicateBasedProvider.matches(predicate, symbol)
         }?.key
@@ -115,7 +123,7 @@ internal class KmpNativeCoroutinesDeclarationGenerationExtension(
             callableId, suffix,
             setOf(NativeCoroutines, NativeCoroutinesRefined)
         ) { symbol, annotation ->
-            buildNativeFunction(callableId, symbol, annotation)
+            buildNativeFunction(callableId, symbol, annotation, swiftExport)
         }
     }
 
@@ -147,35 +155,35 @@ internal class KmpNativeCoroutinesDeclarationGenerationExtension(
             callableId, suffix,
             setOf(NativeCoroutines, NativeCoroutinesRefined)
         ) { symbol, annotation ->
-            buildNativeProperty(callableId, symbol, annotation, objCName = symbol.name.identifier)
+            buildNativeProperty(callableId, symbol, annotation, objCName = symbol.name.identifier, swiftExport = swiftExport)
         }
         generateProperties(
             context?.owner,
             callableId, flowValueSuffix,
             setOf(NativeCoroutines, NativeCoroutinesRefined)
         ) { symbol, annotation ->
-            buildStateFlowValueProperty(callableId, symbol, annotation, objCNameSuffix = flowValueSuffix)
+            buildStateFlowValueProperty(callableId, symbol, annotation, objCNameSuffix = flowValueSuffix, swiftExport = swiftExport)
         }
         generateProperties(
             context?.owner,
             callableId, flowReplayCacheSuffix,
             setOf(NativeCoroutines, NativeCoroutinesRefined)
         ) { symbol, annotation ->
-            buildSharedFlowReplayCacheProperty(callableId, symbol, annotation, flowReplayCacheSuffix)
+            buildSharedFlowReplayCacheProperty(callableId, symbol, annotation, flowReplayCacheSuffix, swiftExport)
         }
         generateProperties(
             context?.owner,
             callableId, stateSuffix,
             setOf(NativeCoroutinesState, NativeCoroutinesRefinedState)
         ) { symbol, annotation ->
-            buildStateFlowValueProperty(callableId, symbol, annotation, objCName = symbol.name.identifier)
+            buildStateFlowValueProperty(callableId, symbol, annotation, objCName = symbol.name.identifier, swiftExport = swiftExport)
         }
         generateProperties(
             context?.owner,
             callableId, stateFlowSuffix,
             setOf(NativeCoroutinesState, NativeCoroutinesRefinedState)
         ) { symbol, annotation ->
-            buildNativeProperty(callableId, symbol, annotation, objCNameSuffix = stateFlowSuffix)
+            buildNativeProperty(callableId, symbol, annotation, objCNameSuffix = stateFlowSuffix, swiftExport = swiftExport)
         }
     }
 

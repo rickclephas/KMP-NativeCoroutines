@@ -15,14 +15,18 @@ class RandomLettersAsyncViewModel: RandomLettersViewModel {
     @Published private(set) var result: Result<String, Error>? = nil
     @Published private(set) var isLoading: Bool = false
     
-    private let randomLettersGenerator = RandomLettersGenerator()
+    private let randomLettersGenerator = RandomLettersGenerator.shared
     
     func loadRandomLetters(throwException: Bool) {
         Task {
             isLoading = true
             result = nil
             do {
+                #if NATIVE_COROUTINES_SWIFT_EXPORT
+                let letters = try await asyncFunction(for: randomLettersGenerator.getRandomLettersNative(throwException: throwException))
+                #else
                 let letters = try await asyncFunction(for: randomLettersGenerator.getRandomLetters(throwException: throwException))
+                #endif
                 result = .success(letters)
             } catch {
                 result = .failure(error)

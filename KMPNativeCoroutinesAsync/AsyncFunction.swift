@@ -18,6 +18,14 @@ public func asyncFunction<Result, Failure: Error, Unit>(
     try await AsyncFunctionTask(nativeSuspend: nativeSuspend).awaitResult()
 }
 
+/// This function provides source compatibility during the migration to Swift export.
+///
+/// This is a no-op function and it can be safely removed once you have fully migrated to Swift export.
+@available(*, deprecated, message: "Kotlin Coroutines are supported by Swift export")
+public func asyncFunction<Result>(for result: Result) async -> Result {
+    return result
+}
+
 /// Wraps the `NativeSuspend` in an async function.
 /// - Parameter nativeSuspend: The native suspend function to await.
 /// - Throws: Errors thrown by the `nativeSuspend`.

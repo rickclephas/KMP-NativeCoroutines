@@ -8,7 +8,7 @@
 import XCTest
 import NativeCoroutinesSampleShared
 
-func assertJobCompleted(_ integrationTests: IntegrationTests) async {
+func assertJobCompleted(_ integrationTests: KotlinIntergrationTests) async {
     await withCheckedContinuation { (continuation: CheckedContinuation<Void, Never>) in
         // The job should complete soon after the stream finishes
         DispatchQueue.global().asyncAfter(deadline: .now() + 1) {

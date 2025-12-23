@@ -11,6 +11,7 @@ import NativeCoroutinesSampleShared
 
 class AsyncSequenceIntegrationTests: XCTestCase {
     
+    #if !NATIVE_COROUTINES_SWIFT_EXPORT
     func testValuesReceived() async {
         let integrationTests = FlowIntegrationTests()
         let sendValueCount = randomInt(min: 5, max: 20)
@@ -32,7 +33,9 @@ class AsyncSequenceIntegrationTests: XCTestCase {
         }
         await assertJobCompleted(integrationTests)
     }
+    #endif
     
+    #if !NATIVE_COROUTINES_SWIFT_EXPORT
     func testValueBackPressure() async {
         let integrationTests = FlowIntegrationTests()
         let sendValueCount: Int32 = 10
@@ -52,7 +55,9 @@ class AsyncSequenceIntegrationTests: XCTestCase {
         }
         await assertJobCompleted(integrationTests)
     }
+    #endif
     
+    #if !NATIVE_COROUTINES_SWIFT_EXPORT
     func testNilValueReceived() async {
         let integrationTests = FlowIntegrationTests()
         let sendValueCount = randomInt(min: 5, max: 20)
@@ -79,7 +84,9 @@ class AsyncSequenceIntegrationTests: XCTestCase {
         }
         await assertJobCompleted(integrationTests)
     }
+    #endif
     
+    #if !NATIVE_COROUTINES_SWIFT_EXPORT
     func testExceptionReceived() async {
         let integrationTests = FlowIntegrationTests()
         let sendValueCount = randomInt(min: 5, max: 20)
@@ -102,7 +109,9 @@ class AsyncSequenceIntegrationTests: XCTestCase {
         await assertJobCompleted(integrationTests)
         XCTAssertEqual(receivedValueCount, exceptionIndex, "Should have received all values before the exception")
     }
+    #endif
     
+    #if !NATIVE_COROUTINES_SWIFT_EXPORT
     func testErrorReceived() async {
         let integrationTests = FlowIntegrationTests()
         let sendValueCount = randomInt(min: 5, max: 20)
@@ -125,7 +134,9 @@ class AsyncSequenceIntegrationTests: XCTestCase {
         await assertJobCompleted(integrationTests)
         XCTAssertEqual(receivedValueCount, errorIndex, "Should have received all values before the error")
     }
+    #endif
     
+    #if !NATIVE_COROUTINES_SWIFT_EXPORT
     func testCancellation() async {
         let integrationTests = FlowIntegrationTests()
         let handle = Task<Void, Never> {
@@ -147,4 +158,25 @@ class AsyncSequenceIntegrationTests: XCTestCase {
         await handle.value
         await assertJobCompleted(integrationTests)
     }
+    #endif
+    
+    #if !NATIVE_COROUTINES_SWIFT_EXPORT
+    func testImplicitCancellation() async {
+        let integrationTests = FlowIntegrationTests()
+        let handle = Task<Void, Never> {
+            do {
+                let sequence = asyncSequence(for: integrationTests.getFlowWithCallback(count: 5, callbackIndex: 2, delay: 1000) {
+                    XCTFail("The callback shouldn't be called")
+                })
+                let iterator = sequence.makeAsyncIterator()
+                let _ = try await iterator.next()
+                XCTAssertEqual(integrationTests.uncompletedJobCount, 1, "There should be 1 uncompleted job")
+            } catch {
+                XCTFail("Sequence should be cancelled without an error")
+            }
+        }
+        await handle.value
+        await assertJobCompleted(integrationTests)
+    }
+    #endif
 }
