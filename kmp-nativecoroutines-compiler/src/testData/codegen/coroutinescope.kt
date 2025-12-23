@@ -80,20 +80,20 @@ class MyClass7: MyClass6() {
 }
 
 fun box() = runBoxTest {
-    await(returnSuspendValueNative())
+    await<String> { returnSuspendValueNative() }
     collect(flowPropertyNative)
-    await(MyClass1().returnSuspendValueNative())
+    await<String> { MyClass1().returnSuspendValueNative() }
     collect(MyClass2().flowPropertyNative)
-    await(MyClass3().returnOtherSuspendValueNative())
+    await<String> { MyClass3().returnOtherSuspendValueNative() }
     collect(MyClass3().flowExtProperty1Native)
     with(MyClass4()) {
-        await(MyClass1().returnExtSuspendValueNative())
+        await<String> { MyClass1().returnExtSuspendValueNative() }
     }
     collect(MyClass3().flowExtProperty2Native)
     with(MyClass5()) {
-        await(MyClass1().returnExtSuspendValueNative())
+        await<String> { MyClass1().returnExtSuspendValueNative() }
     }
-    await(MyClass6().returnSuspendValueNative())
-    await(MyClass6().returnExtSuspendValueNative())
-    await(MyClass7().returnOtherSuspendValueNative())
+    await<String> { MyClass6().returnSuspendValueNative() }
+    await<String> { MyClass6().returnExtSuspendValueNative() }
+    await<String> { MyClass7().returnOtherSuspendValueNative() }
 }

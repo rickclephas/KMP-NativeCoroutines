@@ -21,12 +21,13 @@ class ClockCombineViewModel: ClockViewModel {
         formatter.setLocalizedDateFormatFromTemplate("HH:mm:ss")
         return formatter
     }()
-    private let clock = Clock()
+    private let clock = Clock.shared
     private var cancellable: AnyCancellable? = nil {
         didSet { isMonitoring = cancellable != nil }
     }
     
     func startMonitoring() {
+        #if !NATIVE_COROUTINES_SWIFT_EXPORT
         cancellable = createPublisher(for: clock.time)
             // Convert the seconds since EPOCH to a string in the format "HH:mm:ss"
             .map { [weak self] time -> String in
@@ -41,6 +42,7 @@ class ClockCombineViewModel: ClockViewModel {
             .sink { [weak self] time in
                 self?.time = time
             }
+        #endif
     }
     
     func stopMonitoring() {

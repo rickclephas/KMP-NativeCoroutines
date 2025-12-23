@@ -27,7 +27,7 @@ internal class KmpNativeCoroutinesCompilerPluginConfigurator(
         register(Directives.FLOW_REPLAY_CACHE_SUFFIX, FLOW_REPLAY_CACHE_SUFFIX.configKey)
         register(Directives.STATE_SUFFIX, STATE_SUFFIX.configKey)
         register(Directives.STATE_FLOW_SUFFIX, STATE_FLOW_SUFFIX.configKey)
-        register(Directives.K2_MODE, K2_MODE.configKey)
+        register(Directives.SWIFT_EXPORT, SWIFT_EXPORT.configKey)
     }
 
     override fun configureCompilerConfiguration(configuration: CompilerConfiguration, module: TestModule) {

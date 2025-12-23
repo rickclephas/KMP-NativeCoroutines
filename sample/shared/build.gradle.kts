@@ -1,9 +1,8 @@
+import org.jetbrains.kotlin.gradle.plugin.mpp.apple.swiftexport.SWIFT_EXPORT_COROUTINES_SUPPORT_TURNED_ON
+
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.kotlin.plugin.serialization)
-    if (System.getenv("NATIVE_COROUTINES_KSP_MODE")?.toBooleanStrictOrNull() == true) {
-        alias(libs.plugins.ksp)
-    }
     id("com.rickclephas.kmp.nativecoroutines")
 }
 
@@ -50,8 +49,15 @@ kotlin {
             }
         }
     }
+    swiftExport {
+        moduleName = "NativeCoroutinesSampleShared"
+        flattenPackage = "com.rickclephas.kmp.nativecoroutines.sample"
+        configure {
+            settings.put(SWIFT_EXPORT_COROUTINES_SUPPORT_TURNED_ON, "true")
+        }
+    }
 }
 
 nativeCoroutines {
-    k2Mode = System.getenv("NATIVE_COROUTINES_KSP_MODE")?.toBooleanStrictOrNull() != true
+    swiftExport = System.getenv("NATIVE_COROUTINES_SWIFT_EXPORT")?.toBooleanStrictOrNull() == true
 }
