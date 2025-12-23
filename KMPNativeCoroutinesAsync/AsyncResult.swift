@@ -20,6 +20,20 @@ public func asyncResult<Output, Failure: Error, Unit>(
     }
 }
 
+/// This function provides source compatibility during the migration to Swift export.
+///
+/// Once you have fully migrated to Swift export you can replace this function with a do-catch.
+@available(*, deprecated, message: "Kotlin Coroutines are supported by Swift export")
+public func asyncResult<Output>(
+    for output: @autoclosure () async throws -> Output
+) async -> Result<Output, Error> {
+    do {
+        return .success(try await output())
+    } catch {
+        return .failure(error)
+    }
+}
+
 /// Awaits the `NativeSuspend` and returns the result.
 /// - Parameter nativeSuspend: The native suspend function to await.
 /// - Returns: The `Result` from the `nativeSuspend`.

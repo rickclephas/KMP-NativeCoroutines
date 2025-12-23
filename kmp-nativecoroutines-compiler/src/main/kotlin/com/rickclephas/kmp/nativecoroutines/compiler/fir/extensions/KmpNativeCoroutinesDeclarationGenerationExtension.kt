@@ -5,6 +5,7 @@ import com.rickclephas.kmp.nativecoroutines.compiler.fir.codegen.buildNativeFunc
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.codegen.buildNativeProperty
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.codegen.buildSharedFlowReplayCacheProperty
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.codegen.buildStateFlowValueProperty
+import com.rickclephas.kmp.nativecoroutines.compiler.utils.FqNames
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutines
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutinesIgnore
@@ -19,6 +20,7 @@ import org.jetbrains.kotlin.fir.FirSession
 import org.jetbrains.kotlin.fir.declarations.DirectDeclarationsAccess
 import org.jetbrains.kotlin.fir.declarations.utils.isExpect
 import org.jetbrains.kotlin.fir.extensions.*
+import org.jetbrains.kotlin.fir.extensions.predicate.DeclarationPredicate
 import org.jetbrains.kotlin.fir.extensions.predicate.LookupPredicate
 import org.jetbrains.kotlin.fir.resolve.providers.symbolProvider
 import org.jetbrains.kotlin.fir.scopes.getFunctions
@@ -41,9 +43,13 @@ internal class KmpNativeCoroutinesDeclarationGenerationExtension(
     private val lookupPredicate = LookupPredicate.AnnotatedWith(
         NativeCoroutinesAnnotation.entries.map { it.fqName }.toSet()
     )
+    private val objcExportPredicate = DeclarationPredicate.AnnotatedWith(
+        setOf(FqNames.nativeCoroutinesObjCExport)
+    )
 
     override fun FirDeclarationPredicateRegistrar.registerPredicates() {
         register(lookupPredicate)
+        register(objcExportPredicate)
     }
 
     override fun getCallableNamesForClass(
@@ -102,6 +108,7 @@ internal class KmpNativeCoroutinesDeclarationGenerationExtension(
 
     private fun getAnnotationForSymbol(symbol: FirCallableSymbol<*>): NativeCoroutinesAnnotation? {
         if (symbol.rawStatus.isOverride || symbol.isExpect) return null
+        if (swiftExport.isNotEmpty() && session.predicateBasedProvider.matches(objcExportPredicate, symbol)) return null
         return predicates.entries.singleOrNull { (_, predicate) ->
             session.predicateBasedProvider.matches(predicate, symbol)
         }?.key
