@@ -4,6 +4,8 @@ import org.jetbrains.kotlin.name.ClassId
 
 internal object ClassIds {
     val deprecated = ClassId.topLevel(FqNames.deprecated)
+    val exception = ClassId.topLevel(FqNames.exception)
+    val throws = ClassId.topLevel(FqNames.throws)
 
     val hidesFromObjC = ClassId.topLevel(FqNames.hidesFromObjC)
     val objCName = ClassId.topLevel(FqNames.objCName)

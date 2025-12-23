@@ -11,6 +11,7 @@ import NativeCoroutinesSampleShared
 
 class AsyncResultIntegrationTests: XCTestCase {
     
+    #if !NATIVE_COROUTINES_SWIFT_EXPORT
     func testValueReceived() async {
         let integrationTests = SuspendIntegrationTests()
         let sendValue = randomInt()
@@ -22,7 +23,9 @@ class AsyncResultIntegrationTests: XCTestCase {
         XCTAssertEqual(value.int32Value, sendValue, "Received incorrect value")
         await assertJobCompleted(integrationTests)
     }
+    #endif
     
+    #if !NATIVE_COROUTINES_SWIFT_EXPORT
     func testNilValueReceived() async {
         let integrationTests = SuspendIntegrationTests()
         let result = await asyncResult(for: integrationTests.returnNull(delay: 1000))
@@ -33,7 +36,9 @@ class AsyncResultIntegrationTests: XCTestCase {
         XCTAssertNil(value, "Value should be nil")
         await assertJobCompleted(integrationTests)
     }
+    #endif
     
+    #if !NATIVE_COROUTINES_SWIFT_EXPORT
     func testExceptionReceived() async {
         let integrationTests = SuspendIntegrationTests()
         let sendMessage = randomString()
@@ -48,7 +53,9 @@ class AsyncResultIntegrationTests: XCTestCase {
         XCTAssertTrue(exception is KotlinException, "Error doesn't contain the Kotlin exception")
         await assertJobCompleted(integrationTests)
     }
+    #endif
     
+    #if !NATIVE_COROUTINES_SWIFT_EXPORT
     func testErrorReceived() async {
         let integrationTests = SuspendIntegrationTests()
         let sendMessage = randomString()
@@ -63,7 +70,9 @@ class AsyncResultIntegrationTests: XCTestCase {
         XCTAssertTrue(exception is KotlinThrowable, "Error doesn't contain the Kotlin error")
         await assertJobCompleted(integrationTests)
     }
+    #endif
     
+    #if !NATIVE_COROUTINES_SWIFT_EXPORT
     func testCancellation() async {
         let integrationTests = SuspendIntegrationTests()
         let handle = Task {
@@ -88,7 +97,9 @@ class AsyncResultIntegrationTests: XCTestCase {
             XCTFail("Function should fail with an error")
         }
     }
+    #endif
     
+    #if !NATIVE_COROUTINES_SWIFT_EXPORT
     func testUnitReturnType() async throws {
         let integrationTests = SuspendIntegrationTests()
         let result = await asyncResult(for: integrationTests.returnUnit(delay: 100))
@@ -98,4 +109,5 @@ class AsyncResultIntegrationTests: XCTestCase {
         }
         await assertJobCompleted(integrationTests)
     }
+    #endif
 }

@@ -26,6 +26,8 @@ public abstract interface class com/rickclephas/kmp/nativecoroutines/idea/gradle
 	public abstract fun getStateFlowSuffix ()Ljava/lang/String;
 	public abstract fun getStateSuffix ()Ljava/lang/String;
 	public abstract fun getSuffix ()Ljava/lang/String;
+	public abstract fun getSwiftExport ()Z
+	public abstract fun getSwiftExportVersion ()J
 }
 
 public final class com/rickclephas/kmp/nativecoroutines/idea/gradle/KmpNativeCoroutinesModelBuilderService : org/jetbrains/plugins/gradle/tooling/AbstractModelBuilderService {

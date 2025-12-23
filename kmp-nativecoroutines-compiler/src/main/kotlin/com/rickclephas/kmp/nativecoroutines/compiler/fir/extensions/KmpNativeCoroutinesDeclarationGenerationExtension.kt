@@ -77,6 +77,7 @@ internal class KmpNativeCoroutinesDeclarationGenerationExtension(
     private val flowReplayCacheSuffix = configuration[FLOW_REPLAY_CACHE_SUFFIX]
     private val stateSuffix = configuration[STATE_SUFFIX]
     private val stateFlowSuffix = configuration[STATE_FLOW_SUFFIX]
+    private val swiftExport = configuration[SWIFT_EXPORT]
 
     private fun getCallableNamesForSymbol(symbol: FirCallableSymbol<*>): Set<Name> {
         val annotation = getAnnotationForSymbol(symbol) ?: return emptySet()
@@ -115,7 +116,7 @@ internal class KmpNativeCoroutinesDeclarationGenerationExtension(
             callableId, suffix,
             setOf(NativeCoroutines, NativeCoroutinesRefined)
         ) { symbol, annotation ->
-            buildNativeFunction(callableId, symbol, annotation)
+            buildNativeFunction(callableId, symbol, annotation, swiftExport)
         }
     }
 
@@ -147,35 +148,35 @@ internal class KmpNativeCoroutinesDeclarationGenerationExtension(
             callableId, suffix,
             setOf(NativeCoroutines, NativeCoroutinesRefined)
         ) { symbol, annotation ->
-            buildNativeProperty(callableId, symbol, annotation, objCName = symbol.name.identifier)
+            buildNativeProperty(callableId, symbol, annotation, objCName = symbol.name.identifier, swiftExport = swiftExport)
         }
         generateProperties(
             context?.owner,
             callableId, flowValueSuffix,
             setOf(NativeCoroutines, NativeCoroutinesRefined)
         ) { symbol, annotation ->
-            buildStateFlowValueProperty(callableId, symbol, annotation, objCNameSuffix = flowValueSuffix)
+            buildStateFlowValueProperty(callableId, symbol, annotation, objCNameSuffix = flowValueSuffix, swiftExport = swiftExport)
         }
         generateProperties(
             context?.owner,
             callableId, flowReplayCacheSuffix,
             setOf(NativeCoroutines, NativeCoroutinesRefined)
         ) { symbol, annotation ->
-            buildSharedFlowReplayCacheProperty(callableId, symbol, annotation, flowReplayCacheSuffix)
+            buildSharedFlowReplayCacheProperty(callableId, symbol, annotation, flowReplayCacheSuffix, swiftExport)
         }
         generateProperties(
             context?.owner,
             callableId, stateSuffix,
             setOf(NativeCoroutinesState, NativeCoroutinesRefinedState)
         ) { symbol, annotation ->
-            buildStateFlowValueProperty(callableId, symbol, annotation, objCName = symbol.name.identifier)
+            buildStateFlowValueProperty(callableId, symbol, annotation, objCName = symbol.name.identifier, swiftExport = swiftExport)
         }
         generateProperties(
             context?.owner,
             callableId, stateFlowSuffix,
             setOf(NativeCoroutinesState, NativeCoroutinesRefinedState)
         ) { symbol, annotation ->
-            buildNativeProperty(callableId, symbol, annotation, objCNameSuffix = stateFlowSuffix)
+            buildNativeProperty(callableId, symbol, annotation, objCNameSuffix = stateFlowSuffix, swiftExport = swiftExport)
         }
     }
 

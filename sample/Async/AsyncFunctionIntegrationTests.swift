@@ -11,6 +11,7 @@ import NativeCoroutinesSampleShared
 
 class AsyncFunctionIntegrationTests: XCTestCase {
     
+    #if !NATIVE_COROUTINES_SWIFT_EXPORT
     func testValueReceived() async throws {
         let integrationTests = SuspendIntegrationTests()
         let sendValue = randomInt()
@@ -18,14 +19,18 @@ class AsyncFunctionIntegrationTests: XCTestCase {
         XCTAssertEqual(value.int32Value, sendValue, "Received incorrect value")
         await assertJobCompleted(integrationTests)
     }
+    #endif
     
+    #if !NATIVE_COROUTINES_SWIFT_EXPORT
     func testNilValueReceived() async throws {
         let integrationTests = SuspendIntegrationTests()
         let value = try await asyncFunction(for: integrationTests.returnNull(delay: 1000))
         XCTAssertNil(value, "Value should be nil")
         await assertJobCompleted(integrationTests)
     }
+    #endif
     
+    #if !NATIVE_COROUTINES_SWIFT_EXPORT
     func testExceptionReceived() async {
         let integrationTests = SuspendIntegrationTests()
         let sendMessage = randomString()
@@ -40,7 +45,9 @@ class AsyncFunctionIntegrationTests: XCTestCase {
         }
         await assertJobCompleted(integrationTests)
     }
+    #endif
     
+    #if !NATIVE_COROUTINES_SWIFT_EXPORT
     func testErrorReceived() async {
         let integrationTests = SuspendIntegrationTests()
         let sendMessage = randomString()
@@ -55,7 +62,9 @@ class AsyncFunctionIntegrationTests: XCTestCase {
         }
         await assertJobCompleted(integrationTests)
     }
+    #endif
     
+    #if !NATIVE_COROUTINES_SWIFT_EXPORT
     func testCancellation() async {
         let integrationTests = SuspendIntegrationTests()
         let handle = Task {
@@ -76,10 +85,13 @@ class AsyncFunctionIntegrationTests: XCTestCase {
             XCTFail("Function should fail with an error")
         }
     }
+    #endif
     
+    #if !NATIVE_COROUTINES_SWIFT_EXPORT
     func testUnitReturnType() async throws {
         let integrationTests = SuspendIntegrationTests()
         try await asyncFunction(for: integrationTests.returnUnit(delay: 100))
         await assertJobCompleted(integrationTests)
     }
+    #endif
 }

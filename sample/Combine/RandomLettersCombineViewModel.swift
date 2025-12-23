@@ -16,12 +16,13 @@ class RandomLettersCombineViewModel: RandomLettersViewModel {
     @Published private(set) var result: Result<String, Error>? = nil
     @Published private(set) var isLoading: Bool = false
     
-    private let randomLettersGenerator = RandomLettersGenerator()
+    private let randomLettersGenerator = RandomLettersGenerator.shared
     private var cancellables = Set<AnyCancellable>()
     
     func loadRandomLetters(throwException: Bool) {
         isLoading = true
         result = nil
+        #if !NATIVE_COROUTINES_SWIFT_EXPORT
         createFuture(for: randomLettersGenerator.getRandomLetters(throwException: throwException))
             // Update the UI on the main thread
             .receive(on: DispatchQueue.main)
@@ -33,5 +34,6 @@ class RandomLettersCombineViewModel: RandomLettersViewModel {
             } receiveValue: { [weak self] word in
                 self?.result = .success(word)
             }.store(in: &cancellables)
+        #endif
     }
 }

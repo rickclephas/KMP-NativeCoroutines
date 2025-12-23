@@ -10,8 +10,10 @@ import NativeCoroutinesSampleShared
 
 class GH219Tests: XCTestCase {
     
+    #if !NATIVE_COROUTINES_SWIFT_EXPORT
     func testReturnStateFlowValue() {
         let gh219 = GH219Kt.createGH219()
         XCTAssertEqual(gh219.state, "GH219")
     }
+    #endif
 }
