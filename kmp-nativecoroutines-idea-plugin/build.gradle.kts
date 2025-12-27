@@ -25,7 +25,7 @@ kotlin {
 
 dependencies {
     intellijPlatform {
-        intellijIdeaCommunity("2025.1")
+        intellijIdea("2025.3")
 
         bundledPlugins("org.jetbrains.kotlin", "com.intellij.gradle")
 
@@ -52,8 +52,8 @@ intellijPlatform {
         """.trimIndent()
 
         ideaVersion {
-            sinceBuild = "251"
-            untilBuild = "251.*"
+            sinceBuild = "253"
+            untilBuild = "253.*"
         }
 
         vendor {
@@ -90,8 +90,7 @@ intellijPlatform {
                 recommended()
                 select {
                     types = listOf(
-                        IntelliJPlatformType.IntellijIdeaCommunity,
-                        IntelliJPlatformType.IntellijIdeaUltimate,
+                        IntelliJPlatformType.IntellijIdea,
                         IntelliJPlatformType.AndroidStudio,
                     )
                 }
@@ -100,18 +99,13 @@ intellijPlatform {
     }
 }
 
-val runIntelliJCommunity by intellijPlatformTesting.runIde.registering {
-    type = IntelliJPlatformType.IntellijIdeaCommunity
+val runIntelliJ by intellijPlatformTesting.runIde.registering {
+    type = IntelliJPlatformType.IntellijIdea
 }
 
-val runIntelliJUltimate by intellijPlatformTesting.runIde.registering {
-    type = IntelliJPlatformType.IntellijIdeaUltimate
-}
-
-val runAndroidStudio by intellijPlatformTesting.runIde.registering {
-    type = IntelliJPlatformType.AndroidStudio
-    version = "2024.3.2.11"
-}
+//val runAndroidStudio by intellijPlatformTesting.runIde.registering {
+//    type = IntelliJPlatformType.AndroidStudio
+//}
 
 tasks.withType(RunIdeTask::class) {
     maxHeapSize = "4g"

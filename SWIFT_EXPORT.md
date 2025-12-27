@@ -38,6 +38,11 @@ Throwing suspend functions aren't supported yet.
 KMP-NativeCoroutines behaves as if a `@Throws(Exception::class)` annotation was added to all suspend functions.
 Since throwing suspend functions aren't supported yet, any exception will currently cause a fatal crash.
 
+## 🚨 Cancellation isn't supported yet
+
+At the moment you can't cancel suspend functions.  
+Meaning your suspend functions will keep running until they either complete or fail.
+
 ## ⚠️ `@ObjCName` is ignored
 
 The `@ObjCName` annotation is (currently) ignored by Swift export.  
@@ -49,7 +54,22 @@ You should update your Swift code with the `Native` name suffix in order to acce
 # Enabling Swift export
 
 To enable Swift export with KMP-NativeCoroutines you start by following the
-[official documentation](https://kotlinlang.org/docs/native-swift-export.html).
+[official documentation](https://kotlinlang.org/docs/native-swift-export.html)
+and enabling the experimental coroutines support:
+```kotlin
+// build.gradle.kts
+import org.jetbrains.kotlin.gradle.plugin.mpp.apple.swiftexport.SWIFT_EXPORT_COROUTINES_SUPPORT_TURNED_ON
+
+kotlin {
+    // ...
+    swiftExport {
+        // ...
+        configure {
+            settings.put(SWIFT_EXPORT_COROUTINES_SUPPORT_TURNED_ON, "true")
+        }
+    }
+}
+```
 
 Once Swift export is enabled you'll need to activate the Swift export compatibility mode:
 ```kotlin
@@ -61,7 +81,26 @@ nativeCoroutines {
 
 # Usage
 
-At the moment you can't use any coroutines related code when Swift export is enabled.
+Only some coroutines related code can be used when Swift export is enabled.
 
-You can still use the generated properties for the `StateFlow.value` and `SharedFlow.replayCache` values,
-but keep in mind the `@ObjCName` limitation. 
+> [!NOTE]
+> You can also use the generated properties for the `StateFlow.value` and `SharedFlow.replayCache` values,
+> but keep in mind the `@ObjCName` limitation. 
+
+## Suspend functions
+
+You can use suspend functions as async functions in Swift (but keep in mind the limitations):
+```diff
+- let letters = try await asyncFunction(for: randomLettersGenerator.getRandomLetters(throwException: throwException))
++ let letters = try await asyncFunction(for: randomLettersGenerator.getRandomLettersNative(throwException: throwException))
+```
+
+> [!NOTE]
+> It's recommended to keep using the `asyncFunction(for:)` function for now.  
+> However this function is a no-op and can eventually be removed.
+
+For Combine and RxSwift there are helper functions available, e.g.:
+```diff
+- let future = createFuture(for: randomLettersGenerator.getRandomLetters(throwException: throwException))
++ let future = createFuture(for: { await self.randomLettersGenerator.getRandomLettersNative(throwException: throwException) })
+```
