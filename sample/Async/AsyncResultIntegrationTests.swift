@@ -8,6 +8,9 @@
 import XCTest
 import KMPNativeCoroutinesAsync
 import NativeCoroutinesSampleShared
+#if NATIVE_COROUTINES_SWIFT_EXPORT
+import KotlinRuntimeSupport
+#endif
 
 class AsyncResultIntegrationTests: XCTestCase {
     
@@ -46,38 +49,57 @@ class AsyncResultIntegrationTests: XCTestCase {
         await assertJobCompleted(integrationTests)
     }
     
-    #if !NATIVE_COROUTINES_SWIFT_EXPORT
-    /// Exception throwing isn't supported yet, see https://youtrack.jetbrains.com/issue/KT-80971
     func testExceptionReceived() async {
-        let integrationTests = SuspendIntegrationTests()
+        let integrationTests = KotlinSuspendIntegrationTests()
         let sendMessage = randomString()
+        #if NATIVE_COROUTINES_SWIFT_EXPORT
+        let result = await asyncResult(for: try await integrationTests.throwExceptionNative(message: sendMessage, delay: 1000))
+        #else
         let result = await asyncResult(for: integrationTests.throwException(message: sendMessage, delay: 1000))
+        #endif
         guard case let .failure(error) = result else {
             XCTFail("Function should complete with an error")
             return
         }
+        #if NATIVE_COROUTINES_SWIFT_EXPORT
+        XCTAssertTrue(error is KotlinError, "Error isn't a KotlinError")
+        let kotlinError = error as! KotlinError
+        XCTAssertEqual(kotlinError.description, sendMessage, "Error has incorrect description")
+        // TODO: Get actual Kotlin Exception
+        #else
         let nsError = error as NSError
         XCTAssertEqual(nsError.localizedDescription, sendMessage, "Error has incorrect localizedDescription")
         let exception = nsError.userInfo["KotlinException"]
         XCTAssertTrue(exception is KotlinException, "Error doesn't contain the Kotlin exception")
+        #endif
         await assertJobCompleted(integrationTests)
     }
-    #endif
     
     #if !NATIVE_COROUTINES_SWIFT_EXPORT
-    /// Exception throwing isn't supported yet, see https://youtrack.jetbrains.com/issue/KT-80971
+    /// Error throwing isn't supported yet, see https://youtrack.jetbrains.com/issue/KT-83389
     func testErrorReceived() async {
-        let integrationTests = SuspendIntegrationTests()
+        let integrationTests = KotlinSuspendIntegrationTests()
         let sendMessage = randomString()
+        #if NATIVE_COROUTINES_SWIFT_EXPORT
+        let result = await asyncResult(for: try await integrationTests.throwErrorNative(message: sendMessage, delay: 1000))
+        #else
         let result = await asyncResult(for: integrationTests.throwError(message: sendMessage, delay: 1000))
+        #endif
         guard case let .failure(error) = result else {
             XCTFail("Function should complete with an error")
             return
         }
+        #if NATIVE_COROUTINES_SWIFT_EXPORT
+        XCTAssertTrue(error is KotlinError, "Error isn't a KotlinError")
+        let kotlinError = error as! KotlinError
+        XCTAssertEqual(kotlinError.description, sendMessage, "Error has incorrect description")
+        // TODO: Get actual Kotlin Error
+        #else
         let nsError = error as NSError
         XCTAssertEqual(nsError.localizedDescription, sendMessage, "Error has incorrect localizedDescription")
         let exception = nsError.userInfo["KotlinException"]
         XCTAssertTrue(exception is KotlinThrowable, "Error doesn't contain the Kotlin error")
+        #endif
         await assertJobCompleted(integrationTests)
     }
     #endif
