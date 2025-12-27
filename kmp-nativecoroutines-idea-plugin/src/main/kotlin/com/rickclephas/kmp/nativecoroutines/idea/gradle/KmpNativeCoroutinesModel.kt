@@ -11,6 +11,8 @@ public interface KmpNativeCoroutinesModel: Serializable {
     public val stateFlowSuffix: String?
     public val exposedSeverity: String
     public val generatedSourceDirs: List<String>
+    public val swiftExport: Boolean
+    public val swiftExportVersion: Long
 }
 
 internal class KmpNativeCoroutinesModelImpl(
@@ -21,6 +23,8 @@ internal class KmpNativeCoroutinesModelImpl(
     override val stateFlowSuffix: String?,
     override val exposedSeverity: String,
     override val generatedSourceDirs: List<String>,
+    override val swiftExport: Boolean,
+    override val swiftExportVersion: Long,
 ): KmpNativeCoroutinesModel
 
 internal val KmpNativeCoroutinesModelKey = Key<KmpNativeCoroutinesModel>(KmpNativeCoroutinesModel::class.java.name, 1)

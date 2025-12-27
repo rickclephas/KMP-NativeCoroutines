@@ -1,9 +1,12 @@
 package com.rickclephas.kmp.nativecoroutines
 
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.flow.*
+import kotlin.coroutines.cancellation.CancellationException
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
+import kotlin.experimental.ExperimentalTypeInference
 
 public class BoxTest internal constructor() {
 
@@ -36,9 +39,29 @@ public class BoxTest internal constructor() {
         resultBuilder.appendLine()
     }
 
-    public suspend fun <T> await(nativeSuspend: NativeSuspend<T>) {
+    public suspend fun <T> collect(flow: Flow<T>, maxValues: Int? = null) {
+        try {
+            var valueCount = 0
+            flow.collect { value ->
+                if (valueCount != 0) resultBuilder.append(",")
+                resultBuilder.append(value)
+                if (++valueCount == maxValues) {
+                    throw CancellationException()
+                }
+            }
+        } catch (_: CancellationException) {
+            resultBuilder.append(";<cancelled>")
+        } catch (e: Throwable) {
+            resultBuilder.append(";$e")
+        }
+        resultBuilder.appendLine()
+    }
+
+    @OptIn(ExperimentalTypeInference::class)
+    @OverloadResolutionByLambdaReturnType
+    public suspend fun <T> await(nativeSuspend: () -> NativeSuspend<T>) {
         suspendCoroutine { cont ->
-            nativeSuspend({ result, _ ->
+            nativeSuspend()({ result, _ ->
                 resultBuilder.append(result)
                 cont.resume(Unit)
             }, { error, _ ->
@@ -52,12 +75,27 @@ public class BoxTest internal constructor() {
         resultBuilder.appendLine()
     }
 
+    @OptIn(ExperimentalTypeInference::class)
+    @OverloadResolutionByLambdaReturnType
+    public suspend fun <T> await(result: suspend () -> T) {
+        try {
+            resultBuilder.append(result())
+        } catch (_: CancellationException) {
+            resultBuilder.append(";<cancelled>")
+        } catch (e: Throwable) {
+            resultBuilder.append(";$e")
+        }
+        resultBuilder.appendLine()
+    }
+
+    @OptIn(ExperimentalTypeInference::class)
+    @OverloadResolutionByLambdaReturnType
     public suspend fun <T> awaitAndCollect(
-        nativeSuspendFlow: NativeSuspend<NativeFlow<T>>,
-        maxValues: Int? = null
+        maxValues: Int? = null,
+        nativeSuspend: () -> NativeSuspend<NativeFlow<T>>
     ) {
         val nativeFlow = suspendCoroutine<NativeFlow<T>> { cont ->
-            nativeSuspendFlow({ result, _ ->
+            nativeSuspend()({ result, _ ->
                 cont.resume(result)
             }, { error, _ ->
                 cont.resumeWithException(error)
@@ -66,6 +104,31 @@ public class BoxTest internal constructor() {
             })
         }
         collect(nativeFlow, maxValues)
+    }
+
+    @OptIn(ExperimentalTypeInference::class)
+    @OverloadResolutionByLambdaReturnType
+    public suspend fun <T> awaitAndCollect(
+        maxValues: Int? = null,
+        flow: suspend () -> Flow<T>
+    ) {
+        collect(flow(), maxValues)
+    }
+
+    @OptIn(ExperimentalTypeInference::class)
+    @OverloadResolutionByLambdaReturnType
+    public suspend fun <T> awaitAndCollectNull(
+        nativeSuspend: () -> NativeSuspend<NativeFlow<T>?>
+    ) {
+        await<NativeFlow<T>?>(nativeSuspend)
+    }
+
+    @OptIn(ExperimentalTypeInference::class)
+    @OverloadResolutionByLambdaReturnType
+    public suspend fun <T> awaitAndCollectNull(
+        flow: suspend () -> Flow<T>?
+    ) {
+        await<Flow<T>?>(flow)
     }
 
     public fun <T> value(value: T) {

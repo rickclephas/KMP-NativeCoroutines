@@ -8,6 +8,9 @@ internal object Names {
         val replaceWith = Name.identifier("replaceWith")
         val level = Name.identifier("level")
     }
+    object Throws {
+        val exceptionClasses = Name.identifier("exceptionClasses")
+    }
     object ObjCName {
         val name = Name.identifier("name")
         val swiftName = Name.identifier("swiftName")

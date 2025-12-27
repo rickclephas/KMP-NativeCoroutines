@@ -35,7 +35,7 @@ struct RootView: View {
                     Text("Random letters")
                 }
                 if #available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *) {
-                    NavigationLink(destination: SwiftUIAsyncTest(tests: SuspendIntegrationTests())) {
+                    NavigationLink(destination: SwiftUIAsyncTest(tests: KotlinSuspendIntegrationTests())) {
                         Text("SwiftUI test")
                     }
                 }

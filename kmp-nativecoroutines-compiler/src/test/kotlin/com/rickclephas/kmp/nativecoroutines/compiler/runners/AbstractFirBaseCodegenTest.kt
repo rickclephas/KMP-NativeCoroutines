@@ -1,5 +1,6 @@
 package com.rickclephas.kmp.nativecoroutines.compiler.runners
 
+import com.rickclephas.kmp.nativecoroutines.compiler.config.SWIFT_EXPORT
 import com.rickclephas.kmp.nativecoroutines.compiler.directives.KmpNativeCoroutinesDirectives
 import com.rickclephas.kmp.nativecoroutines.compiler.services.KmpNativeCoroutinesCompilerPluginConfigurator
 import com.rickclephas.kmp.nativecoroutines.compiler.services.KmpNativeCoroutinesJvmRuntimeClasspathProvider
@@ -78,6 +79,16 @@ abstract class AbstractFirBaseCodegenTest(
             KmpNativeCoroutinesDirectives.FLOW_REPLAY_CACHE_SUFFIX with "ReplayCache"
             KmpNativeCoroutinesDirectives.STATE_SUFFIX with "Value"
             KmpNativeCoroutinesDirectives.STATE_FLOW_SUFFIX with "Flow"
+        }
+        listOf<Long>(
+            0b01, // Kotlin 2.2.21
+            0b11, // Kotlin 2.3.0
+        ).forEach { version ->
+            forTestsMatching("swift$version/*") {
+                defaultDirectives {
+                    KmpNativeCoroutinesDirectives.SWIFT_EXPORT with SWIFT_EXPORT.parse(version.toString())
+                }
+            }
         }
         configureFirParser(firParser)
         configureFirHandlersStep {

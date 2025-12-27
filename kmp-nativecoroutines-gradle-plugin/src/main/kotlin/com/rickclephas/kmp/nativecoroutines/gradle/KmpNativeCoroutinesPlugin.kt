@@ -45,6 +45,8 @@ public class KmpNativeCoroutinesPlugin: KotlinCompilerPluginSupportPlugin {
                 extension.flowReplayCacheSuffix?.let { add(SubpluginOption("flowReplayCacheSuffix", it)) }
                 add(SubpluginOption("stateSuffix", extension.stateSuffix))
                 extension.stateFlowSuffix?.let { add(SubpluginOption("stateFlowSuffix", it)) }
+                val swiftExport = extension.swiftExportVersion.takeIf { extension.swiftExport } ?: 0
+                add(SubpluginOption("swiftExport", swiftExport.toString()))
             }
         }
     }

@@ -4,14 +4,22 @@ import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.asFirExpression
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.ClassIds
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.Names
 import org.jetbrains.kotlin.fir.declarations.toAnnotationClassId
+import org.jetbrains.kotlin.fir.declarations.utils.isCompanion
 import org.jetbrains.kotlin.fir.expressions.*
 import org.jetbrains.kotlin.fir.expressions.builder.buildAnnotation
 import org.jetbrains.kotlin.fir.expressions.builder.buildAnnotationArgumentMapping
+import org.jetbrains.kotlin.fir.expressions.builder.buildArgumentList
+import org.jetbrains.kotlin.fir.expressions.builder.buildGetClassCall
+import org.jetbrains.kotlin.fir.expressions.builder.buildResolvedQualifier
+import org.jetbrains.kotlin.fir.expressions.builder.buildVarargArgumentsExpression
 import org.jetbrains.kotlin.fir.extensions.FirExtension
+import org.jetbrains.kotlin.fir.resolve.providers.symbolProvider
+import org.jetbrains.kotlin.fir.types.ConeKotlinTypeProjectionOut
 import org.jetbrains.kotlin.fir.types.builder.buildResolvedTypeRef
 import org.jetbrains.kotlin.fir.types.constructClassLikeType
 import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.Name
+import org.jetbrains.kotlin.name.StandardClassIds
 
 internal fun FirExtension.buildAnnotationsCopy(
     originalAnnotations: List<FirAnnotation>,
@@ -42,6 +50,38 @@ internal fun buildAnnotation(
     argumentMapping = buildAnnotationArgumentMapping {
         mapping.putAll(arguments)
     }
+}
+
+internal fun FirExtension.buildThrowsAnnotation(vararg classIds: ClassId): FirAnnotation {
+    val exceptionClasses = classIds.mapNotNull { classId ->
+        session.symbolProvider.getClassLikeSymbolByClassId(classId)
+    }.map { symbol ->
+        buildResolvedQualifier {
+            coneTypeOrNull = symbol.classId.constructClassLikeType()
+            packageFqName = symbol.classId.packageFqName
+            relativeClassFqName = symbol.classId.relativeClassName
+            this.symbol = symbol
+            resolvedToCompanionObject = symbol.isCompanion
+        }
+    }.map { resolvedQualifier ->
+        buildGetClassCall {
+            coneTypeOrNull = StandardClassIds.KClass.constructClassLikeType(arrayOf(
+                resolvedQualifier.classId!!.constructClassLikeType()
+            ))
+            argumentList = buildArgumentList {
+                arguments.add(resolvedQualifier)
+            }
+        }
+    }
+    return buildAnnotation(ClassIds.throws, mapOf(
+        Names.Throws.exceptionClasses to buildVarargArgumentsExpression {
+            coneElementTypeOrNull = StandardClassIds.Throwable.constructClassLikeType()
+            coneTypeOrNull = StandardClassIds.Array.constructClassLikeType(arrayOf(
+                ConeKotlinTypeProjectionOut(coneElementTypeOrNull!!)
+            ))
+            arguments.addAll(exceptionClasses)
+        }
+    ))
 }
 
 private fun buildObjCNameAnnotationCopy(

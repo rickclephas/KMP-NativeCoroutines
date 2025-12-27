@@ -329,32 +329,86 @@ interface MyInterface22 {
 
 fun box(): String {
   return runBoxTest(action = local suspend fun BoxTest.<anonymous>() {
-    $this$runBoxTest.await<String>(nativeSuspend = returnSuspendValueNative())
-    $this$runBoxTest.await<String?>(nativeSuspend = returnNullableSuspendValueNative())
+    $this$runBoxTest.await<String>(nativeSuspend = local fun <anonymous>(): Function3<@ParameterName(name = "onResult") Function2<String, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+      return returnSuspendValueNative()
+    }
+)
+    $this$runBoxTest.await<String?>(nativeSuspend = local fun <anonymous>(): Function3<@ParameterName(name = "onResult") Function2<String?, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+      return returnNullableSuspendValueNative()
+    }
+)
     $this$runBoxTest.collect<String>(nativeFlow = returnFlowValueNative())
     $this$runBoxTest.collect<String?>(nativeFlow = returnNullableFlowValueNative())
     $this$runBoxTest.value<Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>?>(value = returnNullableFlowNative())
     $this$runBoxTest.value<Function3<@ParameterName(name = "onItem") Function3<String?, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>?>(value = returnNullableFlowAndValueNative())
     $this$runBoxTest.collect<String>(nativeFlow = returnStateFlowValueNative(), maxValues = 1)
-    $this$runBoxTest.await<String>(nativeSuspend = MyClass8().returnSuspendValueNative())
-    $this$runBoxTest.await<String>(nativeSuspend = returnSuspendParameterValueNative(value = "OK9"))
-    $this$runBoxTest.await<Int>(nativeSuspend = returnSuspendParameterValueNative(value = 9))
-    $this$runBoxTest.await<String>(nativeSuspend = returnThrowsSuspendValueNative())
-    $this$runBoxTest.await<String>(nativeSuspend = returnSuspendVarargValueNative(values = ["OK11"]))
-    $this$runBoxTest.await<String>(nativeSuspend = MyClass14<String>(value = "OK12").returnGenericSuspendValueNative())
-    $this$runBoxTest.await<String>(nativeSuspend = returnRefinedSuspendValueNative())
-    $this$runBoxTest.awaitAndCollect<String>(nativeSuspendFlow = returnSuspendFlowValueNative())
-    $this$runBoxTest.await<String>(nativeSuspend = returnGenericSuspendValueNative<String>(value = "OK15"))
-    $this$runBoxTest.await<String>(nativeSuspend = MyClass16().functionWithGenericValuesNative<CharSequence, String>(value1 = "OK", value2 = "16"))
-    $this$runBoxTest.await<String>(nativeSuspend = returnInlineSuspendValueNative<String>(value = "OK17"))
-    $this$runBoxTest.await<Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>?>(nativeSuspend = returnNullableSuspendFlowNative())
-    $this$runBoxTest.await<String>(nativeSuspend = returnExtensionValueNative(/* <this> = "OK19" */))
-    with<MyClass20, Unit>(receiver = MyClass20(), block = local fun MyClass20.<anonymous>() {
-      $this$runBoxTest.await<String>(nativeSuspend = $this$with.returnClassExtensionValueNative(/* <this> = "OK20" */))
+    $this$runBoxTest.await<String>(nativeSuspend = local fun <anonymous>(): Function3<@ParameterName(name = "onResult") Function2<String, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+      return MyClass8().returnSuspendValueNative()
     }
 )
-    $this$runBoxTest.await<String?>(nativeSuspend = MyClass21<String>().returnGenericValueNative())
-    $this$runBoxTest.await<String>(nativeSuspend = MyClass22().returnInterfaceSuspendValueNative())
+    $this$runBoxTest.await<String>(nativeSuspend = local fun <anonymous>(): Function3<@ParameterName(name = "onResult") Function2<String, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+      return returnSuspendParameterValueNative(value = "OK9")
+    }
+)
+    $this$runBoxTest.await<Int>(nativeSuspend = local fun <anonymous>(): Function3<@ParameterName(name = "onResult") Function2<Int, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+      return returnSuspendParameterValueNative(value = 9)
+    }
+)
+    $this$runBoxTest.await<String>(nativeSuspend = local fun <anonymous>(): Function3<@ParameterName(name = "onResult") Function2<String, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+      return returnThrowsSuspendValueNative()
+    }
+)
+    $this$runBoxTest.await<String>(nativeSuspend = local fun <anonymous>(): Function3<@ParameterName(name = "onResult") Function2<String, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+      return returnSuspendVarargValueNative(values = ["OK11"])
+    }
+)
+    $this$runBoxTest.await<String>(nativeSuspend = local fun <anonymous>(): Function3<@ParameterName(name = "onResult") Function2<String, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+      return MyClass14<String>(value = "OK12").returnGenericSuspendValueNative()
+    }
+)
+    $this$runBoxTest.await<String>(nativeSuspend = local fun <anonymous>(): Function3<@ParameterName(name = "onResult") Function2<String, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+      return returnRefinedSuspendValueNative()
+    }
+)
+    $this$runBoxTest.awaitAndCollect<String>(nativeSuspend = local fun <anonymous>(): Function3<@ParameterName(name = "onResult") Function2<Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+      return returnSuspendFlowValueNative()
+    }
+)
+    $this$runBoxTest.await<String>(nativeSuspend = local fun <anonymous>(): Function3<@ParameterName(name = "onResult") Function2<String, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+      return returnGenericSuspendValueNative<String>(value = "OK15")
+    }
+)
+    $this$runBoxTest.await<String>(nativeSuspend = local fun <anonymous>(): Function3<@ParameterName(name = "onResult") Function2<String, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+      return MyClass16().functionWithGenericValuesNative<CharSequence, String>(value1 = "OK", value2 = "16")
+    }
+)
+    $this$runBoxTest.await<String>(nativeSuspend = local fun <anonymous>(): Function3<@ParameterName(name = "onResult") Function2<String, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+      return returnInlineSuspendValueNative<String>(value = "OK17")
+    }
+)
+    $this$runBoxTest.awaitAndCollectNull<String>(nativeSuspend = local fun <anonymous>(): Function3<@ParameterName(name = "onResult") Function2<Function3<@ParameterName(name = "onItem") Function3<String, Function0<Unit>, Unit, Unit>, @ParameterName(name = "onComplete") Function2<Throwable?, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>>?, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+      return returnNullableSuspendFlowNative()
+    }
+)
+    $this$runBoxTest.await<String>(nativeSuspend = local fun <anonymous>(): Function3<@ParameterName(name = "onResult") Function2<String, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+      return returnExtensionValueNative(/* <this> = "OK19" */)
+    }
+)
+    with<MyClass20, Unit>(receiver = MyClass20(), block = local fun MyClass20.<anonymous>() {
+      $this$runBoxTest.await<String>(nativeSuspend = local fun <anonymous>(): Function3<@ParameterName(name = "onResult") Function2<String, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+        return $this$with.returnClassExtensionValueNative(/* <this> = "OK20" */)
+      }
+)
+    }
+)
+    $this$runBoxTest.await<String?>(nativeSuspend = local fun <anonymous>(): Function3<@ParameterName(name = "onResult") Function2<String?, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+      return MyClass21<String>().returnGenericValueNative()
+    }
+)
+    $this$runBoxTest.await<String>(nativeSuspend = local fun <anonymous>(): Function3<@ParameterName(name = "onResult") Function2<String, Unit, Unit>, @ParameterName(name = "onError") Function2<Throwable, Unit, Unit>, @ParameterName(name = "onCancelled") Function2<Throwable, Unit, Unit>, Function0<Unit>> {
+      return MyClass22().returnInterfaceSuspendValueNative()
+    }
+)
     $this$runBoxTest.collect<String>(nativeFlow = returnCustomFlowValueNative())
   }
 )

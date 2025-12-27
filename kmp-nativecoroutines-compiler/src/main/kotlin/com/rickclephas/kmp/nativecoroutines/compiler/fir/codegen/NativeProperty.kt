@@ -1,5 +1,6 @@
 package com.rickclephas.kmp.nativecoroutines.compiler.fir.codegen
 
+import com.rickclephas.kmp.nativecoroutines.compiler.config.SwiftExport
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.*
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.ClassIds
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation
@@ -24,6 +25,7 @@ internal fun FirExtension.buildNativeProperty(
     annotation: NativeCoroutinesAnnotation,
     objCName: String? = null,
     objCNameSuffix: String? = null,
+    swiftExport: Set<SwiftExport>,
 ): FirPropertySymbol? {
     val firCallableSignature = originalSymbol.getCallableSignature(session) ?: return null
     val callableSignature = firCallableSignature.signature
@@ -62,7 +64,7 @@ internal fun FirExtension.buildNativeProperty(
             typeParameters.substitutor
         )
 
-        returnTypeRef = firCallableSignature.getNativeType(callableSignature.returnType)
+        returnTypeRef = firCallableSignature.getNativeType(callableSignature.returnType, swiftExport)
             .let(typeParameters.substitutor::substituteOrSelf)
             .toFirResolvedTypeRef()
 
