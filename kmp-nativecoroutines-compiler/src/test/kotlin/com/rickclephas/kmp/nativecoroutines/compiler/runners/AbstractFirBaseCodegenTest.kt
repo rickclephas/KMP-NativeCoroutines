@@ -8,10 +8,10 @@ import org.jetbrains.kotlin.config.JvmDefaultMode
 import org.jetbrains.kotlin.test.Constructor
 import org.jetbrains.kotlin.test.FirParser
 import org.jetbrains.kotlin.test.backend.handlers.IrPrettyKotlinDumpHandler
+import org.jetbrains.kotlin.test.backend.ir.BackendCliJvmFacade
 import org.jetbrains.kotlin.test.backend.ir.IrBackendInput
 import org.jetbrains.kotlin.test.backend.ir.IrConstCheckerHandler
 import org.jetbrains.kotlin.test.backend.ir.IrDiagnosticsHandler
-import org.jetbrains.kotlin.test.backend.ir.JvmIrBackendFacade
 import org.jetbrains.kotlin.test.builders.TestConfigurationBuilder
 import org.jetbrains.kotlin.test.builders.configureFirHandlersStep
 import org.jetbrains.kotlin.test.builders.configureIrHandlersStep
@@ -24,8 +24,8 @@ import org.jetbrains.kotlin.test.directives.FirDiagnosticsDirectives.FIR_DUMP
 import org.jetbrains.kotlin.test.directives.JvmEnvironmentConfigurationDirectives.FULL_JDK
 import org.jetbrains.kotlin.test.directives.LanguageSettingsDirectives.JVM_DEFAULT_MODE
 import org.jetbrains.kotlin.test.directives.configureFirParser
-import org.jetbrains.kotlin.test.frontend.fir.Fir2IrResultsConverter
-import org.jetbrains.kotlin.test.frontend.fir.FirFrontendFacade
+import org.jetbrains.kotlin.test.frontend.fir.Fir2IrCliJvmFacade
+import org.jetbrains.kotlin.test.frontend.fir.FirCliJvmFacade
 import org.jetbrains.kotlin.test.frontend.fir.FirMetaInfoDiffSuppressor
 import org.jetbrains.kotlin.test.frontend.fir.FirOutputArtifact
 import org.jetbrains.kotlin.test.frontend.fir.handlers.FirCfgDumpHandler
@@ -58,11 +58,11 @@ abstract class AbstractFirBaseCodegenTest(
     }
 
     final override val frontendFacade: Constructor<FrontendFacade<FirOutputArtifact>>
-        get() = ::FirFrontendFacade
+        get() = ::FirCliJvmFacade
     final override val frontendToBackendConverter: Constructor<Frontend2BackendConverter<FirOutputArtifact, IrBackendInput>>
-        get() = ::Fir2IrResultsConverter
+        get() = ::Fir2IrCliJvmFacade
     final override val backendFacade: Constructor<BackendFacade<IrBackendInput, BinaryArtifacts.Jvm>>
-        get() = ::JvmIrBackendFacade
+        get() = ::BackendCliJvmFacade
 
     override fun configure(builder: TestConfigurationBuilder) = with(builder) {
         super.configure(builder)
