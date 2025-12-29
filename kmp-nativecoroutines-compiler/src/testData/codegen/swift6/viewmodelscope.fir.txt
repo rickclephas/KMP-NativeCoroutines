@@ -1,0 +1,170 @@
+FILE: androidxviewmodel.kt
+    package androidx.lifecycle
+
+    public open class ViewModel : R|kotlin/Any| {
+        public constructor(): R|androidx/lifecycle/ViewModel| {
+            super<R|kotlin/Any|>()
+        }
+
+    }
+    public final val R|androidx/lifecycle/ViewModel|.viewModelScope: R|kotlinx/coroutines/CoroutineScope|
+        public get(): R|kotlinx/coroutines/CoroutineScope| {
+            ^ R|kotlinx/coroutines/CoroutineScope|(Q|kotlinx/coroutines/Dispatchers|.R|kotlinx/coroutines/Dispatchers.Default|)
+        }
+FILE: observableviewmodel.kt
+    package com.rickclephas.kmp.observableviewmodel
+
+    public final class ViewModelScope : R|kotlin/Any| {
+        public constructor(): R|com/rickclephas/kmp/observableviewmodel/ViewModelScope| {
+            super<R|kotlin/Any|>()
+        }
+
+    }
+    public final val R|com/rickclephas/kmp/observableviewmodel/ViewModelScope|.coroutineScope: R|kotlinx/coroutines/CoroutineScope|
+        public get(): R|kotlinx/coroutines/CoroutineScope| {
+            ^ R|kotlinx/coroutines/CoroutineScope|(Q|kotlinx/coroutines/Dispatchers|.R|kotlinx/coroutines/Dispatchers.Default|)
+        }
+    public open class ViewModel : R|androidx/lifecycle/ViewModel| {
+        public constructor(): R|com/rickclephas/kmp/observableviewmodel/ViewModel| {
+            super<R|androidx/lifecycle/ViewModel|>()
+        }
+
+        public final val viewModelScope: R|com/rickclephas/kmp/observableviewmodel/ViewModelScope| = R|com/rickclephas/kmp/observableviewmodel/ViewModelScope.ViewModelScope|()
+            public get(): R|com/rickclephas/kmp/observableviewmodel/ViewModelScope|
+
+    }
+FILE: viewmodelscope.kt
+    @R|com/rickclephas/kmp/nativecoroutines/NativeCoroutineScope|() internal final val unusedCoroutineScope: R|kotlinx/coroutines/CoroutineScope| = R|kotlinx/coroutines/CoroutineScope|(Q|kotlinx/coroutines/Dispatchers|.R|kotlinx/coroutines/Dispatchers.Default|)
+        internal get(): R|kotlinx/coroutines/CoroutineScope|
+    public final class MyAndroidXViewModel1 : R|androidx/lifecycle/ViewModel| {
+        public constructor(): R|MyAndroidXViewModel1| {
+            super<R|androidx/lifecycle/ViewModel|>()
+        }
+
+        @R|com/rickclephas/kmp/nativecoroutines/NativeCoroutines|() public final suspend fun returnSuspendValue1(): R|kotlin/String| {
+            ^returnSuspendValue1 String(OK1)
+        }
+
+        @R|kotlin/native/ObjCName|(name = String(returnSuspendValue1)) public final suspend fun returnSuspendValue1Native(): R|kotlin/String| {
+            ::R|/MyAndroidXViewModel1.returnSuspendValue1|
+            R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
+        }
+
+    }
+    @R|com/rickclephas/kmp/nativecoroutines/NativeCoroutines|() public final suspend fun R|MyAndroidXViewModel1|.returnSuspendValue2(): R|kotlin/String| {
+        ^returnSuspendValue2 String(OK2)
+    }
+    public final class MyObservableViewModel1 : R|com/rickclephas/kmp/observableviewmodel/ViewModel| {
+        public constructor(): R|MyObservableViewModel1| {
+            super<R|com/rickclephas/kmp/observableviewmodel/ViewModel|>()
+        }
+
+        @R|com/rickclephas/kmp/nativecoroutines/NativeCoroutines|() public final suspend fun returnSuspendValue1(): R|kotlin/String| {
+            ^returnSuspendValue1 String(OK3)
+        }
+
+        @R|kotlin/native/ObjCName|(name = String(returnSuspendValue1)) public final suspend fun returnSuspendValue1Native(): R|kotlin/String| {
+            ::R|/MyObservableViewModel1.returnSuspendValue1|
+            R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
+        }
+
+    }
+    @R|com/rickclephas/kmp/nativecoroutines/NativeCoroutines|() public final suspend fun R|MyObservableViewModel1|.returnSuspendValue2(): R|kotlin/String| {
+        ^returnSuspendValue2 String(OK4)
+    }
+    public final class MyAndroidXViewModel2 : R|androidx/lifecycle/ViewModel| {
+        public constructor(): R|MyAndroidXViewModel2| {
+            super<R|androidx/lifecycle/ViewModel|>()
+        }
+
+        @R|com/rickclephas/kmp/nativecoroutines/NativeCoroutineScope|() internal final val customCoroutineScope: R|kotlinx/coroutines/CoroutineScope| = R|kotlinx/coroutines/CoroutineScope|(Q|kotlinx/coroutines/Dispatchers|.R|kotlinx/coroutines/Dispatchers.Default|)
+            internal get(): R|kotlinx/coroutines/CoroutineScope|
+
+        @R|com/rickclephas/kmp/nativecoroutines/NativeCoroutines|() public final suspend fun returnSuspendValue1(): R|kotlin/String| {
+            ^returnSuspendValue1 String(OK5)
+        }
+
+        @R|kotlin/native/ObjCName|(name = String(returnSuspendValue1)) public final suspend fun returnSuspendValue1Native(): R|kotlin/String| {
+            ::R|/MyAndroidXViewModel2.returnSuspendValue1|
+            R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
+        }
+
+    }
+    @R|com/rickclephas/kmp/nativecoroutines/NativeCoroutines|() public final suspend fun R|MyAndroidXViewModel2|.returnSuspendValue2(): R|kotlin/String| {
+        ^returnSuspendValue2 String(OK6)
+    }
+    public final class MyObservableViewModel2 : R|com/rickclephas/kmp/observableviewmodel/ViewModel| {
+        public constructor(): R|MyObservableViewModel2| {
+            super<R|com/rickclephas/kmp/observableviewmodel/ViewModel|>()
+        }
+
+        @R|com/rickclephas/kmp/nativecoroutines/NativeCoroutineScope|() internal final val customCoroutineScope: R|kotlinx/coroutines/CoroutineScope| = R|kotlinx/coroutines/CoroutineScope|(Q|kotlinx/coroutines/Dispatchers|.R|kotlinx/coroutines/Dispatchers.Default|)
+            internal get(): R|kotlinx/coroutines/CoroutineScope|
+
+        @R|com/rickclephas/kmp/nativecoroutines/NativeCoroutines|() public final suspend fun returnSuspendValue1(): R|kotlin/String| {
+            ^returnSuspendValue1 String(OK7)
+        }
+
+        @R|kotlin/native/ObjCName|(name = String(returnSuspendValue1)) public final suspend fun returnSuspendValue1Native(): R|kotlin/String| {
+            ::R|/MyObservableViewModel2.returnSuspendValue1|
+            R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
+        }
+
+    }
+    @R|com/rickclephas/kmp/nativecoroutines/NativeCoroutines|() public final suspend fun R|MyObservableViewModel2|.returnSuspendValue2(): R|kotlin/String| {
+        ^returnSuspendValue2 String(OK8)
+    }
+    public final fun box(): R|kotlin/String| {
+        ^box R|com/rickclephas/kmp/nativecoroutines/runBoxTest|(<L> = runBoxTest@fun R|com/rickclephas/kmp/nativecoroutines/BoxTest|.<anonymous>(): R|kotlin/Unit| <inline=NoInline>  {
+            this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.await|<R|kotlin/String|>(<L> = await@fun <anonymous>(): R|kotlin/String| <inline=NoInline>  {
+                ^ R|/MyAndroidXViewModel1.MyAndroidXViewModel1|().R|/MyAndroidXViewModel1.returnSuspendValue1Native|()
+            }
+            )
+            this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.await|<R|kotlin/String|>(<L> = await@fun <anonymous>(): R|kotlin/String| <inline=NoInline>  {
+                ^ R|/MyAndroidXViewModel1.MyAndroidXViewModel1|().R|/returnSuspendValue2Native|()
+            }
+            )
+            this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.await|<R|kotlin/String|>(<L> = await@fun <anonymous>(): R|kotlin/String| <inline=NoInline>  {
+                ^ R|/MyObservableViewModel1.MyObservableViewModel1|().R|/MyObservableViewModel1.returnSuspendValue1Native|()
+            }
+            )
+            this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.await|<R|kotlin/String|>(<L> = await@fun <anonymous>(): R|kotlin/String| <inline=NoInline>  {
+                ^ R|/MyObservableViewModel1.MyObservableViewModel1|().R|/returnSuspendValue2Native|()
+            }
+            )
+            this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.await|<R|kotlin/String|>(<L> = await@fun <anonymous>(): R|kotlin/String| <inline=NoInline>  {
+                ^ R|/MyAndroidXViewModel2.MyAndroidXViewModel2|().R|/MyAndroidXViewModel2.returnSuspendValue1Native|()
+            }
+            )
+            this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.await|<R|kotlin/String|>(<L> = await@fun <anonymous>(): R|kotlin/String| <inline=NoInline>  {
+                ^ R|/MyAndroidXViewModel2.MyAndroidXViewModel2|().R|/returnSuspendValue2Native|()
+            }
+            )
+            this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.await|<R|kotlin/String|>(<L> = await@fun <anonymous>(): R|kotlin/String| <inline=NoInline>  {
+                ^ R|/MyObservableViewModel2.MyObservableViewModel2|().R|/MyObservableViewModel2.returnSuspendValue1Native|()
+            }
+            )
+            this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.await|<R|kotlin/String|>(<L> = await@fun <anonymous>(): R|kotlin/String| <inline=NoInline>  {
+                ^ R|/MyObservableViewModel2.MyObservableViewModel2|().R|/returnSuspendValue2Native|()
+            }
+            )
+        }
+        )
+    }
+FILE: /__GENERATED__CALLABLES__.kt
+    @R|kotlin/native/ObjCName|(name = String(returnSuspendValue2)) public final suspend fun R|MyAndroidXViewModel1|.returnSuspendValue2Native(): R|kotlin/String| {
+        ::R|/returnSuspendValue2|
+        R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
+    }
+    @R|kotlin/native/ObjCName|(name = String(returnSuspendValue2)) public final suspend fun R|MyObservableViewModel1|.returnSuspendValue2Native(): R|kotlin/String| {
+        ::R|/returnSuspendValue2|
+        R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
+    }
+    @R|kotlin/native/ObjCName|(name = String(returnSuspendValue2)) public final suspend fun R|MyAndroidXViewModel2|.returnSuspendValue2Native(): R|kotlin/String| {
+        ::R|/returnSuspendValue2|
+        R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
+    }
+    @R|kotlin/native/ObjCName|(name = String(returnSuspendValue2)) public final suspend fun R|MyObservableViewModel2|.returnSuspendValue2Native(): R|kotlin/String| {
+        ::R|/returnSuspendValue2|
+        R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
+    }
