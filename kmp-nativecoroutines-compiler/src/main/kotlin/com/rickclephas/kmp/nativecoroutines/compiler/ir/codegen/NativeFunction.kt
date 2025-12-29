@@ -25,7 +25,7 @@ internal fun GeneratorContext.buildNativeFunctionBody(
         if (callableSignature.returnType is CallableSignature.Type.Flow) {
             expression = irCallAsNativeFlow(expression, coroutineScope)
         }
-        if (callableSignature.isSuspend) {
+        if (callableSignature.isSuspend && SwiftExport.SUSPEND_FUNC_SUPPORTED !in swiftExport) {
             expression = irCallNativeSuspend(expression, coroutineScope)
         }
     }
