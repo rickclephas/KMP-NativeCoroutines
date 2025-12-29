@@ -71,15 +71,15 @@ FILE: annotations.kt
         )
     }
 FILE: /__GENERATED__CALLABLES__.kt
-    @R|kotlin/Deprecated|(message = String(This is deprecated 1)) @R|kotlin/native/ObjCName|(name = String(deprecatedFunction1)) public final suspend fun deprecatedFunction1Native(): R|kotlin/String| {
+    @R|kotlin/Deprecated|(message = String(This is deprecated 1)) @R|kotlin/native/ObjCName|(name = String(deprecatedFunction1)) @R|kotlin/Throws|(exceptionClasses = vararg(<getClass>(Q|kotlin/Exception|))) public final suspend fun deprecatedFunction1Native(): R|kotlin/String| {
         ::R|/deprecatedFunction1|
         R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
     }
-    @R|kotlin/Deprecated|(message = String(This is deprecated 2), level = Q|kotlin/DeprecationLevel|.R|kotlin/DeprecationLevel.WARNING|) @R|kotlin/native/ObjCName|(name = String(deprecatedFunction2)) public final suspend fun deprecatedFunction2Native(): R|kotlin/String| {
+    @R|kotlin/Deprecated|(message = String(This is deprecated 2), level = Q|kotlin/DeprecationLevel|.R|kotlin/DeprecationLevel.WARNING|) @R|kotlin/native/ObjCName|(name = String(deprecatedFunction2)) @R|kotlin/Throws|(exceptionClasses = vararg(<getClass>(Q|kotlin/Exception|))) public final suspend fun deprecatedFunction2Native(): R|kotlin/String| {
         ::R|/deprecatedFunction2|
         R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
     }
-    @R|kotlin/Deprecated|(message = String(This is deprecated 3), level = Q|kotlin/DeprecationLevel|.R|kotlin/DeprecationLevel.ERROR|) @R|kotlin/native/ObjCName|(name = String(deprecatedFunction3)) public final suspend fun deprecatedFunction3Native(): R|kotlin/String| {
+    @R|kotlin/Deprecated|(message = String(This is deprecated 3), level = Q|kotlin/DeprecationLevel|.R|kotlin/DeprecationLevel.ERROR|) @R|kotlin/native/ObjCName|(name = String(deprecatedFunction3)) @R|kotlin/Throws|(exceptionClasses = vararg(<getClass>(Q|kotlin/Exception|))) public final suspend fun deprecatedFunction3Native(): R|kotlin/String| {
         ::R|/deprecatedFunction3|
         R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
     }
@@ -109,15 +109,15 @@ FILE: /__GENERATED__CALLABLES__.kt
             R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
         }
         @R|kotlin/Deprecated|(message = String(This is deprecated 7)) public set(value: R|kotlin/String|): R|kotlin/Unit|
-    @R|kotlin/native/ObjCName|(name = String(objCNameFunction1ObjC)) public final suspend fun objCNameFunction1Native(): R|kotlin/String| {
+    @R|kotlin/native/ObjCName|(name = String(objCNameFunction1ObjC)) @R|kotlin/Throws|(exceptionClasses = vararg(<getClass>(Q|kotlin/Exception|))) public final suspend fun objCNameFunction1Native(): R|kotlin/String| {
         ::R|/objCNameFunction1|
         R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
     }
-    @R|kotlin/native/ObjCName|(name = String(objCNameFunction2), swiftName = String(objCNameFunction2Swift)) public final suspend fun objCNameFunction2Native(): R|kotlin/String| {
+    @R|kotlin/native/ObjCName|(name = String(objCNameFunction2), swiftName = String(objCNameFunction2Swift)) @R|kotlin/Throws|(exceptionClasses = vararg(<getClass>(Q|kotlin/Exception|))) public final suspend fun objCNameFunction2Native(): R|kotlin/String| {
         ::R|/objCNameFunction2|
         R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
     }
-    @R|kotlin/native/ObjCName|(name = String(objCNameFunction3ObjC), swiftName = String(objCNameFunction3Swift)) public final suspend fun objCNameFunction3Native(): R|kotlin/String| {
+    @R|kotlin/native/ObjCName|(name = String(objCNameFunction3ObjC), swiftName = String(objCNameFunction3Swift)) @R|kotlin/Throws|(exceptionClasses = vararg(<getClass>(Q|kotlin/Exception|))) public final suspend fun objCNameFunction3Native(): R|kotlin/String| {
         ::R|/objCNameFunction3|
         R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
     }
@@ -131,7 +131,7 @@ FILE: /__GENERATED__CALLABLES__.kt
             ::R|/objCNameProperty1|
             R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
         }
-    @R|kotlin/native/ObjCName|(name = String(objCNameFunctionParameter)) public final suspend fun objCNameFunctionParameterNative(@R|kotlin/native/ObjCName|(name = String(valueObjC)) value: R|kotlin/String|): R|kotlin/String| {
+    @R|kotlin/native/ObjCName|(name = String(objCNameFunctionParameter)) @R|kotlin/Throws|(exceptionClasses = vararg(<getClass>(Q|kotlin/Exception|))) public final suspend fun objCNameFunctionParameterNative(@R|kotlin/native/ObjCName|(name = String(valueObjC)) value: R|kotlin/String|): R|kotlin/String| {
         ::R|/objCNameFunctionParameter|
         R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
     }

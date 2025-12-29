@@ -25,6 +25,7 @@ FILE fqName:<root> fileName:/__GENERATED__CALLABLES__.kt
     annotations:
       Deprecated(message = "This is deprecated 1", replaceWith = <null>, level = <null>)
       ObjCName(name = "deprecatedFunction1", swiftName = <null>, exact = <null>)
+      Throws(exceptionClasses = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_JAVA_DECLARATION_STUB CLASS name:Exception modality:OPEN visibility:public superTypes:[kotlin.Throwable]' type=kotlin.reflect.KClass<java.lang.Exception>] type=kotlin.Array<out kotlin.Throwable> varargElementType=kotlin.Throwable)
     BLOCK_BODY
       VAR IR_TEMPORARY_VARIABLE name:tmp_1 type:kotlinx.coroutines.CoroutineScope? [val]
         CONST Null type=kotlinx.coroutines.CoroutineScope? value=null
@@ -34,6 +35,7 @@ FILE fqName:<root> fileName:/__GENERATED__CALLABLES__.kt
     annotations:
       Deprecated(message = "This is deprecated 2", replaceWith = <null>, level = GET_ENUM 'ENUM_ENTRY IR_EXTERNAL_DECLARATION_STUB name:WARNING' type=kotlin.DeprecationLevel)
       ObjCName(name = "deprecatedFunction2", swiftName = <null>, exact = <null>)
+      Throws(exceptionClasses = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_JAVA_DECLARATION_STUB CLASS name:Exception modality:OPEN visibility:public superTypes:[kotlin.Throwable]' type=kotlin.reflect.KClass<java.lang.Exception>] type=kotlin.Array<out kotlin.Throwable> varargElementType=kotlin.Throwable)
     BLOCK_BODY
       VAR IR_TEMPORARY_VARIABLE name:tmp_2 type:kotlinx.coroutines.CoroutineScope? [val]
         CONST Null type=kotlinx.coroutines.CoroutineScope? value=null
@@ -43,6 +45,7 @@ FILE fqName:<root> fileName:/__GENERATED__CALLABLES__.kt
     annotations:
       Deprecated(message = "This is deprecated 3", replaceWith = <null>, level = GET_ENUM 'ENUM_ENTRY IR_EXTERNAL_DECLARATION_STUB name:ERROR' type=kotlin.DeprecationLevel)
       ObjCName(name = "deprecatedFunction3", swiftName = <null>, exact = <null>)
+      Throws(exceptionClasses = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_JAVA_DECLARATION_STUB CLASS name:Exception modality:OPEN visibility:public superTypes:[kotlin.Throwable]' type=kotlin.reflect.KClass<java.lang.Exception>] type=kotlin.Array<out kotlin.Throwable> varargElementType=kotlin.Throwable)
     BLOCK_BODY
       VAR IR_TEMPORARY_VARIABLE name:tmp_3 type:kotlinx.coroutines.CoroutineScope? [val]
         CONST Null type=kotlinx.coroutines.CoroutineScope? value=null
@@ -51,6 +54,7 @@ FILE fqName:<root> fileName:/__GENERATED__CALLABLES__.kt
   FUN GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:objCNameFunction1Native visibility:public modality:FINAL returnType:kotlin.String [suspend]
     annotations:
       ObjCName(name = "objCNameFunction1ObjC", swiftName = <null>, exact = <null>)
+      Throws(exceptionClasses = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_JAVA_DECLARATION_STUB CLASS name:Exception modality:OPEN visibility:public superTypes:[kotlin.Throwable]' type=kotlin.reflect.KClass<java.lang.Exception>] type=kotlin.Array<out kotlin.Throwable> varargElementType=kotlin.Throwable)
     BLOCK_BODY
       VAR IR_TEMPORARY_VARIABLE name:tmp_4 type:kotlinx.coroutines.CoroutineScope? [val]
         CONST Null type=kotlinx.coroutines.CoroutineScope? value=null
@@ -59,6 +63,7 @@ FILE fqName:<root> fileName:/__GENERATED__CALLABLES__.kt
   FUN GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:objCNameFunction2Native visibility:public modality:FINAL returnType:kotlin.String [suspend]
     annotations:
       ObjCName(name = "objCNameFunction2", swiftName = "objCNameFunction2Swift", exact = <null>)
+      Throws(exceptionClasses = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_JAVA_DECLARATION_STUB CLASS name:Exception modality:OPEN visibility:public superTypes:[kotlin.Throwable]' type=kotlin.reflect.KClass<java.lang.Exception>] type=kotlin.Array<out kotlin.Throwable> varargElementType=kotlin.Throwable)
     BLOCK_BODY
       VAR IR_TEMPORARY_VARIABLE name:tmp_5 type:kotlinx.coroutines.CoroutineScope? [val]
         CONST Null type=kotlinx.coroutines.CoroutineScope? value=null
@@ -67,6 +72,7 @@ FILE fqName:<root> fileName:/__GENERATED__CALLABLES__.kt
   FUN GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:objCNameFunction3Native visibility:public modality:FINAL returnType:kotlin.String [suspend]
     annotations:
       ObjCName(name = "objCNameFunction3ObjC", swiftName = "objCNameFunction3Swift", exact = <null>)
+      Throws(exceptionClasses = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_JAVA_DECLARATION_STUB CLASS name:Exception modality:OPEN visibility:public superTypes:[kotlin.Throwable]' type=kotlin.reflect.KClass<java.lang.Exception>] type=kotlin.Array<out kotlin.Throwable> varargElementType=kotlin.Throwable)
     BLOCK_BODY
       VAR IR_TEMPORARY_VARIABLE name:tmp_6 type:kotlinx.coroutines.CoroutineScope? [val]
         CONST Null type=kotlinx.coroutines.CoroutineScope? value=null
@@ -78,6 +84,7 @@ FILE fqName:<root> fileName:/__GENERATED__CALLABLES__.kt
         ObjCName(name = "valueObjC", swiftName = <null>, exact = <null>)
     annotations:
       ObjCName(name = "objCNameFunctionParameter", swiftName = <null>, exact = <null>)
+      Throws(exceptionClasses = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_JAVA_DECLARATION_STUB CLASS name:Exception modality:OPEN visibility:public superTypes:[kotlin.Throwable]' type=kotlin.reflect.KClass<java.lang.Exception>] type=kotlin.Array<out kotlin.Throwable> varargElementType=kotlin.Throwable)
     BLOCK_BODY
       VAR IR_TEMPORARY_VARIABLE name:tmp_7 type:kotlinx.coroutines.CoroutineScope? [val]
         CONST Null type=kotlinx.coroutines.CoroutineScope? value=null

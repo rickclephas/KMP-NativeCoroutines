@@ -29,7 +29,7 @@ FILE: functions.kt
             ^returnSuspendValue String(OK8)
         }
 
-        @R|kotlin/native/ObjCName|(name = String(returnSuspendValue)) public final suspend fun returnSuspendValueNative(): R|kotlin/String| {
+        @R|kotlin/native/ObjCName|(name = String(returnSuspendValue)) @R|kotlin/Throws|(exceptionClasses = vararg(<getClass>(Q|kotlin/Exception|))) public final suspend fun returnSuspendValueNative(): R|kotlin/String| {
             ::R|/MyClass8.returnSuspendValue|
             R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
         }
@@ -59,7 +59,7 @@ FILE: functions.kt
             ^returnGenericSuspendValue this@R|/MyClass14|.R|/MyClass14.value|
         }
 
-        @R|kotlin/native/ObjCName|(name = String(returnGenericSuspendValue)) public final suspend fun returnGenericSuspendValueNative(): R|T| {
+        @R|kotlin/native/ObjCName|(name = String(returnGenericSuspendValue)) @R|kotlin/Throws|(exceptionClasses = vararg(<getClass>(Q|kotlin/Exception|))) public final suspend fun returnGenericSuspendValueNative(): R|T| {
             ::R|/MyClass14.returnGenericSuspendValue|
             R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
         }
@@ -83,7 +83,7 @@ FILE: functions.kt
             ^functionWithGenericValues R|<local>/value1|.R|kotlin/toString|().R|kotlin/String.plus|(R|<local>/value2|.R|kotlin/toString|())
         }
 
-        @R|kotlin/native/ObjCName|(name = String(functionWithGenericValues)) public final suspend fun <T1, T2 : R|T1|> functionWithGenericValuesNative(value1: R|T1|, value2: R|T2|): R|kotlin/String| {
+        @R|kotlin/native/ObjCName|(name = String(functionWithGenericValues)) @R|kotlin/Throws|(exceptionClasses = vararg(<getClass>(Q|kotlin/Exception|))) public final suspend fun <T1, T2 : R|T1|> functionWithGenericValuesNative(value1: R|T1|, value2: R|T2|): R|kotlin/String| {
             ::R|/MyClass16.functionWithGenericValues|
             R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
         }
@@ -107,7 +107,7 @@ FILE: functions.kt
             ^returnClassExtensionValue this@R|/MyClass20.returnClassExtensionValue|
         }
 
-        @R|kotlin/native/ObjCName|(name = String(returnClassExtensionValue)) public final suspend fun R|kotlin/String|.returnClassExtensionValueNative(): R|kotlin/String| {
+        @R|kotlin/native/ObjCName|(name = String(returnClassExtensionValue)) @R|kotlin/Throws|(exceptionClasses = vararg(<getClass>(Q|kotlin/Exception|))) public final suspend fun R|kotlin/String|.returnClassExtensionValueNative(): R|kotlin/String| {
             ::R|/MyClass20.returnClassExtensionValue|
             R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
         }
@@ -122,7 +122,7 @@ FILE: functions.kt
             ^returnGenericValue Null(null)
         }
 
-        @R|kotlin/native/ObjCName|(name = String(returnGenericValue)) public final suspend fun returnGenericValueNative(): R|T?| {
+        @R|kotlin/native/ObjCName|(name = String(returnGenericValue)) @R|kotlin/Throws|(exceptionClasses = vararg(<getClass>(Q|kotlin/Exception|))) public final suspend fun returnGenericValueNative(): R|T?| {
             ::R|/MyClass21.returnGenericValue|
             R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
         }
@@ -131,7 +131,7 @@ FILE: functions.kt
     public abstract interface MyInterface22 : R|kotlin/Any| {
         @R|com/rickclephas/kmp/nativecoroutines/NativeCoroutines|() public abstract suspend fun returnInterfaceSuspendValue(): R|kotlin/String|
 
-        @R|kotlin/native/ObjCName|(name = String(returnInterfaceSuspendValue)) public open suspend fun returnInterfaceSuspendValueNative(): R|kotlin/String| {
+        @R|kotlin/native/ObjCName|(name = String(returnInterfaceSuspendValue)) @R|kotlin/Throws|(exceptionClasses = vararg(<getClass>(Q|kotlin/Exception|))) public open suspend fun returnInterfaceSuspendValueNative(): R|kotlin/String| {
             ::R|/MyInterface22.returnInterfaceSuspendValue|
             R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
         }
@@ -245,11 +245,11 @@ FILE: functions.kt
         )
     }
 FILE: /__GENERATED__CALLABLES__.kt
-    @R|kotlin/native/ObjCName|(name = String(returnSuspendValue)) public final suspend fun returnSuspendValueNative(): R|kotlin/String| {
+    @R|kotlin/native/ObjCName|(name = String(returnSuspendValue)) @R|kotlin/Throws|(exceptionClasses = vararg(<getClass>(Q|kotlin/Exception|))) public final suspend fun returnSuspendValueNative(): R|kotlin/String| {
         ::R|/returnSuspendValue|
         R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
     }
-    @R|kotlin/native/ObjCName|(name = String(returnNullableSuspendValue)) public final suspend fun returnNullableSuspendValueNative(): R|kotlin/String?| {
+    @R|kotlin/native/ObjCName|(name = String(returnNullableSuspendValue)) @R|kotlin/Throws|(exceptionClasses = vararg(<getClass>(Q|kotlin/Exception|))) public final suspend fun returnNullableSuspendValueNative(): R|kotlin/String?| {
         ::R|/returnNullableSuspendValue|
         R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
     }
@@ -273,35 +273,35 @@ FILE: /__GENERATED__CALLABLES__.kt
         ::R|/returnStateFlowValue|
         R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
     }
-    @R|kotlin/native/ObjCName|(name = String(returnSuspendParameterValue)) public final suspend fun returnSuspendParameterValueNative(value: R|kotlin/String|): R|kotlin/String| {
+    @R|kotlin/native/ObjCName|(name = String(returnSuspendParameterValue)) @R|kotlin/Throws|(exceptionClasses = vararg(<getClass>(Q|kotlin/Exception|))) public final suspend fun returnSuspendParameterValueNative(value: R|kotlin/String|): R|kotlin/String| {
         ::R|/returnSuspendParameterValue|
         R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
     }
-    @R|kotlin/native/ObjCName|(name = String(returnSuspendParameterValue)) public final suspend fun returnSuspendParameterValueNative(value: R|kotlin/Int|): R|kotlin/Int| {
+    @R|kotlin/native/ObjCName|(name = String(returnSuspendParameterValue)) @R|kotlin/Throws|(exceptionClasses = vararg(<getClass>(Q|kotlin/Exception|))) public final suspend fun returnSuspendParameterValueNative(value: R|kotlin/Int|): R|kotlin/Int| {
         ::R|/returnSuspendParameterValue|
         R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
     }
-    @R|kotlin/native/ObjCName|(name = String(returnThrowsSuspendValue)) public final suspend fun returnThrowsSuspendValueNative(): R|kotlin/String| {
+    @R|kotlin/native/ObjCName|(name = String(returnThrowsSuspendValue)) @R|kotlin/Throws|(exceptionClasses = vararg(<getClass>(Q|kotlin/Exception|))) public final suspend fun returnThrowsSuspendValueNative(): R|kotlin/String| {
         ::R|/returnThrowsSuspendValue|
         R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
     }
-    @R|kotlin/native/ObjCName|(name = String(returnSuspendVarargValue)) public final suspend fun returnSuspendVarargValueNative(vararg values: R|kotlin/Array<out kotlin/String>|): R|kotlin/String| {
+    @R|kotlin/native/ObjCName|(name = String(returnSuspendVarargValue)) @R|kotlin/Throws|(exceptionClasses = vararg(<getClass>(Q|kotlin/Exception|))) public final suspend fun returnSuspendVarargValueNative(vararg values: R|kotlin/Array<out kotlin/String>|): R|kotlin/String| {
         ::R|/returnSuspendVarargValue|
         R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
     }
-    @R|kotlin/native/ObjCName|(name = String(returnGenericSuspendValue)) public final suspend fun <T> returnGenericSuspendValueNative(value: R|T|): R|T| {
+    @R|kotlin/native/ObjCName|(name = String(returnGenericSuspendValue)) @R|kotlin/Throws|(exceptionClasses = vararg(<getClass>(Q|kotlin/Exception|))) public final suspend fun <T> returnGenericSuspendValueNative(value: R|T|): R|T| {
         ::R|/returnGenericSuspendValue|
         R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
     }
-    @R|kotlin/native/ObjCName|(name = String(returnInlineSuspendValue)) public final inline suspend fun <reified T> returnInlineSuspendValueNative(value: R|T|): R|T| {
+    @R|kotlin/native/ObjCName|(name = String(returnInlineSuspendValue)) @R|kotlin/Throws|(exceptionClasses = vararg(<getClass>(Q|kotlin/Exception|))) public final inline suspend fun <reified T> returnInlineSuspendValueNative(value: R|T|): R|T| {
         ::R|/returnInlineSuspendValue|
         R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
     }
-    @R|kotlin/native/ObjCName|(name = String(returnNullableSuspendFlow)) public final suspend fun returnNullableSuspendFlowNative(): R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>?| {
+    @R|kotlin/native/ObjCName|(name = String(returnNullableSuspendFlow)) @R|kotlin/Throws|(exceptionClasses = vararg(<getClass>(Q|kotlin/Exception|))) public final suspend fun returnNullableSuspendFlowNative(): R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>?| {
         ::R|/returnNullableSuspendFlow|
         R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
     }
-    @R|kotlin/native/ObjCName|(name = String(returnExtensionValue)) public final suspend fun R|kotlin/String|.returnExtensionValueNative(): R|kotlin/String| {
+    @R|kotlin/native/ObjCName|(name = String(returnExtensionValue)) @R|kotlin/Throws|(exceptionClasses = vararg(<getClass>(Q|kotlin/Exception|))) public final suspend fun R|kotlin/String|.returnExtensionValueNative(): R|kotlin/String| {
         ::R|/returnExtensionValue|
         R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
     }
@@ -309,11 +309,11 @@ FILE: /__GENERATED__CALLABLES__.kt
         ::R|/returnCustomFlowValue|
         R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
     }
-    @R|kotlin/native/ObjCName|(name = String(returnRefinedSuspendValue)) @R|kotlin/native/ShouldRefineInSwift|() public final suspend fun returnRefinedSuspendValueNative(): R|kotlin/String| {
+    @R|kotlin/native/ObjCName|(name = String(returnRefinedSuspendValue)) @R|kotlin/native/ShouldRefineInSwift|() @R|kotlin/Throws|(exceptionClasses = vararg(<getClass>(Q|kotlin/Exception|))) public final suspend fun returnRefinedSuspendValueNative(): R|kotlin/String| {
         ::R|/returnRefinedSuspendValue|
         R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
     }
-    @R|kotlin/native/ObjCName|(name = String(returnSuspendFlowValue)) @R|kotlin/native/ShouldRefineInSwift|() public final suspend fun returnSuspendFlowValueNative(): R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>| {
+    @R|kotlin/native/ObjCName|(name = String(returnSuspendFlowValue)) @R|kotlin/native/ShouldRefineInSwift|() @R|kotlin/Throws|(exceptionClasses = vararg(<getClass>(Q|kotlin/Exception|))) public final suspend fun returnSuspendFlowValueNative(): R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>| {
         ::R|/returnSuspendFlowValue|
         R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
     }

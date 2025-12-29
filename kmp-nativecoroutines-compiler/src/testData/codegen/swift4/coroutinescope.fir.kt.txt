@@ -1,12 +1,14 @@
 // FILE: __GENERATED__CALLABLES__.kt
 
 @ObjCName(name = "returnExtSuspendValue")
+@Throws(exceptionClasses = [Exception::class])
 suspend fun MyClass6.returnExtSuspendValueNative(): String {
   val tmp_0: CoroutineScope? = null
   return returnExtSuspendValue(/* <this> = <this> */)
 }
 
 @ObjCName(name = "returnSuspendValue")
+@Throws(exceptionClasses = [Exception::class])
 suspend fun returnSuspendValueNative(): String {
   val tmp_1: CoroutineScope = <get-coroutineScope1>()
   return returnSuspendValue()
@@ -61,6 +63,7 @@ open class MyClass1 {
   }
 
   @ObjCName(name = "returnSuspendValue")
+  @Throws(exceptionClasses = [Exception::class])
   suspend fun returnSuspendValueNative(): String {
     val tmp_0: CoroutineScope = <this>.<get-coroutineScope2>()
     return <this>.returnSuspendValue()
@@ -108,6 +111,7 @@ class MyClass3 : MyClass1 {
   }
 
   @ObjCName(name = "returnOtherSuspendValue")
+  @Throws(exceptionClasses = [Exception::class])
   suspend fun returnOtherSuspendValueNative(): String {
     val tmp_3: CoroutineScope = <this>.<get-coroutineScope3>()
     return <this>.returnOtherSuspendValue()
@@ -128,6 +132,7 @@ class MyClass4 {
   }
 
   @ObjCName(name = "returnExtSuspendValue")
+  @Throws(exceptionClasses = [Exception::class])
   suspend fun MyClass1.returnExtSuspendValueNative(): String {
     val tmp_4: CoroutineScope = <get-coroutineScope1>()
     return <this>.returnExtSuspendValue(/* <this> = <this> */)
@@ -161,6 +166,7 @@ class MyClass5 {
   }
 
   @ObjCName(name = "returnExtSuspendValue")
+  @Throws(exceptionClasses = [Exception::class])
   suspend fun MyClass1.returnExtSuspendValueNative(): String {
     val tmp_0: CoroutineScope? = null
     return <this>.returnExtSuspendValue(/* <this> = <this> */)
@@ -186,6 +192,7 @@ open class MyClass6 {
   }
 
   @ObjCName(name = "returnSuspendValue")
+  @Throws(exceptionClasses = [Exception::class])
   suspend fun returnSuspendValueNative(): String {
     val tmp_1: CoroutineScope = <this>.<get-coroutineScope4>()
     return <this>.returnSuspendValue()
@@ -206,6 +213,7 @@ class MyClass7 : MyClass6 {
   }
 
   @ObjCName(name = "returnOtherSuspendValue")
+  @Throws(exceptionClasses = [Exception::class])
   suspend fun returnOtherSuspendValueNative(): String {
     val tmp_2: CoroutineScope? = null
     return <this>.returnOtherSuspendValue()

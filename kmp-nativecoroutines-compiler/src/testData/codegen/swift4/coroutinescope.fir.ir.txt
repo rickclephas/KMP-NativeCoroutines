@@ -3,6 +3,7 @@ FILE fqName:<root> fileName:/__GENERATED__CALLABLES__.kt
     VALUE_PARAMETER kind:ExtensionReceiver name:<this> index:0 type:<root>.MyClass6
     annotations:
       ObjCName(name = "returnExtSuspendValue", swiftName = <null>, exact = <null>)
+      Throws(exceptionClasses = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_JAVA_DECLARATION_STUB CLASS name:Exception modality:OPEN visibility:public superTypes:[kotlin.Throwable]' type=kotlin.reflect.KClass<java.lang.Exception>] type=kotlin.Array<out kotlin.Throwable> varargElementType=kotlin.Throwable)
     BLOCK_BODY
       VAR IR_TEMPORARY_VARIABLE name:tmp_0 type:kotlinx.coroutines.CoroutineScope? [val]
         CONST Null type=kotlinx.coroutines.CoroutineScope? value=null
@@ -12,6 +13,7 @@ FILE fqName:<root> fileName:/__GENERATED__CALLABLES__.kt
   FUN GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:returnSuspendValueNative visibility:public modality:FINAL returnType:kotlin.String [suspend]
     annotations:
       ObjCName(name = "returnSuspendValue", swiftName = <null>, exact = <null>)
+      Throws(exceptionClasses = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_JAVA_DECLARATION_STUB CLASS name:Exception modality:OPEN visibility:public superTypes:[kotlin.Throwable]' type=kotlin.reflect.KClass<java.lang.Exception>] type=kotlin.Array<out kotlin.Throwable> varargElementType=kotlin.Throwable)
     BLOCK_BODY
       VAR IR_TEMPORARY_VARIABLE name:tmp_1 type:kotlinx.coroutines.CoroutineScope [val]
         CALL 'internal final fun <get-coroutineScope1> (): kotlinx.coroutines.CoroutineScope declared in <root>' type=kotlinx.coroutines.CoroutineScope origin=null
@@ -132,6 +134,7 @@ FILE fqName:<root> fileName:/coroutinescope1.kt
       VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.MyClass1
       annotations:
         ObjCName(name = "returnSuspendValue", swiftName = <null>, exact = <null>)
+        Throws(exceptionClasses = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_JAVA_DECLARATION_STUB CLASS name:Exception modality:OPEN visibility:public superTypes:[kotlin.Throwable]' type=kotlin.reflect.KClass<java.lang.Exception>] type=kotlin.Array<out kotlin.Throwable> varargElementType=kotlin.Throwable)
       BLOCK_BODY
         VAR IR_TEMPORARY_VARIABLE name:tmp_0 type:kotlinx.coroutines.CoroutineScope [val]
           CALL 'protected final fun <get-coroutineScope2> (): kotlinx.coroutines.CoroutineScope declared in <root>.MyClass1' type=kotlinx.coroutines.CoroutineScope origin=null
@@ -186,6 +189,7 @@ FILE fqName:<root> fileName:/coroutinescope1.kt
       VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.MyClass1
       annotations:
         ObjCName(name = "returnSuspendValue", swiftName = <null>, exact = <null>)
+        Throws(exceptionClasses = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_JAVA_DECLARATION_STUB CLASS name:Exception modality:OPEN visibility:public superTypes:[kotlin.Throwable]' type=kotlin.reflect.KClass<java.lang.Exception>] type=kotlin.Array<out kotlin.Throwable> varargElementType=kotlin.Throwable)
       overridden:
         public final fun returnSuspendValueNative (): kotlin.String declared in <root>.MyClass1
     FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN returnType:kotlin.String [fake_override]
@@ -260,6 +264,7 @@ FILE fqName:<root> fileName:/coroutinescope1.kt
       VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.MyClass1
       annotations:
         ObjCName(name = "returnSuspendValue", swiftName = <null>, exact = <null>)
+        Throws(exceptionClasses = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_JAVA_DECLARATION_STUB CLASS name:Exception modality:OPEN visibility:public superTypes:[kotlin.Throwable]' type=kotlin.reflect.KClass<java.lang.Exception>] type=kotlin.Array<out kotlin.Throwable> varargElementType=kotlin.Throwable)
       overridden:
         public final fun returnSuspendValueNative (): kotlin.String declared in <root>.MyClass1
     FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN returnType:kotlin.String [fake_override]
@@ -270,6 +275,7 @@ FILE fqName:<root> fileName:/coroutinescope1.kt
       VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.MyClass3
       annotations:
         ObjCName(name = "returnOtherSuspendValue", swiftName = <null>, exact = <null>)
+        Throws(exceptionClasses = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_JAVA_DECLARATION_STUB CLASS name:Exception modality:OPEN visibility:public superTypes:[kotlin.Throwable]' type=kotlin.reflect.KClass<java.lang.Exception>] type=kotlin.Array<out kotlin.Throwable> varargElementType=kotlin.Throwable)
       BLOCK_BODY
         VAR IR_TEMPORARY_VARIABLE name:tmp_3 type:kotlinx.coroutines.CoroutineScope [val]
           CALL 'internal final fun <get-coroutineScope3> (): kotlinx.coroutines.CoroutineScope declared in <root>.MyClass3' type=kotlinx.coroutines.CoroutineScope origin=null
@@ -318,6 +324,7 @@ FILE fqName:<root> fileName:/coroutinescope1.kt
       VALUE_PARAMETER kind:ExtensionReceiver name:<this> index:1 type:<root>.MyClass1
       annotations:
         ObjCName(name = "returnExtSuspendValue", swiftName = <null>, exact = <null>)
+        Throws(exceptionClasses = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_JAVA_DECLARATION_STUB CLASS name:Exception modality:OPEN visibility:public superTypes:[kotlin.Throwable]' type=kotlin.reflect.KClass<java.lang.Exception>] type=kotlin.Array<out kotlin.Throwable> varargElementType=kotlin.Throwable)
       BLOCK_BODY
         VAR IR_TEMPORARY_VARIABLE name:tmp_4 type:kotlinx.coroutines.CoroutineScope [val]
           CALL 'internal final fun <get-coroutineScope1> (): kotlinx.coroutines.CoroutineScope declared in <root>' type=kotlinx.coroutines.CoroutineScope origin=null
@@ -375,6 +382,7 @@ FILE fqName:<root> fileName:/coroutinescope2.kt
       VALUE_PARAMETER kind:ExtensionReceiver name:<this> index:1 type:<root>.MyClass1
       annotations:
         ObjCName(name = "returnExtSuspendValue", swiftName = <null>, exact = <null>)
+        Throws(exceptionClasses = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_JAVA_DECLARATION_STUB CLASS name:Exception modality:OPEN visibility:public superTypes:[kotlin.Throwable]' type=kotlin.reflect.KClass<java.lang.Exception>] type=kotlin.Array<out kotlin.Throwable> varargElementType=kotlin.Throwable)
       BLOCK_BODY
         VAR IR_TEMPORARY_VARIABLE name:tmp_0 type:kotlinx.coroutines.CoroutineScope? [val]
           CONST Null type=kotlinx.coroutines.CoroutineScope? value=null
@@ -428,6 +436,7 @@ FILE fqName:<root> fileName:/coroutinescope2.kt
       VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.MyClass6
       annotations:
         ObjCName(name = "returnSuspendValue", swiftName = <null>, exact = <null>)
+        Throws(exceptionClasses = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_JAVA_DECLARATION_STUB CLASS name:Exception modality:OPEN visibility:public superTypes:[kotlin.Throwable]' type=kotlin.reflect.KClass<java.lang.Exception>] type=kotlin.Array<out kotlin.Throwable> varargElementType=kotlin.Throwable)
       BLOCK_BODY
         VAR IR_TEMPORARY_VARIABLE name:tmp_1 type:kotlinx.coroutines.CoroutineScope [val]
           CALL 'private final fun <get-coroutineScope4> (): kotlinx.coroutines.CoroutineScope declared in <root>.MyClass6' type=kotlinx.coroutines.CoroutineScope origin=null
@@ -467,6 +476,7 @@ FILE fqName:<root> fileName:/coroutinescope2.kt
       VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.MyClass6
       annotations:
         ObjCName(name = "returnSuspendValue", swiftName = <null>, exact = <null>)
+        Throws(exceptionClasses = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_JAVA_DECLARATION_STUB CLASS name:Exception modality:OPEN visibility:public superTypes:[kotlin.Throwable]' type=kotlin.reflect.KClass<java.lang.Exception>] type=kotlin.Array<out kotlin.Throwable> varargElementType=kotlin.Throwable)
       overridden:
         public final fun returnSuspendValueNative (): kotlin.String declared in <root>.MyClass6
     FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN returnType:kotlin.String [fake_override]
@@ -477,6 +487,7 @@ FILE fqName:<root> fileName:/coroutinescope2.kt
       VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.MyClass7
       annotations:
         ObjCName(name = "returnOtherSuspendValue", swiftName = <null>, exact = <null>)
+        Throws(exceptionClasses = [CLASS_REFERENCE 'CLASS IR_EXTERNAL_JAVA_DECLARATION_STUB CLASS name:Exception modality:OPEN visibility:public superTypes:[kotlin.Throwable]' type=kotlin.reflect.KClass<java.lang.Exception>] type=kotlin.Array<out kotlin.Throwable> varargElementType=kotlin.Throwable)
       BLOCK_BODY
         VAR IR_TEMPORARY_VARIABLE name:tmp_2 type:kotlinx.coroutines.CoroutineScope? [val]
           CONST Null type=kotlinx.coroutines.CoroutineScope? value=null

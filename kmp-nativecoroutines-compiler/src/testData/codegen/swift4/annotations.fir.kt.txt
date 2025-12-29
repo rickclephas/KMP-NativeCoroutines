@@ -13,6 +13,7 @@ var deprecatedProperty4Value: String
 
 @Deprecated(message = "This is deprecated 1")
 @ObjCName(name = "deprecatedFunction1")
+@Throws(exceptionClasses = [Exception::class])
 suspend fun deprecatedFunction1Native(): String {
   val tmp_1: CoroutineScope? = null
   return deprecatedFunction1()
@@ -20,6 +21,7 @@ suspend fun deprecatedFunction1Native(): String {
 
 @Deprecated(message = "This is deprecated 2", level = DeprecationLevel.WARNING)
 @ObjCName(name = "deprecatedFunction2")
+@Throws(exceptionClasses = [Exception::class])
 suspend fun deprecatedFunction2Native(): String {
   val tmp_2: CoroutineScope? = null
   return deprecatedFunction2()
@@ -27,30 +29,35 @@ suspend fun deprecatedFunction2Native(): String {
 
 @Deprecated(message = "This is deprecated 3", level = DeprecationLevel.ERROR)
 @ObjCName(name = "deprecatedFunction3")
+@Throws(exceptionClasses = [Exception::class])
 suspend fun deprecatedFunction3Native(): String {
   val tmp_3: CoroutineScope? = null
   return deprecatedFunction3()
 }
 
 @ObjCName(name = "objCNameFunction1ObjC")
+@Throws(exceptionClasses = [Exception::class])
 suspend fun objCNameFunction1Native(): String {
   val tmp_4: CoroutineScope? = null
   return objCNameFunction1()
 }
 
 @ObjCName(name = "objCNameFunction2", swiftName = "objCNameFunction2Swift")
+@Throws(exceptionClasses = [Exception::class])
 suspend fun objCNameFunction2Native(): String {
   val tmp_5: CoroutineScope? = null
   return objCNameFunction2()
 }
 
 @ObjCName(name = "objCNameFunction3ObjC", swiftName = "objCNameFunction3Swift")
+@Throws(exceptionClasses = [Exception::class])
 suspend fun objCNameFunction3Native(): String {
   val tmp_6: CoroutineScope? = null
   return objCNameFunction3()
 }
 
 @ObjCName(name = "objCNameFunctionParameter")
+@Throws(exceptionClasses = [Exception::class])
 suspend fun objCNameFunctionParameterNative(@ObjCName(name = "valueObjC") value: String): String {
   val tmp_7: CoroutineScope? = null
   return objCNameFunctionParameter(value = value)

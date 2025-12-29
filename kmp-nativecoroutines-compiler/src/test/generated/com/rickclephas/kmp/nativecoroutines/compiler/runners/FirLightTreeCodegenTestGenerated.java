@@ -132,42 +132,42 @@ public class FirLightTreeCodegenTestGenerated extends AbstractFirLightTreeCodege
   }
 
   @Nested
-  @TestMetadata("src/testData/codegen/swift6")
+  @TestMetadata("src/testData/codegen/swift4")
   @TestDataPath("$PROJECT_ROOT")
-  public class Swift6 {
+  public class Swift4 {
     @Test
-    public void testAllFilesPresentInSwift6() {
-      KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("src/testData/codegen/swift6"), Pattern.compile("^(.+)\\.kt$"), Pattern.compile("^(.+)\\.fir\\.kt$"), true);
+    public void testAllFilesPresentInSwift4() {
+      KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("src/testData/codegen/swift4"), Pattern.compile("^(.+)\\.kt$"), Pattern.compile("^(.+)\\.fir\\.kt$"), true);
     }
 
     @Test
     @TestMetadata("annotations.kt")
     public void testAnnotations() {
-      runTest("src/testData/codegen/swift6/annotations.kt");
+      runTest("src/testData/codegen/swift4/annotations.kt");
     }
 
     @Test
     @TestMetadata("coroutinescope.kt")
     public void testCoroutinescope() {
-      runTest("src/testData/codegen/swift6/coroutinescope.kt");
+      runTest("src/testData/codegen/swift4/coroutinescope.kt");
     }
 
     @Test
     @TestMetadata("functions.kt")
     public void testFunctions() {
-      runTest("src/testData/codegen/swift6/functions.kt");
+      runTest("src/testData/codegen/swift4/functions.kt");
     }
 
     @Test
     @TestMetadata("properties.kt")
     public void testProperties() {
-      runTest("src/testData/codegen/swift6/properties.kt");
+      runTest("src/testData/codegen/swift4/properties.kt");
     }
 
     @Test
     @TestMetadata("viewmodelscope.kt")
     public void testViewmodelscope() {
-      runTest("src/testData/codegen/swift6/viewmodelscope.kt");
+      runTest("src/testData/codegen/swift4/viewmodelscope.kt");
     }
   }
 }
