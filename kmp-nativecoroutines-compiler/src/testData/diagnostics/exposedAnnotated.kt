@@ -83,6 +83,12 @@ interface TestHiddenFromObjCInterface {
     suspend fun suspendInterfaceFunction(): Int
 
     val flowInterfaceProperty: Flow<Int>
+
+    interface Nested {
+        suspend fun suspendInterfaceFunction(): Int
+
+        val flowInterfaceProperty: Flow<Int>
+    }
 }
 
 class TestClassA: TestInterface {
@@ -135,4 +141,10 @@ class TestHiddenFromObjCClass {
     suspend fun suspendFunction(): Int = 0
 
     val flowProperty: Flow<Int> get() = throw Throwable()
+
+    class Nested {
+        suspend fun suspendInterfaceFunction(): Int = 0
+
+        val flowInterfaceProperty: Flow<Int> = throw Throwable()
+    }
 }
