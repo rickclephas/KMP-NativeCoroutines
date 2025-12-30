@@ -57,6 +57,7 @@ import org.jetbrains.kotlin.fir.analysis.checkers.unsubstitutedScope
 import org.jetbrains.kotlin.fir.declarations.*
 import org.jetbrains.kotlin.fir.declarations.utils.*
 import org.jetbrains.kotlin.fir.expressions.FirAnnotation
+import org.jetbrains.kotlin.fir.resolve.getContainingClass
 import org.jetbrains.kotlin.fir.scopes.getDirectOverriddenMembersWithBaseScopeSafe
 import org.jetbrains.kotlin.fir.symbols.impl.FirClassSymbol
 import java.nio.file.Path
@@ -100,7 +101,9 @@ internal class FirKmpNativeCoroutinesDeclarationChecker(
         }
 
         val annotations = declaration.getNativeCoroutinesAnnotations(context.session)
-        val isRefined = declaration.isRefined(context.session)
+        val isRefined =
+            declaration.isRefined(context.session) || (declaration.getContainingClass()?.isRefined(context.session)
+                ?: false)
         val isPublic = declaration.effectiveVisibility.publicApi
         val isOverride = declaration.isOverride
         val isActual = declaration.isActual
