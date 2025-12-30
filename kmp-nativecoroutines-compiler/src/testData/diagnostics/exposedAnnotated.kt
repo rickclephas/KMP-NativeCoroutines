@@ -84,10 +84,10 @@ interface TestHiddenFromObjCInterface {
 
     val flowInterfaceProperty: Flow<Int>
 
-    interface Nested {
-        suspend fun suspendInterfaceFunction(): Int
+    class Nested {
+        suspend fun suspendInterfaceFunction(): Int = 0
 
-        val flowInterfaceProperty: Flow<Int>
+        val flowInterfaceProperty: Flow<Int> = throw Throwable()
     }
 }
 
@@ -135,16 +135,18 @@ actual class TestClassC {
     actual val flowProperty: Flow<Int> get() = throw Throwable()
 }
 
-@OptIn(ExperimentalObjCRefinement::class)
-@HiddenFromObjC
-class TestHiddenFromObjCClass {
-    suspend fun suspendFunction(): Int = 0
+class TestClassD {
+    @NativeCoroutines
+    suspend fun suspendInterfaceFunction(): Int = 0
 
-    val flowProperty: Flow<Int> get() = throw Throwable()
+    @NativeCoroutines
+    val flowInterfaceProperty: Flow<Int> = throw Throwable()
 
-    class Nested {
-        suspend fun suspendInterfaceFunction(): Int = 0
+    @OptIn(ExperimentalObjCRefinement::class)
+    @HiddenFromObjC
+    interface Nested {
+        suspend fun suspendInterfaceFunction(): Int
 
-        val flowInterfaceProperty: Flow<Int> = throw Throwable()
+        val flowInterfaceProperty: Flow<Int>
     }
 }
