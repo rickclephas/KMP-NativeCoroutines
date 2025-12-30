@@ -95,7 +95,7 @@ public class KmpNativeCoroutinesChecker(
         if (descriptor !is CallableMemberDescriptor) return
         if (descriptor !is SimpleFunctionDescriptor && descriptor !is PropertyDescriptor) return
         val annotations = descriptor.getNativeCoroutinesAnnotations()
-        val isRefined = descriptor.isRefined || descriptor.containingDeclaration.isRefined
+        val isRefined = descriptor.isRefined
         val isPublic = descriptor.isEffectivelyPublicApi
         val isOverride = descriptor.overriddenDescriptors.isNotEmpty()
         val isActual = descriptor.isActual
