@@ -15,7 +15,7 @@ internal fun FirCallableDeclaration.isRefined(session: FirSession): Boolean =
 
 internal fun FirClassLikeDeclaration.isRefined(session: FirSession): Boolean =
     annotations.any { annotation ->
-        !annotation.isNativeCoroutinesAnnotation(session) && annotation.isRefinementAnnotation(session)
+        annotation.isRefinementAnnotation(session)
     }
 
 private fun FirAnnotation.isRefinementAnnotation(session: FirSession): Boolean =
