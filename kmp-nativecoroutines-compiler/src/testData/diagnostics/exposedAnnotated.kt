@@ -77,6 +77,14 @@ interface TestInterface {
     val flowInterfaceProperty: Flow<Int>
 }
 
+@OptIn(ExperimentalObjCRefinement::class)
+@HiddenFromObjC
+interface TestHiddenFromObjCInterface {
+    suspend fun suspendInterfaceFunction(): Int
+
+    val flowInterfaceProperty: Flow<Int>
+}
+
 class TestClassA: TestInterface {
 
     override suspend fun suspendInterfaceFunction(): Int = 0
