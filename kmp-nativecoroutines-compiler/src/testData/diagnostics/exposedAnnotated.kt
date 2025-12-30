@@ -128,3 +128,11 @@ actual class TestClassC {
 
     actual val flowProperty: Flow<Int> get() = throw Throwable()
 }
+
+@OptIn(ExperimentalObjCRefinement::class)
+@HiddenFromObjC
+class TestHiddenFromObjCClass {
+    suspend fun suspendFunction(): Int = 0
+
+    val flowProperty: Flow<Int> get() = throw Throwable()
+}
