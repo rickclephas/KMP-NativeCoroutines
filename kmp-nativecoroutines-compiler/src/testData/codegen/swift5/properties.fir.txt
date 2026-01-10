@@ -91,14 +91,14 @@ FILE: properties.kt
         @R|com/rickclephas/kmp/nativecoroutines/NativeCoroutines|() public final val genericStateFlow: R|kotlinx/coroutines/flow/StateFlow<T>| = R|kotlinx/coroutines/flow/MutableStateFlow|<R|T|>(this@R|/MyGenericClass2|.R|/MyGenericClass2.value|)
             public get(): R|kotlinx/coroutines/flow/StateFlow<T>|
 
-        @R|kotlin/native/ObjCName|(name = String(genericFlow)) public final val genericFlowNative: R|com/rickclephas/kmp/nativecoroutines/NativeFlow<T>|
-            public get(): R|com/rickclephas/kmp/nativecoroutines/NativeFlow<T>| {
+        @R|kotlin/native/ObjCName|(name = String(genericFlow)) public final val genericFlowNative: R|kotlinx/coroutines/flow/Flow<T>|
+            public get(): R|kotlinx/coroutines/flow/Flow<T>| {
                 ::R|/MyGenericClass2.genericFlow|
                 R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
             }
 
-        @R|kotlin/native/ObjCName|(name = String(genericSharedFlow)) public final val genericSharedFlowNative: R|com/rickclephas/kmp/nativecoroutines/NativeFlow<T>|
-            public get(): R|com/rickclephas/kmp/nativecoroutines/NativeFlow<T>| {
+        @R|kotlin/native/ObjCName|(name = String(genericSharedFlow)) public final val genericSharedFlowNative: R|kotlinx/coroutines/flow/SharedFlow<T>|
+            public get(): R|kotlinx/coroutines/flow/SharedFlow<T>| {
                 ::R|/MyGenericClass2.genericSharedFlow|
                 R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
             }
@@ -109,8 +109,8 @@ FILE: properties.kt
                 R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
             }
 
-        @R|kotlin/native/ObjCName|(name = String(genericStateFlow)) public final val genericStateFlowNative: R|com/rickclephas/kmp/nativecoroutines/NativeFlow<T>|
-            public get(): R|com/rickclephas/kmp/nativecoroutines/NativeFlow<T>| {
+        @R|kotlin/native/ObjCName|(name = String(genericStateFlow)) public final val genericStateFlowNative: R|kotlinx/coroutines/flow/StateFlow<T>|
+            public get(): R|kotlinx/coroutines/flow/StateFlow<T>| {
                 ::R|/MyGenericClass2.genericStateFlow|
                 R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
             }
@@ -151,8 +151,8 @@ FILE: properties.kt
         @R|com/rickclephas/kmp/nativecoroutines/NativeCoroutines|() public abstract val interfaceFlowValue: R|kotlinx/coroutines/flow/Flow<kotlin/String>|
             public get(): R|kotlinx/coroutines/flow/Flow<kotlin/String>|
 
-        @R|kotlin/native/ObjCName|(name = String(interfaceFlowValue)) public open val interfaceFlowValueNative: R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>|
-            public get(): R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>| {
+        @R|kotlin/native/ObjCName|(name = String(interfaceFlowValue)) public open val interfaceFlowValueNative: R|kotlinx/coroutines/flow/Flow<kotlin/String>|
+            public get(): R|kotlinx/coroutines/flow/Flow<kotlin/String>| {
                 ::R|/MyInterface28.interfaceFlowValue|
                 R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
             }
@@ -193,25 +193,25 @@ FILE: properties.kt
             this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.values|<R|kotlin/String?|>(R|/nullableSharedFlowValueReplayCache|)
             this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.collect|<R|kotlin/String?|>(R|/nullableStateFlowValueNative|, Int(1))
             this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.value|<R|kotlin/String?|>(R|/nullableStateFlowValueValue|)
-            this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.value|<R|{com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>?=} (((kotlin/String, () -> kotlin/Unit, kotlin/Unit) -> kotlin/Unit, ({com/rickclephas/kmp/nativecoroutines/NativeError?=} kotlin/Throwable?, kotlin/Unit) -> kotlin/Unit, ({com/rickclephas/kmp/nativecoroutines/NativeError=} kotlin/Throwable, kotlin/Unit) -> kotlin/Unit) -> () -> kotlin/Unit)?|>(R|/nullableFlowNative|)
-            this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.value|<R|{com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>?=} (((kotlin/String, () -> kotlin/Unit, kotlin/Unit) -> kotlin/Unit, ({com/rickclephas/kmp/nativecoroutines/NativeError?=} kotlin/Throwable?, kotlin/Unit) -> kotlin/Unit, ({com/rickclephas/kmp/nativecoroutines/NativeError=} kotlin/Throwable, kotlin/Unit) -> kotlin/Unit) -> () -> kotlin/Unit)?|>(R|/nullableSharedFlowNative|)
+            this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.value|<R|kotlinx/coroutines/flow/Flow<kotlin/String>?|>(R|/nullableFlowNative|)
+            this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.value|<R|kotlinx/coroutines/flow/SharedFlow<kotlin/String>?|>(R|/nullableSharedFlowNative|)
             this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.value|<R|kotlin/collections/List<kotlin/String>?|>(R|/nullableSharedFlowReplayCache|)
-            this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.value|<R|{com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>?=} (((kotlin/String, () -> kotlin/Unit, kotlin/Unit) -> kotlin/Unit, ({com/rickclephas/kmp/nativecoroutines/NativeError?=} kotlin/Throwable?, kotlin/Unit) -> kotlin/Unit, ({com/rickclephas/kmp/nativecoroutines/NativeError=} kotlin/Throwable, kotlin/Unit) -> kotlin/Unit) -> () -> kotlin/Unit)?|>(R|/nullableStateFlowPropertyNative|)
+            this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.value|<R|kotlinx/coroutines/flow/StateFlow<kotlin/String>?|>(R|/nullableStateFlowPropertyNative|)
             this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.value|<R|kotlin/String?|>(R|/nullableStateFlowPropertyValue|)
-            this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.value|<R|{com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String?>?=} (((kotlin/String?, () -> kotlin/Unit, kotlin/Unit) -> kotlin/Unit, ({com/rickclephas/kmp/nativecoroutines/NativeError?=} kotlin/Throwable?, kotlin/Unit) -> kotlin/Unit, ({com/rickclephas/kmp/nativecoroutines/NativeError=} kotlin/Throwable, kotlin/Unit) -> kotlin/Unit) -> () -> kotlin/Unit)?|>(R|/nullableFlowAndValueNative|)
-            this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.value|<R|{com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String?>?=} (((kotlin/String?, () -> kotlin/Unit, kotlin/Unit) -> kotlin/Unit, ({com/rickclephas/kmp/nativecoroutines/NativeError?=} kotlin/Throwable?, kotlin/Unit) -> kotlin/Unit, ({com/rickclephas/kmp/nativecoroutines/NativeError=} kotlin/Throwable, kotlin/Unit) -> kotlin/Unit) -> () -> kotlin/Unit)?|>(R|/nullableSharedFlowAndValueNative|)
+            this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.value|<R|kotlinx/coroutines/flow/Flow<kotlin/String?>?|>(R|/nullableFlowAndValueNative|)
+            this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.value|<R|kotlinx/coroutines/flow/SharedFlow<kotlin/String?>?|>(R|/nullableSharedFlowAndValueNative|)
             this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.value|<R|kotlin/collections/List<kotlin/String?>?|>(R|/nullableSharedFlowAndValueReplayCache|)
-            this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.value|<R|{com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String?>?=} (((kotlin/String?, () -> kotlin/Unit, kotlin/Unit) -> kotlin/Unit, ({com/rickclephas/kmp/nativecoroutines/NativeError?=} kotlin/Throwable?, kotlin/Unit) -> kotlin/Unit, ({com/rickclephas/kmp/nativecoroutines/NativeError=} kotlin/Throwable, kotlin/Unit) -> kotlin/Unit) -> () -> kotlin/Unit)?|>(R|/nullableStateFlowAndValueNative|)
+            this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.value|<R|kotlinx/coroutines/flow/StateFlow<kotlin/String?>?|>(R|/nullableStateFlowAndValueNative|)
             this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.value|<R|kotlin/String?|>(R|/nullableStateFlowAndValueValue|)
             this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.collect|<R|kotlin/String|>(R|/MyGenericClass1.MyGenericClass1|<R|kotlin/String|>(String(OK14)).R|/genericFlowNative|<R|kotlin/String|>)
             this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.collect|<R|kotlin/String|>(R|/MyGenericClass1.MyGenericClass1|<R|kotlin/String|>(String(OK15)).R|/genericSharedFlowNative|<R|kotlin/String|>, Int(1))
             this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.values|<R|kotlin/String|>(R|/MyGenericClass1.MyGenericClass1|<R|kotlin/String|>(String(OK15)).R|/genericSharedFlowReplayCache|<R|kotlin/String|>)
             this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.collect|<R|kotlin/String|>(R|/MyGenericClass1.MyGenericClass1|<R|kotlin/String|>(String(OK16)).R|/genericStateFlowNative|<R|kotlin/String|>, Int(1))
             this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.value|<R|kotlin/String|>(R|/MyGenericClass1.MyGenericClass1|<R|kotlin/String|>(String(OK16)).R|/genericStateFlowValue|<R|kotlin/String|>)
-            this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.collect|<R|kotlin/String|>(R|/MyGenericClass2.MyGenericClass2|<R|kotlin/String|>(String(OK17)).R|SubstitutionOverride</MyGenericClass2.genericFlowNative: R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>|>|)
-            this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.collect|<R|kotlin/String|>(R|/MyGenericClass2.MyGenericClass2|<R|kotlin/String|>(String(OK18)).R|SubstitutionOverride</MyGenericClass2.genericSharedFlowNative: R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>|>|, Int(1))
+            this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.collect|<R|kotlin/String|>(R|/MyGenericClass2.MyGenericClass2|<R|kotlin/String|>(String(OK17)).R|SubstitutionOverride</MyGenericClass2.genericFlowNative: R|kotlinx/coroutines/flow/Flow<kotlin/String>|>|)
+            this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.collect|<R|kotlin/String|>(R|/MyGenericClass2.MyGenericClass2|<R|kotlin/String|>(String(OK18)).R|SubstitutionOverride</MyGenericClass2.genericSharedFlowNative: R|kotlinx/coroutines/flow/SharedFlow<kotlin/String>|>|, Int(1))
             this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.values|<R|kotlin/String|>(R|/MyGenericClass2.MyGenericClass2|<R|kotlin/String|>(String(OK18)).R|SubstitutionOverride</MyGenericClass2.genericSharedFlowReplayCache: R|kotlin/collections/List<kotlin/String>|>|)
-            this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.collect|<R|kotlin/String|>(R|/MyGenericClass2.MyGenericClass2|<R|kotlin/String|>(String(OK19)).R|SubstitutionOverride</MyGenericClass2.genericStateFlowNative: R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>|>|, Int(1))
+            this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.collect|<R|kotlin/String|>(R|/MyGenericClass2.MyGenericClass2|<R|kotlin/String|>(String(OK19)).R|SubstitutionOverride</MyGenericClass2.genericStateFlowNative: R|kotlinx/coroutines/flow/StateFlow<kotlin/String>|>|, Int(1))
             this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.value|<R|kotlin/String|>(R|/MyGenericClass2.MyGenericClass2|<R|kotlin/String|>(String(OK19)).R|SubstitutionOverride</MyGenericClass2.genericStateFlowValue: R|kotlin/String|>|)
             this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.collect|<R|kotlin/String|>(String(OK20).R|/extensionFlowNative|)
             this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.collect|<R|kotlin/String|>(String(OK21).R|/extensionSharedFlowNative|, Int(1))
@@ -233,13 +233,13 @@ FILE: properties.kt
         )
     }
 FILE: /__GENERATED__CALLABLES__.kt
-    @R|kotlin/native/ObjCName|(name = String(topLevelFlow)) public final val topLevelFlowNative: R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>|
-        public get(): R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>| {
+    @R|kotlin/native/ObjCName|(name = String(topLevelFlow)) public final val topLevelFlowNative: R|kotlinx/coroutines/flow/Flow<kotlin/String>|
+        public get(): R|kotlinx/coroutines/flow/Flow<kotlin/String>| {
             ::R|/topLevelFlow|
             R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
         }
-    @R|kotlin/native/ObjCName|(name = String(topLevelSharedFlow)) public final val topLevelSharedFlowNative: R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>|
-        public get(): R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>| {
+    @R|kotlin/native/ObjCName|(name = String(topLevelSharedFlow)) public final val topLevelSharedFlowNative: R|kotlinx/coroutines/flow/SharedFlow<kotlin/String>|
+        public get(): R|kotlinx/coroutines/flow/SharedFlow<kotlin/String>| {
             ::R|/topLevelSharedFlow|
             R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
         }
@@ -248,8 +248,8 @@ FILE: /__GENERATED__CALLABLES__.kt
             ::R|/topLevelSharedFlow|
             R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
         }
-    @R|kotlin/native/ObjCName|(name = String(topLevelStateFlow)) public final val topLevelStateFlowNative: R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>|
-        public get(): R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>| {
+    @R|kotlin/native/ObjCName|(name = String(topLevelStateFlow)) public final val topLevelStateFlowNative: R|kotlinx/coroutines/flow/StateFlow<kotlin/String>|
+        public get(): R|kotlinx/coroutines/flow/StateFlow<kotlin/String>| {
             ::R|/topLevelStateFlow|
             R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
         }
@@ -258,8 +258,8 @@ FILE: /__GENERATED__CALLABLES__.kt
             ::R|/topLevelStateFlow|
             R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
         }
-    @R|kotlin/native/ObjCName|(name = String(topLevelMutableStateFlow)) public final val topLevelMutableStateFlowNative: R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>|
-        public get(): R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>| {
+    @R|kotlin/native/ObjCName|(name = String(topLevelMutableStateFlow)) public final val topLevelMutableStateFlowNative: R|kotlinx/coroutines/flow/MutableStateFlow<kotlin/String>|
+        public get(): R|kotlinx/coroutines/flow/MutableStateFlow<kotlin/String>| {
             ::R|/topLevelMutableStateFlow|
             R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
         }
@@ -269,13 +269,13 @@ FILE: /__GENERATED__CALLABLES__.kt
             R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
         }
         public set(value: R|kotlin/String|): R|kotlin/Unit|
-    @R|kotlin/native/ObjCName|(name = String(nullableFlowValue)) public final val nullableFlowValueNative: R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String?>|
-        public get(): R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String?>| {
+    @R|kotlin/native/ObjCName|(name = String(nullableFlowValue)) public final val nullableFlowValueNative: R|kotlinx/coroutines/flow/Flow<kotlin/String?>|
+        public get(): R|kotlinx/coroutines/flow/Flow<kotlin/String?>| {
             ::R|/nullableFlowValue|
             R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
         }
-    @R|kotlin/native/ObjCName|(name = String(nullableSharedFlowValue)) public final val nullableSharedFlowValueNative: R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String?>|
-        public get(): R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String?>| {
+    @R|kotlin/native/ObjCName|(name = String(nullableSharedFlowValue)) public final val nullableSharedFlowValueNative: R|kotlinx/coroutines/flow/SharedFlow<kotlin/String?>|
+        public get(): R|kotlinx/coroutines/flow/SharedFlow<kotlin/String?>| {
             ::R|/nullableSharedFlowValue|
             R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
         }
@@ -284,8 +284,8 @@ FILE: /__GENERATED__CALLABLES__.kt
             ::R|/nullableSharedFlowValue|
             R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
         }
-    @R|kotlin/native/ObjCName|(name = String(nullableStateFlowValue)) public final val nullableStateFlowValueNative: R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String?>|
-        public get(): R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String?>| {
+    @R|kotlin/native/ObjCName|(name = String(nullableStateFlowValue)) public final val nullableStateFlowValueNative: R|kotlinx/coroutines/flow/StateFlow<kotlin/String?>|
+        public get(): R|kotlinx/coroutines/flow/StateFlow<kotlin/String?>| {
             ::R|/nullableStateFlowValue|
             R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
         }
@@ -294,13 +294,13 @@ FILE: /__GENERATED__CALLABLES__.kt
             ::R|/nullableStateFlowValue|
             R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
         }
-    @R|kotlin/native/ObjCName|(name = String(nullableFlow)) public final val nullableFlowNative: R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>?|
-        public get(): R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>?| {
+    @R|kotlin/native/ObjCName|(name = String(nullableFlow)) public final val nullableFlowNative: R|kotlinx/coroutines/flow/Flow<kotlin/String>?|
+        public get(): R|kotlinx/coroutines/flow/Flow<kotlin/String>?| {
             ::R|/nullableFlow|
             R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
         }
-    @R|kotlin/native/ObjCName|(name = String(nullableSharedFlow)) public final val nullableSharedFlowNative: R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>?|
-        public get(): R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>?| {
+    @R|kotlin/native/ObjCName|(name = String(nullableSharedFlow)) public final val nullableSharedFlowNative: R|kotlinx/coroutines/flow/SharedFlow<kotlin/String>?|
+        public get(): R|kotlinx/coroutines/flow/SharedFlow<kotlin/String>?| {
             ::R|/nullableSharedFlow|
             R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
         }
@@ -309,8 +309,8 @@ FILE: /__GENERATED__CALLABLES__.kt
             ::R|/nullableSharedFlow|
             R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
         }
-    @R|kotlin/native/ObjCName|(name = String(nullableStateFlowProperty)) public final val nullableStateFlowPropertyNative: R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>?|
-        public get(): R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>?| {
+    @R|kotlin/native/ObjCName|(name = String(nullableStateFlowProperty)) public final val nullableStateFlowPropertyNative: R|kotlinx/coroutines/flow/StateFlow<kotlin/String>?|
+        public get(): R|kotlinx/coroutines/flow/StateFlow<kotlin/String>?| {
             ::R|/nullableStateFlowProperty|
             R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
         }
@@ -319,13 +319,13 @@ FILE: /__GENERATED__CALLABLES__.kt
             ::R|/nullableStateFlowProperty|
             R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
         }
-    @R|kotlin/native/ObjCName|(name = String(nullableFlowAndValue)) public final val nullableFlowAndValueNative: R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String?>?|
-        public get(): R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String?>?| {
+    @R|kotlin/native/ObjCName|(name = String(nullableFlowAndValue)) public final val nullableFlowAndValueNative: R|kotlinx/coroutines/flow/Flow<kotlin/String?>?|
+        public get(): R|kotlinx/coroutines/flow/Flow<kotlin/String?>?| {
             ::R|/nullableFlowAndValue|
             R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
         }
-    @R|kotlin/native/ObjCName|(name = String(nullableSharedFlowAndValue)) public final val nullableSharedFlowAndValueNative: R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String?>?|
-        public get(): R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String?>?| {
+    @R|kotlin/native/ObjCName|(name = String(nullableSharedFlowAndValue)) public final val nullableSharedFlowAndValueNative: R|kotlinx/coroutines/flow/SharedFlow<kotlin/String?>?|
+        public get(): R|kotlinx/coroutines/flow/SharedFlow<kotlin/String?>?| {
             ::R|/nullableSharedFlowAndValue|
             R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
         }
@@ -334,8 +334,8 @@ FILE: /__GENERATED__CALLABLES__.kt
             ::R|/nullableSharedFlowAndValue|
             R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
         }
-    @R|kotlin/native/ObjCName|(name = String(nullableStateFlowAndValue)) public final val nullableStateFlowAndValueNative: R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String?>?|
-        public get(): R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String?>?| {
+    @R|kotlin/native/ObjCName|(name = String(nullableStateFlowAndValue)) public final val nullableStateFlowAndValueNative: R|kotlinx/coroutines/flow/StateFlow<kotlin/String?>?|
+        public get(): R|kotlinx/coroutines/flow/StateFlow<kotlin/String?>?| {
             ::R|/nullableStateFlowAndValue|
             R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
         }
@@ -344,13 +344,13 @@ FILE: /__GENERATED__CALLABLES__.kt
             ::R|/nullableStateFlowAndValue|
             R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
         }
-    @R|kotlin/native/ObjCName|(name = String(genericFlow)) public final val <T> R|MyGenericClass1<T>|.genericFlowNative: R|com/rickclephas/kmp/nativecoroutines/NativeFlow<T>|
-        public get(): R|com/rickclephas/kmp/nativecoroutines/NativeFlow<T>| {
+    @R|kotlin/native/ObjCName|(name = String(genericFlow)) public final val <T> R|MyGenericClass1<T>|.genericFlowNative: R|kotlinx/coroutines/flow/Flow<T>|
+        public get(): R|kotlinx/coroutines/flow/Flow<T>| {
             ::R|/genericFlow|
             R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
         }
-    @R|kotlin/native/ObjCName|(name = String(genericSharedFlow)) public final val <T> R|MyGenericClass1<T>|.genericSharedFlowNative: R|com/rickclephas/kmp/nativecoroutines/NativeFlow<T>|
-        public get(): R|com/rickclephas/kmp/nativecoroutines/NativeFlow<T>| {
+    @R|kotlin/native/ObjCName|(name = String(genericSharedFlow)) public final val <T> R|MyGenericClass1<T>|.genericSharedFlowNative: R|kotlinx/coroutines/flow/SharedFlow<T>|
+        public get(): R|kotlinx/coroutines/flow/SharedFlow<T>| {
             ::R|/genericSharedFlow|
             R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
         }
@@ -359,8 +359,8 @@ FILE: /__GENERATED__CALLABLES__.kt
             ::R|/genericSharedFlow|
             R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
         }
-    @R|kotlin/native/ObjCName|(name = String(genericStateFlow)) public final val <T> R|MyGenericClass1<T>|.genericStateFlowNative: R|com/rickclephas/kmp/nativecoroutines/NativeFlow<T>|
-        public get(): R|com/rickclephas/kmp/nativecoroutines/NativeFlow<T>| {
+    @R|kotlin/native/ObjCName|(name = String(genericStateFlow)) public final val <T> R|MyGenericClass1<T>|.genericStateFlowNative: R|kotlinx/coroutines/flow/StateFlow<T>|
+        public get(): R|kotlinx/coroutines/flow/StateFlow<T>| {
             ::R|/genericStateFlow|
             R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
         }
@@ -369,13 +369,13 @@ FILE: /__GENERATED__CALLABLES__.kt
             ::R|/genericStateFlow|
             R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
         }
-    @R|kotlin/native/ObjCName|(name = String(extensionFlow)) public final val R|kotlin/String|.extensionFlowNative: R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>|
-        public get(): R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>| {
+    @R|kotlin/native/ObjCName|(name = String(extensionFlow)) public final val R|kotlin/String|.extensionFlowNative: R|kotlinx/coroutines/flow/Flow<kotlin/String>|
+        public get(): R|kotlinx/coroutines/flow/Flow<kotlin/String>| {
             ::R|/extensionFlow|
             R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
         }
-    @R|kotlin/native/ObjCName|(name = String(extensionSharedFlow)) public final val R|kotlin/String|.extensionSharedFlowNative: R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>|
-        public get(): R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>| {
+    @R|kotlin/native/ObjCName|(name = String(extensionSharedFlow)) public final val R|kotlin/String|.extensionSharedFlowNative: R|kotlinx/coroutines/flow/SharedFlow<kotlin/String>|
+        public get(): R|kotlinx/coroutines/flow/SharedFlow<kotlin/String>| {
             ::R|/extensionSharedFlow|
             R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
         }
@@ -384,8 +384,8 @@ FILE: /__GENERATED__CALLABLES__.kt
             ::R|/extensionSharedFlow|
             R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
         }
-    @R|kotlin/native/ObjCName|(name = String(extensionStateFlow)) public final val R|kotlin/String|.extensionStateFlowNative: R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>|
-        public get(): R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>| {
+    @R|kotlin/native/ObjCName|(name = String(extensionStateFlow)) public final val R|kotlin/String|.extensionStateFlowNative: R|kotlinx/coroutines/flow/StateFlow<kotlin/String>|
+        public get(): R|kotlinx/coroutines/flow/StateFlow<kotlin/String>| {
             ::R|/extensionStateFlow|
             R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
         }
@@ -394,13 +394,13 @@ FILE: /__GENERATED__CALLABLES__.kt
             ::R|/extensionStateFlow|
             R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
         }
-    @R|kotlin/native/ObjCName|(name = String(customFlowValue)) public final val customFlowValueNative: R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String?>|
-        public get(): R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String?>| {
+    @R|kotlin/native/ObjCName|(name = String(customFlowValue)) public final val customFlowValueNative: R|MyFlow29<kotlin/Int, kotlin/String>|
+        public get(): R|MyFlow29<kotlin/Int, kotlin/String>| {
             ::R|/customFlowValue|
             R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
         }
-    @R|kotlin/native/ObjCName|(name = String(refinedFlow)) @R|kotlin/native/ShouldRefineInSwift|() public final val refinedFlowNative: R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>|
-        public get(): R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>| {
+    @R|kotlin/native/ObjCName|(name = String(refinedFlow)) @R|kotlin/native/ShouldRefineInSwift|() public final val refinedFlowNative: R|kotlinx/coroutines/flow/Flow<kotlin/String>|
+        public get(): R|kotlinx/coroutines/flow/Flow<kotlin/String>| {
             ::R|/refinedFlow|
             R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
         }
@@ -409,8 +409,8 @@ FILE: /__GENERATED__CALLABLES__.kt
             ::R|/refinedState|
             R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
         }
-    @R|kotlin/native/ShouldRefineInSwift|() public final val refinedStateFlow: R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>|
-        public get(): R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>| {
+    @R|kotlin/native/ShouldRefineInSwift|() public final val refinedStateFlow: R|kotlinx/coroutines/flow/StateFlow<kotlin/String>|
+        public get(): R|kotlinx/coroutines/flow/StateFlow<kotlin/String>| {
             ::R|/refinedState|
             R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
         }
@@ -419,8 +419,8 @@ FILE: /__GENERATED__CALLABLES__.kt
             ::R|/stateProperty|
             R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
         }
-    public final val statePropertyFlow: R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>|
-        public get(): R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>| {
+    public final val statePropertyFlow: R|kotlinx/coroutines/flow/StateFlow<kotlin/String>|
+        public get(): R|kotlinx/coroutines/flow/StateFlow<kotlin/String>| {
             ::R|/stateProperty|
             R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
         }
@@ -430,8 +430,8 @@ FILE: /__GENERATED__CALLABLES__.kt
             R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
         }
         public set(value: R|kotlin/String|): R|kotlin/Unit|
-    public final val mutableStatePropertyFlow: R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>|
-        public get(): R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>| {
+    public final val mutableStatePropertyFlow: R|kotlinx/coroutines/flow/MutableStateFlow<kotlin/String>|
+        public get(): R|kotlinx/coroutines/flow/MutableStateFlow<kotlin/String>| {
             ::R|/mutableStateProperty|
             R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
         }
@@ -440,8 +440,8 @@ FILE: /__GENERATED__CALLABLES__.kt
             ::R|/mutableNullableStateProperty|
             R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
         }
-    public final val mutableNullableStatePropertyFlow: R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>?|
-        public get(): R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>?| {
+    public final val mutableNullableStatePropertyFlow: R|kotlinx/coroutines/flow/MutableStateFlow<kotlin/String>?|
+        public get(): R|kotlinx/coroutines/flow/MutableStateFlow<kotlin/String>?| {
             ::R|/mutableNullableStateProperty|
             R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
         }

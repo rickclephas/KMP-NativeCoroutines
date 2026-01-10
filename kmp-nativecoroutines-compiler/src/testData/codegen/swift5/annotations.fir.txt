@@ -83,23 +83,23 @@ FILE: /__GENERATED__CALLABLES__.kt
         ::R|/deprecatedFunction3|
         R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
     }
-    @R|kotlin/Deprecated|(message = String(This is deprecated 4)) @R|kotlin/native/ObjCName|(name = String(deprecatedProperty1)) public final val deprecatedProperty1Native: R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>|
-        public get(): R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>| {
+    @R|kotlin/Deprecated|(message = String(This is deprecated 4)) @R|kotlin/native/ObjCName|(name = String(deprecatedProperty1)) public final val deprecatedProperty1Native: R|kotlinx/coroutines/flow/Flow<kotlin/String>|
+        public get(): R|kotlinx/coroutines/flow/Flow<kotlin/String>| {
             ::R|/deprecatedProperty1|
             R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
         }
-    @R|kotlin/Deprecated|(message = String(This is deprecated 5), level = Q|kotlin/DeprecationLevel|.R|kotlin/DeprecationLevel.WARNING|) @R|kotlin/native/ObjCName|(name = String(deprecatedProperty2)) public final val deprecatedProperty2Native: R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>|
-        public get(): R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>| {
+    @R|kotlin/Deprecated|(message = String(This is deprecated 5), level = Q|kotlin/DeprecationLevel|.R|kotlin/DeprecationLevel.WARNING|) @R|kotlin/native/ObjCName|(name = String(deprecatedProperty2)) public final val deprecatedProperty2Native: R|kotlinx/coroutines/flow/Flow<kotlin/String>|
+        public get(): R|kotlinx/coroutines/flow/Flow<kotlin/String>| {
             ::R|/deprecatedProperty2|
             R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
         }
-    @R|kotlin/Deprecated|(message = String(This is deprecated 6), level = Q|kotlin/DeprecationLevel|.R|kotlin/DeprecationLevel.ERROR|) @R|kotlin/native/ObjCName|(name = String(deprecatedProperty3)) public final val deprecatedProperty3Native: R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>|
-        public get(): R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>| {
+    @R|kotlin/Deprecated|(message = String(This is deprecated 6), level = Q|kotlin/DeprecationLevel|.R|kotlin/DeprecationLevel.ERROR|) @R|kotlin/native/ObjCName|(name = String(deprecatedProperty3)) public final val deprecatedProperty3Native: R|kotlinx/coroutines/flow/Flow<kotlin/String>|
+        public get(): R|kotlinx/coroutines/flow/Flow<kotlin/String>| {
             ::R|/deprecatedProperty3|
             R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
         }
-    @R|kotlin/native/ObjCName|(name = String(deprecatedProperty4)) public final val deprecatedProperty4Native: R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>|
-        @R|kotlin/Deprecated|(message = String(This is deprecated 7)) public get(): R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>| {
+    @R|kotlin/native/ObjCName|(name = String(deprecatedProperty4)) public final val deprecatedProperty4Native: R|kotlinx/coroutines/flow/MutableStateFlow<kotlin/String>|
+        @R|kotlin/Deprecated|(message = String(This is deprecated 7)) public get(): R|kotlinx/coroutines/flow/MutableStateFlow<kotlin/String>| {
             ::R|/deprecatedProperty4|
             R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
         }
@@ -121,8 +121,8 @@ FILE: /__GENERATED__CALLABLES__.kt
         ::R|/objCNameFunction3|
         R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
     }
-    @R|kotlin/native/ObjCName|(name = String(objCNameProperty1ObjC)) public final val objCNameProperty1Native: R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>|
-        public get(): R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>| {
+    @R|kotlin/native/ObjCName|(name = String(objCNameProperty1ObjC)) public final val objCNameProperty1Native: R|kotlinx/coroutines/flow/StateFlow<kotlin/String>|
+        public get(): R|kotlinx/coroutines/flow/StateFlow<kotlin/String>| {
             ::R|/objCNameProperty1|
             R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
         }
@@ -140,8 +140,8 @@ FILE: /__GENERATED__CALLABLES__.kt
             ::R|/objCNameProperty2|
             R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
         }
-    @R|kotlin/native/ObjCName|(name = String(objCNameProperty2ObjCFlow)) public final val objCNameProperty2Flow: R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>|
-        public get(): R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>| {
+    @R|kotlin/native/ObjCName|(name = String(objCNameProperty2ObjCFlow)) public final val objCNameProperty2Flow: R|kotlinx/coroutines/flow/StateFlow<kotlin/String>|
+        public get(): R|kotlinx/coroutines/flow/StateFlow<kotlin/String>| {
             ::R|/objCNameProperty2|
             R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
         }

@@ -83,7 +83,7 @@ abstract class AbstractFirBaseCodegenTest(
         listOf<Long>(
             0b001, // Kotlin 2.2.21
             0b011, // Kotlin 2.3.0
-            0b100, // Kotlin 2.3.20
+            0b101, // Kotlin 2.3.20
         ).forEach { version ->
             forTestsMatching("swift$version/*") {
                 defaultDirectives {

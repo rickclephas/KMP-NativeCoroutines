@@ -32,8 +32,8 @@ FILE: coroutinescope1.kt
         @R|com/rickclephas/kmp/nativecoroutines/NativeCoroutines|() public final val flowProperty: R|kotlinx/coroutines/flow/Flow<kotlin/String>| = R|kotlinx/coroutines/flow/flowOf|<R|kotlin/String|>(String(OK4))
             public get(): R|kotlinx/coroutines/flow/Flow<kotlin/String>|
 
-        @R|kotlin/native/ObjCName|(name = String(flowProperty)) public final val flowPropertyNative: R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>|
-            public get(): R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>| {
+        @R|kotlin/native/ObjCName|(name = String(flowProperty)) public final val flowPropertyNative: R|kotlinx/coroutines/flow/Flow<kotlin/String>|
+            public get(): R|kotlinx/coroutines/flow/Flow<kotlin/String>| {
                 ::R|/MyClass2.flowProperty|
                 R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
             }
@@ -184,18 +184,18 @@ FILE: /__GENERATED__CALLABLES__.kt
         ::R|/returnSuspendValue|
         R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
     }
-    @R|kotlin/native/ObjCName|(name = String(flowProperty)) public final val flowPropertyNative: R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>|
-        public get(): R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>| {
+    @R|kotlin/native/ObjCName|(name = String(flowProperty)) public final val flowPropertyNative: R|kotlinx/coroutines/flow/Flow<kotlin/String>|
+        public get(): R|kotlinx/coroutines/flow/Flow<kotlin/String>| {
             ::R|/flowProperty|
             R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
         }
-    @R|kotlin/native/ObjCName|(name = String(flowExtProperty1)) public final val R|MyClass3|.flowExtProperty1Native: R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>|
-        public get(): R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>| {
+    @R|kotlin/native/ObjCName|(name = String(flowExtProperty1)) public final val R|MyClass3|.flowExtProperty1Native: R|kotlinx/coroutines/flow/Flow<kotlin/String>|
+        public get(): R|kotlinx/coroutines/flow/Flow<kotlin/String>| {
             ::R|/flowExtProperty1|
             R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
         }
-    @R|kotlin/native/ObjCName|(name = String(flowExtProperty2)) public final val R|MyClass3|.flowExtProperty2Native: R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>|
-        public get(): R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>| {
+    @R|kotlin/native/ObjCName|(name = String(flowExtProperty2)) public final val R|MyClass3|.flowExtProperty2Native: R|kotlinx/coroutines/flow/Flow<kotlin/String>|
+        public get(): R|kotlinx/coroutines/flow/Flow<kotlin/String>| {
             ::R|/flowExtProperty2|
             R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
         }

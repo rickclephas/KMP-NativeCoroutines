@@ -170,8 +170,8 @@ FILE: functions.kt
             )
             this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.collect|<R|kotlin/String|>(R|/returnFlowValueNative|())
             this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.collect|<R|kotlin/String?|>(R|/returnNullableFlowValueNative|())
-            this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.value|<R|{com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>?=} (((kotlin/String, () -> kotlin/Unit, kotlin/Unit) -> kotlin/Unit, ({com/rickclephas/kmp/nativecoroutines/NativeError?=} kotlin/Throwable?, kotlin/Unit) -> kotlin/Unit, ({com/rickclephas/kmp/nativecoroutines/NativeError=} kotlin/Throwable, kotlin/Unit) -> kotlin/Unit) -> () -> kotlin/Unit)?|>(R|/returnNullableFlowNative|())
-            this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.value|<R|{com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String?>?=} (((kotlin/String?, () -> kotlin/Unit, kotlin/Unit) -> kotlin/Unit, ({com/rickclephas/kmp/nativecoroutines/NativeError?=} kotlin/Throwable?, kotlin/Unit) -> kotlin/Unit, ({com/rickclephas/kmp/nativecoroutines/NativeError=} kotlin/Throwable, kotlin/Unit) -> kotlin/Unit) -> () -> kotlin/Unit)?|>(R|/returnNullableFlowAndValueNative|())
+            this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.value|<R|kotlinx/coroutines/flow/Flow<kotlin/String>?|>(R|/returnNullableFlowNative|())
+            this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.value|<R|kotlinx/coroutines/flow/Flow<kotlin/String?>?|>(R|/returnNullableFlowAndValueNative|())
             this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.collect|<R|kotlin/String|>(R|/returnStateFlowValueNative|(), Int(1))
             this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.await|<R|kotlin/String|>(<L> = await@fun <anonymous>(): R|kotlin/String| <inline=NoInline>  {
                 ^ R|/MyClass8.MyClass8|().R|/MyClass8.returnSuspendValueNative|()
@@ -201,7 +201,7 @@ FILE: functions.kt
                 ^ R|/returnRefinedSuspendValueNative|()
             }
             )
-            this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.awaitAndCollect|<R|kotlin/String|>(<L> = awaitAndCollect@fun <anonymous>(): R|{com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>=} ((kotlin/String, () -> kotlin/Unit, kotlin/Unit) -> kotlin/Unit, ({com/rickclephas/kmp/nativecoroutines/NativeError?=} kotlin/Throwable?, kotlin/Unit) -> kotlin/Unit, ({com/rickclephas/kmp/nativecoroutines/NativeError=} kotlin/Throwable, kotlin/Unit) -> kotlin/Unit) -> () -> kotlin/Unit| <inline=NoInline>  {
+            this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.awaitAndCollect|<R|kotlin/String|>(<L> = awaitAndCollect@fun <anonymous>(): R|kotlinx/coroutines/flow/Flow<kotlin/String>| <inline=NoInline>  {
                 ^ R|/returnSuspendFlowValueNative|()
             }
             )
@@ -217,7 +217,7 @@ FILE: functions.kt
                 ^ R|/returnInlineSuspendValueNative|<R|kotlin/String|>(String(OK17))
             }
             )
-            this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.awaitAndCollectNull|<R|kotlin/String|>(<L> = awaitAndCollectNull@fun <anonymous>(): R|{com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>?=} (((kotlin/String, () -> kotlin/Unit, kotlin/Unit) -> kotlin/Unit, ({com/rickclephas/kmp/nativecoroutines/NativeError?=} kotlin/Throwable?, kotlin/Unit) -> kotlin/Unit, ({com/rickclephas/kmp/nativecoroutines/NativeError=} kotlin/Throwable, kotlin/Unit) -> kotlin/Unit) -> () -> kotlin/Unit)?| <inline=NoInline>  {
+            this@R|special/anonymous|.R|com/rickclephas/kmp/nativecoroutines/BoxTest.awaitAndCollectNull|<R|kotlin/String|>(<L> = awaitAndCollectNull@fun <anonymous>(): R|kotlinx/coroutines/flow/Flow<kotlin/String>?| <inline=NoInline>  {
                 ^ R|/returnNullableSuspendFlowNative|()
             }
             )
@@ -253,23 +253,23 @@ FILE: /__GENERATED__CALLABLES__.kt
         ::R|/returnNullableSuspendValue|
         R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
     }
-    @R|kotlin/native/ObjCName|(name = String(returnFlowValue)) public final fun returnFlowValueNative(): R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>| {
+    @R|kotlin/native/ObjCName|(name = String(returnFlowValue)) public final fun returnFlowValueNative(): R|kotlinx/coroutines/flow/Flow<kotlin/String>| {
         ::R|/returnFlowValue|
         R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
     }
-    @R|kotlin/native/ObjCName|(name = String(returnNullableFlowValue)) public final fun returnNullableFlowValueNative(): R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String?>| {
+    @R|kotlin/native/ObjCName|(name = String(returnNullableFlowValue)) public final fun returnNullableFlowValueNative(): R|kotlinx/coroutines/flow/Flow<kotlin/String?>| {
         ::R|/returnNullableFlowValue|
         R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
     }
-    @R|kotlin/native/ObjCName|(name = String(returnNullableFlow)) public final fun returnNullableFlowNative(): R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>?| {
+    @R|kotlin/native/ObjCName|(name = String(returnNullableFlow)) public final fun returnNullableFlowNative(): R|kotlinx/coroutines/flow/Flow<kotlin/String>?| {
         ::R|/returnNullableFlow|
         R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
     }
-    @R|kotlin/native/ObjCName|(name = String(returnNullableFlowAndValue)) public final fun returnNullableFlowAndValueNative(): R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String?>?| {
+    @R|kotlin/native/ObjCName|(name = String(returnNullableFlowAndValue)) public final fun returnNullableFlowAndValueNative(): R|kotlinx/coroutines/flow/Flow<kotlin/String?>?| {
         ::R|/returnNullableFlowAndValue|
         R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
     }
-    @R|kotlin/native/ObjCName|(name = String(returnStateFlowValue)) public final fun returnStateFlowValueNative(): R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>| {
+    @R|kotlin/native/ObjCName|(name = String(returnStateFlowValue)) public final fun returnStateFlowValueNative(): R|kotlinx/coroutines/flow/StateFlow<kotlin/String>| {
         ::R|/returnStateFlowValue|
         R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
     }
@@ -297,7 +297,7 @@ FILE: /__GENERATED__CALLABLES__.kt
         ::R|/returnInlineSuspendValue|
         R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
     }
-    @R|kotlin/native/ObjCName|(name = String(returnNullableSuspendFlow)) @R|kotlin/Throws|(exceptionClasses = vararg(<getClass>(Q|kotlin/Exception|))) public final suspend fun returnNullableSuspendFlowNative(): R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>?| {
+    @R|kotlin/native/ObjCName|(name = String(returnNullableSuspendFlow)) @R|kotlin/Throws|(exceptionClasses = vararg(<getClass>(Q|kotlin/Exception|))) public final suspend fun returnNullableSuspendFlowNative(): R|kotlinx/coroutines/flow/Flow<kotlin/String>?| {
         ::R|/returnNullableSuspendFlow|
         R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
     }
@@ -305,7 +305,7 @@ FILE: /__GENERATED__CALLABLES__.kt
         ::R|/returnExtensionValue|
         R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
     }
-    @R|kotlin/native/ObjCName|(name = String(returnCustomFlowValue)) public final fun returnCustomFlowValueNative(): R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>| {
+    @R|kotlin/native/ObjCName|(name = String(returnCustomFlowValue)) public final fun returnCustomFlowValueNative(): R|MyFlow23<kotlin/Int, kotlin/String>| {
         ::R|/returnCustomFlowValue|
         R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
     }
@@ -313,7 +313,7 @@ FILE: /__GENERATED__CALLABLES__.kt
         ::R|/returnRefinedSuspendValue|
         R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
     }
-    @R|kotlin/native/ObjCName|(name = String(returnSuspendFlowValue)) @R|kotlin/native/ShouldRefineInSwift|() @R|kotlin/Throws|(exceptionClasses = vararg(<getClass>(Q|kotlin/Exception|))) public final suspend fun returnSuspendFlowValueNative(): R|com/rickclephas/kmp/nativecoroutines/NativeFlow<kotlin/String>| {
+    @R|kotlin/native/ObjCName|(name = String(returnSuspendFlowValue)) @R|kotlin/native/ShouldRefineInSwift|() @R|kotlin/Throws|(exceptionClasses = vararg(<getClass>(Q|kotlin/Exception|))) public final suspend fun returnSuspendFlowValueNative(): R|kotlinx/coroutines/flow/Flow<kotlin/String>| {
         ::R|/returnSuspendFlowValue|
         R|kotlin/TODO|(String(KMP-NativeCoroutines generated declaration must be implemented in IR))
     }

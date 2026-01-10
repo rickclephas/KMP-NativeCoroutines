@@ -44,7 +44,7 @@ public open class KmpNativeCoroutinesExtension {
     /**
      * The compatibility version of Swift export used by the plugin.
      */
-    public val swiftExportVersion: Long = 0b100
+    public val swiftExportVersion: Long = 0b101
 }
 
 public enum class ExposedSeverity {
