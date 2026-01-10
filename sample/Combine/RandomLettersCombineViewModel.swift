@@ -23,7 +23,7 @@ class RandomLettersCombineViewModel: RandomLettersViewModel {
         isLoading = true
         result = nil
         #if NATIVE_COROUTINES_SWIFT_EXPORT
-        let future = createFuture(for: { await self.randomLettersGenerator.getRandomLettersNative(throwException: throwException) })
+        let future = createFuture(for: { try await self.randomLettersGenerator.getRandomLettersNative(throwException: throwException) })
         #else
         let future = createFuture(for: randomLettersGenerator.getRandomLetters(throwException: throwException))
         #endif

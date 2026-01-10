@@ -130,4 +130,44 @@ public class FirPsiCodegenTestGenerated extends AbstractFirPsiCodegenTest {
       runTest("src/testData/codegen/swift3/viewmodelscope.kt");
     }
   }
+
+  @Nested
+  @TestMetadata("src/testData/codegen/swift5")
+  @TestDataPath("$PROJECT_ROOT")
+  public class Swift5 {
+    @Test
+    public void testAllFilesPresentInSwift5() {
+      KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("src/testData/codegen/swift5"), Pattern.compile("^(.+)\\.kt$"), Pattern.compile("^(.+)\\.fir\\.kt$"), true);
+    }
+
+    @Test
+    @TestMetadata("annotations.kt")
+    public void testAnnotations() {
+      runTest("src/testData/codegen/swift5/annotations.kt");
+    }
+
+    @Test
+    @TestMetadata("coroutinescope.kt")
+    public void testCoroutinescope() {
+      runTest("src/testData/codegen/swift5/coroutinescope.kt");
+    }
+
+    @Test
+    @TestMetadata("functions.kt")
+    public void testFunctions() {
+      runTest("src/testData/codegen/swift5/functions.kt");
+    }
+
+    @Test
+    @TestMetadata("properties.kt")
+    public void testProperties() {
+      runTest("src/testData/codegen/swift5/properties.kt");
+    }
+
+    @Test
+    @TestMetadata("viewmodelscope.kt")
+    public void testViewmodelscope() {
+      runTest("src/testData/codegen/swift5/viewmodelscope.kt");
+    }
+  }
 }

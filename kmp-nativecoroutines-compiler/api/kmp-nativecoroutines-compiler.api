@@ -106,6 +106,7 @@ public final class com/rickclephas/kmp/nativecoroutines/compiler/config/Suffixes
 public final class com/rickclephas/kmp/nativecoroutines/compiler/config/SwiftExport : java/lang/Enum {
 	public static final field NO_FUNC_RETURN_TYPES Lcom/rickclephas/kmp/nativecoroutines/compiler/config/SwiftExport;
 	public static final field NO_THROWS_SUSPEND_FUNC Lcom/rickclephas/kmp/nativecoroutines/compiler/config/SwiftExport;
+	public static final field SUSPEND_FUNC_SUPPORTED Lcom/rickclephas/kmp/nativecoroutines/compiler/config/SwiftExport;
 	public static fun getEntries ()Lkotlin/enums/EnumEntries;
 	public static fun valueOf (Ljava/lang/String;)Lcom/rickclephas/kmp/nativecoroutines/compiler/config/SwiftExport;
 	public static fun values ()[Lcom/rickclephas/kmp/nativecoroutines/compiler/config/SwiftExport;
