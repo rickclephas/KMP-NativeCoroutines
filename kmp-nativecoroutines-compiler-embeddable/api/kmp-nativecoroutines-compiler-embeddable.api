@@ -52,6 +52,11 @@ public final class com/rickclephas/kmp/nativecoroutines/compiler/classic/diagnos
 	public static final field REDUNDANT_PRIVATE_COROUTINES_REFINED Lorg/jetbrains/kotlin/diagnostics/DiagnosticFactory0;
 	public static final field REDUNDANT_PRIVATE_COROUTINES_REFINED_STATE Lorg/jetbrains/kotlin/diagnostics/DiagnosticFactory0;
 	public static final field REDUNDANT_PRIVATE_COROUTINES_STATE Lorg/jetbrains/kotlin/diagnostics/DiagnosticFactory0;
+	public static final field REDUNDANT_REFINED_COROUTINES Lorg/jetbrains/kotlin/diagnostics/DiagnosticFactory0;
+	public static final field REDUNDANT_REFINED_COROUTINES_IGNORE Lorg/jetbrains/kotlin/diagnostics/DiagnosticFactory0;
+	public static final field REDUNDANT_REFINED_COROUTINES_REFINED Lorg/jetbrains/kotlin/diagnostics/DiagnosticFactory0;
+	public static final field REDUNDANT_REFINED_COROUTINES_REFINED_STATE Lorg/jetbrains/kotlin/diagnostics/DiagnosticFactory0;
+	public static final field REDUNDANT_REFINED_COROUTINES_STATE Lorg/jetbrains/kotlin/diagnostics/DiagnosticFactory0;
 	public static final field UNSUPPORTED_CLASS_EXTENSION_PROPERTY Lorg/jetbrains/kotlin/diagnostics/DiagnosticFactory0;
 }
 
@@ -150,6 +155,11 @@ public final class com/rickclephas/kmp/nativecoroutines/compiler/fir/diagnostics
 	public final fun getREDUNDANT_PRIVATE_COROUTINES_REFINED ()Lorg/jetbrains/kotlin/diagnostics/KtDiagnosticFactory0;
 	public final fun getREDUNDANT_PRIVATE_COROUTINES_REFINED_STATE ()Lorg/jetbrains/kotlin/diagnostics/KtDiagnosticFactory0;
 	public final fun getREDUNDANT_PRIVATE_COROUTINES_STATE ()Lorg/jetbrains/kotlin/diagnostics/KtDiagnosticFactory0;
+	public final fun getREDUNDANT_REFINED_COROUTINES ()Lorg/jetbrains/kotlin/diagnostics/KtDiagnosticFactory0;
+	public final fun getREDUNDANT_REFINED_COROUTINES_IGNORE ()Lorg/jetbrains/kotlin/diagnostics/KtDiagnosticFactory0;
+	public final fun getREDUNDANT_REFINED_COROUTINES_REFINED ()Lorg/jetbrains/kotlin/diagnostics/KtDiagnosticFactory0;
+	public final fun getREDUNDANT_REFINED_COROUTINES_REFINED_STATE ()Lorg/jetbrains/kotlin/diagnostics/KtDiagnosticFactory0;
+	public final fun getREDUNDANT_REFINED_COROUTINES_STATE ()Lorg/jetbrains/kotlin/diagnostics/KtDiagnosticFactory0;
 	public fun getRendererFactory ()Lorg/jetbrains/kotlin/diagnostics/rendering/BaseDiagnosticRendererFactory;
 	public final fun getUNSUPPORTED_CLASS_EXTENSION_PROPERTY ()Lorg/jetbrains/kotlin/diagnostics/KtDiagnosticFactory0;
 }

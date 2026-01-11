@@ -34,6 +34,11 @@ import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativ
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.REDUNDANT_PRIVATE_COROUTINES_REFINED
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.REDUNDANT_PRIVATE_COROUTINES_REFINED_STATE
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.REDUNDANT_PRIVATE_COROUTINES_STATE
+import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.REDUNDANT_REFINED_COROUTINES
+import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.REDUNDANT_REFINED_COROUTINES_IGNORE
+import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.REDUNDANT_REFINED_COROUTINES_REFINED
+import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.REDUNDANT_REFINED_COROUTINES_REFINED_STATE
+import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.REDUNDANT_REFINED_COROUTINES_STATE
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.UNSUPPORTED_CLASS_EXTENSION_PROPERTY
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.getCoroutinesReturnType
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.getNativeCoroutinesAnnotations
@@ -203,6 +208,13 @@ internal class FirKmpNativeCoroutinesDeclarationChecker(
             REDUNDANT_PRIVATE_COROUTINES_REFINED.reportOn(annotations[NativeCoroutinesRefined])
             REDUNDANT_PRIVATE_COROUTINES_REFINED_STATE.reportOn(annotations[NativeCoroutinesRefinedState])
             REDUNDANT_PRIVATE_COROUTINES_STATE.reportOn(annotations[NativeCoroutinesState])
+        }
+        if (isRefined) {
+            REDUNDANT_REFINED_COROUTINES.reportOn(annotations[NativeCoroutines])
+            REDUNDANT_REFINED_COROUTINES_IGNORE.reportOn(annotations[NativeCoroutinesIgnore])
+            REDUNDANT_REFINED_COROUTINES_REFINED.reportOn(annotations[NativeCoroutinesRefined])
+            REDUNDANT_REFINED_COROUTINES_REFINED_STATE.reportOn(annotations[NativeCoroutinesRefinedState])
+            REDUNDANT_REFINED_COROUTINES_STATE.reportOn(annotations[NativeCoroutinesState])
         }
         //endregion
 
