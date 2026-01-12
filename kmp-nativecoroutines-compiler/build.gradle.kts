@@ -12,6 +12,7 @@ plugins {
 repositories {
     mavenCentral()
     maven("https://cache-redirector.jetbrains.com/intellij-dependencies")
+    maven("https://redirector.kotlinlang.org/maven/dev")
 }
 
 sourceSets {

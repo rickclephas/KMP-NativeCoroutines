@@ -44,6 +44,7 @@ internal fun FirExtension.buildNativeProperty(
         name = callableId.callableName
 
         status = originalSymbol.getGeneratedDeclarationStatus(session) ?: return null
+        isLocal = originalSymbol.isLocal
 
         dispatchReceiverType = originalSymbol.dispatchReceiverType
 
