@@ -39,6 +39,7 @@ public class SuspendIntegrationTests: IntegrationTests() {
     }
 
     @NativeCoroutines
+    @NativeCoroutinesObjCExport // https://youtrack.jetbrains.com/issue/KT-83398
     public suspend fun getFlow(count: Int, delay: Long): Flow<Int> {
         delay(delay)
         return flow {
