@@ -8,6 +8,9 @@
 import XCTest
 import KMPNativeCoroutinesRxSwift
 import NativeCoroutinesSampleShared
+#if NATIVE_COROUTINES_SWIFT_EXPORT
+import KotlinRuntimeSupport
+#endif
 
 class RxSwiftSingleIntegrationTests: XCTestCase {
     
@@ -15,7 +18,7 @@ class RxSwiftSingleIntegrationTests: XCTestCase {
         let integrationTests = KotlinSuspendIntegrationTests()
         let sendValue = randomInt()
         #if NATIVE_COROUTINES_SWIFT_EXPORT
-        let single = createSingle(for: { await integrationTests.returnValueNative(value: sendValue, delay: 1000) })
+        let single = createSingle(for: { try await integrationTests.returnValueNative(value: sendValue, delay: 1000) })
         #else
         let single = createSingle(for: integrationTests.returnValue(value: sendValue, delay: 1000))
         #endif
@@ -45,7 +48,7 @@ class RxSwiftSingleIntegrationTests: XCTestCase {
     func testNilValueReceived() {
         let integrationTests = KotlinSuspendIntegrationTests()
         #if NATIVE_COROUTINES_SWIFT_EXPORT
-        let single = createSingle(for: { await integrationTests.returnNullNative(delay: 1000) })
+        let single = createSingle(for: { try await integrationTests.returnNullNative(delay: 1000) })
         #else
         let single = createSingle(for: integrationTests.returnNull(delay: 1000))
         #endif
@@ -68,12 +71,14 @@ class RxSwiftSingleIntegrationTests: XCTestCase {
         XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
     }
     
-    #if !NATIVE_COROUTINES_SWIFT_EXPORT
-    /// Exception throwing isn't supported yet, see https://youtrack.jetbrains.com/issue/KT-80971
     func testExceptionReceived() {
-        let integrationTests = SuspendIntegrationTests()
+        let integrationTests = KotlinSuspendIntegrationTests()
         let sendMessage = randomString()
+        #if NATIVE_COROUTINES_SWIFT_EXPORT
+        let single = createSingle(for: { try await integrationTests.throwExceptionNative(message: sendMessage, delay: 1000) })
+        #else
         let single = createSingle(for: integrationTests.throwException(message: sendMessage, delay: 1000))
+        #endif
         let valueExpectation = expectation(description: "Waiting for no value")
         valueExpectation.isInverted = true
         let errorExpectation = expectation(description: "Waiting for error")
@@ -81,27 +86,39 @@ class RxSwiftSingleIntegrationTests: XCTestCase {
         let disposable = single.subscribe(onSuccess: { _ in
             valueExpectation.fulfill()
         }, onFailure: { error in
+            #if NATIVE_COROUTINES_SWIFT_EXPORT
+            XCTAssertTrue(error is KotlinError, "Error isn't a KotlinError")
+            let error = error as! KotlinError
+            XCTAssertEqual(error.description, sendMessage, "Error has incorrect description")
+            // TODO: Get actual Kotlin Exception
+            #else
             let error = error as NSError
             XCTAssertEqual(error.localizedDescription, sendMessage, "Error has incorrect localizedDescription")
             let exception = error.userInfo["KotlinException"]
             XCTAssertTrue(exception is KotlinException, "Error doesn't contain the Kotlin exception")
+            #endif
             errorExpectation.fulfill()
         }, onDisposed: {
             disposedExpectation.fulfill()
         })
         _ = disposable // This is just to remove the unused variable warning
+        #if !NATIVE_COROUTINES_SWIFT_EXPORT
         XCTAssertEqual(integrationTests.uncompletedJobCount, 1, "There should be 1 uncompleted job")
+        #endif
         wait(for: [valueExpectation, errorExpectation, disposedExpectation], timeout: 3)
         XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
     }
-    #endif
     
     #if !NATIVE_COROUTINES_SWIFT_EXPORT
-    /// Exception throwing isn't supported yet, see https://youtrack.jetbrains.com/issue/KT-80971
+    /// Error throwing isn't supported yet, see https://youtrack.jetbrains.com/issue/KT-83389
     func testErrorReceived() {
-        let integrationTests = SuspendIntegrationTests()
+        let integrationTests = KotlinSuspendIntegrationTests()
         let sendMessage = randomString()
+        #if NATIVE_COROUTINES_SWIFT_EXPORT
+        let single = createSingle(for: { try await integrationTests.throwErrorNative(message: sendMessage, delay: 1000) })
+        #else
         let single = createSingle(for: integrationTests.throwError(message: sendMessage, delay: 1000))
+        #endif
         let valueExpectation = expectation(description: "Waiting for no value")
         valueExpectation.isInverted = true
         let errorExpectation = expectation(description: "Waiting for error")
@@ -109,16 +126,25 @@ class RxSwiftSingleIntegrationTests: XCTestCase {
         let disposable = single.subscribe(onSuccess: { _ in
             valueExpectation.fulfill()
         }, onFailure: { error in
+            #if NATIVE_COROUTINES_SWIFT_EXPORT
+            XCTAssertTrue(error is KotlinError, "Error isn't a KotlinError")
+            let error = error as! KotlinError
+            XCTAssertEqual(error.description, sendMessage, "Error has incorrect description")
+            // TODO: Get actual Kotlin Error
+            #else
             let error = error as NSError
             XCTAssertEqual(error.localizedDescription, sendMessage, "Error has incorrect localizedDescription")
             let exception = error.userInfo["KotlinException"]
             XCTAssertTrue(exception is KotlinThrowable, "Error doesn't contain the Kotlin error")
+            #endif
             errorExpectation.fulfill()
         }, onDisposed: {
             disposedExpectation.fulfill()
         })
         _ = disposable // This is just to remove the unused variable warning
+        #if !NATIVE_COROUTINES_SWIFT_EXPORT
         XCTAssertEqual(integrationTests.uncompletedJobCount, 1, "There should be 1 uncompleted job")
+        #endif
         wait(for: [valueExpectation, errorExpectation, disposedExpectation], timeout: 3)
         XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
     }
@@ -127,7 +153,7 @@ class RxSwiftSingleIntegrationTests: XCTestCase {
     func testNotOnMainThread() {
         let integrationTests = KotlinSuspendIntegrationTests()
         #if NATIVE_COROUTINES_SWIFT_EXPORT
-        let single = createSingle(for: { await integrationTests.returnValueNative(value: 1, delay: 1000) })
+        let single = createSingle(for: { try await integrationTests.returnValueNative(value: 1, delay: 1000) })
         #else
         let single = createSingle(for: integrationTests.returnValue(value: 1, delay: 1000))
         #endif
@@ -145,16 +171,21 @@ class RxSwiftSingleIntegrationTests: XCTestCase {
         wait(for: [valueExpectation, disposedExpectation], timeout: 3)
     }
     
-    #if !NATIVE_COROUTINES_SWIFT_EXPORT
-    /// Cancellation isn't supported yet, see https://youtrack.jetbrains.com/issue/KT-80970
     func testCancellation() {
-        let integrationTests = SuspendIntegrationTests()
+        let integrationTests = KotlinSuspendIntegrationTests()
         let callbackExpectation = expectation(description: "Waiting for callback not to get called")
         callbackExpectation.isInverted = true
+        #if NATIVE_COROUTINES_SWIFT_EXPORT
+        let single = createSingle(for: { try await integrationTests.returnFromCallbackNative(delay: 3000) {
+            callbackExpectation.fulfill()
+            return 1
+        }})
+        #else
         let single = createSingle(for: integrationTests.returnFromCallback(delay: 3000) {
             callbackExpectation.fulfill()
             return KotlinInt(int: 1)
         })
+        #endif
         let valueExpectation = expectation(description: "Waiting for value")
         valueExpectation.isInverted = true
         let errorExpectation = expectation(description: "Waiting for error")
@@ -167,15 +198,18 @@ class RxSwiftSingleIntegrationTests: XCTestCase {
         }, onDisposed: {
             disposedExpectation.fulfill()
         })
+        #if !NATIVE_COROUTINES_SWIFT_EXPORT
         XCTAssertEqual(integrationTests.uncompletedJobCount, 1, "There should be 1 uncompleted job")
+        #endif
         delay(1)
+        #if !NATIVE_COROUTINES_SWIFT_EXPORT
         XCTAssertEqual(integrationTests.activeJobCount, 1, "There should be 1 active job")
+        #endif
         disposable.dispose()
         XCTAssertEqual(integrationTests.activeJobCount, 0, "The job shouldn't be active anymore")
         wait(for: [callbackExpectation, valueExpectation, errorExpectation, disposedExpectation], timeout: 3)
         XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
     }
-    #endif
     
     #if !NATIVE_COROUTINES_SWIFT_EXPORT
     func testValuesReceived() {

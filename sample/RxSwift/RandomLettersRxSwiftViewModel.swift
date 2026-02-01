@@ -22,7 +22,7 @@ class RandomLettersRxSwiftViewModel: RandomLettersViewModel {
         isLoading = true
         result = nil
         #if NATIVE_COROUTINES_SWIFT_EXPORT
-        let single = createSingle(for: { await self.randomLettersGenerator.getRandomLettersNative(throwException: throwException) })
+        let single = createSingle(for: { try await self.randomLettersGenerator.getRandomLettersNative(throwException: throwException) })
         #else
         let single = createSingle(for: randomLettersGenerator.getRandomLetters(throwException: throwException))
         #endif
