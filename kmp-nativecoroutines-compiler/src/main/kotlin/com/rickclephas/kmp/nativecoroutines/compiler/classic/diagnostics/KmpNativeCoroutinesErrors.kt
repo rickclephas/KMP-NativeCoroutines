@@ -81,6 +81,17 @@ public object KmpNativeCoroutinesErrors {
     public val REDUNDANT_PRIVATE_COROUTINES_STATE: DiagnosticFactory0<KtElement> = DiagnosticFactory0.create(Severity.ERROR)
 
     @JvmField
+    public val REDUNDANT_REFINED_COROUTINES: DiagnosticFactory0<KtElement> = DiagnosticFactory0.create(Severity.WARNING)
+    @JvmField
+    public val REDUNDANT_REFINED_COROUTINES_IGNORE: DiagnosticFactory0<KtElement> = DiagnosticFactory0.create(Severity.WARNING)
+    @JvmField
+    public val REDUNDANT_REFINED_COROUTINES_REFINED: DiagnosticFactory0<KtElement> = DiagnosticFactory0.create(Severity.WARNING)
+    @JvmField
+    public val REDUNDANT_REFINED_COROUTINES_REFINED_STATE: DiagnosticFactory0<KtElement> = DiagnosticFactory0.create(Severity.WARNING)
+    @JvmField
+    public val REDUNDANT_REFINED_COROUTINES_STATE: DiagnosticFactory0<KtElement> = DiagnosticFactory0.create(Severity.WARNING)
+
+    @JvmField
     public val UNSUPPORTED_CLASS_EXTENSION_PROPERTY: DiagnosticFactory0<KtElement> = DiagnosticFactory0.create(Severity.ERROR)
 
     @JvmField
