@@ -48,6 +48,12 @@ public object FirKmpNativeCoroutinesErrors: KtDiagnosticsContainer() {
     public val REDUNDANT_PRIVATE_COROUTINES_REFINED_STATE: KtDiagnosticFactory0 by error0<KtElement>()
     public val REDUNDANT_PRIVATE_COROUTINES_STATE: KtDiagnosticFactory0 by error0<KtElement>()
 
+    public val REDUNDANT_REFINED_COROUTINES: KtDiagnosticFactory0 by warning0<KtElement>()
+    public val REDUNDANT_REFINED_COROUTINES_IGNORE: KtDiagnosticFactory0 by warning0<KtElement>()
+    public val REDUNDANT_REFINED_COROUTINES_REFINED: KtDiagnosticFactory0 by warning0<KtElement>()
+    public val REDUNDANT_REFINED_COROUTINES_REFINED_STATE: KtDiagnosticFactory0 by warning0<KtElement>()
+    public val REDUNDANT_REFINED_COROUTINES_STATE: KtDiagnosticFactory0 by warning0<KtElement>()
+
     public val UNSUPPORTED_CLASS_EXTENSION_PROPERTY: KtDiagnosticFactory0 by error0<KtElement>()
 
     public val IMPLICIT_RETURN_TYPE: KtDiagnosticFactory0 by error0<KtElement>(SourceElementPositioningStrategies.DECLARATION_NAME)
