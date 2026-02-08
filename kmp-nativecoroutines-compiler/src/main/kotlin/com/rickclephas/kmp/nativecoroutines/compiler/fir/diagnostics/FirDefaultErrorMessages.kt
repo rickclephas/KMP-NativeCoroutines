@@ -33,6 +33,11 @@ import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativ
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.REDUNDANT_PRIVATE_COROUTINES_REFINED
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.REDUNDANT_PRIVATE_COROUTINES_REFINED_STATE
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.REDUNDANT_PRIVATE_COROUTINES_STATE
+import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.REDUNDANT_REFINED_COROUTINES
+import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.REDUNDANT_REFINED_COROUTINES_IGNORE
+import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.REDUNDANT_REFINED_COROUTINES_REFINED
+import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.REDUNDANT_REFINED_COROUTINES_REFINED_STATE
+import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.REDUNDANT_REFINED_COROUTINES_STATE
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.UNSUPPORTED_CLASS_EXTENSION_PROPERTY
 import org.jetbrains.kotlin.diagnostics.KtDiagnosticFactoryToRendererMap
 import org.jetbrains.kotlin.diagnostics.rendering.BaseDiagnosticRendererFactory
@@ -78,6 +83,12 @@ internal object FirDefaultErrorMessages: BaseDiagnosticRendererFactory() {
         map.put(REDUNDANT_PRIVATE_COROUTINES_REFINED, "NativeCoroutinesRefined is only supported on public declarations")
         map.put(REDUNDANT_PRIVATE_COROUTINES_REFINED_STATE, "NativeCoroutinesRefinedState is only supported on public declarations")
         map.put(REDUNDANT_PRIVATE_COROUTINES_STATE, "NativeCoroutinesState is only supported on public declarations")
+
+        map.put(REDUNDANT_REFINED_COROUTINES, "NativeCoroutines is applied to a refined declaration")
+        map.put(REDUNDANT_REFINED_COROUTINES_IGNORE, "NativeCoroutinesIgnore is implied for refined declarations")
+        map.put(REDUNDANT_REFINED_COROUTINES_REFINED, "NativeCoroutinesRefined is applied to a refined declaration")
+        map.put(REDUNDANT_REFINED_COROUTINES_REFINED_STATE, "NativeCoroutinesRefinedState is applied to a refined declaration")
+        map.put(REDUNDANT_REFINED_COROUTINES_STATE, "NativeCoroutinesState is applied to a refined declaration")
 
         map.put(UNSUPPORTED_CLASS_EXTENSION_PROPERTY, "Class extension properties aren't supported")
 

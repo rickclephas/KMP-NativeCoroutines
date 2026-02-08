@@ -34,6 +34,11 @@ import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativ
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.REDUNDANT_PRIVATE_COROUTINES_REFINED
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.REDUNDANT_PRIVATE_COROUTINES_REFINED_STATE
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.REDUNDANT_PRIVATE_COROUTINES_STATE
+import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.REDUNDANT_REFINED_COROUTINES
+import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.REDUNDANT_REFINED_COROUTINES_IGNORE
+import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.REDUNDANT_REFINED_COROUTINES_REFINED
+import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.REDUNDANT_REFINED_COROUTINES_REFINED_STATE
+import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.REDUNDANT_REFINED_COROUTINES_STATE
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation
 import com.rickclephas.kmp.nativecoroutines.idea.quickfixes.k2.AddAnnotationFixFactory.Companion.registerAddAnnotationFix
 import com.rickclephas.kmp.nativecoroutines.idea.quickfixes.k2.RemoveAnnotationFixFactory.Companion.registerRemoveAnnotationFix
@@ -92,6 +97,12 @@ internal class KmpNativeCoroutinesQuickFixRegistrar: KotlinQuickFixRegistrar() {
             REDUNDANT_PRIVATE_COROUTINES_REFINED,
             REDUNDANT_PRIVATE_COROUTINES_REFINED_STATE,
             REDUNDANT_PRIVATE_COROUTINES_STATE,
+
+            REDUNDANT_REFINED_COROUTINES,
+            REDUNDANT_REFINED_COROUTINES_IGNORE,
+            REDUNDANT_REFINED_COROUTINES_REFINED,
+            REDUNDANT_REFINED_COROUTINES_REFINED_STATE,
+            REDUNDANT_REFINED_COROUTINES_STATE,
         )
 
         registerFactory(KotlinQuickFixFactory.ModCommandBased { diagnostic: KaCompilerPluginDiagnostic0 ->

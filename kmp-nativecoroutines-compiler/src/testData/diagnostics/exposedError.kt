@@ -59,6 +59,20 @@ interface TestInterface {
     val flowInterfaceProperty: <!EXPOSED_FLOW_TYPE_ERROR!>Flow<Int><!>
 }
 
+@OptIn(ExperimentalObjCRefinement::class)
+@HiddenFromObjC
+interface TestHiddenFromObjCInterface {
+    suspend fun suspendInterfaceFunction(): Int
+
+    val flowInterfaceProperty: Flow<Int>
+
+    class Nested {
+        suspend fun suspendInterfaceFunction(): Int = 0
+
+        val flowInterfaceProperty: Flow<Int> = throw Throwable()
+    }
+}
+
 class TestClassA: TestInterface {
 
     override suspend fun suspendInterfaceFunction(): Int = 0
@@ -95,4 +109,18 @@ actual class TestClassC {
     actual suspend fun suspendFunction(): Int = 0
 
     actual val flowProperty: Flow<Int> get() = throw Throwable()
+}
+
+class TestClassD {
+    <!EXPOSED_SUSPEND_FUNCTION_ERROR!>suspend<!> fun suspendInterfaceFunction(): Int = 0
+
+    val flowInterfaceProperty: <!EXPOSED_FLOW_TYPE_ERROR!>Flow<Int><!> = throw Throwable()
+
+    @OptIn(ExperimentalObjCRefinement::class)
+    @HiddenFromObjC
+    interface Nested {
+        suspend fun suspendInterfaceFunction(): Int
+
+        val flowInterfaceProperty: Flow<Int>
+    }
 }
