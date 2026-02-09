@@ -33,7 +33,7 @@ public class KmpNativeCoroutinesStorageComponentContainerContributor: StorageCom
         container.useInstance(KmpNativeCoroutinesChecker(exposedSeverity, generatedSourceDirs))
     }
 
-    private fun TargetPlatform.hasApple(): Boolean = isNotEmpty() && any {
+    private fun TargetPlatform.hasApple(): Boolean = any {
         when (it) {
             is NativePlatformWithTarget -> it.target.family.isAppleFamily
             is NativePlatformUnspecifiedTarget -> true
