@@ -36,10 +36,12 @@ import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNati
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation
 import com.rickclephas.kmp.nativecoroutines.idea.quickfixes.k1.AddAnnotationFixFactory.Companion.registerAddAnnotationFix
 import com.rickclephas.kmp.nativecoroutines.idea.quickfixes.k1.RemoveAnnotationFixFactory.Companion.registerRemoveAnnotationFix
+import org.jetbrains.kotlin.K1Deprecation
 import org.jetbrains.kotlin.idea.quickfix.QuickFixContributor
 import org.jetbrains.kotlin.idea.quickfix.QuickFixes
 import org.jetbrains.kotlin.idea.quickfix.SpecifyTypeExplicitlyFix
 
+@OptIn(K1Deprecation::class)
 public class KmpNativeCoroutinesQuickFixContributor: QuickFixContributor {
     override fun registerQuickFixes(quickFixes: QuickFixes) {
         quickFixes.registerAddAnnotationFix(

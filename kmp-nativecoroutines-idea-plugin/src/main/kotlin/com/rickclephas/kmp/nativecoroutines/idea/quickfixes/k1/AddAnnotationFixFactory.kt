@@ -5,6 +5,7 @@ import com.intellij.codeInsight.intention.IntentionAction
 import com.intellij.codeInsight.intention.LowPriorityAction
 import com.intellij.psi.util.findParentOfType
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation
+import org.jetbrains.kotlin.K1Deprecation
 import org.jetbrains.kotlin.diagnostics.Diagnostic
 import org.jetbrains.kotlin.diagnostics.DiagnosticFactory0
 import org.jetbrains.kotlin.idea.quickfix.AddAnnotationFix
@@ -14,6 +15,7 @@ import org.jetbrains.kotlin.psi.KtCallableDeclaration
 import org.jetbrains.kotlin.psi.KtDeclaration
 import org.jetbrains.kotlin.psi.KtModifierListOwner
 
+@OptIn(K1Deprecation::class)
 internal class AddAnnotationFixFactory(
     private val diagnosticFactories: List<DiagnosticFactory0<KtDeclaration>>,
     private val preferredAnnotation: NativeCoroutinesAnnotation,
