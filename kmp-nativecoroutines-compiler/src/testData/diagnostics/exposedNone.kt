@@ -124,3 +124,17 @@ class TestClassD {
         val flowInterfaceProperty: Flow<Int>
     }
 }
+
+class TestClassE(
+    val flowA: Flow<String>,
+    @OptIn(ExperimentalObjCRefinement::class)
+    @HiddenFromObjC
+    val flowB: Flow<String>,
+)
+
+data class TestClassF(
+    val flowA: Flow<String>,
+    @OptIn(ExperimentalObjCRefinement::class)
+    @HiddenFromObjC
+    val flowB: Flow<String>,
+)

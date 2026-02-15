@@ -9,6 +9,7 @@ import org.jetbrains.kotlin.fir.expressions.impl.FirSingleExpressionBlock
 
 // https://github.com/JetBrains/kotlin/blob/da6501a98a8f85dd3e7d94dcc17e050b3fefaaa4/compiler/fir/checkers/src/org/jetbrains/kotlin/fir/analysis/checkers/syntax/FirExplicitApiDeclarationChecker.kt#L150C9-L159
 internal fun FirCallableDeclaration.hasImplicitReturnType(): Boolean {
+    if (source?.kind != KtRealSourceElementKind) return false
     // It's an explicit type, the check always should be skipped
     if (returnTypeRef.source?.kind == KtRealSourceElementKind) return false
 

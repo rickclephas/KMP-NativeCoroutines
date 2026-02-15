@@ -105,6 +105,7 @@ internal class FirKmpNativeCoroutinesDeclarationChecker(
         }
 
         val annotations = declaration.getNativeCoroutinesAnnotations(context.session)
+        val isFromSource = declaration.origin is FirDeclarationOrigin.Source
         val isRefined = declaration.isRefined(context.session)
         val isPublic = declaration.effectiveVisibility.publicApi
         val isOverride = declaration.isOverride
@@ -127,7 +128,7 @@ internal class FirKmpNativeCoroutinesDeclarationChecker(
         //region EXPOSED_*
         val hasAnnotation = coroutinesAnnotations.isNotEmpty()
         val isIgnored = annotations.containsKey(NativeCoroutinesIgnore)
-        if (!isRefined && isPublic && !isOverride && !isActual && !hasAnnotation && !isIgnored) {
+        if (isFromSource && !isRefined && isPublic && !isOverride && !isActual && !hasAnnotation && !isIgnored) {
             val isGenerated = context.containingFilePath?.let {
                 generatedSourceDirs.any(Path(it)::startsWith)
             } ?: false
