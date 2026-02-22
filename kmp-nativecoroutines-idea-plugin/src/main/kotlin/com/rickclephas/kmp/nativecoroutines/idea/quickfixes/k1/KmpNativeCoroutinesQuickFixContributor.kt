@@ -33,6 +33,11 @@ import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNati
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.REDUNDANT_PRIVATE_COROUTINES_REFINED
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.REDUNDANT_PRIVATE_COROUTINES_REFINED_STATE
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.REDUNDANT_PRIVATE_COROUTINES_STATE
+import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.REDUNDANT_REFINED_COROUTINES
+import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.REDUNDANT_REFINED_COROUTINES_IGNORE
+import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.REDUNDANT_REFINED_COROUTINES_REFINED
+import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.REDUNDANT_REFINED_COROUTINES_REFINED_STATE
+import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.REDUNDANT_REFINED_COROUTINES_STATE
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation
 import com.rickclephas.kmp.nativecoroutines.idea.quickfixes.k1.AddAnnotationFixFactory.Companion.registerAddAnnotationFix
 import com.rickclephas.kmp.nativecoroutines.idea.quickfixes.k1.RemoveAnnotationFixFactory.Companion.registerRemoveAnnotationFix
@@ -83,6 +88,12 @@ public class KmpNativeCoroutinesQuickFixContributor: QuickFixContributor {
             REDUNDANT_PRIVATE_COROUTINES_REFINED,
             REDUNDANT_PRIVATE_COROUTINES_REFINED_STATE,
             REDUNDANT_PRIVATE_COROUTINES_STATE,
+
+            REDUNDANT_REFINED_COROUTINES,
+            REDUNDANT_REFINED_COROUTINES_IGNORE,
+            REDUNDANT_REFINED_COROUTINES_REFINED,
+            REDUNDANT_REFINED_COROUTINES_REFINED_STATE,
+            REDUNDANT_REFINED_COROUTINES_STATE,
         )
 
         quickFixes.register(IMPLICIT_RETURN_TYPE, SpecifyTypeExplicitlyFix())
