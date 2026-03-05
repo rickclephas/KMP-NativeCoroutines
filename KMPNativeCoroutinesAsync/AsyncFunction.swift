@@ -12,30 +12,22 @@ import KMPNativeCoroutinesCore
 /// - Parameter nativeSuspend: The native suspend function to await.
 /// - Returns: The result from the `nativeSuspend`.
 /// - Throws: Errors thrown by the `nativeSuspend`.
-public func asyncFunction<Result, Failure: Error, Unit>(
+public func asyncFunction<Result: Sendable, Failure: Error & Sendable, Unit: Sendable>(
     for nativeSuspend: @escaping NativeSuspend<Result, Failure, Unit>
 ) async throws -> Result {
     try await AsyncFunctionTask(nativeSuspend: nativeSuspend).awaitResult()
 }
 
-/// This function provides source compatibility during the migration to Swift export.
-///
-/// This is a no-op function and it can be safely removed once you have fully migrated to Swift export.
-@available(*, deprecated, message: "Kotlin Coroutines are supported by Swift export")
-public func asyncFunction<Result>(for result: Result) async -> Result {
-    return result
-}
-
 /// Wraps the `NativeSuspend` in an async function.
 /// - Parameter nativeSuspend: The native suspend function to await.
 /// - Throws: Errors thrown by the `nativeSuspend`.
-public func asyncFunction<Unit, Failure: Error>(
+public func asyncFunction<Unit: Sendable, Failure: Error & Sendable>(
     for nativeSuspend: @escaping NativeSuspend<Unit, Failure, Unit>
 ) async throws -> Void {
     _ = try await AsyncFunctionTask(nativeSuspend: nativeSuspend).awaitResult()
 }
 
-private class AsyncFunctionTask<Result, Failure: Error, Unit>: @unchecked Sendable {
+private class AsyncFunctionTask<Result: Sendable, Failure: Error & Sendable, Unit: Sendable>: @unchecked Sendable {
     
     private let semaphore = DispatchSemaphore(value: 1)
     private var nativeCancellable: NativeCancellable<Unit>?
@@ -45,7 +37,7 @@ private class AsyncFunctionTask<Result, Failure: Error, Unit>: @unchecked Sendab
     private var continuation: UnsafeContinuation<Result, Error>? = nil
     
     init(nativeSuspend: NativeSuspend<Result, Failure, Unit>) {
-        nativeCancellable = nativeSuspend({ result, unit in
+        nativeCancellable = nativeSuspend({ @Sendable (result, unit) in
             self.semaphore.wait()
             defer { self.semaphore.signal() }
             self.result = result
@@ -55,7 +47,7 @@ private class AsyncFunctionTask<Result, Failure: Error, Unit>: @unchecked Sendab
             }
             self.nativeCancellable = nil
             return unit
-        }, { error, unit in
+        }, { @Sendable (error, unit) in
             self.semaphore.wait()
             defer { self.semaphore.signal() }
             self.error = error
@@ -65,7 +57,7 @@ private class AsyncFunctionTask<Result, Failure: Error, Unit>: @unchecked Sendab
             }
             self.nativeCancellable = nil
             return unit
-        }, { cancellationError, unit in
+        }, { @Sendable (cancellationError, unit) in
             self.semaphore.wait()
             defer { self.semaphore.signal() }
             self.cancellationError = cancellationError
