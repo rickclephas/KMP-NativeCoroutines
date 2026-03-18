@@ -42,7 +42,7 @@ internal fun FirExtension.buildNativeFunction(
 
         status = originalSymbol.getGeneratedDeclarationStatus(session)
             ?.copy(isInline = originalSymbol.isInline) ?: return null
-        if (SwiftExport.NO_FUNC_RETURN_TYPES in swiftExport) {
+        if (SwiftExport.NO_FUNC_RETURN_TYPES in swiftExport || SwiftExport.SUSPEND_FUNC_SUPPORTED in swiftExport) {
             status = status.copy(isSuspend = callableSignature.isSuspend)
         }
         isLocal = originalSymbol.isLocal
@@ -85,7 +85,7 @@ internal fun FirExtension.buildNativeFunction(
         if (annotation.shouldRefineInSwift) {
             annotations.add(buildAnnotation(ClassIds.shouldRefineInSwift))
         }
-        if (SwiftExport.NO_FUNC_RETURN_TYPES in swiftExport &&
+        if ((SwiftExport.NO_FUNC_RETURN_TYPES in swiftExport || SwiftExport.SUSPEND_FUNC_SUPPORTED in swiftExport) &&
             SwiftExport.NO_THROWS_SUSPEND_FUNC !in swiftExport &&
             callableSignature.isSuspend
         ) {
