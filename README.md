@@ -115,8 +115,8 @@ Or add it in Xcode by going to `File` > `Add Packages...` and providing the URL:
 
 If you use CocoaPods add one or more of the following libraries to your `Podfile`:
 ```ruby
-pod 'KMPNativeCoroutinesAsync', '1.0.2'    # Swift Concurrency implementation
-pod 'KMPNativeCoroutinesCombine', '1.0.2'  # Combine implementation
+pod 'KMPNativeCoroutinesAsync', git: 'https://github.com/rickclephas/KMP-NativeCoroutines.git', tag: 'v1.0.2'   # Swift Concurrency implementation
+pod 'KMPNativeCoroutinesCombine', git: 'https://github.com/rickclephas/KMP-NativeCoroutines.git', tag: 'v1.0.2' # Combine implementation
 pod 'KMPNativeCoroutinesRxSwift', git: 'https://github.com/rickclephas/KMP-NativeCoroutines.git', tag: 'v1.0.2' # RxSwift implementation
 ```
 > [!NOTE]
