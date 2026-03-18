@@ -18,7 +18,7 @@ internal fun FirCallableSignature.getNativeType(
             val typeArgs = arrayOf<ConeTypeProjection>(getRawType(type.valueType))
             nativeType = ClassIds.nativeFlow.constructClassLikeType(typeArgs, type.isNullable)
         }
-        if (isSuspend) {
+        if (isSuspend && SwiftExport.SUSPEND_FUNC_SUPPORTED !in swiftExport) {
             val typeArgs = arrayOf<ConeTypeProjection>(nativeType)
             nativeType = ClassIds.nativeSuspend.constructClassLikeType(typeArgs)
         }
