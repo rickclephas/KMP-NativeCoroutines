@@ -31,18 +31,6 @@ For now the plugin just clones your original functions and properties to prevent
 **Temporary workaround:**  
 You should disable any relevant code in Swift if you would like to try Swift export.
 
-## 🚨 `@Throws` suspend functions are unsupported
-
-Throwing suspend functions aren't supported yet.
-
-KMP-NativeCoroutines behaves as if a `@Throws(Exception::class)` annotation was added to all suspend functions.
-Since throwing suspend functions aren't supported yet, any exception will currently cause a fatal crash.
-
-## 🚨 Cancellation isn't supported yet
-
-At the moment you can't cancel suspend functions.  
-Meaning your suspend functions will keep running until they either complete or fail.
-
 ## ⚠️ `@ObjCName` is ignored
 
 The `@ObjCName` annotation is (currently) ignored by Swift export.  

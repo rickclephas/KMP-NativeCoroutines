@@ -9,7 +9,7 @@ import org.jetbrains.kotlin.KtFakeSourceElementKind
 import org.jetbrains.kotlin.fakeElement
 import org.jetbrains.kotlin.fir.copy
 import org.jetbrains.kotlin.fir.declarations.FirResolvePhase
-import org.jetbrains.kotlin.fir.declarations.builder.buildSimpleFunction
+import org.jetbrains.kotlin.fir.declarations.builder.buildNamedFunction
 import org.jetbrains.kotlin.fir.declarations.origin
 import org.jetbrains.kotlin.fir.declarations.utils.isInline
 import org.jetbrains.kotlin.fir.extensions.FirExtension
@@ -27,7 +27,7 @@ internal fun FirExtension.buildNativeFunction(
 ): FirNamedFunctionSymbol? {
     val firCallableSignature = originalSymbol.getCallableSignature(session) ?: return null
     val callableSignature = firCallableSignature.signature
-    return buildSimpleFunction {
+    return buildNamedFunction {
         resolvePhase = FirResolvePhase.BODY_RESOLVE
         moduleData = session.moduleData
         origin = NativeCoroutinesDeclarationKey(
@@ -42,9 +42,10 @@ internal fun FirExtension.buildNativeFunction(
 
         status = originalSymbol.getGeneratedDeclarationStatus(session)
             ?.copy(isInline = originalSymbol.isInline) ?: return null
-        if (SwiftExport.NO_FUNC_RETURN_TYPES in swiftExport) {
+        if (SwiftExport.NO_FUNC_RETURN_TYPES in swiftExport || SwiftExport.SUSPEND_FUNC_SUPPORTED in swiftExport) {
             status = status.copy(isSuspend = callableSignature.isSuspend)
         }
+        isLocal = originalSymbol.isLocal
 
         dispatchReceiverType = originalSymbol.dispatchReceiverType
 
@@ -84,7 +85,7 @@ internal fun FirExtension.buildNativeFunction(
         if (annotation.shouldRefineInSwift) {
             annotations.add(buildAnnotation(ClassIds.shouldRefineInSwift))
         }
-        if (SwiftExport.NO_FUNC_RETURN_TYPES in swiftExport &&
+        if ((SwiftExport.NO_FUNC_RETURN_TYPES in swiftExport || SwiftExport.SUSPEND_FUNC_SUPPORTED in swiftExport) &&
             SwiftExport.NO_THROWS_SUSPEND_FUNC !in swiftExport &&
             callableSignature.isSuspend
         ) {
