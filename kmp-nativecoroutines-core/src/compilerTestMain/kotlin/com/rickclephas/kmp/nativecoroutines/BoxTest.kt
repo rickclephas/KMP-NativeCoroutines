@@ -108,6 +108,16 @@ public class BoxTest internal constructor() {
 
     @OptIn(ExperimentalTypeInference::class)
     @OverloadResolutionByLambdaReturnType
+    @JvmName("awaitAndCollectNativeFlow")
+    public suspend fun <T> awaitAndCollect(
+        maxValues: Int? = null,
+        nativeFlow: suspend () -> NativeFlow<T>
+    ) {
+        collect(nativeFlow(), maxValues)
+    }
+
+    @OptIn(ExperimentalTypeInference::class)
+    @OverloadResolutionByLambdaReturnType
     public suspend fun <T> awaitAndCollect(
         maxValues: Int? = null,
         flow: suspend () -> Flow<T>
@@ -121,6 +131,15 @@ public class BoxTest internal constructor() {
         nativeSuspend: () -> NativeSuspend<NativeFlow<T>?>
     ) {
         await<NativeFlow<T>?>(nativeSuspend)
+    }
+
+    @OptIn(ExperimentalTypeInference::class)
+    @OverloadResolutionByLambdaReturnType
+    @JvmName("awaitAndCollectNullNativeFlow")
+    public suspend fun <T> awaitAndCollectNull(
+        nativeFlow: suspend () -> NativeFlow<T>?
+    ) {
+        await<NativeFlow<T>?>(nativeFlow)
     }
 
     @OptIn(ExperimentalTypeInference::class)
