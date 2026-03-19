@@ -20,11 +20,7 @@ struct SwiftUIAsyncTest: View {
         }.refreshable {
             print("Refreshable started")
             do {
-                #if NATIVE_COROUTINES_SWIFT_EXPORT
-                let result = try await asyncFunction(for: tests.returnValueNative(value: 20, delay: 10000))
-                #else
                 let result = try await asyncFunction(for: tests.returnValue(value: 20, delay: 10000))
-                #endif
                 print("Refreshable result: \(result)")
             } catch {
                 print("Refreshable error: \(error)")
@@ -32,11 +28,7 @@ struct SwiftUIAsyncTest: View {
         }.task {
             print("Task started")
             do {
-                #if NATIVE_COROUTINES_SWIFT_EXPORT
-                let result = try await asyncFunction(for: tests.returnValueNative(value: 2, delay: 10000))
-                #else
                 let result = try await asyncFunction(for: tests.returnValue(value: 2, delay: 10000))
-                #endif
                 print("Task result: \(result)")
             } catch {
                 print("Task error: \(error)")

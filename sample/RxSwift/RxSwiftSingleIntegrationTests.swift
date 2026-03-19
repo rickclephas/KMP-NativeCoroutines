@@ -18,7 +18,7 @@ class RxSwiftSingleIntegrationTests: XCTestCase {
         let integrationTests = KotlinSuspendIntegrationTests()
         let sendValue = randomInt()
         #if NATIVE_COROUTINES_SWIFT_EXPORT
-        let single = createSingle(for: { try await integrationTests.returnValueNative(value: sendValue, delay: 1000) })
+        let single = createSingle(for: { try await integrationTests.returnValue(value: sendValue, delay: 1000) })
         #else
         let single = createSingle(for: integrationTests.returnValue(value: sendValue, delay: 1000))
         #endif
@@ -48,7 +48,7 @@ class RxSwiftSingleIntegrationTests: XCTestCase {
     func testNilValueReceived() {
         let integrationTests = KotlinSuspendIntegrationTests()
         #if NATIVE_COROUTINES_SWIFT_EXPORT
-        let single = createSingle(for: { try await integrationTests.returnNullNative(delay: 1000) })
+        let single = createSingle(for: { try await integrationTests.returnNull(delay: 1000) })
         #else
         let single = createSingle(for: integrationTests.returnNull(delay: 1000))
         #endif
@@ -75,7 +75,7 @@ class RxSwiftSingleIntegrationTests: XCTestCase {
         let integrationTests = KotlinSuspendIntegrationTests()
         let sendMessage = randomString()
         #if NATIVE_COROUTINES_SWIFT_EXPORT
-        let single = createSingle(for: { try await integrationTests.throwExceptionNative(message: sendMessage, delay: 1000) })
+        let single = createSingle(for: { try await integrationTests.throwException(message: sendMessage, delay: 1000) })
         #else
         let single = createSingle(for: integrationTests.throwException(message: sendMessage, delay: 1000))
         #endif
@@ -115,7 +115,7 @@ class RxSwiftSingleIntegrationTests: XCTestCase {
         let integrationTests = KotlinSuspendIntegrationTests()
         let sendMessage = randomString()
         #if NATIVE_COROUTINES_SWIFT_EXPORT
-        let single = createSingle(for: { try await integrationTests.throwErrorNative(message: sendMessage, delay: 1000) })
+        let single = createSingle(for: { try await integrationTests.throwError(message: sendMessage, delay: 1000) })
         #else
         let single = createSingle(for: integrationTests.throwError(message: sendMessage, delay: 1000))
         #endif
@@ -153,7 +153,7 @@ class RxSwiftSingleIntegrationTests: XCTestCase {
     func testNotOnMainThread() {
         let integrationTests = KotlinSuspendIntegrationTests()
         #if NATIVE_COROUTINES_SWIFT_EXPORT
-        let single = createSingle(for: { try await integrationTests.returnValueNative(value: 1, delay: 1000) })
+        let single = createSingle(for: { try await integrationTests.returnValue(value: 1, delay: 1000) })
         #else
         let single = createSingle(for: integrationTests.returnValue(value: 1, delay: 1000))
         #endif
@@ -176,7 +176,7 @@ class RxSwiftSingleIntegrationTests: XCTestCase {
         let callbackExpectation = expectation(description: "Waiting for callback not to get called")
         callbackExpectation.isInverted = true
         #if NATIVE_COROUTINES_SWIFT_EXPORT
-        let single = createSingle(for: { try await integrationTests.returnFromCallbackNative(delay: 3000) {
+        let single = createSingle(for: { try await integrationTests.returnFromCallback(delay: 3000) {
             callbackExpectation.fulfill()
             return 1
         }})
