@@ -231,7 +231,7 @@ class CombineFutureIntegrationTests: XCTestCase {
             valuesExpectation.fulfill()
         }
         _ = cancellable // This is just to remove the unused variable warning
-        delay(0.1) // Gives the job some time to start (in Swift Export)
+        delay(0.2) // Gives the job some time to start (in Swift Export)
         XCTAssertEqual(integrationTests.uncompletedJobCount, 1, "There should be 1 uncompleted job")
         wait(for: [valuesExpectation, completionExpectation], timeout: 4)
         delay(1) // Delay is needed else the job isn't completed yet
