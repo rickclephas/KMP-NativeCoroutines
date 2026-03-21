@@ -237,11 +237,13 @@ class RxSwiftSingleIntegrationTests: XCTestCase {
     }
     #endif
     
-    #if !NATIVE_COROUTINES_SWIFT_EXPORT
-    /// Suspend functions returning Unit aren't supported yet, see https://youtrack.jetbrains.com/issue/KT-81593
     func testUnitReturnType() {
-        let integrationTests = SuspendIntegrationTests()
+        let integrationTests = KotlinSuspendIntegrationTests()
+        #if NATIVE_COROUTINES_SWIFT_EXPORT
+        let single = createSingle(for: { try await integrationTests.returnUnit(delay: 1000) })
+        #else
         let single = createSingle(for: integrationTests.returnUnit(delay: 1000))
+        #endif
         let valueExpectation = expectation(description: "Waiting for value")
         let disposedExpectation = expectation(description: "Waiting for dispose")
         let disposable = single.subscribe(onSuccess: {
@@ -252,10 +254,11 @@ class RxSwiftSingleIntegrationTests: XCTestCase {
             disposedExpectation.fulfill()
         })
         _ = disposable // This is just to remove the unused variable warning
+        #if !NATIVE_COROUTINES_SWIFT_EXPORT
         XCTAssertEqual(integrationTests.uncompletedJobCount, 1, "There should be 1 uncompleted job")
+        #endif
         wait(for: [valueExpectation, disposedExpectation], timeout: 3)
         delay(1) // Delay is needed else the job isn't completed yet
         XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
     }
-    #endif
 }

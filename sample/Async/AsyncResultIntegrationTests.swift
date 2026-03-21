@@ -135,16 +135,17 @@ class AsyncResultIntegrationTests: XCTestCase {
         }
     }
     
-    #if !NATIVE_COROUTINES_SWIFT_EXPORT
-    /// Suspend functions returning Unit aren't supported yet, see https://youtrack.jetbrains.com/issue/KT-81593
     func testUnitReturnType() async throws {
-        let integrationTests = SuspendIntegrationTests()
+        let integrationTests = KotlinSuspendIntegrationTests()
+        #if NATIVE_COROUTINES_SWIFT_EXPORT
+        let result = await asyncResult(for: try await integrationTests.returnUnit(delay: 100))
+        #else
         let result = await asyncResult(for: integrationTests.returnUnit(delay: 100))
+        #endif
         guard case .success = result else {
             XCTFail("Function should complete without an error")
             return
         }
         await assertJobCompleted(integrationTests)
     }
-    #endif
 }

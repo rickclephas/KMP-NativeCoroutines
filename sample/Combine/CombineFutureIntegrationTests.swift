@@ -236,11 +236,13 @@ class CombineFutureIntegrationTests: XCTestCase {
     }
     #endif
     
-    #if !NATIVE_COROUTINES_SWIFT_EXPORT
-    /// Suspend functions returning Unit aren't supported yet, see https://youtrack.jetbrains.com/issue/KT-81593
     func testUnitReturnType() {
-        let integrationTests = SuspendIntegrationTests()
+        let integrationTests = KotlinSuspendIntegrationTests()
+        #if NATIVE_COROUTINES_SWIFT_EXPORT
+        let future = createFuture(for: { try await integrationTests.returnUnit(delay: 100) })
+        #else
         let future = createFuture(for: integrationTests.returnUnit(delay: 100))
+        #endif
         let valueExpectation = expectation(description: "Waiting for value")
         let completionExpectation = expectation(description: "Waiting for completion")
         let cancellable = future.sink { completion in
@@ -252,10 +254,11 @@ class CombineFutureIntegrationTests: XCTestCase {
             valueExpectation.fulfill()
         }
         _ = cancellable // This is just to remove the unused variable warning
+        #if !NATIVE_COROUTINES_SWIFT_EXPORT
         XCTAssertEqual(integrationTests.uncompletedJobCount, 1, "There should be 1 uncompleted job")
+        #endif
         wait(for: [valueExpectation, completionExpectation], timeout: 3)
         delay(1) // Delay is needed else the job isn't completed yet
         XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
     }
-    #endif
 }

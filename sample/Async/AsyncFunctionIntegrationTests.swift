@@ -104,12 +104,9 @@ class AsyncFunctionIntegrationTests: XCTestCase {
         }
     }
     
-    #if !NATIVE_COROUTINES_SWIFT_EXPORT
-    /// Suspend functions returning Unit aren't supported yet, see https://youtrack.jetbrains.com/issue/KT-81593
     func testUnitReturnType() async throws {
-        let integrationTests = SuspendIntegrationTests()
+        let integrationTests = KotlinSuspendIntegrationTests()
         try await asyncFunction(for: integrationTests.returnUnit(delay: 100))
         await assertJobCompleted(integrationTests)
     }
-    #endif
 }
