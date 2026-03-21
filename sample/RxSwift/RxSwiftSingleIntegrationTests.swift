@@ -109,8 +109,6 @@ class RxSwiftSingleIntegrationTests: XCTestCase {
         XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
     }
     
-    #if !NATIVE_COROUTINES_SWIFT_EXPORT
-    /// Error throwing isn't supported yet, see https://youtrack.jetbrains.com/issue/KT-83389
     func testErrorReceived() {
         let integrationTests = KotlinSuspendIntegrationTests()
         let sendMessage = randomString()
@@ -148,7 +146,6 @@ class RxSwiftSingleIntegrationTests: XCTestCase {
         wait(for: [valueExpectation, errorExpectation, disposedExpectation], timeout: 3)
         XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
     }
-    #endif
     
     func testNotOnMainThread() {
         let integrationTests = KotlinSuspendIntegrationTests()

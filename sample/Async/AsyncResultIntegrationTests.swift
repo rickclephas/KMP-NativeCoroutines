@@ -75,8 +75,6 @@ class AsyncResultIntegrationTests: XCTestCase {
         await assertJobCompleted(integrationTests)
     }
     
-    #if !NATIVE_COROUTINES_SWIFT_EXPORT
-    /// Error throwing isn't supported yet, see https://youtrack.jetbrains.com/issue/KT-83389
     func testErrorReceived() async {
         let integrationTests = KotlinSuspendIntegrationTests()
         let sendMessage = randomString()
@@ -102,7 +100,6 @@ class AsyncResultIntegrationTests: XCTestCase {
         #endif
         await assertJobCompleted(integrationTests)
     }
-    #endif
     
     func testCancellation() async {
         let integrationTests = KotlinSuspendIntegrationTests()
