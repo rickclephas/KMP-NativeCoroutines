@@ -27,12 +27,20 @@ class ClockRxSwiftViewModel: ClockViewModel {
     }
     
     func startMonitoring() {
-        #if !NATIVE_COROUTINES_SWIFT_EXPORT
-        disposable = createObservable(for: clock.time)
+        #if NATIVE_COROUTINES_SWIFT_EXPORT
+        let observable = createObservable(for: asyncSequence(for: clock.time))
+        #else
+        let observable = createObservable(for: clock.time)
+        #endif
+        disposable = observable
             // Convert the seconds since EPOCH to a string in the format "HH:mm:ss"
             .map { [weak self] time -> String in
                 guard let self = self else { return "" }
+                #if NATIVE_COROUTINES_SWIFT_EXPORT
+                let date = Date(timeIntervalSince1970: Double(time))
+                #else
                 let date = Date(timeIntervalSince1970: time.doubleValue)
+                #endif
                 return self.formatter.string(from: date)
             }
             // Update the UI on the main thread
@@ -43,7 +51,6 @@ class ClockRxSwiftViewModel: ClockViewModel {
                 // Replace any errors with a text message :)
                 self?.time = "Ohno error!"
             })
-        #endif
     }
     
     func stopMonitoring() {

@@ -14,6 +14,7 @@ typealias KotlinFlowIntegrationTests = NativeCoroutinesSampleShared.tests.FlowIn
 typealias KotlinIntegrationTests = NativeCoroutinesSampleShared.tests.IntegrationTests
 typealias KotlinNewMemoryModelIntegrationTests = NativeCoroutinesSampleShared.tests.NewMemoryModelIntegrationTests
 typealias KotlinSuspendIntegrationTests = NativeCoroutinesSampleShared.tests.SuspendIntegrationTests
+typealias KotlinThreadLockIntegrationTests = NativeCoroutinesSampleShared.tests.ThreadLockIntegrationTests
 
 #else
 
@@ -22,6 +23,7 @@ typealias KotlinFlowIntegrationTests = NativeCoroutinesSampleShared.FlowIntegrat
 typealias KotlinIntegrationTests = NativeCoroutinesSampleShared.IntegrationTests
 typealias KotlinNewMemoryModelIntegrationTests = NativeCoroutinesSampleShared.NewMemoryModelIntegrationTests
 typealias KotlinSuspendIntegrationTests = NativeCoroutinesSampleShared.SuspendIntegrationTests
+typealias KotlinThreadLockIntegrationTests = NativeCoroutinesSampleShared.ThreadLockIntegrationTests
 
 #endif
 

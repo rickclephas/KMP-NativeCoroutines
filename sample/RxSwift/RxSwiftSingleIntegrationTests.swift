@@ -203,18 +203,25 @@ class RxSwiftSingleIntegrationTests: XCTestCase {
         XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
     }
     
-    #if !NATIVE_COROUTINES_SWIFT_EXPORT
     func testValuesReceived() {
         let integrationTests = setup(KotlinSuspendIntegrationTests.init)
         let sendValueCount = randomInt(min: 5, max: 20)
+        #if NATIVE_COROUTINES_SWIFT_EXPORT
+        let observable = createObservable(for: { try await asyncSequence(for: integrationTests.getFlow(count: sendValueCount, delay: 100)) })
+        #else
         let observable = createObservable(for: integrationTests.getFlow(count: sendValueCount, delay: 100))
+        #endif
         let valuesExpectation = expectation(description: "Waiting for values")
         valuesExpectation.expectedFulfillmentCount = Int(sendValueCount)
         let completionExpectation = expectation(description: "Waiting for completion")
         let disposedExpectation = expectation(description: "Waiting for dispose")
         var receivedValueCount = 0
         let disposable = observable.subscribe(onNext: { value in
+            #if NATIVE_COROUTINES_SWIFT_EXPORT
+            XCTAssertEqual(Int(value), receivedValueCount, "Received incorrect value")
+            #else
             XCTAssertEqual(value.intValue, receivedValueCount, "Received incorrect value")
+            #endif
             receivedValueCount += 1
             valuesExpectation.fulfill()
         }, onError: { _ in
@@ -231,7 +238,6 @@ class RxSwiftSingleIntegrationTests: XCTestCase {
         delay(1) // Delay is needed else the job isn't completed yet
         XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
     }
-    #endif
     
     func testUnitReturnType() {
         let integrationTests = setup(KotlinSuspendIntegrationTests.init)

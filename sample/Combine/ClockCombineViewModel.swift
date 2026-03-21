@@ -27,12 +27,20 @@ class ClockCombineViewModel: ClockViewModel {
     }
     
     func startMonitoring() {
-        #if !NATIVE_COROUTINES_SWIFT_EXPORT
-        cancellable = createPublisher(for: clock.time)
+        #if NATIVE_COROUTINES_SWIFT_EXPORT
+        let publisher = createPublisher(for: asyncSequence(for: clock.time))
+        #else
+        let publisher = createPublisher(for: clock.time)
+        #endif
+        cancellable = publisher
             // Convert the seconds since EPOCH to a string in the format "HH:mm:ss"
             .map { [weak self] time -> String in
                 guard let self = self else { return "" }
+                #if NATIVE_COROUTINES_SWIFT_EXPORT
+                let date = Date(timeIntervalSince1970: Double(time))
+                #else
                 let date = Date(timeIntervalSince1970: time.doubleValue)
+                #endif
                 return self.formatter.string(from: date)
             }
             // Replace any errors with a text message :)
@@ -42,7 +50,6 @@ class ClockCombineViewModel: ClockViewModel {
             .sink { [weak self] time in
                 self?.time = time
             }
-        #endif
     }
     
     func stopMonitoring() {
