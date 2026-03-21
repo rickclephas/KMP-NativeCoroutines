@@ -17,11 +17,7 @@ class AsyncSequenceIntegrationTests: XCTestCase {
     func testValuesReceived() async {
         let integrationTests = setup(KotlinFlowIntegrationTests.init)
         let sendValueCount = randomInt(min: 5, max: 20)
-        #if NATIVE_COROUTINES_SWIFT_EXPORT
-        let sequence = integrationTests.getFlow(count: sendValueCount, delay: 100).asAsyncSequence()
-        #else
         let sequence = asyncSequence(for: integrationTests.getFlow(count: sendValueCount, delay: 100))
-        #endif
         do {
             var receivedValueCount: Int32 = 0
             for try await value in sequence {
@@ -47,11 +43,7 @@ class AsyncSequenceIntegrationTests: XCTestCase {
     func testValueBackPressure() async {
         let integrationTests = setup(KotlinFlowIntegrationTests.init)
         let sendValueCount: Int32 = 10
-        #if NATIVE_COROUTINES_SWIFT_EXPORT
-        let sequence = integrationTests.getFlow(count: sendValueCount, delay: 100).asAsyncSequence()
-        #else
         let sequence = asyncSequence(for: integrationTests.getFlow(count: sendValueCount, delay: 100))
-        #endif
         do {
             var receivedValueCount: Int32 = 0
             for try await _ in sequence {
@@ -78,11 +70,7 @@ class AsyncSequenceIntegrationTests: XCTestCase {
         let integrationTests = setup(KotlinFlowIntegrationTests.init)
         let sendValueCount = randomInt(min: 5, max: 20)
         let nullValueIndex = randomInt(min: 0, max: sendValueCount - 1)
-        #if NATIVE_COROUTINES_SWIFT_EXPORT
-        let sequence = integrationTests.getFlowWithNull(count: sendValueCount, nullIndex: nullValueIndex, delay: 100).asAsyncSequence()
-        #else
         let sequence = asyncSequence(for: integrationTests.getFlowWithNull(count: sendValueCount, nullIndex: nullValueIndex, delay: 100))
-        #endif
         do {
             var receivedValueCount: Int32 = 0
             for try await value in sequence {
@@ -115,11 +103,7 @@ class AsyncSequenceIntegrationTests: XCTestCase {
         let sendValueCount = randomInt(min: 5, max: 20)
         let exceptionIndex = randomInt(min: 1, max: sendValueCount - 1)
         let sendMessage = randomString()
-        #if NATIVE_COROUTINES_SWIFT_EXPORT
-        let sequence = integrationTests.getFlowWithException(count: sendValueCount, exceptionIndex: exceptionIndex, message: sendMessage, delay: 100).asAsyncSequence()
-        #else
         let sequence = asyncSequence(for: integrationTests.getFlowWithException(count: sendValueCount, exceptionIndex: exceptionIndex, message: sendMessage, delay: 100))
-        #endif
         var receivedValueCount: Int32 = 0
         do {
             for try await _ in sequence {
@@ -149,11 +133,7 @@ class AsyncSequenceIntegrationTests: XCTestCase {
         let sendValueCount = randomInt(min: 5, max: 20)
         let errorIndex = randomInt(min: 1, max: sendValueCount - 1)
         let sendMessage = randomString()
-        #if NATIVE_COROUTINES_SWIFT_EXPORT
-        let sequence = integrationTests.getFlowWithError(count: sendValueCount, errorIndex: errorIndex, message: sendMessage, delay: 100).asAsyncSequence()
-        #else
         let sequence = asyncSequence(for: integrationTests.getFlowWithError(count: sendValueCount, errorIndex: errorIndex, message: sendMessage, delay: 100))
-        #endif
         var receivedValueCount: Int32 = 0
         do {
             for try await _ in sequence {
@@ -184,15 +164,9 @@ class AsyncSequenceIntegrationTests: XCTestCase {
         let integrationTests = setup(KotlinFlowIntegrationTests.init)
         let handle = Task<Void, Never> {
             do {
-                #if NATIVE_COROUTINES_SWIFT_EXPORT
-                let sequence = integrationTests.getFlowWithCallback(count: 5, callbackIndex: 3, delay: 1000) {
-                    XCTFail("The callback shouldn't be called")
-                }.asAsyncSequence()
-                #else
                 let sequence = asyncSequence(for: integrationTests.getFlowWithCallback(count: 5, callbackIndex: 3, delay: 1000) {
                     XCTFail("The callback shouldn't be called")
                 })
-                #endif
                 for try await _ in sequence {
                     XCTAssertEqual(integrationTests.uncompletedJobCount, 1, "There should be 1 uncompleted job")
                 }
@@ -219,15 +193,9 @@ class AsyncSequenceIntegrationTests: XCTestCase {
         let integrationTests = setup(KotlinFlowIntegrationTests.init)
         let handle = Task<Void, Never> {
             do {
-                #if NATIVE_COROUTINES_SWIFT_EXPORT
-                let sequence = integrationTests.getFlowWithCallback(count: 5, callbackIndex: 2, delay: 1000) {
-                    XCTFail("The callback shouldn't be called")
-                }.asAsyncSequence()
-                #else
                 let sequence = asyncSequence(for: integrationTests.getFlowWithCallback(count: 5, callbackIndex: 2, delay: 1000) {
                     XCTFail("The callback shouldn't be called")
                 })
-                #endif
                 let iterator = sequence.makeAsyncIterator()
                 let _ = try await iterator.next()
                 XCTAssertEqual(integrationTests.uncompletedJobCount, 1, "There should be 1 uncompleted job")
