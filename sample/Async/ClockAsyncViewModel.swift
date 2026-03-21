@@ -27,12 +27,15 @@ class ClockAsyncViewModel: ClockViewModel {
     
     func startMonitoring() {
         let clock = clock
-        #if !NATIVE_COROUTINES_SWIFT_EXPORT
         task = Task { [weak self] in
             let timeSequence = asyncSequence(for: clock.time)
                 .map { [weak self] time -> String in
                     guard let self = self else { return "" }
+                    #if NATIVE_COROUTINES_SWIFT_EXPORT
+                    let date = Date(timeIntervalSince1970: Double(time))
+                    #else
                     let date = Date(timeIntervalSince1970: time.doubleValue)
+                    #endif
                     return self.formatter.string(from: date)
                 }
             do {
@@ -40,12 +43,13 @@ class ClockAsyncViewModel: ClockViewModel {
                     self?.time = time
                 }
             } catch {
-                // Replace any errors with a text message :)
-                self?.time = "Ohno error!"
+                if !(error is CancellationError) {
+                    // Replace any errors with a text message :)
+                    self?.time = "Ohno error!"
+                }
             }
             self?.task = nil
         }
-        #endif
     }
     
     func stopMonitoring() {

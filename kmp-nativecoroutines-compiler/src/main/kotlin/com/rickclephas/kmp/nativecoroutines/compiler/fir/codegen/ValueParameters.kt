@@ -41,9 +41,6 @@ internal fun FirExtension.buildValueParametersCopy(
             .let(substitutor::substituteOrSelf)
             .toFirResolvedTypeRef()
 
-        @OptIn(SymbolInternals::class)
-        deprecationsProvider = parameter.fir.deprecationsProvider
-
         // TODO: support defaultValue once exported to ObjC
 
         annotations.addAll(buildAnnotationsCopy(parameter.resolvedAnnotationsWithClassIds))

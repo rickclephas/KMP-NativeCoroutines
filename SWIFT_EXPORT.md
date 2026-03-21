@@ -23,13 +23,25 @@ These are the known limitations with Swift export and KMP-NativeCoroutines.
 
 ## 🚨 `NativeSuspend` and `NativeFlow` are unsupported
 
-At the moment Swift export doesn't support functional return types yet.
+At the moment Swift export has some issues with functional return types and generics.
 
 Unfortunately KMP-NativeCoroutines heavily relies on functional return types, making it incompatible with Swift Export.
 For now the plugin just clones your original functions and properties to prevent your Kotlin builds from failing.
 
-**Temporary workaround:**  
-You should disable any relevant code in Swift if you would like to try Swift export.
+## ⚠️ `Flow` cancellation doesn't fully work yet
+
+Cancelling a `Flow` from Swift doesn't properly cancel the Flow on the Kotlin side
+([KT-85159](https://youtrack.jetbrains.com/issue/KT-85159)).
+
+## ⚠️ `Flow` with `null` values is canceled
+
+A `Flow` that emits `null` values will be canceled at the first `null` value
+([KT-84485](https://youtrack.jetbrains.com/issue/KT-84485)).
+
+## ⚠️ `Flow` with `Unit` values crashes
+
+A `Flow` with `Unit` values will crash with a force cast exception
+([KT-85163](https://youtrack.jetbrains.com/issue/KT-85163)).
 
 # Enabling Swift export
 
@@ -63,4 +75,39 @@ For Combine and RxSwift there are helper functions available, e.g.:
 ```diff
 - let future = createFuture(for: randomLettersGenerator.getRandomLetters(throwException: throwException))
 + let future = createFuture(for: { await self.randomLettersGenerator.getRandomLetters(throwException: throwException) })
+```
+
+## Flows
+
+You can use `Flow`s by adding the following helper function to your project:
+```swift
+import KotlinCoroutineSupport
+
+/// This function provides source compatibility during the migration to Swift export.
+///
+/// This is a no-op function and it can be safely removed once you have fully migrated to Swift export.
+@available(*, deprecated, message: "Kotlin Coroutines are supported by Swift export")
+public func asyncSequence<T>(
+    for flow: any KotlinTypedFlow<T>
+) -> KotlinFlowSequence<T> {
+    return flow.asAsyncSequence()
+}
+```
+
+After that you can use `Flow`s as `AsyncSequence`s without any changes:
+```swift
+let sequence = asyncSequence(for: clock.time)
+```
+
+> [!NOTE]
+> Upon cancellation Swift export will throw a `CancellationError` instead of ending the iteration by returning `nil`.
+
+> [!NOTE]
+> It's recommended to keep using the `asyncSequence(for:)` function for now.  
+> However this function is a no-op and can eventually be replaces with a call to `asAsyncSequence()`.
+
+For Combine and RxSwift there are helper functions available, e.g.:
+```diff
+- let publisher = createPublisher(for: clock.time)
++ let publisher = createPublisher(for: asyncSequence(for: clock.time))
 ```
