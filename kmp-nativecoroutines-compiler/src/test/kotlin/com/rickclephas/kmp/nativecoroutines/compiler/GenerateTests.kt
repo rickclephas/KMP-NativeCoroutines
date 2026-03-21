@@ -17,9 +17,10 @@ fun main() {
                 model("diagnostics", excludedPattern = excludePattern)
             }
 
-            testClass<AbstractFirPsiCodegenTest> {
-                model("codegen", excludedPattern = excludePattern)
-            }
+            // TODO: Enable PSI codegen test again once KT-82959 is fixed
+//            testClass<AbstractFirPsiCodegenTest> {
+//                model("codegen", excludedPattern = excludePattern)
+//            }
             testClass<AbstractFirLightTreeCodegenTest> {
                 model("codegen", excludedPattern = excludePattern)
             }
