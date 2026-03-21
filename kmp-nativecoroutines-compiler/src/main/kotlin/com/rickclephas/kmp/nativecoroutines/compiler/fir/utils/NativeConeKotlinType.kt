@@ -14,7 +14,7 @@ internal fun FirCallableSignature.getNativeType(
 ): ConeKotlinType {
     var nativeType = getRawType(type)
     if (SwiftExport.NO_FUNC_RETURN_TYPES !in swiftExport) {
-        if (type is CallableSignature.Type.Flow) {
+        if (type is CallableSignature.Type.Flow && SwiftExport.FLOW_SUPPORTED !in swiftExport) {
             val typeArgs = arrayOf<ConeTypeProjection>(getRawType(type.valueType))
             nativeType = ClassIds.nativeFlow.constructClassLikeType(typeArgs, type.isNullable)
         }

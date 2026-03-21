@@ -25,7 +25,7 @@ internal fun GeneratorContext.buildNativePropertyGetterBody(
     val coroutineScope = irTemporary(irCallCoroutineScope(originalGetter, function))
     var expression = irCallOriginalPropertyGetter(originalGetter, function)
     if (SwiftExport.NO_FUNC_RETURN_TYPES !in swiftExport) {
-        if (callableSignature.returnType is CallableSignature.Type.Flow) {
+        if (callableSignature.returnType is CallableSignature.Type.Flow && SwiftExport.FLOW_SUPPORTED !in swiftExport) {
             expression = irCallAsNativeFlow(expression, coroutineScope)
         }
     }
