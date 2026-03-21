@@ -15,7 +15,7 @@ import KotlinRuntimeSupport
 class RxSwiftSingleIntegrationTests: XCTestCase {
     
     func testValueReceived() {
-        let integrationTests = KotlinSuspendIntegrationTests()
+        let integrationTests = setup(KotlinSuspendIntegrationTests.init)
         let sendValue = randomInt()
         #if NATIVE_COROUTINES_SWIFT_EXPORT
         let single = createSingle(for: { try await integrationTests.returnValue(value: sendValue, delay: 1000) })
@@ -37,16 +37,15 @@ class RxSwiftSingleIntegrationTests: XCTestCase {
             disposedExpectation.fulfill()
         })
         _ = disposable // This is just to remove the unused variable warning
-        #if !NATIVE_COROUTINES_SWIFT_EXPORT
+        delay(0.1) // Gives the job some time to start (in Swift Export)
         XCTAssertEqual(integrationTests.uncompletedJobCount, 1, "There should be 1 uncompleted job")
-        #endif
         wait(for: [valueExpectation, disposedExpectation], timeout: 3)
         delay(1) // Delay is needed else the job isn't completed yet
         XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
     }
     
     func testNilValueReceived() {
-        let integrationTests = KotlinSuspendIntegrationTests()
+        let integrationTests = setup(KotlinSuspendIntegrationTests.init)
         #if NATIVE_COROUTINES_SWIFT_EXPORT
         let single = createSingle(for: { try await integrationTests.returnNull(delay: 1000) })
         #else
@@ -63,16 +62,15 @@ class RxSwiftSingleIntegrationTests: XCTestCase {
             disposedExpectation.fulfill()
         })
         _ = disposable // This is just to remove the unused variable warning
-        #if !NATIVE_COROUTINES_SWIFT_EXPORT
+        delay(0.1) // Gives the job some time to start (in Swift Export)
         XCTAssertEqual(integrationTests.uncompletedJobCount, 1, "There should be 1 uncompleted job")
-        #endif
         wait(for: [valueExpectation, disposedExpectation], timeout: 3)
         delay(1) // Delay is needed else the job isn't completed yet
         XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
     }
     
     func testExceptionReceived() {
-        let integrationTests = KotlinSuspendIntegrationTests()
+        let integrationTests = setup(KotlinSuspendIntegrationTests.init)
         let sendMessage = randomString()
         #if NATIVE_COROUTINES_SWIFT_EXPORT
         let single = createSingle(for: { try await integrationTests.throwException(message: sendMessage, delay: 1000) })
@@ -102,15 +100,14 @@ class RxSwiftSingleIntegrationTests: XCTestCase {
             disposedExpectation.fulfill()
         })
         _ = disposable // This is just to remove the unused variable warning
-        #if !NATIVE_COROUTINES_SWIFT_EXPORT
+        delay(0.1) // Gives the job some time to start (in Swift Export)
         XCTAssertEqual(integrationTests.uncompletedJobCount, 1, "There should be 1 uncompleted job")
-        #endif
         wait(for: [valueExpectation, errorExpectation, disposedExpectation], timeout: 3)
         XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
     }
     
     func testErrorReceived() {
-        let integrationTests = KotlinSuspendIntegrationTests()
+        let integrationTests = setup(KotlinSuspendIntegrationTests.init)
         let sendMessage = randomString()
         #if NATIVE_COROUTINES_SWIFT_EXPORT
         let single = createSingle(for: { try await integrationTests.throwError(message: sendMessage, delay: 1000) })
@@ -140,15 +137,14 @@ class RxSwiftSingleIntegrationTests: XCTestCase {
             disposedExpectation.fulfill()
         })
         _ = disposable // This is just to remove the unused variable warning
-        #if !NATIVE_COROUTINES_SWIFT_EXPORT
+        delay(0.1) // Gives the job some time to start (in Swift Export)
         XCTAssertEqual(integrationTests.uncompletedJobCount, 1, "There should be 1 uncompleted job")
-        #endif
         wait(for: [valueExpectation, errorExpectation, disposedExpectation], timeout: 3)
         XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
     }
     
     func testNotOnMainThread() {
-        let integrationTests = KotlinSuspendIntegrationTests()
+        let integrationTests = setup(KotlinSuspendIntegrationTests.init)
         #if NATIVE_COROUTINES_SWIFT_EXPORT
         let single = createSingle(for: { try await integrationTests.returnValue(value: 1, delay: 1000) })
         #else
@@ -169,7 +165,7 @@ class RxSwiftSingleIntegrationTests: XCTestCase {
     }
     
     func testCancellation() {
-        let integrationTests = KotlinSuspendIntegrationTests()
+        let integrationTests = setup(KotlinSuspendIntegrationTests.init)
         let callbackExpectation = expectation(description: "Waiting for callback not to get called")
         callbackExpectation.isInverted = true
         #if NATIVE_COROUTINES_SWIFT_EXPORT
@@ -195,22 +191,21 @@ class RxSwiftSingleIntegrationTests: XCTestCase {
         }, onDisposed: {
             disposedExpectation.fulfill()
         })
-        #if !NATIVE_COROUTINES_SWIFT_EXPORT
+        delay(0.1) // Gives the job some time to start (in Swift Export)
         XCTAssertEqual(integrationTests.uncompletedJobCount, 1, "There should be 1 uncompleted job")
-        #endif
         delay(1)
-        #if !NATIVE_COROUTINES_SWIFT_EXPORT
         XCTAssertEqual(integrationTests.activeJobCount, 1, "There should be 1 active job")
-        #endif
         disposable.dispose()
+        #if !NATIVE_COROUTINES_SWIFT_EXPORT
         XCTAssertEqual(integrationTests.activeJobCount, 0, "The job shouldn't be active anymore")
+        #endif
         wait(for: [callbackExpectation, valueExpectation, errorExpectation, disposedExpectation], timeout: 3)
         XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
     }
     
     #if !NATIVE_COROUTINES_SWIFT_EXPORT
     func testValuesReceived() {
-        let integrationTests = SuspendIntegrationTests()
+        let integrationTests = setup(KotlinSuspendIntegrationTests.init)
         let sendValueCount = randomInt(min: 5, max: 20)
         let observable = createObservable(for: integrationTests.getFlow(count: sendValueCount, delay: 100))
         let valuesExpectation = expectation(description: "Waiting for values")
@@ -230,6 +225,7 @@ class RxSwiftSingleIntegrationTests: XCTestCase {
             disposedExpectation.fulfill()
         })
         _ = disposable // This is just to remove the unused variable warning
+        delay(0.1) // Gives the job some time to start (in Swift Export)
         XCTAssertEqual(integrationTests.uncompletedJobCount, 1, "There should be 1 uncompleted job")
         wait(for: [valuesExpectation, completionExpectation, disposedExpectation], timeout: 4)
         delay(1) // Delay is needed else the job isn't completed yet
@@ -238,7 +234,7 @@ class RxSwiftSingleIntegrationTests: XCTestCase {
     #endif
     
     func testUnitReturnType() {
-        let integrationTests = KotlinSuspendIntegrationTests()
+        let integrationTests = setup(KotlinSuspendIntegrationTests.init)
         #if NATIVE_COROUTINES_SWIFT_EXPORT
         let single = createSingle(for: { try await integrationTests.returnUnit(delay: 1000) })
         #else
@@ -254,9 +250,8 @@ class RxSwiftSingleIntegrationTests: XCTestCase {
             disposedExpectation.fulfill()
         })
         _ = disposable // This is just to remove the unused variable warning
-        #if !NATIVE_COROUTINES_SWIFT_EXPORT
+        delay(0.1) // Gives the job some time to start (in Swift Export)
         XCTAssertEqual(integrationTests.uncompletedJobCount, 1, "There should be 1 uncompleted job")
-        #endif
         wait(for: [valueExpectation, disposedExpectation], timeout: 3)
         delay(1) // Delay is needed else the job isn't completed yet
         XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
