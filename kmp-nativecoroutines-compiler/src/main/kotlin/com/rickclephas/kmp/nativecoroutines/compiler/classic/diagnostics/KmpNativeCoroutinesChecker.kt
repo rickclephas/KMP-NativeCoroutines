@@ -34,6 +34,11 @@ import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNati
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.INCOMPATIBLE_OVERRIDE_COROUTINES_REFINED_STATE
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.REDUNDANT_PRIVATE_COROUTINES_REFINED
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.REDUNDANT_PRIVATE_COROUTINES_REFINED_STATE
+import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.REDUNDANT_REFINED_COROUTINES
+import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.REDUNDANT_REFINED_COROUTINES_IGNORE
+import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.REDUNDANT_REFINED_COROUTINES_REFINED
+import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.REDUNDANT_REFINED_COROUTINES_REFINED_STATE
+import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.REDUNDANT_REFINED_COROUTINES_STATE
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.UNSUPPORTED_CLASS_EXTENSION_PROPERTY
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.utils.coroutinesReturnType
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.utils.getNativeCoroutinesAnnotations
@@ -192,6 +197,13 @@ public class KmpNativeCoroutinesChecker(
             context.trace.report(REDUNDANT_PRIVATE_COROUTINES_REFINED, annotations[NativeCoroutinesRefined], declaration)
             context.trace.report(REDUNDANT_PRIVATE_COROUTINES_REFINED_STATE, annotations[NativeCoroutinesRefinedState], declaration)
             context.trace.report(REDUNDANT_PRIVATE_COROUTINES_STATE, annotations[NativeCoroutinesState], declaration)
+        }
+        if (isRefined) {
+            context.trace.report(REDUNDANT_REFINED_COROUTINES, annotations[NativeCoroutines], declaration)
+            context.trace.report(REDUNDANT_REFINED_COROUTINES_IGNORE, annotations[NativeCoroutinesIgnore], declaration)
+            context.trace.report(REDUNDANT_REFINED_COROUTINES_REFINED, annotations[NativeCoroutinesRefined], declaration)
+            context.trace.report(REDUNDANT_REFINED_COROUTINES_REFINED_STATE, annotations[NativeCoroutinesRefinedState], declaration)
+            context.trace.report(REDUNDANT_REFINED_COROUTINES_STATE, annotations[NativeCoroutinesState], declaration)
         }
         //endregion
 

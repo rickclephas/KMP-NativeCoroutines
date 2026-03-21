@@ -27,21 +27,23 @@ This library solves both of these limitations 😄.
 
 ## Compatibility
 
-The latest version of the library uses Kotlin version `2.3.0`.  
+The latest version of the library uses Kotlin version `2.3.20`.  
 Compatibility versions for older and/or preview Kotlin versions are also available:
 
-| Version        | Version suffix      |  Kotlin   | Coroutines |
-|----------------|---------------------|:---------:|:----------:|
-| **_latest_**   | **_no suffix_**     | **2.3.0** | **1.10.1** |
-| 1.0.0-ALPHA-48 | _no suffix_         |  2.2.21   |   1.10.1   |
-| 1.0.0-ALPHA-46 | _no suffix_         |  2.2.10   |   1.10.1   |
-| 1.0.0-ALPHA-45 | _no suffix_         |   2.2.0   |   1.10.1   |
-| 1.0.0-ALPHA-44 | _no suffix_         |  2.1.21   |   1.10.1   |
-| 1.0.0-ALPHA-41 | _no suffix_         |  2.1.10   |   1.10.1   |
-| 1.0.0-ALPHA-38 | _no suffix_         |   2.1.0   |   1.9.0    |
-| 1.0.0-ALPHA-37 | _no suffix_         |  2.0.21   |   1.9.0    |
-| 1.0.0-ALPHA-34 | _no suffix_         |  2.0.10   |   1.8.1    |
-| 1.0.0-ALPHA-33 | _no suffix_         |   2.0.0   |   1.8.1    |
+| Version        | Version suffix  |   Kotlin   | Coroutines |
+|----------------|-----------------|:----------:|:----------:|
+| **_latest_**   | **_no suffix_** | **2.3.20** | **1.10.1** |
+| 1.0.1          | _no suffix_     |   2.3.10   |   1.10.1   |
+| 1.0.0          | _no suffix_     |   2.3.0    |   1.10.1   |
+| 1.0.0-ALPHA-48 | _no suffix_     |   2.2.21   |   1.10.1   |
+| 1.0.0-ALPHA-46 | _no suffix_     |   2.2.10   |   1.10.1   |
+| 1.0.0-ALPHA-45 | _no suffix_     |   2.2.0    |   1.10.1   |
+| 1.0.0-ALPHA-44 | _no suffix_     |   2.1.21   |   1.10.1   |
+| 1.0.0-ALPHA-41 | _no suffix_     |   2.1.10   |   1.10.1   |
+| 1.0.0-ALPHA-38 | _no suffix_     |   2.1.0    |   1.9.0    |
+| 1.0.0-ALPHA-37 | _no suffix_     |   2.0.21   |   1.9.0    |
+| 1.0.0-ALPHA-34 | _no suffix_     |   2.0.10   |   1.8.1    |
+| 1.0.0-ALPHA-33 | _no suffix_     |   2.0.0    |   1.8.1    |
 
 You can choose from a couple of Swift implementations.  
 Depending on the implementation you can support as low as iOS 9, macOS 10.9, tvOS 9 and watchOS 3:
@@ -65,7 +67,7 @@ Make sure to always use the same versions for all the libraries!
 For Kotlin just add the plugin to your `build.gradle.kts`:
 ```kotlin
 plugins {
-    id("com.rickclephas.kmp.nativecoroutines") version "1.0.0"
+    id("com.rickclephas.kmp.nativecoroutines") version "1.0.2"
 }
 ```
 and make sure to opt in to the experimental `@ObjCName` annotation:
@@ -81,7 +83,7 @@ The Swift implementations are available via the Swift Package Manager.
 Just add it to your `Package.swift` file:
 ```swift
 dependencies: [
-    .package(url: "https://github.com/rickclephas/KMP-NativeCoroutines.git", exact: "1.0.0")
+    .package(url: "https://github.com/rickclephas/KMP-NativeCoroutines.git", exact: "1.0.2")
 ],
 targets: [
     .target(
@@ -113,9 +115,9 @@ Or add it in Xcode by going to `File` > `Add Packages...` and providing the URL:
 
 If you use CocoaPods add one or more of the following libraries to your `Podfile`:
 ```ruby
-pod 'KMPNativeCoroutinesAsync', '1.0.0'    # Swift Concurrency implementation
-pod 'KMPNativeCoroutinesCombine', '1.0.0'  # Combine implementation
-pod 'KMPNativeCoroutinesRxSwift', git: 'https://github.com/rickclephas/KMP-NativeCoroutines.git', tag: 'v1.0.0' # RxSwift implementation
+pod 'KMPNativeCoroutinesAsync', git: 'https://github.com/rickclephas/KMP-NativeCoroutines.git', tag: 'v1.0.2'   # Swift Concurrency implementation
+pod 'KMPNativeCoroutinesCombine', git: 'https://github.com/rickclephas/KMP-NativeCoroutines.git', tag: 'v1.0.2' # Combine implementation
+pod 'KMPNativeCoroutinesRxSwift', git: 'https://github.com/rickclephas/KMP-NativeCoroutines.git', tag: 'v1.0.2' # RxSwift implementation
 ```
 > [!NOTE]
 > The version for CocoaPods should not contain the Kotlin version suffix (e.g. `-new-mm` or `-kotlin-1.6.0`).

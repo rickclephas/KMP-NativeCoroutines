@@ -18,7 +18,7 @@ jobs:
         include:
           - java: '17'
           - xcode: '16.4'
-          - xcode: '26.0'
+          - xcode: '26.1'
             swift-export: true
           - platform: iOS
             scheme: iOS App
