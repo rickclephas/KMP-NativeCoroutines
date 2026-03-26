@@ -28,11 +28,6 @@ At the moment Swift export has some issues with functional return types and gene
 Unfortunately KMP-NativeCoroutines heavily relies on functional return types, making it incompatible with Swift Export.
 For now the plugin just clones your original functions and properties to prevent your Kotlin builds from failing.
 
-## ⚠️ `Flow` cancellation doesn't fully work yet
-
-Cancelling a `Flow` from Swift doesn't properly cancel the Flow on the Kotlin side
-([KT-85159](https://youtrack.jetbrains.com/issue/KT-85159)).
-
 ## ⚠️ `Flow` with `Unit` values crashes
 
 A `Flow` with `Unit` values will crash with a force cast exception

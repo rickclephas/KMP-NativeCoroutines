@@ -216,8 +216,6 @@ class CombinePublisherIntegrationTests: XCTestCase {
         wait(for: [valueExpectation, completionExpectation], timeout: 3)
     }
     
-    #if !NATIVE_COROUTINES_SWIFT_EXPORT
-    /// Cancellation isn't working yet, see https://youtrack.jetbrains.com/issue/KT-85159
     func testCancellation() {
         let integrationTests = setup(KotlinFlowIntegrationTests.init)
         let callbackExpectation = expectation(description: "Waiting for callback not to get called")
@@ -249,7 +247,6 @@ class CombinePublisherIntegrationTests: XCTestCase {
         wait(for: [callbackExpectation, completionExpectation], timeout: 2)
         XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
     }
-    #endif
     
     func testThreadLock() {
         let integrationTests = setup(KotlinThreadLockIntegrationTests.init)

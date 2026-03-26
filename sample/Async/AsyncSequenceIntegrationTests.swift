@@ -156,8 +156,6 @@ class AsyncSequenceIntegrationTests: XCTestCase {
         XCTAssertEqual(receivedValueCount, errorIndex, "Should have received all values before the error")
     }
     
-    #if !NATIVE_COROUTINES_SWIFT_EXPORT
-    /// Cancellation isn't working yet, see https://youtrack.jetbrains.com/issue/KT-85159
     func testCancellation() async {
         let integrationTests = setup(KotlinFlowIntegrationTests.init)
         let handle = Task<Void, Never> {
@@ -183,10 +181,7 @@ class AsyncSequenceIntegrationTests: XCTestCase {
         await handle.value
         await assertJobCompleted(integrationTests)
     }
-    #endif
     
-    #if !NATIVE_COROUTINES_SWIFT_EXPORT
-    /// Cancellation isn't working yet, see https://youtrack.jetbrains.com/issue/KT-85159
     func testImplicitCancellation() async {
         let integrationTests = setup(KotlinFlowIntegrationTests.init)
         let handle = Task<Void, Never> {
@@ -204,5 +199,4 @@ class AsyncSequenceIntegrationTests: XCTestCase {
         await handle.value
         await assertJobCompleted(integrationTests)
     }
-    #endif
 }
