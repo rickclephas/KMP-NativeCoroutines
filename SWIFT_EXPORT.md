@@ -79,19 +79,9 @@ For Combine and RxSwift there are helper functions available, e.g.:
 
 ## Flows
 
-You can use `Flow`s by adding the following helper function to your project:
+To use `Flow`s you'll need to add the following import:
 ```swift
 import KotlinCoroutineSupport
-
-/// This function provides source compatibility during the migration to Swift export.
-///
-/// This is a no-op function and it can be safely removed once you have fully migrated to Swift export.
-@available(*, deprecated, message: "Kotlin Coroutines are supported by Swift export")
-public func asyncSequence<T>(
-    for flow: any KotlinTypedFlow<T>
-) -> KotlinFlowSequence<T> {
-    return flow.asAsyncSequence()
-}
 ```
 
 After that you can use `Flow`s as `AsyncSequence`s without any changes:
