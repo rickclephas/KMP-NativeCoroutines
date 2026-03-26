@@ -65,8 +65,6 @@ class AsyncSequenceIntegrationTests: XCTestCase {
         await assertJobCompleted(integrationTests)
     }
     
-    #if !NATIVE_COROUTINES_SWIFT_EXPORT
-    /// Nil values in Flow cancel the collection, see http://youtrack.jetbrains.com/issue/KT-84485
     func testNilValueReceived() async {
         let integrationTests = setup(KotlinFlowIntegrationTests.init)
         let sendValueCount = randomInt(min: 5, max: 20)
@@ -97,7 +95,6 @@ class AsyncSequenceIntegrationTests: XCTestCase {
         }
         await assertJobCompleted(integrationTests)
     }
-    #endif
     
     func testExceptionReceived() async {
         let integrationTests = setup(KotlinFlowIntegrationTests.init)

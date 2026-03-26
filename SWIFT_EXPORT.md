@@ -33,11 +33,6 @@ For now the plugin just clones your original functions and properties to prevent
 Cancelling a `Flow` from Swift doesn't properly cancel the Flow on the Kotlin side
 ([KT-85159](https://youtrack.jetbrains.com/issue/KT-85159)).
 
-## ⚠️ `Flow` with `null` values is canceled
-
-A `Flow` that emits `null` values will be canceled at the first `null` value
-([KT-84485](https://youtrack.jetbrains.com/issue/KT-84485)).
-
 ## ⚠️ `Flow` with `Unit` values crashes
 
 A `Flow` with `Unit` values will crash with a force cast exception

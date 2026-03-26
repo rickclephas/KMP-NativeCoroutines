@@ -74,8 +74,6 @@ class CombinePublisherIntegrationTests: XCTestCase {
         await assertJobCompleted(integrationTests)
     }
     
-    #if !NATIVE_COROUTINES_SWIFT_EXPORT
-    /// Nil values in Flow cancel the collection, see http://youtrack.jetbrains.com/issue/KT-84485
     func testNilValueReceived() {
         let integrationTests = setup(KotlinFlowIntegrationTests.init)
         let sendValueCount = randomInt(min: 5, max: 20)
@@ -114,7 +112,6 @@ class CombinePublisherIntegrationTests: XCTestCase {
         delay(1) // Delay is needed else the job isn't completed yet
         XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
     }
-    #endif
     
     func testExceptionReceived() {
         let integrationTests = setup(KotlinFlowIntegrationTests.init)
