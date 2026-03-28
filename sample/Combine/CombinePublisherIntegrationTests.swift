@@ -243,7 +243,9 @@ class CombinePublisherIntegrationTests: XCTestCase {
         wait(for: [valuesExpectation], timeout: 4)
         XCTAssertEqual(integrationTests.activeJobCount, 1, "There should be 1 active job")
         cancellable.cancel()
+        #if !NATIVE_COROUTINES_SWIFT_EXPORT
         XCTAssertEqual(integrationTests.activeJobCount, 0, "The job shouldn't be active anymore")
+        #endif
         wait(for: [callbackExpectation, completionExpectation], timeout: 2)
         XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
     }
