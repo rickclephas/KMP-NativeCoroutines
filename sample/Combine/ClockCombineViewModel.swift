@@ -9,6 +9,9 @@ import Foundation
 import Combine
 import KMPNativeCoroutinesCombine
 import NativeCoroutinesSampleShared
+#if NATIVE_COROUTINES_SWIFT_EXPORT
+import KotlinCoroutineSupport
+#endif
 
 /// `ClockViewModel` implementation that uses Combine.
 class ClockCombineViewModel: ClockViewModel {
@@ -27,12 +30,20 @@ class ClockCombineViewModel: ClockViewModel {
     }
     
     func startMonitoring() {
-        #if !NATIVE_COROUTINES_SWIFT_EXPORT
-        cancellable = createPublisher(for: clock.time)
+        #if NATIVE_COROUTINES_SWIFT_EXPORT
+        let publisher = createPublisher(for: asyncSequence(for: clock.time))
+        #else
+        let publisher = createPublisher(for: clock.time)
+        #endif
+        cancellable = publisher
             // Convert the seconds since EPOCH to a string in the format "HH:mm:ss"
             .map { [weak self] time -> String in
                 guard let self = self else { return "" }
+                #if NATIVE_COROUTINES_SWIFT_EXPORT
+                let date = Date(timeIntervalSince1970: Double(time))
+                #else
                 let date = Date(timeIntervalSince1970: time.doubleValue)
+                #endif
                 return self.formatter.string(from: date)
             }
             // Replace any errors with a text message :)
@@ -42,7 +53,6 @@ class ClockCombineViewModel: ClockViewModel {
             .sink { [weak self] time in
                 self?.time = time
             }
-        #endif
     }
     
     func stopMonitoring() {
@@ -51,9 +61,14 @@ class ClockCombineViewModel: ClockViewModel {
     }
     
     func updateTime() {
+        #if NATIVE_COROUTINES_SWIFT_EXPORT
+        let time = clock.time.value
+        #else
+        let time = clock.timeValue
+        #endif
         // Convert the seconds since EPOCH to a string
         // in the format "HH:mm:ss" and update the UI
-        let date = Date(timeIntervalSince1970: TimeInterval(clock.timeValue))
-        time = formatter.string(from: date)
+        let date = Date(timeIntervalSince1970: TimeInterval(time))
+        self.time = formatter.string(from: date)
     }
 }

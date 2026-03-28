@@ -17,6 +17,17 @@ public func createObservable<Output, Failure: Error, Unit>(
     return createObservableImpl(for: nativeFlow)
 }
 
+/// This function provides source compatibility during the migration to Swift export.
+///
+/// You should migrate away from this function once you have fully migrated to Swift export.
+@available(*, deprecated, message: "Kotlin Coroutines are supported by Swift export")
+@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
+public func createObservable<Sequence: AsyncSequence>(
+    for asyncSequence: Sequence
+) -> Observable<Sequence.Element> {
+    return createObservableImpl(for: nativeFlow(for: asyncSequence))
+}
+
 /// Creates an `Observable` for the provided `NativeFlow`.
 /// - Parameter nativeFlow: The native flow to collect.
 /// - Returns: An observable that publishes the collected values.
