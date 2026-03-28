@@ -62,9 +62,14 @@ class ClockRxSwiftViewModel: ClockViewModel {
     }
     
     func updateTime() {
+        #if NATIVE_COROUTINES_SWIFT_EXPORT
+        let time = clock.time.value
+        #else
+        let time = clock.timeValue
+        #endif
         // Convert the seconds since EPOCH to a string
         // in the format "HH:mm:ss" and update the UI
-        let date = Date(timeIntervalSince1970: TimeInterval(clock.timeValue))
-        time = formatter.string(from: date)
+        let date = Date(timeIntervalSince1970: TimeInterval(time))
+        self.time = formatter.string(from: date)
     }
 }
