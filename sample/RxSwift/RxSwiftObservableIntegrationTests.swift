@@ -242,8 +242,6 @@ class RxSwiftObservableIntegrationTests: XCTestCase {
         XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
     }
     
-    #if !NATIVE_COROUTINES_SWIFT_EXPORT
-    /// Unit values don't work yet, see https://youtrack.jetbrains.com/issue/KT-85163
     func testUnitValues() {
         let integrationTests = setup(KotlinFlowIntegrationTests.init)
         #if NATIVE_COROUTINES_SWIFT_EXPORT
@@ -256,7 +254,7 @@ class RxSwiftObservableIntegrationTests: XCTestCase {
         let completionExpectation = expectation(description: "Waiting for completion")
         let disposedExpectation = expectation(description: "Waiting for dispose")
         var receivedValueCount = 0
-        let disposable = observable.subscribe(onNext: {
+        let disposable = observable.subscribe(onNext: { _ in
             receivedValueCount += 1
             valuesExpectation.fulfill()
         }, onError: { _ in
@@ -273,5 +271,4 @@ class RxSwiftObservableIntegrationTests: XCTestCase {
         delay(1) // Delay is needed else the job isn't completed yet
         XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
     }
-    #endif
 }

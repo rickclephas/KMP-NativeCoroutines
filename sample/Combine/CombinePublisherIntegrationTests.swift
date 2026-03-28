@@ -264,8 +264,6 @@ class CombinePublisherIntegrationTests: XCTestCase {
         cancellable.cancel()
     }
     
-    #if !NATIVE_COROUTINES_SWIFT_EXPORT
-    /// Unit values don't work yet, see https://youtrack.jetbrains.com/issue/KT-85163
     func testUnitValues() {
         let integrationTests = setup(KotlinFlowIntegrationTests.init)
         #if NATIVE_COROUTINES_SWIFT_EXPORT
@@ -282,7 +280,7 @@ class CombinePublisherIntegrationTests: XCTestCase {
                 XCTFail("Publisher should complete without an error")
             }
             completionExpectation.fulfill()
-        } receiveValue: {
+        } receiveValue: { _ in
             receivedValueCount += 1
             valuesExpectation.fulfill()
         }
@@ -293,5 +291,4 @@ class CombinePublisherIntegrationTests: XCTestCase {
         delay(1) // Delay is needed else the job isn't completed yet
         XCTAssertEqual(integrationTests.uncompletedJobCount, 0, "The job should have completed by now")
     }
-    #endif
 }
