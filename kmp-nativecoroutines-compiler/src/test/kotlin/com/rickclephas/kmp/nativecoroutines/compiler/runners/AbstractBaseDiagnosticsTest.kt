@@ -53,4 +53,4 @@ abstract class AbstractBaseDiagnosticsTest<R : ResultingArtifact.FrontendOutput<
 // Using NativeFirstStageEnvironmentConfigurator causes issues with the incompatible.kt tests
 private class BaseNativeEnvironmentConfigurator(
     testServices: TestServices
-): NativeEnvironmentConfigurator(testServices)
+): NativeEnvironmentConfigurator(testServices, null)
