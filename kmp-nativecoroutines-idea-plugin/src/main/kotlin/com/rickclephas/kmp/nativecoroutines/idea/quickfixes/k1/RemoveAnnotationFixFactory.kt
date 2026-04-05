@@ -1,6 +1,7 @@
 package com.rickclephas.kmp.nativecoroutines.idea.quickfixes.k1
 
 import com.intellij.codeInsight.intention.IntentionAction
+import org.jetbrains.kotlin.K1Deprecation
 import org.jetbrains.kotlin.diagnostics.Diagnostic
 import org.jetbrains.kotlin.diagnostics.DiagnosticFactory0
 import org.jetbrains.kotlin.idea.inspections.RemoveAnnotationFix
@@ -9,6 +10,7 @@ import org.jetbrains.kotlin.idea.quickfix.QuickFixes
 import org.jetbrains.kotlin.psi.KtAnnotationEntry
 import org.jetbrains.kotlin.psi.KtElement
 
+@OptIn(K1Deprecation::class)
 internal class RemoveAnnotationFixFactory(
     private val diagnosticFactories: Array<out DiagnosticFactory0<KtElement>>
 ): KotlinSingleIntentionActionFactory() {
