@@ -1,5 +1,5 @@
 [versions]
-kotlin = "2.4.0-dev-7068"
+kotlin = "2.4.0-Beta1"
 kotlin-idea = "2.4.0-dev-2631"
 kotlinx-coroutines = "1.10.1"
 kotlinx-binary-compatibility-validator = "0.16.3"
