@@ -11,6 +11,7 @@ import org.jetbrains.kotlin.test.frontend.classic.handlers.OldNewInferenceMetaIn
 import org.jetbrains.kotlin.test.initIdeaConfiguration
 import org.jetbrains.kotlin.test.model.*
 import org.jetbrains.kotlin.test.runners.AbstractKotlinCompilerTest
+import org.jetbrains.kotlin.test.services.TestServices
 import org.jetbrains.kotlin.test.services.configuration.CommonEnvironmentConfigurator
 import org.jetbrains.kotlin.test.services.configuration.NativeEnvironmentConfigurator
 import org.junit.jupiter.api.BeforeAll
@@ -40,7 +41,7 @@ abstract class AbstractBaseDiagnosticsTest<R : ResultingArtifact.FrontendOutput<
             +WITH_PLATFORM_LIBS
         }
         enableMetaInfoHandler()
-        useConfigurators(::CommonEnvironmentConfigurator, ::NativeEnvironmentConfigurator)
+        useConfigurators(::CommonEnvironmentConfigurator, ::BaseNativeEnvironmentConfigurator)
         useMetaInfoProcessors(::OldNewInferenceMetaInfoProcessor)
         facadeStep(frontend)
         handlersSetup()
@@ -48,3 +49,8 @@ abstract class AbstractBaseDiagnosticsTest<R : ResultingArtifact.FrontendOutput<
         useCustomRuntimeClasspathProviders(::KmpNativeCoroutinesNativeRuntimeClasspathProvider)
     }
 }
+
+// Using NativeFirstStageEnvironmentConfigurator causes issues with the incompatible.kt tests
+private class BaseNativeEnvironmentConfigurator(
+    testServices: TestServices
+): NativeEnvironmentConfigurator(testServices, null)

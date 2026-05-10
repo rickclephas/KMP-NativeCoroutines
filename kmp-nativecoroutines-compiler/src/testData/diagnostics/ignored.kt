@@ -1,5 +1,3 @@
-// FIR_IDENTICAL
-
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesIgnore
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesRefined

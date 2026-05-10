@@ -7,9 +7,6 @@ fun main() {
     generateTestGroupSuiteWithJUnit5 {
         testGroup(testDataRoot = "src/testData", testsRoot = "src/test/generated") {
             val excludePattern = "^(.+)\\.fir\\.kt\$"
-            testClass<AbstractClassicDiagnosticsTest> {
-                model("diagnostics", excludedPattern = excludePattern)
-            }
             testClass<AbstractFirPsiDiagnosticsTest> {
                 model("diagnostics", excludedPattern = excludePattern)
             }
@@ -17,9 +14,10 @@ fun main() {
                 model("diagnostics", excludedPattern = excludePattern)
             }
 
-            testClass<AbstractFirPsiCodegenTest> {
-                model("codegen", excludedPattern = excludePattern)
-            }
+            // TODO: Enable PSI codegen test again once KT-82959 is fixed
+//            testClass<AbstractFirPsiCodegenTest> {
+//                model("codegen", excludedPattern = excludePattern)
+//            }
             testClass<AbstractFirLightTreeCodegenTest> {
                 model("codegen", excludedPattern = excludePattern)
             }
