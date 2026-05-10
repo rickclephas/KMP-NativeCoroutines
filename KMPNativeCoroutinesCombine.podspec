@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name       = 'KMPNativeCoroutinesCombine'
-  s.version    = '1.0.2'
+  s.version    = '1.0.3'
   s.summary    = 'Swift library for Kotlin Coroutines with Combine'
 
   s.homepage   = 'https://github.com/rickclephas/KMP-NativeCoroutines'
