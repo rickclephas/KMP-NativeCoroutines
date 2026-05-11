@@ -100,6 +100,50 @@ public class FirLightTreeCodegenTestGenerated extends AbstractFirLightTreeCodege
   }
 
   @Nested
+  @TestMetadata("src/testData/codegen/swift13")
+  @TestDataPath("$PROJECT_ROOT")
+  public class Swift13 {
+    private void run(String fileName) {
+      runTest("src/testData/codegen/swift13/" + fileName);
+    }
+
+    @Test
+    public void testAllFilesPresentInSwift13() {
+      KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("src/testData/codegen/swift13"), Pattern.compile("^(.+)\\.kt$"), Pattern.compile("^(.+)\\.fir\\.kt$"), true);
+    }
+
+    @Test
+    @TestMetadata("annotations.kt")
+    public void testAnnotations() {
+      run("annotations.kt");
+    }
+
+    @Test
+    @TestMetadata("coroutinescope.kt")
+    public void testCoroutinescope() {
+      run("coroutinescope.kt");
+    }
+
+    @Test
+    @TestMetadata("functions.kt")
+    public void testFunctions() {
+      run("functions.kt");
+    }
+
+    @Test
+    @TestMetadata("properties.kt")
+    public void testProperties() {
+      run("properties.kt");
+    }
+
+    @Test
+    @TestMetadata("viewmodelscope.kt")
+    public void testViewmodelscope() {
+      run("viewmodelscope.kt");
+    }
+  }
+
+  @Nested
   @TestMetadata("src/testData/codegen/swift3")
   @TestDataPath("$PROJECT_ROOT")
   public class Swift3 {
