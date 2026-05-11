@@ -9,9 +9,6 @@ import Foundation
 import Combine
 import KMPNativeCoroutinesCombine
 import NativeCoroutinesSampleShared
-#if NATIVE_COROUTINES_SWIFT_EXPORT
-import KotlinCoroutineSupport
-#endif
 
 /// `ClockViewModel` implementation that uses Combine.
 class ClockCombineViewModel: ClockViewModel {

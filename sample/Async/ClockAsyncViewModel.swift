@@ -8,9 +8,6 @@
 import Foundation
 import KMPNativeCoroutinesAsync
 import NativeCoroutinesSampleShared
-#if NATIVE_COROUTINES_SWIFT_EXPORT
-import KotlinCoroutineSupport
-#endif
 
 /// `ClockViewModel` implementation that uses RxSwift.
 class ClockAsyncViewModel: ClockViewModel {

@@ -64,12 +64,7 @@ For Combine and RxSwift there are helper functions available, e.g.:
 
 ## Flows
 
-To use `Flow`s you'll need to add the following import:
-```swift
-import KotlinCoroutineSupport
-```
-
-After that you can use `Flow`s as `AsyncSequence`s without any changes:
+You can use `Flow`s as `AsyncSequence`s without any changes:
 ```swift
 let sequence = asyncSequence(for: clock.time)
 ```

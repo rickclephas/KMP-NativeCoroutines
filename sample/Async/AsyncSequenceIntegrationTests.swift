@@ -10,7 +10,6 @@ import KMPNativeCoroutinesAsync
 import NativeCoroutinesSampleShared
 #if NATIVE_COROUTINES_SWIFT_EXPORT
 import KotlinRuntimeSupport
-import KotlinCoroutineSupport
 #endif
 
 class AsyncSequenceIntegrationTests: XCTestCase {
