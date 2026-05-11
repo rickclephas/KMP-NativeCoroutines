@@ -53,19 +53,19 @@ interface InterfaceA {
 }
 
 class ClassA: InterfaceA {
-    <!INCOMPATIBLE_OVERRIDE_COROUTINES, INCOMPATIBLE_OVERRIDE_COROUTINES{NATIVE}!>@NativeCoroutines<!>
+    <!INCOMPATIBLE_OVERRIDE_COROUTINES!>@NativeCoroutines<!>
     override suspend fun functionA(): Int = 0
 
-    <!INCOMPATIBLE_OVERRIDE_COROUTINES_IGNORE, INCOMPATIBLE_OVERRIDE_COROUTINES_IGNORE{NATIVE}!>@NativeCoroutinesIgnore<!>
+    <!INCOMPATIBLE_OVERRIDE_COROUTINES_IGNORE!>@NativeCoroutinesIgnore<!>
     override suspend fun functionB(): Int = 0
 
-    <!INCOMPATIBLE_OVERRIDE_COROUTINES_REFINED, INCOMPATIBLE_OVERRIDE_COROUTINES_REFINED{NATIVE}!>@NativeCoroutinesRefined<!>
+    <!INCOMPATIBLE_OVERRIDE_COROUTINES_REFINED!>@NativeCoroutinesRefined<!>
     override suspend fun functionC(): Int = 0
 
-    <!INCOMPATIBLE_OVERRIDE_COROUTINES_REFINED_STATE, INCOMPATIBLE_OVERRIDE_COROUTINES_REFINED_STATE{NATIVE}!>@NativeCoroutinesRefinedState<!>
+    <!INCOMPATIBLE_OVERRIDE_COROUTINES_REFINED_STATE!>@NativeCoroutinesRefinedState<!>
     override val propertyA: StateFlow<Int> = throw Throwable()
 
-    <!INCOMPATIBLE_OVERRIDE_COROUTINES_STATE, INCOMPATIBLE_OVERRIDE_COROUTINES_STATE{NATIVE}!>@NativeCoroutinesState<!>
+    <!INCOMPATIBLE_OVERRIDE_COROUTINES_STATE!>@NativeCoroutinesState<!>
     override val propertyB: StateFlow<Int> = throw Throwable()
 }
 

@@ -7,9 +7,6 @@ fun main() {
     generateTestGroupSuiteWithJUnit5 {
         testGroup(testDataRoot = "src/testData", testsRoot = "src/test/generated") {
             val excludePattern = "^(.+)\\.fir\\.kt\$"
-            testClass<AbstractClassicDiagnosticsTest> {
-                model("diagnostics", excludedPattern = excludePattern)
-            }
             testClass<AbstractFirPsiDiagnosticsTest> {
                 model("diagnostics", excludedPattern = excludePattern)
             }
