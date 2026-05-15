@@ -36,4 +36,8 @@ kotlin {
         nodejs()
         d8()
     }
+    @OptIn(ExperimentalWasmDsl::class)
+    wasmWasi {
+        nodejs()
+    }
 }
