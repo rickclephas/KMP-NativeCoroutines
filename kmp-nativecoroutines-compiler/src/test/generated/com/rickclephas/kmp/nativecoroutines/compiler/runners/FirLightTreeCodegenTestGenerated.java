@@ -16,6 +16,10 @@ import java.util.regex.Pattern;
 @TestMetadata("src/testData/codegen")
 @TestDataPath("$PROJECT_ROOT")
 public class FirLightTreeCodegenTestGenerated extends AbstractFirLightTreeCodegenTest {
+  private void run(String fileName) {
+    runTest("src/testData/codegen/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInCodegen() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("src/testData/codegen"), Pattern.compile("^(.+)\\.kt$"), Pattern.compile("^(.+)\\.fir\\.kt$"), true);
@@ -24,37 +28,41 @@ public class FirLightTreeCodegenTestGenerated extends AbstractFirLightTreeCodege
   @Test
   @TestMetadata("annotations.kt")
   public void testAnnotations() {
-    runTest("src/testData/codegen/annotations.kt");
+    run("annotations.kt");
   }
 
   @Test
   @TestMetadata("coroutinescope.kt")
   public void testCoroutinescope() {
-    runTest("src/testData/codegen/coroutinescope.kt");
+    run("coroutinescope.kt");
   }
 
   @Test
   @TestMetadata("functions.kt")
   public void testFunctions() {
-    runTest("src/testData/codegen/functions.kt");
+    run("functions.kt");
   }
 
   @Test
   @TestMetadata("properties.kt")
   public void testProperties() {
-    runTest("src/testData/codegen/properties.kt");
+    run("properties.kt");
   }
 
   @Test
   @TestMetadata("viewmodelscope.kt")
   public void testViewmodelscope() {
-    runTest("src/testData/codegen/viewmodelscope.kt");
+    run("viewmodelscope.kt");
   }
 
   @Nested
   @TestMetadata("src/testData/codegen/swift1")
   @TestDataPath("$PROJECT_ROOT")
   public class Swift1 {
+    private void run(String fileName) {
+      runTest("src/testData/codegen/swift1/" + fileName);
+    }
+
     @Test
     public void testAllFilesPresentInSwift1() {
       KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("src/testData/codegen/swift1"), Pattern.compile("^(.+)\\.kt$"), Pattern.compile("^(.+)\\.fir\\.kt$"), true);
@@ -63,31 +71,31 @@ public class FirLightTreeCodegenTestGenerated extends AbstractFirLightTreeCodege
     @Test
     @TestMetadata("annotations.kt")
     public void testAnnotations() {
-      runTest("src/testData/codegen/swift1/annotations.kt");
+      run("annotations.kt");
     }
 
     @Test
     @TestMetadata("coroutinescope.kt")
     public void testCoroutinescope() {
-      runTest("src/testData/codegen/swift1/coroutinescope.kt");
+      run("coroutinescope.kt");
     }
 
     @Test
     @TestMetadata("functions.kt")
     public void testFunctions() {
-      runTest("src/testData/codegen/swift1/functions.kt");
+      run("functions.kt");
     }
 
     @Test
     @TestMetadata("properties.kt")
     public void testProperties() {
-      runTest("src/testData/codegen/swift1/properties.kt");
+      run("properties.kt");
     }
 
     @Test
     @TestMetadata("viewmodelscope.kt")
     public void testViewmodelscope() {
-      runTest("src/testData/codegen/swift1/viewmodelscope.kt");
+      run("viewmodelscope.kt");
     }
   }
 
@@ -95,6 +103,10 @@ public class FirLightTreeCodegenTestGenerated extends AbstractFirLightTreeCodege
   @TestMetadata("src/testData/codegen/swift3")
   @TestDataPath("$PROJECT_ROOT")
   public class Swift3 {
+    private void run(String fileName) {
+      runTest("src/testData/codegen/swift3/" + fileName);
+    }
+
     @Test
     public void testAllFilesPresentInSwift3() {
       KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("src/testData/codegen/swift3"), Pattern.compile("^(.+)\\.kt$"), Pattern.compile("^(.+)\\.fir\\.kt$"), true);
@@ -103,31 +115,31 @@ public class FirLightTreeCodegenTestGenerated extends AbstractFirLightTreeCodege
     @Test
     @TestMetadata("annotations.kt")
     public void testAnnotations() {
-      runTest("src/testData/codegen/swift3/annotations.kt");
+      run("annotations.kt");
     }
 
     @Test
     @TestMetadata("coroutinescope.kt")
     public void testCoroutinescope() {
-      runTest("src/testData/codegen/swift3/coroutinescope.kt");
+      run("coroutinescope.kt");
     }
 
     @Test
     @TestMetadata("functions.kt")
     public void testFunctions() {
-      runTest("src/testData/codegen/swift3/functions.kt");
+      run("functions.kt");
     }
 
     @Test
     @TestMetadata("properties.kt")
     public void testProperties() {
-      runTest("src/testData/codegen/swift3/properties.kt");
+      run("properties.kt");
     }
 
     @Test
     @TestMetadata("viewmodelscope.kt")
     public void testViewmodelscope() {
-      runTest("src/testData/codegen/swift3/viewmodelscope.kt");
+      run("viewmodelscope.kt");
     }
   }
 
@@ -135,6 +147,10 @@ public class FirLightTreeCodegenTestGenerated extends AbstractFirLightTreeCodege
   @TestMetadata("src/testData/codegen/swift5")
   @TestDataPath("$PROJECT_ROOT")
   public class Swift5 {
+    private void run(String fileName) {
+      runTest("src/testData/codegen/swift5/" + fileName);
+    }
+
     @Test
     public void testAllFilesPresentInSwift5() {
       KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("src/testData/codegen/swift5"), Pattern.compile("^(.+)\\.kt$"), Pattern.compile("^(.+)\\.fir\\.kt$"), true);
@@ -143,31 +159,31 @@ public class FirLightTreeCodegenTestGenerated extends AbstractFirLightTreeCodege
     @Test
     @TestMetadata("annotations.kt")
     public void testAnnotations() {
-      runTest("src/testData/codegen/swift5/annotations.kt");
+      run("annotations.kt");
     }
 
     @Test
     @TestMetadata("coroutinescope.kt")
     public void testCoroutinescope() {
-      runTest("src/testData/codegen/swift5/coroutinescope.kt");
+      run("coroutinescope.kt");
     }
 
     @Test
     @TestMetadata("functions.kt")
     public void testFunctions() {
-      runTest("src/testData/codegen/swift5/functions.kt");
+      run("functions.kt");
     }
 
     @Test
     @TestMetadata("properties.kt")
     public void testProperties() {
-      runTest("src/testData/codegen/swift5/properties.kt");
+      run("properties.kt");
     }
 
     @Test
     @TestMetadata("viewmodelscope.kt")
     public void testViewmodelscope() {
-      runTest("src/testData/codegen/swift5/viewmodelscope.kt");
+      run("viewmodelscope.kt");
     }
   }
 }

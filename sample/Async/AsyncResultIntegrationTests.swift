@@ -18,7 +18,7 @@ class AsyncResultIntegrationTests: XCTestCase {
         let integrationTests = KotlinSuspendIntegrationTests()
         let sendValue = randomInt()
         #if NATIVE_COROUTINES_SWIFT_EXPORT
-        let result = await asyncResult(for: try await integrationTests.returnValueNative(value: sendValue, delay: 1000))
+        let result = await asyncResult(for: try await integrationTests.returnValue(value: sendValue, delay: 1000))
         #else
         let result = await asyncResult(for: integrationTests.returnValue(value: sendValue, delay: 1000))
         #endif
@@ -37,7 +37,7 @@ class AsyncResultIntegrationTests: XCTestCase {
     func testNilValueReceived() async {
         let integrationTests = KotlinSuspendIntegrationTests()
         #if NATIVE_COROUTINES_SWIFT_EXPORT
-        let result = await asyncResult(for: try await integrationTests.returnNullNative(delay: 1000))
+        let result = await asyncResult(for: try await integrationTests.returnNull(delay: 1000))
         #else
         let result = await asyncResult(for: integrationTests.returnNull(delay: 1000))
         #endif
@@ -53,7 +53,7 @@ class AsyncResultIntegrationTests: XCTestCase {
         let integrationTests = KotlinSuspendIntegrationTests()
         let sendMessage = randomString()
         #if NATIVE_COROUTINES_SWIFT_EXPORT
-        let result = await asyncResult(for: try await integrationTests.throwExceptionNative(message: sendMessage, delay: 1000))
+        let result = await asyncResult(for: try await integrationTests.throwException(message: sendMessage, delay: 1000))
         #else
         let result = await asyncResult(for: integrationTests.throwException(message: sendMessage, delay: 1000))
         #endif
@@ -75,13 +75,11 @@ class AsyncResultIntegrationTests: XCTestCase {
         await assertJobCompleted(integrationTests)
     }
     
-    #if !NATIVE_COROUTINES_SWIFT_EXPORT
-    /// Error throwing isn't supported yet, see https://youtrack.jetbrains.com/issue/KT-83389
     func testErrorReceived() async {
         let integrationTests = KotlinSuspendIntegrationTests()
         let sendMessage = randomString()
         #if NATIVE_COROUTINES_SWIFT_EXPORT
-        let result = await asyncResult(for: try await integrationTests.throwErrorNative(message: sendMessage, delay: 1000))
+        let result = await asyncResult(for: try await integrationTests.throwError(message: sendMessage, delay: 1000))
         #else
         let result = await asyncResult(for: integrationTests.throwError(message: sendMessage, delay: 1000))
         #endif
@@ -102,13 +100,12 @@ class AsyncResultIntegrationTests: XCTestCase {
         #endif
         await assertJobCompleted(integrationTests)
     }
-    #endif
     
     func testCancellation() async {
         let integrationTests = KotlinSuspendIntegrationTests()
         let handle = Task {
             #if NATIVE_COROUTINES_SWIFT_EXPORT
-            return await asyncResult(for: try await integrationTests.returnFromCallbackNative(delay: 3000) {
+            return await asyncResult(for: try await integrationTests.returnFromCallback(delay: 3000) {
                 XCTFail("Callback shouldn't be invoked")
                 return 1
             })
@@ -138,16 +135,17 @@ class AsyncResultIntegrationTests: XCTestCase {
         }
     }
     
-    #if !NATIVE_COROUTINES_SWIFT_EXPORT
-    /// Suspend functions returning Unit aren't supported yet, see https://youtrack.jetbrains.com/issue/KT-81593
     func testUnitReturnType() async throws {
-        let integrationTests = SuspendIntegrationTests()
+        let integrationTests = KotlinSuspendIntegrationTests()
+        #if NATIVE_COROUTINES_SWIFT_EXPORT
+        let result = await asyncResult(for: try await integrationTests.returnUnit(delay: 100))
+        #else
         let result = await asyncResult(for: integrationTests.returnUnit(delay: 100))
+        #endif
         guard case .success = result else {
             XCTFail("Function should complete without an error")
             return
         }
         await assertJobCompleted(integrationTests)
     }
-    #endif
 }
