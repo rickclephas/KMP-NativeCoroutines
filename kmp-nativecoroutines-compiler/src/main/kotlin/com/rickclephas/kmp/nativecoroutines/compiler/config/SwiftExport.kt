@@ -6,6 +6,7 @@ public enum class SwiftExport {
     NO_FUNC_RETURN_TYPES,
     NO_THROWS_SUSPEND_FUNC,
     SUSPEND_FUNC_SUPPORTED,
+    FLOW_SUPPORTED,
 }
 
 public val SWIFT_EXPORT: ConfigOptionWithDefault<Set<SwiftExport>> =

@@ -21,7 +21,7 @@ public class NewMemoryModelIntegrationTests: IntegrationTests() {
     }
 
     @NativeCoroutines
-    public suspend fun generateRandomMutableData(): MutableData {
+    public suspend fun generateRandomMutableData(): MutableData = withSwiftExportTracking {
         val data = MutableData()
         withContext(Dispatchers.Main) {
             data.dataFromMain = randomString()

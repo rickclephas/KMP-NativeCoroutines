@@ -15,7 +15,7 @@ import KotlinRuntimeSupport
 class AsyncResultIntegrationTests: XCTestCase {
     
     func testValueReceived() async {
-        let integrationTests = KotlinSuspendIntegrationTests()
+        let integrationTests = setup(KotlinSuspendIntegrationTests.init)
         let sendValue = randomInt()
         #if NATIVE_COROUTINES_SWIFT_EXPORT
         let result = await asyncResult(for: try await integrationTests.returnValue(value: sendValue, delay: 1000))
@@ -35,7 +35,7 @@ class AsyncResultIntegrationTests: XCTestCase {
     }
     
     func testNilValueReceived() async {
-        let integrationTests = KotlinSuspendIntegrationTests()
+        let integrationTests = setup(KotlinSuspendIntegrationTests.init)
         #if NATIVE_COROUTINES_SWIFT_EXPORT
         let result = await asyncResult(for: try await integrationTests.returnNull(delay: 1000))
         #else
@@ -50,7 +50,7 @@ class AsyncResultIntegrationTests: XCTestCase {
     }
     
     func testExceptionReceived() async {
-        let integrationTests = KotlinSuspendIntegrationTests()
+        let integrationTests = setup(KotlinSuspendIntegrationTests.init)
         let sendMessage = randomString()
         #if NATIVE_COROUTINES_SWIFT_EXPORT
         let result = await asyncResult(for: try await integrationTests.throwException(message: sendMessage, delay: 1000))
@@ -76,7 +76,7 @@ class AsyncResultIntegrationTests: XCTestCase {
     }
     
     func testErrorReceived() async {
-        let integrationTests = KotlinSuspendIntegrationTests()
+        let integrationTests = setup(KotlinSuspendIntegrationTests.init)
         let sendMessage = randomString()
         #if NATIVE_COROUTINES_SWIFT_EXPORT
         let result = await asyncResult(for: try await integrationTests.throwError(message: sendMessage, delay: 1000))
@@ -102,7 +102,7 @@ class AsyncResultIntegrationTests: XCTestCase {
     }
     
     func testCancellation() async {
-        let integrationTests = KotlinSuspendIntegrationTests()
+        let integrationTests = setup(KotlinSuspendIntegrationTests.init)
         let handle = Task {
             #if NATIVE_COROUTINES_SWIFT_EXPORT
             return await asyncResult(for: try await integrationTests.returnFromCallback(delay: 3000) {
@@ -117,9 +117,7 @@ class AsyncResultIntegrationTests: XCTestCase {
             #endif
         }
         DispatchQueue.global().asyncAfter(deadline: .now() + 1) {
-            #if !NATIVE_COROUTINES_SWIFT_EXPORT
             XCTAssertEqual(integrationTests.activeJobCount, 1, "There should be 1 active job")
-            #endif
             handle.cancel()
         }
         let handleResult = await handle.result
@@ -136,7 +134,7 @@ class AsyncResultIntegrationTests: XCTestCase {
     }
     
     func testUnitReturnType() async throws {
-        let integrationTests = KotlinSuspendIntegrationTests()
+        let integrationTests = setup(KotlinSuspendIntegrationTests.init)
         #if NATIVE_COROUTINES_SWIFT_EXPORT
         let result = await asyncResult(for: try await integrationTests.returnUnit(delay: 100))
         #else
