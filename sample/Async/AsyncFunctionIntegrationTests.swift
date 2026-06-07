@@ -15,38 +15,29 @@ import KotlinRuntimeSupport
 class AsyncFunctionIntegrationTests: XCTestCase {
     
     func testValueReceived() async throws {
-        let integrationTests = KotlinSuspendIntegrationTests()
+        let integrationTests = setup(KotlinSuspendIntegrationTests.init)
         let sendValue = randomInt()
+        let value = try await asyncFunction(for: integrationTests.returnValue(value: sendValue, delay: 1000))
         #if NATIVE_COROUTINES_SWIFT_EXPORT
-        let value = try await asyncFunction(for: integrationTests.returnValueNative(value: sendValue, delay: 1000))
         XCTAssertEqual(value, sendValue, "Received incorrect value")
         #else
-        let value = try await asyncFunction(for: integrationTests.returnValue(value: sendValue, delay: 1000))
         XCTAssertEqual(value.int32Value, sendValue, "Received incorrect value")
         #endif
         await assertJobCompleted(integrationTests)
     }
     
     func testNilValueReceived() async throws {
-        let integrationTests = KotlinSuspendIntegrationTests()
-        #if NATIVE_COROUTINES_SWIFT_EXPORT
-        let value = try await asyncFunction(for: integrationTests.returnNullNative(delay: 1000))
-        #else
+        let integrationTests = setup(KotlinSuspendIntegrationTests.init)
         let value = try await asyncFunction(for: integrationTests.returnNull(delay: 1000))
-        #endif
         XCTAssertNil(value, "Value should be nil")
         await assertJobCompleted(integrationTests)
     }
     
     func testExceptionReceived() async {
-        let integrationTests = KotlinSuspendIntegrationTests()
+        let integrationTests = setup(KotlinSuspendIntegrationTests.init)
         let sendMessage = randomString()
         do {
-            #if NATIVE_COROUTINES_SWIFT_EXPORT
-            _ = try await asyncFunction(for: integrationTests.throwExceptionNative(message: sendMessage, delay: 1000))
-            #else
             _ = try await asyncFunction(for: integrationTests.throwException(message: sendMessage, delay: 1000))
-            #endif
             XCTFail("Function should complete with an error")
         } catch {
             #if NATIVE_COROUTINES_SWIFT_EXPORT
@@ -64,17 +55,11 @@ class AsyncFunctionIntegrationTests: XCTestCase {
         await assertJobCompleted(integrationTests)
     }
     
-    #if !NATIVE_COROUTINES_SWIFT_EXPORT
-    /// Error throwing isn't supported yet, see https://youtrack.jetbrains.com/issue/KT-83389
     func testErrorReceived() async {
-        let integrationTests = KotlinSuspendIntegrationTests()
+        let integrationTests = setup(KotlinSuspendIntegrationTests.init)
         let sendMessage = randomString()
         do {
-            #if NATIVE_COROUTINES_SWIFT_EXPORT
-            _ = try await asyncFunction(for: integrationTests.throwErrorNative(message: sendMessage, delay: 1000))
-            #else
             _ = try await asyncFunction(for: integrationTests.throwError(message: sendMessage, delay: 1000))
-            #endif
             XCTFail("Function should complete with an error")
         } catch {
             #if NATIVE_COROUTINES_SWIFT_EXPORT
@@ -91,27 +76,21 @@ class AsyncFunctionIntegrationTests: XCTestCase {
         }
         await assertJobCompleted(integrationTests)
     }
-    #endif
     
     func testCancellation() async {
-        let integrationTests = KotlinSuspendIntegrationTests()
+        let integrationTests = setup(KotlinSuspendIntegrationTests.init)
         let handle = Task {
-            #if NATIVE_COROUTINES_SWIFT_EXPORT
-            return try await asyncFunction(for: integrationTests.returnFromCallbackNative(delay: 3000) {
-                XCTFail("Callback shouldn't be invoked")
-                return 1
-            })
-            #else
             return try await asyncFunction(for: integrationTests.returnFromCallback(delay: 3000) {
                 XCTFail("Callback shouldn't be invoked")
+                #if NATIVE_COROUTINES_SWIFT_EXPORT
+                return 1
+                #else
                 return KotlinInt(int: 1)
+                #endif
             })
-            #endif
         }
         DispatchQueue.global().asyncAfter(deadline: .now() + 1) {
-            #if !NATIVE_COROUTINES_SWIFT_EXPORT
             XCTAssertEqual(integrationTests.activeJobCount, 1, "There should be 1 active job")
-            #endif
             handle.cancel()
         }
         let result = await handle.result
@@ -123,12 +102,9 @@ class AsyncFunctionIntegrationTests: XCTestCase {
         }
     }
     
-    #if !NATIVE_COROUTINES_SWIFT_EXPORT
-    /// Suspend functions returning Unit aren't supported yet, see https://youtrack.jetbrains.com/issue/KT-81593
     func testUnitReturnType() async throws {
-        let integrationTests = SuspendIntegrationTests()
+        let integrationTests = setup(KotlinSuspendIntegrationTests.init)
         try await asyncFunction(for: integrationTests.returnUnit(delay: 100))
         await assertJobCompleted(integrationTests)
     }
-    #endif
 }

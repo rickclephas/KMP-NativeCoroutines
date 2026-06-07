@@ -19,6 +19,16 @@ public func createPublisher<Output, Failure: Error, Unit>(
         .eraseToAnyPublisher()
 }
 
+/// This function provides source compatibility during the migration to Swift export.
+///
+/// You should migrate away from this function once you have fully migrated to Swift export.
+@available(*, deprecated, message: "Kotlin Coroutines are supported by Swift export")
+public func createPublisher<Sequence: AsyncSequence>(
+    for asyncSequence: Sequence
+) -> AnyPublisher<Sequence.Element, Error> {
+    return createPublisher(for: nativeFlow(for: asyncSequence))
+}
+
 /// Creates an `AnyPublisher` for the provided `NativeFlow`.
 /// - Parameter nativeFlow: The native flow to collect.
 /// - Returns: A publisher that publishes the collected values.

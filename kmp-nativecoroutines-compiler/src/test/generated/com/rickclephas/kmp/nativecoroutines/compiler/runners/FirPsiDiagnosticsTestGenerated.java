@@ -15,6 +15,10 @@ import java.util.regex.Pattern;
 @TestMetadata("src/testData/diagnostics")
 @TestDataPath("$PROJECT_ROOT")
 public class FirPsiDiagnosticsTestGenerated extends AbstractFirPsiDiagnosticsTest {
+  private void run(String fileName) {
+    runTest("src/testData/diagnostics/" + fileName);
+  }
+
   @Test
   public void testAllFilesPresentInDiagnostics() {
     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("src/testData/diagnostics"), Pattern.compile("^(.+)\\.kt$"), Pattern.compile("^(.+)\\.fir\\.kt$"), true);
@@ -23,66 +27,66 @@ public class FirPsiDiagnosticsTestGenerated extends AbstractFirPsiDiagnosticsTes
   @Test
   @TestMetadata("conflict.kt")
   public void testConflict() {
-    runTest("src/testData/diagnostics/conflict.kt");
+    run("conflict.kt");
   }
 
   @Test
   @TestMetadata("exposedAnnotated.kt")
   public void testExposedAnnotated() {
-    runTest("src/testData/diagnostics/exposedAnnotated.kt");
+    run("exposedAnnotated.kt");
   }
 
   @Test
   @TestMetadata("exposedError.kt")
   public void testExposedError() {
-    runTest("src/testData/diagnostics/exposedError.kt");
+    run("exposedError.kt");
   }
 
   @Test
   @TestMetadata("exposedNone.kt")
   public void testExposedNone() {
-    runTest("src/testData/diagnostics/exposedNone.kt");
+    run("exposedNone.kt");
   }
 
   @Test
   @TestMetadata("exposedWarning.kt")
   public void testExposedWarning() {
-    runTest("src/testData/diagnostics/exposedWarning.kt");
+    run("exposedWarning.kt");
   }
 
   @Test
   @TestMetadata("ignored.kt")
   public void testIgnored() {
-    runTest("src/testData/diagnostics/ignored.kt");
+    run("ignored.kt");
   }
 
   @Test
   @TestMetadata("implicitReturnType.kt")
   public void testImplicitReturnType() {
-    runTest("src/testData/diagnostics/implicitReturnType.kt");
+    run("implicitReturnType.kt");
   }
 
   @Test
   @TestMetadata("incompatible.kt")
   public void testIncompatible() {
-    runTest("src/testData/diagnostics/incompatible.kt");
+    run("incompatible.kt");
   }
 
   @Test
   @TestMetadata("invalid.kt")
   public void testInvalid() {
-    runTest("src/testData/diagnostics/invalid.kt");
+    run("invalid.kt");
   }
 
   @Test
   @TestMetadata("redundant.kt")
   public void testRedundant() {
-    runTest("src/testData/diagnostics/redundant.kt");
+    run("redundant.kt");
   }
 
   @Test
   @TestMetadata("unsupported.kt")
   public void testUnsupported() {
-    runTest("src/testData/diagnostics/unsupported.kt");
+    run("unsupported.kt");
   }
 }

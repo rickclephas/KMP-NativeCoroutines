@@ -23,43 +23,14 @@ These are the known limitations with Swift export and KMP-NativeCoroutines.
 
 ## 🚨 `NativeSuspend` and `NativeFlow` are unsupported
 
-At the moment Swift export doesn't support functional return types yet.
+At the moment Swift export has some issues with functional return types and generics.
 
 Unfortunately KMP-NativeCoroutines heavily relies on functional return types, making it incompatible with Swift Export.
 For now the plugin just clones your original functions and properties to prevent your Kotlin builds from failing.
 
-**Temporary workaround:**  
-You should disable any relevant code in Swift if you would like to try Swift export.
-
-## ⚠️ `@ObjCName` is ignored
-
-The `@ObjCName` annotation is (currently) ignored by Swift export.  
-This prevents KMP-NativeCoroutines from reusing your original function or property name.
-
-**Temporary workaround:**  
-You should update your Swift code with the `Native` name suffix in order to access the generated declarations.
-
 # Enabling Swift export
 
-To enable Swift export with KMP-NativeCoroutines you start by following the
-[official documentation](https://kotlinlang.org/docs/native-swift-export.html)
-and enabling the experimental coroutines support:
-```kotlin
-// build.gradle.kts
-import org.jetbrains.kotlin.gradle.plugin.mpp.apple.swiftexport.SWIFT_EXPORT_COROUTINES_SUPPORT_TURNED_ON
-
-kotlin {
-    // ...
-    swiftExport {
-        // ...
-        configure {
-            settings.put(SWIFT_EXPORT_COROUTINES_SUPPORT_TURNED_ON, "true")
-        }
-    }
-}
-```
-
-Once Swift export is enabled you'll need to activate the Swift export compatibility mode:
+To enable Swift export with KMP-NativeCoroutines you'll need to activate the Swift export compatibility mode:
 ```kotlin
 // build.gradle.kts
 nativeCoroutines {
@@ -72,15 +43,13 @@ nativeCoroutines {
 Only some coroutines related code can be used when Swift export is enabled.
 
 > [!NOTE]
-> You can also use the generated properties for the `StateFlow.value` and `SharedFlow.replayCache` values,
-> but keep in mind the `@ObjCName` limitation. 
+> You can also use the generated properties for the `StateFlow.value` and `SharedFlow.replayCache` values.
 
 ## Suspend functions
 
-You can use suspend functions as async functions in Swift (but keep in mind the limitations):
-```diff
-- let letters = try await asyncFunction(for: randomLettersGenerator.getRandomLetters(throwException: throwException))
-+ let letters = try await asyncFunction(for: randomLettersGenerator.getRandomLettersNative(throwException: throwException))
+You can use suspend functions as async functions in Swift without any changes:
+```swift
+let letters = try await asyncFunction(for: randomLettersGenerator.getRandomLetters(throwException: throwException))
 ```
 
 > [!NOTE]
@@ -90,5 +59,25 @@ You can use suspend functions as async functions in Swift (but keep in mind the 
 For Combine and RxSwift there are helper functions available, e.g.:
 ```diff
 - let future = createFuture(for: randomLettersGenerator.getRandomLetters(throwException: throwException))
-+ let future = createFuture(for: { await self.randomLettersGenerator.getRandomLettersNative(throwException: throwException) })
++ let future = createFuture(for: { await self.randomLettersGenerator.getRandomLetters(throwException: throwException) })
+```
+
+## Flows
+
+You can use `Flow`s as `AsyncSequence`s without any changes:
+```swift
+let sequence = asyncSequence(for: clock.time)
+```
+
+> [!NOTE]
+> Upon cancellation Swift export will throw a `CancellationError` instead of ending the iteration by returning `nil`.
+
+> [!NOTE]
+> It's recommended to keep using the `asyncSequence(for:)` function for now.  
+> However this function is a no-op and can eventually be replaces with a call to `asAsyncSequence()`.
+
+For Combine and RxSwift there are helper functions available, e.g.:
+```diff
+- let publisher = createPublisher(for: clock.time)
++ let publisher = createPublisher(for: asyncSequence(for: clock.time))
 ```
