@@ -18,15 +18,15 @@ public class FlowIntegrationTests: IntegrationTests() {
             emit(it)
             _emittedCount++
         }
-    }
+    }.withSwiftExportTracking()
 
     @NativeCoroutines
-    public  fun getFlowWithNull(count: Int, nullIndex: Int, delay: Long): Flow<Int?> = flow {
+    public fun getFlowWithNull(count: Int, nullIndex: Int, delay: Long): Flow<Int?> = flow {
         repeat(count) {
             delay(delay)
             emit(if (it == nullIndex) null else it)
         }
-    }
+    }.withSwiftExportTracking()
 
     @NativeCoroutines
     public fun getFlowWithException(count: Int, exceptionIndex: Int, message: String, delay: Long): Flow<Int> = flow {
@@ -35,7 +35,7 @@ public class FlowIntegrationTests: IntegrationTests() {
             if (it == exceptionIndex) throw Exception(message)
             emit(it)
         }
-    }
+    }.withSwiftExportTracking()
 
     @NativeCoroutines
     public fun getFlowWithError(count: Int, errorIndex: Int, message: String, delay: Long): Flow<Int> = flow {
@@ -44,7 +44,7 @@ public class FlowIntegrationTests: IntegrationTests() {
             if (it == errorIndex) throw Error(message)
             emit(it)
         }
-    }
+    }.withSwiftExportTracking()
 
     @NativeCoroutines
     public fun getFlowWithCallback(count: Int, callbackIndex: Int, delay: Long, callback: () -> Unit): Flow<Int> = flow {
@@ -53,7 +53,7 @@ public class FlowIntegrationTests: IntegrationTests() {
             if (it == callbackIndex) callback()
             emit(it)
         }
-    }
+    }.withSwiftExportTracking()
 
     @NativeCoroutines
     public fun getUnitFlow(count: Int, delay: Long): Flow<Unit> = flow {
@@ -61,5 +61,5 @@ public class FlowIntegrationTests: IntegrationTests() {
             delay(delay)
             emit(Unit)
         }
-    }
+    }.withSwiftExportTracking()
 }

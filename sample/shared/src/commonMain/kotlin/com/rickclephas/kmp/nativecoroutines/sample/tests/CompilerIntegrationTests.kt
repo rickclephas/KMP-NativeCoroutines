@@ -10,51 +10,51 @@ import kotlinx.coroutines.flow.flow
 public class CompilerIntegrationTests<V>: IntegrationTests() {
 
     @NativeCoroutines
-    public suspend fun returnGenericClassValue(value: V): V {
+    public suspend fun returnGenericClassValue(value: V): V = withSwiftExportTracking {
         return value
     }
 
     @NativeCoroutines
-    public suspend fun returnDefaultValue(value: Int = 1): Int {
+    public suspend fun returnDefaultValue(value: Int = 1): Int = withSwiftExportTracking {
         return value
     }
 
     @NativeCoroutines
-    public suspend fun <T> returnGenericValue(value: T): T {
+    public suspend fun <T> returnGenericValue(value: T): T = withSwiftExportTracking {
         return value
     }
 
     public fun returnAppendable(value: String): Appendable = StringBuilder(value)
 
     @NativeCoroutines
-    public suspend fun <T: Appendable> returnConstrainedGenericValue(value: T): T {
+    public suspend fun <T: Appendable> returnConstrainedGenericValue(value: T): T = withSwiftExportTracking {
         return value
     }
 
     @NativeCoroutines
-    public suspend fun <T> returnGenericValues(values: List<T>): List<T> {
+    public suspend fun <T> returnGenericValues(values: List<T>): List<T> = withSwiftExportTracking {
         return values
     }
 
     @NativeCoroutines
     @NativeCoroutinesObjCExport // https://youtrack.jetbrains.com/issue/KT-82282
-    public suspend fun <T> returnGenericVarargValues(vararg values: T): Array<out T> {
+    public suspend fun <T> returnGenericVarargValues(vararg values: T): Array<out T> = withSwiftExportTracking {
         return values
     }
 
     @NativeCoroutines
     @Suppress("UnusedReceiverParameter")
-    public suspend fun <T> List<T>.returnGenericValueFromExtension(value: T): T {
+    public suspend fun <T> List<T>.returnGenericValueFromExtension(value: T): T = withSwiftExportTracking {
         return value
     }
 
     @NativeCoroutines
     public fun <T> returnGenericFlow(value: T): Flow<T> = flow {
         emit(value)
-    }
+    }.withSwiftExportTracking()
 
     @NativeCoroutinesIgnore
-    public suspend fun returnIgnoredValue(value: Int): Int {
+    public suspend fun returnIgnoredValue(value: Int): Int = withSwiftExportTracking {
         return value
     }
 }
