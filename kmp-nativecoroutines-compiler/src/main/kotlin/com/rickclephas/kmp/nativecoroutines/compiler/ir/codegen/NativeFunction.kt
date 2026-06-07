@@ -22,7 +22,7 @@ internal fun GeneratorContext.buildNativeFunctionBody(
     val coroutineScope = irTemporary(irCallCoroutineScope(originalFunction, function))
     var expression = irCallOriginalFunction(originalFunction, function)
     if (SwiftExport.NO_FUNC_RETURN_TYPES !in swiftExport) {
-        if (callableSignature.returnType is CallableSignature.Type.Flow) {
+        if (callableSignature.returnType is CallableSignature.Type.Flow && SwiftExport.FLOW_SUPPORTED !in swiftExport) {
             expression = irCallAsNativeFlow(expression, coroutineScope)
         }
         if (callableSignature.isSuspend && SwiftExport.SUSPEND_FUNC_SUPPORTED !in swiftExport) {

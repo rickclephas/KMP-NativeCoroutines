@@ -1,4 +1,3 @@
-// FIR_IDENTICAL
 // FILE: customStateFlow.kt
 
 import kotlinx.coroutines.ExperimentalForInheritanceCoroutinesApi

@@ -53,9 +53,6 @@ public class KmpNativeCoroutinesPlugin: KotlinCompilerPluginSupportPlugin {
 
     override fun getCompilerPluginId(): String = "com.rickclephas.kmp.nativecoroutines"
 
-    override fun getPluginArtifactForNative(): SubpluginArtifact =
-        SubpluginArtifact("com.rickclephas.kmp", "kmp-nativecoroutines-compiler", VERSION)
-
     override fun getPluginArtifact(): SubpluginArtifact =
         SubpluginArtifact("com.rickclephas.kmp", "kmp-nativecoroutines-compiler-embeddable", VERSION)
 }
