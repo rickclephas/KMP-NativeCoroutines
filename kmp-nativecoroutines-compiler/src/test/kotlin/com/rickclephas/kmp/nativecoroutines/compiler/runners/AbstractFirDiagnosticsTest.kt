@@ -4,9 +4,9 @@ import org.jetbrains.kotlin.test.Constructor
 import org.jetbrains.kotlin.test.FirParser
 import org.jetbrains.kotlin.test.builders.TestConfigurationBuilder
 import org.jetbrains.kotlin.test.builders.firHandlersStep
-import org.jetbrains.kotlin.test.configuration.configurationForClassicAndFirTestsAlongside
 import org.jetbrains.kotlin.test.configuration.enableLazyResolvePhaseChecking
 import org.jetbrains.kotlin.test.directives.configureFirParser
+import org.jetbrains.kotlin.test.frontend.fir.FirFailingTestSuppressor
 import org.jetbrains.kotlin.test.frontend.fir.FirFrontendFacade
 import org.jetbrains.kotlin.test.frontend.fir.FirOutputArtifact
 import org.jetbrains.kotlin.test.frontend.fir.handlers.FirDiagnosticsHandler
@@ -30,7 +30,9 @@ abstract class AbstractFirBaseDiagnosticsTest(
             configureFirParser(parser)
             enableLazyResolvePhaseChecking()
             forTestsMatching("testData/diagnostics/*") {
-                configurationForClassicAndFirTestsAlongside()
+                useAfterAnalysisCheckers(
+                    ::FirFailingTestSuppressor,
+                )
             }
         }
     }

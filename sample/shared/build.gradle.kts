@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.plugin.mpp.apple.swiftexport.SWIFT_EXPORT_COROUTINES_SUPPORT_TURNED_ON
-
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.kotlin.plugin.serialization)
@@ -52,9 +50,6 @@ kotlin {
     swiftExport {
         moduleName = "NativeCoroutinesSampleShared"
         flattenPackage = "com.rickclephas.kmp.nativecoroutines.sample"
-        configure {
-            settings.put(SWIFT_EXPORT_COROUTINES_SUPPORT_TURNED_ON, "true")
-        }
     }
 }
 
