@@ -2,6 +2,7 @@ package com.rickclephas.kmp.nativecoroutines.idea.compiler.extensions
 
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesChecker
 import com.rickclephas.kmp.nativecoroutines.compiler.config.*
+import org.jetbrains.kotlin.K1Deprecation
 import org.jetbrains.kotlin.analyzer.moduleInfo
 import org.jetbrains.kotlin.container.StorageComponentContainer
 import org.jetbrains.kotlin.container.useInstance
@@ -14,7 +15,7 @@ import org.jetbrains.kotlin.platform.TargetPlatform
 import org.jetbrains.kotlin.platform.konan.NativePlatformUnspecifiedTarget
 import org.jetbrains.kotlin.platform.konan.NativePlatformWithTarget
 
-@OptIn(K1ModeProjectStructureApi::class)
+@OptIn(K1ModeProjectStructureApi::class, K1Deprecation::class)
 public class KmpNativeCoroutinesStorageComponentContainerContributor: StorageComponentContainerContributor {
 
     override fun registerModuleComponents(

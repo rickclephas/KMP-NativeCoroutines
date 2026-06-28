@@ -2,6 +2,7 @@ package com.rickclephas.kmp.nativecoroutines.compiler.classic.utils
 
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.ClassIds
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.CoroutinesReturnType
+import org.jetbrains.kotlin.K1Deprecation
 import org.jetbrains.kotlin.descriptors.CallableDescriptor
 import org.jetbrains.kotlin.descriptors.ModuleDescriptor
 import org.jetbrains.kotlin.descriptors.findClassifierAcrossModuleDependencies
@@ -12,6 +13,7 @@ import org.jetbrains.kotlin.types.TypeConstructor
 import org.jetbrains.kotlin.types.typeUtil.supertypes
 
 @Suppress("UnstableApiUsage")
+@OptIn(K1Deprecation::class)
 internal val CallableDescriptor.coroutinesReturnType: CoroutinesReturnType? get() {
     val returnType = returnTypeOrNothing
     val stateFlowConstructor = module.findTypeConstructor(ClassIds.stateFlow)
