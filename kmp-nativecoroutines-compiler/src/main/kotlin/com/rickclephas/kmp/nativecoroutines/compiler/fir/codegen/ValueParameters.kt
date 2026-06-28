@@ -25,7 +25,7 @@ internal fun FirExtension.buildValueParametersCopy(
         moduleData = session.moduleData
         this.origin = origin
 
-        source = parameter.source?.fakeElement(KtFakeSourceElementKind.PluginGenerated)
+        source = parameter.source?.fakeElement(KtFakeSourceElementKind.PluginGenerated.Default)
 
         symbol = FirValueParameterSymbol()
         name = parameter.name
