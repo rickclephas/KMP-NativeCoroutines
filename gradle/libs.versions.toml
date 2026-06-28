@@ -29,7 +29,7 @@ kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serializa
 
 [plugins]
 gradle-plugin-publish = { id = "com.gradle.plugin-publish", version = "1.2.0" }
-intellij-platform = { id = "org.jetbrains.intellij.platform", version = "2.10.5" }
+intellij-platform = { id = "org.jetbrains.intellij.platform", version = "2.17.0" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 
 # Sample plugins

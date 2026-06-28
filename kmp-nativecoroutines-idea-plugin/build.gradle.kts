@@ -84,7 +84,7 @@ intellijPlatform {
             if (verificationIde != null) {
                 val (platformType, build) = verificationIde.split('-', limit = 2)
                 select {
-                    channels = ProductRelease.Channel.values().toList()
+                    channels = ProductRelease.Channel.entries.toList()
                     types = listOf(IntelliJPlatformType.fromCode(platformType))
                     sinceBuild = build
                     untilBuild = "$build.*"
@@ -105,10 +105,6 @@ intellijPlatform {
 val runIntelliJ = intellijPlatformTesting.runIde.register("runIntelliJ") {
     type = IntelliJPlatformType.IntellijIdea
 }
-
-//val runAndroidStudio by intellijPlatformTesting.runIde.register("runAndroidStudio") {
-//    type = IntelliJPlatformType.AndroidStudio
-//}
 
 tasks.withType(RunIdeTask::class) {
     maxHeapSize = "4g"
