@@ -1,9 +1,11 @@
 @file:Suppress("UnstableApiUsage")
+@file:OptIn(ExperimentalAbiValidation::class)
 
 import org.jetbrains.intellij.platform.gradle.IntelliJPlatformType
 import org.jetbrains.intellij.platform.gradle.models.ProductRelease
 import org.jetbrains.intellij.platform.gradle.tasks.RunIdeTask
 import org.jetbrains.intellij.platform.gradle.tasks.VerifyPluginTask
+import org.jetbrains.kotlin.gradle.dsl.abi.ExperimentalAbiValidation
 
 plugins {
     id("java")
@@ -20,6 +22,7 @@ repositories {
 
 kotlin {
     explicitApi()
+    abiValidation()
     jvmToolchain(21)
 }
 

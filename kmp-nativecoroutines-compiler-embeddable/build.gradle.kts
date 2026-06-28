@@ -1,3 +1,7 @@
+@file:OptIn(ExperimentalAbiValidation::class)
+
+import org.jetbrains.kotlin.gradle.dsl.abi.ExperimentalAbiValidation
+
 plugins {
     id("kmp-nativecoroutines-kotlin-jvm")
     id("kmp-nativecoroutines-publish")
@@ -20,6 +24,7 @@ val syncSources by tasks.registering(Sync::class) {
 
 kotlin {
     explicitApi()
+    abiValidation()
     jvmToolchain(11)
 }
 
