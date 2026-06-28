@@ -1,6 +1,6 @@
 [versions]
 kotlin = "2.4.0"
-kotlin-idea = "2.4.0-dev-2631"
+kotlin-idea = "2.4.20-dev-6724"
 kotlinx-coroutines = "1.10.1"
 junit = "5.9.1"
 
