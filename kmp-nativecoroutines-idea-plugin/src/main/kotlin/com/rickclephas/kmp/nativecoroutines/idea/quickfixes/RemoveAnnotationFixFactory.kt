@@ -1,4 +1,4 @@
-package com.rickclephas.kmp.nativecoroutines.idea.quickfixes.k2
+package com.rickclephas.kmp.nativecoroutines.idea.quickfixes
 
 import org.jetbrains.kotlin.analysis.api.fir.diagnostics.KaCompilerPluginDiagnostic0
 import org.jetbrains.kotlin.diagnostics.KtDiagnosticFactory0

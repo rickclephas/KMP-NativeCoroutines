@@ -1,4 +1,4 @@
-package com.rickclephas.kmp.nativecoroutines.idea.quickfixes.k2
+package com.rickclephas.kmp.nativecoroutines.idea.quickfixes
 
 import com.intellij.codeInsight.intention.HighPriorityAction
 import com.intellij.codeInsight.intention.LowPriorityAction

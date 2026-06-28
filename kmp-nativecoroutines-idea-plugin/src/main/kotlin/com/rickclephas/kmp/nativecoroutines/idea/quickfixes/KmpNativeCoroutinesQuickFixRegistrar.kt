@@ -1,4 +1,4 @@
-package com.rickclephas.kmp.nativecoroutines.idea.quickfixes.k2
+package com.rickclephas.kmp.nativecoroutines.idea.quickfixes
 
 import com.intellij.openapi.util.TextRange
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.CONFLICT_COROUTINES
@@ -40,8 +40,8 @@ import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativ
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.REDUNDANT_REFINED_COROUTINES_REFINED_STATE
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.diagnostics.FirKmpNativeCoroutinesErrors.REDUNDANT_REFINED_COROUTINES_STATE
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation
-import com.rickclephas.kmp.nativecoroutines.idea.quickfixes.k2.AddAnnotationFixFactory.Companion.registerAddAnnotationFix
-import com.rickclephas.kmp.nativecoroutines.idea.quickfixes.k2.RemoveAnnotationFixFactory.Companion.registerRemoveAnnotationFix
+import com.rickclephas.kmp.nativecoroutines.idea.quickfixes.AddAnnotationFixFactory.Companion.registerAddAnnotationFix
+import com.rickclephas.kmp.nativecoroutines.idea.quickfixes.RemoveAnnotationFixFactory.Companion.registerRemoveAnnotationFix
 import org.jetbrains.kotlin.analysis.api.diagnostics.KaSeverity
 import org.jetbrains.kotlin.analysis.api.fir.diagnostics.KaCompilerPluginDiagnostic0
 import org.jetbrains.kotlin.analysis.api.fir.diagnostics.KaFirDiagnostic
