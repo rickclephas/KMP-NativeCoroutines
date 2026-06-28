@@ -102,11 +102,11 @@ intellijPlatform {
     }
 }
 
-val runIntelliJ by intellijPlatformTesting.runIde.registering {
+val runIntelliJ = intellijPlatformTesting.runIde.register("runIntelliJ") {
     type = IntelliJPlatformType.IntellijIdea
 }
 
-//val runAndroidStudio by intellijPlatformTesting.runIde.registering {
+//val runAndroidStudio by intellijPlatformTesting.runIde.register("runAndroidStudio") {
 //    type = IntelliJPlatformType.AndroidStudio
 //}
 
@@ -123,7 +123,7 @@ tasks.withType(VerifyPluginTask::class) {
     }
 }
 
-val requireIdePluginBuild by requireBuildType(BuildType.IDE_PLUGIN)
+val requireIdePluginBuild = requireBuildType(BuildType.IDE_PLUGIN)
 
 tasks.compileKotlin {
     dependsOn(requireIdePluginBuild)
