@@ -38,7 +38,7 @@ internal fun FirExtension.buildNativeProperty(
             callableSignature
         ).origin
 
-        source = originalSymbol.source?.fakeElement(KtFakeSourceElementKind.PluginGenerated)
+        source = originalSymbol.source?.fakeElement(KtFakeSourceElementKind.PluginGenerated.Default)
 
         symbol = FirRegularPropertySymbol(callableId)
         name = callableId.callableName
