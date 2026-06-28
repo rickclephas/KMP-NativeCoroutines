@@ -7,7 +7,7 @@ dependencies {
     compileOnly(libs.kotlin.compiler.embeddable)
 }
 
-val syncSources by tasks.registering(Sync::class) {
+val syncSources = tasks.register<Sync>("syncSources") {
     from(project(":kmp-nativecoroutines-compiler").files("src/main"))
     into("src/main")
     filter {
@@ -23,7 +23,7 @@ kotlin {
     jvmToolchain(11)
 }
 
-val sourcesJar by tasks.getting(Jar::class) {
+val sourcesJar = tasks.getByName<Jar>("sourcesJar") {
     dependsOn(syncSources)
 }
 

@@ -21,14 +21,14 @@ sourceSets {
     }
 }
 
-val nativeTestClasspath: Configuration by configurations.creating {
+val nativeTestClasspath = configurations.create("nativeTestClasspath") {
     attributes {
         attribute(KotlinPlatformType.attribute, KotlinPlatformType.native)
         attribute(KotlinNativeTarget.konanTargetAttribute, HostManager.hostName)
         attribute(Usage.USAGE_ATTRIBUTE, objects.named(KotlinUsages.KOTLIN_API))
     }
 }
-val jvmTestClasspath: Configuration by configurations.creating {
+val jvmTestClasspath = configurations.create("jvmTestClasspath") {
     attributes {
         attribute(KotlinPlatformType.attribute, KotlinPlatformType.jvm)
     }
@@ -73,7 +73,7 @@ tasks.compileKotlin.configure {
     }
 }
 
-val requireCompilerTestsBuild by requireBuildType(BuildType.COMPILER_TESTS)
+val requireCompilerTestsBuild = requireBuildType(BuildType.COMPILER_TESTS)
 
 tasks.test {
     dependsOn(requireCompilerTestsBuild)
@@ -107,11 +107,11 @@ tasks.test {
     systemProperty("com.rickclephas.kmp.nativecoroutines.test.classpath-native", nativeTestClasspath.asPath)
 }
 
-val deleteGeneratedTests by tasks.registering(Delete::class) {
+val deleteGeneratedTests = tasks.register<Delete>("deleteGeneratedTests") {
     delete("src/test/generated")
 }
 
-val generateTests by tasks.registering(JavaExec::class) {
+val generateTests = tasks.register<JavaExec>("generateTests") {
     dependsOn(deleteGeneratedTests)
     classpath = sourceSets.test.get().runtimeClasspath
     mainClass.set("com.rickclephas.kmp.nativecoroutines.compiler.GenerateTestsKt")

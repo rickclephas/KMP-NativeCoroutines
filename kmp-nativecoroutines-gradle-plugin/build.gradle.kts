@@ -16,7 +16,7 @@ java {
     withSourcesJar()
 }
 
-val copyVersionTemplate by tasks.registering(Copy::class) {
+val copyVersionTemplate = tasks.register<Copy>("copyVersionTemplate") {
     inputs.property("version", version)
     from(layout.projectDirectory.file("Version.kt"))
     into(layout.buildDirectory.dir("generated/kmp-nativecoroutines-version/main"))
@@ -28,7 +28,7 @@ tasks.compileKotlin {
     dependsOn(copyVersionTemplate)
 }
 
-val sourcesJar by tasks.getting(Jar::class) {
+val sourcesJar = tasks.getByName<Jar>("sourcesJar") {
     dependsOn(copyVersionTemplate)
 }
 
