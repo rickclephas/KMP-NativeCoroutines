@@ -30,7 +30,7 @@ jobs:
       - name: Verify plugin structure
         run: ./gradlew :kmp-nativecoroutines-idea-plugin:verifyPluginStructure
       - name: Run binary compatibility validator
-        run: ./gradlew :kmp-nativecoroutines-idea-plugin:apiCheck
+        run: ./gradlew :kmp-nativecoroutines-idea-plugin:checkKotlinAbi
   run-idea-tests:
     needs:
       - run-common-idea-tests
