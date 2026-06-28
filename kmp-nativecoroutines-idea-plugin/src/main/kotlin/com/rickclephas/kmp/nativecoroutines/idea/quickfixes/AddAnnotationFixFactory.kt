@@ -1,7 +1,8 @@
 package com.rickclephas.kmp.nativecoroutines.idea.quickfixes
 
-import com.intellij.codeInsight.intention.HighPriorityAction
-import com.intellij.codeInsight.intention.LowPriorityAction
+import com.intellij.codeInsight.intention.PriorityAction
+import com.intellij.modcommand.ActionContext
+import com.intellij.modcommand.Presentation
 import com.intellij.psi.util.findParentOfType
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation
 import org.jetbrains.kotlin.analysis.api.fir.diagnostics.KaCompilerPluginDiagnostic0
@@ -10,6 +11,7 @@ import org.jetbrains.kotlin.idea.codeinsight.api.applicators.fixes.KotlinQuickFi
 import org.jetbrains.kotlin.idea.codeinsight.api.applicators.fixes.KtQuickFixesListBuilder
 import org.jetbrains.kotlin.idea.quickfix.AddAnnotationFix
 import org.jetbrains.kotlin.psi.KtCallableDeclaration
+import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtModifierListOwner
 
 internal class AddAnnotationFixFactory(
@@ -32,12 +34,20 @@ internal class AddAnnotationFixFactory(
     private class HighPriorityAddAnnotationFix(
         element: KtModifierListOwner,
         annotation: NativeCoroutinesAnnotation
-    ): AddAnnotationFix(element, annotation.classId), HighPriorityAction
+    ): AddAnnotationFix(element, annotation.classId) {
+        override fun getActionPresentation(context: ActionContext, element: KtElement): Presentation? {
+            return super.getActionPresentation(context, element)?.withPriority(PriorityAction.Priority.HIGH)
+        }
+    }
 
     private class LowPriorityAddAnnotationFix(
         element: KtModifierListOwner,
         annotation: NativeCoroutinesAnnotation
-    ): AddAnnotationFix(element, annotation.classId), LowPriorityAction
+    ): AddAnnotationFix(element, annotation.classId) {
+        override fun getActionPresentation(context: ActionContext, element: KtElement): Presentation? {
+            return super.getActionPresentation(context, element)?.withPriority(PriorityAction.Priority.LOW)
+        }
+    }
 
     private val intentionBased = KotlinQuickFixFactory.IntentionBased { diagnostic: KaCompilerPluginDiagnostic0 ->
         if (diagnosticFactories.none { it.name == diagnostic.factoryName }) return@IntentionBased emptyList()
