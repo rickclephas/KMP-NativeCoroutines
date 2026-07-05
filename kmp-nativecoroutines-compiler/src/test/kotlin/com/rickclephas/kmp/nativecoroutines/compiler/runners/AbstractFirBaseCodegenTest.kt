@@ -92,8 +92,8 @@ abstract class AbstractFirBaseCodegenTest(parser: FirParser): AbstractJvmBlackBo
                 ::IrPrettyKotlinDumpHandler,
             )
         }
-        useAfterAnalysisCheckers(
-            ::FirMetaInfoDiffSuppressor,
+        useFailureSuppressors(
+            ::FirMetaInfoDiffSuppressor
         )
         configureDumpHandlersForCodegenTest()
         useConfigurators(::KmpNativeCoroutinesCompilerPluginConfigurator)

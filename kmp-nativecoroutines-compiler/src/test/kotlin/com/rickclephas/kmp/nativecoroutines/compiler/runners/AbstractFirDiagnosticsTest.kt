@@ -30,7 +30,7 @@ abstract class AbstractFirBaseDiagnosticsTest(
             configureFirParser(parser)
             enableLazyResolvePhaseChecking()
             forTestsMatching("testData/diagnostics/*") {
-                useAfterAnalysisCheckers(
+                useFailureSuppressors(
                     ::FirFailingTestSuppressor,
                 )
             }
