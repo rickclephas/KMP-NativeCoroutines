@@ -32,7 +32,7 @@ internal fun FirExtension.buildTypeParametersCopy(
             moduleData = session.moduleData
             this.origin = origin
 
-            source = parameter.source?.fakeElement(KtFakeSourceElementKind.PluginGenerated)
+            source = parameter.source?.fakeElement(KtFakeSourceElementKind.PluginGenerated.Default)
 
             symbol = FirTypeParameterSymbol()
             name = parameter.name

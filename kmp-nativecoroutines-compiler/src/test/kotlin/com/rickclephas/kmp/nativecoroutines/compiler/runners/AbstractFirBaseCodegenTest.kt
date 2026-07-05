@@ -5,11 +5,8 @@ import com.rickclephas.kmp.nativecoroutines.compiler.directives.KmpNativeCorouti
 import com.rickclephas.kmp.nativecoroutines.compiler.services.KmpNativeCoroutinesCompilerPluginConfigurator
 import com.rickclephas.kmp.nativecoroutines.compiler.services.KmpNativeCoroutinesJvmRuntimeClasspathProvider
 import org.jetbrains.kotlin.config.JvmDefaultMode
-import org.jetbrains.kotlin.test.Constructor
 import org.jetbrains.kotlin.test.FirParser
 import org.jetbrains.kotlin.test.backend.handlers.IrPrettyKotlinDumpHandler
-import org.jetbrains.kotlin.test.backend.ir.BackendCliJvmFacade
-import org.jetbrains.kotlin.test.backend.ir.IrBackendInput
 import org.jetbrains.kotlin.test.backend.ir.IrConstCheckerHandler
 import org.jetbrains.kotlin.test.backend.ir.IrDiagnosticsHandler
 import org.jetbrains.kotlin.test.builders.TestConfigurationBuilder
@@ -24,26 +21,18 @@ import org.jetbrains.kotlin.test.directives.FirDiagnosticsDirectives.FIR_DUMP
 import org.jetbrains.kotlin.test.directives.JvmEnvironmentConfigurationDirectives.FULL_JDK
 import org.jetbrains.kotlin.test.directives.LanguageSettingsDirectives.JVM_DEFAULT_MODE
 import org.jetbrains.kotlin.test.directives.configureFirParser
-import org.jetbrains.kotlin.test.frontend.fir.Fir2IrCliJvmFacade
-import org.jetbrains.kotlin.test.frontend.fir.FirCliJvmFacade
 import org.jetbrains.kotlin.test.frontend.fir.FirMetaInfoDiffSuppressor
-import org.jetbrains.kotlin.test.frontend.fir.FirOutputArtifact
 import org.jetbrains.kotlin.test.frontend.fir.handlers.FirCfgDumpHandler
 import org.jetbrains.kotlin.test.frontend.fir.handlers.FirDumpHandler
 import org.jetbrains.kotlin.test.frontend.fir.handlers.FirResolvedTypesVerifier
 import org.jetbrains.kotlin.test.frontend.fir.handlers.FirScopeDumpHandler
 import org.jetbrains.kotlin.test.initIdeaConfiguration
-import org.jetbrains.kotlin.test.model.*
 import org.jetbrains.kotlin.test.runners.codegen.AbstractJvmBlackBoxCodegenTestBase
 import org.jetbrains.kotlin.test.services.EnvironmentBasedStandardLibrariesPathProvider
 import org.jetbrains.kotlin.test.services.KotlinStandardLibrariesPathProvider
 import org.junit.jupiter.api.BeforeAll
 
-abstract class AbstractFirBaseCodegenTest(
-    private val firParser: FirParser
-): AbstractJvmBlackBoxCodegenTestBase<FirOutputArtifact>(
-    FrontendKinds.FIR
-) {
+abstract class AbstractFirBaseCodegenTest(parser: FirParser): AbstractJvmBlackBoxCodegenTestBase(parser) {
 
     companion object {
         @BeforeAll
@@ -56,13 +45,6 @@ abstract class AbstractFirBaseCodegenTest(
     override fun createKotlinStandardLibrariesPathProvider(): KotlinStandardLibrariesPathProvider {
         return EnvironmentBasedStandardLibrariesPathProvider
     }
-
-    final override val frontendFacade: Constructor<FrontendFacade<FirOutputArtifact>>
-        get() = ::FirCliJvmFacade
-    final override val frontendToBackendConverter: Constructor<Frontend2BackendConverter<FirOutputArtifact, IrBackendInput>>
-        get() = ::Fir2IrCliJvmFacade
-    final override val backendFacade: Constructor<BackendFacade<IrBackendInput, BinaryArtifacts.Jvm>>
-        get() = ::BackendCliJvmFacade
 
     override fun configure(builder: TestConfigurationBuilder) = with(builder) {
         super.configure(builder)
@@ -92,7 +74,7 @@ abstract class AbstractFirBaseCodegenTest(
                 }
             }
         }
-        configureFirParser(firParser)
+        configureFirParser(parser)
         configureFirHandlersStep {
             useHandlersAtFirst(
                 ::FirDumpHandler,
@@ -110,8 +92,8 @@ abstract class AbstractFirBaseCodegenTest(
                 ::IrPrettyKotlinDumpHandler,
             )
         }
-        useAfterAnalysisCheckers(
-            ::FirMetaInfoDiffSuppressor,
+        useFailureSuppressors(
+            ::FirMetaInfoDiffSuppressor
         )
         configureDumpHandlersForCodegenTest()
         useConfigurators(::KmpNativeCoroutinesCompilerPluginConfigurator)
