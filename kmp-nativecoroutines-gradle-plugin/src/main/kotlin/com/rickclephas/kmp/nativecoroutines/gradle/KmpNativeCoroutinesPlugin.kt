@@ -37,8 +37,14 @@ public class KmpNativeCoroutinesPlugin: KotlinCompilerPluginSupportPlugin {
         return project.provider {
             buildList {
                 add(SubpluginOption("exposedSeverity", extension.exposedSeverity.name))
-                extension.generatedSourceDirs.map { project.file(it).absolutePath }.distinct().forEach {
-                    add(SubpluginOption("generatedSourceDir", it))
+                extension.generatedSourceDirs.map { project.file(it) }.distinct().forEach { dir ->
+                    // Prefer project relative paths so that the absolute project path doesn't
+                    // end up in the build cache key of Kotlin/Native compilations, which would
+                    // prevent relocated build cache hits.
+                    val relativeDir = dir.relativeToOrNull(project.projectDir)?.takeUnless {
+                        it.path.startsWith("..")
+                    }
+                    add(SubpluginOption("generatedSourceDir", (relativeDir ?: dir).path))
                 }
                 add(SubpluginOption("suffix", extension.suffix))
                 extension.flowValueSuffix?.let { add(SubpluginOption("flowValueSuffix", it)) }
