@@ -1,3 +1,7 @@
+@file:OptIn(ExperimentalAbiValidation::class)
+
+import org.jetbrains.kotlin.gradle.dsl.abi.ExperimentalAbiValidation
+
 plugins {
     id("kmp-nativecoroutines-kotlin-jvm")
     id("kmp-nativecoroutines-publish")
@@ -7,7 +11,7 @@ dependencies {
     compileOnly(libs.kotlin.compiler.embeddable)
 }
 
-val syncSources by tasks.registering(Sync::class) {
+val syncSources = tasks.register<Sync>("syncSources") {
     from(project(":kmp-nativecoroutines-compiler").files("src/main"))
     into("src/main")
     filter {
@@ -20,10 +24,11 @@ val syncSources by tasks.registering(Sync::class) {
 
 kotlin {
     explicitApi()
+    abiValidation()
     jvmToolchain(11)
 }
 
-val sourcesJar by tasks.getting(Jar::class) {
+val sourcesJar = tasks.getByName<Jar>("sourcesJar") {
     dependsOn(syncSources)
 }
 

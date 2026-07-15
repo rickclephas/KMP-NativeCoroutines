@@ -1,4 +1,7 @@
+@file:OptIn(ExperimentalAbiValidation::class)
+
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
+import org.jetbrains.kotlin.gradle.dsl.abi.ExperimentalAbiValidation
 
 plugins {
     id("kmp-nativecoroutines-kotlin-multiplatform")
@@ -7,6 +10,7 @@ plugins {
 
 kotlin {
     explicitApi()
+    abiValidation()
     jvmToolchain(11)
 
     macosX64()
