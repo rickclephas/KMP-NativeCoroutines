@@ -1,9 +1,11 @@
 @file:Suppress("UnstableApiUsage")
+@file:OptIn(ExperimentalAbiValidation::class)
 
 import org.jetbrains.intellij.platform.gradle.IntelliJPlatformType
 import org.jetbrains.intellij.platform.gradle.models.ProductRelease
 import org.jetbrains.intellij.platform.gradle.tasks.RunIdeTask
 import org.jetbrains.intellij.platform.gradle.tasks.VerifyPluginTask
+import org.jetbrains.kotlin.gradle.dsl.abi.ExperimentalAbiValidation
 
 plugins {
     id("java")
@@ -20,6 +22,7 @@ repositories {
 
 kotlin {
     explicitApi()
+    abiValidation()
     jvmToolchain(21)
 }
 
@@ -76,12 +79,16 @@ intellijPlatform {
     }
 
     pluginVerification {
+        failureLevel = listOf(
+            VerifyPluginTask.FailureLevel.COMPATIBILITY_PROBLEMS,
+            VerifyPluginTask.FailureLevel.OVERRIDE_ONLY_API_USAGES,
+        )
         ides {
             val verificationIde = findProperty("verificationIde") as String?
             if (verificationIde != null) {
                 val (platformType, build) = verificationIde.split('-', limit = 2)
                 select {
-                    channels = ProductRelease.Channel.values().toList()
+                    channels = ProductRelease.Channel.entries.toList()
                     types = listOf(IntelliJPlatformType.fromCode(platformType))
                     sinceBuild = build
                     untilBuild = "$build.*"
@@ -99,13 +106,9 @@ intellijPlatform {
     }
 }
 
-val runIntelliJ by intellijPlatformTesting.runIde.registering {
+val runIntelliJ = intellijPlatformTesting.runIde.register("runIntelliJ") {
     type = IntelliJPlatformType.IntellijIdea
 }
-
-//val runAndroidStudio by intellijPlatformTesting.runIde.registering {
-//    type = IntelliJPlatformType.AndroidStudio
-//}
 
 tasks.withType(RunIdeTask::class) {
     maxHeapSize = "4g"
@@ -120,7 +123,7 @@ tasks.withType(VerifyPluginTask::class) {
     }
 }
 
-val requireIdePluginBuild by requireBuildType(BuildType.IDE_PLUGIN)
+val requireIdePluginBuild = requireBuildType(BuildType.IDE_PLUGIN)
 
 tasks.compileKotlin {
     dependsOn(requireIdePluginBuild)
