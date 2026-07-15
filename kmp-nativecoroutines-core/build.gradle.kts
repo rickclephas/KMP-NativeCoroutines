@@ -1,5 +1,8 @@
+@file:OptIn(ExperimentalAbiValidation::class)
+
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
+import org.jetbrains.kotlin.gradle.dsl.abi.ExperimentalAbiValidation
 import org.jetbrains.kotlin.gradle.plugin.KotlinCompilation
 
 plugins {
@@ -9,6 +12,7 @@ plugins {
 
 kotlin {
     explicitApi()
+    abiValidation()
     jvmToolchain(11)
 
     @OptIn(ExperimentalKotlinGradlePluginApi::class)
@@ -85,4 +89,8 @@ kotlin {
             }
         }
     }
+}
+
+tasks.withType<AbstractTestTask>().configureEach {
+    failOnNoDiscoveredTests = false
 }

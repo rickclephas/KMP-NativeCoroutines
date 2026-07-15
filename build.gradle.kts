@@ -1,9 +1,3 @@
-import kotlinx.validation.ExperimentalBCVApi
-
-plugins {
-    alias(libs.plugins.kotlinx.binary.compatibility.validator)
-}
-
 buildscript {
     repositories {
         gradlePluginPortal()
@@ -13,12 +7,5 @@ buildscript {
 
 allprojects {
     group = "com.rickclephas.kmp"
-    version = "1.0.4"
-}
-
-apiValidation {
-    @OptIn(ExperimentalBCVApi::class)
-    klib {
-        enabled = true
-    }
+    version = "1.0.5"
 }
