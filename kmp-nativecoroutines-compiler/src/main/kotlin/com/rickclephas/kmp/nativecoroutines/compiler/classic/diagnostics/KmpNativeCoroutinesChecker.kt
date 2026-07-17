@@ -1,6 +1,7 @@
 package com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics
 
 import com.rickclephas.kmp.nativecoroutines.compiler.config.ExposedSeverity
+import com.rickclephas.kmp.nativecoroutines.compiler.config.isLocatedIn
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.CONFLICT_COROUTINES
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.EXPOSED_FLOW_TYPE
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.EXPOSED_FLOW_TYPE_ERROR
@@ -125,7 +126,7 @@ public class KmpNativeCoroutinesChecker(
         val hasAnnotation = coroutinesAnnotations.isNotEmpty()
         val isIgnored = annotations.contains(NativeCoroutinesIgnore)
         if (!isRefined && isPublic && !isOverride && !isActual && !hasAnnotation && !isIgnored) {
-            val isGenerated = generatedSourceDirs.any(Path(declaration.containingKtFile.virtualFilePath)::startsWith)
+            val isGenerated = generatedSourceDirs.any(Path(declaration.containingKtFile.virtualFilePath)::isLocatedIn)
             if (!isGenerated && isSuspend) {
                 exposedSuspendFunction?.on(declaration)?.let(context.trace::report)
             }
