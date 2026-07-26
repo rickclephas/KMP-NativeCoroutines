@@ -51,6 +51,7 @@ import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnot
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutinesRefined
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutinesRefinedState
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutinesState
+import org.jetbrains.kotlin.K1Deprecation
 import org.jetbrains.kotlin.descriptors.*
 import org.jetbrains.kotlin.descriptors.annotations.Annotated
 import org.jetbrains.kotlin.descriptors.annotations.AnnotationDescriptor
@@ -68,6 +69,7 @@ import org.jetbrains.kotlin.resolve.multiplatform.findExpects
 import java.nio.file.Path
 import kotlin.io.path.Path
 
+@OptIn(K1Deprecation::class)
 @Suppress("UnstableApiUsage")
 public class KmpNativeCoroutinesChecker(
     exposedSeverity: ExposedSeverity,

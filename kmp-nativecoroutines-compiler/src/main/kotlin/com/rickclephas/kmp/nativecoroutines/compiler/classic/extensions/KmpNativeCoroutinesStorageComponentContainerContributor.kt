@@ -4,6 +4,7 @@ import com.rickclephas.kmp.nativecoroutines.compiler.config.EXPOSED_SEVERITY
 import com.rickclephas.kmp.nativecoroutines.compiler.config.GENERATED_SOURCE_DIR
 import com.rickclephas.kmp.nativecoroutines.compiler.config.get
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesChecker
+import org.jetbrains.kotlin.K1Deprecation
 import org.jetbrains.kotlin.config.CompilerConfiguration
 import org.jetbrains.kotlin.container.StorageComponentContainer
 import org.jetbrains.kotlin.container.useInstance
@@ -11,6 +12,7 @@ import org.jetbrains.kotlin.descriptors.ModuleDescriptor
 import org.jetbrains.kotlin.extensions.StorageComponentContainerContributor
 import org.jetbrains.kotlin.platform.TargetPlatform
 
+@OptIn(K1Deprecation::class)
 internal class KmpNativeCoroutinesStorageComponentContainerContributor(
     private val configuration: CompilerConfiguration
 ): StorageComponentContainerContributor {
