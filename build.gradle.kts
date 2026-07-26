@@ -7,5 +7,5 @@ buildscript {
 
 allprojects {
     group = "com.rickclephas.kmp"
-    version = "1.0.4-kotlin-2.4.20-Beta1"
+    version = "1.0.5"
 }
