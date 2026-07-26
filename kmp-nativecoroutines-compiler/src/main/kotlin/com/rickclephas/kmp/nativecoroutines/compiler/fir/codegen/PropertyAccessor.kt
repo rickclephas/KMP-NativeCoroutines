@@ -6,6 +6,7 @@ import org.jetbrains.kotlin.fir.declarations.builder.FirPropertyBuilder
 import org.jetbrains.kotlin.fir.declarations.builder.buildDefaultSetterValueParameter
 import org.jetbrains.kotlin.fir.declarations.builder.buildPropertyAccessor
 import org.jetbrains.kotlin.fir.extensions.FirExtension
+import org.jetbrains.kotlin.fir.resolve.substitution.ConeSubstitutor
 import org.jetbrains.kotlin.fir.symbols.impl.FirPropertyAccessorSymbol
 import org.jetbrains.kotlin.fir.symbols.impl.FirPropertySymbol
 import org.jetbrains.kotlin.fir.symbols.impl.FirValueParameterSymbol
@@ -14,6 +15,7 @@ import org.jetbrains.kotlin.fir.types.impl.FirImplicitUnitTypeRef
 internal fun FirExtension.buildPropertyGetter(
     propertyBuilder: FirPropertyBuilder,
     originalSymbol: FirPropertySymbol,
+    substitutor: ConeSubstitutor,
 ): FirPropertyAccessor = buildPropertyAccessor {
     val originalGetter = originalSymbol.getterSymbol
     require(originalGetter != null)
@@ -26,7 +28,7 @@ internal fun FirExtension.buildPropertyGetter(
     propertySymbol = propertyBuilder.symbol
     isGetter = true
     annotations.addAll(buildAnnotationsCopy(originalGetter.resolvedAnnotationsWithClassIds))
-    body = session.buildCallableReferenceBlock(originalSymbol)
+    body = session.buildCallableReferenceBlock(originalSymbol, substitutor)
 }
 
 internal fun FirExtension.buildPropertySetter(

@@ -92,6 +92,6 @@ internal fun FirExtension.buildNativeFunction(
             annotations.add(buildThrowsAnnotation(ClassIds.exception))
         }
 
-        body = session.buildCallableReferenceBlock(originalSymbol)
+        body = session.buildCallableReferenceBlock(originalSymbol, typeParameters.substitutor)
     }.symbol
 }

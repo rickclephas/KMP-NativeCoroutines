@@ -116,7 +116,7 @@ FILE fqName:<root> fileName:/__GENERATED__CALLABLES__.kt
         VAR IR_TEMPORARY_VARIABLE name:tmp_8 type:kotlinx.coroutines.CoroutineScope? [val]
           CONST Null type=kotlinx.coroutines.CoroutineScope? value=null
         RETURN type=kotlin.Nothing from='public final fun <get-genericFlowNative> <T> (<this>: <root>.MyGenericClass1<T of <root>.<get-genericFlowNative>>): kotlinx.coroutines.flow.Flow<T of <root>.<get-genericFlowNative>> declared in <root>'
-          CALL 'public final fun <get-genericFlow> <T> (<this>: <root>.MyGenericClass1<T of <root>.<get-genericFlow>>): kotlinx.coroutines.flow.Flow<T of <root>.<get-genericFlow>> declared in <root>' type=kotlinx.coroutines.flow.Flow<T of <root>.<get-genericFlow>> origin=null
+          CALL 'public final fun <get-genericFlow> <T> (<this>: <root>.MyGenericClass1<T of <root>.<get-genericFlow>>): kotlinx.coroutines.flow.Flow<T of <root>.<get-genericFlow>> declared in <root>' type=kotlinx.coroutines.flow.Flow<T of <root>.<get-genericFlowNative>> origin=null
             TYPE_ARG T: T of <root>.<get-genericFlowNative>
             ARG <this>: GET_VAR '<this>: <root>.MyGenericClass1<T of <root>.<get-genericFlowNative>> declared in <root>.<get-genericFlowNative>' type=<root>.MyGenericClass1<T of <root>.<get-genericFlowNative>> origin=null
   PROPERTY GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:genericSharedFlowNative visibility:public modality:FINAL [val]
@@ -130,7 +130,7 @@ FILE fqName:<root> fileName:/__GENERATED__CALLABLES__.kt
         VAR IR_TEMPORARY_VARIABLE name:tmp_9 type:kotlinx.coroutines.CoroutineScope? [val]
           CONST Null type=kotlinx.coroutines.CoroutineScope? value=null
         RETURN type=kotlin.Nothing from='public final fun <get-genericSharedFlowNative> <T> (<this>: <root>.MyGenericClass1<T of <root>.<get-genericSharedFlowNative>>): kotlinx.coroutines.flow.SharedFlow<T of <root>.<get-genericSharedFlowNative>> declared in <root>'
-          CALL 'public final fun <get-genericSharedFlow> <T> (<this>: <root>.MyGenericClass1<T of <root>.<get-genericSharedFlow>>): kotlinx.coroutines.flow.SharedFlow<T of <root>.<get-genericSharedFlow>> declared in <root>' type=kotlinx.coroutines.flow.SharedFlow<T of <root>.<get-genericSharedFlow>> origin=null
+          CALL 'public final fun <get-genericSharedFlow> <T> (<this>: <root>.MyGenericClass1<T of <root>.<get-genericSharedFlow>>): kotlinx.coroutines.flow.SharedFlow<T of <root>.<get-genericSharedFlow>> declared in <root>' type=kotlinx.coroutines.flow.SharedFlow<T of <root>.<get-genericSharedFlowNative>> origin=null
             TYPE_ARG T: T of <root>.<get-genericSharedFlowNative>
             ARG <this>: GET_VAR '<this>: <root>.MyGenericClass1<T of <root>.<get-genericSharedFlowNative>> declared in <root>.<get-genericSharedFlowNative>' type=<root>.MyGenericClass1<T of <root>.<get-genericSharedFlowNative>> origin=null
   PROPERTY GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:genericSharedFlowReplayCache visibility:public modality:FINAL [val]
@@ -139,13 +139,13 @@ FILE fqName:<root> fileName:/__GENERATED__CALLABLES__.kt
       VALUE_PARAMETER kind:ExtensionReceiver name:<this> index:0 type:<root>.MyGenericClass1<T of <root>.<get-genericSharedFlowReplayCache>>
       correspondingProperty: PROPERTY GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:genericSharedFlowReplayCache visibility:public modality:FINAL [val]
       BLOCK_BODY
-        VAR IR_TEMPORARY_VARIABLE name:tmp_10 type:kotlinx.coroutines.flow.SharedFlow<T of <root>.<get-genericSharedFlow>> [val]
-          CALL 'public final fun <get-genericSharedFlow> <T> (<this>: <root>.MyGenericClass1<T of <root>.<get-genericSharedFlow>>): kotlinx.coroutines.flow.SharedFlow<T of <root>.<get-genericSharedFlow>> declared in <root>' type=kotlinx.coroutines.flow.SharedFlow<T of <root>.<get-genericSharedFlow>> origin=null
+        VAR IR_TEMPORARY_VARIABLE name:tmp_10 type:kotlinx.coroutines.flow.SharedFlow<T of <root>.<get-genericSharedFlowReplayCache>> [val]
+          CALL 'public final fun <get-genericSharedFlow> <T> (<this>: <root>.MyGenericClass1<T of <root>.<get-genericSharedFlow>>): kotlinx.coroutines.flow.SharedFlow<T of <root>.<get-genericSharedFlow>> declared in <root>' type=kotlinx.coroutines.flow.SharedFlow<T of <root>.<get-genericSharedFlowReplayCache>> origin=null
             TYPE_ARG T: T of <root>.<get-genericSharedFlowReplayCache>
             ARG <this>: GET_VAR '<this>: <root>.MyGenericClass1<T of <root>.<get-genericSharedFlowReplayCache>> declared in <root>.<get-genericSharedFlowReplayCache>' type=<root>.MyGenericClass1<T of <root>.<get-genericSharedFlowReplayCache>> origin=null
         RETURN type=kotlin.Nothing from='public final fun <get-genericSharedFlowReplayCache> <T> (<this>: <root>.MyGenericClass1<T of <root>.<get-genericSharedFlowReplayCache>>): kotlin.collections.List<T of <root>.<get-genericSharedFlowReplayCache>> declared in <root>'
-          CALL 'public abstract fun <get-replayCache> (): kotlin.collections.List<T of kotlinx.coroutines.flow.SharedFlow> declared in kotlinx.coroutines.flow.SharedFlow' type=T of <root>.<get-genericSharedFlow> origin=null
-            ARG <this>: GET_VAR 'val tmp_10: kotlinx.coroutines.flow.SharedFlow<T of <root>.<get-genericSharedFlow>> declared in <root>.<get-genericSharedFlowReplayCache>' type=kotlinx.coroutines.flow.SharedFlow<T of <root>.<get-genericSharedFlow>> origin=null
+          CALL 'public abstract fun <get-replayCache> (): kotlin.collections.List<T of kotlinx.coroutines.flow.SharedFlow> declared in kotlinx.coroutines.flow.SharedFlow' type=T of <root>.<get-genericSharedFlowReplayCache> origin=null
+            ARG <this>: GET_VAR 'val tmp_10: kotlinx.coroutines.flow.SharedFlow<T of <root>.<get-genericSharedFlowReplayCache>> declared in <root>.<get-genericSharedFlowReplayCache>' type=kotlinx.coroutines.flow.SharedFlow<T of <root>.<get-genericSharedFlowReplayCache>> origin=null
   PROPERTY GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:genericStateFlowNative visibility:public modality:FINAL [val]
     annotations:
       ObjCName(name = "genericStateFlow", swiftName = <null>, exact = <null>)
@@ -157,7 +157,7 @@ FILE fqName:<root> fileName:/__GENERATED__CALLABLES__.kt
         VAR IR_TEMPORARY_VARIABLE name:tmp_11 type:kotlinx.coroutines.CoroutineScope? [val]
           CONST Null type=kotlinx.coroutines.CoroutineScope? value=null
         RETURN type=kotlin.Nothing from='public final fun <get-genericStateFlowNative> <T> (<this>: <root>.MyGenericClass1<T of <root>.<get-genericStateFlowNative>>): kotlinx.coroutines.flow.StateFlow<T of <root>.<get-genericStateFlowNative>> declared in <root>'
-          CALL 'public final fun <get-genericStateFlow> <T> (<this>: <root>.MyGenericClass1<T of <root>.<get-genericStateFlow>>): kotlinx.coroutines.flow.StateFlow<T of <root>.<get-genericStateFlow>> declared in <root>' type=kotlinx.coroutines.flow.StateFlow<T of <root>.<get-genericStateFlow>> origin=null
+          CALL 'public final fun <get-genericStateFlow> <T> (<this>: <root>.MyGenericClass1<T of <root>.<get-genericStateFlow>>): kotlinx.coroutines.flow.StateFlow<T of <root>.<get-genericStateFlow>> declared in <root>' type=kotlinx.coroutines.flow.StateFlow<T of <root>.<get-genericStateFlowNative>> origin=null
             TYPE_ARG T: T of <root>.<get-genericStateFlowNative>
             ARG <this>: GET_VAR '<this>: <root>.MyGenericClass1<T of <root>.<get-genericStateFlowNative>> declared in <root>.<get-genericStateFlowNative>' type=<root>.MyGenericClass1<T of <root>.<get-genericStateFlowNative>> origin=null
   PROPERTY GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:genericStateFlowValue visibility:public modality:FINAL [val]
@@ -166,13 +166,13 @@ FILE fqName:<root> fileName:/__GENERATED__CALLABLES__.kt
       VALUE_PARAMETER kind:ExtensionReceiver name:<this> index:0 type:<root>.MyGenericClass1<T of <root>.<get-genericStateFlowValue>>
       correspondingProperty: PROPERTY GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:genericStateFlowValue visibility:public modality:FINAL [val]
       BLOCK_BODY
-        VAR IR_TEMPORARY_VARIABLE name:tmp_12 type:kotlinx.coroutines.flow.StateFlow<T of <root>.<get-genericStateFlow>> [val]
-          CALL 'public final fun <get-genericStateFlow> <T> (<this>: <root>.MyGenericClass1<T of <root>.<get-genericStateFlow>>): kotlinx.coroutines.flow.StateFlow<T of <root>.<get-genericStateFlow>> declared in <root>' type=kotlinx.coroutines.flow.StateFlow<T of <root>.<get-genericStateFlow>> origin=null
+        VAR IR_TEMPORARY_VARIABLE name:tmp_12 type:kotlinx.coroutines.flow.StateFlow<T of <root>.<get-genericStateFlowValue>> [val]
+          CALL 'public final fun <get-genericStateFlow> <T> (<this>: <root>.MyGenericClass1<T of <root>.<get-genericStateFlow>>): kotlinx.coroutines.flow.StateFlow<T of <root>.<get-genericStateFlow>> declared in <root>' type=kotlinx.coroutines.flow.StateFlow<T of <root>.<get-genericStateFlowValue>> origin=null
             TYPE_ARG T: T of <root>.<get-genericStateFlowValue>
             ARG <this>: GET_VAR '<this>: <root>.MyGenericClass1<T of <root>.<get-genericStateFlowValue>> declared in <root>.<get-genericStateFlowValue>' type=<root>.MyGenericClass1<T of <root>.<get-genericStateFlowValue>> origin=null
         RETURN type=kotlin.Nothing from='public final fun <get-genericStateFlowValue> <T> (<this>: <root>.MyGenericClass1<T of <root>.<get-genericStateFlowValue>>): T of <root>.<get-genericStateFlowValue> declared in <root>'
-          CALL 'public abstract fun <get-value> (): T of kotlinx.coroutines.flow.StateFlow declared in kotlinx.coroutines.flow.StateFlow' type=T of <root>.<get-genericStateFlow> origin=null
-            ARG <this>: GET_VAR 'val tmp_12: kotlinx.coroutines.flow.StateFlow<T of <root>.<get-genericStateFlow>> declared in <root>.<get-genericStateFlowValue>' type=kotlinx.coroutines.flow.StateFlow<T of <root>.<get-genericStateFlow>> origin=null
+          CALL 'public abstract fun <get-value> (): T of kotlinx.coroutines.flow.StateFlow declared in kotlinx.coroutines.flow.StateFlow' type=T of <root>.<get-genericStateFlowValue> origin=null
+            ARG <this>: GET_VAR 'val tmp_12: kotlinx.coroutines.flow.StateFlow<T of <root>.<get-genericStateFlowValue>> declared in <root>.<get-genericStateFlowValue>' type=kotlinx.coroutines.flow.StateFlow<T of <root>.<get-genericStateFlowValue>> origin=null
   PROPERTY GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:mutableNullableStatePropertyFlow visibility:public modality:FINAL [val]
     FUN GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:<get-mutableNullableStatePropertyFlow> visibility:public modality:FINAL returnType:kotlinx.coroutines.flow.MutableStateFlow<kotlin.String>?
       correspondingProperty: PROPERTY GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:mutableNullableStatePropertyFlow visibility:public modality:FINAL [val]
