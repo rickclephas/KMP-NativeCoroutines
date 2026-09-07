@@ -27,12 +27,13 @@ This library solves both of these limitations 😄.
 
 ## Compatibility
 
-The latest version of the library uses Kotlin version `2.4.10`.  
+The latest version of the library uses Kotlin version `2.4.20`.  
 Compatibility versions for older and/or preview Kotlin versions are also available:
 
 | Version        | Version suffix  |   Kotlin   | Coroutines |
 |----------------|-----------------|:----------:|:----------:|
-| **_latest_**   | **_no suffix_** | **2.4.10** | **1.10.1** |
+| **_latest_**   | **_no suffix_** | **2.4.20** | **1.10.1** |
+| 1.0.5          | _no suffix_     |   2.4.10   |   1.10.1   |
 | 1.0.4          | _no suffix_     |   2.4.0    |   1.10.1   |
 | 1.0.3          | _no suffix_     |   2.3.21   |   1.10.1   |
 | 1.0.2          | _no suffix_     |   2.3.20   |   1.10.1   |
@@ -70,7 +71,7 @@ Make sure to always use the same versions for all the libraries!
 For Kotlin just add the plugin to your `build.gradle.kts`:
 ```kotlin
 plugins {
-    id("com.rickclephas.kmp.nativecoroutines") version "1.0.5"
+    id("com.rickclephas.kmp.nativecoroutines") version "1.0.6"
 }
 ```
 and make sure to opt in to the experimental `@ObjCName` annotation:
@@ -86,7 +87,7 @@ The Swift implementations are available via the Swift Package Manager.
 Just add it to your `Package.swift` file:
 ```swift
 dependencies: [
-    .package(url: "https://github.com/rickclephas/KMP-NativeCoroutines.git", exact: "1.0.5")
+    .package(url: "https://github.com/rickclephas/KMP-NativeCoroutines.git", exact: "1.0.6")
 ],
 targets: [
     .target(
@@ -118,9 +119,9 @@ Or add it in Xcode by going to `File` > `Add Packages...` and providing the URL:
 
 If you use CocoaPods add one or more of the following libraries to your `Podfile`:
 ```ruby
-pod 'KMPNativeCoroutinesAsync', git: 'https://github.com/rickclephas/KMP-NativeCoroutines.git', tag: 'v1.0.5'   # Swift Concurrency implementation
-pod 'KMPNativeCoroutinesCombine', git: 'https://github.com/rickclephas/KMP-NativeCoroutines.git', tag: 'v1.0.5' # Combine implementation
-pod 'KMPNativeCoroutinesRxSwift', git: 'https://github.com/rickclephas/KMP-NativeCoroutines.git', tag: 'v1.0.5' # RxSwift implementation
+pod 'KMPNativeCoroutinesAsync', git: 'https://github.com/rickclephas/KMP-NativeCoroutines.git', tag: 'v1.0.6'   # Swift Concurrency implementation
+pod 'KMPNativeCoroutinesCombine', git: 'https://github.com/rickclephas/KMP-NativeCoroutines.git', tag: 'v1.0.6' # Combine implementation
+pod 'KMPNativeCoroutinesRxSwift', git: 'https://github.com/rickclephas/KMP-NativeCoroutines.git', tag: 'v1.0.6' # RxSwift implementation
 ```
 > [!NOTE]
 > The version for CocoaPods should not contain the Kotlin version suffix (e.g. `-new-mm` or `-kotlin-1.6.0`).
