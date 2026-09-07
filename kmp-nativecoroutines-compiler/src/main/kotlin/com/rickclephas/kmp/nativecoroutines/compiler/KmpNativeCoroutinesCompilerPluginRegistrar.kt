@@ -3,6 +3,7 @@ package com.rickclephas.kmp.nativecoroutines.compiler
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.extensions.KmpNativeCoroutinesStorageComponentContainerContributor
 import com.rickclephas.kmp.nativecoroutines.compiler.fir.extensions.KmpNativeCoroutinesFirExtensionRegistrar
 import com.rickclephas.kmp.nativecoroutines.compiler.ir.extensions.KmpNativeCoroutinesIrGenerationExtension
+import org.jetbrains.kotlin.K1Deprecation
 import org.jetbrains.kotlin.backend.common.extensions.IrGenerationExtension
 import org.jetbrains.kotlin.compiler.plugin.CompilerPluginRegistrar
 import org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi
@@ -16,6 +17,7 @@ public class KmpNativeCoroutinesCompilerPluginRegistrar: CompilerPluginRegistrar
     override val pluginId: String = "com.rickclephas.kmp.nativecoroutines"
     override val supportsK2: Boolean = true
 
+    @OptIn(K1Deprecation::class)
     override fun ExtensionStorage.registerExtensions(configuration: CompilerConfiguration) {
         FirExtensionRegistrarAdapter.registerExtension(KmpNativeCoroutinesFirExtensionRegistrar(configuration))
         StorageComponentContainerContributor.registerExtension(

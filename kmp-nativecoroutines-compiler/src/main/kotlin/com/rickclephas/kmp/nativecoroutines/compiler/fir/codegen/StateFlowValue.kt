@@ -42,7 +42,7 @@ internal fun FirExtension.buildStateFlowValueProperty(
             callableSignature
         ).origin
 
-        source = originalSymbol.source?.fakeElement(KtFakeSourceElementKind.PluginGenerated)
+        source = originalSymbol.source?.fakeElement(KtFakeSourceElementKind.PluginGenerated.Default)
 
         symbol = FirRegularPropertySymbol(callableId)
         name = callableId.callableName
@@ -76,7 +76,7 @@ internal fun FirExtension.buildStateFlowValueProperty(
             .toFirResolvedTypeRef()
 
         isVar = callableSignature.returnType.isMutable
-        getter = buildPropertyGetter(this, originalSymbol)
+        getter = buildPropertyGetter(this, originalSymbol, typeParameters.substitutor)
         if (isVar) {
             setter = buildPropertySetter(this, originalSymbol)
         }

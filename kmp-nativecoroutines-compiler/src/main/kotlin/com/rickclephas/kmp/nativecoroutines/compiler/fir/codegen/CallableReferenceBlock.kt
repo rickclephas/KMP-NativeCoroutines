@@ -7,6 +7,7 @@ import org.jetbrains.kotlin.fir.expressions.FirBlock
 import org.jetbrains.kotlin.fir.expressions.builder.buildBlock
 import org.jetbrains.kotlin.fir.expressions.builder.buildCallableReferenceAccess
 import org.jetbrains.kotlin.fir.references.builder.buildResolvedNamedReference
+import org.jetbrains.kotlin.fir.resolve.substitution.ConeSubstitutor
 import org.jetbrains.kotlin.fir.symbols.impl.FirCallableSymbol
 import org.jetbrains.kotlin.fir.symbols.impl.FirNamedFunctionSymbol
 import org.jetbrains.kotlin.fir.symbols.impl.FirPropertySymbol
@@ -15,11 +16,12 @@ import org.jetbrains.kotlin.name.StandardClassIds
 import org.jetbrains.kotlin.utils.addIfNotNull
 
 internal fun FirSession.buildCallableReferenceBlock(
-    symbol: FirCallableSymbol<*>
+    symbol: FirCallableSymbol<*>,
+    substitutor: ConeSubstitutor,
 ): FirBlock = buildBlock {
     coneTypeOrNull = StandardClassIds.Nothing.constructClassLikeType()
     statements += buildCallableReferenceAccess {
-        coneTypeOrNull = symbol.getReferenceConeType()
+        coneTypeOrNull = substitutor.substituteOrSelf(symbol.getReferenceConeType())
         calleeReference = buildResolvedNamedReference {
             name = symbol.name
             resolvedSymbol = symbol

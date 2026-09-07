@@ -60,7 +60,7 @@ internal fun FirExtension.buildThrowsAnnotation(vararg classIds: ClassId): FirAn
             coneTypeOrNull = symbol.classId.constructClassLikeType()
             packageFqName = symbol.classId.packageFqName
             relativeClassFqName = symbol.classId.relativeClassName
-            this.symbol = symbol
+            this.qualifierSymbol = symbol
             resolvedToCompanionObject = symbol.isCompanion
         }
     }.map { resolvedQualifier ->

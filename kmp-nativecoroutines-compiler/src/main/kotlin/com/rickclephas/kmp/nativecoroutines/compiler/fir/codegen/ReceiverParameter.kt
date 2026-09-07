@@ -25,7 +25,7 @@ internal fun FirExtension.buildReceiverParameterCopy(
         moduleData = session.moduleData
         this.origin = origin
 
-        source = originalParameter.source?.fakeElement(KtFakeSourceElementKind.PluginGenerated)
+        source = originalParameter.source?.fakeElement(KtFakeSourceElementKind.PluginGenerated.Default)
 
         symbol = FirReceiverParameterSymbol()
         this.containingDeclarationSymbol = containingDeclarationSymbol
