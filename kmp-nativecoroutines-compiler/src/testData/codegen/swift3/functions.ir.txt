@@ -34,7 +34,7 @@ FILE fqName:<root> fileName:/__GENERATED__CALLABLES__.kt
       VAR IR_TEMPORARY_VARIABLE name:tmp_3 type:kotlinx.coroutines.CoroutineScope? [val]
         CONST Null type=kotlinx.coroutines.CoroutineScope? value=null
       RETURN type=kotlin.Nothing from='public final fun returnGenericSuspendValueNative <T> (value: T of <root>.returnGenericSuspendValueNative): T of <root>.returnGenericSuspendValueNative declared in <root>'
-        CALL 'public final fun returnGenericSuspendValue <T> (value: T of <root>.returnGenericSuspendValue): T of <root>.returnGenericSuspendValue declared in <root>' type=T of <root>.returnGenericSuspendValue origin=null
+        CALL 'public final fun returnGenericSuspendValue <T> (value: T of <root>.returnGenericSuspendValue): T of <root>.returnGenericSuspendValue declared in <root>' type=T of <root>.returnGenericSuspendValueNative origin=null
           TYPE_ARG T: T of <root>.returnGenericSuspendValueNative
           ARG value: GET_VAR 'value: T of <root>.returnGenericSuspendValueNative declared in <root>.returnGenericSuspendValueNative' type=T of <root>.returnGenericSuspendValueNative origin=null
   FUN GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:returnInlineSuspendValueNative visibility:public modality:FINAL returnType:T of <root>.returnInlineSuspendValueNative [inline,suspend]
@@ -46,7 +46,7 @@ FILE fqName:<root> fileName:/__GENERATED__CALLABLES__.kt
       VAR IR_TEMPORARY_VARIABLE name:tmp_4 type:kotlinx.coroutines.CoroutineScope? [val]
         CONST Null type=kotlinx.coroutines.CoroutineScope? value=null
       RETURN type=kotlin.Nothing from='public final fun returnInlineSuspendValueNative <T> (value: T of <root>.returnInlineSuspendValueNative): T of <root>.returnInlineSuspendValueNative declared in <root>'
-        CALL 'public final fun returnInlineSuspendValue <T> (value: T of <root>.returnInlineSuspendValue): T of <root>.returnInlineSuspendValue declared in <root>' type=T of <root>.returnInlineSuspendValue origin=null
+        CALL 'public final fun returnInlineSuspendValue <T> (value: T of <root>.returnInlineSuspendValue): T of <root>.returnInlineSuspendValue declared in <root>' type=T of <root>.returnInlineSuspendValueNative origin=null
           TYPE_ARG T: T of <root>.returnInlineSuspendValueNative
           ARG value: GET_VAR 'value: T of <root>.returnInlineSuspendValueNative declared in <root>.returnInlineSuspendValueNative' type=T of <root>.returnInlineSuspendValueNative origin=null
   FUN GENERATED[com.rickclephas.kmp.nativecoroutines.compiler.fir.utils.NativeCoroutinesDeclarationKey] name:returnNullableFlowAndValueNative visibility:public modality:FINAL returnType:kotlinx.coroutines.flow.Flow<kotlin.String?>?
