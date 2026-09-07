@@ -35,7 +35,7 @@ internal fun FirExtension.buildNativeFunction(
             callableSignature
         ).origin
 
-        source = originalSymbol.source?.fakeElement(KtFakeSourceElementKind.PluginGenerated)
+        source = originalSymbol.source?.fakeElement(KtFakeSourceElementKind.PluginGenerated.Default)
 
         symbol = FirNamedFunctionSymbol(callableId)
         name = callableId.callableName
@@ -92,6 +92,6 @@ internal fun FirExtension.buildNativeFunction(
             annotations.add(buildThrowsAnnotation(ClassIds.exception))
         }
 
-        body = session.buildCallableReferenceBlock(originalSymbol)
+        body = session.buildCallableReferenceBlock(originalSymbol, typeParameters.substitutor)
     }.symbol
 }
