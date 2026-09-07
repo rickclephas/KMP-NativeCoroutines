@@ -1,6 +1,7 @@
 package com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics
 
 import com.rickclephas.kmp.nativecoroutines.compiler.config.ExposedSeverity
+import com.rickclephas.kmp.nativecoroutines.compiler.config.isLocatedIn
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.CONFLICT_COROUTINES
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.EXPOSED_FLOW_TYPE
 import com.rickclephas.kmp.nativecoroutines.compiler.classic.diagnostics.KmpNativeCoroutinesErrors.EXPOSED_FLOW_TYPE_ERROR
@@ -51,6 +52,7 @@ import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnot
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutinesRefined
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutinesRefinedState
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation.NativeCoroutinesState
+import org.jetbrains.kotlin.K1Deprecation
 import org.jetbrains.kotlin.descriptors.*
 import org.jetbrains.kotlin.descriptors.annotations.Annotated
 import org.jetbrains.kotlin.descriptors.annotations.AnnotationDescriptor
@@ -68,6 +70,7 @@ import org.jetbrains.kotlin.resolve.multiplatform.findExpects
 import java.nio.file.Path
 import kotlin.io.path.Path
 
+@OptIn(K1Deprecation::class)
 @Suppress("UnstableApiUsage")
 public class KmpNativeCoroutinesChecker(
     exposedSeverity: ExposedSeverity,
@@ -125,7 +128,7 @@ public class KmpNativeCoroutinesChecker(
         val hasAnnotation = coroutinesAnnotations.isNotEmpty()
         val isIgnored = annotations.contains(NativeCoroutinesIgnore)
         if (!isRefined && isPublic && !isOverride && !isActual && !hasAnnotation && !isIgnored) {
-            val isGenerated = generatedSourceDirs.any(Path(declaration.containingKtFile.virtualFilePath)::startsWith)
+            val isGenerated = generatedSourceDirs.any(Path(declaration.containingKtFile.virtualFilePath)::isLocatedIn)
             if (!isGenerated && isSuspend) {
                 exposedSuspendFunction?.on(declaration)?.let(context.trace::report)
             }
