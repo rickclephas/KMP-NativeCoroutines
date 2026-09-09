@@ -58,4 +58,13 @@ gradlePlugin {
 
 dependencies {
     implementation(libs.kotlin.gradle.plugin)
+    testImplementation(project(":kmp-nativecoroutines-compiler"))
+    testImplementation(libs.kotlin.compiler)
+    testImplementation(platform(libs.junit.bom))
+    testImplementation(libs.junit.jupiter)
+    testRuntimeOnly(libs.junit.platform.launcher)
+}
+
+tasks.test {
+    useJUnitPlatform()
 }

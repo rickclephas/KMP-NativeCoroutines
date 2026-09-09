@@ -465,7 +465,7 @@ disposable.dispose()
 
 ## Customize
 
-There are a number of ways you can customize the generated Kotlin code.
+There are a number of ways you can customize the generated Kotlin declarations.
 
 ### Name suffix
 
@@ -475,9 +475,6 @@ Specify your own custom suffixes in your `build.gradle.kts` file:
 nativeCoroutines {
     // The suffix used to generate the native coroutine function and property names.
     suffix = "Native"
-    // The suffix used to generate the native coroutine file names.
-    // Note: defaults to the suffix value when `null`.
-    fileSuffix = null
     // The suffix used to generate the StateFlow value property names,
     // or `null` to remove the value properties.
     flowValueSuffix = "Value"
