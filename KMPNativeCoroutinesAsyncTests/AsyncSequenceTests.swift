@@ -34,6 +34,35 @@ class AsyncSequenceTests: XCTestCase {
         }
         XCTAssertTrue(error is CancellationError, "Error should be a CancellationError")
     }
+
+    @MainActor
+    func testCancellationWhileNextIsSuspendedThrowsCancellationError() async {
+        let nextRequested = expectation(description: "The async iterator requested its first value")
+        var cancelCount = 0
+        let nativeFlow: NativeFlow<TestValue, Error, Void> = { _, _, cancelCallback in
+            nextRequested.fulfill()
+            return {
+                cancelCount += 1
+                cancelCallback(NSError(domain: "Ignored", code: 0), ())
+            }
+        }
+        let handle = Task {
+            for try await _ in asyncSequence(for: nativeFlow) { }
+        }
+
+        // The task inherits MainActor. After the expectation is fulfilled it continues
+        // synchronously into next() and suspends before this test resumes on MainActor.
+        await fulfillment(of: [nextRequested], timeout: 1)
+        handle.cancel()
+
+        let result = await handle.result
+        XCTAssertEqual(cancelCount, 1, "Cancellable should be invoked once")
+        guard case let .failure(error) = result else {
+            XCTFail("Task should fail with an error")
+            return
+        }
+        XCTAssertTrue(error is CancellationError, "Error should be a CancellationError")
+    }
     
     func testCompletionWithCorrectValues() async {
         let values = [TestValue(), TestValue(), TestValue(), TestValue(), TestValue()]

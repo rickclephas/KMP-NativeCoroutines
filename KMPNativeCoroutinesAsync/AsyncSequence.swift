@@ -65,7 +65,7 @@ public struct NativeFlowAsyncSequence<Output, Failure: Error, Unit>: AsyncSequen
                 defer { self.semaphore.signal() }
                 self.cancellationError = cancellationError
                 if let continuation = self.continuation {
-                    continuation.resume(returning: nil)
+                    continuation.resume(throwing: CancellationError())
                     self.continuation = nil
                 }
                 self.nativeCancellable = nil
