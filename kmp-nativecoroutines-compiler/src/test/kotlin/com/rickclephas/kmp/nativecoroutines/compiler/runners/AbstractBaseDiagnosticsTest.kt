@@ -7,7 +7,6 @@ import org.jetbrains.kotlin.test.Constructor
 import org.jetbrains.kotlin.test.builders.TestConfigurationBuilder
 import org.jetbrains.kotlin.test.directives.ConfigurationDirectives.WITH_STDLIB
 import org.jetbrains.kotlin.test.directives.NativeEnvironmentConfigurationDirectives.WITH_PLATFORM_LIBS
-import org.jetbrains.kotlin.test.frontend.classic.handlers.OldNewInferenceMetaInfoProcessor
 import org.jetbrains.kotlin.test.initIdeaConfiguration
 import org.jetbrains.kotlin.test.model.*
 import org.jetbrains.kotlin.test.runners.AbstractKotlinCompilerTest
@@ -42,7 +41,6 @@ abstract class AbstractBaseDiagnosticsTest<R : ResultingArtifact.FrontendOutput<
         }
         enableMetaInfoHandler()
         useConfigurators(::CommonEnvironmentConfigurator, ::BaseNativeEnvironmentConfigurator)
-        useMetaInfoProcessors(::OldNewInferenceMetaInfoProcessor)
         facadeStep(frontend)
         handlersSetup()
         useConfigurators(::KmpNativeCoroutinesCompilerPluginConfigurator)
