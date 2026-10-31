@@ -6,7 +6,6 @@ import com.rickclephas.kmp.nativecoroutines.compiler.utils.ClassIds
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.NativeCoroutinesAnnotation
 import com.rickclephas.kmp.nativecoroutines.compiler.utils.shouldRefineInSwift
 import org.jetbrains.kotlin.KtFakeSourceElementKind
-import org.jetbrains.kotlin.fakeElement
 import org.jetbrains.kotlin.fir.declarations.FirPropertyBodyResolveState
 import org.jetbrains.kotlin.fir.declarations.FirResolvePhase
 import org.jetbrains.kotlin.fir.declarations.builder.buildProperty
