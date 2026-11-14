@@ -10,7 +10,7 @@ import org.jetbrains.kotlin.backend.common.extensions.IrPluginContext
 import org.jetbrains.kotlin.config.CompilerConfiguration
 import org.jetbrains.kotlin.ir.IrElement
 import org.jetbrains.kotlin.ir.declarations.*
-import org.jetbrains.kotlin.ir.expressions.IrCallableReference
+import org.jetbrains.kotlin.ir.expressions.IrRichCallableReference
 import org.jetbrains.kotlin.ir.expressions.IrTypeOperatorCall
 import org.jetbrains.kotlin.ir.symbols.IrPropertySymbol
 import org.jetbrains.kotlin.ir.symbols.IrSimpleFunctionSymbol
@@ -39,9 +39,9 @@ internal class KmpNativeCoroutinesIrTransformer(
         val body = body
         requireNotNull(body)
         val statement = body.statements.first() as IrTypeOperatorCall
-        val callableReference = statement.argument as IrCallableReference<*>
+        val callableReference = statement.argument as IrRichCallableReference<*>
         @Suppress("UNCHECKED_CAST")
-        return callableReference.symbol as T
+        return callableReference.reflectionTargetSymbol as T
     }
 
     override fun visitElement(element: IrElement) = when (element) {
