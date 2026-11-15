@@ -1,7 +1,6 @@
 package com.rickclephas.kmp.nativecoroutines.compiler.fir.codegen
 
 import org.jetbrains.kotlin.KtFakeSourceElementKind
-import org.jetbrains.kotlin.fakeElement
 import org.jetbrains.kotlin.fir.declarations.FirDeclarationOrigin
 import org.jetbrains.kotlin.fir.declarations.FirResolvePhase
 import org.jetbrains.kotlin.fir.declarations.FirValueParameter

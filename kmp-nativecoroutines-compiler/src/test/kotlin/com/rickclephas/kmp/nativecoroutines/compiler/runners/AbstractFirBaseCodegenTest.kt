@@ -16,6 +16,7 @@ import org.jetbrains.kotlin.test.configuration.configureDumpHandlersForCodegenTe
 import org.jetbrains.kotlin.test.directives.CodegenTestDirectives.DUMP_IR
 import org.jetbrains.kotlin.test.directives.CodegenTestDirectives.DUMP_KT_IR
 import org.jetbrains.kotlin.test.directives.CodegenTestDirectives.IGNORE_DEXING
+import org.jetbrains.kotlin.test.directives.CodegenTestDirectives.RESULT_OUTPUT_EXTENSION
 import org.jetbrains.kotlin.test.directives.ConfigurationDirectives.WITH_STDLIB
 import org.jetbrains.kotlin.test.directives.FirDiagnosticsDirectives.FIR_DUMP
 import org.jetbrains.kotlin.test.directives.JvmEnvironmentConfigurationDirectives.FULL_JDK
@@ -56,6 +57,7 @@ abstract class AbstractFirBaseCodegenTest(parser: FirParser): AbstractJvmBlackBo
             +DUMP_KT_IR
             +IGNORE_DEXING
             JVM_DEFAULT_MODE with JvmDefaultMode.NO_COMPATIBILITY
+            RESULT_OUTPUT_EXTENSION with ".box.txt"
             KmpNativeCoroutinesDirectives.SUFFIX with "Native"
             KmpNativeCoroutinesDirectives.FLOW_VALUE_SUFFIX with "Value"
             KmpNativeCoroutinesDirectives.FLOW_REPLAY_CACHE_SUFFIX with "ReplayCache"

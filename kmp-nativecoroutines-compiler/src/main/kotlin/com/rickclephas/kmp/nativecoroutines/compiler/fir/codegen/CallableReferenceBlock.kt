@@ -6,13 +6,19 @@ import org.jetbrains.kotlin.fir.declarations.utils.isSuspend
 import org.jetbrains.kotlin.fir.expressions.FirBlock
 import org.jetbrains.kotlin.fir.expressions.builder.buildBlock
 import org.jetbrains.kotlin.fir.expressions.builder.buildCallableReferenceAccess
+import org.jetbrains.kotlin.fir.expressions.builder.buildThisReceiverExpression
+import org.jetbrains.kotlin.fir.references.builder.buildExplicitThisReference
 import org.jetbrains.kotlin.fir.references.builder.buildResolvedNamedReference
 import org.jetbrains.kotlin.fir.resolve.substitution.ConeSubstitutor
+import org.jetbrains.kotlin.fir.scopes.impl.toConeType
 import org.jetbrains.kotlin.fir.symbols.impl.FirCallableSymbol
 import org.jetbrains.kotlin.fir.symbols.impl.FirNamedFunctionSymbol
 import org.jetbrains.kotlin.fir.symbols.impl.FirPropertySymbol
 import org.jetbrains.kotlin.fir.types.*
+import org.jetbrains.kotlin.fir.types.builder.buildResolvedTypeRef
+import org.jetbrains.kotlin.fir.types.builder.buildTypeProjectionWithVariance
 import org.jetbrains.kotlin.name.StandardClassIds
+import org.jetbrains.kotlin.types.Variance
 import org.jetbrains.kotlin.utils.addIfNotNull
 
 internal fun FirSession.buildCallableReferenceBlock(
@@ -22,6 +28,20 @@ internal fun FirSession.buildCallableReferenceBlock(
     coneTypeOrNull = StandardClassIds.Nothing.constructClassLikeType()
     statements += buildCallableReferenceAccess {
         coneTypeOrNull = substitutor.substituteOrSelf(symbol.getReferenceConeType())
+        symbol.typeParameterSymbols.forEach {
+            typeArguments.add(buildTypeProjectionWithVariance {
+                typeRef = buildResolvedTypeRef {
+                    coneType = substitutor.substituteOrSelf(it.toConeType())
+                }
+                variance = Variance.INVARIANT
+            })
+        }
+        dispatchReceiver = symbol.dispatchReceiverType?.let {
+            buildThisReceiverExpression {
+                coneTypeOrNull = substitutor.substituteOrSelf(it)
+                calleeReference = buildExplicitThisReference()
+            }
+        }
         calleeReference = buildResolvedNamedReference {
             name = symbol.name
             resolvedSymbol = symbol
@@ -59,6 +79,7 @@ private fun FirPropertySymbol.getReferenceConeType(): ConeKotlinType {
     val typeArguments = buildList {
         addIfNotNull(dispatchReceiverType)
         addIfNotNull(resolvedReceiverType)
+        add(resolvedReturnType)
     }
     return classId.constructClassLikeType(typeArguments.toTypedArray())
 }

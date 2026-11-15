@@ -27,18 +27,14 @@ kotlin {
         }
     }
 
-    macosX64()
     macosArm64()
     iosArm64()
     iosX64()
     iosSimulatorArm64()
-    watchosArm32()
     watchosArm64()
-    watchosX64()
     watchosSimulatorArm64()
     watchosDeviceArm64()
     tvosArm64()
-    tvosX64()
     tvosSimulatorArm64()
     jvm {
         if (buildType.orNull == BuildType.COMPILER_TESTS) {
@@ -55,7 +51,6 @@ kotlin {
     linuxArm64()
     linuxX64()
     mingwX64()
-    @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
         browser()
         nodejs()
@@ -63,7 +58,7 @@ kotlin {
     }
     @OptIn(ExperimentalWasmDsl::class)
     wasmWasi {
-        nodejs()
+        wasmtime()
     }
 
     targets.all {

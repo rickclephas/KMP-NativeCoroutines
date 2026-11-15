@@ -130,8 +130,7 @@ private fun buildDeprecatedAnnotationCopy(annotation: FirAnnotation): FirAnnotat
 
 private fun FirAnnotation.getArguments(vararg names: Name): Map<Name, FirExpression> {
     val mapping = argumentMapping.mapping
-    if (mapping.isNotEmpty()) return mapping.filterKeys { it in names }
-    if (this !is FirAnnotationCall) return emptyMap()
+    if (this !is FirAnnotationCall || mapping.size == arguments.size) return mapping.filterKeys { it in names }
     val arguments = mutableMapOf<Name, FirExpression>()
     var index: Int? = -1
     for (argument in this.arguments) {
