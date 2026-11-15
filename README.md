@@ -49,15 +49,6 @@ Compatibility versions for older and/or preview Kotlin versions are also availab
 | 1.0.0-ALPHA-34 | _no suffix_     |   2.0.10   |   1.8.1    |
 | 1.0.0-ALPHA-33 | _no suffix_     |   2.0.0    |   1.8.1    |
 
-You can choose from a couple of Swift implementations.  
-Depending on the implementation you can support as low as iOS 9, macOS 10.9, tvOS 9 and watchOS 3:
-
-| Implementation | Swift | iOS  | macOS | tvOS | watchOS |
-|----------------|:-----:|:----:|:-----:|:----:|:-------:|
-| Async          |  5.5  | 13.0 | 10.15 | 13.0 |   6.0   |
-| Combine        |  5.0  | 13.0 | 10.15 | 13.0 |   6.0   |
-| RxSwift        |  5.0  | 9.0  | 10.9  | 9.0  |   3.0   |
-
 ## Installation
 
 The library consists of a Kotlin and Swift part which you'll need to add to your project.  
