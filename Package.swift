@@ -1,9 +1,9 @@
-// swift-tools-version:5.3
+// swift-tools-version:5.7
 import PackageDescription
 
 let package = Package(
     name: "KMPNativeCoroutines",
-    platforms: [.iOS(.v9), .macOS(.v10_10), .tvOS(.v9), .watchOS(.v3)],
+    platforms: [.iOS(.v15), .macOS(.v12), .tvOS(.v15), .watchOS(.v9)],
     products: [
         .library(
             name: "KMPNativeCoroutinesCore",
