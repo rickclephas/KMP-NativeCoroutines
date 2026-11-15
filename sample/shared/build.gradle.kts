@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.swiftexport.ExperimentalSwiftExportDsl
+
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.kotlin.plugin.serialization)
@@ -43,9 +45,13 @@ kotlin {
             }
         }
     }
-    swiftExport {
-        moduleName = "NativeCoroutinesSampleShared"
-        flattenPackage = "com.rickclephas.kmp.nativecoroutines.sample"
+    export {
+        @OptIn(ExperimentalSwiftExportDsl::class)
+        swift {
+            moduleName = "NativeCoroutinesSampleShared"
+            rootPackage = "com.rickclephas.kmp.nativecoroutines.sample"
+            xcodeIntegration()
+        }
     }
 }
 
