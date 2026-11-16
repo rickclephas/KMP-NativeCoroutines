@@ -36,6 +36,14 @@ dependencies {
         zipSigner()
     }
     implementation(project(":kmp-nativecoroutines-compiler"))
+    testImplementation(project(":kmp-nativecoroutines-gradle-plugin"))
+    testImplementation(platform(libs.junit.bom))
+    testImplementation(libs.junit.jupiter)
+    testRuntimeOnly(libs.junit.platform.launcher)
+}
+
+tasks.test {
+    useJUnitPlatform()
 }
 
 intellijPlatform {

@@ -6,9 +6,9 @@ public open class KmpNativeCoroutinesExtension {
      */
     public var suffix: String = "Native"
     /**
-     * The suffix used to generate the native coroutine file names.
-     * Note: defaults to [suffix] when `null`.
+     * Obsolete suffix used by the removed source-generation implementation.
      */
+    @Deprecated("Generated declarations no longer use source files, so this property has no effect.")
     public var fileSuffix: String? = null
     /**
      * The suffix used to generate the `StateFlow` value property names,

@@ -35,25 +35,16 @@ public class KmpNativeCoroutinesPlugin: KotlinCompilerPluginSupportPlugin {
         val project = kotlinCompilation.target.project
         val extension = project.extensions.getByType(KmpNativeCoroutinesExtension::class.java)
         return project.provider {
-            buildList {
-                add(SubpluginOption("exposedSeverity", extension.exposedSeverity.name))
-                extension.generatedSourceDirs.map { project.file(it) }.distinct().forEach { dir ->
-                    // Prefer project relative paths so that the absolute project path doesn't
-                    // end up in the build cache key of Kotlin/Native compilations, which would
-                    // prevent relocated build cache hits.
-                    val relativeDir = dir.relativeToOrNull(project.projectDir)?.takeUnless {
-                        it.path.startsWith("..")
-                    }
-                    add(SubpluginOption("generatedSourceDir", (relativeDir ?: dir).path))
+            val generatedSourceDirs = extension.generatedSourceDirs.map { project.file(it) }.distinct().map { dir ->
+                // Prefer project relative paths so that the absolute project path doesn't
+                // end up in the build cache key of Kotlin/Native compilations, which would
+                // prevent relocated build cache hits.
+                val relativeDir = dir.relativeToOrNull(project.projectDir)?.takeUnless {
+                    it.path.startsWith("..")
                 }
-                add(SubpluginOption("suffix", extension.suffix))
-                extension.flowValueSuffix?.let { add(SubpluginOption("flowValueSuffix", it)) }
-                extension.flowReplayCacheSuffix?.let { add(SubpluginOption("flowReplayCacheSuffix", it)) }
-                add(SubpluginOption("stateSuffix", extension.stateSuffix))
-                extension.stateFlowSuffix?.let { add(SubpluginOption("stateFlowSuffix", it)) }
-                val swiftExport = extension.swiftExportVersion.takeIf { extension.swiftExport } ?: 0
-                add(SubpluginOption("swiftExport", swiftExport.toString()))
+                (relativeDir ?: dir).path
             }
+            extension.toCompilerPluginOptions(generatedSourceDirs)
         }
     }
 
